@@ -1,0 +1,31 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+
+# Test disjoint classes
+
+wd:Q_Inconsistent wdt:P31 wd:Q_rock_singer, schema:Organization .
+
+# Test Wikipedia pages
+<https://elvis.com> schema:about wd:Q_Elvis .
+
+wd:Q_Elvis wdt:P31 wd:Q_rock_singer;
+	# Test cardinality constraint
+	wdt:P19 wd:Q_birth_place_1;
+	wdt:P19 wd:Q_birth_place_2;
+	# Check domain
+	wdt:P150 wd:Q_inconsistent_place;
+	# Check bad property
+	wdt:P10000000 wd:Q_bad_object;
+	# Normal range
+	wdt:P40 wd:Q_child;
+	# Disjunctive range
+	wdt:P1716 wd:Q_brand;
+	# Strings
+	wdt:P2317 "test string";
+	# Patterns
+	wdt:P2900 "+33-33-333-333";
+	# Datatypes
+	wdt:P570 "1970"^^xsd:gYear .
