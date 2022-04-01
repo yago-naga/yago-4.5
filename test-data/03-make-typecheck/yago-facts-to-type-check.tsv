@@ -1,12 +1,19 @@
-wd:Q_Elvis	http://schema.org/callSign	"test string"
-wd:Q_Elvis	rdf:type	wd:Q_singer
-wd:Q_Elvis	http://schema.org/brand	wd:Q_brand	IF	schema:Brand, schema:Organization
-wd:Q_Elvis	http://schema.org/deathDate	"1970-01-01"^^xsd:gYear
-wd:Q_Elvis	http://schema.org/faxNumber	"+33-33-333-333"
-wd:Q_Elvis	http://schema.org/children	wd:Q_child	IF	schema:Person
-wd:Q_Elvis	http://schema.org/mainEntityOfPage	<https://elvis.com>
-wd:Q_Elvis	http://schema.org/children	wd:Q_bad_child	IF	schema:Person
+# All should go through except bad_child
 
+# Elvis id should be yago:Elvis, from the Wikipedia page
+wd:Q_Elvis	schema:callSign	"test string"
+wd:Q_Elvis	rdf:type	wd:Q_singer
+wd:Q_Elvis	schema:brand	wd:Q_brand	IF	schema:Brand, schema:Organization
+wd:Q_Elvis	schema:deathDate	"1970-01-01"^^xsd:gYear
+wd:Q_Elvis	schema:faxNumber	"+33-33-333-333"
+wd:Q_Elvis	schema:children	wd:Q_child	IF	schema:Person
+wd:Q_Elvis	schema:mainEntityOfPage	<https://elvis.com>
+wd:Q_Elvis	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Elvis>
+wd:Q_Elvis	schema:children	wd:Q_bad_child	IF	schema:Person
+
+# Brand id should be yago:_brand, from the Wikidata ID (which will be something like wd:Q123, i.e., yago:Q123)
 wd:Q_brand	rdf:type	schema:Brand
 wd:Q_child	rdf:type	wd:Child
 wd:Q_bad_child	rdf:type	schema:Brand
+# Bad child id should be yago:_Bad_Child__bad_child, which is the label plus (as disambiguation) the Wikidata id
+wd:Q_bad_child	rdfs:label	"Bad Child"@en

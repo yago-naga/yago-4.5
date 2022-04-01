@@ -163,8 +163,7 @@ schema:AccountingService a rdfs:Class ;
     rdfs:label "AccountingService" ;
     rdfs:comment """Accountancy business.<br/><br/>
 
-As a <a class="localLink" href="http://schema.org/LocalBusiness">LocalBusiness</a> it can be described as a <a class="localLink" href="http://schema.org/provider">provider</a> of one or more <a class="localLink" href="http://schema.org/Service">Service</a>(s).""" ;
-    rdfs:subClassOf schema:FinancialService .
+As a <a class="localLink" href="http://schema.org/LocalBusiness">LocalBusiness</a> it can be described as a <a class="localLink" href="http://schema.org/provider">provider</a> of one or more <a class="localLink" href="http://schema.org/Service">Service</a>(s).""" .
 
 schema:AchieveAction a rdfs:Class ;
     rdfs:label "AchieveAction" ;
@@ -210,8 +209,7 @@ schema:AdministrativeArea a rdfs:Class,
 
 schema:AdultEntertainment a rdfs:Class ;
     rdfs:label "AdultEntertainment" ;
-    rdfs:comment "An adult entertainment establishment." ;
-    rdfs:subClassOf schema:EntertainmentBusiness .
+    rdfs:comment "An adult entertainment establishment." .
 
 schema:AdvertiserContentArticle a rdfs:Class ;
     rdfs:label "AdvertiserContentArticle" ;
@@ -290,7 +288,6 @@ schema:AmusementPark a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "AmusementPark" ;
     rdfs:comment "An amusement park." ;
-    rdfs:subClassOf schema:EntertainmentBusiness ;
     ys:fromClass wd:Q194195 .
 
 schema:AnalysisNewsArticle a rdfs:Class ;
@@ -323,7 +320,6 @@ schema:AnimalShelter a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "AnimalShelter" ;
     rdfs:comment "Animal shelter." ;
-    rdfs:subClassOf schema:LocalBusiness ;
     ys:fromClass wd:Q1411287 .
 
 schema:Answer a rdfs:Class ;
@@ -387,7 +383,6 @@ schema:ArchiveOrganization a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "ArchiveOrganization"@en ;
     rdfs:comment "An organization with archival holdings. An organization which keeps and preserves archival material and typically makes it accessible to the public." ;
-    rdfs:subClassOf schema:LocalBusiness ;
     ys:fromClass wd:Q166118 ;
     schema:category "issue-1758"@en ;
     schema:isPartOf <http://pending.schema.org> ;
@@ -402,7 +397,6 @@ schema:ArtGallery a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "ArtGallery" ;
     rdfs:comment "An art gallery." ;
-    rdfs:subClassOf schema:EntertainmentBusiness ;
     ys:fromClass wd:Q1007870 .
 
 schema:Artery a rdfs:Class,
@@ -471,8 +465,7 @@ schema:Attorney a rdfs:Class ;
     rdfs:label "Attorney" ;
     rdfs:comment """Professional service: Attorney. <br/><br/>
 
-This type is deprecated - <a class="localLink" href="http://schema.org/LegalService">LegalService</a> is more inclusive and less ambiguous.""" ;
-    rdfs:subClassOf schema:LegalService .
+This type is deprecated - <a class="localLink" href="http://schema.org/LegalService">LegalService</a> is more inclusive and less ambiguous.""" .
 
 schema:Audience a rdfs:Class ;
     rdfs:label "Audience" ;
@@ -489,8 +482,6 @@ schema:AudioObject a rdfs:Class,
 schema:Audiobook a rdfs:Class ;
     rdfs:label "Audiobook" ;
     rdfs:comment "An audiobook." ;
-    rdfs:subClassOf schema:AudioObject,
-        schema:Book ;
     schema:isPartOf <http://bib.schema.org> .
 
 schema:AuthorizeAction a rdfs:Class ;
@@ -500,47 +491,38 @@ schema:AuthorizeAction a rdfs:Class ;
 
 schema:AutoBodyShop a rdfs:Class ;
     rdfs:label "AutoBodyShop" ;
-    rdfs:comment "Auto body shop." ;
-    rdfs:subClassOf schema:AutomotiveBusiness .
+    rdfs:comment "Auto body shop." .
 
 schema:AutoDealer a rdfs:Class ;
     rdfs:label "AutoDealer" ;
-    rdfs:comment "An car dealership." ;
-    rdfs:subClassOf schema:AutomotiveBusiness .
+    rdfs:comment "An car dealership." .
 
 schema:AutoPartsStore a rdfs:Class ;
     rdfs:label "AutoPartsStore" ;
-    rdfs:comment "An auto parts store." ;
-    rdfs:subClassOf schema:AutomotiveBusiness,
-        schema:Store .
+    rdfs:comment "An auto parts store." .
 
 schema:AutoRental a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "AutoRental" ;
     rdfs:comment "A car rental business." ;
-    rdfs:subClassOf schema:AutomotiveBusiness ;
     ys:fromClass wd:Q291240 .
 
 schema:AutoRepair a rdfs:Class ;
     rdfs:label "AutoRepair" ;
-    rdfs:comment "Car repair business." ;
-    rdfs:subClassOf schema:AutomotiveBusiness .
+    rdfs:comment "Car repair business." .
 
 schema:AutoWash a rdfs:Class ;
     rdfs:label "AutoWash" ;
-    rdfs:comment "A car wash business." ;
-    rdfs:subClassOf schema:AutomotiveBusiness .
+    rdfs:comment "A car wash business." .
 
 schema:AutomatedTeller a rdfs:Class ;
     rdfs:label "AutomatedTeller" ;
-    rdfs:comment "ATM/cash machine." ;
-    rdfs:subClassOf schema:FinancialService .
+    rdfs:comment "ATM/cash machine." .
 
 schema:AutomotiveBusiness a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "AutomotiveBusiness" ;
-    rdfs:comment "Car repair, sales, or parts." ;
-    rdfs:subClassOf schema:LocalBusiness .
+    rdfs:comment "Car repair, sales, or parts." .
 
 schema:BackgroundNewsArticle a rdfs:Class ;
     rdfs:label "BackgroundNewsArticle" ;
@@ -555,7 +537,6 @@ schema:Bakery a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "Bakery" ;
     rdfs:comment "A bakery." ;
-    rdfs:subClassOf schema:FoodEstablishment ;
     ys:fromClass wd:Q274393 .
 
 schema:BankAccount a rdfs:Class ;
@@ -568,14 +549,12 @@ schema:BankOrCreditUnion a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "BankOrCreditUnion" ;
     rdfs:comment "Bank or credit union." ;
-    rdfs:subClassOf schema:FinancialService ;
     ys:fromClass wd:Q730038 .
 
 schema:BarOrPub a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "BarOrPub" ;
     rdfs:comment "A bar or pub." ;
-    rdfs:subClassOf schema:FoodEstablishment ;
     ys:fromClass wd:Q5307737 .
 
 schema:Barcode a rdfs:Class ;
@@ -594,7 +573,6 @@ schema:BeautySalon a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "BeautySalon" ;
     rdfs:comment "Beauty salon." ;
-    rdfs:subClassOf schema:HealthAndBeautyBusiness ;
     ys:fromClass wd:Q1195245 .
 
 schema:BedAndBreakfast a rdfs:Class,
@@ -603,7 +581,6 @@ schema:BedAndBreakfast a rdfs:Class,
     rdfs:comment """Bed and breakfast.
 <br /><br />
 See also the <a href="/docs/hotels.html">dedicated document on the use of schema.org for marking up hotels and other forms of accommodations</a>.""" ;
-    rdfs:subClassOf schema:LodgingBusiness ;
     ys:fromClass wd:Q367914 .
 
 schema:BedDetails a rdfs:Class ;
@@ -634,8 +611,7 @@ Related actions:<br/><br/>
 
 schema:BikeStore a rdfs:Class ;
     rdfs:label "BikeStore" ;
-    rdfs:comment "A bike store." ;
-    rdfs:subClassOf schema:Store .
+    rdfs:comment "A bike store." .
 
 schema:Blog a rdfs:Class,
         sh:NodeShape ;
@@ -734,14 +710,12 @@ schema:BookSeries a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "BookSeries" ;
     rdfs:comment "A series of books. Included books can be indicated with the hasPart property." ;
-    rdfs:subClassOf schema:CreativeWorkSeries ;
     ys:fromClass wd:Q277759 .
 
 schema:BookStore a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "BookStore" ;
     rdfs:comment "A bookstore." ;
-    rdfs:subClassOf schema:Store ;
     ys:fromClass wd:Q200764 .
 
 schema:BookmarkAction a rdfs:Class ;
@@ -770,7 +744,6 @@ schema:BowlingAlley a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "BowlingAlley" ;
     rdfs:comment "A bowling alley." ;
-    rdfs:subClassOf schema:SportsActivityLocation ;
     ys:fromClass wd:Q27106471 .
 
 schema:BrainStructure a rdfs:Class ;
@@ -801,7 +774,6 @@ schema:Brewery a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "Brewery" ;
     rdfs:comment "Brewery." ;
-    rdfs:subClassOf schema:FoodEstablishment ;
     ys:fromClass wd:Q131734 .
 
 schema:Bridge a rdfs:Class,
@@ -963,7 +935,6 @@ schema:CafeOrCoffeeShop a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "CafeOrCoffeeShop" ;
     rdfs:comment "A cafe or coffee shop." ;
-    rdfs:subClassOf schema:FoodEstablishment ;
     ys:fromClass wd:Q30022 .
 
 schema:Campground a rdfs:Class,
@@ -974,8 +945,6 @@ schema:Campground a rdfs:Class,
 In British English a campsite is an area, usually divided into a number of pitches, where people can camp overnight using tents or camper vans or caravans; this British English use of the word is synonymous with the American English expression campground. In American English the term campsite generally means an area where an individual, family, group, or military unit can pitch a tent or park a camper; a campground may contain many campsites (Source: Wikipedia see <a href="https://en.wikipedia.org/wiki/Campsite">https://en.wikipedia.org/wiki/Campsite</a>).<br/><br/>
 
 See also the dedicated <a href="/docs/hotels.html">document on the use of schema.org for marking up hotels and other forms of accommodations</a>.""" ;
-    rdfs:subClassOf schema:CivicStructure,
-        schema:LodgingBusiness ;
     ys:fromClass wd:Q27108230 ;
     schema:source <https://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#STI_Accommodation_Ontology> .
 
@@ -1028,7 +997,6 @@ schema:Casino a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "Casino" ;
     rdfs:comment "A casino." ;
-    rdfs:subClassOf schema:EntertainmentBusiness ;
     ys:fromClass wd:Q133215 .
 
 schema:CategoryCode a rdfs:Class ;
@@ -1111,7 +1079,6 @@ schema:ChildCare a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "ChildCare" ;
     rdfs:comment "A Childcare center." ;
-    rdfs:subClassOf schema:LocalBusiness ;
     ys:fromClass wd:Q27008444 .
 
 schema:ChildrensEvent a rdfs:Class ;
@@ -1189,8 +1156,7 @@ schema:Clip a rdfs:Class ;
 
 schema:ClothingStore a rdfs:Class ;
     rdfs:label "ClothingStore" ;
-    rdfs:comment "A clothing store." ;
-    rdfs:subClassOf schema:Store .
+    rdfs:comment "A clothing store." .
 
 schema:Code a rdfs:Class ;
     rdfs:label "Code" ;
@@ -1215,14 +1181,12 @@ schema:CollegeOrUniversity a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "CollegeOrUniversity" ;
     rdfs:comment "A college, university, or other third-level educational institution." ;
-    rdfs:subClassOf schema:EducationalOrganization ;
     ys:fromClass wd:Q38723 .
 
 schema:ComedyClub a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "ComedyClub" ;
     rdfs:comment "A comedy club." ;
-    rdfs:subClassOf schema:EntertainmentBusiness ;
     ys:fromClass wd:Q2814066 .
 
 schema:ComedyEvent a rdfs:Class ;
@@ -1233,8 +1197,6 @@ schema:ComedyEvent a rdfs:Class ;
 schema:ComicCoverArt a rdfs:Class ;
     rdfs:label "ComicCoverArt" ;
     rdfs:comment "The artwork on the cover of a comic." ;
-    rdfs:subClassOf schema:ComicStory,
-        schema:CoverArt ;
     schema:category "Comics" ;
     schema:isPartOf <http://bib.schema.org> .
 
@@ -1256,7 +1218,6 @@ schema:ComicSeries a rdfs:Class,
     rdfs:comment """A sequential publication of comic stories under a
         unifying title, for example "The Amazing Spider-Man" or "Groo the
         Wanderer".""" ;
-    rdfs:subClassOf schema:Periodical ;
     ys:fromClass wd:Q14406742 ;
     schema:category "Comics" ;
     schema:isPartOf <http://bib.schema.org> .
@@ -1315,8 +1276,7 @@ schema:ComputerLanguage a rdfs:Class,
 
 schema:ComputerStore a rdfs:Class ;
     rdfs:label "ComputerStore" ;
-    rdfs:comment "A computer store." ;
-    rdfs:subClassOf schema:Store .
+    rdfs:comment "A computer store." .
 
 schema:ConfirmAction a rdfs:Class ;
     rdfs:label "ConfirmAction" ;
@@ -1372,8 +1332,7 @@ schema:ControlAction a rdfs:Class ;
 
 schema:ConvenienceStore a rdfs:Class ;
     rdfs:label "ConvenienceStore" ;
-    rdfs:comment "A convenience store." ;
-    rdfs:subClassOf schema:Store .
+    rdfs:comment "A convenience store." .
 
 schema:Conversation a rdfs:Class ;
     rdfs:label "Conversation" ;
@@ -1412,8 +1371,6 @@ schema:Course a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "Course" ;
     rdfs:comment "A description of an educational course which may be offered as distinct instances at which take place at different times or take place at different locations, or be offered through different media or modes of study. An educational course is a sequence of one or more educational events and/or creative works which aims to build knowledge, competence or ability of learners." ;
-    rdfs:subClassOf schema:CreativeWork,
-        schema:LearningResource ;
     ys:fromClass wd:Q600134 .
 
 schema:CourseInstance a rdfs:Class ;
@@ -1441,7 +1398,6 @@ schema:CovidTestingFacility a rdfs:Class ;
       disease is available. If the facility is being made available from an established <a class="localLink" href="http://schema.org/Pharmacy">Pharmacy</a>, <a class="localLink" href="http://schema.org/Hotel">Hotel</a>, or other
       non-medical organization, multiple types can be listed. This makes it easier to re-use existing schema.org information
       about that place e.g. contact info, address, opening hours. Note that in an emergency, such information may not always be reliable.""" ;
-    rdfs:subClassOf schema:MedicalClinic ;
     schema:category "issue-2490" ;
     schema:isPartOf <http://pending.schema.org> ;
     schema:source <https://github.com/schemaorg/schemaorg/issues/2490> .
@@ -1593,8 +1549,6 @@ schema:CreativeWorkSeries a rdfs:Class,
 Specific subtypes are available for describing <a class="localLink" href="http://schema.org/TVSeries">TVSeries</a>, <a class="localLink" href="http://schema.org/RadioSeries">RadioSeries</a>, <a class="localLink" href="http://schema.org/MovieSeries">MovieSeries</a>, <a class="localLink" href="http://schema.org/BookSeries">BookSeries</a>, <a class="localLink" href="http://schema.org/Periodical">Periodical</a> and <a class="localLink" href="http://schema.org/VideoGameSeries">VideoGameSeries</a>. In each case, the <a class="localLink" href="http://schema.org/hasPart">hasPart</a> / <a class="localLink" href="http://schema.org/isPartOf">isPartOf</a> properties can be used to relate the CreativeWorkSeries to its parts. The general CreativeWorkSeries type serves largely just to organize these more specific and practical subtypes.<br/><br/>
 
 It is common for properties applicable to an item from the series to be usefully applied to the containing group. Schema.org attempts to anticipate some of these cases, but publishers should be free to apply properties of the series parts to the series as a whole wherever they seem appropriate.""" ;
-    rdfs:subClassOf schema:CreativeWork,
-        schema:Series ;
     sh:property [ sh:datatype xsd:string ;
             sh:maxCount 1 ;
             sh:path schema:issn ;
@@ -1739,7 +1693,6 @@ schema:DaySpa a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "DaySpa" ;
     rdfs:comment "A day spa." ;
-    rdfs:subClassOf schema:HealthAndBeautyBusiness ;
     ys:fromClass wd:Q11290050 .
 
 schema:DeactivateAction a rdfs:Class ;
@@ -1842,10 +1795,7 @@ schema:Demand a rdfs:Class ;
 
 schema:Dentist a rdfs:Class ;
     rdfs:label "Dentist" ;
-    rdfs:comment "A dentist." ;
-    rdfs:subClassOf schema:LocalBusiness,
-        schema:MedicalBusiness,
-        schema:MedicalOrganization .
+    rdfs:comment "A dentist." .
 
 schema:DepartAction a rdfs:Class ;
     rdfs:label "DepartAction" ;
@@ -1854,8 +1804,7 @@ schema:DepartAction a rdfs:Class ;
 
 schema:DepartmentStore a rdfs:Class ;
     rdfs:label "DepartmentStore" ;
-    rdfs:comment "A department store." ;
-    rdfs:subClassOf schema:Store .
+    rdfs:comment "A department store." .
 
 schema:DepositAccount a rdfs:Class ;
     rdfs:label "DepositAccount" ;
@@ -1881,8 +1830,6 @@ schema:DiagnosticProcedure a rdfs:Class,
 schema:Diet a rdfs:Class ;
     rdfs:label "Diet" ;
     rdfs:comment "A strategy of regulating the intake of food to achieve or maintain a specific health-related goal." ;
-    rdfs:subClassOf schema:CreativeWork,
-        schema:LifestyleModification ;
     schema:isPartOf <http://health-lifesci.schema.org> .
 
 schema:DietarySupplement a rdfs:Class ;
@@ -1935,7 +1882,6 @@ schema:Distillery a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "Distillery" ;
     rdfs:comment "A distillery." ;
-    rdfs:subClassOf schema:FoodEstablishment ;
     ys:fromClass wd:Q1251750 ;
     schema:category "issue-743" ;
     schema:source <https://github.com/schemaorg/schemaorg/issues/743> .
@@ -2037,8 +1983,7 @@ schema:DrugStrength a rdfs:Class ;
 
 schema:DryCleaningOrLaundry a rdfs:Class ;
     rdfs:label "DryCleaningOrLaundry" ;
-    rdfs:comment "A dry-cleaning business." ;
-    rdfs:subClassOf schema:LocalBusiness .
+    rdfs:comment "A dry-cleaning business." .
 
 schema:Duration a rdfs:Class ;
     rdfs:label "Duration" ;
@@ -2081,25 +2026,20 @@ schema:EducationalOrganization a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "EducationalOrganization" ;
     rdfs:comment "An educational organization." ;
-    rdfs:subClassOf schema:CivicStructure,
-        schema:Organization ;
     ys:fromClass wd:Q5341295 .
 
 schema:Electrician a rdfs:Class ;
     rdfs:label "Electrician" ;
-    rdfs:comment "An electrician." ;
-    rdfs:subClassOf schema:HomeAndConstructionBusiness .
+    rdfs:comment "An electrician." .
 
 schema:ElectronicsStore a rdfs:Class ;
     rdfs:label "ElectronicsStore" ;
-    rdfs:comment "An electronics store." ;
-    rdfs:subClassOf schema:Store .
+    rdfs:comment "An electronics store." .
 
 schema:ElementarySchool a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "ElementarySchool" ;
     rdfs:comment "An elementary school." ;
-    rdfs:subClassOf schema:EducationalOrganization ;
     ys:fromClass wd:Q20950067 .
 
 schema:EmailMessage a rdfs:Class ;
@@ -2118,7 +2058,6 @@ schema:EmergencyService a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "EmergencyService" ;
     rdfs:comment "An emergency service, such as a fire station or ER." ;
-    rdfs:subClassOf schema:LocalBusiness ;
     ys:fromClass wd:Q814610 .
 
 schema:EmployeeRole a rdfs:Class ;
@@ -2145,7 +2084,6 @@ schema:EmploymentAgency a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "EmploymentAgency" ;
     rdfs:comment "An employment agency." ;
-    rdfs:subClassOf schema:LocalBusiness ;
     ys:fromClass wd:Q261362 .
 
 schema:EndorseAction a rdfs:Class ;
@@ -2179,8 +2117,7 @@ schema:EngineSpecification a rdfs:Class ;
 schema:EntertainmentBusiness a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "EntertainmentBusiness" ;
-    rdfs:comment "A business providing entertainment." ;
-    rdfs:subClassOf schema:LocalBusiness .
+    rdfs:comment "A business providing entertainment." .
 
 schema:EntryPoint a rdfs:Class ;
     rdfs:label "EntryPoint" ;
@@ -2306,8 +2243,6 @@ EventSeries has been defined as a kind of Event to make it easy for publishers t
 worrying about which kinds of series are really event-like enough to call an Event. In general an EventSeries
 may seem more Event-like when the period of time is compact and when aspects such as location are fixed, but
 it may also sometimes prove useful to describe a longer-term series as an Event.""" ;
-    rdfs:subClassOf schema:Event,
-        schema:Series ;
     ys:fromClass wd:Q15275719 ;
     schema:category "issue-447" ;
     schema:isPartOf <http://pending.schema.org> ;
@@ -2341,14 +2276,11 @@ schema:ExerciseAction a rdfs:Class ;
 
 schema:ExerciseGym a rdfs:Class ;
     rdfs:label "ExerciseGym" ;
-    rdfs:comment "A gym." ;
-    rdfs:subClassOf schema:SportsActivityLocation .
+    rdfs:comment "A gym." .
 
 schema:ExercisePlan a rdfs:Class ;
     rdfs:label "ExercisePlan" ;
     rdfs:comment "Fitness-related activity designed for a specific health-related purpose, including defined exercise routines as well as activity prescribed by a clinician." ;
-    rdfs:subClassOf schema:CreativeWork,
-        schema:PhysicalActivity ;
     schema:isPartOf <http://health-lifesci.schema.org> .
 
 schema:ExhibitionEvent a rdfs:Class ;
@@ -2372,8 +2304,7 @@ schema:FMRadioChannel a rdfs:Class ;
 
 schema:FastFoodRestaurant a rdfs:Class ;
     rdfs:label "FastFoodRestaurant" ;
-    rdfs:comment "A fast-food restaurant." ;
-    rdfs:subClassOf schema:FoodEstablishment .
+    rdfs:comment "A fast-food restaurant." .
 
 schema:Festival a rdfs:Class,
         sh:NodeShape ;
@@ -2399,7 +2330,6 @@ schema:FinancialService a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "FinancialService" ;
     rdfs:comment "Financial services business." ;
-    rdfs:subClassOf schema:LocalBusiness ;
     ys:fromClass wd:Q837171 .
 
 schema:FindAction a rdfs:Class ;
@@ -2418,8 +2348,6 @@ schema:FireStation a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "FireStation" ;
     rdfs:comment "A fire station. With firemen." ;
-    rdfs:subClassOf schema:CivicStructure,
-        schema:EmergencyService ;
     ys:fromClass wd:Q1195942 .
 
 schema:Flight a rdfs:Class ;
@@ -2449,8 +2377,7 @@ schema:FloorPlan a rdfs:Class ;
 
 schema:Florist a rdfs:Class ;
     rdfs:label "Florist" ;
-    rdfs:comment "A florist." ;
-    rdfs:subClassOf schema:Store .
+    rdfs:comment "A florist." .
 
 schema:FollowAction a rdfs:Class ;
     rdfs:label "FollowAction" ;
@@ -2472,7 +2399,6 @@ schema:FoodEstablishment a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "FoodEstablishment" ;
     rdfs:comment "A food-related business." ;
-    rdfs:subClassOf schema:LocalBusiness ;
     sh:property [ sh:node schema:Thing ;
             sh:path schema:servesCuisine ;
             ys:fromProperty wdt:P2012 ] ;
@@ -2522,8 +2448,7 @@ schema:FundingScheme a rdfs:Class ;
 
 schema:FurnitureStore a rdfs:Class ;
     rdfs:label "FurnitureStore" ;
-    rdfs:comment "A furniture store." ;
-    rdfs:subClassOf schema:Store .
+    rdfs:comment "A furniture store." .
 
 schema:Game a rdfs:Class,
         sh:NodeShape ;
@@ -2549,14 +2474,12 @@ schema:GameServerStatus a rdfs:Class ;
 
 schema:GardenStore a rdfs:Class ;
     rdfs:label "GardenStore" ;
-    rdfs:comment "A garden store." ;
-    rdfs:subClassOf schema:Store .
+    rdfs:comment "A garden store." .
 
 schema:GasStation a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "GasStation" ;
     rdfs:comment "A gas station." ;
-    rdfs:subClassOf schema:AutomotiveBusiness ;
     ys:fromClass wd:Q205495 .
 
 schema:GatedResidenceCommunity a rdfs:Class ;
@@ -2571,8 +2494,7 @@ schema:GenderType a rdfs:Class ;
 
 schema:GeneralContractor a rdfs:Class ;
     rdfs:label "GeneralContractor" ;
-    rdfs:comment "A general contractor." ;
-    rdfs:subClassOf schema:HomeAndConstructionBusiness .
+    rdfs:comment "A general contractor." .
 
 schema:GeoCircle a rdfs:Class ;
     rdfs:label "GeoCircle" ;
@@ -2626,7 +2548,6 @@ schema:GolfCourse a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "GolfCourse" ;
     rdfs:comment "A golf course." ;
-    rdfs:subClassOf schema:SportsActivityLocation ;
     ys:fromClass wd:Q1048525 .
 
 schema:GovernmentBenefitsType a rdfs:Class ;
@@ -2648,7 +2569,6 @@ schema:GovernmentOffice a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "GovernmentOffice" ;
     rdfs:comment "A government office&#x2014;for example, an IRS or DMV office." ;
-    rdfs:subClassOf schema:LocalBusiness ;
     ys:fromClass wd:Q327333 .
 
 schema:GovernmentOrganization a rdfs:Class,
@@ -2685,7 +2605,6 @@ schema:GroceryStore a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "GroceryStore" ;
     rdfs:comment "A grocery store." ;
-    rdfs:subClassOf schema:Store ;
     ys:fromClass wd:Q1295201 .
 
 schema:Guide a rdfs:Class ;
@@ -2698,8 +2617,7 @@ schema:Guide a rdfs:Class ;
 
 schema:HVACBusiness a rdfs:Class ;
     rdfs:label "HVACBusiness" ;
-    rdfs:comment "A business that provide Heating, Ventilation and Air Conditioning services." ;
-    rdfs:subClassOf schema:HomeAndConstructionBusiness .
+    rdfs:comment "A business that provide Heating, Ventilation and Air Conditioning services." .
 
 schema:Hackathon a rdfs:Class ;
     rdfs:label "Hackathon" ;
@@ -2711,19 +2629,16 @@ schema:Hackathon a rdfs:Class ;
 
 schema:HairSalon a rdfs:Class ;
     rdfs:label "HairSalon" ;
-    rdfs:comment "A hair salon." ;
-    rdfs:subClassOf schema:HealthAndBeautyBusiness .
+    rdfs:comment "A hair salon." .
 
 schema:HardwareStore a rdfs:Class ;
     rdfs:label "HardwareStore" ;
-    rdfs:comment "A hardware store." ;
-    rdfs:subClassOf schema:Store .
+    rdfs:comment "A hardware store." .
 
 schema:HealthAndBeautyBusiness a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "HealthAndBeautyBusiness" ;
-    rdfs:comment "Health and beauty." ;
-    rdfs:subClassOf schema:LocalBusiness .
+    rdfs:comment "Health and beauty." .
 
 schema:HealthAspectEnumeration a rdfs:Class ;
     rdfs:label "HealthAspectEnumeration" ;
@@ -2737,8 +2652,6 @@ schema:HealthClub a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "HealthClub" ;
     rdfs:comment "A health club." ;
-    rdfs:subClassOf schema:HealthAndBeautyBusiness,
-        schema:SportsActivityLocation ;
     ys:fromClass wd:Q1065656 .
 
 schema:HealthInsurancePlan a rdfs:Class ;
@@ -2783,8 +2696,7 @@ schema:HealthTopicContent a rdfs:Class ;
 
 schema:HighSchool a rdfs:Class ;
     rdfs:label "HighSchool" ;
-    rdfs:comment "A high school." ;
-    rdfs:subClassOf schema:EducationalOrganization .
+    rdfs:comment "A high school." .
 
 schema:HinduTemple a rdfs:Class,
         sh:NodeShape ;
@@ -2795,8 +2707,7 @@ schema:HinduTemple a rdfs:Class,
 
 schema:HobbyShop a rdfs:Class ;
     rdfs:label "HobbyShop" ;
-    rdfs:comment "A store that sells materials useful or necessary for various hobbies." ;
-    rdfs:subClassOf schema:Store .
+    rdfs:comment "A store that sells materials useful or necessary for various hobbies." .
 
 schema:HomeAndConstructionBusiness a rdfs:Class ;
     rdfs:label "HomeAndConstructionBusiness" ;
@@ -2804,21 +2715,16 @@ schema:HomeAndConstructionBusiness a rdfs:Class ;
 
 A HomeAndConstructionBusiness is a <a class="localLink" href="http://schema.org/LocalBusiness">LocalBusiness</a> that provides services around homes and buildings.<br/><br/>
 
-As a <a class="localLink" href="http://schema.org/LocalBusiness">LocalBusiness</a> it can be described as a <a class="localLink" href="http://schema.org/provider">provider</a> of one or more <a class="localLink" href="http://schema.org/Service">Service</a>(s).""" ;
-    rdfs:subClassOf schema:LocalBusiness .
+As a <a class="localLink" href="http://schema.org/LocalBusiness">LocalBusiness</a> it can be described as a <a class="localLink" href="http://schema.org/provider">provider</a> of one or more <a class="localLink" href="http://schema.org/Service">Service</a>(s).""" .
 
 schema:HomeGoodsStore a rdfs:Class ;
     rdfs:label "HomeGoodsStore" ;
-    rdfs:comment "A home goods store." ;
-    rdfs:subClassOf schema:Store .
+    rdfs:comment "A home goods store." .
 
 schema:Hospital a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "Hospital" ;
     rdfs:comment "A hospital." ;
-    rdfs:subClassOf schema:CivicStructure,
-        schema:EmergencyService,
-        schema:MedicalOrganization ;
     ys:fromClass wd:Q16917 .
 
 schema:Hostel a rdfs:Class,
@@ -2827,7 +2733,6 @@ schema:Hostel a rdfs:Class,
     rdfs:comment """A hostel - cheap accommodation, often in shared dormitories.
 <br /><br />
 See also the <a href="/docs/hotels.html">dedicated document on the use of schema.org for marking up hotels and other forms of accommodations</a>.""" ;
-    rdfs:subClassOf schema:LodgingBusiness ;
     ys:fromClass wd:Q654772 .
 
 schema:Hotel a rdfs:Class,
@@ -2836,7 +2741,6 @@ schema:Hotel a rdfs:Class,
     rdfs:comment """A hotel is an establishment that provides lodging paid on a short-term basis (Source: Wikipedia, the free encyclopedia, see http://en.wikipedia.org/wiki/Hotel).
 <br /><br />
 See also the <a href="/docs/hotels.html">dedicated document on the use of schema.org for marking up hotels and other forms of accommodations</a>.""" ;
-    rdfs:subClassOf schema:LodgingBusiness ;
     ys:fromClass wd:Q27686 ;
     schema:source <https://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#STI_Accommodation_Ontology> .
 
@@ -2858,8 +2762,7 @@ schema:House a rdfs:Class,
 
 schema:HousePainter a rdfs:Class ;
     rdfs:label "HousePainter" ;
-    rdfs:comment "A house painting service." ;
-    rdfs:subClassOf schema:HomeAndConstructionBusiness .
+    rdfs:comment "A house painting service." .
 
 schema:HowTo a rdfs:Class ;
     rdfs:label "HowTo" ;
@@ -2868,9 +2771,7 @@ schema:HowTo a rdfs:Class ;
 
 schema:HowToDirection a rdfs:Class ;
     rdfs:label "HowToDirection" ;
-    rdfs:comment "A direction indicating a single action to do in the instructions for how to achieve a result." ;
-    rdfs:subClassOf schema:CreativeWork,
-        schema:ListItem .
+    rdfs:comment "A direction indicating a single action to do in the instructions for how to achieve a result." .
 
 schema:HowToItem a rdfs:Class ;
     rdfs:label "HowToItem" ;
@@ -2879,17 +2780,11 @@ schema:HowToItem a rdfs:Class ;
 
 schema:HowToSection a rdfs:Class ;
     rdfs:label "HowToSection" ;
-    rdfs:comment "A sub-grouping of steps in the instructions for how to achieve a result (e.g. steps for making a pie crust within a pie recipe)." ;
-    rdfs:subClassOf schema:CreativeWork,
-        schema:ItemList,
-        schema:ListItem .
+    rdfs:comment "A sub-grouping of steps in the instructions for how to achieve a result (e.g. steps for making a pie crust within a pie recipe)." .
 
 schema:HowToStep a rdfs:Class ;
     rdfs:label "HowToStep" ;
-    rdfs:comment "A step in the instructions for how to achieve a result. It is an ordered list with HowToDirection and/or HowToTip items." ;
-    rdfs:subClassOf schema:CreativeWork,
-        schema:ItemList,
-        schema:ListItem .
+    rdfs:comment "A step in the instructions for how to achieve a result. It is an ordered list with HowToDirection and/or HowToTip items." .
 
 schema:HowToSupply a rdfs:Class ;
     rdfs:label "HowToSupply" ;
@@ -2898,9 +2793,7 @@ schema:HowToSupply a rdfs:Class ;
 
 schema:HowToTip a rdfs:Class ;
     rdfs:label "HowToTip" ;
-    rdfs:comment "An explanation in the instructions for how to achieve a result. It provides supplementary information about a technique, supply, author's preference, etc. It can explain what could be done, or what should not be done, but doesn't specify what should be done (see HowToDirection)." ;
-    rdfs:subClassOf schema:CreativeWork,
-        schema:ListItem .
+    rdfs:comment "An explanation in the instructions for how to achieve a result. It provides supplementary information about a technique, supply, author's preference, etc. It can explain what could be done, or what should not be done, but doesn't specify what should be done (see HowToDirection)." .
 
 schema:HowToTool a rdfs:Class ;
     rdfs:label "HowToTool" ;
@@ -2911,7 +2804,6 @@ schema:IceCreamShop a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "IceCreamShop" ;
     rdfs:comment "An ice cream shop." ;
-    rdfs:subClassOf schema:FoodEstablishment ;
     ys:fromClass wd:Q1311064 .
 
 schema:IgnoreAction a rdfs:Class ;
@@ -2974,8 +2866,7 @@ schema:InstallAction a rdfs:Class ;
 
 schema:InsuranceAgency a rdfs:Class ;
     rdfs:label "InsuranceAgency" ;
-    rdfs:comment "An Insurance agency." ;
-    rdfs:subClassOf schema:FinancialService .
+    rdfs:comment "An Insurance agency." .
 
 schema:Intangible a rdfs:Class ;
     rdfs:label "Intangible" ;
@@ -2999,8 +2890,7 @@ schema:InteractionCounter a rdfs:Class ;
 
 schema:InternetCafe a rdfs:Class ;
     rdfs:label "InternetCafe" ;
-    rdfs:comment "An internet cafe." ;
-    rdfs:subClassOf schema:LocalBusiness .
+    rdfs:comment "An internet cafe." .
 
 schema:InvestmentFund a rdfs:Class ;
     rdfs:label "InvestmentFund" ;
@@ -3049,8 +2939,7 @@ schema:ItemPage a rdfs:Class ;
 
 schema:JewelryStore a rdfs:Class ;
     rdfs:label "JewelryStore" ;
-    rdfs:comment "A jewelry store." ;
-    rdfs:subClassOf schema:Store .
+    rdfs:comment "A jewelry store." .
 
 schema:JobPosting a rdfs:Class ;
     rdfs:label "JobPosting" ;
@@ -3146,8 +3035,7 @@ schema:LegalService a rdfs:Class ;
     rdfs:label "LegalService" ;
     rdfs:comment """A LegalService is a business that provides legally-oriented services, advice and representation, e.g. law firms.<br/><br/>
 
-As a <a class="localLink" href="http://schema.org/LocalBusiness">LocalBusiness</a> it can be described as a <a class="localLink" href="http://schema.org/provider">provider</a> of one or more <a class="localLink" href="http://schema.org/Service">Service</a>(s).""" ;
-    rdfs:subClassOf schema:LocalBusiness .
+As a <a class="localLink" href="http://schema.org/LocalBusiness">LocalBusiness</a> it can be described as a <a class="localLink" href="http://schema.org/provider">provider</a> of one or more <a class="localLink" href="http://schema.org/Service">Service</a>(s).""" .
 
 schema:LegalValueLevel a rdfs:Class ;
     rdfs:label "LegalValueLevel" ;
@@ -3175,8 +3063,6 @@ schema:Legislation a rdfs:Class,
 schema:LegislationObject a rdfs:Class ;
     rdfs:label "LegislationObject" ;
     rdfs:comment "A specific object or file containing a Legislation. Note that the same Legislation can be published in multiple files. For example, a digitally signed PDF, a plain PDF and an HTML version." ;
-    rdfs:subClassOf schema:Legislation,
-        schema:MediaObject ;
     skos:closeMatch eli:Format ;
     schema:category "issue-1156" ;
     schema:isPartOf <http://pending.schema.org> ;
@@ -3204,7 +3090,6 @@ schema:Library a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "Library" ;
     rdfs:comment "A library." ;
-    rdfs:subClassOf schema:LocalBusiness ;
     ys:fromClass wd:Q7075 .
 
 schema:LibrarySystem a rdfs:Class ;
@@ -3246,7 +3131,6 @@ schema:LiquorStore a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "LiquorStore" ;
     rdfs:comment "A shop that sells alcoholic drinks such as wine, beer, whisky and other spirits." ;
-    rdfs:subClassOf schema:Store ;
     ys:fromClass wd:Q2632011 .
 
 schema:ListItem a rdfs:Class ;
@@ -3279,8 +3163,6 @@ schema:LocalBusiness a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "LocalBusiness" ;
     rdfs:comment "A particular physical business or branch of an organization. Examples of LocalBusiness include a restaurant, a particular branch of a restaurant chain, a branch of a bank, a medical practice, a club, a bowling alley, etc." ;
-    rdfs:subClassOf schema:Organization,
-        schema:Place ;
     skos:closeMatch <http://www.w3.org/ns/regorg#RegisteredOrganization> ;
     ys:fromClass wd:Q62849941 .
 
@@ -3292,14 +3174,12 @@ schema:LocationFeatureSpecification a rdfs:Class ;
 
 schema:Locksmith a rdfs:Class ;
     rdfs:label "Locksmith" ;
-    rdfs:comment "A locksmith." ;
-    rdfs:subClassOf schema:HomeAndConstructionBusiness .
+    rdfs:comment "A locksmith." .
 
 schema:LodgingBusiness a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "LodgingBusiness" ;
-    rdfs:comment "A lodging business, such as a motel, hotel, or inn." ;
-    rdfs:subClassOf schema:LocalBusiness .
+    rdfs:comment "A lodging business, such as a motel, hotel, or inn." .
 
 schema:LodgingReservation a rdfs:Class ;
     rdfs:label "LodgingReservation" ;
@@ -3410,7 +3290,6 @@ schema:MedicalBusiness a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "MedicalBusiness" ;
     rdfs:comment "A particular physical or virtual business of an organization for medical purposes. Examples of MedicalBusiness include differents business run by health professionals." ;
-    rdfs:subClassOf schema:LocalBusiness ;
     schema:isPartOf <http://health-lifesci.schema.org> .
 
 schema:MedicalCause a rdfs:Class ;
@@ -3423,8 +3302,6 @@ schema:MedicalClinic a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "MedicalClinic" ;
     rdfs:comment "A facility, often associated with a hospital or medical school, that is devoted to the specific diagnosis and/or healthcare. Previously limited to outpatients but with evolution it may be open to inpatients as well." ;
-    rdfs:subClassOf schema:MedicalBusiness,
-        schema:MedicalOrganization ;
     ys:fromClass wd:Q1774898 ;
     schema:isPartOf <http://health-lifesci.schema.org> .
 
@@ -3709,8 +3586,7 @@ See also the <a href="/docs/hotels.html">dedicated document on the use of schema
 
 schema:MensClothingStore a rdfs:Class ;
     rdfs:label "MensClothingStore" ;
-    rdfs:comment "A men's clothing store." ;
-    rdfs:subClassOf schema:Store .
+    rdfs:comment "A men's clothing store." .
 
 schema:Menu a rdfs:Class ;
     rdfs:label "Menu" ;
@@ -3752,7 +3628,6 @@ schema:MiddleSchool a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "MiddleSchool" ;
     rdfs:comment "A middle school (typically for children aged around 11-14, although this varies somewhat)." ;
-    rdfs:subClassOf schema:EducationalOrganization ;
     ys:fromClass wd:Q149566 .
 
 schema:MobileApplication a rdfs:Class,
@@ -3764,8 +3639,7 @@ schema:MobileApplication a rdfs:Class,
 
 schema:MobilePhoneStore a rdfs:Class ;
     rdfs:label "MobilePhoneStore" ;
-    rdfs:comment "A store that sells mobile phones and related accessories." ;
-    rdfs:subClassOf schema:Store .
+    rdfs:comment "A store that sells mobile phones and related accessories." .
 
 schema:MonetaryAmount a rdfs:Class ;
     rdfs:label "MonetaryAmount" ;
@@ -3819,7 +3693,6 @@ schema:Motel a rdfs:Class,
     rdfs:comment """A motel.
 <br /><br />
 See also the <a href="/docs/hotels.html">dedicated document on the use of schema.org for marking up hotels and other forms of accommodations</a>.""" ;
-    rdfs:subClassOf schema:LodgingBusiness ;
     ys:fromClass wd:Q216212 .
 
 schema:Motorcycle a rdfs:Class,
@@ -3833,13 +3706,11 @@ schema:Motorcycle a rdfs:Class,
 
 schema:MotorcycleDealer a rdfs:Class ;
     rdfs:label "MotorcycleDealer" ;
-    rdfs:comment "A motorcycle dealer." ;
-    rdfs:subClassOf schema:AutomotiveBusiness .
+    rdfs:comment "A motorcycle dealer." .
 
 schema:MotorcycleRepair a rdfs:Class ;
     rdfs:label "MotorcycleRepair" ;
-    rdfs:comment "A motorcycle repair shop." ;
-    rdfs:subClassOf schema:AutomotiveBusiness .
+    rdfs:comment "A motorcycle repair shop." .
 
 schema:MotorizedBicycle a rdfs:Class ;
     rdfs:label "MotorizedBicycle" ;
@@ -3899,14 +3770,12 @@ schema:MovieClip a rdfs:Class ;
 
 schema:MovieRentalStore a rdfs:Class ;
     rdfs:label "MovieRentalStore" ;
-    rdfs:comment "A movie rental store." ;
-    rdfs:subClassOf schema:Store .
+    rdfs:comment "A movie rental store." .
 
 schema:MovieSeries a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "MovieSeries" ;
     rdfs:comment "A series of movies. Included movies can be indicated with the hasPart property." ;
-    rdfs:subClassOf schema:CreativeWorkSeries ;
     sh:property [ sh:node schema:Person ;
             sh:path schema:actor ;
             ys:fromProperty wdt:P161 ],
@@ -3924,14 +3793,11 @@ schema:MovieTheater a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "MovieTheater" ;
     rdfs:comment "A movie theater." ;
-    rdfs:subClassOf schema:CivicStructure,
-        schema:EntertainmentBusiness ;
     ys:fromClass wd:Q41253 .
 
 schema:MovingCompany a rdfs:Class ;
     rdfs:label "MovingCompany" ;
-    rdfs:comment "A moving company." ;
-    rdfs:subClassOf schema:HomeAndConstructionBusiness .
+    rdfs:comment "A moving company." .
 
 schema:Muscle a rdfs:Class,
         sh:NodeShape ;
@@ -4042,8 +3908,7 @@ schema:MusicReleaseFormatType a rdfs:Class ;
 
 schema:MusicStore a rdfs:Class ;
     rdfs:label "MusicStore" ;
-    rdfs:comment "A music store." ;
-    rdfs:subClassOf schema:Store .
+    rdfs:comment "A music store." .
 
 schema:MusicVenue a rdfs:Class,
         sh:NodeShape ;
@@ -4076,7 +3941,6 @@ schema:NailSalon a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "NailSalon" ;
     rdfs:comment "A nail salon." ;
-    rdfs:subClassOf schema:HealthAndBeautyBusiness ;
     ys:fromClass wd:Q8007048 .
 
 schema:Nerve a rdfs:Class,
@@ -4111,7 +3975,6 @@ schema:Newspaper a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "Newspaper" ;
     rdfs:comment "A publication containing information about varied topics that are pertinent to general information, a geographic area, or a specific subject matter (i.e. business, culture, education). Often published daily." ;
-    rdfs:subClassOf schema:Periodical ;
     ys:fromClass wd:Q11032 ;
     schema:isPartOf <http://bib.schema.org> ;
     schema:source <http://www.productontology.org/id/Newspaper> .
@@ -4120,7 +3983,6 @@ schema:NightClub a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "NightClub" ;
     rdfs:comment "A nightclub or discotheque." ;
-    rdfs:subClassOf schema:EntertainmentBusiness ;
     ys:fromClass wd:Q622425 .
 
 schema:NonprofitType a rdfs:Class ;
@@ -4133,8 +3995,7 @@ schema:NonprofitType a rdfs:Class ;
 
 schema:Notary a rdfs:Class ;
     rdfs:label "Notary" ;
-    rdfs:comment "A notary." ;
-    rdfs:subClassOf schema:LegalService .
+    rdfs:comment "A notary." .
 
 schema:NoteDigitalDocument a rdfs:Class ;
     rdfs:label "NoteDigitalDocument" ;
@@ -4251,8 +4112,7 @@ or Fast and expensive: $15 in 1-2 days""" ;
 
 schema:OfficeEquipmentStore a rdfs:Class ;
     rdfs:label "OfficeEquipmentStore" ;
-    rdfs:comment "An office equipment store." ;
-    rdfs:subClassOf schema:Store .
+    rdfs:comment "An office equipment store." .
 
 schema:OnDemandEvent a rdfs:Class ;
     rdfs:label "OnDemandEvent" ;
@@ -4282,7 +4142,6 @@ schema:Optician a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "Optician" ;
     rdfs:comment "A store that sells reading glasses and similar devices for improving vision." ;
-    rdfs:subClassOf schema:MedicalBusiness ;
     ys:fromClass wd:Q1996635 ;
     schema:isPartOf <http://health-lifesci.schema.org> .
 
@@ -4396,7 +4255,6 @@ schema:OutletStore a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "OutletStore" ;
     rdfs:comment "An outlet store." ;
-    rdfs:subClassOf schema:Store ;
     ys:fromClass wd:Q76470 .
 
 schema:OwnershipInfo a rdfs:Class ;
@@ -4457,8 +4315,6 @@ schema:PathologyTest a rdfs:Class ;
 schema:Patient a rdfs:Class ;
     rdfs:label "Patient" ;
     rdfs:comment "A patient is any person recipient of health care services." ;
-    rdfs:subClassOf schema:MedicalAudience,
-        schema:Person ;
     owl:equivalentClass snomed:116154003 ;
     schema:isPartOf <http://health-lifesci.schema.org> .
 
@@ -4466,7 +4322,6 @@ schema:PawnShop a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "PawnShop" ;
     rdfs:comment "A shop that will buy, or lend money against the security of, personal possessions." ;
-    rdfs:subClassOf schema:Store ;
     ys:fromClass wd:Q176637 .
 
 schema:PayAction a rdfs:Class ;
@@ -4553,7 +4408,6 @@ schema:Periodical a rdfs:Class,
     rdfs:comment """A publication in any medium issued in successive parts bearing numerical or chronological designations and intended, such as a magazine, scholarly journal, or newspaper to continue indefinitely.<br/><br/>
 
 See also <a href="http://blog.schema.org/2014/09/schemaorg-support-for-bibliographic_2.html">blog post</a>.""" ;
-    rdfs:subClassOf schema:CreativeWorkSeries ;
     owl:equivalentClass bibo:Periodical ;
     ys:fromClass wd:Q1002697 ;
     schema:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_bibex> .
@@ -4677,15 +4531,12 @@ schema:PetStore a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "PetStore" ;
     rdfs:comment "A pet store." ;
-    rdfs:subClassOf schema:Store ;
     ys:fromClass wd:Q220142 .
 
 schema:Pharmacy a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "Pharmacy" ;
     rdfs:comment "A pharmacy or drugstore." ;
-    rdfs:subClassOf schema:MedicalBusiness,
-        schema:MedicalOrganization ;
     ys:fromClass wd:Q13107184 .
 
 schema:Photograph a rdfs:Class,
@@ -4729,9 +4580,7 @@ schema:PhysicalTherapy a rdfs:Class ;
 
 schema:Physician a rdfs:Class ;
     rdfs:label "Physician" ;
-    rdfs:comment "A doctor's office." ;
-    rdfs:subClassOf schema:MedicalBusiness,
-        schema:MedicalOrganization .
+    rdfs:comment "A doctor's office." .
 
 schema:Place a rdfs:Class,
         sh:NodeShape ;
@@ -4814,8 +4663,7 @@ schema:Playground a rdfs:Class,
 
 schema:Plumber a rdfs:Class ;
     rdfs:label "Plumber" ;
-    rdfs:comment "A plumbing service." ;
-    rdfs:subClassOf schema:HomeAndConstructionBusiness .
+    rdfs:comment "A plumbing service." .
 
 schema:PodcastEpisode a rdfs:Class ;
     rdfs:label "PodcastEpisode" ;
@@ -4837,7 +4685,6 @@ schema:PodcastSeries a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "PodcastSeries" ;
     rdfs:comment "A podcast is an episodic series of digital audio or video files which a user can download and listen to." ;
-    rdfs:subClassOf schema:CreativeWorkSeries ;
     ys:fromClass wd:Q24634210 ;
     schema:category "issue-373" ;
     schema:isPartOf <http://pending.schema.org> ;
@@ -4847,8 +4694,6 @@ schema:PoliceStation a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "PoliceStation" ;
     rdfs:comment "A police station." ;
-    rdfs:subClassOf schema:CivicStructure,
-        schema:EmergencyService ;
     ys:fromClass wd:Q861951 .
 
 schema:Pond a rdfs:Class,
@@ -4862,7 +4707,6 @@ schema:PostOffice a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "PostOffice" ;
     rdfs:comment "A post office." ;
-    rdfs:subClassOf schema:GovernmentOffice ;
     ys:fromClass wd:Q35054 .
 
 schema:PostalAddress a rdfs:Class ;
@@ -4904,7 +4748,6 @@ schema:Preschool a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "Preschool" ;
     rdfs:comment "A preschool." ;
-    rdfs:subClassOf schema:EducationalOrganization ;
     ys:fromClass wd:Q1076052 .
 
 schema:PresentationDigitalDocument a rdfs:Class ;
@@ -4967,8 +4810,6 @@ schema:Product a rdfs:Class,
 schema:ProductCollection a rdfs:Class ;
     rdfs:label "ProductCollection" ;
     rdfs:comment "A set of products (either <a class=\"localLink\" href=\"http://schema.org/ProductGroup\">ProductGroup</a>s or specific variants) that are listed together e.g. in an <a class=\"localLink\" href=\"http://schema.org/Offer\">Offer</a>." ;
-    rdfs:subClassOf schema:Collection,
-        schema:Product ;
     schema:category "issue-2597" ;
     schema:isPartOf <http://pending.schema.org> ;
     schema:source <https://github.com/schemaorg/schemaorg/issues/2597> .
@@ -5015,8 +4856,7 @@ schema:ProfessionalService a rdfs:Class ;
 
 The general <a class="localLink" href="http://schema.org/ProfessionalService">ProfessionalService</a> type for local businesses was deprecated due to confusion with <a class="localLink" href="http://schema.org/Service">Service</a>. For reference, the types that it included were: <a class="localLink" href="http://schema.org/Dentist">Dentist</a>,
         <a class="localLink" href="http://schema.org/AccountingService">AccountingService</a>, <a class="localLink" href="http://schema.org/Attorney">Attorney</a>, <a class="localLink" href="http://schema.org/Notary">Notary</a>, as well as types for several kinds of <a class="localLink" href="http://schema.org/HomeAndConstructionBusiness">HomeAndConstructionBusiness</a>: <a class="localLink" href="http://schema.org/Electrician">Electrician</a>, <a class="localLink" href="http://schema.org/GeneralContractor">GeneralContractor</a>,
-        <a class="localLink" href="http://schema.org/HousePainter">HousePainter</a>, <a class="localLink" href="http://schema.org/Locksmith">Locksmith</a>, <a class="localLink" href="http://schema.org/Plumber">Plumber</a>, <a class="localLink" href="http://schema.org/RoofingContractor">RoofingContractor</a>. <a class="localLink" href="http://schema.org/LegalService">LegalService</a> was introduced as a more inclusive supertype of <a class="localLink" href="http://schema.org/Attorney">Attorney</a>.""" ;
-    rdfs:subClassOf schema:LocalBusiness .
+        <a class="localLink" href="http://schema.org/HousePainter">HousePainter</a>, <a class="localLink" href="http://schema.org/Locksmith">Locksmith</a>, <a class="localLink" href="http://schema.org/Plumber">Plumber</a>, <a class="localLink" href="http://schema.org/RoofingContractor">RoofingContractor</a>. <a class="localLink" href="http://schema.org/LegalService">LegalService</a> was introduced as a more inclusive supertype of <a class="localLink" href="http://schema.org/Attorney">Attorney</a>.""" .
 
 schema:ProfilePage a rdfs:Class ;
     rdfs:label "ProfilePage" ;
@@ -5076,7 +4916,6 @@ schema:PublicSwimmingPool a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "PublicSwimmingPool" ;
     rdfs:comment "A public swimming pool." ;
-    rdfs:subClassOf schema:SportsActivityLocation ;
     ys:fromClass wd:Q27106886 .
 
 schema:PublicToilet a rdfs:Class,
@@ -5247,7 +5086,6 @@ schema:RadioSeries a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "RadioSeries" ;
     rdfs:comment "CreativeWorkSeries dedicated to radio broadcast and associated online delivery." ;
-    rdfs:subClassOf schema:CreativeWorkSeries ;
     sh:property [ sh:node schema:Person ;
             sh:path schema:actor ;
             ys:fromProperty wdt:P161 ],
@@ -5274,7 +5112,6 @@ schema:RadioStation a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "RadioStation" ;
     rdfs:comment "A radio station." ;
-    rdfs:subClassOf schema:LocalBusiness ;
     ys:fromClass wd:Q14350 .
 
 schema:Rating a rdfs:Class,
@@ -5296,8 +5133,7 @@ schema:ReadAction a rdfs:Class ;
 
 schema:RealEstateAgent a rdfs:Class ;
     rdfs:label "RealEstateAgent" ;
-    rdfs:comment "A real-estate agent." ;
-    rdfs:subClassOf schema:LocalBusiness .
+    rdfs:comment "A real-estate agent." .
 
 schema:RealEstateListing a rdfs:Class ;
     rdfs:label "RealEstateListing" ;
@@ -5344,7 +5180,6 @@ schema:RecyclingCenter a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "RecyclingCenter" ;
     rdfs:comment "A recycling center." ;
-    rdfs:subClassOf schema:LocalBusiness ;
     ys:fromClass wd:Q27106436 .
 
 schema:RefundTypeEnumeration a rdfs:Class ;
@@ -5503,7 +5338,6 @@ schema:Resort a rdfs:Class,
     rdfs:comment """A resort is a place used for relaxation or recreation, attracting visitors for holidays or vacations. Resorts are places, towns or sometimes commercial establishment operated by a single company (Source: Wikipedia, the free encyclopedia, see <a href="http://en.wikipedia.org/wiki/Resort">http://en.wikipedia.org/wiki/Resort</a>).
 <br /><br />
 See also the <a href="/docs/hotels.html">dedicated document on the use of schema.org for marking up hotels and other forms of accommodations</a>.""" ;
-    rdfs:subClassOf schema:LodgingBusiness ;
     ys:fromClass wd:Q875157 ;
     schema:source <https://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#STI_Accommodation_Ontology> .
 
@@ -5511,7 +5345,6 @@ schema:Restaurant a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "Restaurant" ;
     rdfs:comment "A restaurant." ;
-    rdfs:subClassOf schema:FoodEstablishment ;
     ys:fromClass wd:Q11707 .
 
 schema:RestrictedDiet a rdfs:Class ;
@@ -5550,8 +5383,6 @@ schema:ReviewAction a rdfs:Class ;
 schema:ReviewNewsArticle a rdfs:Class ;
     rdfs:label "ReviewNewsArticle" ;
     rdfs:comment "A <a class=\"localLink\" href=\"http://schema.org/NewsArticle\">NewsArticle</a> and <a class=\"localLink\" href=\"http://schema.org/CriticReview\">CriticReview</a> providing a professional critic's assessment of a service, product, performance, or artistic or literary work." ;
-    rdfs:subClassOf schema:CriticReview,
-        schema:NewsArticle ;
     schema:category "issue-1525" ;
     schema:isPartOf <http://pending.schema.org> ;
     schema:source <https://github.com/schemaorg/schemaorg/issues/1525>,
@@ -5573,8 +5404,7 @@ See also <a href="http://blog.schema.org/2014/06/introducing-role.html">blog pos
 
 schema:RoofingContractor a rdfs:Class ;
     rdfs:label "RoofingContractor" ;
-    rdfs:comment "A roofing contractor." ;
-    rdfs:subClassOf schema:HomeAndConstructionBusiness .
+    rdfs:comment "A roofing contractor." .
 
 schema:Room a rdfs:Class ;
     rdfs:label "Room" ;
@@ -5641,7 +5471,6 @@ schema:School a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "School" ;
     rdfs:comment "A school." ;
-    rdfs:subClassOf schema:EducationalOrganization ;
     ys:fromClass wd:Q3914 .
 
 schema:SchoolDistrict a rdfs:Class ;
@@ -5703,7 +5532,6 @@ schema:SelfStorage a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "SelfStorage" ;
     rdfs:comment "A self-storage facility." ;
-    rdfs:subClassOf schema:LocalBusiness ;
     ys:fromClass wd:Q401404 .
 
 schema:SellAction a rdfs:Class ;
@@ -5773,14 +5601,12 @@ schema:ShoeStore a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "ShoeStore" ;
     rdfs:comment "A shoe store." ;
-    rdfs:subClassOf schema:Store ;
     ys:fromClass wd:Q7500021 .
 
 schema:ShoppingCenter a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "ShoppingCenter" ;
     rdfs:comment "A shopping center or mall." ;
-    rdfs:subClassOf schema:LocalBusiness ;
     ys:fromClass wd:Q11315 .
 
 schema:ShortStory a rdfs:Class ;
@@ -5805,7 +5631,6 @@ schema:SkiResort a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "SkiResort" ;
     rdfs:comment "A ski resort." ;
-    rdfs:subClassOf schema:SportsActivityLocation ;
     ys:fromClass wd:Q130003 .
 
 schema:SocialEvent a rdfs:Class ;
@@ -5898,19 +5723,16 @@ schema:Specialty a rdfs:Class,
 
 schema:SportingGoodsStore a rdfs:Class ;
     rdfs:label "SportingGoodsStore" ;
-    rdfs:comment "A sporting goods store." ;
-    rdfs:subClassOf schema:Store .
+    rdfs:comment "A sporting goods store." .
 
 schema:SportsActivityLocation a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "SportsActivityLocation" ;
-    rdfs:comment "A sports location, such as a playing field." ;
-    rdfs:subClassOf schema:LocalBusiness .
+    rdfs:comment "A sports location, such as a playing field." .
 
 schema:SportsClub a rdfs:Class ;
     rdfs:label "SportsClub" ;
-    rdfs:comment "A sports club." ;
-    rdfs:subClassOf schema:SportsActivityLocation .
+    rdfs:comment "A sports club." .
 
 schema:SportsEvent a rdfs:Class,
         sh:NodeShape ;
@@ -5952,8 +5774,6 @@ schema:StadiumOrArena a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "StadiumOrArena" ;
     rdfs:comment "A stadium." ;
-    rdfs:subClassOf schema:CivicStructure,
-        schema:SportsActivityLocation ;
     ys:fromClass wd:Q483110 .
 
 schema:State a rdfs:Class,
@@ -5990,7 +5810,6 @@ schema:Store a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "Store" ;
     rdfs:comment "A retail good store." ;
-    rdfs:subClassOf schema:LocalBusiness ;
     ys:fromClass wd:Q213441 .
 
 schema:StructuredValue a rdfs:Class ;
@@ -6088,8 +5907,6 @@ schema:TVSeason a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "TVSeason" ;
     rdfs:comment "Season dedicated to TV broadcast and associated online delivery." ;
-    rdfs:subClassOf schema:CreativeWork,
-        schema:CreativeWorkSeason ;
     sh:property [ sh:node schema:Country ;
             sh:path schema:countryOfOrigin ;
             ys:fromProperty wdt:P495 ] ;
@@ -6099,8 +5916,6 @@ schema:TVSeries a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "TVSeries" ;
     rdfs:comment "CreativeWorkSeries dedicated to TV broadcast and associated online delivery." ;
-    rdfs:subClassOf schema:CreativeWork,
-        schema:CreativeWorkSeries ;
     sh:property [ sh:node schema:Person ;
             sh:path schema:actor ;
             ys:fromProperty wdt:P161 ],
@@ -6147,7 +5962,6 @@ schema:TattooParlor a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "TattooParlor" ;
     rdfs:comment "A tattoo parlor." ;
-    rdfs:subClassOf schema:HealthAndBeautyBusiness ;
     ys:fromClass wd:Q27038997 .
 
 schema:Taxi a rdfs:Class ;
@@ -6189,14 +6003,12 @@ schema:TelevisionStation a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "TelevisionStation" ;
     rdfs:comment "A television station." ;
-    rdfs:subClassOf schema:LocalBusiness ;
     ys:fromClass wd:Q1616075 .
 
 schema:TennisComplex a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "TennisComplex" ;
     rdfs:comment "A tennis complex." ;
-    rdfs:subClassOf schema:SportsActivityLocation ;
     ys:fromClass wd:Q13380226 .
 
 schema:Text a rdfs:Class,
@@ -6289,8 +6101,7 @@ schema:TipAction a rdfs:Class ;
 
 schema:TireShop a rdfs:Class ;
     rdfs:label "TireShop" ;
-    rdfs:comment "A tire shop." ;
-    rdfs:subClassOf schema:Store .
+    rdfs:comment "A tire shop." .
 
 schema:TouristAttraction a rdfs:Class,
         sh:NodeShape ;
@@ -6315,7 +6126,6 @@ schema:TouristInformationCenter a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "TouristInformationCenter" ;
     rdfs:comment "A tourist information center." ;
-    rdfs:subClassOf schema:LocalBusiness ;
     ys:fromClass wd:Q1587716 .
 
 schema:TouristTrip a rdfs:Class ;
@@ -6332,7 +6142,6 @@ schema:ToyStore a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "ToyStore" ;
     rdfs:comment "A toy store." ;
-    rdfs:subClassOf schema:Store ;
     ys:fromClass wd:Q1318959 .
 
 schema:TrackAction a rdfs:Class ;
@@ -6386,7 +6195,6 @@ schema:TravelAgency a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "TravelAgency" ;
     rdfs:comment "A travel agency." ;
-    rdfs:subClassOf schema:LocalBusiness ;
     ys:fromClass wd:Q217107 .
 
 schema:TreatmentIndication a rdfs:Class ;
@@ -6567,8 +6375,6 @@ schema:VideoGame a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "VideoGame" ;
     rdfs:comment "A video game is an electronic game that involves human interaction with a user interface to generate visual feedback on a video device." ;
-    rdfs:subClassOf schema:Game,
-        schema:SoftwareApplication ;
     sh:property [ sh:node schema:Person ;
             sh:path schema:actor ;
             ys:fromProperty wdt:P161 ],
@@ -6589,7 +6395,6 @@ schema:VideoGameSeries a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "VideoGameSeries" ;
     rdfs:comment "A video game series." ;
-    rdfs:subClassOf schema:CreativeWorkSeries ;
     sh:property [ sh:node schema:Person ;
             sh:path schema:director ;
             ys:fromProperty wdt:P57 ],
@@ -6779,8 +6584,7 @@ schema:WebSite a rdfs:Class,
 
 schema:WholesaleStore a rdfs:Class ;
     rdfs:label "WholesaleStore" ;
-    rdfs:comment "A wholesale store." ;
-    rdfs:subClassOf schema:Store .
+    rdfs:comment "A wholesale store." .
 
 schema:WinAction a rdfs:Class ;
     rdfs:label "WinAction" ;
@@ -6791,7 +6595,6 @@ schema:Winery a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "Winery" ;
     rdfs:comment "A winery." ;
-    rdfs:subClassOf schema:FoodEstablishment ;
     ys:fromClass wd:Q156362 .
 
 schema:WorkBasedProgram a rdfs:Class ;
@@ -6866,6 +6669,12 @@ bioschema:potentialUse a rdf:Property .
 bioschema:samplingAge a rdf:Property .
 
 bioschema:taxonomicRange a rdf:Property .
+
+wd:Q_European_event rdfs:subClassOf schema:Event .
+
+wd:Q_loop_book rdfs:subClassOf wd:Q_English_book .
+
+wd:Q_wikipediapage_book rdfs:subClassOf wd:Q_European_book .
 
 ys: rdfs:label "Yago 4 shapes declaration"@en .
 
@@ -7056,7 +6865,6 @@ schema:CommentPermission a schema:DigitalDocumentPermissionType ;
 schema:CommunityHealth a schema:MedicalSpecialty ;
     rdfs:label "CommunityHealth" ;
     rdfs:comment "A field of public health focusing on improving health characteristics of a defined population in relation with their geographical or environment areas" ;
-    rdfs:subClassOf schema:MedicalBusiness ;
     schema:isPartOf <http://health-lifesci.schema.org> .
 
 schema:CompilationAlbum a schema:MusicAlbumProductionType ;
@@ -7137,7 +6945,6 @@ schema:Diagnostic a schema:MedicalDevicePurpose ;
 schema:DietNutrition a schema:MedicalSpecialty ;
     rdfs:label "DietNutrition" ;
     rdfs:comment "Dietetic and nutrition as a medical speciality." ;
-    rdfs:subClassOf schema:MedicalBusiness ;
     schema:isPartOf <http://health-lifesci.schema.org> .
 
 schema:DigitalAudioTapeFormat a schema:MusicReleaseFormatType ;
@@ -7189,7 +6996,6 @@ schema:Ear a schema:PhysicalExam ;
 schema:Emergency a schema:MedicalSpecialty ;
     rdfs:label "Emergency" ;
     rdfs:comment "A specific branch of medical science that deals with the evaluation and initial treatment of medical conditions caused by trauma or sudden illness." ;
-    rdfs:subClassOf schema:MedicalBusiness ;
     schema:isPartOf <http://health-lifesci.schema.org> .
 
 schema:Endocrine a schema:MedicalSpecialty ;
@@ -7341,7 +7147,6 @@ schema:Genitourinary a schema:PhysicalExam ;
 schema:Geriatric a schema:MedicalSpecialty ;
     rdfs:label "Geriatric" ;
     rdfs:comment "A specific branch of medical science that is concerned with the diagnosis and treatment of diseases, debilities and provision of care to the aged." ;
-    rdfs:subClassOf schema:MedicalBusiness ;
     schema:isPartOf <http://health-lifesci.schema.org> .
 
 schema:GlutenFreeDiet a schema:RestrictedDiet ;
@@ -7361,7 +7166,6 @@ schema:GroupBoardingPolicy a schema:BoardingPolicyType ;
 schema:Gynecologic a schema:MedicalSpecialty ;
     rdfs:label "Gynecologic" ;
     rdfs:comment "A specific branch of medical science that pertains to the health care of women, particularly in the diagnosis and treatment of disorders affecting the female reproductive system." ;
-    rdfs:subClassOf schema:MedicalBusiness ;
     schema:isPartOf <http://health-lifesci.schema.org> .
 
 schema:HalalDiet a schema:RestrictedDiet ;
@@ -7549,7 +7353,6 @@ schema:MedicalResearcher a schema:MedicalAudienceType ;
 schema:Midwifery a schema:MedicalSpecialty ;
     rdfs:label "Midwifery" ;
     rdfs:comment "A nurse-like health profession that deals with pregnancy, childbirth, and the postpartum period (including care of the newborn), besides sexual and reproductive health of women throughout their lives." ;
-    rdfs:subClassOf schema:MedicalBusiness ;
     schema:isPartOf <http://health-lifesci.schema.org> .
 
 schema:MisconceptionsHealthAspect a schema:HealthAspectEnumeration ;
@@ -7919,7 +7722,6 @@ schema:NotYetRecruiting a schema:MedicalStudyStatus ;
 schema:Nursing a schema:MedicalSpecialty ;
     rdfs:label "Nursing" ;
     rdfs:comment "A health profession of a person formally educated and trained in the care of the sick or infirm person." ;
-    rdfs:subClassOf schema:MedicalBusiness ;
     schema:isPartOf <http://health-lifesci.schema.org> .
 
 schema:OTC a schema:DrugPrescriptionStatus ;
@@ -7935,7 +7737,6 @@ schema:Observational a schema:MedicalObservationalStudyDesign ;
 schema:Obstetric a schema:MedicalSpecialty ;
     rdfs:label "Obstetric" ;
     rdfs:comment "A specific branch of medical science that specializes in the care of women during the prenatal and postnatal care and with the delivery of the child." ;
-    rdfs:subClassOf schema:MedicalBusiness ;
     schema:isPartOf <http://health-lifesci.schema.org> .
 
 schema:OccupationalActivity a schema:PhysicalActivityCategory ;
@@ -7974,7 +7775,6 @@ schema:OnSitePickup a schema:DeliveryMethod ;
 schema:Oncologic a schema:MedicalSpecialty ;
     rdfs:label "Oncologic" ;
     rdfs:comment "A specific branch of medical science that deals with benign and malignant tumors, including the study of their development, diagnosis, treatment and prevention." ;
-    rdfs:subClassOf schema:MedicalBusiness ;
     schema:isPartOf <http://health-lifesci.schema.org> .
 
 schema:OneTimePayments a schema:GovernmentBenefitsType ;
@@ -8011,7 +7811,6 @@ schema:OpenTrial a schema:MedicalTrialDesign ;
 schema:Optometric a schema:MedicalSpecialty ;
     rdfs:label "Optometric" ;
     rdfs:comment "The science or practice of testing visual acuity and prescribing corrective lenses." ;
-    rdfs:subClassOf schema:MedicalBusiness ;
     schema:isPartOf <http://health-lifesci.schema.org> .
 
 schema:OrderCancelled a schema:OrderStatus ;
@@ -8061,7 +7860,6 @@ schema:Osteopathic a schema:MedicineSystem ;
 schema:Otolaryngologic a schema:MedicalSpecialty ;
     rdfs:label "Otolaryngologic" ;
     rdfs:comment "A specific branch of medical science that is concerned with the ear, nose and throat and their respective disease states." ;
-    rdfs:subClassOf schema:MedicalBusiness ;
     schema:isPartOf <http://health-lifesci.schema.org> .
 
 schema:OutOfStock a schema:ItemAvailability ;
@@ -8160,7 +7958,6 @@ schema:PaymentPastDue a schema:PaymentStatusType ;
 schema:Pediatric a schema:MedicalSpecialty ;
     rdfs:label "Pediatric" ;
     rdfs:comment "A specific branch of medical science that specializes in the care of infants, children and adolescents." ;
-    rdfs:subClassOf schema:MedicalBusiness ;
     schema:isPartOf <http://health-lifesci.schema.org> .
 
 schema:PercutaneousProcedure a schema:MedicalProcedureType ;
@@ -8176,7 +7973,6 @@ schema:PharmacySpecialty a schema:MedicalSpecialty ;
 schema:Physiotherapy a schema:MedicalSpecialty ;
     rdfs:label "Physiotherapy" ;
     rdfs:comment "The practice of treatment of disease, injury, or deformity by physical methods such as massage, heat treatment, and exercise rather than by drugs or surgery.." ;
-    rdfs:subClassOf schema:MedicalBusiness ;
     schema:isPartOf <http://health-lifesci.schema.org> .
 
 schema:PlaceboControlledTrial a schema:MedicalTrialDesign ;
@@ -8187,13 +7983,11 @@ schema:PlaceboControlledTrial a schema:MedicalTrialDesign ;
 schema:PlasticSurgery a schema:MedicalSpecialty ;
     rdfs:label "PlasticSurgery" ;
     rdfs:comment "A specific branch of medical science that pertains to therapeutic or cosmetic repair or re-formation of missing, injured or malformed tissues or body parts by manual and instrumental means." ;
-    rdfs:subClassOf schema:MedicalBusiness ;
     schema:isPartOf <http://health-lifesci.schema.org> .
 
 schema:Podiatric a schema:MedicalSpecialty ;
     rdfs:label "Podiatric" ;
     rdfs:comment "Podiatry is the care of the human foot, especially the diagnosis and treatment of foot disorders." ;
-    rdfs:subClassOf schema:MedicalBusiness ;
     schema:isPartOf <http://health-lifesci.schema.org> .
 
 schema:PotentialActionStatus a schema:ActionStatusType ;
@@ -8223,7 +8017,6 @@ schema:PreventionHealthAspect a schema:HealthAspectEnumeration ;
 schema:PrimaryCare a schema:MedicalSpecialty ;
     rdfs:label "PrimaryCare" ;
     rdfs:comment "The medical care by a physician, or other health-care professional, who is the patient's first contact with the health-care system and who may recommend a specialist if necessary." ;
-    rdfs:subClassOf schema:MedicalBusiness ;
     schema:isPartOf <http://health-lifesci.schema.org> .
 
 schema:Prion a schema:InfectiousAgentClass ;
@@ -8278,13 +8071,11 @@ schema:Protozoa a schema:InfectiousAgentClass ;
 schema:Psychiatric a schema:MedicalSpecialty ;
     rdfs:label "Psychiatric" ;
     rdfs:comment "A specific branch of medical science that is concerned with the study, treatment, and prevention of mental illness, using both medical and psychological therapies." ;
-    rdfs:subClassOf schema:MedicalBusiness ;
     schema:isPartOf <http://health-lifesci.schema.org> .
 
 schema:PublicHealth a schema:MedicalSpecialty ;
     rdfs:label "PublicHealth" ;
     rdfs:comment "Branch of medicine that pertains to the health services to improve and protect community health, especially epidemiology, sanitation, immunization, and preventive medicine." ;
-    rdfs:subClassOf schema:MedicalBusiness ;
     schema:isPartOf <http://health-lifesci.schema.org> .
 
 schema:PublicHolidays a schema:DayOfWeek ;
@@ -18042,10 +17833,11 @@ bioschema:smiles a rdf:Property .
 
 bioschema:taxonRank a rdf:Property .
 
+wd:Q_English_book rdfs:subClassOf wd:Q_European_book .
+
 schema:Dermatology a schema:MedicalSpecialty ;
     rdfs:label "Dermatology" ;
     rdfs:comment "A specific branch of medical science that pertains to diagnosis and treatment of disorders of skin." ;
-    rdfs:subClassOf schema:MedicalBusiness ;
     schema:isPartOf <http://health-lifesci.schema.org> .
 
 schema:MerchantReturnFiniteReturnWindow a schema:MerchantReturnEnumeration ;
@@ -19301,6 +19093,8 @@ bioschema:encodesBioChemEntity a rdf:Property ;
 
 bioschema:isEncodedByBioChemEntity a rdf:Property ;
     schema:inverseOf bioschema:encodesBioChemEntity .
+
+wd:Q_European_book rdfs:subClassOf schema:Book .
 
 ys:AnnotationPropertyShape a rdfs:Property ;
     rdfs:subPropertyOf sh:PropertyShape .

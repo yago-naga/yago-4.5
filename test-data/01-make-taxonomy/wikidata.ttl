@@ -2,37 +2,47 @@
 @prefix wd: <http://www.wikidata.org/entity/ .
 @prefix wdt: <http://www.wikidata.org/prop/ direct/ .
 
+# European books should be a subclass of Books in YAGO
 wd:Q_European_book a wd:item .
 <https://en.wikipedia.org/wiki/Blah> schema:about wd:Q_European_book .
 wd:Q_European_book wdt:P279 wd:Q571 .
 
+# English books should be a subclass of European Books in YAGO
 wd:Q_English_book a wd:item .
 <https://en.wikipedia.org/wiki/Blah> schema:about wd:Q_English_book .
 wd:Q_English_book wdt:P279 wd:Q_European_book .
 
+# Loops should be removed in YAGO
 wd:Q_loop_book a wd:item .
 <https://en.wikipedia.org/wiki/Blah> schema:about wd:Q_loop_book .
 wd:Q_loop_book wdt:P279 wd:Q_English_book .
 wd:Q_European_book wdt:P279 wd:Q_loop_book .
 
+# European events should be a subclass of Event in YAGO
 wd:Q_European_event a wd:item .
 <https://en.wikipedia.org/wiki/Blah> schema:about wd:Q_European_event .
 wd:Q_European_event wdt:P279 wd:Q1656682 .
 
+# Nonsense is a book and an event, and should not exist in YAGO
 wd:Q_nonsense a wd:item .
 <https://en.wikipedia.org/wiki/Blah> schema:about wd:Q_nonsense .
 wd:Q_nonsense wdt:P279 wd:Q_English_book ,
  wd:Q_European_event .
 
+# Disambiguation pages should not exist in YAGO
 wd:Q4167410 a wd:item .
 <https://en.wikipedia.org/wiki/Blah> schema:about wd:Q4167410 .
 wd:Q4167410 wdt:P279 wd:Q571 .
 
+# Disambiguation pages should not exist in YAGO
 wd:Q_English_disambiguation_page a wd:item .
 <https://en.wikipedia.org/wiki/Blah> schema:about wd:Q_English_disambiguation_page .
 wd:Q_English_disambiguation_page wdt:P279 wd:Q4167410 .
 
+# Classes with a Wikipedia page should get in
 wd:Q_wikipediapage_book a wd:item .
 <https://en.wikipedia.org/wiki/Blah> schema:about wd:Q_wikipediapage_book  .
-wd:Q_nonwikipediapage_book wdt:P279 wd:Q_European_book .
 wd:Q_wikipediapage_book wdt:P279 wd:Q_nonwikipediapage_book .
+
+# Classes without a Wikipedia page should not get in
+wd:Q_nonwikipediapage_book wdt:P279 wd:Q_European_book .

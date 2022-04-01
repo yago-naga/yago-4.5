@@ -4,7 +4,10 @@ Creates the the YAGO facts from the Wikidata facts
 (c) 2022 Fabian M. Suchanek
 
 Call:
-  python3 make-facts.py wikidata-latest-all.ttl.gz
+  python3 make-facts.py
+
+Assumes:
+- Wikidata file in input-data/wikidata.ttl.gz
 
 Input:
 - yago-taxonomy.ttl
@@ -20,11 +23,12 @@ Algorithm:
   - check cardinality constraints
   - check domain constraint
   - check range constraints
-  - write out facts that fulfill the constraints to yago-facts-to-type-check.tsv
-   
+  - write out facts that fulfill the constraints to yago-facts-to-type-check.tsv  
 """
 
 TEST=True
+FOLDER="test-data/02-make-facts/" if TEST else "yago-data/"
+WIKIDATA_FILE= "test-data/02-make-facts/wikidata.ttl" if TEST else "input-data/wikidata.ttl.gz"
 
 ##########################################################################
 #             Booting
@@ -39,18 +43,14 @@ import sys
 import re
 print("done")
 
-if not TEST and len(sys.argv)!=2:
-    print("  Need a single wikidata file as argument\nfailed")
-    exit()
-
 print("  Loading YAGO taxonomy...", end="", flush=True)
 yagoTaxonomy=Graph()
-yagoTaxonomy.parse("test/02-make-facts/test-input-yago-taxonomy.ttl" if TEST else "yago-taxonomy.ttl", format="turtle")
+yagoTaxonomy.parse(FOLDER+"yago-taxonomy.ttl", format="turtle")
 print("done")
 
 print("  Loading unmapped classes...", end="", flush=True)
 unmappedClasses=Graph()
-unmappedClasses.parse("test/02-make-facts/test-input-unmapped-classes.ttl" if TEST else "unmapped-classes.ttl", format="turtle")
+unmappedClasses.parse(FOLDER+"unmapped-classes.ttl", format="turtle")
 print("done")
 
 ##########################################################################
@@ -152,12 +152,11 @@ def checkDomain(p, classes):
 
 def checkDatatype(datatype, o):
     """True if the object <o> conforms to the <datatype>"""
-    print("  Checking if "+str(o)+" has datatype "+str(datatype)+" FYI: "+str(XSD.anyUri))
-    # Bug for URIs: we also have to check capitalization...
-    if datatype==XSD.anyUri or str(datatype)=='http://www.w3.org/2001/XMLSchema#anyURI':
+    #print("  Checking if "+str(o)+" has datatype "+str(datatype))
+    if datatype==XSD.anyURI:
         return isinstance(o,URIRef)
     if not isinstance(o, Literal):
-        print("  "+str(o)+" is not a literal")
+        #print("  "+str(o)+" is not a literal")
         return False
     if datatype==XSD.string:
         return o.datatype is None
@@ -171,17 +170,17 @@ def checkRangePropertyNode(propertyNode, o):
     disjunctObject = next(yagoTaxonomy.objects(propertyNode, utils.shaclOr), None)
     if disjunctObject:
         possiblePropertyNodes = collection.Collection(yagoTaxonomy, disjunctObject)
-        print("   is disjunction: "+str(possiblePropertyNodes))
+        #print("   is disjunction: "+str(possiblePropertyNodes))
         resultList=[]
         for possiblePropertyNode in possiblePropertyNodes:
             result=checkRangePropertyNode(possiblePropertyNode, o)
-            print("    checking: "+str(result))
+            #print("    checking: "+str(result))
             if result==True:
                return True
             if result==False:
                 continue
             resultList=resultList+result
-        print("   disjunction result: "+str(resultList))
+        #print("   disjunction result: "+str(resultList))
         if len(resultList)==0:
             return False
         return resultList
@@ -191,14 +190,14 @@ def checkRangePropertyNode(propertyNode, o):
     patternObject = next(yagoTaxonomy.objects(propertyNode, utils.shaclPattern), None)
     if patternObject: 
        if not isinstance(o, Literal):
-           print("  Pattern "+str(patternObject)+" cannot match because object is not a string: "+str(o))
+           #print("  Pattern "+str(patternObject)+" cannot match because object is not a string: "+str(o))
            return False
        string = o.value    
        if not isinstance(patternObject, Literal):
             raise Exception("SHACL pattern has to be a string: "+str(propertyNode)+" "+str(patternObject))
        patternString = patternObject.value    
        if not re.match(patternString, string):
-           print("  Pattern "+patternString+" does not match: "+string)
+           #print("  Pattern "+patternString+" does not match: "+string)
            return False
     
     # Datatypes
@@ -218,7 +217,7 @@ def checkRange(p, o):
     """True if the object <o> conforms to the range constraint of predicate <p>. False if it does not. Otherwise, returns a list of classes that <o> would have to belong to."""
     # ASSUMPTION: the object types for the predicate p are the same, no matter the subject type
     propertyNode = next(yagoTaxonomy.subjects(utils.shaclPath, p), None)
-    print("  Range check for "+str(p)+" "+str(o)+" with prop node "+str(propertyNode))
+    #print("  Range check for "+str(p)+" "+str(o)+" with prop node "+str(propertyNode))
     if not propertyNode:
         return False
     return checkRangePropertyNode(propertyNode, o)
@@ -227,9 +226,9 @@ def checkRange(p, o):
 #             Main method
 ##########################################################################
 
-with open("test/02-make-facts/test-output.tsv" if TEST else "yago-facts-to-type-check.tsv", "tw", encoding="utf=8") as yagoFacts:
-    for entityFacts in utils.readWikidataEntities("test/02-make-facts/test-input-wikidata.ttl" if TEST else sys.argv[1]): 
-        utils.printGraph(entityFacts)
+with open(FOLDER+"yago-facts-to-type-check.tsv", "tw", encoding="utf=8") as yagoFacts:
+    for entityFacts in utils.readWikidataEntities(WIKIDATA_FILE): 
+        #utils.printGraph(entityFacts)
         if not cleanClasses(entityFacts):
             continue
         classes = getClasses(entityFacts)
@@ -238,31 +237,31 @@ with open("test/02-make-facts/test-output.tsv" if TEST else "yago-facts-to-type-
         for p in set(entityFacts.predicates()):
             checkCardinalityConstraints(p, entityFacts)
         for s,p,o in entityFacts:
-            print(str(s)+" "+str(p)+' '+str(o))
+            #print(str(s)+" "+str(p)+' '+str(o))
             if p==RDF.type:
                 yagoFacts.write(utils.compress(s)+"\trdf:type\t"+utils.compress(o)+"\n")
                 continue
             if p==utils.schemaAbout:
-                yagoPredicate=URIRef("http://schema.org/mainEntityOfPage")
+                yagoPredicate=URIRef("https://schema.org/mainEntityOfPage")
                 tmp=s
                 s=o
                 o=tmp
             else:
                 yagoPredicate = wikidataPredicate2YagoPredicate(p)
-            print(" in YAGO: "+str(yagoPredicate))
+            #print(" in YAGO: "+str(yagoPredicate))
             if not yagoPredicate:
                 continue
             if not checkDomain(yagoPredicate, classes):
-                print(" domain check failed")
+                #print(" domain check failed")
                 continue
             rangeResult=checkRange(yagoPredicate, o)
             if rangeResult is True:
-                yagoFacts.write(utils.compress(s)+"\t"+yagoPredicate+"\t"+utils.compress(o)+"\n")
+                yagoFacts.write(utils.compress(s)+"\t"+utils.compress(yagoPredicate)+"\t"+utils.compress(o)+"\n")
             elif rangeResult is False:
-                print(" range check failed")
+                #print(" range check failed")
                 continue
             else:
-                print(str(rangeResult))
-                yagoFacts.write(utils.compress(s)+"\t"+yagoPredicate+"\t"+utils.compress(o)+"\tIF\t"+(", ".join(rangeResult))+"\n")           
+                #print(str(rangeResult))
+                yagoFacts.write(utils.compress(s)+"\t"+utils.compress(yagoPredicate)+"\t"+utils.compress(o)+"\tIF\t"+(", ".join(rangeResult))+"\n")           
 
 print("done")

@@ -21,11 +21,11 @@ wikidataSubClassOf = URIRef("http://www.wikidata.org/prop/direct/P279")
 
 owlDisjointWith = URIRef("http://www.w3.org/2002/07/owl#disjointWith")
 
-schemaAbout = URIRef("http://schema.org/about")
+schemaAbout = URIRef("https://schema.org/about")
 
-schemaPage = URIRef("http://schema.org/mainEntityOfPage")
+schemaPage = URIRef("https://schema.org/mainEntityOfPage")
 
-schemaThing = URIRef("http://schema.org/Thing")
+schemaThing = URIRef("https://schema.org/Thing")
 
 fromClass = URIRef("http://yago-knowledge.org/schema#fromClass")
 

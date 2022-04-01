@@ -11,8 +11,8 @@ Output:
 - Unmapped classes (which appear in Wikidata but not in YAGO, and whose instances have to be attached to a superclass in YAGO) in unmapped-classes.ttl
 
 Assumes:
-  - a folder "input-data" with the hard-coded YAGO top-level taxonomy
-    and a wikidata file
+- a folder "input-data" with the hard-coded YAGO top-level taxonomy
+  and a wikidata file wikidata.ttl.gz
     
 Algorithm:
 1) Start with top-level YAGO classes
@@ -25,7 +25,7 @@ Algorithm:
 
 TEST=True
 OUTPUT_FOLDER="test-data/01-make-taxonomy/" if TEST else "yago-data/"
-WIKIDATA_FILE= "test-data/01-make-taxonomy/wikidata.ttl" if TEST else "input-data/wikidata.ttl.gzip"
+WIKIDATA_FILE= "test-data/01-make-taxonomy/wikidata.ttl" if TEST else "input-data/wikidata.ttl.gz"
 
 ###########################################################################
 #           Booting
@@ -106,6 +106,7 @@ def addSubClasses(lastGoodYagoClass, wikidataClass, unmappedClassesWriter, treat
 print("  Merging Wikidata taxonomy into YAGO taxonomy...", end="", flush=True)
 with open(OUTPUT_FOLDER+"unmapped-classes.ttl", "w", encoding="utf=8") as unmappedClassesWriter:
     unmappedClassesWriter.write("@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n")
+    unmappedClassesWriter.write("@prefix schema: <https://schema.org/> .\n")
     unmappedClassesWriter.write("@prefix wd: <http://www.wikidata.org/entity/> .\n")
     treated=set()
     for s,p,o in yagoTaxonomy.triples((None, utils.fromClass, None)):
