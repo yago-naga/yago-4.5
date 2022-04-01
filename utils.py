@@ -4,7 +4,7 @@ Utility functions for the creation of YAGO
 (c) 2022 Fabian M. Suchanek
 """
 
-from rdflib import URIRef, Graph
+from rdflib import URIRef, Graph, Namespace
 import gzip
 import gzip
 import os
@@ -59,7 +59,7 @@ prefixes = '''
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix wikibase: <http://wikiba.se/ontology#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix schema: <http://schema.org/> .
+@prefix schema: <https://schema.org/> .
 @prefix cc: <http://creativecommons.org/ns#> .
 @prefix geo: <http://www.opengis.net/ont/geosparql#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
@@ -165,9 +165,10 @@ def expandWikidataPrefix(entity):
 ##########################################################################
 
 if TEST and __name__ == '__main__':
-    with open("test/utils/test-output.ttl", "wb") as out:
-        for entityFacts in readWikidataEntities("test/utils/test-input.ttl"):
+    print("Test run of utils...")
+    with open("test-data/utils/test-output.ttl", "wb") as out:
+        for entityFacts in readWikidataEntities("test-data/utils/test-input.ttl"):
             printGraph(entityFacts, out)
-            out.write(b"Self-made:\n")
             for s,p,o in entityFacts:
                 out.write(bytes(compress(s)+"\t"+compress(p)+"\t"+compress(o)+"\n","utf-8"))
+    print("done")

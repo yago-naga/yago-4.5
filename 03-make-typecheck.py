@@ -20,6 +20,9 @@ Algorithm:
    
 """
 
+TEST=True
+FOLDER="test-data/" if TEST else ""
+
 ##########################################################################
 #             Booting
 ##########################################################################
@@ -36,31 +39,18 @@ print("done")
 
 print("  Loading YAGO taxonomy...", end="", flush=True)
 yagoTaxonomy=Graph()
-utils.parse("yago-taxonomy.ttl", format="turtle")
+utils.parse(FOLDER+"yago-taxonomy.ttl", format="turtle")
 print("done")
 
 print("  Loading YAGO instances...", end="", flush=True)
 yagoInstances=defaultdict(set)
-with open("yago-facts-to-type-check.tsv", mode='rt', encoding='UTF-8') as file:
+with open(FOLDER+"yago-facts-to-type-check.tsv", mode='rt', encoding='UTF-8') as file:
     for line in file:
         line=line.rstrip()
         if "\trdf:type\t" in line:
             split=line.split("\t")
             yagoInstances[split[0]].add(split[2])
 print("done")
-
-##########################################################################
-#             Creating YAGO ids
-##########################################################################
-
-def yagoIdFromString(string):
-    yagoId=""
-    for c in string:
-        if legal(c):
-            yagoId+=c
-        else:
-            yagoId+=
-def yagoIdFromWikipediaPage(currentWikipediaPage)
 
 ##########################################################################
 #             Main
@@ -78,8 +68,8 @@ def instanceOf(obj, cls):
     return any(isSubclassOf(c, cls) for c in yagoInstances[obj])
     
 print("  Type-checking facts...", end="", flush=True)
-with open("yago-facts-unlabeled.tsv", "wt", encoding="utf=8") as out:
-    with open("yago-facts-to-type-check", "rt", encoding="utf=8") as input:
+with open(FOLDER+"yago-facts-unlabeled.tsv", "wt", encoding="utf=8") as out:
+    with open(FOLDER+"yago-facts-to-type-check", "rt", encoding="utf=8") as input:
         currentTopic=""
         currentLabel=""
         currentWikipediaPage=""

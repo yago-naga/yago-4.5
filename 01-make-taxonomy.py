@@ -4,14 +4,15 @@ Creates the YAGO 4 taxonomy from the Wikidata taxonomy
 (c) 2021 Fabian M. Suchanek
 
 Call:
-  python3 01-make-taxonomy.py [wikidata-latest-all.ttl.gz]
+  python3 01-make-taxonomy.py
 
 Output:
 - The YAGO taxonomy in yago-taxonomy.ttl 
 - Unmapped classes (which appear in Wikidata but not in YAGO, and whose instances have to be attached to a superclass in YAGO) in unmapped-classes.ttl
 
 Assumes:
-  - a folder "data" with the hard-coded YAGO top-level taxonomy
+  - a folder "input-data" with the hard-coded YAGO top-level taxonomy
+    and a wikidata file
     
 Algorithm:
 1) Start with top-level YAGO classes
@@ -23,6 +24,8 @@ Algorithm:
 """
 
 TEST=True
+OUTPUT_FOLDER="test-data/01-make-taxonomy/" if TEST else "yago-data/"
+WIKIDATA_FILE= "test-data/01-make-taxonomy/wikidata.ttl" if TEST else "input-data/wikidata.ttl.gzip"
 
 ###########################################################################
 #           Booting
@@ -36,10 +39,7 @@ import sys
 from os.path import exists
 print("done")
 
-if not TEST and len(sys.argv)!=2:
-    print("  Need a single wikidata file as argument\nfailed")
-    exit()
-if not(exists("data")):
+if not(exists("input-data")):
     print("  'data' folder not found\nfailed")
     exit()
 
@@ -50,17 +50,17 @@ if not(exists("data")):
 # Load YAGO taxonomy
 print("  Loading YAGO taxonomy...", end="", flush=True)
 yagoTaxonomy = Graph()
-yagoTaxonomy.parse("data/bio-schema.ttl", format="turtle")
-yagoTaxonomy.parse("data/schema.ttl", format="turtle")
-yagoTaxonomy.parse("data/shapes.ttl", format="turtle")
-yagoTaxonomy.parse("data/bio-shapes.ttl", format="turtle")
+yagoTaxonomy.parse("input-data/bio-schema.ttl", format="turtle")
+yagoTaxonomy.parse("input-data/schema.ttl", format="turtle")
+yagoTaxonomy.parse("input-data/shapes.ttl", format="turtle")
+yagoTaxonomy.parse("input-data/bio-shapes.ttl", format="turtle")
 print("done")
 
 # Load Wikidata taxonomy
 wikidataTaxonomy = Graph()
 wikidataClassesWithWikipediaPage=set()
 
-for graph in utils.readWikidataEntities("test/01-make-taxonomy/test-input.ttl" if TEST else sys.argv[1]):
+for graph in utils.readWikidataEntities(WIKIDATA_FILE):
     for s,p,o in graph.triples((None, utils.wikidataSubClassOf, None)):
         wikidataTaxonomy.add((s,RDFS.subClassOf,o))
         for w in graph.subjects(utils.schemaAbout, s):
@@ -93,7 +93,7 @@ def addSubClasses(lastGoodYagoClass, wikidataClass, unmappedClassesWriter, treat
         yagoTaxonomy.add((wikidataClass, RDFS.subClassOf, lastGoodYagoClass))
         lastGoodYagoClass=wikidataClass
     else:       
-        unmappedClassesWriter.write(utils.compressWikidataPrefix(str(wikidataClass))+"\trdfs:subClassOf\t"+utils.compressWikidataPrefix(str(lastGoodYagoClass))+"\t.\n")
+        unmappedClassesWriter.write(utils.compress(wikidataClass)+"\trdfs:subClassOf\t"+utils.compress(lastGoodYagoClass)+"\t.\n")
     # "Treated" serves to avoid adding the subclasses again in case of double inheritance
     if wikidataClass in treated:
         return
@@ -104,7 +104,7 @@ def addSubClasses(lastGoodYagoClass, wikidataClass, unmappedClassesWriter, treat
     pathToRoot.pop()
 
 print("  Merging Wikidata taxonomy into YAGO taxonomy...", end="", flush=True)
-with open("test/01-make-taxonomy/test-output-unmapped.ttl" if TEST else "unmapped-classes.ttl", "w", encoding="utf=8") as unmappedClassesWriter:
+with open(OUTPUT_FOLDER+"unmapped-classes.ttl", "w", encoding="utf=8") as unmappedClassesWriter:
     unmappedClassesWriter.write("@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n")
     unmappedClassesWriter.write("@prefix wd: <http://www.wikidata.org/entity/> .\n")
     treated=set()
@@ -152,6 +152,6 @@ print("done")
 ###########################################################################
 
 print("  Writing taxonomy...", end="", flush=True)
-yagoTaxonomy.serialize(destination=("test/01-make-taxonomy/test-output.ttl" if TEST else "yago-taxonomy.ttl"), format="turtle", encoding="UTF-8")
+yagoTaxonomy.serialize(destination=(OUTPUT_FOLDER+"yago-taxonomy.ttl"), format="turtle", encoding="UTF-8")
 print("done")
 print("done")
