@@ -88,9 +88,32 @@ EMPTY_GRAPH=Graph()
 EMPTY_GRAPH.parse(data=prefixes, format="turtle")
 
 ##########################################################################
-#             Parsing
+#             Reading lines of a file
 ##########################################################################
 
+def linesOfFile(file, message="Parsing"):
+    """ Iterator over the lines of a GZ or text file, with progress bar """
+    print(message,"...", end="", flush=True)
+    totalNumberOfDots=60-len(message)
+    coveredSize=0
+    printedDots=0
+    fileSize=os.path.getsize(file)
+    isGZ=file.endswith(".gz")
+    if isGZ:
+        fileSize*=20
+    with (gzip.open(file, mode='rt', encoding='UTF-8') if isGZ else open(file, mode='rt', encoding='UTF-8')) as input:
+        for line in input:
+            coveredSize+=len(line)
+            while coveredSize / fileSize * totalNumberOfDots > printedDots:
+                print(".", end="", flush=True)
+                printedDots+=1
+            yield line
+    print("done")
+
+##########################################################################
+#             Parsing Wikidata
+##########################################################################
+        
 def getTopic(line):
     """Returns the subject of a compound statement in gthe form of one text line. Returns the Wikidata subject for meta statements (s:Q32~~~>ws:Q32)."""
     if line.startswith("wd:Q"):
@@ -108,21 +131,19 @@ def getTopic(line):
 
 def statements(fileName):
     """Iterator over the compound statements in a TTL file. Returns a last dummy statement about Priscilla."""
-    with (gzip.open(fileName, mode='rt', encoding='UTF-8') if fileName.endswith(".gz") else open(fileName, mode='rt', encoding='UTF-8')) as file:
-        lines=""
-        for line in file:
-            line=line.strip()
-            if line.startswith("@") or line.startswith("#") or len(line)==0:
-                continue
-            lines+=line
-            if lines.endswith("."):
-                yield lines
-                lines=""        
+    lines=""
+    for line in linesOfFile(fileName, "  Parsing Wikidata"):
+        line=line.strip()
+        if line.startswith("@") or line.startswith("#") or len(line)==0:
+            continue
+        lines+=line
+        if lines.endswith("."):
+            yield lines
+            lines=""        
     yield "wd:Q_Priscilla rdf:type schema:Person ."
     
 def readWikidataEntities(fileName):    
     """Takes a TTL file as input, iterates over RDF graphs, each of which contains all facts about a topic (= a subject with its associated meta statements). """
-    print("  Parsing Wikidata...",end="", flush=True)
     # ASSUMPTION: statements about one subject all follow each other the input file
     # ASSUMPTION: meta-statement identifiers start with the name of the subject
     # (as in s:Q31-7C0DCA8..., which is about wd:Q31)
@@ -140,8 +161,7 @@ def readWikidataEntities(fileName):
         if len(result)>0:
             yield result
         statementsAboutTopic=compoundStatement
-        currentTopic=topic
-    print(" done")
+        currentTopic=topic    
     
 def printGraph(graph, out=None):
     """Prints an RDF graph in a human-readable format"""
