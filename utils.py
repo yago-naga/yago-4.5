@@ -108,6 +108,9 @@ def linesOfFile(file, message="Parsing"):
                 print(".", end="", flush=True)
                 printedDots+=1
             yield line
+    while coveredSize / fileSize * totalNumberOfDots > printedDots:
+        print(".", end="", flush=True)
+        printedDots+=1
     print("done")
 
 ##########################################################################

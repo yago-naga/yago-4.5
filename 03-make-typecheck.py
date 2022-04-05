@@ -45,15 +45,12 @@ yagoTaxonomy=Graph()
 yagoTaxonomy.parse(FOLDER+"yago-taxonomy.ttl", format="turtle")
 print("done")
 
-print("  Loading YAGO instances...", end="", flush=True)
 yagoInstances=defaultdict(set)
-with open(FOLDER+"yago-facts-to-type-check.tsv", mode='rt', encoding='UTF-8') as file:
-    for line in file:
-        line=line.rstrip()
-        if "\trdf:type\t" in line:
-            split=line.split("\t")
-            yagoInstances[split[0]].add(split[2])
-print("done")
+for line in utils.linesOfFile(FOLDER+"yago-facts-to-type-check.tsv", "  Loading YAGO instances"):
+    line=line.rstrip()
+    if "\trdf:type\t" in line:
+        split=line.split("\t")
+        yagoInstances[split[0]].add(split[2])
 
 ##########################################################################
 #             YAGO ids
@@ -111,40 +108,36 @@ def isSubclassOf(c1, c2):
 def instanceOf(obj, cls):
     return any(isSubclassOf(c, cls) for c in yagoInstances[obj])
     
-print("  Type-checking facts...", end="", flush=True)
 with open(FOLDER+"yago-facts-unlabeled.tsv", "wt", encoding="utf=8") as out:
     with open(FOLDER+"yago-ids.tsv", "wt", encoding="utf=8") as idsFile:
-        with open(FOLDER+"yago-facts-to-type-check.tsv", "rt", encoding="utf=8") as input:
-            currentTopic=""
-            currentLabel=""
-            currentWikipediaPage=""
-            wroteFacts=False # True if the entity had any valid facts
-            for line in input:
-                split=line.rstrip().split("\t")
-                if len(split)<3:
-                    continue
-                if split[0]!=currentTopic:
-                    if wroteFacts:
-                        writeYagoId(idsFile, currentTopic, currentLabel, currentWikipediaPage)
-                    currentTopic=split[0]
-                    currentLabel=""
-                    currentWikipediaPage=""
-                    wroteFacts=False
-                if split[1]=="rdfs:label" and split[2].endswith('"@en'):
-                    currentLabel=split[2][1:-4]
-                elif split[1]=="schema:mainEntityOfPage" and split[2].startswith('<https://en.wikipedia.org/wiki/'):
-                    currentWikipediaPage=split[2][31:-1]
-                if len(split)==3:
-                    out.write(split[0]+"\t"+split[1]+"\t"+split[2]+"\n")
-                    wroteFacts=True
-                    continue            
-                classes=split[4].split(", ")
-                if any(instanceOf(split[2],c) for c in classes):
-                    out.write(split[0]+"\t"+split[1]+"\t"+split[2]+"\n")
-                    wroteFacts=True
-            # Also flush the ids of the last entity...
-            if wroteFacts:
-                writeYagoId(idsFile, currentTopic, currentLabel, currentWikipediaPage)
-print("done")
-
+        currentTopic=""
+        currentLabel=""
+        currentWikipediaPage=""
+        wroteFacts=False # True if the entity had any valid facts
+        for line in utils.linesOfFile(FOLDER+"yago-facts-to-type-check.tsv", "  Type-checking facts"):
+            split=line.rstrip().split("\t")
+            if len(split)<3:
+                continue
+            if split[0]!=currentTopic:
+                if wroteFacts:
+                    writeYagoId(idsFile, currentTopic, currentLabel, currentWikipediaPage)
+                currentTopic=split[0]
+                currentLabel=""
+                currentWikipediaPage=""
+                wroteFacts=False
+            if split[1]=="rdfs:label" and split[2].endswith('"@en'):
+                currentLabel=split[2][1:-4]
+            elif split[1]=="schema:mainEntityOfPage" and split[2].startswith('<https://en.wikipedia.org/wiki/'):
+                currentWikipediaPage=split[2][31:-1]
+            if len(split)==3:
+                out.write(split[0]+"\t"+split[1]+"\t"+split[2]+"\n")
+                wroteFacts=True
+                continue            
+            classes=split[4].split(", ")
+            if any(instanceOf(split[2],c) for c in classes):
+                out.write(split[0]+"\t"+split[1]+"\t"+split[2]+"\n")
+                wroteFacts=True
+        # Also flush the ids of the last entity...
+        if wroteFacts:
+            writeYagoId(idsFile, currentTopic, currentLabel, currentWikipediaPage)
 print("done")
