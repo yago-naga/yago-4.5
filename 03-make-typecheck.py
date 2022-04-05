@@ -11,12 +11,14 @@ Input:
 - yago-facts-to-type-check.tsv
 
 Output:
-- yago-facts-unlabeled.tsv (type checked YAGO facts without correct labels)
+- yago-facts-unlabeled.tsv (type checked YAGO facts without correct ids)
+- yago-ids.tsv (maps Wikidata ids to YAGO ids)
 
 Algorithm:
 - run through all entities of yago-facts-to-type-check.tsv, load classes
 - run through all facts in yago-facts-to-type-check.tsv, do type check
-    - write out facts that fulfill the constraints to yago-facts-2.ttl
+    - write out facts that fulfill the constraints to yago-facts-unlabeled.tsv
+    - if there are any such facts, write out the id to yago-ids.tsv
    
 """
 
@@ -88,11 +90,11 @@ def yagoIdFromWikidataId(wikidataEntity):
 
 def writeYagoId(out, currentTopic, currentLabel, currentWikipediaPage):
     if currentWikipediaPage:
-        out.write(currentTopic+"\towl:sameAs\tyago:"+yagoIdFromWikipediaPage(currentWikipediaPage)+"\n")
+        out.write(currentTopic+"\tyago:"+yagoIdFromWikipediaPage(currentWikipediaPage)+"\tWIKI\n")
     elif currentLabel:
-        out.write(currentTopic+"\towl:sameAs\tyago:"+yagoIdFromLabel(currentTopic,currentLabel)+"\n")
+        out.write(currentTopic+"\tyago:"+yagoIdFromLabel(currentTopic,currentLabel)+"\tOTHER\n")
     else:
-        out.write(currentTopic+"\towl:sameAs\tyago:"+yagoIdFromWikidataId(currentTopic)+"\n")
+        out.write(currentTopic+"\tyago:"+yagoIdFromWikidataId(currentTopic)+"\tOTHER\n")
   
 ##########################################################################
 #             Main
@@ -111,39 +113,38 @@ def instanceOf(obj, cls):
     
 print("  Type-checking facts...", end="", flush=True)
 with open(FOLDER+"yago-facts-unlabeled.tsv", "wt", encoding="utf=8") as out:
-    with open(FOLDER+"yago-facts-to-type-check.tsv", "rt", encoding="utf=8") as input:
-        currentTopic=""
-        currentLabel=""
-        currentWikipediaPage=""
-        wroteFacts=False # True if the entity had any valid facts
-        for line in input:
-            split=line.rstrip().split("\t")
-            if len(split)<3:
-                continue
-            if split[0]!=currentTopic:
-                if wroteFacts:
-                    writeYagoId(out, currentTopic, currentLabel, currentWikipediaPage)
-                currentTopic=split[0]
-                currentLabel=""
-                currentWikipediaPage=""
-                wroteFacts=False
-            if split[1]=="rdfs:label" and split[2].endswith('"@en'):
-                currentLabel=split[2][1:-4]
-                print("Found label",currentLabel)
-            elif split[1]=="schema:mainEntityOfPage" and split[2].startswith('<https://en.wikipedia.org/wiki/'):
-                currentWikipediaPage=split[2][31:-1]
-                print("Found wp",currentWikipediaPage)
-            if len(split)==3:
-                out.write(split[0]+"\t"+split[1]+"\t"+split[2]+"\n")
-                wroteFacts=True
-                continue            
-            classes=split[4].split(", ")
-            if any(instanceOf(split[2],c) for c in classes):
-                out.write(split[0]+"\t"+split[1]+"\t"+split[2]+"\n")
-                wroteFacts=True
-        # Also flush the label of the last entity...
-        if wroteFacts:
-            writeYagoId(out, currentTopic, currentLabel, currentWikipediaPage)
+    with open(FOLDER+"yago-ids.tsv", "wt", encoding="utf=8") as idsFile:
+        with open(FOLDER+"yago-facts-to-type-check.tsv", "rt", encoding="utf=8") as input:
+            currentTopic=""
+            currentLabel=""
+            currentWikipediaPage=""
+            wroteFacts=False # True if the entity had any valid facts
+            for line in input:
+                split=line.rstrip().split("\t")
+                if len(split)<3:
+                    continue
+                if split[0]!=currentTopic:
+                    if wroteFacts:
+                        writeYagoId(idsFile, currentTopic, currentLabel, currentWikipediaPage)
+                    currentTopic=split[0]
+                    currentLabel=""
+                    currentWikipediaPage=""
+                    wroteFacts=False
+                if split[1]=="rdfs:label" and split[2].endswith('"@en'):
+                    currentLabel=split[2][1:-4]
+                elif split[1]=="schema:mainEntityOfPage" and split[2].startswith('<https://en.wikipedia.org/wiki/'):
+                    currentWikipediaPage=split[2][31:-1]
+                if len(split)==3:
+                    out.write(split[0]+"\t"+split[1]+"\t"+split[2]+"\n")
+                    wroteFacts=True
+                    continue            
+                classes=split[4].split(", ")
+                if any(instanceOf(split[2],c) for c in classes):
+                    out.write(split[0]+"\t"+split[1]+"\t"+split[2]+"\n")
+                    wroteFacts=True
+            # Also flush the ids of the last entity...
+            if wroteFacts:
+                writeYagoId(idsFile, currentTopic, currentLabel, currentWikipediaPage)
 print("done")
 
 print("done")
