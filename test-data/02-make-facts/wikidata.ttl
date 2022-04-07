@@ -1,0 +1,31 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <https://schema.org/> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+
+# Disjoint classes should be removed
+
+wd:Q_Inconsistent wdt:P31 wd:Q_rock_singer, schema:Organization .
+
+# Web pages should become objects of schema:mainEntityOfPage
+<https://elvis.com> schema:about wd:Q_Elvis .
+
+wd:Q_Elvis wdt:P31 wd:Q_rock_singer;
+	# Test cardinality constraint: Both birth places should be removed
+	wdt:P19 wd:Q_birth_place_1;
+	wdt:P19 wd:Q_birth_place_2;
+	# Check domain: the place should be removed
+	wdt:P150 wd:Q_inconsistent_place;
+	# Check bad property: fact should be removed
+	wdt:P10000000 wd:Q_bad_object;
+	# Normal range: fact should exist
+	wdt:P40 wd:Q_child;
+	# Disjunctive range: should be OK
+	wdt:P1716 wd:Q_brand;
+	# Strings: should be OK
+	wdt:P2317 "test string";
+	# Patterns: should be OK
+	wdt:P2900 "+33-33-333-333";
+	# Datatypes: should be OK
+	wdt:P570 "1970"^^xsd:gYear .
