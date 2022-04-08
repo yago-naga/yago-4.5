@@ -6,13 +6,15 @@ Creates the YAGO 4 taxonomy from the Wikidata taxonomy
 Call:
   python3 01-make-taxonomy.py
 
-Output:
-- The YAGO taxonomy in yago-taxonomy.ttl 
-- Unmapped classes (which appear in Wikidata but not in YAGO, and whose instances have to be attached to a superclass in YAGO) in unmapped-classes.ttl
+Input:
+- a folder "input-data" with 
+  - the hard-coded YAGO top-level taxonomy
+  - a wikidata file wikidata.ttl.gz
 
-Assumes:
-- a folder "input-data" with the hard-coded YAGO top-level taxonomy
-  and a wikidata file wikidata.ttl.gz
+Output:
+- The YAGO top-level taxonomy in yago-schema.ttl
+- The YAGO lower level taxonomy in yago-taxonomy.tsv
+- Unmapped classes (which appear in Wikidata but not in YAGO, and whose instances have to be attached to a superclass in YAGO) in non-yago-classes.tsv
     
 Algorithm:
 1) Start with top-level YAGO classes
@@ -37,6 +39,7 @@ from rdflib import URIRef, RDFS, Graph
 import utils
 import sys
 from os.path import exists
+from collections import defaultdict
 print("done")
 
 if not(exists("input-data")):
@@ -47,15 +50,23 @@ if not(exists("input-data")):
 #           Load YAGO top-level taxonomy and Wikidata taxonomy
 ###########################################################################
 
-# Load YAGO taxonomy
-print("  Loading YAGO taxonomy...", end="", flush=True)
-yagoTaxonomy = Graph()
-yagoTaxonomy.parse("input-data/bio-schema.ttl", format="turtle")
-yagoTaxonomy.parse("input-data/schema.ttl", format="turtle")
-yagoTaxonomy.parse("input-data/shapes.ttl", format="turtle")
-yagoTaxonomy.parse("input-data/bio-shapes.ttl", format="turtle")
+# Load YAGO schema
+print("  Loading YAGO schema...", end="", flush=True)
+yagoSchema = Graph()
+yagoSchema.parse("input-data/bio-schema.ttl", format="turtle")
+yagoSchema.parse("input-data/schema.ttl", format="turtle")
+yagoSchema.parse("input-data/shapes.ttl", format="turtle")
+yagoSchema.parse("input-data/bio-shapes.ttl", format="turtle")
 print("done")
 
+# YAGO taxonomy
+# mapping a subclass to its superclasses and vice versa
+yagoTaxonomyUp = defaultdict(set)
+yagoTaxonomyDown = defaultdict(set)
+for (s,p,o) in yagoSchema.triples((None, RDFS.subClassOf, None)):
+    yagoTaxonomyUp[s].add(o)
+    yagoTaxonomyDown[o].add(s)
+    
 # Load Wikidata taxonomy
 wikidataTaxonomy = Graph()
 wikidataClassesWithWikipediaPage=set()
@@ -68,7 +79,7 @@ for graph in utils.readWikidataEntities(WIKIDATA_FILE):
                 wikidataClassesWithWikipediaPage.add(s)
 
 ###########################################################################
-#           Import Wikidata taxonomy into YAGO taxonomy
+#           Create YAGO taxonomy
 ###########################################################################
 
 # Classes that will not be added to YAGO, and whose children won't be added either
@@ -81,19 +92,18 @@ badClasses = {
     URIRef("http://www.wikidata.org/entity/Q18340514")  # article about events in a specific year or time period
 }
 
-
 def addSubClasses(lastGoodYagoClass, wikidataClass, unmappedClassesWriter, treated, pathToRoot):
-    """Adds the Wikipedia classes to the YAGO taxonomy, excluding bad classes and classes without Wikipedia pages"""
-    
+    """Adds the Wikidata classes to the YAGO taxonomy, excluding bad classes and classes without Wikipedia pages"""
     if wikidataClass in badClasses:
         return
     if wikidataClass in pathToRoot:
         return
     if wikidataClass in wikidataClassesWithWikipediaPage:
-        yagoTaxonomy.add((wikidataClass, RDFS.subClassOf, lastGoodYagoClass))
+        yagoTaxonomyUp[wikidataClass].add(lastGoodYagoClass)
+        yagoTaxonomyDown[lastGoodYagoClass].add(wikidataClass)
         lastGoodYagoClass=wikidataClass
     else:       
-        unmappedClassesWriter.write(utils.compress(wikidataClass)+"\trdfs:subClassOf\t"+utils.compress(lastGoodYagoClass)+"\t.\n")
+        unmappedClassesWriter.writeFact(utils.compress(wikidataClass),"rdfs:subClassOf",utils.compress(lastGoodYagoClass))
     # "Treated" serves to avoid adding the subclasses again in case of double inheritance
     if wikidataClass in treated:
         return
@@ -103,13 +113,10 @@ def addSubClasses(lastGoodYagoClass, wikidataClass, unmappedClassesWriter, treat
         addSubClasses(lastGoodYagoClass, subClass, unmappedClassesWriter, treated, pathToRoot)
     pathToRoot.pop()
 
-print("  Merging Wikidata taxonomy into YAGO taxonomy...", end="", flush=True)
-with open(OUTPUT_FOLDER+"unmapped-classes.ttl", "w", encoding="utf=8") as unmappedClassesWriter:
-    unmappedClassesWriter.write("@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n")
-    unmappedClassesWriter.write("@prefix schema: <https://schema.org/> .\n")
-    unmappedClassesWriter.write("@prefix wd: <http://www.wikidata.org/entity/> .\n")
+print("  Creating YAGO taxonomy...", end="", flush=True)
+with utils.TsvFile(OUTPUT_FOLDER+"non-yago-classes.tsv") as unmappedClassesWriter:
     treated=set()
-    for s,p,o in yagoTaxonomy.triples((None, utils.fromClass, None)):
+    for s,p,o in yagoSchema.triples((None, utils.fromClass, None)):
         if s!=utils.schemaThing:
             for subclass in wikidataTaxonomy.subjects(RDFS.subClassOf, o):
                 addSubClasses(s,subclass, unmappedClassesWriter,treated,[o])
@@ -120,23 +127,23 @@ print("done")
 ###########################################################################
 
 def disjoint(disjointTopLevelClass, cls):
-    """TRUE if cls is a transitive subclass of a class that is disjoint with disjointTopLevelClass"""
-    
-    return any(yagoTaxonomy.triples((disjointTopLevelClass, utils.owlDisjointWith, cls))) \
-        or any(disjoint(disjointTopLevelClass, superclass) for superclass in yagoTaxonomy.objects(cls, RDFS.subClassOf))
+    """TRUE if cls is a transitive subclass of a class that is disjoint with disjointTopLevelClass"""    
+    return any(yagoSchema.triples((disjointTopLevelClass, utils.owlDisjointWith, cls))) \
+        or any(disjoint(disjointTopLevelClass, superclass) for superclass in yagoTaxonomyUp[cls])
 
 def removeClass(cls):
-    """ Removes the class from the YAGO taxonomy """
-    
-    yagoTaxonomy.remove((cls, RDFS.subClassOf, None))
-    for subClass in yagoTaxonomy.subjects(RDFS.subClassOf, cls):
+    """ Removes the class from the YAGO taxonomy """    
+    for subClass in set(yagoTaxonomyDown[cls]):
         removeClass(subClass)
+    yagoTaxonomyDown.pop(cls)
+    for superclass in yagoTaxonomyUp[cls]:
+        yagoTaxonomyDown[superclass].remove(cls)    
+    yagoTaxonomyUp.pop(cls)
     
 def checkDisjointness(disjointTopLevelClass, currentClass):
-    """ Recursively removes any classes that are disjoint with disjointTopLevelClass, starting with currentClass """
-    
-    for subClass in yagoTaxonomy.subjects(RDFS.subClassOf, currentClass):        
-        for otherSuperclass in yagoTaxonomy.objects(subClass, RDFS.subClassOf):
+    """ Recursively top-down removes any classes that are disjoint with disjointTopLevelClass, starting with currentClass """   
+    for subClass in set(yagoTaxonomyDown[currentClass]):
+        for otherSuperclass in yagoTaxonomyUp[subClass]:
             if otherSuperclass==currentClass:
                 continue
             if disjoint(disjointTopLevelClass, otherSuperclass):
@@ -144,7 +151,7 @@ def checkDisjointness(disjointTopLevelClass, currentClass):
         checkDisjointness(disjointTopLevelClass, subClass)
 
 print("  Removing disjoint-inconsistent classes...", end="", flush=True)
-for disjointTopLevelClass in yagoTaxonomy.subjects(utils.owlDisjointWith, None):
+for disjointTopLevelClass in yagoSchema.subjects(utils.owlDisjointWith, None):
     checkDisjointness(disjointTopLevelClass, utils.schemaThing)
 print("done")
 
@@ -152,7 +159,15 @@ print("done")
 #           Serialize the result
 ###########################################################################
 
+# The schema is most beautiful in native TTL
+print("  Writing schema...", end="", flush=True)
+yagoSchema.serialize(destination=(OUTPUT_FOLDER+"yago-schema.ttl"), format="turtle", encoding="UTF-8")
+print("done")
+
 print("  Writing taxonomy...", end="", flush=True)
-yagoTaxonomy.serialize(destination=(OUTPUT_FOLDER+"yago-taxonomy.ttl"), format="turtle", encoding="UTF-8")
+with utils.TsvFile(OUTPUT_FOLDER+"yago-taxonomy.tsv") as taxonomyWriter:
+    for cls in yagoTaxonomyUp:
+        for superclass in yagoTaxonomyUp[cls]:
+            taxonomyWriter.writeFact(utils.compress(cls), "rdfs:subClassOf", utils.compress(superclass))
 print("done")
 print("done")

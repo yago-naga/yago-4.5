@@ -6,12 +6,11 @@ Creates the the YAGO facts from the Wikidata facts
 Call:
   python3 make-facts.py
 
-Assumes:
-- Wikidata file in input-data/wikidata.ttl.gz
-
 Input:
-- yago-taxonomy.ttl
-- unmapped-classes.ttl
+- yago-taxonomy.tsv
+- yago-schema.ttl
+- non-yago-classes.tsv
+- Wikidata file in input-data/wikidata.ttl.gz
 
 Output:
 - yago-facts-to-type-check.tsv
@@ -45,12 +44,13 @@ print("done")
 
 print("  Loading YAGO taxonomy...", end="", flush=True)
 yagoTaxonomy=Graph()
-yagoTaxonomy.parse(FOLDER+"yago-taxonomy.ttl", format="turtle")
+yagoTaxonomy.parse(FOLDER+"yago-taxonomy.tsv", format="turtle")
+yagoTaxonomy.parse(FOLDER+"yago-schema.ttl", format="turtle")
 print("done")
 
-print("  Loading unmapped classes...", end="", flush=True)
+print("  Loading non-YAGO classes...", end="", flush=True)
 unmappedClasses=Graph()
-unmappedClasses.parse(FOLDER+"unmapped-classes.ttl", format="turtle")
+unmappedClasses.parse(FOLDER+"non-yago-classes.tsv", format="turtle")
 print("done")
 
 ##########################################################################
@@ -226,7 +226,7 @@ def checkRange(p, o):
 #             Main method
 ##########################################################################
 
-with open(FOLDER+"yago-facts-to-type-check.tsv", "tw", encoding="utf=8") as yagoFacts:
+with utils.TsvFile(FOLDER+"yago-facts-to-type-check.tsv") as yagoFacts:
     for entityFacts in utils.readWikidataEntities(WIKIDATA_FILE): 
         #utils.printGraph(entityFacts)
         if not cleanClasses(entityFacts):
@@ -239,7 +239,7 @@ with open(FOLDER+"yago-facts-to-type-check.tsv", "tw", encoding="utf=8") as yago
         for s,p,o in entityFacts:
             #print(str(s)+" "+str(p)+' '+str(o))
             if p==RDF.type:
-                yagoFacts.write(utils.compress(s)+"\trdf:type\t"+utils.compress(o)+"\n")
+                yagoFacts.writeFact(utils.compress(s),"rdf:type",utils.compress(o))
                 continue
             if p==utils.schemaAbout:
                 yagoPredicate=URIRef("https://schema.org/mainEntityOfPage")
@@ -256,12 +256,12 @@ with open(FOLDER+"yago-facts-to-type-check.tsv", "tw", encoding="utf=8") as yago
                 continue
             rangeResult=checkRange(yagoPredicate, o)
             if rangeResult is True:
-                yagoFacts.write(utils.compress(s)+"\t"+utils.compress(yagoPredicate)+"\t"+utils.compress(o)+"\n")
+                yagoFacts.writeFact(utils.compress(s),utils.compress(yagoPredicate),utils.compress(o))
             elif rangeResult is False:
                 #print(" range check failed")
                 continue
             else:
                 #print(str(rangeResult))
-                yagoFacts.write(utils.compress(s)+"\t"+utils.compress(yagoPredicate)+"\t"+utils.compress(o)+"\tIF\t"+(", ".join(rangeResult))+"\n")           
+                yagoFacts.write(utils.compress(s),utils.compress(yagoPredicate),utils.compress(o),". # IF",(", ".join(rangeResult)))           
 
 print("done")

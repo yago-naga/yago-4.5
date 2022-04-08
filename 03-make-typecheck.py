@@ -7,17 +7,17 @@ Call:
   python3 make-typecheck.py
 
 Input:
-- yago-taxonomy.ttl
+- yago-taxonomy.tsv
 - yago-facts-to-type-check.tsv
 
 Output:
-- yago-facts-unlabeled.tsv (type checked YAGO facts without correct ids)
+- yago-facts-to-rename.tsv (type checked YAGO facts without correct ids)
 - yago-ids.tsv (maps Wikidata ids to YAGO ids)
 
 Algorithm:
 - run through all entities of yago-facts-to-type-check.tsv, load classes
 - run through all facts in yago-facts-to-type-check.tsv, do type check
-    - write out facts that fulfill the constraints to yago-facts-unlabeled.tsv
+    - write out facts that fulfill the constraints to yago-facts-to-rename.tsv
     - if there are any such facts, write out the id to yago-ids.tsv
    
 """
@@ -40,17 +40,15 @@ import unicodedata
 from collections import defaultdict
 print("done")
 
-print("  Loading YAGO taxonomy...", end="", flush=True)
-yagoTaxonomy=Graph()
-yagoTaxonomy.parse(FOLDER+"yago-taxonomy.ttl", format="turtle")
-print("done")
+yagoTaxonomyUp=defaultdict(set)
+for tuple in utils.tsvTuples(FOLDER+"yago-taxonomy.tsv", "  Loading YAGO taxonomy"):
+    if len(tuple)>3:
+        yagoTaxonomyUp[tuple[0]].add(tuple[2])
 
 yagoInstances=defaultdict(set)
-for line in utils.linesOfFile(FOLDER+"yago-facts-to-type-check.tsv", "  Loading YAGO instances"):
-    line=line.rstrip()
-    if "\trdf:type\t" in line:
-        split=line.split("\t")
-        yagoInstances[split[0]].add(split[2])
+for tuple in utils.tsvTuples(FOLDER+"yago-facts-to-type-check.tsv", "  Loading YAGO instances"):
+    if len(tuple)>2 and tuple[1]=="rdf:type":
+        yagoInstances[tuple[0]].add(tuple[2])
 
 ##########################################################################
 #             YAGO ids
@@ -87,11 +85,11 @@ def yagoIdFromWikidataId(wikidataEntity):
 
 def writeYagoId(out, currentTopic, currentLabel, currentWikipediaPage):
     if currentWikipediaPage:
-        out.write(currentTopic+"\tyago:"+yagoIdFromWikipediaPage(currentWikipediaPage)+"\tWIKI\n")
+        out.write(currentTopic,"owl:sameAs","yago:"+yagoIdFromWikipediaPage(currentWikipediaPage),". #WIKI")
     elif currentLabel:
-        out.write(currentTopic+"\tyago:"+yagoIdFromLabel(currentTopic,currentLabel)+"\tOTHER\n")
+        out.write(currentTopic,"owl:sameAs","yago:"+yagoIdFromLabel(currentTopic,currentLabel),". #OTHER")
     else:
-        out.write(currentTopic+"\tyago:"+yagoIdFromWikidataId(currentTopic)+"\tOTHER\n")
+        out.write(currentTopic,"owl:sameAs","yago:"+yagoIdFromWikidataId(currentTopic),". #OTHER")
   
 ##########################################################################
 #             Main
@@ -99,23 +97,22 @@ def writeYagoId(out, currentTopic, currentLabel, currentWikipediaPage):
 
 def isSubclassOf(c1, c2):
     if c1==c2:
-        return True
-    for superclass in yagoTaxonomy.objects(c1, RDFS.subClassOf):
-        if isSubclassOf(c1, superclass):
+        return True    
+    for superclass in yagoTaxonomyUp[c1]:
+        if isSubclassOf(superclass, c2):
             return True
     return False
     
 def instanceOf(obj, cls):
     return any(isSubclassOf(c, cls) for c in yagoInstances[obj])
     
-with open(FOLDER+"yago-facts-unlabeled.tsv", "wt", encoding="utf=8") as out:
-    with open(FOLDER+"yago-ids.tsv", "wt", encoding="utf=8") as idsFile:
+with utils.TsvFile(FOLDER+"yago-facts-to-be-renamed.tsv") as out:
+    with utils.TsvFile(FOLDER+"yago-ids.tsv") as idsFile:
         currentTopic=""
         currentLabel=""
         currentWikipediaPage=""
         wroteFacts=False # True if the entity had any valid facts
-        for line in utils.linesOfFile(FOLDER+"yago-facts-to-type-check.tsv", "  Type-checking facts"):
-            split=line.rstrip().split("\t")
+        for split in utils.tsvTuples(FOLDER+"yago-facts-to-type-check.tsv", "  Type-checking facts"):
             if len(split)<3:
                 continue
             if split[0]!=currentTopic:
@@ -129,13 +126,13 @@ with open(FOLDER+"yago-facts-unlabeled.tsv", "wt", encoding="utf=8") as out:
                 currentLabel=split[2][1:-4]
             elif split[1]=="schema:mainEntityOfPage" and split[2].startswith('<https://en.wikipedia.org/wiki/'):
                 currentWikipediaPage=split[2][31:-1]
-            if len(split)==3:
-                out.write(split[0]+"\t"+split[1]+"\t"+split[2]+"\n")
+            if len(split)<5:
+                out.writeFact(split[0], split[1], split[2])
                 wroteFacts=True
                 continue            
             classes=split[4].split(", ")
             if any(instanceOf(split[2],c) for c in classes):
-                out.write(split[0]+"\t"+split[1]+"\t"+split[2]+"\n")
+                out.writeFact(split[0], split[1], split[2])
                 wroteFacts=True
         # Also flush the ids of the last entity...
         if wroteFacts:

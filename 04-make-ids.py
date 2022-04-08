@@ -4,16 +4,16 @@ Replaces the ids of the facts by YAGO ids
 (c) 2022 Fabian M. Suchanek
 
 Input:
-- yago-facts-unlabeled.tsv
+- yago-facts-to-be-renamed.tsv
 - yago-ids.tsv
 
 Output:
-- yago-final-wikipedia.ttl
-- yago-final-full.ttl
+- yago-final-wikipedia.tsv
+- yago-final-full.tsv
 
 Algorithm:
 - load yago-ids.tsv
-- run through yago-facts-unlabeled.tsv
+- run through yago-facts-to-be-renamed.tsv
   - replace the Wikidata ids by YAGO ids
   - write out the facts to the output files
    
@@ -33,12 +33,12 @@ print("Renaming YAGO entities...")
 
 yagoIds={}
 entitiesWithWikipediaPage=set()
-for line in utils.linesOfFile(FOLDER+"yago-ids.tsv", "  Loading YAGO ids"):
-    line=line.rstrip()
-    split=line.split("\t")
-    yagoIds[split[0]]=split[1]
-    if split[2]=="WIKI":
-        entitiesWithWikipediaPage.add(split[1])
+for split in utils.tsvTuples(FOLDER+"yago-ids.tsv", "  Loading YAGO ids"):
+    if len(split)<4:
+        continue
+    yagoIds[split[0]]=split[2]
+    if split[3]==". #WIKI":
+        entitiesWithWikipediaPage.add(split[2])
 
 ##########################################################################
 #             Helper methods
@@ -67,13 +67,10 @@ def hasWikipediaPage(entity):
 ##########################################################################
 #             Main
 ##########################################################################
-    
-with open(FOLDER+"yago-final-full.ttl", "wt", encoding="utf=8") as fullFacts:
-    with open(FOLDER+"yago-final-wikipedia.ttl", "wt", encoding="utf=8") as wikipediaFacts:
-        fullFacts.write(utils.prefixes)
-        wikipediaFacts.write(utils.prefixes)        
-        for line in utils.linesOfFile(FOLDER+"yago-facts-unlabeled.tsv", "  Renaming"):
-            split=line.rstrip().split("\t")
+
+with utils.TsvFile(FOLDER+"yago-final-full.tsv") as fullFacts:
+    with utils.TsvFile(FOLDER+"yago-final-wikipedia.tsv") as wikipediaFacts:
+        for split in utils.tsvTuples(FOLDER+"yago-facts-to-be-renamed.tsv", "  Renaming"):
             if len(split)<3:
                 continue
             subject=toYagoEntity(split[0])
@@ -89,7 +86,7 @@ with open(FOLDER+"yago-final-full.ttl", "wt", encoding="utf=8") as fullFacts:
                 continue
             # Write facts to Wikipedia version of YAGO
             if hasWikipediaPage(subject) and (relation=="rdf:type" or hasWikipediaPage(object)):
-                wikipediaFacts.write(subject+"\t"+relation+"\t"+object+"\t.\n")
+                wikipediaFacts.writeFact(subject, relation, object)
             # In any case, write (also) to the full version of YAGO
-            fullFacts.write(subject+"\t"+relation+"\t"+object+"\t.\n")
+            fullFacts.writeFact(subject, relation, object)
 print("done")

@@ -114,6 +114,39 @@ def linesOfFile(file, message="Parsing"):
     print("done")
 
 ##########################################################################
+#             TSV files
+##########################################################################
+
+# We use TSV files that can at the same time be parsed as TTL files
+
+def tsvTuples(file, message="Parsing"):
+    for line in linesOfFile(file, message):
+        if not line.startswith("#"):
+            yield line.rstrip().split("\t")
+
+class TsvFile(object):
+    def __init__(self, file_name):
+        self.file_name = file_name
+      
+    def __enter__(self):
+        self.file = open(self.file_name, "tw", encoding="utf=8")
+        self.file.write(prefixes)
+        return self
+        
+    def write(self, *args):
+        for i in range(0,len(args)-1):
+            self.file.write(args[i])
+            self.file.write("\t")
+        self.file.write(args[-1])
+        self.file.write("\n")
+  
+    def writeFact(self, subject,predicate, object):
+        self.write(subject, predicate, object, ".")
+        
+    def __exit__(self, *exceptions):
+        self.file.close()
+        
+##########################################################################
 #             Parsing Wikidata
 ##########################################################################
         

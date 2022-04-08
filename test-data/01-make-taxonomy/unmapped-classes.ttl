@@ -1,4 +1,0 @@
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix schema: <https://schema.org/> .
-@prefix wd: <http://www.wikidata.org/entity/> .
-wd:Q_nonwikipediapage_book	rdfs:subClassOf	wd:Q_European_book	.
