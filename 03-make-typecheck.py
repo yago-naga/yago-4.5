@@ -41,12 +41,12 @@ from collections import defaultdict
 print("done")
 
 yagoTaxonomyUp=defaultdict(set)
-for tuple in utils.tsvTuples(FOLDER+"yago-taxonomy.tsv", "  Loading YAGO taxonomy"):
+for tuple in utils.readTsvTuples(FOLDER+"yago-taxonomy.tsv", "  Loading YAGO taxonomy"):
     if len(tuple)>3:
         yagoTaxonomyUp[tuple[0]].add(tuple[2])
 
 yagoInstances=defaultdict(set)
-for tuple in utils.tsvTuples(FOLDER+"yago-facts-to-type-check.tsv", "  Loading YAGO instances"):
+for tuple in utils.readTsvTuples(FOLDER+"yago-facts-to-type-check.tsv", "  Loading YAGO instances"):
     if len(tuple)>2 and tuple[1]=="rdf:type":
         yagoInstances[tuple[0]].add(tuple[2])
 
@@ -106,13 +106,13 @@ def isSubclassOf(c1, c2):
 def instanceOf(obj, cls):
     return any(isSubclassOf(c, cls) for c in yagoInstances[obj])
     
-with utils.TsvFile(FOLDER+"yago-facts-to-be-renamed.tsv") as out:
-    with utils.TsvFile(FOLDER+"yago-ids.tsv") as idsFile:
+with utils.TsvFileWriter(FOLDER+"yago-facts-to-be-renamed.tsv") as out:
+    with utils.TsvFileWriter(FOLDER+"yago-ids.tsv") as idsFile:
         currentTopic=""
         currentLabel=""
         currentWikipediaPage=""
         wroteFacts=False # True if the entity had any valid facts
-        for split in utils.tsvTuples(FOLDER+"yago-facts-to-type-check.tsv", "  Type-checking facts"):
+        for split in utils.readTsvTuples(FOLDER+"yago-facts-to-type-check.tsv", "  Type-checking facts"):
             if len(split)<3:
                 continue
             if split[0]!=currentTopic:

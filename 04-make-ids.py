@@ -33,7 +33,7 @@ print("Renaming YAGO entities...")
 
 yagoIds={}
 entitiesWithWikipediaPage=set()
-for split in utils.tsvTuples(FOLDER+"yago-ids.tsv", "  Loading YAGO ids"):
+for split in utils.readTsvTuples(FOLDER+"yago-ids.tsv", "  Loading YAGO ids"):
     if len(split)<4:
         continue
     yagoIds[split[0]]=split[2]
@@ -68,9 +68,9 @@ def hasWikipediaPage(entity):
 #             Main
 ##########################################################################
 
-with utils.TsvFile(FOLDER+"yago-final-full.tsv") as fullFacts:
-    with utils.TsvFile(FOLDER+"yago-final-wikipedia.tsv") as wikipediaFacts:
-        for split in utils.tsvTuples(FOLDER+"yago-facts-to-be-renamed.tsv", "  Renaming"):
+with utils.TsvFileWriter(FOLDER+"yago-final-full.tsv") as fullFacts:
+    with utils.TsvFileWriter(FOLDER+"yago-final-wikipedia.tsv") as wikipediaFacts:
+        for split in utils.readTsvTuples(FOLDER+"yago-facts-to-be-renamed.tsv", "  Renaming"):
             if len(split)<3:
                 continue
             subject=toYagoEntity(split[0])

@@ -47,45 +47,45 @@ shaclPattern=URIRef("http://www.w3.org/ns/shacl#pattern")
 
 shaclProperty=URIRef("http://www.w3.org/ns/shacl#property")
 
-prefixes = '''
-@prefix bioschema: <http://bioschemas.org/> .
-@prefix yago: <http://yago-knowledge.org/resource/> .
-@prefix yagov: <http://yago-knowledge.org/value/> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> .
-@prefix dct: <http://purl.org/dc/terms/> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix wikibase: <http://wikiba.se/ontology#> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix schema: <https://schema.org/> .
-@prefix cc: <http://creativecommons.org/ns#> .
-@prefix geo: <http://www.opengis.net/ont/geosparql#> .
-@prefix prov: <http://www.w3.org/ns/prov#> .
-@prefix wd: <http://www.wikidata.org/entity/> .
-@prefix data: <https://www.wikidata.org/wiki/Special:EntityData/> .
-@prefix sh: <http://www.w3.org/ns/shacl#> . 
-@prefix s: <http://www.wikidata.org/entity/statement/> .
-@prefix ref: <http://www.wikidata.org/reference/> .
-@prefix v: <http://www.wikidata.org/value/> .
-@prefix wdt: <http://www.wikidata.org/prop/direct/> .
-@prefix wdtn: <http://www.wikidata.org/prop/direct-normalized/> .
-@prefix p: <http://www.wikidata.org/prop/> .
-@prefix ps: <http://www.wikidata.org/prop/statement/> .
-@prefix psv: <http://www.wikidata.org/prop/statement/value/> .
-@prefix psn: <http://www.wikidata.org/prop/statement/value-normalized/> .
-@prefix pq: <http://www.wikidata.org/prop/qualifier/> .
-@prefix pqv: <http://www.wikidata.org/prop/qualifier/value/> .
-@prefix pqn: <http://www.wikidata.org/prop/qualifier/value-normalized/> .
-@prefix pr: <http://www.wikidata.org/prop/reference/> .
-@prefix prv: <http://www.wikidata.org/prop/reference/value/> .
-@prefix prn: <http://www.wikidata.org/prop/reference/value-normalized/> .
-@prefix wdno: <http://www.wikidata.org/prop/novalue/> .
-'''
+prefixes = {
+"bioschema": "http://bioschemas.org/",
+"yago": "http://yago-knowledge.org/resource/",
+"yagov": "http://yago-knowledge.org/value/",
+"rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+"xsd": "http://www.w3.org/2001/XMLSchema#",
+"ontolex": "http://www.w3.org/ns/lemon/ontolex#",
+"dct": "http://purl.org/dc/terms/",
+"rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+"owl": "http://www.w3.org/2002/07/owl#",
+"wikibase": "http://wikiba.se/ontology#",
+"skos": "http://www.w3.org/2004/02/skos/core#",
+"schema": "https://schema.org/",
+"cc": "http://creativecommons.org/ns#",
+"geo": "http://www.opengis.net/ont/geosparql#",
+"prov": "http://www.w3.org/ns/prov#",
+"wd": "http://www.wikidata.org/entity/",
+"data": "https://www.wikidata.org/wiki/Special:EntityData/",
+"sh": "http://www.w3.org/ns/shacl#",
+"s": "http://www.wikidata.org/entity/statement/",
+"ref": "http://www.wikidata.org/reference/",
+"v": "http://www.wikidata.org/value/",
+"wdt": "http://www.wikidata.org/prop/direct/",
+"wdtn": "http://www.wikidata.org/prop/direct-normalized/",
+"p": "http://www.wikidata.org/prop/",
+"ps": "http://www.wikidata.org/prop/statement/",
+"psv": "http://www.wikidata.org/prop/statement/value/",
+"psn": "http://www.wikidata.org/prop/statement/value-normalized/",
+"pq": "http://www.wikidata.org/prop/qualifier/",
+"pqv": "http://www.wikidata.org/prop/qualifier/value/",
+"pqn": "http://www.wikidata.org/prop/qualifier/value-normalized/",
+"pr": "http://www.wikidata.org/prop/reference/",
+"prv": "http://www.wikidata.org/prop/reference/value/",
+"prn": "http://www.wikidata.org/prop/reference/value-normalized/",
+"wdno": "http://www.wikidata.org/prop/novalue/"
+}
 
-EMPTY_GRAPH=Graph()
-EMPTY_GRAPH.parse(data=prefixes, format="turtle")
+# For turtle parsing, see TODO further down
+prefixesAsString="\n".join([ "@prefix "+p+": <"+prefixes[p]+"> ." for p in prefixes])
 
 ##########################################################################
 #             Reading lines of a file
@@ -119,18 +119,21 @@ def linesOfFile(file, message="Parsing"):
 
 # We use TSV files that can at the same time be parsed as TTL files
 
-def tsvTuples(file, message="Parsing"):
+def readTsvTuples(file, message="Parsing"):
+    """ Iterates over the tuples in a TSV file"""
     for line in linesOfFile(file, message):
         if not line.startswith("#"):
             yield line.rstrip().split("\t")
 
-class TsvFile(object):
+class TsvFileWriter(object):
+    """ To be used in a WITH...AS clause to write facts to TSV files"""
     def __init__(self, file_name):
         self.file_name = file_name
       
     def __enter__(self):
         self.file = open(self.file_name, "tw", encoding="utf=8")
-        self.file.write(prefixes)
+        for p in prefixes:
+            self.file.write("@prefix "+p+": <"+prefixes[p]+"> .\n")
         return self
         
     def write(self, *args):
@@ -193,12 +196,18 @@ def readWikidataEntities(fileName):
             statementsAboutTopic+=" "+compoundStatement
             continue            
         result = Graph()
-        result.parse(data=prefixes+statementsAboutTopic, format="n3")
+        # TODO: It would be great if we could bind the prefixes
+        # in the graph object instead of parsing them out of the prefixesAsString...
+        result.parse(data=prefixesAsString+statementsAboutTopic, format="n3")
         if len(result)>0:
             yield result
         statementsAboutTopic=compoundStatement
         currentTopic=topic    
-    
+ 
+##########################################################################
+#             Graph handling
+##########################################################################
+ 
 def printGraph(graph, out=None):
     """Prints an RDF graph in a human-readable format"""
     if out:
@@ -206,16 +215,20 @@ def printGraph(graph, out=None):
     else:
         print(str(graph.serialize(format="turtle", encoding="utf-8"), "utf-8"))
 
-def compress(entity):
-    """Compresses the URI prefix of Wikidata to "wd:" etc. """
-    return entity.n3(EMPTY_GRAPH.namespace_manager)
+def compressPrefix(entity):
+    """ Compresses the URI prefix of Wikidata to "wd:" etc. """
+    for p in prefixes:
+        if entity.startswith(prefixes[p]):
+            return p+":"+entity[len(prefixes[p]):]
+    return entity
 
-def expandWikidataPrefix(entity):
-    """Expands the URI prefix of Wikidata from "wd:" """
-    if entity.startswith("wd:"):
-       return "http://www.wikidata.org/entity/"+entity[3:]
-    return entity    
-
+def expandPrefix(entity):
+    """ Returns a URI for a CURIE """
+    for p in prefixes:
+        if entity.startswith(p+":"):
+            return URIRef(prefixes[p]+entity[len(p)+1:])
+    return URIRef(entity)
+    
 ##########################################################################
 #             Test
 ##########################################################################

@@ -1,4 +1,3 @@
-
 @prefix bioschema: <http://bioschemas.org/> .
 @prefix yago: <http://yago-knowledge.org/resource/> .
 @prefix yagov: <http://yago-knowledge.org/value/> .
@@ -16,7 +15,7 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix wd: <http://www.wikidata.org/entity/> .
 @prefix data: <https://www.wikidata.org/wiki/Special:EntityData/> .
-@prefix sh: <http://www.w3.org/ns/shacl#> . 
+@prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix s: <http://www.wikidata.org/entity/statement/> .
 @prefix ref: <http://www.wikidata.org/reference/> .
 @prefix v: <http://www.wikidata.org/value/> .
@@ -33,10 +32,10 @@
 @prefix prv: <http://www.wikidata.org/prop/reference/value/> .
 @prefix prn: <http://www.wikidata.org/prop/reference/value-normalized/> .
 @prefix wdno: <http://www.wikidata.org/prop/novalue/> .
+wd:Q_Elvis	schema:callSign	test string	.
 wd:Q_Elvis	rdf:type	wd:Q_singer	.
-wd:Q_Elvis	schema:deathDate	"1970-01-01"^^xsd:gYear	.
-wd:Q_Elvis	schema:faxNumber	"+33-33-333-333"	.
-wd:Q_Elvis	schema:callSign	"test string"	.
-wd:Q_Elvis	schema:mainEntityOfPage	<https://elvis.com>	.
+wd:Q_Elvis	schema:mainEntityOfPage	https://elvis.com	.
+wd:Q_Elvis	schema:deathDate	1970	.
+wd:Q_Elvis	schema:faxNumber	+33-33-333-333	.
 wd:Q_Elvis	schema:children	wd:Q_child	. # IF	schema:Person
 wd:Q_Elvis	schema:brand	wd:Q_brand	. # IF	schema:Brand, schema:Organization

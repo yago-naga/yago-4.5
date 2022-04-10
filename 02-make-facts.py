@@ -40,18 +40,24 @@ from rdflib import URIRef, RDFS, RDF, OWL, Graph, Literal, XSD, collection
 import utils
 import sys
 import re
+from collections import defaultdict
 print("done")
 
-print("  Loading YAGO taxonomy...", end="", flush=True)
-yagoTaxonomy=Graph()
-yagoTaxonomy.parse(FOLDER+"yago-taxonomy.tsv", format="turtle")
-yagoTaxonomy.parse(FOLDER+"yago-schema.ttl", format="turtle")
+print("  Loading YAGO schema...", end="", flush=True)
+yagoSchema=Graph()
+yagoSchema.parse(FOLDER+"yago-schema.ttl", format="turtle")
+disjointClasses=[ (utils.compressPrefix(c1), utils.compressPrefix(c2)) for (c1, p, c2) in yagoSchema.triples((None, OWL.disjointWith, None)) ]
 print("done")
 
-print("  Loading non-YAGO classes...", end="", flush=True)
-unmappedClasses=Graph()
-unmappedClasses.parse(FOLDER+"non-yago-classes.tsv", format="turtle")
-print("done")
+yagoTaxonomyUp=defaultdict(set)
+for triple in utils.readTsvTuples(FOLDER+"yago-taxonomy.tsv", "  Loading YAGO taxonomy"):
+    if len(triple)>3:
+        yagoTaxonomyUp[triple[0]].add(triple[2])
+
+nonYagoClasses={}
+for triple in utils.readTsvTuples(FOLDER+"non-yago-classes.tsv", "  Loading non-YAGO classes"):
+    if len(triple)>3:
+        nonYagoClasses[triple[0]]=utils.expandPrefix(triple[2])
 
 ##########################################################################
 #             Cleaning of entities
@@ -60,17 +66,18 @@ print("done")
 def cleanClasses(entityFacts):
     """Replace all facts <subject, wikidata:type, wikidataClass> by <subject, rdf:type, yagoClass>"""
     for s,p,o in entityFacts.triples((None, utils.wikidataType, None)):
-        for targetClass in unmappedClasses.objects(o, RDFS.subClassOf):
-            entityFacts.add((s,RDF.type,targetClass))
-        if (o, RDFS.subClassOf,None) in yagoTaxonomy:
+        compressedO=utils.compressPrefix(o)
+        if compressedO in nonYagoClasses:
+            entityFacts.add((s,RDF.type,nonYagoClasses[compressedO]))
+        if compressedO in yagoTaxonomyUp:
             entityFacts.add((s,RDF.type,o))
     entityFacts.remove((None, utils.wikidataType, None))    
     return (None, RDF.type, None) in entityFacts
 
 def wikidataPredicate2YagoPredicate(p):
     """Translates a Wikidata predicate to a YAGO predicate -- or None"""
-    for b in yagoTaxonomy.subjects(utils.fromProperty, p):
-        for s in yagoTaxonomy.objects(b, utils.shaclPath):
+    for b in yagoSchema.subjects(utils.fromProperty, p):
+        for s in yagoSchema.objects(b, utils.shaclPath):
             return s
     return None
     
@@ -81,18 +88,21 @@ def wikidataPredicate2YagoPredicate(p):
 def getSuperClasses(cls, classes):
     """Adds all superclasses of a class <cls> (including <cls>) to the set <classes>"""
     classes.add(cls)
-    for sc in yagoTaxonomy.objects(cls, RDFS.subClassOf):
-        getSuperClasses(sc, classes)
+    # Make a check before because it's a defaultdict,
+    # which would create cls if it's not there
+    if cls in yagoTaxonomyUp:
+        for sc in yagoTaxonomyUp[cls]:
+            getSuperClasses(sc, classes)
 
 def anyDisjoint(classes):
     """True if the set <classes> contains any classes that are declared disjoint"""
-    return any( (s in classes) and (o in classes) for s,p,o in yagoTaxonomy.triples((None, OWL.disjointWith, None)) )        
+    return any( (c1 in classes) and (c2 in classes) for (c1, c2) in disjointClasses )        
 
 def getClasses(entityFacts):
     """Returns the set of all classes and their superclasses that the subject is an instance of"""
     classes=set()
     for directClass in entityFacts.objects(None, RDF.type):
-        getSuperClasses(directClass, classes)        
+        getSuperClasses(utils.compressPrefix(directClass), classes)        
     return classes
 
 ##########################################################################
@@ -113,10 +123,10 @@ def checkCardinalityConstraints(p, entityFacts):
     yagoPredicate=wikidataPredicate2YagoPredicate(p)
     if not yagoPredicate:
         return
-    propertyNode = next(yagoTaxonomy.subjects(utils.shaclPath, yagoPredicate), None)
+    propertyNode = next(yagoSchema.subjects(utils.shaclPath, yagoPredicate), None)
     if not propertyNode:
         return
-    maxCount = next(yagoTaxonomy.objects(propertyNode, utils.shaclMaxCount), None)
+    maxCount = next(yagoSchema.objects(propertyNode, utils.shaclMaxCount), None)
     if not maxCount:
         return
     if not isinstance(maxCount, Literal) or int(maxCount.value)<=0:
@@ -145,8 +155,8 @@ def checkCardinalityConstraints(p, entityFacts):
 def checkDomain(p, classes):
     """True if the domain of predicate <p> appears in the set <classes>"""
     for c in classes:        
-        for propertyNode in yagoTaxonomy.objects(c, utils.shaclProperty):
-            if (propertyNode, utils.shaclPath, p) in yagoTaxonomy:
+        for propertyNode in yagoSchema.objects(utils.expandPrefix(c), utils.shaclProperty):
+            if (propertyNode, utils.shaclPath, p) in yagoSchema:
                 return True
     return False    
 
@@ -167,9 +177,9 @@ def checkDatatype(datatype, o):
 def checkRangePropertyNode(propertyNode, o):
     """True if the object <o> conforms to the range constraints given by the yago-shape-prop node <propertNode>. False if it does not. Otherwise, returns a list of permissible types."""
     # Disjunctions
-    disjunctObject = next(yagoTaxonomy.objects(propertyNode, utils.shaclOr), None)
+    disjunctObject = next(yagoSchema.objects(propertyNode, utils.shaclOr), None)
     if disjunctObject:
-        possiblePropertyNodes = collection.Collection(yagoTaxonomy, disjunctObject)
+        possiblePropertyNodes = collection.Collection(yagoSchema, disjunctObject)
         #print("   is disjunction: "+str(possiblePropertyNodes))
         resultList=[]
         for possiblePropertyNode in possiblePropertyNodes:
@@ -187,7 +197,7 @@ def checkRangePropertyNode(propertyNode, o):
         
     # Patterns are verified in a fall-through fashion,
     # because verifying a pattern is a necessary but not sufficient condition
-    patternObject = next(yagoTaxonomy.objects(propertyNode, utils.shaclPattern), None)
+    patternObject = next(yagoSchema.objects(propertyNode, utils.shaclPattern), None)
     if patternObject: 
        if not isinstance(o, Literal):
            #print("  Pattern "+str(patternObject)+" cannot match because object is not a string: "+str(o))
@@ -201,14 +211,14 @@ def checkRangePropertyNode(propertyNode, o):
            return False
     
     # Datatypes
-    datatype = next(yagoTaxonomy.objects(propertyNode, utils.shaclDatatype), None)
+    datatype = next(yagoSchema.objects(propertyNode, utils.shaclDatatype), None)
     if datatype:
        return checkDatatype(datatype, o)
     
     # Classes
-    rangeClass = next(yagoTaxonomy.objects(propertyNode, utils.shaclNode), None)
+    rangeClass = next(yagoSchema.objects(propertyNode, utils.shaclNode), None)
     if rangeClass:       
-        return [ utils.compress(rangeClass) ]
+        return [ utils.compressPrefix(rangeClass) ]
     
     # If no type can be established, we fail
     return False
@@ -216,7 +226,7 @@ def checkRangePropertyNode(propertyNode, o):
 def checkRange(p, o):
     """True if the object <o> conforms to the range constraint of predicate <p>. False if it does not. Otherwise, returns a list of classes that <o> would have to belong to."""
     # ASSUMPTION: the object types for the predicate p are the same, no matter the subject type
-    propertyNode = next(yagoTaxonomy.subjects(utils.shaclPath, p), None)
+    propertyNode = next(yagoSchema.subjects(utils.shaclPath, p), None)
     #print("  Range check for "+str(p)+" "+str(o)+" with prop node "+str(propertyNode))
     if not propertyNode:
         return False
@@ -226,7 +236,7 @@ def checkRange(p, o):
 #             Main method
 ##########################################################################
 
-with utils.TsvFile(FOLDER+"yago-facts-to-type-check.tsv") as yagoFacts:
+with utils.TsvFileWriter(FOLDER+"yago-facts-to-type-check.tsv") as yagoFacts:
     for entityFacts in utils.readWikidataEntities(WIKIDATA_FILE): 
         #utils.printGraph(entityFacts)
         if not cleanClasses(entityFacts):
@@ -239,7 +249,7 @@ with utils.TsvFile(FOLDER+"yago-facts-to-type-check.tsv") as yagoFacts:
         for s,p,o in entityFacts:
             #print(str(s)+" "+str(p)+' '+str(o))
             if p==RDF.type:
-                yagoFacts.writeFact(utils.compress(s),"rdf:type",utils.compress(o))
+                yagoFacts.writeFact(utils.compressPrefix(s),"rdf:type",utils.compressPrefix(o))
                 continue
             if p==utils.schemaAbout:
                 yagoPredicate=URIRef("https://schema.org/mainEntityOfPage")
@@ -256,12 +266,12 @@ with utils.TsvFile(FOLDER+"yago-facts-to-type-check.tsv") as yagoFacts:
                 continue
             rangeResult=checkRange(yagoPredicate, o)
             if rangeResult is True:
-                yagoFacts.writeFact(utils.compress(s),utils.compress(yagoPredicate),utils.compress(o))
+                yagoFacts.writeFact(utils.compressPrefix(s),utils.compressPrefix(yagoPredicate),utils.compressPrefix(o))
             elif rangeResult is False:
                 #print(" range check failed")
                 continue
             else:
                 #print(str(rangeResult))
-                yagoFacts.write(utils.compress(s),utils.compress(yagoPredicate),utils.compress(o),". # IF",(", ".join(rangeResult)))           
+                yagoFacts.write(utils.compressPrefix(s),utils.compressPrefix(yagoPredicate),utils.compressPrefix(o),". # IF",(", ".join(rangeResult)))           
 
 print("done")

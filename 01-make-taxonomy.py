@@ -103,7 +103,7 @@ def addSubClasses(lastGoodYagoClass, wikidataClass, unmappedClassesWriter, treat
         yagoTaxonomyDown[lastGoodYagoClass].add(wikidataClass)
         lastGoodYagoClass=wikidataClass
     else:       
-        unmappedClassesWriter.writeFact(utils.compress(wikidataClass),"rdfs:subClassOf",utils.compress(lastGoodYagoClass))
+        unmappedClassesWriter.writeFact(utils.compressPrefix(wikidataClass),"rdfs:subClassOf",utils.compressPrefix(lastGoodYagoClass))
     # "Treated" serves to avoid adding the subclasses again in case of double inheritance
     if wikidataClass in treated:
         return
@@ -114,7 +114,7 @@ def addSubClasses(lastGoodYagoClass, wikidataClass, unmappedClassesWriter, treat
     pathToRoot.pop()
 
 print("  Creating YAGO taxonomy...", end="", flush=True)
-with utils.TsvFile(OUTPUT_FOLDER+"non-yago-classes.tsv") as unmappedClassesWriter:
+with utils.WriteTsvFile(OUTPUT_FOLDER+"non-yago-classes.tsv") as unmappedClassesWriter:
     treated=set()
     for s,p,o in yagoSchema.triples((None, utils.fromClass, None)):
         if s!=utils.schemaThing:
@@ -165,9 +165,9 @@ yagoSchema.serialize(destination=(OUTPUT_FOLDER+"yago-schema.ttl"), format="turt
 print("done")
 
 print("  Writing taxonomy...", end="", flush=True)
-with utils.TsvFile(OUTPUT_FOLDER+"yago-taxonomy.tsv") as taxonomyWriter:
+with utils.TsvFileWriter(OUTPUT_FOLDER+"yago-taxonomy.tsv") as taxonomyWriter:
     for cls in yagoTaxonomyUp:
         for superclass in yagoTaxonomyUp[cls]:
-            taxonomyWriter.writeFact(utils.compress(cls), "rdfs:subClassOf", utils.compress(superclass))
+            taxonomyWriter.writeFact(utils.compressPrefix(cls), "rdfs:subClassOf", utils.compressPrefix(superclass))
 print("done")
 print("done")

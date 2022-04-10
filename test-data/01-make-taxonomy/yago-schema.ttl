@@ -72,6 +72,14 @@ bioschema:MolecularEntity a rdfs:Class,
     rdfs:subClassOf bioschema:BioChemEntity ;
     sh:property [ sh:datatype xsd:string ;
             sh:maxCount 1 ;
+            sh:path bioschema:molecularFormula ;
+            ys:fromProperty wdt:P274 ],
+        [ sh:datatype xsd:string ;
+            sh:path bioschema:smiles ;
+            sh:pattern "^[A-Za-z0-9+\\-\\*=#$:().>/\\\\\\[\\]%]+$" ;
+            ys:fromProperty wdt:P233 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
             sh:path bioschema:inChI ;
             sh:pattern "^1S/([0-9]*[A-Z][ub]?[a-z]?[0-9]*\\.?)+(/[0-9A-Za-z+\\-(),.*;?]+)*$" ;
             ys:fromProperty wdt:P234 ],
@@ -79,15 +87,7 @@ bioschema:MolecularEntity a rdfs:Class,
             sh:maxCount 1 ;
             sh:path bioschema:inChIKey ;
             sh:pattern "^[A-Z]{14}-[A-Z]{10}-[A-Z]$" ;
-            ys:fromProperty wdt:P235 ],
-        [ sh:datatype xsd:string ;
-            sh:maxCount 1 ;
-            sh:path bioschema:molecularFormula ;
-            ys:fromProperty wdt:P274 ],
-        [ sh:datatype xsd:string ;
-            sh:path bioschema:smiles ;
-            sh:pattern "^[A-Za-z0-9+\\-\\*=#$:().>/\\\\\\[\\]%]+$" ;
-            ys:fromProperty wdt:P233 ] ;
+            ys:fromProperty wdt:P235 ] ;
     ys:fromClass wd:Q2393187 .
 
 bioschema:Protein a rdfs:Class,
@@ -102,13 +102,13 @@ bioschema:Taxon a rdfs:Class,
     rdfs:label "taxon"@en ;
     rdfs:comment "A set of organisms asserted to represent a natural cohesive biological unit."@en ;
     rdfs:subClassOf schema:Thing ;
-    sh:property [ sh:maxCount 1 ;
+    sh:property [ sh:node bioschema:Taxon ;
+            sh:path bioschema:parentTaxon ;
+            ys:fromProperty wdt:P171 ],
+        [ sh:maxCount 1 ;
             sh:node schema:Thing ;
             sh:path bioschema:taxonRank ;
-            ys:fromProperty wdt:P105 ],
-        [ sh:node bioschema:Taxon ;
-            sh:path bioschema:parentTaxon ;
-            ys:fromProperty wdt:P171 ] ;
+            ys:fromProperty wdt:P105 ] ;
     ys:fromClass wd:Q16521 .
 
 schema:3DModel a rdfs:Class ;
@@ -1460,7 +1460,16 @@ schema:CreativeWork a rdfs:Class,
         schema:Organization,
         schema:Person,
         schema:Place ;
-    sh:property [ sh:node schema:CreativeWork ;
+    sh:property [ sh:node schema:Thing ;
+            sh:path schema:about ;
+            ys:fromProperty wdt:P921 ],
+        [ sh:node schema:Thing ;
+            sh:path schema:award ;
+            ys:fromProperty wdt:P166 ],
+        [ sh:or ( [ sh:node schema:Organization ] [ sh:node schema:Person ] ) ;
+            sh:path schema:author ;
+            ys:fromProperty wdt:P50 ],
+        [ sh:node schema:CreativeWork ;
             sh:path schema:citation ;
             ys:fromProperty wdt:P2860 ],
         [ sh:node schema:Person ;
@@ -1552,16 +1561,7 @@ schema:CreativeWork a rdfs:Class,
             ys:fromProperty wdt:P655 ],
         [ sh:node schema:CreativeWork ;
             sh:path schema:workExample ;
-            ys:fromProperty wdt:P747 ],
-        [ sh:node schema:Thing ;
-            sh:path schema:about ;
-            ys:fromProperty wdt:P921 ],
-        [ sh:node schema:Thing ;
-            sh:path schema:award ;
-            ys:fromProperty wdt:P166 ],
-        [ sh:or ( [ sh:node schema:Organization ] [ sh:node schema:Person ] ) ;
-            sh:path schema:author ;
-            ys:fromProperty wdt:P50 ] ;
+            ys:fromProperty wdt:P747 ] ;
     ys:fromClass wd:Q17537576 ;
     schema:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_rNews> .
 
@@ -2229,23 +2229,7 @@ schema:Event a rdfs:Class,
         schema:Person,
         schema:Place ;
     owl:equivalentClass dctype:Event ;
-    sh:property [ sh:maxCount 1 ;
-            sh:or ( [ sh:datatype xsd:dateTime ] [ sh:datatype xsd:date ] [ sh:datatype xsd:gYearMonth ] [ sh:datatype xsd:gYear ] ) ;
-            sh:path schema:endDate ;
-            ys:fromProperty wdt:P582 ],
-        [ sh:or ( [ sh:node schema:Organization ] [ sh:node schema:Person ] ) ;
-            sh:path schema:sponsor ;
-            ys:fromProperty wdt:P859 ],
-        [ sh:node schema:Event ;
-            sh:path schema:superEvent ;
-            ys:fromProperty wdt:P361 ],
-        [ sh:node schema:Event ;
-            sh:path schema:subEvent ;
-            ys:fromProperty wdt:P527 ],
-        [ sh:or ( [ sh:node schema:Organization ] [ sh:node schema:Person ] ) ;
-            sh:path schema:translator ;
-            ys:fromProperty wdt:P655 ],
-        [ sh:node schema:Thing ;
+    sh:property [ sh:node schema:Thing ;
             sh:path schema:about ;
             ys:fromProperty wdt:P921 ],
         [ sh:or ( [ sh:node schema:Person ] [ sh:node schema:MusicGroup ] ) ;
@@ -2272,7 +2256,23 @@ schema:Event a rdfs:Class,
         [ sh:maxCount 1 ;
             sh:or ( [ sh:datatype xsd:dateTime ] [ sh:datatype xsd:date ] [ sh:datatype xsd:gYearMonth ] [ sh:datatype xsd:gYear ] ) ;
             sh:path schema:startDate ;
-            ys:fromProperty wdt:P580 ] ;
+            ys:fromProperty wdt:P580 ],
+        [ sh:maxCount 1 ;
+            sh:or ( [ sh:datatype xsd:dateTime ] [ sh:datatype xsd:date ] [ sh:datatype xsd:gYearMonth ] [ sh:datatype xsd:gYear ] ) ;
+            sh:path schema:endDate ;
+            ys:fromProperty wdt:P582 ],
+        [ sh:or ( [ sh:node schema:Organization ] [ sh:node schema:Person ] ) ;
+            sh:path schema:sponsor ;
+            ys:fromProperty wdt:P859 ],
+        [ sh:node schema:Event ;
+            sh:path schema:superEvent ;
+            ys:fromProperty wdt:P361 ],
+        [ sh:node schema:Event ;
+            sh:path schema:subEvent ;
+            ys:fromProperty wdt:P527 ],
+        [ sh:or ( [ sh:node schema:Organization ] [ sh:node schema:Person ] ) ;
+            sh:path schema:translator ;
+            ys:fromProperty wdt:P655 ] ;
     ys:fromClass wd:Q1656682 .
 
 schema:EventAttendanceModeEnumeration a rdfs:Class ;
