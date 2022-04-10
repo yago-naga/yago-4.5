@@ -1,8 +1,15 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix schema: <https://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
 @prefix wd: <http://www.wikidata.org/entity/> .
 @prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix wpq: <http://www.wikidata.org/prop/qualifier/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
 
 # Disjoint classes should be removed
 
@@ -29,3 +36,22 @@ wd:Q_Elvis wdt:P31 wd:Q_rock_singer;
 	wdt:P2900 "+33-33-333-333";
 	# Datatypes: should be OK
 	wdt:P570 "1970"^^xsd:gYear .
+	
+	
+# Classes should survive
+
+<https://de.wikipedia.org/wiki/Mensch> a schema:Article ;
+	schema:about wd:Q_singer ;
+	schema:inLanguage "de" ;
+	schema:isPartOf <https://de.wikipedia.org/> ;
+	schema:name "Saenger"@de .
+	
+wd:Q_singer  rdfs:label "singer"@en ;
+	skos:prefLabel "singer"@en ;
+	schema:name "singer"@en ;
+	rdfs:label "chanteur"@fr ;
+	skos:prefLabel "chanteur"@fr ;
+	schema:name "chanteur"@fr ;	
+	schema:description "this is a singer"@en;
+	skos:altLabel "this is a human being"@en .
+		

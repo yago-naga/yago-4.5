@@ -63,6 +63,45 @@ schema:Thing a sh:NodeShape ;
         sh:nodeKind sh:IRI ;
     ] .
 
+rdfs:Class a sh:NodeShape ;
+    sh:property [
+        sh:path schema:alternateName ;
+        sh:datatype rdf:langString ;
+        sh:disjoint rdfs:label ;
+        ys:fromProperty skos:altLabel ;
+    ] ;
+    sh:property [
+        sh:path rdfs:comment ;
+        sh:datatype rdf:langString ;
+        sh:uniqueLang true ;
+        ys:fromProperty schema:description ;
+    ] ;
+    sh:property [
+        sh:path schema:image ;
+        sh:node schema:ImageObject ;
+        ys:fromProperty wdt:P18 ;
+    ] ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:datatype rdf:langString ;
+        sh:uniqueLang true ;
+        ys:fromProperty skos:prefLabel ;
+    ] ;
+    sh:property [
+        sh:path schema:sameAs ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+    sh:property [
+        sh:path schema:url ;
+        sh:datatype xsd:anyURI ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P856 ;
+    ] ;
+    sh:property [
+        sh:path owl:sameAs ;
+        sh:nodeKind sh:IRI ;
+    ] .
+
 schema:BroadcastChannel a sh:NodeShape ;
     sh:property [
         sh:path schema:broadcastChannelId ;

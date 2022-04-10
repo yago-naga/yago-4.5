@@ -44,3 +44,9 @@ wd:Q_brand	rdf:type	schema:Brand	.
 wd:Q_child	rdf:type	wd:Child	.
 wd:Q_bad_child	rdf:type	schema:Brand	.
 wd:Q_bad_child	rdfs:label	"Bad Child"@en	.
+wd:Q_singer	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Singer>	.
+wd:Q_singer	rdfs:label	"chanteur"@fr	.
+wd:Q_singer	schema:alternateName	"this is a human being"@en	.
+wd:Q_singer	rdfs:comment	"this is a singer"@en	.
+wd:Q_singer	rdf:type	rdfs:Class	.
+wd:Q_singer	rdfs:label	"singer"@en	.

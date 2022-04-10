@@ -220,7 +220,7 @@ def compressPrefix(entity):
     for p in prefixes:
         if entity.startswith(prefixes[p]):
             return p+":"+entity[len(prefixes[p]):]
-    return entity
+    return entity.n3()
 
 def expandPrefix(entity):
     """ Returns a URI for a CURIE """

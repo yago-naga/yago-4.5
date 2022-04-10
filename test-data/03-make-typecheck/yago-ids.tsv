@@ -36,3 +36,4 @@ wd:Q_Elvis	owl:sameAs	yago:Elvis	. #WIKI
 wd:Q_brand	owl:sameAs	yago:_brand	. #OTHER
 wd:Q_child	owl:sameAs	yago:_child	. #OTHER
 wd:Q_bad_child	owl:sameAs	yago:Bad_Child__bad_child	. #OTHER
+wd:Q_singer	owl:sameAs	yago:Singer	. #WIKI

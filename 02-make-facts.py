@@ -63,6 +63,12 @@ for triple in utils.readTsvTuples(FOLDER+"non-yago-classes.tsv", "  Loading non-
 #             Cleaning of entities
 ##########################################################################
 
+def checkIfClass(entityFacts):
+    """Adds <subject, rdf:type, rdfs:Class> if this is a class"""
+    for s in entityFacts.subjects(RDFS.label, None):
+        if utils.compressPrefix(s) in yagoTaxonomyUp:
+            entityFacts.add((s,RDF.type,RDFS.Class))
+
 def cleanClasses(entityFacts):
     """Replace all facts <subject, wikidata:type, wikidataClass> by <subject, rdf:type, yagoClass>"""
     for s,p,o in entityFacts.triples((None, utils.wikidataType, None)):
@@ -239,6 +245,7 @@ def checkRange(p, o):
 with utils.TsvFileWriter(FOLDER+"yago-facts-to-type-check.tsv") as yagoFacts:
     for entityFacts in utils.readWikidataEntities(WIKIDATA_FILE): 
         #utils.printGraph(entityFacts)
+        checkIfClass(entityFacts)
         if not cleanClasses(entityFacts):
             continue
         classes = getClasses(entityFacts)
@@ -247,7 +254,6 @@ with utils.TsvFileWriter(FOLDER+"yago-facts-to-type-check.tsv") as yagoFacts:
         for p in set(entityFacts.predicates()):
             checkCardinalityConstraints(p, entityFacts)
         for s,p,o in entityFacts:
-            #print(str(s)+" "+str(p)+' '+str(o))
             if p==RDF.type:
                 yagoFacts.writeFact(utils.compressPrefix(s),"rdf:type",utils.compressPrefix(o))
                 continue

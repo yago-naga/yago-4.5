@@ -44,3 +44,11 @@ wd:Q_123456	schema:parent	wd:Q_Elvis	.
 
 # This one should not exist
 wd:nonsense	schema:child	wd:Q_123456	.
+
+# Classes should survive
+wd:Q_singer	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Singer>	.
+wd:Q_singer	rdfs:label	"chanteur"@fr	.
+wd:Q_singer	schema:alternateName	"this is a human being"@en	.
+wd:Q_singer	rdfs:comment	"this is a singer"@en	.
+wd:Q_singer	rdf:type	rdfs:Class	.
+wd:Q_singer	rdfs:label	"singer"@en	.
