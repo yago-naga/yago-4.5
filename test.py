@@ -26,38 +26,19 @@ if __name__ == '__main__':
         err_file = "gold standard"
         try:
             with open(gold_standard) as file:
-                tsv_file = csv.reader(file, delimiter="\t")
-                for golden_line in tsv_file:
-                    found = False
-                    err_file = "output"
-                    if golden_line != []:
-                        with open(output_file) as file2:
-                            tsv_file2 = csv.reader(file2, delimiter="\t")
-                            for output_line in tsv_file2:
-                                if golden_line == output_line:
-                                    found = True
-                                    break
-                            file2.close()
-                        if not found:
-                            not_in_output.append(golden_line)
+                with open(output_file) as file2:
+                    not_in_output = set(file).difference(file2)
+            
             file.close()
+            file2.close()
 
             with open(output_file) as file:
-                tsv_file = csv.reader(file, delimiter="\t")
-                for output_line in tsv_file:
-                    found = False
-                    err_file = "output"
-                    if output_line != []:
-                        with open(gold_standard) as file2:
-                            tsv_file2 = csv.reader(file2, delimiter="\t")
-                            for golden_line in tsv_file2:
-                                if output_line == golden_line:
-                                    found = True
-                                    break
-                            file2.close()
-                        if not found:
-                            not_in_gold.append(output_line)
-            file.close()                
+                with open(gold_standard) as file2:
+                    not_in_gold = set(file).difference(file2)
+
+            file.close()
+            file2.close()                          
+           
         except FileNotFoundError:
             msg.fail(f"Invalid file path for {err_file} file.")
             halt = True
@@ -70,7 +51,7 @@ if __name__ == '__main__':
     msg.text("Lines:", color="yellow")
     for line in not_in_output:
         msg.text(f"\t{str(line)}")
-    msg.text(f"Number of files in output file and not in golden standard: {len(not_in_output)}")
+    msg.text(f"Number of files in output file and not in golden standard: {len(not_in_gold)}")
     msg.text("Lines:", color="yellow")
     for line in not_in_gold:
         msg.text(f"\t{str(line)}")
