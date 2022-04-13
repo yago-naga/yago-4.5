@@ -2,18 +2,22 @@ import sys
 from wasabi import msg, table
 import csv
 
+# to use program: 
+# 1. start the environment (recommended) with pipenv shell
+# 2. python3 compare-taxonomies.py [path to gold standard file] [path to output file]
 if __name__ == '__main__':
     print()
     msg.info("Initiated...")
-    gold_standard = ""
+    gold_standard = "" # standard file path
     output_file = ""
     not_in_output = []
     not_in_gold = []
     num_output = 0
     num_gold = 0
-    halt = False
+    halt = False # to exit the program later after an error has been detected (and not get stack problems)
     
     try:
+        # reads file paths from args
         gold_standard = sys.argv[1]
         output_file = sys.argv[2]
         msg.text(f"gold standard: {str(gold_standard)}")
@@ -27,6 +31,8 @@ if __name__ == '__main__':
 
     with msg.loading("Analyzing the files..."):
         err_file = "gold standard"
+        # instead of doing a double four loop, we use python's built-in set methods, which turn out to be faster and more efficient
+        # todo: test with large data and ask Fabian if looking line by line instead of tab by tab works for him
         try:
             with open(gold_standard) as file:
                 err_file = "output"
@@ -43,6 +49,7 @@ if __name__ == '__main__':
             file.close()
             file2.close()
 
+            # obtaining total amount of lines for statistics
             with open(output_file) as file:
                 num_output = len(file.readlines())
 
@@ -72,6 +79,8 @@ if __name__ == '__main__':
     for line in not_in_gold:
         msg.text(f"\t{str(line)}")
     print()
+
+    # todo: check the statistics because I am not sure they are correct
     msg.text("Statistics:", color="yellow")
     precision = round((num_gold - len(not_in_output)) / num_gold, 3)
     recall = round((num_output - len(not_in_gold)) / num_output, 3)
