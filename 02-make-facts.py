@@ -254,6 +254,7 @@ with utils.TsvFileWriter(FOLDER+"yago-facts-to-type-check.tsv") as yagoFacts:
         for p in set(entityFacts.predicates()):
             checkCardinalityConstraints(p, entityFacts)
         for s,p,o in entityFacts:
+            #print(" Predicate: "+str(p))
             if p==RDF.type:
                 yagoFacts.writeFact(utils.compressPrefix(s),"rdf:type",utils.compressPrefix(o))
                 continue
