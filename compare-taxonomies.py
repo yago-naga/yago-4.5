@@ -4,7 +4,7 @@ import csv
 
 # to use program: 
 # 1. start the environment (recommended) with pipenv shell
-# 2. python3 test.py [path to gold standard file] [path to output file]
+# 2. python3 compare-taxonomies.py [path to gold standard file] [path to output file]
 if __name__ == '__main__':
     print()
     msg.info("Initiated...")
