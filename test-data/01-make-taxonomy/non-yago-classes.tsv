@@ -32,4 +32,4 @@
 @prefix prv: <http://www.wikidata.org/prop/reference/value/> .
 @prefix prn: <http://www.wikidata.org/prop/reference/value-normalized/> .
 @prefix wdno: <http://www.wikidata.org/prop/novalue/> .
-wd:Q_nonwikipediapage_book	rdfs:subClassOf	wd:Q_European_book	.
+<http://www.wikidata.org/entity/Q_nonwikipediapage_book>	rdfs:subClassOf	<http://www.wikidata.org/entity/Q_European_book>	.

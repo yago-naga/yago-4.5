@@ -217,9 +217,9 @@ def printGraph(graph, out=None):
 
 def compressPrefix(entity):
     """ Compresses the URI prefix of Wikidata to "wd:" etc. """
-    for p in prefixes:
-        if entity.startswith(prefixes[p]):
-            return p+":"+entity[len(prefixes[p]):]
+    #for p in prefixes:
+    #    if entity.startswith(prefixes[p]):
+    #        return p+":"+entity[len(prefixes[p]):]
     return entity.n3()
 
 def expandPrefix(entity):

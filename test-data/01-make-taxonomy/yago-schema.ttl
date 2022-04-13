@@ -18110,12 +18110,6 @@ schema:albumRelease a rdf:Property ;
     schema:inverseOf schema:releaseOf ;
     schema:rangeIncludes schema:MusicRelease .
 
-schema:alternateName a rdf:Property ;
-    rdfs:label "alternateName" ;
-    rdfs:comment "An alias for the item." ;
-    schema:domainIncludes schema:Thing ;
-    schema:rangeIncludes schema:Text .
-
 schema:alumni a rdf:Property ;
     rdfs:label "alumni" ;
     rdfs:comment "Alumni of an organization." ;
@@ -19053,12 +19047,6 @@ schema:runtimePlatform a rdf:Property ;
     schema:domainIncludes schema:SoftwareSourceCode ;
     schema:rangeIncludes schema:Text .
 
-schema:sameAs a rdf:Property ;
-    rdfs:label "sameAs" ;
-    rdfs:comment "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website." ;
-    schema:domainIncludes schema:Thing ;
-    schema:rangeIncludes schema:URL .
-
 schema:season a rdf:Property ;
     rdfs:label "season" ;
     rdfs:comment "A season in a media series." ;
@@ -19219,12 +19207,6 @@ schema:unitCode a rdf:Property ;
         schema:URL ;
     schema:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsTerms> .
 
-schema:url a rdf:Property ;
-    rdfs:label "url" ;
-    rdfs:comment "URL of the item." ;
-    schema:domainIncludes schema:Thing ;
-    schema:rangeIncludes schema:URL .
-
 schema:usageInfo a rdf:Property ;
     rdfs:label "usageInfo" ;
     rdfs:comment """The schema.org <a class="localLink" href="http://schema.org/usageInfo">usageInfo</a> property indicates further information about a <a class="localLink" href="http://schema.org/CreativeWork">CreativeWork</a>. This property is applicable both to works that are freely available and to those that require payment or other transactions. It can reference additional information e.g. community expectations on preferred linking and citation conventions, as well as purchasing details. For something that can be commercially licensed, usageInfo can provide detailed, resource-specific information about licensing options.<br/><br/>
@@ -19305,6 +19287,12 @@ bioschema:isEncodedByBioChemEntity a rdf:Property ;
 ys:AnnotationPropertyShape a rdfs:Property ;
     rdfs:subPropertyOf sh:PropertyShape .
 
+schema:alternateName a rdf:Property ;
+    rdfs:label "alternateName" ;
+    rdfs:comment "An alias for the item." ;
+    schema:domainIncludes schema:Thing ;
+    schema:rangeIncludes schema:Text .
+
 schema:alumniOf a rdf:Property ;
     rdfs:label "alumniOf" ;
     rdfs:comment "An organization that the person is an alumni of." ;
@@ -19368,13 +19356,6 @@ schema:depth a rdf:Property ;
     schema:rangeIncludes schema:Distance,
         schema:QuantitativeValue ;
     schema:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsTerms> .
-
-schema:description a rdf:Property ;
-    rdfs:label "description" ;
-    rdfs:comment "A description of the item." ;
-    owl:equivalentProperty dct:description ;
-    schema:domainIncludes schema:Thing ;
-    schema:rangeIncludes schema:Text .
 
 schema:encoding a rdf:Property ;
     rdfs:label "encoding" ;
@@ -19515,6 +19496,12 @@ schema:result a rdf:Property ;
     schema:domainIncludes schema:Action ;
     schema:rangeIncludes schema:Thing .
 
+schema:sameAs a rdf:Property ;
+    rdfs:label "sameAs" ;
+    rdfs:comment "URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website." ;
+    schema:domainIncludes schema:Thing ;
+    schema:rangeIncludes schema:URL .
+
 schema:seller a rdf:Property ;
     rdfs:label "seller" ;
     rdfs:comment "An entity which offers (sells / leases / lends / loans) the services / goods.  A seller may also be a provider." ;
@@ -19603,6 +19590,12 @@ schema:translator a rdf:Property ;
     schema:rangeIncludes schema:Organization,
         schema:Person .
 
+schema:url a rdf:Property ;
+    rdfs:label "url" ;
+    rdfs:comment "URL of the item." ;
+    schema:domainIncludes schema:Thing ;
+    schema:rangeIncludes schema:URL .
+
 schema:weight a rdf:Property ;
     rdfs:label "weight" ;
     rdfs:comment "The weight of the product or person." ;
@@ -19686,6 +19679,13 @@ schema:containedInPlace a rdf:Property ;
     schema:inverseOf schema:containsPlace ;
     schema:rangeIncludes schema:Place .
 
+schema:description a rdf:Property ;
+    rdfs:label "description" ;
+    rdfs:comment "A description of the item." ;
+    owl:equivalentProperty dct:description ;
+    schema:domainIncludes schema:Thing ;
+    schema:rangeIncludes schema:Text .
+
 schema:faxNumber a rdf:Property ;
     rdfs:label "faxNumber" ;
     rdfs:comment "The fax number." ;
@@ -19720,13 +19720,6 @@ schema:iataCode a rdf:Property ;
     schema:domainIncludes schema:Airline,
         schema:Airport ;
     schema:rangeIncludes schema:Text .
-
-schema:image a rdf:Property ;
-    rdfs:label "image" ;
-    rdfs:comment "An image of the item. This can be a <a class=\"localLink\" href=\"http://schema.org/URL\">URL</a> or a fully described <a class=\"localLink\" href=\"http://schema.org/ImageObject\">ImageObject</a>." ;
-    schema:domainIncludes schema:Thing ;
-    schema:rangeIncludes schema:ImageObject,
-        schema:URL .
 
 schema:includedInDataCatalog a rdf:Property ;
     rdfs:label "includedInDataCatalog" ;
@@ -19849,6 +19842,13 @@ schema:duration a rdf:Property ;
     schema:rangeIncludes schema:Duration ;
     schema:source <https://github.com/schemaorg/schemaorg/issues/1457>,
         <https://github.com/schemaorg/schemaorg/issues/1698> .
+
+schema:image a rdf:Property ;
+    rdfs:label "image" ;
+    rdfs:comment "An image of the item. This can be a <a class=\"localLink\" href=\"http://schema.org/URL\">URL</a> or a fully described <a class=\"localLink\" href=\"http://schema.org/ImageObject\">ImageObject</a>." ;
+    schema:domainIncludes schema:Thing ;
+    schema:rangeIncludes schema:ImageObject,
+        schema:URL .
 
 schema:logo a rdf:Property ;
     rdfs:label "logo" ;
@@ -20065,4 +20065,29 @@ schema:identifier a rdf:Property ;
     schema:rangeIncludes schema:PropertyValue,
         schema:Text,
         schema:URL .
+
+rdfs:Class a sh:NodeShape ;
+    sh:property [ sh:node schema:ImageObject ;
+            sh:path schema:image ;
+            ys:fromProperty wdt:P18 ],
+        [ sh:datatype rdf:langString ;
+            sh:path rdfs:label ;
+            sh:uniqueLang true ;
+            ys:fromProperty skos:prefLabel ],
+        [ sh:datatype xsd:anyURI ;
+            sh:path schema:sameAs ],
+        [ sh:datatype xsd:anyURI ;
+            sh:maxCount 1 ;
+            sh:path schema:url ;
+            ys:fromProperty wdt:P856 ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path owl:sameAs ],
+        [ sh:datatype rdf:langString ;
+            sh:disjoint rdfs:label ;
+            sh:path schema:alternateName ;
+            ys:fromProperty skos:altLabel ],
+        [ sh:datatype rdf:langString ;
+            sh:path rdfs:comment ;
+            sh:uniqueLang true ;
+            ys:fromProperty schema:description ] .
 
