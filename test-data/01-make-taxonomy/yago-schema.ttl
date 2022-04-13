@@ -72,14 +72,6 @@ bioschema:MolecularEntity a rdfs:Class,
     rdfs:subClassOf bioschema:BioChemEntity ;
     sh:property [ sh:datatype xsd:string ;
             sh:maxCount 1 ;
-            sh:path bioschema:molecularFormula ;
-            ys:fromProperty wdt:P274 ],
-        [ sh:datatype xsd:string ;
-            sh:path bioschema:smiles ;
-            sh:pattern "^[A-Za-z0-9+\\-\\*=#$:().>/\\\\\\[\\]%]+$" ;
-            ys:fromProperty wdt:P233 ],
-        [ sh:datatype xsd:string ;
-            sh:maxCount 1 ;
             sh:path bioschema:inChI ;
             sh:pattern "^1S/([0-9]*[A-Z][ub]?[a-z]?[0-9]*\\.?)+(/[0-9A-Za-z+\\-(),.*;?]+)*$" ;
             ys:fromProperty wdt:P234 ],
@@ -87,7 +79,15 @@ bioschema:MolecularEntity a rdfs:Class,
             sh:maxCount 1 ;
             sh:path bioschema:inChIKey ;
             sh:pattern "^[A-Z]{14}-[A-Z]{10}-[A-Z]$" ;
-            ys:fromProperty wdt:P235 ] ;
+            ys:fromProperty wdt:P235 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path bioschema:molecularFormula ;
+            ys:fromProperty wdt:P274 ],
+        [ sh:datatype xsd:string ;
+            sh:path bioschema:smiles ;
+            sh:pattern "^[A-Za-z0-9+\\-\\*=#$:().>/\\\\\\[\\]%]+$" ;
+            ys:fromProperty wdt:P233 ] ;
     ys:fromClass wd:Q2393187 .
 
 bioschema:Protein a rdfs:Class,
@@ -102,13 +102,13 @@ bioschema:Taxon a rdfs:Class,
     rdfs:label "taxon"@en ;
     rdfs:comment "A set of organisms asserted to represent a natural cohesive biological unit."@en ;
     rdfs:subClassOf schema:Thing ;
-    sh:property [ sh:node bioschema:Taxon ;
-            sh:path bioschema:parentTaxon ;
-            ys:fromProperty wdt:P171 ],
-        [ sh:maxCount 1 ;
+    sh:property [ sh:maxCount 1 ;
             sh:node schema:Thing ;
             sh:path bioschema:taxonRank ;
-            ys:fromProperty wdt:P105 ] ;
+            ys:fromProperty wdt:P105 ],
+        [ sh:node bioschema:Taxon ;
+            sh:path bioschema:parentTaxon ;
+            ys:fromProperty wdt:P171 ] ;
     ys:fromClass wd:Q16521 .
 
 schema:3DModel a rdfs:Class ;
@@ -2229,16 +2229,7 @@ schema:Event a rdfs:Class,
         schema:Person,
         schema:Place ;
     owl:equivalentClass dctype:Event ;
-    sh:property [ sh:node schema:Thing ;
-            sh:path schema:about ;
-            ys:fromProperty wdt:P921 ],
-        [ sh:or ( [ sh:node schema:Person ] [ sh:node schema:MusicGroup ] ) ;
-            sh:path schema:composer ;
-            ys:fromProperty wdt:P86 ],
-        [ sh:or ( [ sh:node schema:Person ] [ sh:node schema:MusicGroup ] ) ;
-            sh:path schema:composer ;
-            ys:fromProperty wdt:P86 ],
-        [ sh:or ( [ sh:node schema:Organization ] [ sh:node schema:Person ] ) ;
+    sh:property [ sh:or ( [ sh:node schema:Organization ] [ sh:node schema:Person ] ) ;
             sh:path schema:contributor ;
             ys:fromProperty wdt:P767 ],
         [ sh:datatype xsd:duration ;
@@ -2272,7 +2263,16 @@ schema:Event a rdfs:Class,
             ys:fromProperty wdt:P527 ],
         [ sh:or ( [ sh:node schema:Organization ] [ sh:node schema:Person ] ) ;
             sh:path schema:translator ;
-            ys:fromProperty wdt:P655 ] ;
+            ys:fromProperty wdt:P655 ],
+        [ sh:node schema:Thing ;
+            sh:path schema:about ;
+            ys:fromProperty wdt:P921 ],
+        [ sh:or ( [ sh:node schema:Person ] [ sh:node schema:MusicGroup ] ) ;
+            sh:path schema:composer ;
+            ys:fromProperty wdt:P86 ],
+        [ sh:or ( [ sh:node schema:Person ] [ sh:node schema:MusicGroup ] ) ;
+            sh:path schema:composer ;
+            ys:fromProperty wdt:P86 ] ;
     ys:fromClass wd:Q1656682 .
 
 schema:EventAttendanceModeEnumeration a rdfs:Class ;
@@ -6255,10 +6255,11 @@ schema:Thing a rdfs:Class,
             ys:fromProperty wdt:P18 ],
         [ sh:datatype rdf:langString ;
             sh:path rdfs:label ;
-            sh:uniqueLang true ;
-            ys:fromProperty skos:prefLabel ],
+            sh:uniqueLang true ],
         [ sh:datatype xsd:anyURI ;
             sh:path schema:sameAs ],
+        [ sh:datatype xsd:anyURI ;
+            sh:path schema:mainEntityOfPage ],
         [ sh:datatype xsd:anyURI ;
             sh:maxCount 1 ;
             sh:path schema:url ;
@@ -18758,14 +18759,6 @@ schema:mainEntity a rdf:Property ;
     schema:inverseOf schema:mainEntityOfPage ;
     schema:rangeIncludes schema:Thing .
 
-schema:mainEntityOfPage a rdf:Property ;
-    rdfs:label "mainEntityOfPage" ;
-    rdfs:comment "Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See <a href=\"/docs/datamodel.html#mainEntityBackground\">background notes</a> for details." ;
-    schema:domainIncludes schema:Thing ;
-    schema:inverseOf schema:mainEntity ;
-    schema:rangeIncludes schema:CreativeWork,
-        schema:URL .
-
 schema:makesOffer a rdf:Property ;
     rdfs:label "makesOffer" ;
     rdfs:comment "A pointer to products or services offered by the organization or person." ;
@@ -19728,6 +19721,14 @@ schema:includedInDataCatalog a rdf:Property ;
     schema:inverseOf schema:dataset ;
     schema:rangeIncludes schema:DataCatalog .
 
+schema:mainEntityOfPage a rdf:Property ;
+    rdfs:label "mainEntityOfPage" ;
+    rdfs:comment "Indicates a page (or other CreativeWork) for which this thing is the main entity being described. See <a href=\"/docs/datamodel.html#mainEntityBackground\">background notes</a> for details." ;
+    schema:domainIncludes schema:Thing ;
+    schema:inverseOf schema:mainEntity ;
+    schema:rangeIncludes schema:CreativeWork,
+        schema:URL .
+
 schema:member a rdf:Property ;
     rdfs:label "member" ;
     rdfs:comment "A member of an Organization or a ProgramMembership. Organizations can be members of organizations; ProgramMembership is typically for individuals." ;
@@ -20067,20 +20068,7 @@ schema:identifier a rdf:Property ;
         schema:URL .
 
 rdfs:Class a sh:NodeShape ;
-    sh:property [ sh:node schema:ImageObject ;
-            sh:path schema:image ;
-            ys:fromProperty wdt:P18 ],
-        [ sh:datatype rdf:langString ;
-            sh:path rdfs:label ;
-            sh:uniqueLang true ;
-            ys:fromProperty skos:prefLabel ],
-        [ sh:datatype xsd:anyURI ;
-            sh:path schema:sameAs ],
-        [ sh:datatype xsd:anyURI ;
-            sh:maxCount 1 ;
-            sh:path schema:url ;
-            ys:fromProperty wdt:P856 ],
-        [ sh:nodeKind sh:IRI ;
+    sh:property [ sh:nodeKind sh:IRI ;
             sh:path owl:sameAs ],
         [ sh:datatype rdf:langString ;
             sh:disjoint rdfs:label ;
@@ -20089,5 +20077,19 @@ rdfs:Class a sh:NodeShape ;
         [ sh:datatype rdf:langString ;
             sh:path rdfs:comment ;
             sh:uniqueLang true ;
-            ys:fromProperty schema:description ] .
+            ys:fromProperty schema:description ],
+        [ sh:node schema:ImageObject ;
+            sh:path schema:image ;
+            ys:fromProperty wdt:P18 ],
+        [ sh:datatype rdf:langString ;
+            sh:path rdfs:label ;
+            sh:uniqueLang true ],
+        [ sh:datatype xsd:anyURI ;
+            sh:path schema:sameAs ],
+        [ sh:datatype xsd:anyURI ;
+            sh:path schema:mainEntityOfPage ],
+        [ sh:datatype xsd:anyURI ;
+            sh:maxCount 1 ;
+            sh:path schema:url ;
+            ys:fromProperty wdt:P856 ] .
 

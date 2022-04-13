@@ -26,7 +26,7 @@ wd:Q_Elvis wdt:P31 wd:Q_rock_singer;
 	wdt:P150 wd:Q_inconsistent_place;
 	# Check bad property: fact should be removed
 	wdt:P10000000 wd:Q_bad_object;
-	# Normal range: fact should exist
+	# Normal range: fact should survive
 	wdt:P40 wd:Q_child;
 	# Disjunctive range: should be OK
 	wdt:P1716 wd:Q_brand;
@@ -37,6 +37,20 @@ wd:Q_Elvis wdt:P31 wd:Q_rock_singer;
 	# Datatypes: should be OK
 	wdt:P570 "1970"^^xsd:gYear .
 	
+# Start and end dates should survive
+wd:Q_Elvis p:P40 s:Q_Elvis-5b0fdcdf-4815-583c-4dd3-914e1c5d95c0 .
+
+s:Q_Elvis-5b0fdcdf-4815-583c-4dd3-914e1c5d95c0 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P40 wd:Q_child ;
+	psv:P1198 v:6c2312ad7ae86b184ccc35589ceaa308 ;
+	psn:P1198 v:ec871d8e6899d8d51a57e73ba5ef6cd7 ;
+	pq:P585 "2014-01-01T00:00:00Z"^^xsd:dateTime ;
+	pqv:P585 v:c91277cf69500270615dc91eeba92a40 ;
+	prov:wasDerivedFrom ref:da8b01072f4a5eb69892a71023670b9a528a0b97 .
+    
+    
 	
 # Classes should survive
 

@@ -126,13 +126,11 @@ with utils.TsvFileWriter(FOLDER+"yago-facts-to-be-renamed.tsv") as out:
                 currentLabel=split[2][1:-4]
             elif split[1]=="schema:mainEntityOfPage" and split[2].startswith('<https://en.wikipedia.org/wiki/'):
                 currentWikipediaPage=split[2][31:-1]
-            if len(split)<5:
-                out.writeFact(split[0], split[1], split[2])
-                wroteFacts=True
-                continue            
-            classes=split[4].split(", ")
-            if any(instanceOf(split[2],c) for c in classes):
-                out.writeFact(split[0], split[1], split[2])
+            startDate=split[5] if len(split)>5 else ""
+            endDate=split[6] if len(split)>6 else ""
+            classes=split[4].split(", ") if len(split)>4 and len(split[4])>0 else None
+            if classes is None or any(instanceOf(split[2],c) for c in classes):
+                out.write(split[0], split[1], split[2], ". #", startDate, endDate)
                 wroteFacts=True
         # Also flush the ids of the last entity...
         if wroteFacts:

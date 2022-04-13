@@ -10,6 +10,7 @@ Input:
 Output:
 - yago-final-wikipedia.tsv
 - yago-final-full.tsv
+- yago-final-meta.tsv
 
 Algorithm:
 - load yago-ids.tsv
@@ -68,25 +69,31 @@ def hasWikipediaPage(entity):
 #             Main
 ##########################################################################
 
-with utils.TsvFileWriter(FOLDER+"yago-final-full.tsv") as fullFacts:
-    with utils.TsvFileWriter(FOLDER+"yago-final-wikipedia.tsv") as wikipediaFacts:
-        for split in utils.readTsvTuples(FOLDER+"yago-facts-to-be-renamed.tsv", "  Renaming"):
-            if len(split)<3:
-                continue
-            subject=toYagoEntity(split[0])
-            if not subject:
-                # Should not happen
-                print("Entity does not appear in YAGO:", split[0])
-                continue
-            relation=split[1]
-            object=split[2] if relation=="rdf:type" else toYagoEntity(split[2])
-            if not object:
-                # Should not happen
-                print("Entity does not appear in YAGO:", split[2])
-                continue
-            # Write facts to Wikipedia version of YAGO
-            if hasWikipediaPage(subject) and (relation=="rdf:type" or hasWikipediaPage(object)):
-                wikipediaFacts.writeFact(subject, relation, object)
-            # In any case, write (also) to the full version of YAGO
-            fullFacts.writeFact(subject, relation, object)
+with utils.TsvFileWriter(FOLDER+"yago-final-meta.tsv") as metaFacts:
+    with utils.TsvFileWriter(FOLDER+"yago-final-full.tsv") as fullFacts:
+        with utils.TsvFileWriter(FOLDER+"yago-final-wikipedia.tsv") as wikipediaFacts:
+            for split in utils.readTsvTuples(FOLDER+"yago-facts-to-be-renamed.tsv", "  Renaming"):
+                if len(split)<3:
+                    continue
+                subject=toYagoEntity(split[0])
+                if not subject:
+                    # Should not happen
+                    print("Entity does not appear in YAGO:", split[0])
+                    continue
+                relation=split[1]
+                object=split[2] if relation=="rdf:type" else toYagoEntity(split[2])
+                if not object:
+                    # Should not happen
+                    print("Entity does not appear in YAGO:", split[2])
+                    continue
+                # Write facts to Wikipedia version of YAGO
+                if hasWikipediaPage(subject) and (relation=="rdf:type" or hasWikipediaPage(object)):
+                    wikipediaFacts.writeFact(subject, relation, object)
+                # In any case, write (also) to the full version of YAGO
+                fullFacts.writeFact(subject, relation, object)
+                # If there is a meta-fact, write it out as well
+                if len(split)>5:
+                    metaFacts.write("<<", subject, relation, object, ">>", "schema:startDate", split[4])
+                    metaFacts.write("<<", subject, relation, object, ">>", "schema:endDate", split[5])
+                    
 print("done")

@@ -63,6 +63,13 @@ for triple in utils.readTsvTuples(FOLDER+"non-yago-classes.tsv", "  Loading non-
 #             Cleaning of entities
 ##########################################################################
 
+def cleanArticles(entityFacts):
+    """ Changes <page, schema:about, entity> to <entity, mainentityOfPage, page> """
+    entityAndPage=[ (s, o) for s, p, o in entityFacts.triples((None, utils.schemaAbout, None))]
+    entityFacts.remove((None, utils.schemaAbout, None))
+    for (s, o) in entityAndPage:
+        entityFacts.add((o, URIRef("https://schema.org/mainEntityOfPage"), s))
+                
 def checkIfClass(entityFacts):
     """Adds <subject, rdf:type, rdfs:Class> if this is a class"""
     for s in entityFacts.subjects(RDFS.label, None):
@@ -82,11 +89,51 @@ def cleanClasses(entityFacts):
 
 def wikidataPredicate2YagoPredicate(p):
     """Translates a Wikidata predicate to a YAGO predicate -- or None"""
+    # Try directly via sh:path
+    if (None, utils.shaclPath, p) in yagoSchema:
+        return p    
+    # Try via ys:fromProperty
     for b in yagoSchema.subjects(utils.fromProperty, p):
         for s in yagoSchema.objects(b, utils.shaclPath):
             return s
     return None
-    
+
+##########################################################################
+#             Start and end dates
+##########################################################################
+
+# Start and end dates are encoded as follows in Wikidata:
+#
+# # Belgium has 11m inhabitants
+# wd:Q31 wdt:P1082 "+11431406"^^xsd:decimal .
+# 
+# # This is true in the year 2014
+# 
+# wd:Q31 p:P1082 s:Q31-93ba9638-404b-66ac-2733-e6292666a326 .
+# s:Q31-93ba9638-404b-66ac-2733-e6292666a326 a wikibase:Statement ;
+#	ps:P1082 "+11150516"^^xsd:decimal ;
+#	pq:P585 "2014-01-01T00:00:00Z"^^xsd:dateTime ;
+
+def getStartAndEndDate(s, p, o, entityGraph):
+    """ Returns a tuple of a start date and an end date for this fact. Unknown components are None. """
+    # The property should be in the namespace WDT
+    if not p.startswith("http://www.wikidata.org/prop/direct/"):
+        return (None, None)
+    # Translate to the namespace P
+    pStatement=URIRef("http://www.wikidata.org/prop/"+p[36:])
+    # Translate to the namespace PS
+    pValue=URIRef("http://www.wikidata.org/prop/statement/"+p[36:])
+    # Find all meta statements about (s, p, _)
+    for statement in entityGraph.objects(s, pStatement):
+        # If the meta-statement concerns indeed the object o...
+        if (statement, pValue, o) in entityGraph:
+            # If there is a "duringTime" (pq:P585), return that one
+            for duringTime in entityGraph.objects(statement, utils.wikidataDuring):
+                return (duringTime, duringTime)
+            # Otherwise extract start time and end time
+            return(next(entityGraph.objects(statement, utils.wikidataStart), None), next(entityGraph.objects(statement, utils.wikidataEnd), None))
+    return (None, None)
+
 ##########################################################################
 #             Taxonomy checks
 ##########################################################################
@@ -243,8 +290,12 @@ def checkRange(p, o):
 ##########################################################################
 
 with utils.TsvFileWriter(FOLDER+"yago-facts-to-type-check.tsv") as yagoFacts:
-    for entityFacts in utils.readWikidataEntities(WIKIDATA_FILE): 
-        #utils.printGraph(entityFacts)
+    for entityFacts in utils.readWikidataEntities(WIKIDATA_FILE):         
+        # Anything that is rdf:type in Wikidata is meta-statements, 
+        # and should go away
+        entityFacts.remove((None, RDF.type, None))    
+        cleanArticles(entityFacts)
+        
         checkIfClass(entityFacts)
         if not cleanClasses(entityFacts):
             continue
@@ -253,16 +304,14 @@ with utils.TsvFileWriter(FOLDER+"yago-facts-to-type-check.tsv") as yagoFacts:
             continue
         for p in set(entityFacts.predicates()):
             checkCardinalityConstraints(p, entityFacts)
+        
+        utils.printGraph(entityFacts)
+        
         for s,p,o in entityFacts:
             #print(" Predicate: "+str(p))
             if p==RDF.type:
                 yagoFacts.writeFact(utils.compressPrefix(s),"rdf:type",utils.compressPrefix(o))
                 continue
-            if p==utils.schemaAbout:
-                yagoPredicate=URIRef("https://schema.org/mainEntityOfPage")
-                tmp=s
-                s=o
-                o=tmp
             else:
                 yagoPredicate = wikidataPredicate2YagoPredicate(p)
             #print(" in YAGO: "+str(yagoPredicate))
@@ -272,13 +321,14 @@ with utils.TsvFileWriter(FOLDER+"yago-facts-to-type-check.tsv") as yagoFacts:
                 #print(" domain check failed")
                 continue
             rangeResult=checkRange(yagoPredicate, o)
-            if rangeResult is True:
-                yagoFacts.writeFact(utils.compressPrefix(s),utils.compressPrefix(yagoPredicate),utils.compressPrefix(o))
-            elif rangeResult is False:
+            if rangeResult is False:
                 #print(" range check failed")
                 continue
+            (startDate, endDate) = getStartAndEndDate(s, p, o, entityFacts)
+            if rangeResult is True:
+                yagoFacts.write(utils.compressPrefix(s),utils.compressPrefix(yagoPredicate),utils.compressPrefix(o), ".", "", utils.compressPrefix(startDate), utils.compressPrefix(endDate))
             else:
                 #print(str(rangeResult))
-                yagoFacts.write(utils.compressPrefix(s),utils.compressPrefix(yagoPredicate),utils.compressPrefix(o),". # IF",(", ".join(rangeResult)))           
+                yagoFacts.write(utils.compressPrefix(s),utils.compressPrefix(yagoPredicate),utils.compressPrefix(o),". # IF",(", ".join(rangeResult)), utils.compressPrefix(startDate), utils.compressPrefix(endDate))           
 
 print("done")

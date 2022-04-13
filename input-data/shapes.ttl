@@ -46,10 +46,13 @@ schema:Thing a sh:NodeShape ;
         sh:path rdfs:label ;
         sh:datatype rdf:langString ;
         sh:uniqueLang true ;
-        ys:fromProperty skos:prefLabel ;
     ] ;
     sh:property [
         sh:path schema:sameAs ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+    sh:property [
+        sh:path schema:mainEntityOfPage ;
         sh:datatype xsd:anyURI ;
     ] ;
     sh:property [
@@ -85,12 +88,15 @@ rdfs:Class a sh:NodeShape ;
         sh:path rdfs:label ;
         sh:datatype rdf:langString ;
         sh:uniqueLang true ;
-        ys:fromProperty skos:prefLabel ;
     ] ;
     sh:property [
         sh:path schema:sameAs ;
         sh:datatype xsd:anyURI ;
     ] ;
+    sh:property [
+        sh:path schema:mainEntityOfPage ;
+        sh:datatype xsd:anyURI ;
+    ] ;    
     sh:property [
         sh:path schema:url ;
         sh:datatype xsd:anyURI ;

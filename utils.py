@@ -19,6 +19,12 @@ wikidataType = URIRef("http://www.wikidata.org/prop/direct/P31")
 
 wikidataSubClassOf = URIRef("http://www.wikidata.org/prop/direct/P279")
 
+wikidataDuring = URIRef("http://www.wikidata.org/prop/qualifier/P585")
+
+wikidataStart = URIRef("http://www.wikidata.org/prop/qualifier/P580")
+
+wikidataEnd = URIRef("http://www.wikidata.org/prop/qualifier/P582")
+
 owlDisjointWith = URIRef("http://www.w3.org/2002/07/owl#disjointWith")
 
 schemaAbout = URIRef("https://schema.org/about")
@@ -154,7 +160,7 @@ class TsvFileWriter(object):
 ##########################################################################
         
 def getTopic(line):
-    """Returns the subject of a compound statement in gthe form of one text line. Returns the Wikidata subject for meta statements (s:Q32~~~>ws:Q32)."""
+    """Returns the subject of a compound statement in the form of one text line. Returns the Wikidata subject for meta statements (s:Q32~~~>wd:Q32)."""
     if line.startswith("wd:Q"):
         return line[0:line.find(' ')]
     elif line.startswith("s:Q") or line.startswith("s:q"):
@@ -216,7 +222,9 @@ def printGraph(graph, out=None):
         print(str(graph.serialize(format="turtle", encoding="utf-8"), "utf-8"))
 
 def compressPrefix(entity):
-    """ Compresses the URI prefix of Wikidata to "wd:" etc. """
+    """ Compresses the URI prefix of Wikidata to "wd:" etc. Returns the empty string for None. """
+    if not entity:
+        return ""
     for p in prefixes:
         if entity.startswith(prefixes[p]):
             return p+":"+entity[len(prefixes[p]):]
