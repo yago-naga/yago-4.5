@@ -1,18 +1,33 @@
+import sys
 from wasabi import msg, table
 
-# method compares 2 taxonomies and prints results
-# params: call method with output file path and (optionally) gold file path
-# returns: 0 if comparison is successful, -1 if there were problems reading the files
-def compare(output_file, gold_file=None):
+# cli version of compare-taxonomies.py
+# to use program: 
+# 1. start the environment (recommended) with pipenv shell
+# 2. python3 compare-taxonomies.py [path to gold standard file] [path to output file]
+if __name__ == '__main__':
     print()
-    msg.info("Initiated comparison between files...")
-    gold_standard = f"{output_file[0:-4]}-gold.tsv" if gold_file == None else f"{gold_file}" # standard file path
-    output_file = f"{output_file}"
+    msg.info("Initiated...")
+    gold_standard = "" # standard file path
+    output_file = ""
     not_in_output = []
     not_in_gold = []
     num_output = 0
     num_gold = 0
     halt = False # to exit the program later after an error has been detected (and not get stack problems)
+    
+    try:
+        # reads file paths from args
+        gold_standard = sys.argv[1]
+        output_file = sys.argv[2]
+        msg.text(f"gold standard: {str(gold_standard)}")
+        msg.text(f"output file: {str(output_file)}")
+    except:
+        msg.fail("Problem with arguments provided. Please provide the path to the gold standard file and the output file to test.")
+        halt = True
+
+    if halt:
+        exit()
 
     with msg.loading("Analyzing the files..."):
         err_file = "gold standard"
@@ -49,7 +64,7 @@ def compare(output_file, gold_file=None):
             halt = True
 
     if halt:
-        return -1
+        exit()
 
     print()
     msg.good("Files analyzed successfully!")
@@ -65,6 +80,7 @@ def compare(output_file, gold_file=None):
         msg.text(f"\t{str(line)}")
     print()
 
+    # todo: check the statistics because I am not sure they are correct
     msg.text("Statistics:", color="yellow")
     precision = round((num_gold - len(not_in_output)) / num_gold, 3)
     recall = round((num_output - len(not_in_gold)) / num_output, 3)
@@ -72,9 +88,5 @@ def compare(output_file, gold_file=None):
     header = ("Precision", "Recall")
     widths = (10, 10)
     aligns = ("l", "l")
+    # formatted = table(data, header=header, divider=True, widths=widths, aligns=aligns)
     msg.table(data, header=header, divider=True, widths=widths, aligns=aligns)
-    return 1
-
-# quick test
-# if __name__ == '__main__':
-#     compare("yago-taxonomy.tsv")
