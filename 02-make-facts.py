@@ -7,13 +7,13 @@ Call:
   python3 make-facts.py
 
 Input:
-- yago-taxonomy.tsv
-- yago-schema.ttl
-- non-yago-classes.tsv
+- 01-yago-taxonomy.tsv
+- 01-yago-schema.ttl
+- 01-non-yago-classes.tsv
 - Wikidata file in input-data/wikidata.ttl.gz
 
 Output:
-- yago-facts-to-type-check.tsv
+- 02-yago-facts-to-type-check.tsv
 
 Algorithm:
 - run through all entities of Wikidata, with its associated facts
@@ -27,7 +27,7 @@ Algorithm:
 
 TEST=True
 FOLDER="test-data/02-make-facts/" if TEST else "yago-data/"
-WIKIDATA_FILE= "test-data/02-make-facts/wikidata.ttl" if TEST else "input-data/wikidata.ttl.gz"
+WIKIDATA_FILE= "test-data/02-make-facts/00-wikidata.ttl" if TEST else "input-data/wikidata.ttl.gz"
 
 ##########################################################################
 #             Booting
@@ -40,22 +40,23 @@ from rdflib import URIRef, RDFS, RDF, OWL, Graph, Literal, XSD, collection
 import utils
 import sys
 import re
+import evaluator
 from collections import defaultdict
 print("done")
 
 print("  Loading YAGO schema...", end="", flush=True)
 yagoSchema=Graph()
-yagoSchema.parse(FOLDER+"yago-schema.ttl", format="turtle")
+yagoSchema.parse(FOLDER+"01-yago-schema.ttl", format="turtle")
 disjointClasses=[ (utils.compressPrefix(c1), utils.compressPrefix(c2)) for (c1, p, c2) in yagoSchema.triples((None, OWL.disjointWith, None)) ]
 print("done")
 
 yagoTaxonomyUp=defaultdict(set)
-for triple in utils.readTsvTuples(FOLDER+"yago-taxonomy.tsv", "  Loading YAGO taxonomy"):
+for triple in utils.readTsvTuples(FOLDER+"01-yago-taxonomy.tsv", "  Loading YAGO taxonomy"):
     if len(triple)>3:
         yagoTaxonomyUp[triple[0]].add(triple[2])
 
 nonYagoClasses={}
-for triple in utils.readTsvTuples(FOLDER+"non-yago-classes.tsv", "  Loading non-YAGO classes"):
+for triple in utils.readTsvTuples(FOLDER+"01-non-yago-classes.tsv", "  Loading non-YAGO classes"):
     if len(triple)>3:
         nonYagoClasses[triple[0]]=utils.expandPrefix(triple[2])
 
@@ -289,7 +290,7 @@ def checkRange(p, o):
 #             Main method
 ##########################################################################
 
-with utils.TsvFileWriter(FOLDER+"yago-facts-to-type-check.tsv") as yagoFacts:
+with utils.TsvFileWriter(FOLDER+"02-yago-facts-to-type-check.tsv") as yagoFacts:
     for entityFacts in utils.readWikidataEntities(WIKIDATA_FILE):         
         # Anything that is rdf:type in Wikidata is meta-statements, 
         # and should go away
@@ -304,8 +305,6 @@ with utils.TsvFileWriter(FOLDER+"yago-facts-to-type-check.tsv") as yagoFacts:
             continue
         for p in set(entityFacts.predicates()):
             checkCardinalityConstraints(p, entityFacts)
-        
-        utils.printGraph(entityFacts)
         
         for s,p,o in entityFacts:
             #print(" Predicate: "+str(p))
@@ -332,3 +331,6 @@ with utils.TsvFileWriter(FOLDER+"yago-facts-to-type-check.tsv") as yagoFacts:
                 yagoFacts.write(utils.compressPrefix(s),utils.compressPrefix(yagoPredicate),utils.compressPrefix(o),". # IF",(", ".join(rangeResult)), utils.compressPrefix(startDate), utils.compressPrefix(endDate))           
 
 print("done")
+
+if TEST:
+    evaluator.compare(FOLDER+"02-yago-facts-to-type-check.tsv")

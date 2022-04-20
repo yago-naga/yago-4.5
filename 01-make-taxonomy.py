@@ -9,12 +9,12 @@ Call:
 Input:
 - a folder "input-data" with 
   - the hard-coded YAGO top-level taxonomy
-  - a wikidata file wikidata.ttl.gz
+  - a wikidata file 00-wikidata.ttl.gz
 
 Output:
-- The YAGO top-level taxonomy in yago-schema.ttl
-- The YAGO lower level taxonomy in yago-taxonomy.tsv
-- Unmapped classes (which appear in Wikidata but not in YAGO, and whose instances have to be attached to a superclass in YAGO) in non-yago-classes.tsv
+- The YAGO top-level taxonomy in 01-yago-schema.ttl
+- The YAGO lower level taxonomy in 01-yago-taxonomy.tsv
+- Unmapped classes (which appear in Wikidata but not in YAGO, and whose instances have to be attached to a superclass in YAGO) in 01-non-yago-classes.tsv
     
 Algorithm:
 1) Start with top-level YAGO classes
@@ -27,7 +27,7 @@ Algorithm:
 
 TEST=True
 OUTPUT_FOLDER="test-data/01-make-taxonomy/" if TEST else "yago-data/"
-WIKIDATA_FILE= "test-data/01-make-taxonomy/wikidata.ttl" if TEST else "input-data/wikidata.ttl.gz"
+WIKIDATA_FILE= "test-data/01-make-taxonomy/00-wikidata.ttl" if TEST else "input-data/wikidata.ttl.gz"
 
 ###########################################################################
 #           Booting
@@ -40,6 +40,7 @@ import utils
 import sys
 from os.path import exists
 from collections import defaultdict
+import evaluator
 print("done")
 
 if not(exists("input-data")):
@@ -114,7 +115,7 @@ def addSubClasses(lastGoodYagoClass, wikidataClass, unmappedClassesWriter, treat
     pathToRoot.pop()
 
 print("  Creating YAGO taxonomy...", end="", flush=True)
-with utils.TsvFileWriter(OUTPUT_FOLDER+"non-yago-classes.tsv") as unmappedClassesWriter:
+with utils.TsvFileWriter(OUTPUT_FOLDER+"01-non-yago-classes.tsv") as unmappedClassesWriter:
     treated=set()
     for s,p,o in yagoSchema.triples((None, utils.fromClass, None)):
         if s!=utils.schemaThing:
@@ -161,13 +162,18 @@ print("done")
 
 # The schema is most beautiful in native TTL
 print("  Writing schema...", end="", flush=True)
-yagoSchema.serialize(destination=(OUTPUT_FOLDER+"yago-schema.ttl"), format="turtle", encoding="UTF-8")
+yagoSchema.serialize(destination=(OUTPUT_FOLDER+"01-yago-schema.ttl"), format="turtle", encoding="UTF-8")
 print("done")
 
 print("  Writing taxonomy...", end="", flush=True)
-with utils.TsvFileWriter(OUTPUT_FOLDER+"yago-taxonomy.tsv") as taxonomyWriter:
+with utils.TsvFileWriter(OUTPUT_FOLDER+"01-yago-taxonomy.tsv") as taxonomyWriter:
     for cls in yagoTaxonomyUp:
         for superclass in yagoTaxonomyUp[cls]:
             taxonomyWriter.writeFact(utils.compressPrefix(cls), "rdfs:subClassOf", utils.compressPrefix(superclass))
 print("done")
 print("done")
+
+if TEST:
+    evaluator.compare(OUTPUT_FOLDER+"01-non-yago-classes.tsv")
+    evaluator.compare(OUTPUT_FOLDER+"01-yago-taxonomy.tsv")
+    print("YAGO Schema has to be compared by hand")

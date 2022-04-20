@@ -32,16 +32,4 @@
 @prefix prv: <http://www.wikidata.org/prop/reference/value/> .
 @prefix prn: <http://www.wikidata.org/prop/reference/value-normalized/> .
 @prefix wdno: <http://www.wikidata.org/prop/novalue/> .
-wd:Q_Elvis	schema:callSign	"test string"	.			
-wd:Q_Elvis	schema:faxNumber	"+33-33-333-333"	.			
-wd:Q_Elvis	schema:children	wd:Q_child	. # IF	schema:Person	"2014-01-01T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime>	"2014-01-01T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime>
-wd:Q_Elvis	schema:deathDate	"1970-01-01"^^<http://www.w3.org/2001/XMLSchema#gYear>	.			
-wd:Q_Elvis	rdf:type	wd:Q_singer	.
-wd:Q_Elvis	schema:mainEntityOfPage	<https://elvis.com>	.			
-wd:Q_Elvis	schema:brand	wd:Q_brand	. # IF	schema:Brand, schema:Organization		
-wd:Q_singer	rdfs:comment	"this is a singer"@en	.			
-wd:Q_singer	schema:mainEntityOfPage	<https://de.wikipedia.org/wiki/Mensch>	.			
-wd:Q_singer	rdf:type	rdfs:Class	.
-wd:Q_singer	rdfs:label	"singer"@en	.			
-wd:Q_singer	schema:alternateName	"this is a human being"@en	.			
-wd:Q_singer	rdfs:label	"chanteur"@fr	.			
+wd:Q_nonwikipediapage_book	rdfs:subClassOf	wd:Q_European_book	.

@@ -4,17 +4,17 @@ Replaces the ids of the facts by YAGO ids
 (c) 2022 Fabian M. Suchanek
 
 Input:
-- yago-facts-to-be-renamed.tsv
-- yago-ids.tsv
+- 03-yago-facts-to-rename.tsv
+- 03-yago-ids.tsv
 
 Output:
-- yago-final-wikipedia.tsv
-- yago-final-full.tsv
-- yago-final-meta.tsv
+- 04-yago-final-wikipedia.tsv
+- 04-yago-final-full.tsv
+- 04-yago-final-meta.tsv
 
 Algorithm:
 - load yago-ids.tsv
-- run through yago-facts-to-be-renamed.tsv
+- run through yago-facts-to-rename.tsv
   - replace the Wikidata ids by YAGO ids
   - write out the facts to the output files
    
@@ -29,12 +29,13 @@ FOLDER="test-data/04-make-ids/" if TEST else "yago-data/"
 
 import utils
 import sys
+import evaluator
 
 print("Renaming YAGO entities...")
 
 yagoIds={}
 entitiesWithWikipediaPage=set()
-for split in utils.readTsvTuples(FOLDER+"yago-ids.tsv", "  Loading YAGO ids"):
+for split in utils.readTsvTuples(FOLDER+"03-yago-ids.tsv", "  Loading YAGO ids"):
     if len(split)<4:
         continue
     yagoIds[split[0]]=split[2]
@@ -69,16 +70,16 @@ def hasWikipediaPage(entity):
 #             Main
 ##########################################################################
 
-with utils.TsvFileWriter(FOLDER+"yago-final-meta.tsv") as metaFacts:
-    with utils.TsvFileWriter(FOLDER+"yago-final-full.tsv") as fullFacts:
-        with utils.TsvFileWriter(FOLDER+"yago-final-wikipedia.tsv") as wikipediaFacts:
-            for split in utils.readTsvTuples(FOLDER+"yago-facts-to-be-renamed.tsv", "  Renaming"):
+with utils.TsvFileWriter(FOLDER+"04-yago-final-meta.tsv") as metaFacts:
+    with utils.TsvFileWriter(FOLDER+"04-yago-final-full.tsv") as fullFacts:
+        with utils.TsvFileWriter(FOLDER+"04-yago-final-wikipedia.tsv") as wikipediaFacts:
+            for split in utils.readTsvTuples(FOLDER+"03-yago-facts-to-rename.tsv", "  Renaming"):
                 if len(split)<3:
                     continue
                 subject=toYagoEntity(split[0])
                 if not subject:
                     # Should not happen
-                    print("Entity does not appear in YAGO:", split[0])
+                    # print("Entity does not appear in YAGO:", split[0])
                     continue
                 relation=split[1]
                 object=split[2] if relation=="rdf:type" else toYagoEntity(split[2])
@@ -97,3 +98,9 @@ with utils.TsvFileWriter(FOLDER+"yago-final-meta.tsv") as metaFacts:
                     metaFacts.write("<<", subject, relation, object, ">>", "schema:endDate", split[5])
                     
 print("done")
+
+if TEST:
+    evaluator.compare(FOLDER+"04-yago-final-wikipedia.tsv")
+    evaluator.compare(FOLDER+"04-yago-final-full.tsv")
+    evaluator.compare(FOLDER+"04-yago-final-meta.tsv")
+    

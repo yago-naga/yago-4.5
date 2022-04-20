@@ -123,7 +123,7 @@ def linesOfFile(file, message="Parsing"):
 #             TSV files
 ##########################################################################
 
-# We use TSV files that can at the same time be parsed as TTL files
+# We use TSV files that can be parsed also as TTL files
 
 def readTsvTuples(file, message="Parsing"):
     """ Iterates over the tuples in a TSV file"""

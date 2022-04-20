@@ -1,11 +1,20 @@
+"""
+Compares two text files line by line
+
+(c) 2022  Paola Ortega Saborio
+   
+"""
+
 from wasabi import msg, table
 
-# method compares 2 taxonomies and prints results
-# params: call method with output file path and (optionally) gold file path
-# returns: 0 if comparison is successful, -1 if there were problems reading the files
 def compare(output_file, gold_file=None):
+    """ Compares 2 text files line by line and prints precision and recall
+        Parameters: the file to be tested and (optionally) the gold file 
+                    if the gold file is not given, defaults to XXX-gold.tsv
+        Returns: 0 if comparison is successful, 
+                 -1 if there were problems reading the files"""
     print()
-    msg.info("Initiated comparison between files...")
+    msg.info("Evaluating "+output_file)
     gold_standard = f"{output_file[0:-4]}-gold.tsv" if gold_file == None else f"{gold_file}" # standard file path
     output_file = f"{output_file}"
     not_in_output = []
@@ -14,7 +23,7 @@ def compare(output_file, gold_file=None):
     num_gold = 0
     halt = False # to exit the program later after an error has been detected (and not get stack problems)
 
-    with msg.loading("Analyzing the files..."):
+    with msg.loading("  Analyzing the files..."):
         err_file = "gold standard"
         # instead of doing a double four loop, we use python's built-in set methods, which turn out to be faster and more efficient
         # todo: test with large data and ask Fabian if looking line by line instead of tab by tab works for him
@@ -52,20 +61,17 @@ def compare(output_file, gold_file=None):
         return -1
 
     print()
-    msg.good("Files analyzed successfully!")
-    print()
-    msg.text(f"Number of files in golden standard and not in output file: {len(not_in_output)}")
-    msg.text("Lines:", color="yellow")
+    msg.text(f"  Number of files in golden standard and not in output file: {len(not_in_output)}")
+    msg.text("  Lines:", color="yellow")
     for line in not_in_output:
         msg.text(f"\t{str(line)}")
     print()
-    msg.text(f"Number of files in output file and not in golden standard: {len(not_in_gold)}")
-    msg.text("Lines:", color="yellow")
+    msg.text(f"  Number of files in output file and not in golden standard: {len(not_in_gold)}")
+    msg.text("  Lines:", color="yellow")
     for line in not_in_gold:
         msg.text(f"\t{str(line)}")
     print()
 
-    msg.text("Statistics:", color="yellow")
     precision = round((num_gold - len(not_in_output)) / num_gold, 3)
     recall = round((num_output - len(not_in_gold)) / num_output, 3)
     data = [(precision, recall)]
