@@ -121,15 +121,6 @@ schema:RadioChannel a sh:NodeShape ;
 schema:TelevisionChannel a sh:NodeShape ;
     ys:fromClass wd:Q2001305 .
 
-
-schema:Brand a sh:NodeShape ;
-    ys:fromClass wd:Q431289 ;
-    sh:property [
-        sh:path schema:logo ;
-        sh:node schema:ImageObject ;
-        ys:fromProperty wdt:P154 ;
-    ] .
-
 schema:CreativeWork a sh:NodeShape ;
     ys:fromClass wd:Q17537576 ;
     sh:property [
@@ -1275,19 +1266,6 @@ schema:Organization a sh:NodeShape ;
         ys:fromProperty wdt:P166 ;
     ] ;
     sh:property [
-        sh:path schema:brand ;
-        sh:or (
-           [
-                sh:node schema:Brand ;
-           ]
-           [
-                sh:node schema:Organization ;
-           ]
-        ) ;
-        sh:node schema:Brand ;
-        ys:fromProperty wdt:P1716 ;
-    ] ;
-    sh:property [
         sh:path schema:dissolutionDate ;
         sh:or (
             [
@@ -1529,19 +1507,6 @@ schema:Person a sh:NodeShape ;
         sh:node schema:Place ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P19 ;
-    ] ;
-    sh:property [
-        sh:path schema:brand ;
-        sh:or (
-           [
-                sh:node schema:Brand ;
-           ]
-           [
-                sh:node schema:Organization ;
-           ]
-        ) ;
-        sh:node schema:Brand ;
-        ys:fromProperty wdt:P1716 ;
     ] ;
     sh:property [
         sh:path schema:callSign ;
@@ -2137,19 +2102,6 @@ schema:Product a sh:NodeShape ;
         sh:path schema:award ;
         sh:node schema:Thing ;
         ys:fromProperty wdt:P166 ;
-    ] ;
-    sh:property [
-        sh:path schema:brand ;
-        sh:or (
-           [
-                sh:node schema:Brand ;
-           ]
-           [
-                sh:node schema:Organization ;
-           ]
-        ) ;
-        sh:node schema:Brand ;
-        ys:fromProperty wdt:P1716 ;
     ] ;
     sh:property [
         sh:path schema:depth ;
