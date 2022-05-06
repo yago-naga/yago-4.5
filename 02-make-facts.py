@@ -72,10 +72,12 @@ def cleanArticles(entityFacts):
         entityFacts.add((o, URIRef("https://schema.org/mainEntityOfPage"), s))
                 
 def checkIfClass(entityFacts):
-    """Adds <subject, rdf:type, rdfs:Class> if this is a class"""
+    """Adds <subject, rdf:type, rdfs:Class> if this is a class. Removes all other type relationships."""
     for s in entityFacts.subjects(RDFS.label, None):
         if utils.compressPrefix(s) in yagoTaxonomyUp:
             entityFacts.add((s,RDF.type,RDFS.Class))
+    if (None,RDF.type,RDFS.Class) in entityFacts:
+        entityFacts.remove((None, utils.wikidataType, None))    
 
 def cleanClasses(entityFacts):
     """Replace all facts <subject, wikidata:type, wikidataClass> by <subject, rdf:type, yagoClass>"""
