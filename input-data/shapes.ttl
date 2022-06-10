@@ -1652,6 +1652,121 @@ schema:Place a sh:NodeShape ;
         ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552 ;
     ] ;
     sh:property [
+        sh:path schema:inception ;
+        sh:datatype xsd:dateTime ;
+        ys:fromProperty wdt:P571 ;
+    ] ;
+    sh:property [
+        sh:path schema:demonym ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P1549 ;
+    ] ;
+    sh:property [
+        sh:path schema:leader ;
+        sh:datatype schema:Person ;
+        ys:fromProperty wdt:P6, wdt:P35 ;
+    ] ;
+    sh:property [
+        sh:path schema:populationNumber ;
+        sh:datatype xsd:integer ;
+        ys:fromProperty wdt:P1082 ;
+    ] ;
+    sh:property [
+        sh:path schema:timezone ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P421 ;
+    ] ;
+    sh:property [
+        sh:path schema:area ;
+        sh:datatype xsd:string ; # TODO check if this is ok
+        ys:fromProperty wdt:P2046 ;
+    ] ;
+    sh:property [
+        sh:path schema:postalCode ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P281 ;
+    ] ;
+    sh:property [
+        sh:path schema:officialWebsite ;
+        sh:datatype xsd:anyURI ;
+        ys:fromProperty wdt:P856 ;
+    ] ;
+    sh:property [
+        sh:path schema:lifeExpectancy ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P2250 ;
+    ] ;
+    sh:property [
+        sh:path schema:officialLanguage ;
+        sh:datatype schema:Language ;
+        ys:fromProperty wdt:P37 ;
+    ] ;
+    sh:property [
+        sh:path schema:motto ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P1451 ;
+    ] ;
+    sh:property [
+        sh:path schema:highestPoint ;
+        sh:datatype schema:Place ;
+        ys:fromProperty wdt:P610 ;
+    ] ;
+    sh:property [
+        sh:path schema:lowestPoint ;
+        sh:datatype schema:Place ;
+        ys:fromProperty wdt:P1589 ;
+    ] ;
+    sh:property [
+        sh:path schema:memberOf ;
+        sh:datatype schema:Organization ;
+        ys:fromProperty wdt:P463 ;
+    ] ;
+    sh:property [
+        sh:path schema:administrates ;
+        sh:datatype schema:Place ;
+        ys:fromProperty wdt:P150 ;
+    ] ;
+    sh:property [
+        sh:path schema:currency ;
+        sh:datatype xsd:string ; # TODO add currency property
+        ys:fromProperty wdt:P38 ;
+    ] ;
+    sh:property [
+        sh:path schema:humanDevelopmentIndex ;
+        sh:datatype xsd:double ;
+        ys:fromProperty wdt:P1081 ;
+    ] ;
+    sh:property [
+        sh:path schema:unemploymentRate ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P1198 ;
+    ] ;
+    sh:property [
+        sh:path schema:neighbors ;
+        sh:datatype schema:Place ;
+        ys:fromProperty wdt:P47 ;
+    ] ;
+    sh:property [
+        sh:path schema:neighborsBodyOfWater ;
+        sh:datatype schema:BodyOfWater ;
+        ys:fromProperty wdt:P206 ;
+    ] ;
+    sh:property [
+        sh:path schema:neighborsBodyOfWater ;
+        sh:datatype schema:BodyOfWater ;
+        ys:fromProperty wdt:P206 ;
+    ] ;
+    sh:property [
+        sh:path schema:internetDomain ;
+        sh:node xsd:string ;
+        ys:fromProperty wdt:P78 ;
+    ] ;
+    sh:property [
+        sh:path schema:medianIncome ;
+        sh:node xsd:integer ;
+        ys:fromProperty wdt:P3529 ;
+    ] ;
+    sh:property [
         sh:path schema:elevation ;
         sh:node schema:QuantitativeValue ;
         ys:fromProperty wdt:P2044 ;
