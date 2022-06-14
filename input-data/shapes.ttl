@@ -1298,9 +1298,34 @@ schema:Organization a sh:NodeShape ;
         ys:fromProperty wdt:P2900 ;
     ] ;
     sh:property [
+        sh:path schema:socialMediaFollowers ;
+        sh:node xsd:integer ;
+        ys:fromProperty wdt:P8687 ;
+    ] ;
+    sh:property [
         sh:path schema:founder ;
         sh:node schema:Person ;
         ys:fromProperty wdt:P112 ;
+    ] ;
+    sh:property [
+        sh:path schema:leader ;
+        sh:node schema:Person ;
+        ys:fromProperty wdt:P35, wdt:P6 ;
+    ] ;
+    sh:property [
+        sh:path schema:owns ;
+        sh:node schema:Product ;
+        ys:fromProperty wdt:P1830 ;
+    ] ;
+    sh:property [
+        sh:path schema:motto ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P1451 ;
+    ] ;
+    sh:property [
+        sh:path schema:address ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P6375 ;
     ] ;
     sh:property [
         sh:path schema:foundingDate ;
