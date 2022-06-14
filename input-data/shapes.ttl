@@ -1346,6 +1346,36 @@ schema:Organization a sh:NodeShape ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P571 ;
     ] ;
+    sh:property [ # TODO, add to more specific schema property, organization is too broad
+        sh:path schema:assets ;
+        sh:node xsd:double ;
+        ys:fromProperty wdt:P2403 ;
+    ] ;
+    sh:property [
+        sh:path schema:equity ;
+        sh:node xsd:double ;
+        ys:fromProperty wdt:P2137 ;
+    ] ;
+    sh:property [
+        sh:path schema:revenue ;
+        sh:node xsd:double ;
+        ys:fromProperty wdt:P2139 ;
+    ] ;
+    sh:property [
+        sh:path schema:netProfit ;
+        sh:node xsd:double ;
+        ys:fromProperty wdt:P2295 ;
+    ] ;
+    sh:property [
+        sh:path schema:stockExchange ;
+        sh:node xsd:string ;
+        ys:fromProperty wdt:P414 ;
+    ] ;
+    sh:property [
+        sh:path schema:donations ;
+        sh:node xsd:string ;
+        ys:fromProperty wdt:P8093 ;
+    ] ;
     sh:property [
         sh:path schema:foundingLocation ;
         sh:node schema:Place ;
@@ -1434,7 +1464,27 @@ schema:Corporation a sh:NodeShape ;
     ys:fromClass wd:Q167037 .
 
 schema:EducationalOrganization a sh:NodeShape ;
-    ys:fromClass wd:Q5341295 .
+    ys:fromClass wd:Q5341295 ;
+    sh:property [
+        sh:path schema:chairperson ;
+        sh:datatype schema:Person ;
+        ys:fromProperty wdt:P488 ;
+    ] ;
+    sh:property [
+        sh:path schema:fee ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P2555 ;
+    ] ;
+    sh:property [
+        sh:path schema:admissionRate ;
+        sh:datatype xsd:double ;
+        ys:fromProperty wdt:P5822 ;
+    ] ;
+    sh:property [
+        sh:path schema:studentsCount ;
+        sh:datatype xsd:integer ;
+        ys:fromProperty wdt:P2196 ;
+    ] .
 
 schema:CollegeOrUniversity a sh:NodeShape ;
     ys:fromClass wd:Q38723 .
