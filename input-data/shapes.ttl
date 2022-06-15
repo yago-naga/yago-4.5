@@ -1150,6 +1150,21 @@ schema:DrugLegalStatus a sh:NodeShape ;
 schema:AnatomicalStructure a sh:NodeShape ;
     ys:fromClass wd:Q4936952 ;
     sh:property [
+        sh:path schema:foundationalModelOfAnatomyID ;
+        sh:datatype xsd:anyURI ;
+        ys:fromProperty wdt:P1402 ;
+    ] ;
+    sh:property [
+        sh:path schema:partOf ;
+        sh:node schema:AnatomicalStructure ;
+        ys:fromProperty wdt:P361 ; # TODO still do not know if this is going to work for a 1-n relationship
+    ] ;
+    sh:property [
+        sh:path schema:hasParts ;
+        sh:node schema:AnatomicalStructure ;
+        ys:fromProperty wdt:P527 ; # TODO still do not know if this is going to work for a 1-n relationship
+    ] ;
+    sh:property [
         sh:path schema:connectedTo ;
         sh:node schema:AnatomicalStructure ;
         ys:fromProperty wdt:P2789 ;
@@ -1182,14 +1197,49 @@ schema:Vessel a sh:NodeShape ;
 schema:MedicalCondition a sh:NodeShape ;
     ys:fromClass wd:Q12136 ;
     sh:property [
+        sh:path schema:drugOrTherapyTreatment ;
+        sh:or (
+            [
+                sh:node schema:Drug
+            ]
+            [
+                sh:node schema:Therapy
+            ]
+            [
+                sh:node schema:MedicalTherapy
+            ]
+        ) ;
+        ys:fromProperty wdt:P2176 ;
+    ] ;
+    sh:property [
         sh:path schema:possibleTreatment ;
-        sh:node schema:MedicalTherapy ;
+        sh:or (
+            [
+                sh:node schema:Drug
+            ]
+            [
+                sh:node schema:Therapy
+            ]
+            [
+                sh:node schema:MedicalTherapy
+            ]
+        ) ;
         ys:fromProperty wdt:P924 ;
     ] ;
     sh:property [
         sh:path schema:riskFactor ;
         sh:node schema:Thing ; # TODO: should be schema:MedicalRiskFactor
         ys:fromProperty wdt:P5642 ;
+    ] ;
+    sh:property [
+        sh:path schema:medicalExamination ;
+        sh:node schema:MedicalTest ; 
+        ys:fromProperty wdt:P923 ;
+    ] ;
+    sh:property [
+        sh:path schema:anatomicalLocation ;
+        sh:node schema:AnatomicalStructure ; 
+        ys:fromProperty wdt:P927 ;
     ] ;
     sh:property [
         sh:path schema:signOrSymptom ;
@@ -1251,6 +1301,16 @@ schema:Substance a sh:NodeShape ;
     ys:fromClass wd:Q27166344 .
 
 schema:Drug a sh:NodeShape ;
+    sh:property [
+        sh:path schema:definedDailyDose ;
+        sh:datatype xsd:string
+        ys:fromProperty wdt:P4250 ;
+    ] ;
+    sh:property [
+        sh:path schema:medicalConditionTreated ;
+        sh:node schema:MedicalCondition ;
+        ys:fromProperty wdt:P2175 ;
+    ] ;
     ys:fromClass wd:Q12140 .
 
 
@@ -1346,7 +1406,7 @@ schema:Organization a sh:NodeShape ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P571 ;
     ] ;
-    sh:property [ # TODO, add to more specific schema property, organization is too broad
+    sh:property [ # TODO, add to more specific schema property, organization is too broad for the ones that follow
         sh:path schema:assets ;
         sh:datatype xsd:double ;
         ys:fromProperty wdt:P2403 ;
