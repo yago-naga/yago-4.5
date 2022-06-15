@@ -1518,6 +1518,26 @@ schema:DanceGroup a sh:NodeShape ;
 schema:MusicGroup a sh:NodeShape ;
     ys:fromClass wd:Q215380 ;
     sh:property [
+        sh:path schema:influencedBy ;
+        sh:node schema:Person ;
+        ys:fromProperty wdt:P737 ;
+    ] ;
+    sh:property [
+        sh:path schema:fandom ;
+        sh:node xsd:string ;
+        ys:fromProperty wdt:P8693 ;
+    ] ;
+    sh:property [
+        sh:path schema:fandom ;
+        sh:node xsd:string ;
+        ys:fromProperty wdt:P8693 ;
+    ] ;
+    sh:property [ # not sure about this one
+        sh:path schema:members ;
+        sh:node schema:Person ;
+        ys:fromProperty wdt:P527 ;
+    ] ;
+    sh:property [
         sh:path schema:genre ;
         sh:node schema:Thing ;
         ys:fromProperty wdt:P136 ;
