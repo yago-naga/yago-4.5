@@ -34,6 +34,26 @@ bioschema:BioChemEntity a sh:NodeShape ;
         ys:fromProperty wdt:P682 ;
     ] ;
     sh:property [
+        sh:path bioschema:chemicalStructure ;
+        sh:node schema:ImageObject ;
+        ys:fromProperty wdt:P117 ;
+    ] ;
+    sh:property [
+        sh:path bioschema:mass ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P2067 ;
+    ] ;
+    sh:property [
+        sh:path bioschema:meltingPoint ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P2101 ;
+    ] ;
+    sh:property [
+        sh:path bioschema:formula ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P274 ;
+    ] ;
+    sh:property [
         sh:path bioschema:isLocatedInSubcellularLocation ;
         sh:node schema:Thing ;
         ys:fromProperty wdt:P681 ;
