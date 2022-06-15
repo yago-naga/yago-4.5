@@ -1299,7 +1299,7 @@ schema:Organization a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path schema:socialMediaFollowers ;
-        sh:node xsd:integer ;
+        sh:datatype xsd:integer ;
         ys:fromProperty wdt:P8687 ;
     ] ;
     sh:property [
@@ -1348,32 +1348,32 @@ schema:Organization a sh:NodeShape ;
     ] ;
     sh:property [ # TODO, add to more specific schema property, organization is too broad
         sh:path schema:assets ;
-        sh:node xsd:double ;
+        sh:datatype xsd:double ;
         ys:fromProperty wdt:P2403 ;
     ] ;
     sh:property [
         sh:path schema:equity ;
-        sh:node xsd:double ;
+        sh:datatype xsd:double ;
         ys:fromProperty wdt:P2137 ;
     ] ;
     sh:property [
         sh:path schema:revenue ;
-        sh:node xsd:double ;
+        sh:datatype xsd:double ;
         ys:fromProperty wdt:P2139 ;
     ] ;
     sh:property [
         sh:path schema:netProfit ;
-        sh:node xsd:double ;
+        sh:datatype xsd:double ;
         ys:fromProperty wdt:P2295 ;
     ] ;
     sh:property [
         sh:path schema:stockExchange ;
-        sh:node xsd:string ;
+        sh:datatype xsd:string ;
         ys:fromProperty wdt:P414 ;
     ] ;
     sh:property [
         sh:path schema:donations ;
-        sh:node xsd:string ;
+        sh:datatype xsd:string ;
         ys:fromProperty wdt:P8093 ;
     ] ;
     sh:property [
@@ -1459,7 +1459,6 @@ schema:Airline a sh:NodeShape ;
         ys:fromProperty wdt:P230 ;
     ] .
 
-
 schema:Corporation a sh:NodeShape ;
     ys:fromClass wd:Q167037 .
 
@@ -1467,7 +1466,7 @@ schema:EducationalOrganization a sh:NodeShape ;
     ys:fromClass wd:Q5341295 ;
     sh:property [
         sh:path schema:chairperson ;
-        sh:datatype schema:Person ;
+        sh:node schema:Person ;
         ys:fromProperty wdt:P488 ;
     ] ;
     sh:property [
@@ -1524,15 +1523,10 @@ schema:MusicGroup a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path schema:fandom ;
-        sh:node xsd:string ;
+        sh:datatype xsd:string ;
         ys:fromProperty wdt:P8693 ;
     ] ;
-    sh:property [
-        sh:path schema:fandom ;
-        sh:node xsd:string ;
-        ys:fromProperty wdt:P8693 ;
-    ] ;
-    sh:property [ # not sure about this one
+    sh:property [ # TODO represent 1-n relation
         sh:path schema:members ;
         sh:node schema:Person ;
         ys:fromProperty wdt:P527 ;
@@ -1758,7 +1752,7 @@ schema:Place a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path schema:leader ;
-        sh:datatype schema:Person ;
+        sh:node schema:Person ;
         ys:fromProperty wdt:P6, wdt:P35 ;
     ] ;
     sh:property [
@@ -1773,7 +1767,7 @@ schema:Place a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path schema:area ;
-        sh:datatype xsd:string ; # TODO check if this is ok
+        sh:datatype xsd:string ;
         ys:fromProperty wdt:P2046 ;
     ] ;
     sh:property [
@@ -1793,7 +1787,7 @@ schema:Place a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path schema:officialLanguage ;
-        sh:datatype schema:Language ;
+        sh:node schema:Language ;
         ys:fromProperty wdt:P37 ;
     ] ;
     sh:property [
@@ -1803,27 +1797,27 @@ schema:Place a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path schema:highestPoint ;
-        sh:datatype schema:Place ;
+        sh:node schema:Place ;
         ys:fromProperty wdt:P610 ;
     ] ;
     sh:property [
         sh:path schema:lowestPoint ;
-        sh:datatype schema:Place ;
+        sh:node schema:Place ;
         ys:fromProperty wdt:P1589 ;
     ] ;
     sh:property [
         sh:path schema:memberOf ;
-        sh:datatype schema:Organization ;
+        sh:node schema:Organization ;
         ys:fromProperty wdt:P463 ;
     ] ;
     sh:property [
         sh:path schema:administrates ;
-        sh:datatype schema:Place ;
+        sh:node schema:Place ;
         ys:fromProperty wdt:P150 ;
     ] ;
     sh:property [
         sh:path schema:currency ;
-        sh:datatype xsd:string ; # TODO add currency property
+        sh:datatype xsd:string ;
         ys:fromProperty wdt:P38 ;
     ] ;
     sh:property [
@@ -1838,27 +1832,27 @@ schema:Place a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path schema:neighbors ;
-        sh:datatype schema:Place ;
+        sh:node schema:Place ;
         ys:fromProperty wdt:P47 ;
     ] ;
     sh:property [
         sh:path schema:neighborsBodyOfWater ;
-        sh:datatype schema:BodyOfWater ;
+        sh:node schema:BodyOfWater ;
         ys:fromProperty wdt:P206 ;
     ] ;
     sh:property [
         sh:path schema:neighborsBodyOfWater ;
-        sh:datatype schema:BodyOfWater ;
+        sh:node schema:BodyOfWater ;
         ys:fromProperty wdt:P206 ;
     ] ;
     sh:property [
         sh:path schema:internetDomain ;
-        sh:node xsd:string ;
+        sh:datatype xsd:string ;
         ys:fromProperty wdt:P78 ;
     ] ;
     sh:property [
         sh:path schema:medianIncome ;
-        sh:node xsd:integer ;
+        sh:datatype xsd:integer ;
         ys:fromProperty wdt:P3529 ;
     ] ;
     sh:property [
