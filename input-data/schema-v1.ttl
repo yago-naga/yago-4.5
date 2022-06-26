@@ -10,7 +10,7 @@
 @prefix void: <http://rdfs.org/ns/void#> .
 
 # removed from new schema: , tocContinuation, associatedMediaReview, experienceInPlaceOfEducation, negativeNotes, archivedAt, directApply, originalMediaContextDescription, interpretedAsClaim, associatedClaimReview, customerRemorseReturnFees, customerRemorseReturnLabelSource, customerRemorseReturnShippingFeesAmount, mediaItemAppearance, associatedReview, gameAvailabilityType, itemDefectReturnFees, itemDefectReturnLabelSource, itemDefectReturnShippingFeesAmount, utterances, positiveNotes, applicableCountry, returnPolicyCategory, returnPolicyCountry, returnPolicySeasonalOverride, iso6523Code, countryOfLastProcessing, countryOfAssembly
-# removed from old version of schema.ttl: stupidProperty, hasProductReturnPolicy, productReturnLink, productReturnDays, variablesMeasured, smiles, inChIKey, inChI
+# removed from old version of schema.ttl: stupidProperty, hasProductReturnPolicy, productReturnLink, productReturnDays, variablesMeasured
 # added from bio-schema: BioSample
 # not added from bio-schema due to lack of information or redundancy: collector, custodian, isControl, samplingAge, expressedIn, hasSequence, hasStatus, expressedIn
 
@@ -2278,6 +2278,12 @@ schema:ImagingTest a rdfs:Class ;
     rdfs:comment "Any medical imaging modality typically used for diagnostic purposes." ;
     rdfs:subClassOf schema:MedicalTest ;
     schema:isPartOf <https://health-lifesci.schema.org> .
+
+schema:inChI a rdf:Property .
+
+schema:inChIKey a rdf:Property .
+
+schema:smiles a rdf:Property .
 
 schema:IndividualProduct a rdfs:Class ;
     rdfs:label "IndividualProduct" ;

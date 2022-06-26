@@ -8,7 +8,6 @@
 @prefix wdt: <http://www.wikidata.org/prop/direct/> .
 @prefix wpq: <http://www.wikidata.org/prop/qualifier/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-
 @prefix ys: <http://yago-knowledge.org/schema#> .
 
 ys:
@@ -2474,9 +2473,111 @@ schema:QuantitativeValue a sh:NodeShape ;
         sh:maxCount 1 ;
     ] .
 
+schema:BioChemEntity a sh:NodeShape ;
+    sh:property [
+        sh:path schema:bioChemInteraction ;
+        sh:node schema:BioChemEntity ;
+        ys:fromProperty wdt:P769 ;
+    ] ;
+    sh:property [
+        sh:path schema:hasMolecularFunction ;
+        sh:node schema:Thing ;
+        ys:fromProperty wdt:P680 ;
+    ] ;
+    sh:property [
+        sh:path schema:isEncodedByBioChemEntity ;
+        sh:node schema:Gene ;
+        ys:fromProperty wdt:P702 ;
+    ] ;
+    sh:property [
+        sh:path schema:isInvolvedInBiologicalProcess ;
+        sh:node schema:Thing ;
+        ys:fromProperty wdt:P682 ;
+    ] ;
+    sh:property [
+        sh:path schema:chemicalStructure ;
+        sh:node schema:ImageObject ;
+        ys:fromProperty wdt:P117 ;
+    ] ;
+    sh:property [
+        sh:path schema:mass ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P2067 ;
+    ] ;
+    sh:property [
+        sh:path schema:meltingPoint ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P2101 ;
+    ] ;
+    sh:property [
+        sh:path schema:formula ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P274 ;
+    ] ;
+    sh:property [
+        sh:path schema:isLocatedInSubcellularLocation ;
+        sh:node schema:Thing ;
+        ys:fromProperty wdt:P681 ;
+    ] .
+
+schema:ChemicalSubstance a sh:NodeShape ;
+    ys:fromClass wd:Q79529 .
+
+schema:Gene a sh:NodeShape ;
+    ys:fromClass wd:Q7187 ;
+    sh:property [
+        sh:path schema:encodesBioChemEntity ;
+        sh:node shcema:BioChemEntity ;
+        ys:fromProperty wdt:P688 ;
+    ] .
+
+schema:MolecularEntity a sh:NodeShape ;
+    ys:fromClass wd:Q2393187 ;
+    sh:property [
+        sh:path schema:inChI ;
+        sh:datatype xsd:string ;
+        sh:pattern "^1S/([0-9]*[A-Z][ub]?[a-z]?[0-9]*\\.?)+(/[0-9A-Za-z+\\-(),.*;?]+)*$" ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P234 ;
+    ] ;
+    sh:property [
+        sh:path schema:inChIKey ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[A-Z]{14}-[A-Z]{10}-[A-Z]$" ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P235 ;
+    ] ;
+    sh:property [
+        sh:path schema:molecularFormula ;
+        sh:datatype xsd:string ;
+        # TODO: sh:pattern
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P274 ;
+    ] ;
+    sh:property [
+        sh:path schema:smiles ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[A-Za-z0-9+\\-\\*=#$:().>/\\\\\\[\\]%]+$" ;
+        ys:fromProperty wdt:P233 ;
+    ] .
+
+schema:Protein a sh:NodeShape ;
+    ys:fromClass wd:Q8054 .
 
 
-
+schema:Taxon a sh:NodeShape ;
+    ys:fromClass wd:Q16521 ;
+    sh:property [
+        sh:path schema:parentTaxon ;
+        sh:node schema:Taxon ;
+        ys:fromProperty wdt:P171 ;
+    ] ;
+    sh:property [
+        sh:path schema:taxonRank ;
+        sh:node schema:Thing ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P105 ;
+    ] .
 
 ys:AnnotationPropertyShape a rdfs:Property ;
     rdfs:subPropertyOf sh:PropertyShape .
