@@ -54,7 +54,7 @@ if not(exists("input-data")):
 # Load YAGO schema
 print("  Loading YAGO schema...", end="", flush=True)
 yagoSchema = Graph()
-yagoSchema.parse("input-data/bio-schema.ttl", format="turtle")
+# yagoSchema.parse("input-data/bio-schema.ttl", format="turtle")
 yagoSchema.parse("input-data/schema.ttl", format="turtle")
 yagoSchema.parse("input-data/shapes.ttl", format="turtle")
 yagoSchema.parse("input-data/bio-shapes.ttl", format="turtle")
