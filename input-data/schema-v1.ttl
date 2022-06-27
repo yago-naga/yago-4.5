@@ -11,7 +11,6 @@
 
 # removed from new schema: , tocContinuation, associatedMediaReview, experienceInPlaceOfEducation, negativeNotes, archivedAt, directApply, originalMediaContextDescription, interpretedAsClaim, associatedClaimReview, customerRemorseReturnFees, customerRemorseReturnLabelSource, customerRemorseReturnShippingFeesAmount, mediaItemAppearance, associatedReview, gameAvailabilityType, itemDefectReturnFees, itemDefectReturnLabelSource, itemDefectReturnShippingFeesAmount, utterances, positiveNotes, applicableCountry, returnPolicyCategory, returnPolicyCountry, returnPolicySeasonalOverride, iso6523Code, countryOfLastProcessing, countryOfAssembly
 # removed from old version of schema.ttl: stupidProperty, hasProductReturnPolicy, productReturnLink, productReturnDays, variablesMeasured
-# added from bio-schema: BioSample
 # not added from bio-schema due to lack of information or redundancy: collector, custodian, isControl, samplingAge, expressedIn, hasSequence, hasStatus, expressedIn
 
 schema:3DModel a rdfs:Class ;
@@ -454,11 +453,6 @@ schema:BioChemEntity a rdfs:Class ;
     rdfs:comment "Any biological, chemical, or biochemical thing. For example: a protein; a gene; a chemical; a synthetic chemical." ;
     rdfs:subClassOf schema:Thing ;
     schema:isPartOf <https://pending.schema.org> .
-
-bioschema:BioSample a rdfs:Class ;
-    rdfs:subClassOf schema:BioChemEntity ;
-    rdfs:label "biological sample"@en ;
-    rdfs:comment "A biological material entity that is representative of a whole."@en .
 
 schema:Blog a rdfs:Class ;
     rdfs:label "Blog" ;

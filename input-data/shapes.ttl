@@ -1519,7 +1519,12 @@ schema:Airline a sh:NodeShape ;
     ] .
 
 schema:Corporation a sh:NodeShape ;
-    ys:fromClass wd:Q167037 .
+    ys:fromClass wd:Q167037 ;
+    sh:property [
+        sh:path yago:productProduced ;
+        sh:node rdf:Class ;
+        ys:fromProperty wdt:P1056 ;
+    ] .
 
 schema:EducationalOrganization a sh:NodeShape ;
     ys:fromClass wd:Q5341295 ;
