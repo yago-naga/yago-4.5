@@ -1,5 +1,4 @@
 @prefix bibo: <http://purl.org/ontology/bibo/> .
-@prefix bioschema: <http://bioschemas.org/> .
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix dctype: <http://purl.org/dc/dcmitype/> .
@@ -18,98 +17,6 @@
 @prefix wpq: <http://www.wikidata.org/prop/qualifier/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix ys: <http://yago-knowledge.org/schema#> .
-
-bioschema:BioChemEntity a rdfs:Class,
-        sh:NodeShape ;
-    rdfs:label "biology chemistry entity"@en ;
-    rdfs:comment "Any biological, chemical, or biochemical thing. For example: a protein; a gene; a chemical; a synthetic chemical."@en ;
-    rdfs:subClassOf schema:Thing ;
-    sh:property [ sh:node bioschema:BioChemEntity ;
-            sh:path bioschema:bioChemInteraction ;
-            ys:fromProperty wdt:P769 ],
-        [ sh:node schema:Thing ;
-            sh:path bioschema:hasMolecularFunction ;
-            ys:fromProperty wdt:P680 ],
-        [ sh:node bioschema:Gene ;
-            sh:path bioschema:isEncodedByBioChemEntity ;
-            ys:fromProperty wdt:P702 ],
-        [ sh:node schema:Thing ;
-            sh:path bioschema:isInvolvedInBiologicalProcess ;
-            ys:fromProperty wdt:P682 ],
-        [ sh:node schema:Thing ;
-            sh:path bioschema:isLocatedInSubcellularLocation ;
-            ys:fromProperty wdt:P681 ] .
-
-bioschema:BioSample a rdfs:Class ;
-    rdfs:label "biological sample"@en ;
-    rdfs:comment "A biological material entity that is representative of a whole."@en ;
-    rdfs:subClassOf bioschema:BioChemEntity .
-
-bioschema:ChemicalSubstance a rdfs:Class,
-        sh:NodeShape ;
-    rdfs:label "chemical substance"@en ;
-    rdfs:comment "A chemical substance."@en ;
-    rdfs:subClassOf bioschema:BioChemEntity ;
-    ys:fromClass wd:Q79529 .
-
-bioschema:Gene a rdfs:Class,
-        sh:NodeShape ;
-    rdfs:label "gene"@en ;
-    rdfs:comment "A discrete unit of inheritance which affects one or more biological traits ."@en ;
-    rdfs:subClassOf bioschema:BioChemEntity ;
-    sh:property [ sh:node bioschema:BioChemEntity ;
-            sh:path bioschema:encodesBioChemEntity ;
-            ys:fromProperty wdt:P688 ],
-        [ sh:node schema:Thing ;
-            sh:path bioschema:expressedIn ;
-            ys:fromProperty wdt:P5572 ] ;
-    ys:fromClass wd:Q7187 .
-
-bioschema:MolecularEntity a rdfs:Class,
-        sh:NodeShape ;
-    rdfs:label "molecular entity"@en ;
-    rdfs:comment "Any constitutionally or isotopically distinct atom, molecule, ion, ion pair, radical, radical ion, complex, conformer etc., identifiable as a separately distinguishable entity."@en ;
-    rdfs:subClassOf bioschema:BioChemEntity ;
-    sh:property [ sh:datatype xsd:string ;
-            sh:maxCount 1 ;
-            sh:path bioschema:molecularFormula ;
-            ys:fromProperty wdt:P274 ],
-        [ sh:datatype xsd:string ;
-            sh:path bioschema:smiles ;
-            sh:pattern "^[A-Za-z0-9+\\-\\*=#$:().>/\\\\\\[\\]%]+$" ;
-            ys:fromProperty wdt:P233 ],
-        [ sh:datatype xsd:string ;
-            sh:maxCount 1 ;
-            sh:path bioschema:inChI ;
-            sh:pattern "^1S/([0-9]*[A-Z][ub]?[a-z]?[0-9]*\\.?)+(/[0-9A-Za-z+\\-(),.*;?]+)*$" ;
-            ys:fromProperty wdt:P234 ],
-        [ sh:datatype xsd:string ;
-            sh:maxCount 1 ;
-            sh:path bioschema:inChIKey ;
-            sh:pattern "^[A-Z]{14}-[A-Z]{10}-[A-Z]$" ;
-            ys:fromProperty wdt:P235 ] ;
-    ys:fromClass wd:Q2393187 .
-
-bioschema:Protein a rdfs:Class,
-        sh:NodeShape ;
-    rdfs:label "protein"@en ;
-    rdfs:comment "Protein is here used in its widest possible definition, as classes of amino acid based molecules. Amyloid-beta Protein in human (UniProt P05067), eukaryota (e.g. an OrthoDB group) or even a single molecule that one can point to are all of type schema:Protein. A protein can thus be a subclass of another protein, e.g. schema:Protein as a UniProt record can have multiple isoforms inside it which would also be schema:Protein. They can be imagined, synthetic, hypothetical or naturally occurring."@en ;
-    rdfs:subClassOf bioschema:BioChemEntity ;
-    ys:fromClass wd:Q8054 .
-
-bioschema:Taxon a rdfs:Class,
-        sh:NodeShape ;
-    rdfs:label "taxon"@en ;
-    rdfs:comment "A set of organisms asserted to represent a natural cohesive biological unit."@en ;
-    rdfs:subClassOf schema:Thing ;
-    sh:property [ sh:node bioschema:Taxon ;
-            sh:path bioschema:parentTaxon ;
-            ys:fromProperty wdt:P171 ],
-        [ sh:maxCount 1 ;
-            sh:node schema:Thing ;
-            sh:path bioschema:taxonRank ;
-            ys:fromProperty wdt:P105 ] ;
-    ys:fromClass wd:Q16521 .
 
 schema:3DModel a rdfs:Class ;
     rdfs:label "3DModel" ;
@@ -307,7 +214,16 @@ schema:AnatomicalStructure a rdfs:Class,
     rdfs:label "AnatomicalStructure" ;
     rdfs:comment "Any part of the human body, typically a component of an anatomical system. Organs, tissues, and cells are all anatomical structures." ;
     rdfs:subClassOf schema:MedicalEntity ;
-    sh:property [ sh:node schema:AnatomicalStructure ;
+    sh:property [ sh:datatype xsd:anyURI ;
+            sh:path schema:foundationalModelOfAnatomyID ;
+            ys:fromProperty wdt:P1402 ],
+        [ sh:node schema:AnatomicalStructure ;
+            sh:path schema:partOf ;
+            ys:fromProperty wdt:P361 ],
+        [ sh:node schema:AnatomicalStructure ;
+            sh:path schema:hasParts ;
+            ys:fromProperty wdt:P527 ],
+        [ sh:node schema:AnatomicalStructure ;
             sh:path schema:connectedTo ;
             ys:fromProperty wdt:P2789 ] ;
     ys:fromClass wd:Q4936952 ;
@@ -779,15 +695,10 @@ schema:BrainStructure a rdfs:Class ;
     rdfs:subClassOf schema:AnatomicalStructure ;
     schema:isPartOf <http://health-lifesci.schema.org> .
 
-schema:Brand a rdfs:Class,
-        sh:NodeShape ;
+schema:Brand a rdfs:Class ;
     rdfs:label "Brand" ;
     rdfs:comment "A brand is a name used by an organization or business person for labeling a product, product group, or similar." ;
     rdfs:subClassOf schema:Intangible ;
-    sh:property [ sh:node schema:ImageObject ;
-            sh:path schema:logo ;
-            ys:fromProperty wdt:P154 ] ;
-    ys:fromClass wd:Q431289 ;
     schema:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsClass> .
 
 schema:BreadcrumbList a rdfs:Class ;
@@ -1390,6 +1301,9 @@ schema:Corporation a rdfs:Class,
     rdfs:label "Corporation" ;
     rdfs:comment "Organization: A business corporation." ;
     rdfs:subClassOf schema:Organization ;
+    sh:property [ sh:node schema:Product ;
+            sh:path schema:productProduced ;
+            ys:fromProperty wdt:P1056 ] ;
     ys:fromClass wd:Q167037 ;
     schema:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_rNews> .
 
@@ -1460,10 +1374,7 @@ schema:CreativeWork a rdfs:Class,
         schema:Organization,
         schema:Person,
         schema:Place ;
-    sh:property [ sh:node schema:CreativeWork ;
-            sh:path schema:workExample ;
-            ys:fromProperty wdt:P747 ],
-        [ sh:node schema:Thing ;
+    sh:property [ sh:node schema:Thing ;
             sh:path schema:about ;
             ys:fromProperty wdt:P921 ],
         [ sh:node schema:Thing ;
@@ -1561,7 +1472,10 @@ schema:CreativeWork a rdfs:Class,
             ys:fromProperty wdt:P859 ],
         [ sh:or ( [ sh:node schema:Organization ] [ sh:node schema:Person ] ) ;
             sh:path schema:translator ;
-            ys:fromProperty wdt:P655 ] ;
+            ys:fromProperty wdt:P655 ],
+        [ sh:node schema:CreativeWork ;
+            sh:path schema:workExample ;
+            ys:fromProperty wdt:P747 ] ;
     ys:fromClass wd:Q17537576 ;
     schema:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_rNews> .
 
@@ -1988,6 +1902,12 @@ schema:Drug a rdfs:Class,
     rdfs:comment "A chemical or biologic substance, used as a medical therapy, that has a physiological effect on an organism. Here the term drug is used interchangeably with the term medicine although clinical knowledge make a clear difference between them." ;
     rdfs:subClassOf schema:Substance ;
     owl:equivalentClass snomed:410942007 ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:path schema:definedDailyDose ;
+            ys:fromProperty wdt:P4250 ],
+        [ sh:node schema:MedicalCondition ;
+            sh:path schema:medicalConditionTreated ;
+            ys:fromProperty wdt:P2175 ] ;
     ys:fromClass wd:Q12140 ;
     schema:isPartOf <http://health-lifesci.schema.org> .
 
@@ -2083,6 +2003,18 @@ schema:EducationalOrganization a rdfs:Class,
     rdfs:comment "An educational organization." ;
     rdfs:subClassOf schema:CivicStructure,
         schema:Organization ;
+    sh:property [ sh:node schema:Person ;
+            sh:path schema:chairperson ;
+            ys:fromProperty wdt:P488 ],
+        [ sh:datatype xsd:string ;
+            sh:path schema:fee ;
+            ys:fromProperty wdt:P2555 ],
+        [ sh:datatype xsd:double ;
+            sh:path schema:admissionRate ;
+            ys:fromProperty wdt:P5822 ],
+        [ sh:datatype xsd:integer ;
+            sh:path schema:studentsCount ;
+            ys:fromProperty wdt:P2196 ] ;
     ys:fromClass wd:Q5341295 .
 
 schema:Electrician a rdfs:Class ;
@@ -3440,12 +3372,21 @@ schema:MedicalCondition a rdfs:Class,
     rdfs:label "MedicalCondition" ;
     rdfs:comment "Any condition of the human body that affects the normal functioning of a person, whether physically or mentally. Includes diseases, injuries, disabilities, disorders, syndromes, etc." ;
     rdfs:subClassOf schema:MedicalEntity ;
-    sh:property [ sh:node schema:MedicalTherapy ;
+    sh:property [ sh:or ( [ sh:node schema:Drug ] [ sh:node schema:Therapy ] [ sh:node schema:MedicalTherapy ] ) ;
+            sh:path schema:drugOrTherapyTreatment ;
+            ys:fromProperty wdt:P2176 ],
+        [ sh:or ( [ sh:node schema:Drug ] [ sh:node schema:Therapy ] [ sh:node schema:MedicalTherapy ] ) ;
             sh:path schema:possibleTreatment ;
             ys:fromProperty wdt:P924 ],
         [ sh:node schema:Thing ;
             sh:path schema:riskFactor ;
             ys:fromProperty wdt:P5642 ],
+        [ sh:node schema:MedicalTest ;
+            sh:path schema:medicalExamination ;
+            ys:fromProperty wdt:P923 ],
+        [ sh:node schema:AnatomicalStructure ;
+            sh:path schema:anatomicalLocation ;
+            ys:fromProperty wdt:P927 ],
         [ sh:node schema:MedicalSignOrSymptom ;
             sh:path schema:signOrSymptom ;
             ys:fromProperty wdt:P780 ] ;
@@ -3999,7 +3940,16 @@ schema:MusicGroup a rdfs:Class,
     rdfs:label "MusicGroup" ;
     rdfs:comment "A musical group, such as a band, an orchestra, or a choir. Can also be a solo musician." ;
     rdfs:subClassOf schema:PerformingGroup ;
-    sh:property [ sh:node schema:Thing ;
+    sh:property [ sh:node schema:Person ;
+            sh:path schema:influencedBy ;
+            ys:fromProperty wdt:P737 ],
+        [ sh:datatype xsd:string ;
+            sh:path schema:fandom ;
+            ys:fromProperty wdt:P8693 ],
+        [ sh:node schema:Person ;
+            sh:path schema:members ;
+            ys:fromProperty wdt:P527 ],
+        [ sh:node schema:Thing ;
             sh:path schema:genre ;
             ys:fromProperty wdt:P136 ] ;
     ys:fromClass wd:Q215380 .
@@ -4317,10 +4267,6 @@ schema:Organization a rdfs:Class,
     sh:property [ sh:node schema:Thing ;
             sh:path schema:award ;
             ys:fromProperty wdt:P166 ],
-        [ sh:node schema:Brand ;
-            sh:or ( [ sh:node schema:Brand ] [ sh:node schema:Organization ] ) ;
-            sh:path schema:brand ;
-            ys:fromProperty wdt:P1716 ],
         [ sh:maxCount 1 ;
             sh:or ( [ sh:datatype xsd:dateTime ] [ sh:datatype xsd:date ] [ sh:datatype xsd:gYearMonth ] [ sh:datatype xsd:gYear ] ) ;
             sh:path schema:dissolutionDate ;
@@ -4334,13 +4280,47 @@ schema:Organization a rdfs:Class,
             sh:path schema:faxNumber ;
             sh:pattern "^\\+([17]|[2345689]\\d{1,2})(-\\d{1,14})+$" ;
             ys:fromProperty wdt:P2900 ],
+        [ sh:datatype xsd:integer ;
+            sh:path schema:socialMediaFollowers ;
+            ys:fromProperty wdt:P8687 ],
         [ sh:node schema:Person ;
             sh:path schema:founder ;
             ys:fromProperty wdt:P112 ],
+        [ sh:node schema:Person ;
+            sh:path schema:leader ;
+            ys:fromProperty wdt:P35,
+                wdt:P6 ],
+        [ sh:node schema:Product ;
+            sh:path schema:owns ;
+            ys:fromProperty wdt:P1830 ],
+        [ sh:datatype xsd:string ;
+            sh:path schema:motto ;
+            ys:fromProperty wdt:P1451 ],
+        [ sh:datatype xsd:string ;
+            sh:path schema:address ;
+            ys:fromProperty wdt:P6375 ],
         [ sh:maxCount 1 ;
             sh:or ( [ sh:datatype xsd:dateTime ] [ sh:datatype xsd:date ] [ sh:datatype xsd:gYearMonth ] [ sh:datatype xsd:gYear ] ) ;
             sh:path schema:foundingDate ;
             ys:fromProperty wdt:P571 ],
+        [ sh:datatype xsd:double ;
+            sh:path schema:assets ;
+            ys:fromProperty wdt:P2403 ],
+        [ sh:datatype xsd:double ;
+            sh:path schema:equity ;
+            ys:fromProperty wdt:P2137 ],
+        [ sh:datatype xsd:double ;
+            sh:path schema:revenue ;
+            ys:fromProperty wdt:P2139 ],
+        [ sh:datatype xsd:double ;
+            sh:path schema:netProfit ;
+            ys:fromProperty wdt:P2295 ],
+        [ sh:datatype xsd:string ;
+            sh:path schema:stockExchange ;
+            ys:fromProperty wdt:P414 ],
+        [ sh:datatype xsd:string ;
+            sh:path schema:donations ;
+            ys:fromProperty wdt:P8093 ],
         [ sh:node schema:Place ;
             sh:path schema:foundingLocation ;
             ys:fromProperty wdt:P740 ],
@@ -4590,10 +4570,6 @@ schema:Person a rdfs:Class,
             sh:node schema:Place ;
             sh:path schema:birthPlace ;
             ys:fromProperty wdt:P19 ],
-        [ sh:node schema:Brand ;
-            sh:or ( [ sh:node schema:Brand ] [ sh:node schema:Organization ] ) ;
-            sh:path schema:brand ;
-            ys:fromProperty wdt:P1716 ],
         [ sh:datatype xsd:string ;
             sh:path schema:callSign ;
             ys:fromProperty wdt:P2317 ],
@@ -4750,6 +4726,76 @@ schema:Place a rdfs:Class,
                 wdt:P276,
                 wdt:P4552,
                 wdt:P706 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:path schema:inception ;
+            ys:fromProperty wdt:P571 ],
+        [ sh:datatype xsd:string ;
+            sh:path schema:demonym ;
+            ys:fromProperty wdt:P1549 ],
+        [ sh:node schema:Person ;
+            sh:path schema:leader ;
+            ys:fromProperty wdt:P35,
+                wdt:P6 ],
+        [ sh:datatype xsd:integer ;
+            sh:path schema:populationNumber ;
+            ys:fromProperty wdt:P1082 ],
+        [ sh:datatype xsd:string ;
+            sh:path schema:timezone ;
+            ys:fromProperty wdt:P421 ],
+        [ sh:datatype xsd:string ;
+            sh:path schema:area ;
+            ys:fromProperty wdt:P2046 ],
+        [ sh:datatype xsd:string ;
+            sh:path schema:postalCode ;
+            ys:fromProperty wdt:P281 ],
+        [ sh:datatype xsd:anyURI ;
+            sh:path schema:officialWebsite ;
+            ys:fromProperty wdt:P856 ],
+        [ sh:datatype xsd:string ;
+            sh:path schema:lifeExpectancy ;
+            ys:fromProperty wdt:P2250 ],
+        [ sh:node schema:Language ;
+            sh:path schema:officialLanguage ;
+            ys:fromProperty wdt:P37 ],
+        [ sh:datatype xsd:string ;
+            sh:path schema:motto ;
+            ys:fromProperty wdt:P1451 ],
+        [ sh:node schema:Place ;
+            sh:path schema:highestPoint ;
+            ys:fromProperty wdt:P610 ],
+        [ sh:node schema:Place ;
+            sh:path schema:lowestPoint ;
+            ys:fromProperty wdt:P1589 ],
+        [ sh:node schema:Organization ;
+            sh:path schema:memberOf ;
+            ys:fromProperty wdt:P463 ],
+        [ sh:node schema:Place ;
+            sh:path schema:administrates ;
+            ys:fromProperty wdt:P150 ],
+        [ sh:datatype xsd:string ;
+            sh:path schema:currency ;
+            ys:fromProperty wdt:P38 ],
+        [ sh:datatype xsd:double ;
+            sh:path schema:humanDevelopmentIndex ;
+            ys:fromProperty wdt:P1081 ],
+        [ sh:datatype xsd:string ;
+            sh:path schema:unemploymentRate ;
+            ys:fromProperty wdt:P1198 ],
+        [ sh:node schema:Place ;
+            sh:path schema:neighbors ;
+            ys:fromProperty wdt:P47 ],
+        [ sh:node schema:BodyOfWater ;
+            sh:path schema:neighborsBodyOfWater ;
+            ys:fromProperty wdt:P206 ],
+        [ sh:node schema:BodyOfWater ;
+            sh:path schema:neighborsBodyOfWater ;
+            ys:fromProperty wdt:P206 ],
+        [ sh:datatype xsd:string ;
+            sh:path schema:internetDomain ;
+            ys:fromProperty wdt:P78 ],
+        [ sh:datatype xsd:integer ;
+            sh:path schema:medianIncome ;
+            ys:fromProperty wdt:P3529 ],
         [ sh:node schema:QuantitativeValue ;
             sh:path schema:elevation ;
             ys:fromProperty wdt:P2044 ],
@@ -4932,10 +4978,6 @@ schema:Product a rdfs:Class,
     sh:property [ sh:node schema:Thing ;
             sh:path schema:award ;
             ys:fromProperty wdt:P166 ],
-        [ sh:node schema:Brand ;
-            sh:or ( [ sh:node schema:Brand ] [ sh:node schema:Organization ] ) ;
-            sh:path schema:brand ;
-            ys:fromProperty wdt:P1716 ],
         [ sh:node schema:QuantitativeValue ;
             sh:path schema:depth ;
             ys:fromProperty wdt:P5524 ],
@@ -6832,42 +6874,6 @@ schema:Zoo a rdfs:Class,
     rdfs:subClassOf schema:CivicStructure ;
     ys:fromClass wd:Q43501 .
 
-bioschema:alternativeOf a rdf:Property .
-
-bioschema:associatedDisease a rdf:Property .
-
-bioschema:bioChemSimilarity a rdf:Property .
-
-bioschema:biogicalRole a rdf:Property .
-
-bioschema:chemicalRole a rdf:Property .
-
-bioschema:childTaxon a rdf:Property .
-
-bioschema:collector a rdf:Property .
-
-bioschema:custodian a rdf:Property .
-
-bioschema:hasRepresentation a rdf:Property .
-
-bioschema:hasSequence a rdf:Property .
-
-bioschema:hasStatus a rdf:Property .
-
-bioschema:isControl a rdf:Property .
-
-bioschema:iupacName a rdf:Property .
-
-bioschema:molecularWeight a rdf:Property .
-
-bioschema:monoisotopicMolecularWeight a rdf:Property .
-
-bioschema:potentialUse a rdf:Property .
-
-bioschema:samplingAge a rdf:Property .
-
-bioschema:taxonomicRange a rdf:Property .
-
 ys: rdfs:label "Yago 4 shapes declaration"@en .
 
 ys:endDateAnnotation a ys:AnnotationPropertyShape ;
@@ -7030,6 +7036,9 @@ schema:CharitableIncorporatedOrganization a schema:UKNonprofitType ;
     schema:category "issue-2543" ;
     schema:isPartOf <http://pending.schema.org> ;
     schema:source <https://github.com/schemaorg/schemaorg/issues/2543> .
+
+schema:ChemicalSubstance a sh:NodeShape ;
+    ys:fromClass wd:Q79529 .
 
 schema:Chiropractic a schema:MedicineSystem ;
     rdfs:label "Chiropractic" ;
@@ -7578,6 +7587,27 @@ schema:MixtapeAlbum a schema:MusicAlbumProductionType ;
     rdfs:label "MixtapeAlbum" ;
     rdfs:comment "MixtapeAlbum." ;
     schema:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#MBZ> .
+
+schema:MolecularEntity a sh:NodeShape ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path schema:inChI ;
+            sh:pattern "^1S/([0-9]*[A-Z][ub]?[a-z]?[0-9]*\\.?)+(/[0-9A-Za-z+\\-(),.*;?]+)*$" ;
+            ys:fromProperty wdt:P234 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path schema:inChIKey ;
+            sh:pattern "^[A-Z]{14}-[A-Z]{10}-[A-Z]$" ;
+            ys:fromProperty wdt:P235 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path schema:molecularFormula ;
+            ys:fromProperty wdt:P274 ],
+        [ sh:datatype xsd:string ;
+            sh:path schema:smiles ;
+            sh:pattern "^[A-Za-z0-9+\\-\\*=#$:().>/\\\\\\[\\]%]+$" ;
+            ys:fromProperty wdt:P233 ] ;
+    ys:fromClass wd:Q2393187 .
 
 schema:Monday a schema:DayOfWeek ;
     rdfs:label "Monday" ;
@@ -8270,6 +8300,9 @@ schema:PrognosisHealthAspect a schema:HealthAspectEnumeration ;
     schema:category "issue-2374" ;
     schema:isPartOf <http://pending.schema.org> ;
     schema:source <https://github.com/schemaorg/schemaorg/issues/2374> .
+
+schema:Protein a sh:NodeShape ;
+    ys:fromClass wd:Q8054 .
 
 schema:Protozoa a schema:InfectiousAgentClass ;
     rdfs:label "Protozoa" ;
@@ -9064,17 +9097,6 @@ schema:additionalVariable a rdf:Property ;
     schema:isPartOf <http://health-lifesci.schema.org> ;
     schema:rangeIncludes schema:Text .
 
-schema:address a rdf:Property ;
-    rdfs:label "address" ;
-    rdfs:comment "Physical address of the item." ;
-    schema:domainIncludes schema:GeoCoordinates,
-        schema:GeoShape,
-        schema:Organization,
-        schema:Person,
-        schema:Place ;
-    schema:rangeIncludes schema:PostalAddress,
-        schema:Text .
-
 schema:addressCountry a rdf:Property ;
     rdfs:label "addressCountry" ;
     rdfs:comment "The country. For example, USA. You can also provide the two-letter <a href=\"http://en.wikipedia.org/wiki/ISO_3166-1\">ISO 3166-1 alpha-2 country code</a>." ;
@@ -9372,13 +9394,6 @@ schema:appliesToPaymentMethod a rdf:Property ;
     schema:domainIncludes schema:PaymentChargeSpecification ;
     schema:rangeIncludes schema:PaymentMethod ;
     schema:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsTerms> .
-
-schema:area a rdf:Property ;
-    rdfs:label "area" ;
-    rdfs:comment "The area within which users can expect to reach the broadcast service." ;
-    schema:domainIncludes schema:BroadcastService ;
-    schema:rangeIncludes schema:Place ;
-    schema:supersededBy schema:serviceArea .
 
 schema:arrivalAirport a rdf:Property ;
     rdfs:label "arrivalAirport" ;
@@ -9941,6 +9956,16 @@ schema:branchOf a rdf:Property ;
     schema:domainIncludes schema:LocalBusiness ;
     schema:rangeIncludes schema:Organization ;
     schema:supersededBy schema:parentOrganization .
+
+schema:brand a rdf:Property ;
+    rdfs:label "brand" ;
+    rdfs:comment "The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person." ;
+    schema:domainIncludes schema:Organization,
+        schema:Person,
+        schema:Product,
+        schema:Service ;
+    schema:rangeIncludes schema:Brand,
+        schema:Organization .
 
 schema:breadcrumb a rdf:Property ;
     rdfs:label "breadcrumb" ;
@@ -10692,20 +10717,6 @@ schema:currenciesAccepted a rdf:Property ;
 Use standard formats: <a href="http://en.wikipedia.org/wiki/ISO_4217">ISO 4217 currency format</a> e.g. "USD"; <a href="https://en.wikipedia.org/wiki/List_of_cryptocurrencies">Ticker symbol</a> for cryptocurrencies e.g. "BTC"; well known names for <a href="https://en.wikipedia.org/wiki/Local_exchange_trading_system">Local Exchange Tradings Systems</a> (LETS) and other currency types e.g. "Ithaca HOUR".""" ;
     schema:domainIncludes schema:LocalBusiness ;
     schema:rangeIncludes schema:Text .
-
-schema:currency a rdf:Property ;
-    rdfs:label "currency" ;
-    rdfs:comment """The currency in which the monetary amount is expressed.<br/><br/>
-
-Use standard formats: <a href="http://en.wikipedia.org/wiki/ISO_4217">ISO 4217 currency format</a> e.g. "USD"; <a href="https://en.wikipedia.org/wiki/List_of_cryptocurrencies">Ticker symbol</a> for cryptocurrencies e.g. "BTC"; well known names for <a href="https://en.wikipedia.org/wiki/Local_exchange_trading_system">Local Exchange Tradings Systems</a> (LETS) and other currency types e.g. "Ithaca HOUR".""" ;
-    schema:category "issue-1253" ;
-    schema:domainIncludes schema:DatedMoneySpecification,
-        schema:ExchangeRateSpecification,
-        schema:LoanOrCredit,
-        schema:MonetaryAmount,
-        schema:MonetaryAmountDistribution ;
-    schema:rangeIncludes schema:Text ;
-    schema:source <https://github.com/schemaorg/schemaorg/issues/1253> .
 
 schema:currentExchangeRate a rdf:Property ;
     rdfs:label "currentExchangeRate" ;
@@ -13981,15 +13992,6 @@ schema:meetsEmissionStandard a rdf:Property ;
         schema:URL ;
     schema:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#Automotive_Ontology_Working_Group> .
 
-schema:members a rdf:Property ;
-    rdfs:label "members" ;
-    rdfs:comment "A member of this organization." ;
-    schema:domainIncludes schema:Organization,
-        schema:ProgramMembership ;
-    schema:rangeIncludes schema:Organization,
-        schema:Person ;
-    schema:supersededBy schema:member .
-
 schema:membershipNumber a rdf:Property ;
     rdfs:label "membershipNumber" ;
     rdfs:comment "A unique identifier for the membership." ;
@@ -15096,17 +15098,6 @@ schema:postOp a rdf:Property ;
     schema:domainIncludes schema:MedicalDevice ;
     schema:isPartOf <http://health-lifesci.schema.org> ;
     schema:rangeIncludes schema:Text .
-
-schema:postalCode a rdf:Property ;
-    rdfs:label "postalCode" ;
-    rdfs:comment "The postal code. For example, 94043." ;
-    schema:category "issue-2506" ;
-    schema:domainIncludes schema:DefinedRegion,
-        schema:GeoCoordinates,
-        schema:GeoShape,
-        schema:PostalAddress ;
-    schema:rangeIncludes schema:Text ;
-    schema:source <https://github.com/schemaorg/schemaorg/issues/2506> .
 
 schema:postalCodeBegin a rdf:Property ;
     rdfs:label "postalCodeBegin" ;
@@ -18013,41 +18004,17 @@ schema:yearsInOperation a rdf:Property ;
     schema:domainIncludes schema:BusinessAudience ;
     schema:rangeIncludes schema:QuantitativeValue .
 
-bioschema:bioChemInteraction a rdf:Property .
-
-bioschema:expressedIn a rdf:Property .
-
-bioschema:hasBioChemEntityPart a rdf:Property ;
-    schema:inverseOf bioschema:isPartOfBioChemEntity ;
-    schema:subPropertyOf schema:hasPart .
-
-bioschema:hasMolecularFunction a rdf:Property .
-
-bioschema:inChI a rdf:Property .
-
-bioschema:inChIKey a rdf:Property .
-
-bioschema:isInvolvedInBiologicalProcess a rdf:Property .
-
-bioschema:isLocatedInSubcellularLocation a rdf:Property .
-
-bioschema:isPartOfBioChemEntity a rdf:Property ;
-    schema:inverseOf bioschema:hasBioChemEntityPart ;
-    schema:subPropertyOf schema:isPartOf .
-
-bioschema:molecularFormula a rdf:Property .
-
-bioschema:parentTaxon a rdf:Property .
-
-bioschema:smiles a rdf:Property .
-
-bioschema:taxonRank a rdf:Property .
-
 schema:Dermatology a schema:MedicalSpecialty ;
     rdfs:label "Dermatology" ;
     rdfs:comment "A specific branch of medical science that pertains to diagnosis and treatment of disorders of skin." ;
     rdfs:subClassOf schema:MedicalBusiness ;
     schema:isPartOf <http://health-lifesci.schema.org> .
+
+schema:Gene a sh:NodeShape ;
+    sh:property [ sh:node schema:BioChemEntity ;
+            sh:path schema:encodesBioChemEntity ;
+            ys:fromProperty wdt:P688 ] ;
+    ys:fromClass wd:Q7187 .
 
 schema:MerchantReturnFiniteReturnWindow a schema:MerchantReturnEnumeration ;
     rdfs:label "MerchantReturnFiniteReturnWindow" ;
@@ -18077,6 +18044,16 @@ schema:MerchantReturnUnspecified a schema:MerchantReturnEnumeration ;
     schema:isPartOf <http://pending.schema.org> ;
     schema:source <https://github.com/schemaorg/schemaorg/issues/2288> .
 
+schema:Taxon a sh:NodeShape ;
+    sh:property [ sh:node schema:Taxon ;
+            sh:path schema:parentTaxon ;
+            ys:fromProperty wdt:P171 ],
+        [ sh:maxCount 1 ;
+            sh:node schema:Thing ;
+            sh:path schema:taxonRank ;
+            ys:fromProperty wdt:P105 ] ;
+    ys:fromClass wd:Q16521 .
+
 schema:actionApplication a rdf:Property ;
     rdfs:label "actionApplication" ;
     rdfs:comment "An application that can complete the request." ;
@@ -18090,6 +18067,17 @@ schema:actionOption a rdf:Property ;
     schema:domainIncludes schema:ChooseAction ;
     schema:rangeIncludes schema:Text,
         schema:Thing .
+
+schema:address a rdf:Property ;
+    rdfs:label "address" ;
+    rdfs:comment "Physical address of the item." ;
+    schema:domainIncludes schema:GeoCoordinates,
+        schema:GeoShape,
+        schema:Organization,
+        schema:Person,
+        schema:Place ;
+    schema:rangeIncludes schema:PostalAddress,
+        schema:Text .
 
 schema:affiliation a rdf:Property ;
     rdfs:label "affiliation" ;
@@ -18128,6 +18116,13 @@ schema:archiveHeld a rdf:Property ;
     schema:isPartOf <http://pending.schema.org> ;
     schema:rangeIncludes schema:ArchiveComponent ;
     schema:source <https://github.com/schemaorg/schemaorg/issues/1758> .
+
+schema:area a rdf:Property ;
+    rdfs:label "area" ;
+    rdfs:comment "The area within which users can expect to reach the broadcast service." ;
+    schema:domainIncludes schema:BroadcastService ;
+    schema:rangeIncludes schema:Place ;
+    schema:supersededBy schema:serviceArea .
 
 schema:arterialBranch a rdf:Property ;
     rdfs:label "arterialBranch" ;
@@ -18312,6 +18307,20 @@ schema:copyrightHolder a rdf:Property ;
     schema:domainIncludes schema:CreativeWork ;
     schema:rangeIncludes schema:Organization,
         schema:Person .
+
+schema:currency a rdf:Property ;
+    rdfs:label "currency" ;
+    rdfs:comment """The currency in which the monetary amount is expressed.<br/><br/>
+
+Use standard formats: <a href="http://en.wikipedia.org/wiki/ISO_4217">ISO 4217 currency format</a> e.g. "USD"; <a href="https://en.wikipedia.org/wiki/List_of_cryptocurrencies">Ticker symbol</a> for cryptocurrencies e.g. "BTC"; well known names for <a href="https://en.wikipedia.org/wiki/Local_exchange_trading_system">Local Exchange Tradings Systems</a> (LETS) and other currency types e.g. "Ithaca HOUR".""" ;
+    schema:category "issue-1253" ;
+    schema:domainIncludes schema:DatedMoneySpecification,
+        schema:ExchangeRateSpecification,
+        schema:LoanOrCredit,
+        schema:MonetaryAmount,
+        schema:MonetaryAmountDistribution ;
+    schema:rangeIncludes schema:Text ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/1253> .
 
 schema:dataset a rdf:Property ;
     rdfs:label "dataset" ;
@@ -18778,6 +18787,15 @@ schema:maxValue a rdf:Property ;
     schema:rangeIncludes schema:Number ;
     schema:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsTerms> .
 
+schema:members a rdf:Property ;
+    rdfs:label "members" ;
+    rdfs:comment "A member of this organization." ;
+    schema:domainIncludes schema:Organization,
+        schema:ProgramMembership ;
+    schema:rangeIncludes schema:Organization,
+        schema:Person ;
+    schema:supersededBy schema:member .
+
 schema:merchantReturnDays a rdf:Property ;
     rdfs:label "merchantReturnDays" ;
     rdfs:comment "The merchantReturnDays property indicates the number of days (from purchase) within which relevant merchant return policy is applicable." ;
@@ -18877,15 +18895,6 @@ schema:organizer a rdf:Property ;
     schema:rangeIncludes schema:Organization,
         schema:Person .
 
-schema:owns a rdf:Property ;
-    rdfs:label "owns" ;
-    rdfs:comment "Products owned by the organization or person." ;
-    schema:domainIncludes schema:Organization,
-        schema:Person ;
-    schema:rangeIncludes schema:OwnershipInfo,
-        schema:Product ;
-    schema:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsTerms> .
-
 schema:partOfSeason a rdf:Property ;
     rdfs:label "partOfSeason" ;
     rdfs:comment "The season to which this episode belongs." ;
@@ -18933,6 +18942,17 @@ schema:photo a rdf:Property ;
     schema:domainIncludes schema:Place ;
     schema:rangeIncludes schema:ImageObject,
         schema:Photograph .
+
+schema:postalCode a rdf:Property ;
+    rdfs:label "postalCode" ;
+    rdfs:comment "The postal code. For example, 94043." ;
+    schema:category "issue-2506" ;
+    schema:domainIncludes schema:DefinedRegion,
+        schema:GeoCoordinates,
+        schema:GeoShape,
+        schema:PostalAddress ;
+    schema:rangeIncludes schema:Text ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2506> .
 
 schema:producer a rdf:Property ;
     rdfs:label "producer" ;
@@ -19271,14 +19291,37 @@ schema:yield a rdf:Property ;
     schema:rangeIncludes schema:QuantitativeValue,
         schema:Text .
 
-bioschema:encodesBioChemEntity a rdf:Property ;
-    schema:inverseOf bioschema:isEncodedByBioChemEntity .
-
-bioschema:isEncodedByBioChemEntity a rdf:Property ;
-    schema:inverseOf bioschema:encodesBioChemEntity .
-
 ys:AnnotationPropertyShape a rdfs:Property ;
     rdfs:subPropertyOf sh:PropertyShape .
+
+schema:BioChemEntity a sh:NodeShape ;
+    sh:property [ sh:node schema:BioChemEntity ;
+            sh:path schema:bioChemInteraction ;
+            ys:fromProperty wdt:P769 ],
+        [ sh:node schema:Thing ;
+            sh:path schema:hasMolecularFunction ;
+            ys:fromProperty wdt:P680 ],
+        [ sh:node schema:Gene ;
+            sh:path schema:isEncodedByBioChemEntity ;
+            ys:fromProperty wdt:P702 ],
+        [ sh:node schema:Thing ;
+            sh:path schema:isInvolvedInBiologicalProcess ;
+            ys:fromProperty wdt:P682 ],
+        [ sh:node schema:ImageObject ;
+            sh:path schema:chemicalStructure ;
+            ys:fromProperty wdt:P117 ],
+        [ sh:datatype xsd:string ;
+            sh:path schema:mass ;
+            ys:fromProperty wdt:P2067 ],
+        [ sh:datatype xsd:string ;
+            sh:path schema:meltingPoint ;
+            ys:fromProperty wdt:P2101 ],
+        [ sh:datatype xsd:string ;
+            sh:path schema:formula ;
+            ys:fromProperty wdt:P274 ],
+        [ sh:node schema:Thing ;
+            sh:path schema:isLocatedInSubcellularLocation ;
+            ys:fromProperty wdt:P681 ] .
 
 schema:alternateName a rdf:Property ;
     rdfs:label "alternateName" ;
@@ -19445,6 +19488,15 @@ schema:knowsLanguage a rdf:Property ;
         schema:Text ;
     schema:source <https://github.com/schemaorg/schemaorg/issues/1688>,
         <https://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#TP> .
+
+schema:owns a rdf:Property ;
+    rdfs:label "owns" ;
+    rdfs:comment "Products owned by the organization or person." ;
+    schema:domainIncludes schema:Organization,
+        schema:Person ;
+    schema:rangeIncludes schema:OwnershipInfo,
+        schema:Product ;
+    schema:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsTerms> .
 
 schema:parent a rdf:Property ;
     rdfs:label "parent" ;
@@ -19627,16 +19679,6 @@ schema:areaServed a rdf:Property ;
         schema:Place,
         schema:Text .
 
-schema:brand a rdf:Property ;
-    rdfs:label "brand" ;
-    rdfs:comment "The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person." ;
-    schema:domainIncludes schema:Organization,
-        schema:Person,
-        schema:Product,
-        schema:Service ;
-    schema:rangeIncludes schema:Brand,
-        schema:Organization .
-
 schema:callSign a rdf:Property ;
     rdfs:label "callSign" ;
     rdfs:comment "A <a href=\"https://en.wikipedia.org/wiki/Call_sign\">callsign</a>, as used in broadcasting and radio communications to identify people, radio and TV stations, or vehicles." ;
@@ -19720,6 +19762,19 @@ schema:includedInDataCatalog a rdf:Property ;
     schema:domainIncludes schema:Dataset ;
     schema:inverseOf schema:dataset ;
     schema:rangeIncludes schema:DataCatalog .
+
+schema:logo a rdf:Property ;
+    rdfs:label "logo" ;
+    rdfs:comment "An associated logo." ;
+    rdfs:subPropertyOf schema:image ;
+    schema:domainIncludes schema:Brand,
+        schema:Organization,
+        schema:Place,
+        schema:Product,
+        schema:Service ;
+    schema:rangeIncludes schema:ImageObject,
+        schema:URL ;
+    schema:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsTerms> .
 
 schema:mainEntityOfPage a rdf:Property ;
     rdfs:label "mainEntityOfPage" ;
@@ -19851,19 +19906,6 @@ schema:image a rdf:Property ;
     schema:rangeIncludes schema:ImageObject,
         schema:URL .
 
-schema:logo a rdf:Property ;
-    rdfs:label "logo" ;
-    rdfs:comment "An associated logo." ;
-    rdfs:subPropertyOf schema:image ;
-    schema:domainIncludes schema:Brand,
-        schema:Organization,
-        schema:Place,
-        schema:Product,
-        schema:Service ;
-    schema:rangeIncludes schema:ImageObject,
-        schema:URL ;
-    schema:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsTerms> .
-
 schema:material a rdf:Property ;
     rdfs:label "material" ;
     rdfs:comment "A material that something is made from, e.g. leather, wool, cotton, paper." ;
@@ -19872,15 +19914,6 @@ schema:material a rdf:Property ;
     schema:rangeIncludes schema:Product,
         schema:Text,
         schema:URL .
-
-schema:memberOf a rdf:Property ;
-    rdfs:label "memberOf" ;
-    rdfs:comment "An Organization (or ProgramMembership) to which this Person or Organization belongs." ;
-    schema:domainIncludes schema:Organization,
-        schema:Person ;
-    schema:inverseOf schema:member ;
-    schema:rangeIncludes schema:Organization,
-        schema:ProgramMembership .
 
 schema:numberOfEpisodes a rdf:Property ;
     rdfs:label "numberOfEpisodes" ;
@@ -19933,13 +19966,14 @@ schema:gtin a rdf:Property ;
     schema:rangeIncludes schema:Text ;
     schema:source <https://github.com/schemaorg/schemaorg/issues/2288> .
 
-schema:position a rdf:Property ;
-    rdfs:label "position" ;
-    rdfs:comment "The position of an item in a series or sequence of items." ;
-    schema:domainIncludes schema:CreativeWork,
-        schema:ListItem ;
-    schema:rangeIncludes schema:Integer,
-        schema:Text .
+schema:memberOf a rdf:Property ;
+    rdfs:label "memberOf" ;
+    rdfs:comment "An Organization (or ProgramMembership) to which this Person or Organization belongs." ;
+    schema:domainIncludes schema:Organization,
+        schema:Person ;
+    schema:inverseOf schema:member ;
+    schema:rangeIncludes schema:Organization,
+        schema:ProgramMembership .
 
 schema:hasPart a rdf:Property ;
     rdfs:label "hasPart" ;
@@ -19948,6 +19982,22 @@ schema:hasPart a rdf:Property ;
     schema:inverseOf schema:isPartOf ;
     schema:rangeIncludes schema:CreativeWork ;
     schema:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_bibex> .
+
+schema:position a rdf:Property ;
+    rdfs:label "position" ;
+    rdfs:comment "The position of an item in a series or sequence of items." ;
+    schema:domainIncludes schema:CreativeWork,
+        schema:ListItem ;
+    schema:rangeIncludes schema:Integer,
+        schema:Text .
+
+schema:isPartOf a rdf:Property ;
+    rdfs:label "isPartOf" ;
+    rdfs:comment "Indicates an item or CreativeWork that this item, or CreativeWork (in some sense), is part of." ;
+    schema:domainIncludes schema:CreativeWork ;
+    schema:inverseOf schema:hasPart ;
+    schema:rangeIncludes schema:CreativeWork,
+        schema:URL .
 
 schema:musicBy a rdf:Property ;
     rdfs:label "musicBy" ;
@@ -19992,14 +20042,6 @@ schema:director a rdf:Property ;
         schema:VideoGameSeries,
         schema:VideoObject ;
     schema:rangeIncludes schema:Person .
-
-schema:isPartOf a rdf:Property ;
-    rdfs:label "isPartOf" ;
-    rdfs:comment "Indicates an item or CreativeWork that this item, or CreativeWork (in some sense), is part of." ;
-    schema:domainIncludes schema:CreativeWork ;
-    schema:inverseOf schema:hasPart ;
-    schema:rangeIncludes schema:CreativeWork,
-        schema:URL .
 
 schema:actor a rdf:Property ;
     rdfs:label "actor" ;

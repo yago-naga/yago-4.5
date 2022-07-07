@@ -772,6 +772,7 @@ schema:MusicAlbum a sh:NodeShape ;
    ys:fromClass wd:Q482994 ;
    sh:property [
        sh:path schema:byArtist ;
+       sh:maxCount 1 ;
        sh:node schema:MusicGroup ;
        ys:fromProperty wdt:P175 ;
    ] .
@@ -898,6 +899,7 @@ schema:VideoGame a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path schema:director ;
+        sh:maxCount 1 ;
         sh:node schema:Person ;
         ys:fromProperty wdt:P57 ;
     ] ;
@@ -967,18 +969,6 @@ schema:Event a sh:NodeShape ;
         sh:path schema:about ;
         sh:node schema:Thing ;
         ys:fromProperty wdt:P921 ;
-    ] ;
-    sh:property [
-        sh:path schema:composer ;
-        sh:or (
-            [
-                sh:node schema:Person
-            ]
-            [
-                sh:node schema:MusicGroup
-            ]
-        ) ;
-        ys:fromProperty wdt:P86 ;
     ] ;
     sh:property [
         sh:path schema:composer ;
@@ -1302,7 +1292,7 @@ schema:Substance a sh:NodeShape ;
 schema:Drug a sh:NodeShape ;
     sh:property [
         sh:path schema:definedDailyDose ;
-        sh:datatype xsd:string
+        sh:datatype xsd:string ;
         ys:fromProperty wdt:P4250 ;
     ] ;
     sh:property [
@@ -1372,11 +1362,6 @@ schema:Organization a sh:NodeShape ;
         ys:fromProperty wdt:P35, wdt:P6 ;
     ] ;
     sh:property [
-        sh:path schema:owns ;
-        sh:node schema:Product ;
-        ys:fromProperty wdt:P1830 ;
-    ] ;
-    sh:property [
         sh:path schema:motto ;
         sh:datatype xsd:string ;
         ys:fromProperty wdt:P1451 ;
@@ -1404,31 +1389,6 @@ schema:Organization a sh:NodeShape ;
         ) ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P571 ;
-    ] ;
-    sh:property [ # TODO, add to more specific schema property, organization is too broad for the ones that follow
-        sh:path schema:assets ;
-        sh:datatype xsd:double ;
-        ys:fromProperty wdt:P2403 ;
-    ] ;
-    sh:property [
-        sh:path schema:equity ;
-        sh:datatype xsd:double ;
-        ys:fromProperty wdt:P2137 ;
-    ] ;
-    sh:property [
-        sh:path schema:revenue ;
-        sh:datatype xsd:double ;
-        ys:fromProperty wdt:P2139 ;
-    ] ;
-    sh:property [
-        sh:path schema:netProfit ;
-        sh:datatype xsd:double ;
-        ys:fromProperty wdt:P2295 ;
-    ] ;
-    sh:property [
-        sh:path schema:stockExchange ;
-        sh:datatype xsd:string ;
-        ys:fromProperty wdt:P414 ;
     ] ;
     sh:property [
         sh:path schema:donations ;
@@ -1520,9 +1480,38 @@ schema:Airline a sh:NodeShape ;
 
 schema:Corporation a sh:NodeShape ;
     ys:fromClass wd:Q167037 ;
+        sh:property [ 
+        sh:path schema:assets ;
+        sh:datatype xsd:double ;
+        ys:fromProperty wdt:P2403 ;
+    ] ;
     sh:property [
-        sh:path yago:productProduced ;
-        sh:node rdf:Class ;
+        sh:path schema:equity ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        ys:fromProperty wdt:P2137 ;
+    ] ;
+    sh:property [
+        sh:path schema:revenue ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        ys:fromProperty wdt:P2139 ;
+    ] ;
+    sh:property [
+        sh:path schema:netProfit ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        ys:fromProperty wdt:P2295 ;
+    ] ;
+    sh:property [
+        sh:path schema:stockExchange ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P414 ;
+    ] ;
+    sh:property [
+        sh:path schema:productProduced ;
+        sh:node schema:Product ;
         ys:fromProperty wdt:P1056 ;
     ] .
 
@@ -1530,16 +1519,19 @@ schema:EducationalOrganization a sh:NodeShape ;
     ys:fromClass wd:Q5341295 ;
     sh:property [
         sh:path schema:chairperson ;
+        sh:maxCount 1 ;
         sh:node schema:Person ;
         ys:fromProperty wdt:P488 ;
     ] ;
     sh:property [
         sh:path schema:fee ;
+        sh:maxCount 1 ;
         sh:datatype xsd:string ;
         ys:fromProperty wdt:P2555 ;
     ] ;
     sh:property [
         sh:path schema:admissionRate ;
+        sh:maxCount 1 ;
         sh:datatype xsd:double ;
         ys:fromProperty wdt:P5822 ;
     ] ;
@@ -1590,7 +1582,7 @@ schema:MusicGroup a sh:NodeShape ;
         sh:datatype xsd:string ;
         ys:fromProperty wdt:P8693 ;
     ] ;
-    sh:property [ # TODO represent 1-n relation
+    sh:property [
         sh:path schema:members ;
         sh:node schema:Person ;
         ys:fromProperty wdt:P527 ;
@@ -1847,6 +1839,7 @@ schema:Place a sh:NodeShape ;
     sh:property [
         sh:path schema:lifeExpectancy ;
         sh:datatype xsd:string ;
+        sh:pattern "^[0-9]{3} years$" ;
         ys:fromProperty wdt:P2250 ;
     ] ;
     sh:property [
@@ -2501,6 +2494,7 @@ schema:BioChemEntity a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path schema:chemicalStructure ;
+        sh:maxCount 1 ;
         sh:node schema:ImageObject ;
         ys:fromProperty wdt:P117 ;
     ] ;
@@ -2532,7 +2526,7 @@ schema:Gene a sh:NodeShape ;
     ys:fromClass wd:Q7187 ;
     sh:property [
         sh:path schema:encodesBioChemEntity ;
-        sh:node shcema:BioChemEntity ;
+        sh:node schema:BioChemEntity ;
         ys:fromProperty wdt:P688 ;
     ] .
 
