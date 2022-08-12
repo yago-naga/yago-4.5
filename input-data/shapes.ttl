@@ -1542,7 +1542,7 @@ schema:EducationalOrganization a sh:NodeShape ;
     ] .
 
 schema:ResearchOrganization a sh:NodeShape ; 
-    ys:fromClass wd:Q16519632 ;
+    ys:fromClass wd:Q16519632 .
 
 schema:CollegeOrUniversity a sh:NodeShape ;
     ys:fromClass wd:Q38723 .

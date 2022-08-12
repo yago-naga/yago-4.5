@@ -7912,7 +7912,7 @@ schema:associatedDisease a rdf:Property ;
 schema:associatedMedia a rdf:Property ;
     rdfs:label "associatedMedia" ;
     rdfs:comment "A media object that encodes this CreativeWork. This property is a synonym for encoding." ;
-    schema:domainIncludes schema:CreativeWork,
+    schema:domainIncludes schema:CreativeWork ;
     schema:rangeIncludes schema:MediaObject .
 
 schema:associatedPathophysiology a rdf:Property ;
@@ -14163,7 +14163,7 @@ schema:priceType a rdf:Property ;
     rdfs:comment "Defines the type of a price specified for an offered product, for example a list price, a (temporary) sale price or a manufacturer suggested retail price." ;
     schema:domainIncludes schema:CompoundPriceSpecification,
         schema:UnitPriceSpecification ;
-    schema:rangeIncludes schema:PriceSpecification ;
+    schema:rangeIncludes schema:PriceSpecification ,
         schema:Text ;
     schema:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsTerms> .
 
