@@ -96,6 +96,31 @@ schema:AdultEntertainment a rdfs:Class ;
     rdfs:comment "An adult entertainment establishment." ;
     rdfs:subClassOf schema:EntertainmentBusiness .
 
+schema:AdultOrientedEnumeration a rdfs:Class ;
+    rdfs:label "AdultOrientedEnumeration" ;
+    rdfs:comment "Enumeration of considerations that make a product relevant or potentially restricted for adults only." ;
+    rdfs:subClassOf schema:Enumeration ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2989> .
+
+schema:AdvertiserContentArticle a rdfs:Class ;
+    rdfs:label "AdvertiserContentArticle" ;
+    rdfs:comment "An [[Article]] that an external entity has paid to place or to produce to its specifications. Includes [advertorials](https://en.wikipedia.org/wiki/Advertorial), sponsored content, native advertising and other paid content." ;
+    rdfs:subClassOf schema:Article ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/1525>,
+        <https://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#TP> .
+
+schema:AggregateOffer a rdfs:Class ;
+    rdfs:label "AggregateOffer" ;
+    rdfs:comment "When a single product is associated with multiple offers (for example, the same pair of shoes is offered by different merchants), then AggregateOffer can be used.\\n\\nNote: AggregateOffers are normally expected to associate multiple offers that all share the same defined [[businessFunction]] value, or default to http://purl.org/goodrelations/v1#Sell if businessFunction is not explicitly defined." ;
+    rdfs:subClassOf schema:Offer .
+
+schema:AggregateRating a rdfs:Class ;
+    rdfs:label "AggregateRating" ;
+    rdfs:comment "The average rating based on multiple ratings or reviews." ;
+    rdfs:subClassOf schema:Rating .
+
 schema:AgreeAction a rdfs:Class ;
     rdfs:label "AgreeAction" ;
     rdfs:comment "The act of expressing a consistency of opinion with the object. An agent agrees to/about an object (a proposition, topic or theme) with participants." ;
@@ -123,6 +148,14 @@ schema:AllocateAction a rdfs:Class ;
     rdfs:label "AllocateAction" ;
     rdfs:comment "The act of organizing tasks/objects/events by associating resources to it." ;
     rdfs:subClassOf schema:OrganizeAction .
+
+schema:AmpStory a rdfs:Class ;
+    rdfs:label "AmpStory" ;
+    rdfs:comment "A creative work with a visual storytelling format intended to be viewed online, particularly on mobile devices." ;
+    rdfs:subClassOf schema:CreativeWork,
+        schema:MediaObject ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2646> .
 
 schema:AmusementPark a rdfs:Class ;
     rdfs:label "AmusementPark" ;
@@ -274,6 +307,13 @@ schema:AudioObject a rdfs:Class ;
     rdfs:comment "An audio file." ;
     rdfs:subClassOf schema:MediaObject ;
     schema:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_rNews> .
+
+schema:AudioObjectSnapshot a rdfs:Class ;
+    rdfs:label "AudioObjectSnapshot" ;
+    rdfs:comment "A specific and exact (byte-for-byte) version of an [[AudioObject]]. Two byte-for-byte identical files, for the purposes of this type, considered identical. If they have different embedded metadata the files will differ. Different external facts about the files, e.g. creator or dateCreated that aren't represented in their actual content, do not affect this notion of identity." ;
+    rdfs:subClassOf schema:AudioObject ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2450> .
 
 schema:Audiobook a rdfs:Class ;
     rdfs:label "Audiobook" ;
@@ -453,6 +493,13 @@ schema:BoatTrip a rdfs:Class ;
     rdfs:subClassOf schema:Trip ;
     schema:isPartOf <https://pending.schema.org> ;
     schema:source <https://github.com/schemaorg/schemaorg/issues/1755> .
+
+schema:BodyMeasurementTypeEnumeration a rdfs:Class ;
+    rdfs:label "BodyMeasurementTypeEnumeration" ;
+    rdfs:comment "Enumerates types (or dimensions) of a person's body measurements, for example for fitting of clothes." ;
+    rdfs:subClassOf schema:MeasurementTypeEnumeration ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
 
 schema:BodyOfWater a rdfs:Class ;
     rdfs:label "BodyOfWater" ;
@@ -1319,6 +1366,13 @@ schema:DigitalDocumentPermissionType a rdfs:Class ;
     rdfs:comment "A type of permission which can be granted for accessing a digital document." ;
     rdfs:subClassOf schema:Enumeration .
 
+schema:DigitalPlatformEnumeration a rdfs:Class ;
+    rdfs:label "DigitalPlatformEnumeration" ;
+    rdfs:comment "Enumerates some common technology platforms, for use with properties such as [[actionPlatform]]. It is not supposed to be comprehensive - when a suitable code is not enumerated here, textual or URL values can be used instead. These codes are at a fairly high level and do not deal with versioning and other nuance. Additional codes can be suggested [in github](https://github.com/schemaorg/schemaorg/issues/3057). " ;
+    rdfs:subClassOf schema:Enumeration ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/3057> .
+
 schema:DisagreeAction a rdfs:Class ;
     rdfs:label "DisagreeAction" ;
     rdfs:comment "The act of expressing a difference of opinion with the object. An agent disagrees to/about an object (a proposition, topic or theme) with participants." ;
@@ -1448,6 +1502,13 @@ schema:Duration a rdfs:Class ;
     rdfs:comment "Quantity: Duration (use [ISO 8601 duration format](http://en.wikipedia.org/wiki/ISO_8601))." ;
     rdfs:subClassOf schema:Quantity .
 
+schema:EUEnergyEfficiencyEnumeration a rdfs:Class ;
+    rdfs:label "EUEnergyEfficiencyEnumeration" ;
+    rdfs:comment "Enumerates the EU energy efficiency classes A-G as well as A+, A++, and A+++ as defined in EU directive 2017/1369." ;
+    rdfs:subClassOf schema:EnergyEfficiencyEnumeration ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2670> .
+
 schema:EatAction a rdfs:Class ;
     rdfs:label "EatAction" ;
     rdfs:comment "The act of swallowing solid objects." ;
@@ -1558,6 +1619,27 @@ schema:Energy a rdfs:Class ;
     rdfs:label "Energy" ;
     rdfs:comment "Properties that take Energy as values are of the form '&lt;Number&gt; &lt;Energy unit of measure&gt;'." ;
     rdfs:subClassOf schema:Quantity .
+
+schema:EnergyConsumptionDetails a rdfs:Class ;
+    rdfs:label "EnergyConsumptionDetails" ;
+    rdfs:comment "EnergyConsumptionDetails represents information related to the energy efficiency of a product that consumes energy. The information that can be provided is based on international regulations such as for example [EU directive 2017/1369](https://eur-lex.europa.eu/eli/reg/2017/1369/oj) for energy labeling and the [Energy labeling rule](https://www.ftc.gov/enforcement/rules/rulemaking-regulatory-reform-proceedings/energy-water-use-labeling-consumer) under the Energy Policy and Conservation Act (EPCA) in the US." ;
+    rdfs:subClassOf schema:Intangible ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2670> .
+
+schema:EnergyEfficiencyEnumeration a rdfs:Class ;
+    rdfs:label "EnergyEfficiencyEnumeration" ;
+    rdfs:comment "Enumerates energy efficiency levels (also known as \"classes\" or \"ratings\") and certifications that are part of several international energy efficiency standards." ;
+    rdfs:subClassOf schema:Enumeration ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2670> .
+
+schema:EnergyStarEnergyEfficiencyEnumeration a rdfs:Class ;
+    rdfs:label "EnergyStarEnergyEfficiencyEnumeration" ;
+    rdfs:comment "Used to indicate whether a product is EnergyStar certified." ;
+    rdfs:subClassOf schema:EnergyEfficiencyEnumeration ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2670> .
 
 schema:EngineSpecification a rdfs:Class ;
     rdfs:label "EngineSpecification" ;
@@ -1799,6 +1881,13 @@ schema:Game a rdfs:Class ;
     rdfs:label "Game" ;
     rdfs:comment "The Game type represents things which are games. These are typically rule-governed recreational activities, e.g. role-playing games in which players assume the role of characters in a fictional setting." ;
     rdfs:subClassOf schema:CreativeWork .
+
+schema:GameAvailabilityEnumeration a rdfs:Class ;
+    rdfs:label "GameAvailabilityEnumeration" ;
+    rdfs:comment "For a [[VideoGame]], such as used with a [[PlayGameAction]], an enumeration of the kind of game availability offered. " ;
+    rdfs:subClassOf schema:Enumeration ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/3058> .
 
 schema:GamePlayMode a rdfs:Class ;
     rdfs:label "GamePlayMode" ;
@@ -2132,6 +2221,20 @@ schema:HowToTool a rdfs:Class ;
     rdfs:comment "A tool used (but not consumed) when performing instructions for how to achieve a result." ;
     rdfs:subClassOf schema:HowToItem .
 
+schema:HyperToc a rdfs:Class ;
+    rdfs:label "HyperToc" ;
+    rdfs:comment "A HyperToc represents a hypertext table of contents for complex media objects, such as [[VideoObject]], [[AudioObject]]. Items in the table of contents are indicated using the [[tocEntry]] property, and typed [[HyperTocEntry]]. For cases where the same larger work is split into multiple files, [[associatedMedia]] can be used on individual [[HyperTocEntry]] items." ;
+    rdfs:subClassOf schema:CreativeWork ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2766> .
+
+schema:HyperTocEntry a rdfs:Class ;
+    rdfs:label "HyperTocEntry" ;
+    rdfs:comment "A HyperToEntry is an item within a [[HyperToc]], which represents a hypertext table of contents for complex media objects, such as [[VideoObject]], [[AudioObject]]. The media object itself is indicated using [[associatedMedia]]. Each section of interest within that content can be described with a [[HyperTocEntry]], with associated [[startOffset]] and [[endOffset]]. When several entries are all from the same file, [[associatedMedia]] is used on the overarching [[HyperTocEntry]]; if the content has been split into multiple files, they can be referenced using [[associatedMedia]] on each [[HyperTocEntry]]." ;
+    rdfs:subClassOf schema:CreativeWork ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2766> .
+
 schema:IceCreamShop a rdfs:Class ;
     rdfs:label "IceCreamShop" ;
     rdfs:comment "An ice cream shop." ;
@@ -2153,17 +2256,18 @@ schema:ImageObject a rdfs:Class ;
     rdfs:subClassOf schema:MediaObject ;
     owl:equivalentClass dcmitype:Image .
 
+schema:ImageObjectSnapshot a rdfs:Class ;
+    rdfs:label "ImageObjectSnapshot" ;
+    rdfs:comment "A specific and exact (byte-for-byte) version of an [[ImageObject]]. Two byte-for-byte identical files, for the purposes of this type, considered identical. If they have different embedded metadata (e.g. XMP, EXIF) the files will differ. Different external facts about the files, e.g. creator or dateCreated that aren't represented in their actual content, do not affect this notion of identity." ;
+    rdfs:subClassOf schema:ImageObject ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2450> .
+
 schema:ImagingTest a rdfs:Class ;
     rdfs:label "ImagingTest" ;
     rdfs:comment "Any medical imaging modality typically used for diagnostic purposes." ;
     rdfs:subClassOf schema:MedicalTest ;
     schema:isPartOf <https://health-lifesci.schema.org> .
-
-schema:inChI a rdf:Property .
-
-schema:inChIKey a rdf:Property .
-
-schema:smiles a rdf:Property .
 
 schema:IndividualProduct a rdfs:Class ;
     rdfs:label "IndividualProduct" ;
@@ -2515,11 +2619,25 @@ schema:Mass a rdfs:Class ;
     rdfs:comment "Properties that take Mass as values are of the form '&lt;Number&gt; &lt;Mass unit of measure&gt;'. E.g., '7 kg'." ;
     rdfs:subClassOf schema:Quantity .
 
+schema:MathSolver a rdfs:Class ;
+    rdfs:label "MathSolver" ;
+    rdfs:comment "A math solver which is capable of solving a subset of mathematical problems." ;
+    rdfs:subClassOf schema:CreativeWork ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2740> .
+
 schema:MaximumDoseSchedule a rdfs:Class ;
     rdfs:label "MaximumDoseSchedule" ;
     rdfs:comment "The maximum dosing schedule considered safe for a drug or supplement as recommended by an authority or by the drug/supplement's manufacturer. Capture the recommending authority in the recognizingAuthority property of MedicalEntity." ;
     rdfs:subClassOf schema:DoseSchedule ;
     schema:isPartOf <https://health-lifesci.schema.org> .
+
+schema:MeasurementTypeEnumeration a rdfs:Class ;
+    rdfs:label "MeasurementTypeEnumeration" ;
+    rdfs:comment "Enumeration of common measurement types (or dimensions), for example \"chest\" for a person, \"inseam\" for pants, \"gauge\" for screws, or \"wheel\" for bicycles." ;
+    rdfs:subClassOf schema:Enumeration ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
 
 schema:MediaGallery a rdfs:Class ;
     rdfs:label "MediaGallery" ;
@@ -2868,6 +2986,13 @@ schema:MerchantReturnPolicy a rdfs:Class ;
     schema:isPartOf <https://pending.schema.org> ;
     schema:source <https://github.com/schemaorg/schemaorg/issues/2288> .
 
+schema:MerchantReturnPolicySeasonalOverride a rdfs:Class ;
+    rdfs:label "MerchantReturnPolicySeasonalOverride" ;
+    rdfs:comment "A seasonal override of a return policy, for example used for holidays." ;
+    rdfs:subClassOf schema:Intangible ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2880> .
+
 schema:Message a rdfs:Class ;
     rdfs:label "Message" ;
     rdfs:comment "A single message from a sender to one or more organizations or people." ;
@@ -3185,6 +3310,13 @@ schema:Occupation a rdfs:Class ;
     rdfs:subClassOf schema:Intangible ;
     schema:source <https://github.com/schemaorg/schemaorg/issues/1698> .
 
+schema:OccupationalExperienceRequirements a rdfs:Class ;
+    rdfs:label "OccupationalExperienceRequirements" ;
+    rdfs:comment "Indicates employment-related experience requirements, e.g. [[monthsOfExperience]]." ;
+    rdfs:subClassOf schema:Intangible ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2681> .
+
 schema:OccupationalTherapy a rdfs:Class ;
     rdfs:label "OccupationalTherapy" ;
     rdfs:comment "A treatment of people with physical, emotional, or social problems, using purposeful activity to help them overcome or learn to deal with their problems." ;
@@ -3259,6 +3391,20 @@ schema:OnDemandEvent a rdfs:Class ;
     rdfs:label "OnDemandEvent" ;
     rdfs:comment "A publication event e.g. catch-up TV or radio podcast, during which a program is available on-demand." ;
     rdfs:subClassOf schema:PublicationEvent .
+
+schema:OnlineBusiness a rdfs:Class ;
+    rdfs:label "OnlineBusiness" ;
+    rdfs:comment "A particular online business, either standalone or the online part of a broader organization. Examples include an eCommerce site, an online travel booking site, an online learning site, an online logistics and shipping provider, an online (virtual) doctor, etc." ;
+    rdfs:subClassOf schema:Organization ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/3028> .
+
+schema:OnlineStore a rdfs:Class ;
+    rdfs:label "OnlineStore" ;
+    rdfs:comment "An eCommerce site." ;
+    rdfs:subClassOf schema:OnlineBusiness ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/3028> .
 
 schema:OpeningHoursSpecification a rdfs:Class ;
     rdfs:label "OpeningHoursSpecification" ;
@@ -3655,6 +3801,13 @@ schema:PriceSpecification a rdfs:Class ;
     rdfs:comment "A structured value representing a price or price range. Typically, only the subclasses of this type are used for markup. It is recommended to use [[MonetaryAmount]] to describe independent amounts of money such as a salary, credit card limits, etc." ;
     rdfs:subClassOf schema:StructuredValue ;
     schema:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsClass> .
+
+schema:PriceTypeEnumeration a rdfs:Class ;
+    rdfs:label "PriceTypeEnumeration" ;
+    rdfs:comment "Enumerates different price types, for example list price, invoice price, and sale price." ;
+    rdfs:subClassOf schema:Enumeration ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2712> .
 
 schema:Product a rdfs:Class ;
     rdfs:label "Product" ;
@@ -4098,6 +4251,20 @@ schema:ReturnFeesEnumeration a rdfs:Class ;
     schema:isPartOf <https://pending.schema.org> ;
     schema:source <https://github.com/schemaorg/schemaorg/issues/2288> .
 
+schema:ReturnLabelSourceEnumeration a rdfs:Class ;
+    rdfs:label "ReturnLabelSourceEnumeration" ;
+    rdfs:comment "Enumerates several types of return labels for product returns." ;
+    rdfs:subClassOf schema:Enumeration ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2880> .
+
+schema:ReturnMethodEnumeration a rdfs:Class ;
+    rdfs:label "ReturnMethodEnumeration" ;
+    rdfs:comment "Enumerates several types of product return methods." ;
+    rdfs:subClassOf schema:Enumeration ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2880> .
+
 schema:Review a rdfs:Class ;
     rdfs:label "Review" ;
     rdfs:comment "A review of an item - for example, of a restaurant, movie, or store." ;
@@ -4328,6 +4495,13 @@ schema:SiteNavigationElement a rdfs:Class ;
     rdfs:comment "A navigation element of the page." ;
     rdfs:subClassOf schema:WebPageElement .
 
+schema:SizeGroupEnumeration a rdfs:Class ;
+    rdfs:label "SizeGroupEnumeration" ;
+    rdfs:comment "Enumerates common size groups for various product categories." ;
+    rdfs:subClassOf schema:Enumeration ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
 schema:SizeSpecification a rdfs:Class ;
     rdfs:label "SizeSpecification" ;
     rdfs:comment "Size related properties of a product, typically a size code ([[name]]) and optionally a [[sizeSystem]], [[sizeGroup]], and product measurements ([[hasMeasurement]]). In addition, the intended audience can be defined through [[suggestedAge]], [[suggestedGender]], and suggested body measurements ([[suggestedMeasurement]])." ;
@@ -4367,6 +4541,13 @@ schema:SoftwareSourceCode a rdfs:Class ;
     rdfs:label "SoftwareSourceCode" ;
     rdfs:comment "Computer programming source code. Example: Full (compile ready) solutions, code snippet samples, scripts, templates." ;
     rdfs:subClassOf schema:CreativeWork .
+
+schema:SolveMathAction a rdfs:Class ;
+    rdfs:label "SolveMathAction" ;
+    rdfs:comment "The action that takes in a math expression and directs users to a page potentially capable of solving/simplifying that expression." ;
+    rdfs:subClassOf schema:Action ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2740> .
 
 schema:SomeProducts a rdfs:Class ;
     rdfs:label "SomeProducts" ;
@@ -4472,6 +4653,13 @@ schema:State a rdfs:Class ;
     rdfs:label "State" ;
     rdfs:comment "A state or province of a country." ;
     rdfs:subClassOf schema:AdministrativeArea .
+
+schema:Statement a rdfs:Class ;
+    rdfs:label "Statement" ;
+    rdfs:comment "A statement about something, for example a fun or interesting fact. If known, the main entity this statement is about, can be indicated using mainEntity. For more formal claims (e.g. in Fact Checking), consider using [[Claim]] instead. Use the [[text]] property to capture the text of the statement." ;
+    rdfs:subClassOf schema:CreativeWork ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2912> .
 
 schema:StatisticalPopulation a rdfs:Class ;
     rdfs:label "StatisticalPopulation" ;
@@ -4638,6 +4826,11 @@ schema:TennisComplex a rdfs:Class ;
     rdfs:label "TennisComplex" ;
     rdfs:comment "A tennis complex." ;
     rdfs:subClassOf schema:SportsActivityLocation .
+
+schema:Text a rdfs:Class,
+        schema:DataType ;
+    rdfs:label "Text" ;
+    rdfs:comment "Data type: Text." .
 
 schema:TextDigitalDocument a rdfs:Class ;
     rdfs:label "TextDigitalDocument" ;
@@ -4950,6 +5143,13 @@ schema:VideoObject a rdfs:Class ;
     rdfs:subClassOf schema:MediaObject ;
     schema:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_rNews> .
 
+schema:VideoObjectSnapshot a rdfs:Class ;
+    rdfs:label "VideoObjectSnapshot" ;
+    rdfs:comment "A specific and exact (byte-for-byte) version of a [[VideoObject]]. Two byte-for-byte identical files, for the purposes of this type, considered identical. If they have different embedded metadata the files will differ. Different external facts about the files, e.g. creator or dateCreated that aren't represented in their actual content, do not affect this notion of identity." ;
+    rdfs:subClassOf schema:VideoObject ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2450> .
+
 schema:ViewAction a rdfs:Class ;
     rdfs:label "ViewAction" ;
     rdfs:comment "The act of consuming static visual content." ;
@@ -5041,6 +5241,27 @@ schema:WearAction a rdfs:Class ;
     rdfs:label "WearAction" ;
     rdfs:comment "The act of dressing oneself in clothing." ;
     rdfs:subClassOf schema:UseAction .
+
+schema:WearableMeasurementTypeEnumeration a rdfs:Class ;
+    rdfs:label "WearableMeasurementTypeEnumeration" ;
+    rdfs:comment "Enumerates common types of measurement for wearables products." ;
+    rdfs:subClassOf schema:MeasurementTypeEnumeration ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableSizeGroupEnumeration a rdfs:Class ;
+    rdfs:label "WearableSizeGroupEnumeration" ;
+    rdfs:comment "Enumerates common size groups (also known as \"size types\") for wearable products." ;
+    rdfs:subClassOf schema:SizeGroupEnumeration ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableSizeSystemEnumeration a rdfs:Class ;
+    rdfs:label "WearableSizeSystemEnumeration" ;
+    rdfs:comment "Enumerates common size systems specific for wearable products" ;
+    rdfs:subClassOf schema:SizeSystemEnumeration ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
 
 schema:WebAPI a rdfs:Class ;
     rdfs:label "WebAPI" ;
@@ -5173,6 +5394,12 @@ schema:AnaerobicActivity a schema:PhysicalActivityCategory ;
     rdfs:comment "Physical activity that is of high-intensity which utilizes the anaerobic metabolism of the body." ;
     schema:isPartOf <https://health-lifesci.schema.org> .
 
+schema:AndroidPlatform a schema:DigitalPlatformEnumeration ;
+    rdfs:label "AndroidPlatform" ;
+    rdfs:comment "Represents the broad notion of Android-based operating systems." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/3057> .
+
 schema:Anesthesia a schema:MedicalSpecialty ;
     rdfs:label "Anesthesia" ;
     rdfs:comment "A specific branch of medical science that pertains to study of anesthetics and their application." ;
@@ -5225,6 +5452,84 @@ schema:BenefitsHealthAspect a schema:HealthAspectEnumeration ;
     rdfs:comment "Content about the benefits and advantages of usage or utilization of topic." ;
     schema:isPartOf <https://pending.schema.org> ;
     schema:source <https://github.com/schemaorg/schemaorg/issues/2374> .
+
+schema:BodyMeasurementArm a schema:BodyMeasurementTypeEnumeration ;
+    rdfs:label "BodyMeasurementArm" ;
+    rdfs:comment "Arm length (measured between arms/shoulder line intersection and the prominent wrist bone). Used, for example, to fit shirts." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:BodyMeasurementBust a schema:BodyMeasurementTypeEnumeration ;
+    rdfs:label "BodyMeasurementBust" ;
+    rdfs:comment "Maximum girth of bust. Used, for example, to fit women's suits." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:BodyMeasurementChest a schema:BodyMeasurementTypeEnumeration ;
+    rdfs:label "BodyMeasurementChest" ;
+    rdfs:comment "Maximum girth of chest. Used, for example, to fit men's suits." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:BodyMeasurementFoot a schema:BodyMeasurementTypeEnumeration ;
+    rdfs:label "BodyMeasurementFoot" ;
+    rdfs:comment "Foot length (measured between end of the most prominent toe and the most prominent part of the heel). Used, for example, to measure socks." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:BodyMeasurementHand a schema:BodyMeasurementTypeEnumeration ;
+    rdfs:label "BodyMeasurementHand" ;
+    rdfs:comment "Maximum hand girth (measured over the knuckles of the open right hand excluding thumb, fingers together). Used, for example, to fit gloves." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:BodyMeasurementHead a schema:BodyMeasurementTypeEnumeration ;
+    rdfs:label "BodyMeasurementHead" ;
+    rdfs:comment "Maximum girth of head above the ears. Used, for example, to fit hats." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:BodyMeasurementHeight a schema:BodyMeasurementTypeEnumeration ;
+    rdfs:label "BodyMeasurementHeight" ;
+    rdfs:comment "Body height (measured between crown of head and soles of feet). Used, for example, to fit jackets." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:BodyMeasurementHips a schema:BodyMeasurementTypeEnumeration ;
+    rdfs:label "BodyMeasurementHips" ;
+    rdfs:comment "Girth of hips (measured around the buttocks). Used, for example, to fit skirts." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:BodyMeasurementInsideLeg a schema:BodyMeasurementTypeEnumeration ;
+    rdfs:label "BodyMeasurementInsideLeg" ;
+    rdfs:comment "Inside leg (measured between crotch and soles of feet). Used, for example, to fit pants." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:BodyMeasurementNeck a schema:BodyMeasurementTypeEnumeration ;
+    rdfs:label "BodyMeasurementNeck" ;
+    rdfs:comment "Girth of neck. Used, for example, to fit shirts." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:BodyMeasurementUnderbust a schema:BodyMeasurementTypeEnumeration ;
+    rdfs:label "BodyMeasurementUnderbust" ;
+    rdfs:comment "Girth of body just below the bust. Used, for example, to fit women's swimwear." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:BodyMeasurementWaist a schema:BodyMeasurementTypeEnumeration ;
+    rdfs:label "BodyMeasurementWaist" ;
+    rdfs:comment "Girth of natural waistline (between hip bones and lower ribs). Used, for example, to fit pants." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:BodyMeasurementWeight a schema:BodyMeasurementTypeEnumeration ;
+    rdfs:label "BodyMeasurementWeight" ;
+    rdfs:comment "Body weight. Used, for example, to measure pantyhose." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
 
 schema:BroadcastRelease a schema:MusicAlbumReleaseType ;
     rdfs:label "BroadcastRelease" ;
@@ -5388,6 +5693,12 @@ schema:DemoAlbum a schema:MusicAlbumProductionType ;
     rdfs:comment "DemoAlbum." ;
     schema:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#MBZ> .
 
+schema:DemoGameAvailability a schema:GameAvailabilityEnumeration ;
+    rdfs:label "DemoGameAvailability" ;
+    rdfs:comment "Indicates demo game availability, i.e. a somehow limited demonstration of the full game." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/3058> .
+
 schema:Dentistry a schema:MedicalSpecialty ;
     rdfs:label "Dentistry" ;
     rdfs:comment "A branch of medicine that is involved in the dental care." ;
@@ -5398,6 +5709,12 @@ schema:Dermatologic a schema:MedicalSpecialty ;
     rdfs:comment "Something relating to or practicing dermatology." ;
     schema:isPartOf <https://health-lifesci.schema.org> ;
     schema:supersededBy schema:Dermatology .
+
+schema:DesktopWebPlatform a schema:DigitalPlatformEnumeration ;
+    rdfs:label "DesktopWebPlatform" ;
+    rdfs:comment "Represents the broad notion of 'desktop' browsers as a Web Platform." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/3057> .
 
 schema:DiabeticDiet a schema:RestrictedDiet ;
     rdfs:label "DiabeticDiet" ;
@@ -5466,6 +5783,66 @@ schema:EPRelease a schema:MusicAlbumReleaseType ;
     rdfs:comment "EPRelease." ;
     schema:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#MBZ> .
 
+schema:EUEnergyEfficiencyCategoryA a schema:EUEnergyEfficiencyEnumeration ;
+    rdfs:label "EUEnergyEfficiencyCategoryA" ;
+    rdfs:comment "Represents EU Energy Efficiency Class A as defined in EU energy labeling regulations." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2670> .
+
+schema:EUEnergyEfficiencyCategoryA1Plus a schema:EUEnergyEfficiencyEnumeration ;
+    rdfs:label "EUEnergyEfficiencyCategoryA1Plus" ;
+    rdfs:comment "Represents EU Energy Efficiency Class A+ as defined in EU energy labeling regulations." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2670> .
+
+schema:EUEnergyEfficiencyCategoryA2Plus a schema:EUEnergyEfficiencyEnumeration ;
+    rdfs:label "EUEnergyEfficiencyCategoryA2Plus" ;
+    rdfs:comment "Represents EU Energy Efficiency Class A++ as defined in EU energy labeling regulations." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2670> .
+
+schema:EUEnergyEfficiencyCategoryA3Plus a schema:EUEnergyEfficiencyEnumeration ;
+    rdfs:label "EUEnergyEfficiencyCategoryA3Plus" ;
+    rdfs:comment "Represents EU Energy Efficiency Class A+++ as defined in EU energy labeling regulations." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2670> .
+
+schema:EUEnergyEfficiencyCategoryB a schema:EUEnergyEfficiencyEnumeration ;
+    rdfs:label "EUEnergyEfficiencyCategoryB" ;
+    rdfs:comment "Represents EU Energy Efficiency Class B as defined in EU energy labeling regulations." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2670> .
+
+schema:EUEnergyEfficiencyCategoryC a schema:EUEnergyEfficiencyEnumeration ;
+    rdfs:label "EUEnergyEfficiencyCategoryC" ;
+    rdfs:comment "Represents EU Energy Efficiency Class C as defined in EU energy labeling regulations." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2670> .
+
+schema:EUEnergyEfficiencyCategoryD a schema:EUEnergyEfficiencyEnumeration ;
+    rdfs:label "EUEnergyEfficiencyCategoryD" ;
+    rdfs:comment "Represents EU Energy Efficiency Class D as defined in EU energy labeling regulations." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2670> .
+
+schema:EUEnergyEfficiencyCategoryE a schema:EUEnergyEfficiencyEnumeration ;
+    rdfs:label "EUEnergyEfficiencyCategoryE" ;
+    rdfs:comment "Represents EU Energy Efficiency Class E as defined in EU energy labeling regulations." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2670> .
+
+schema:EUEnergyEfficiencyCategoryF a schema:EUEnergyEfficiencyEnumeration ;
+    rdfs:label "EUEnergyEfficiencyCategoryF" ;
+    rdfs:comment "Represents EU Energy Efficiency Class F as defined in EU energy labeling regulations." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2670> .
+
+schema:EUEnergyEfficiencyCategoryG a schema:EUEnergyEfficiencyEnumeration ;
+    rdfs:label "EUEnergyEfficiencyCategoryG" ;
+    rdfs:comment "Represents EU Energy Efficiency Class G as defined in EU energy labeling regulations." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2670> .
+
 schema:Ear a schema:PhysicalExam ;
     rdfs:label "Ear" ;
     rdfs:comment "Ear function assessment with clinical examination." ;
@@ -5502,6 +5879,12 @@ schema:Endocrine a schema:MedicalSpecialty ;
     rdfs:label "Endocrine" ;
     rdfs:comment "A specific branch of medical science that pertains to diagnosis and treatment of disorders of endocrine glands and their secretions." ;
     schema:isPartOf <https://health-lifesci.schema.org> .
+
+schema:EnergyStarCertified a schema:EnergyStarEnergyEfficiencyEnumeration ;
+    rdfs:label "EnergyStarCertified" ;
+    rdfs:comment "Represents EnergyStar certification." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2670> .
 
 schema:EnrollingByInvitation a schema:MedicalStudyStatus ;
     rdfs:label "EnrollingByInvitation" ;
@@ -5622,6 +6005,12 @@ schema:FrontWheelDriveConfiguration a schema:DriveWheelConfigurationValue ;
     rdfs:comment "Front-wheel drive is a transmission layout where the engine drives the front wheels." ;
     schema:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#Automotive_Ontology_Working_Group> .
 
+schema:FullGameAvailability a schema:GameAvailabilityEnumeration ;
+    rdfs:label "FullGameAvailability" ;
+    rdfs:comment "Indicates full game availability." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/3058> .
+
 schema:FullRefund a schema:RefundTypeEnumeration ;
     rdfs:label "FullRefund" ;
     rdfs:comment "Specifies that a refund can be done in the full amount the customer paid for the product" ;
@@ -5637,6 +6026,12 @@ schema:Gastroenterologic a schema:MedicalSpecialty ;
     rdfs:label "Gastroenterologic" ;
     rdfs:comment "A specific branch of medical science that pertains to diagnosis and treatment of disorders of digestive system." ;
     schema:isPartOf <https://health-lifesci.schema.org> .
+
+schema:GenericWebPlatform a schema:DigitalPlatformEnumeration ;
+    rdfs:label "GenericWebPlatform" ;
+    rdfs:comment "Represents the generic notion of the Web Platform. More specific codes include [[MobileWebPlatform]] and [[DesktopWebPlatform]], as an incomplete list. " ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/3057> .
 
 schema:Genetic a schema:MedicalSpecialty ;
     rdfs:label "Genetic" ;
@@ -5734,6 +6129,12 @@ schema:HowOrWhereHealthAspect a schema:HealthAspectEnumeration ;
     schema:isPartOf <https://pending.schema.org> ;
     schema:source <https://github.com/schemaorg/schemaorg/issues/2374> .
 
+schema:IOSPlatform a schema:DigitalPlatformEnumeration ;
+    rdfs:label "IOSPlatform" ;
+    rdfs:comment "Represents the broad notion of iOS-based operating systems." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/3057> .
+
 schema:InForce a schema:LegalForceStatus ;
     rdfs:label "InForce" ;
     rdfs:comment "Indicates that a legislation is in force." ;
@@ -5771,6 +6172,12 @@ schema:InternationalTrial a schema:MedicalTrialDesign ;
     rdfs:label "InternationalTrial" ;
     rdfs:comment "An international trial." ;
     schema:isPartOf <https://health-lifesci.schema.org> .
+
+schema:InvoicePrice a schema:PriceTypeEnumeration ;
+    rdfs:label "InvoicePrice" ;
+    rdfs:comment "Represents the invoice price of an offered product." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2712> .
 
 schema:ItemListOrderAscending a schema:ItemListOrderType ;
     rdfs:label "ItemListOrderAscending" ;
@@ -5818,6 +6225,12 @@ schema:LimitedByGuaranteeCharity a schema:UKNonprofitType ;
     schema:isPartOf <https://pending.schema.org> ;
     schema:source <https://github.com/schemaorg/schemaorg/issues/2543> .
 
+schema:ListPrice a schema:PriceTypeEnumeration ;
+    rdfs:label "ListPrice" ;
+    rdfs:comment "Represents the list price (the price a product is actually advertised for) of an offered product." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2712> .
+
 schema:LiveAlbum a schema:MusicAlbumProductionType ;
     rdfs:label "LiveAlbum" ;
     rdfs:comment "LiveAlbum." ;
@@ -5864,6 +6277,12 @@ schema:MRI a schema:MedicalImagingTechnique ;
     rdfs:comment "Magnetic resonance imaging." ;
     schema:isPartOf <https://health-lifesci.schema.org> .
 
+schema:MSRP a schema:PriceTypeEnumeration ;
+    rdfs:label "MSRP" ;
+    rdfs:comment "Represents the manufacturer suggested retail price (\"MSRP\") of an offered product." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2712> .
+
 schema:Male a schema:GenderType ;
     rdfs:label "Male" ;
     rdfs:comment "The male gender." .
@@ -5909,6 +6328,12 @@ schema:Midwifery a schema:MedicalSpecialty ;
     rdfs:subClassOf schema:MedicalBusiness ;
     schema:isPartOf <https://health-lifesci.schema.org> .
 
+schema:MinimumAdvertisedPrice a schema:PriceTypeEnumeration ;
+    rdfs:label "MinimumAdvertisedPrice" ;
+    rdfs:comment "Represents the minimum advertised price (\"MAP\") (as dictated by the manufacturer) of an offered product." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2712> .
+
 schema:MisconceptionsHealthAspect a schema:HealthAspectEnumeration ;
     rdfs:label "MisconceptionsHealthAspect" ;
     rdfs:comment "Content about common misconceptions and myths that are related to a topic." ;
@@ -5925,6 +6350,12 @@ schema:MixtapeAlbum a schema:MusicAlbumProductionType ;
     rdfs:label "MixtapeAlbum" ;
     rdfs:comment "MixtapeAlbum." ;
     schema:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#MBZ> .
+
+schema:MobileWebPlatform a schema:DigitalPlatformEnumeration ;
+    rdfs:label "MobileWebPlatform" ;
+    rdfs:comment "Represents the broad notion of 'mobile' browsers as a Web Platform." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/3057> .
 
 schema:Monday a schema:DayOfWeek ;
     rdfs:label "Monday" ;
@@ -6691,9 +7122,45 @@ schema:Retail a schema:DrugCostCategory ;
     rdfs:comment "The drug's cost represents the retail cost of the drug." ;
     schema:isPartOf <https://health-lifesci.schema.org> .
 
+schema:ReturnAtKiosk a schema:ReturnMethodEnumeration ;
+    rdfs:label "ReturnAtKiosk" ;
+    rdfs:comment "Specifies that product returns must be made at a kiosk." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2880> .
+
+schema:ReturnByMail a schema:ReturnMethodEnumeration ;
+    rdfs:label "ReturnByMail" ;
+    rdfs:comment "Specifies that product returns must to be done by mail." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2880> .
+
 schema:ReturnFeesCustomerResponsibility a schema:ReturnFeesEnumeration ;
     rdfs:label "ReturnFeesCustomerResponsibility" ;
     rdfs:comment "Specifies that product returns must be paid for, and are the responsibility of, the customer." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2880> .
+
+schema:ReturnInStore a schema:ReturnMethodEnumeration ;
+    rdfs:label "ReturnInStore" ;
+    rdfs:comment "Specifies that product returns must be made in a store." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2880> .
+
+schema:ReturnLabelCustomerResponsibility a schema:ReturnLabelSourceEnumeration ;
+    rdfs:label "ReturnLabelCustomerResponsibility" ;
+    rdfs:comment "Indicated that creating a return label is the responsibility of the customer." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2880> .
+
+schema:ReturnLabelDownloadAndPrint a schema:ReturnLabelSourceEnumeration ;
+    rdfs:label "ReturnLabelDownloadAndPrint" ;
+    rdfs:comment "Indicated that a return label must be downloaded and printed by the customer." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2880> .
+
+schema:ReturnLabelInBox a schema:ReturnLabelSourceEnumeration ;
+    rdfs:label "ReturnLabelInBox" ;
+    rdfs:comment "Specifies that a return label will be provided by the seller in the shipping box." ;
     schema:isPartOf <https://pending.schema.org> ;
     schema:source <https://github.com/schemaorg/schemaorg/issues/2880> .
 
@@ -6731,11 +7198,23 @@ schema:RsvpResponseYes a schema:RsvpResponseType ;
     rdfs:label "RsvpResponseYes" ;
     rdfs:comment "The invitee will attend." .
 
+schema:SRP a schema:PriceTypeEnumeration ;
+    rdfs:label "SRP" ;
+    rdfs:comment "Represents the suggested retail price (\"SRP\") of an offered product." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2712> .
+
 schema:SafetyHealthAspect a schema:HealthAspectEnumeration ;
     rdfs:label "SafetyHealthAspect" ;
     rdfs:comment "Content about the safety-related aspects of a health topic." ;
     schema:isPartOf <https://pending.schema.org> ;
     schema:source <https://github.com/schemaorg/schemaorg/issues/2799> .
+
+schema:SalePrice a schema:PriceTypeEnumeration ;
+    rdfs:label "SalePrice" ;
+    rdfs:comment "Represents a sale price (usually active for a limited period) of an offered product." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2712> .
 
 schema:SatireOrParodyContent a schema:MediaManipulationRatingEnumeration ;
     rdfs:label "SatireOrParodyContent" ;
@@ -7087,6 +7566,264 @@ schema:WeaponConsideration a schema:AdultOrientedEnumeration ;
     schema:isPartOf <https://pending.schema.org> ;
     schema:source <https://github.com/schemaorg/schemaorg/issues/2989> .
 
+schema:WearableMeasurementBack a schema:WearableMeasurementTypeEnumeration ;
+    rdfs:label "WearableMeasurementBack" ;
+    rdfs:comment "Measurement of the back section, for example of a jacket" ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableMeasurementChestOrBust a schema:WearableMeasurementTypeEnumeration ;
+    rdfs:label "WearableMeasurementChestOrBust" ;
+    rdfs:comment "Measurement of the chest/bust section, for example of a suit" ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableMeasurementCollar a schema:WearableMeasurementTypeEnumeration ;
+    rdfs:label "WearableMeasurementCollar" ;
+    rdfs:comment "Measurement of the collar, for example of a shirt" ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableMeasurementCup a schema:WearableMeasurementTypeEnumeration ;
+    rdfs:label "WearableMeasurementCup" ;
+    rdfs:comment "Measurement of the cup, for example of a bra" ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableMeasurementHeight a schema:WearableMeasurementTypeEnumeration ;
+    rdfs:label "WearableMeasurementHeight" ;
+    rdfs:comment "Measurement of the height, for example the heel height of a shoe" ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableMeasurementHips a schema:WearableMeasurementTypeEnumeration ;
+    rdfs:label "WearableMeasurementHips" ;
+    rdfs:comment "Measurement of the hip section, for example of a skirt" ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableMeasurementInseam a schema:WearableMeasurementTypeEnumeration ;
+    rdfs:label "WearableMeasurementInseam" ;
+    rdfs:comment "Measurement of the inseam, for example of pants" ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableMeasurementLength a schema:WearableMeasurementTypeEnumeration ;
+    rdfs:label "WearableMeasurementLength" ;
+    rdfs:comment "Represents the length, for example of a dress" ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableMeasurementOutsideLeg a schema:WearableMeasurementTypeEnumeration ;
+    rdfs:label "WearableMeasurementOutsideLeg" ;
+    rdfs:comment "Measurement of the outside leg, for example of pants" ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableMeasurementSleeve a schema:WearableMeasurementTypeEnumeration ;
+    rdfs:label "WearableMeasurementSleeve" ;
+    rdfs:comment "Measurement of the sleeve length, for example of a shirt" ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableMeasurementWaist a schema:WearableMeasurementTypeEnumeration ;
+    rdfs:label "WearableMeasurementWaist" ;
+    rdfs:comment "Measurement of the waist section, for example of pants" ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableMeasurementWidth a schema:WearableMeasurementTypeEnumeration ;
+    rdfs:label "WearableMeasurementWidth" ;
+    rdfs:comment "Measurement of the width, for example of shoes" ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableSizeGroupBig a schema:WearableSizeGroupEnumeration ;
+    rdfs:label "WearableSizeGroupBig" ;
+    rdfs:comment "Size group \"Big\" for wearables." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableSizeGroupBoys a schema:WearableSizeGroupEnumeration ;
+    rdfs:label "WearableSizeGroupBoys" ;
+    rdfs:comment "Size group \"Boys\" for wearables." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableSizeGroupExtraShort a schema:WearableSizeGroupEnumeration ;
+    rdfs:label "WearableSizeGroupExtraShort" ;
+    rdfs:comment "Size group \"Extra Short\" for wearables." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableSizeGroupExtraTall a schema:WearableSizeGroupEnumeration ;
+    rdfs:label "WearableSizeGroupExtraTall" ;
+    rdfs:comment "Size group \"Extra Tall\" for wearables." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableSizeGroupGirls a schema:WearableSizeGroupEnumeration ;
+    rdfs:label "WearableSizeGroupGirls" ;
+    rdfs:comment "Size group \"Girls\" for wearables." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableSizeGroupHusky a schema:WearableSizeGroupEnumeration ;
+    rdfs:label "WearableSizeGroupHusky" ;
+    rdfs:comment "Size group \"Husky\" (or \"Stocky\") for wearables." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableSizeGroupInfants a schema:WearableSizeGroupEnumeration ;
+    rdfs:label "WearableSizeGroupInfants" ;
+    rdfs:comment "Size group \"Infants\" for wearables." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableSizeGroupJuniors a schema:WearableSizeGroupEnumeration ;
+    rdfs:label "WearableSizeGroupJuniors" ;
+    rdfs:comment "Size group \"Juniors\" for wearables." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableSizeGroupMaternity a schema:WearableSizeGroupEnumeration ;
+    rdfs:label "WearableSizeGroupMaternity" ;
+    rdfs:comment "Size group \"Maternity\" for wearables." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableSizeGroupMens a schema:WearableSizeGroupEnumeration ;
+    rdfs:label "WearableSizeGroupMens" ;
+    rdfs:comment "Size group \"Mens\" for wearables." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableSizeGroupMisses a schema:WearableSizeGroupEnumeration ;
+    rdfs:label "WearableSizeGroupMisses" ;
+    rdfs:comment "Size group \"Misses\" (also known as \"Missy\") for wearables." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableSizeGroupPetite a schema:WearableSizeGroupEnumeration ;
+    rdfs:label "WearableSizeGroupPetite" ;
+    rdfs:comment "Size group \"Petite\" for wearables." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableSizeGroupPlus a schema:WearableSizeGroupEnumeration ;
+    rdfs:label "WearableSizeGroupPlus" ;
+    rdfs:comment "Size group \"Plus\" for wearables." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableSizeGroupRegular a schema:WearableSizeGroupEnumeration ;
+    rdfs:label "WearableSizeGroupRegular" ;
+    rdfs:comment "Size group \"Regular\" for wearables." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableSizeGroupShort a schema:WearableSizeGroupEnumeration ;
+    rdfs:label "WearableSizeGroupShort" ;
+    rdfs:comment "Size group \"Short\" for wearables." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableSizeGroupTall a schema:WearableSizeGroupEnumeration ;
+    rdfs:label "WearableSizeGroupTall" ;
+    rdfs:comment "Size group \"Tall\" for wearables." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableSizeGroupWomens a schema:WearableSizeGroupEnumeration ;
+    rdfs:label "WearableSizeGroupWomens" ;
+    rdfs:comment "Size group \"Womens\" for wearables." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableSizeSystemAU a schema:WearableSizeSystemEnumeration ;
+    rdfs:label "WearableSizeSystemAU" ;
+    rdfs:comment "Australian size system for wearables." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableSizeSystemBR a schema:WearableSizeSystemEnumeration ;
+    rdfs:label "WearableSizeSystemBR" ;
+    rdfs:comment "Brazilian size system for wearables." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableSizeSystemCN a schema:WearableSizeSystemEnumeration ;
+    rdfs:label "WearableSizeSystemCN" ;
+    rdfs:comment "Chinese size system for wearables." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableSizeSystemContinental a schema:WearableSizeSystemEnumeration ;
+    rdfs:label "WearableSizeSystemContinental" ;
+    rdfs:comment "Continental size system for wearables." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableSizeSystemDE a schema:WearableSizeSystemEnumeration ;
+    rdfs:label "WearableSizeSystemDE" ;
+    rdfs:comment "German size system for wearables." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableSizeSystemEN13402 a schema:WearableSizeSystemEnumeration ;
+    rdfs:label "WearableSizeSystemEN13402" ;
+    rdfs:comment "EN 13402 (joint European standard for size labelling of clothes)." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableSizeSystemEurope a schema:WearableSizeSystemEnumeration ;
+    rdfs:label "WearableSizeSystemEurope" ;
+    rdfs:comment "European size system for wearables." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableSizeSystemFR a schema:WearableSizeSystemEnumeration ;
+    rdfs:label "WearableSizeSystemFR" ;
+    rdfs:comment "French size system for wearables." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableSizeSystemGS1 a schema:WearableSizeSystemEnumeration ;
+    rdfs:label "WearableSizeSystemGS1" ;
+    rdfs:comment "GS1 (formerly NRF) size system for wearables." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableSizeSystemIT a schema:WearableSizeSystemEnumeration ;
+    rdfs:label "WearableSizeSystemIT" ;
+    rdfs:comment "Italian size system for wearables." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableSizeSystemJP a schema:WearableSizeSystemEnumeration ;
+    rdfs:label "WearableSizeSystemJP" ;
+    rdfs:comment "Japanese size system for wearables." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableSizeSystemMX a schema:WearableSizeSystemEnumeration ;
+    rdfs:label "WearableSizeSystemMX" ;
+    rdfs:comment "Mexican size system for wearables." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableSizeSystemUK a schema:WearableSizeSystemEnumeration ;
+    rdfs:label "WearableSizeSystemUK" ;
+    rdfs:comment "United Kingdom size system for wearables." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
+schema:WearableSizeSystemUS a schema:WearableSizeSystemEnumeration ;
+    rdfs:label "WearableSizeSystemUS" ;
+    rdfs:comment "United States size system for wearables." ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
 schema:Wednesday a schema:DayOfWeek ;
     rdfs:label "Wednesday" ;
     rdfs:comment "The day of the week between Tuesday and Thursday." ;
@@ -7312,7 +8049,8 @@ schema:actionPlatform a rdf:Property ;
     rdfs:label "actionPlatform" ;
     rdfs:comment "The high level platform(s) where the Action can be performed for the given URL. To specify a specific application or operating system instance, use actionApplication." ;
     schema:domainIncludes schema:EntryPoint ;
-    schema:rangeIncludes schema:Text,
+    schema:rangeIncludes schema:DigitalPlatformEnumeration,
+        schema:Text,
         schema:URL .
 
 schema:actionStatus a rdf:Property ;
@@ -7665,6 +8403,15 @@ schema:appearance a rdf:Property ;
     schema:rangeIncludes schema:CreativeWork ;
     schema:source <https://github.com/schemaorg/schemaorg/issues/1828> .
 
+schema:applicableCountry a rdf:Property ;
+    rdfs:label "applicableCountry" ;
+    rdfs:comment "A country where a particular merchant return policy applies to, for example the two-letter ISO 3166-1 alpha-2 country code." ;
+    schema:domainIncludes schema:MerchantReturnPolicy ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:Country,
+        schema:Text ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/3001> .
+
 schema:applicableLocation a rdf:Property ;
     rdfs:label "applicableLocation" ;
     rdfs:comment "The location in which the status applies." ;
@@ -7746,6 +8493,15 @@ schema:appliesToPaymentMethod a rdf:Property ;
     schema:domainIncludes schema:PaymentChargeSpecification ;
     schema:rangeIncludes schema:PaymentMethod ;
     schema:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsTerms> .
+
+schema:archivedAt a rdf:Property ;
+    rdfs:label "archivedAt" ;
+    rdfs:comment "Indicates a page or other link involved in archival of a [[CreativeWork]]. In the case of [[MediaReview]], the items in a [[MediaReviewItem]] may often become inaccessible, but be archived by archival, journalistic, activist, or law enforcement organizations. In such cases, the referenced page may not directly publish the content." ;
+    schema:domainIncludes schema:CreativeWork ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:URL,
+        schema:WebPage ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2450> .
 
 schema:area a rdf:Property ;
     rdfs:label "area" ;
@@ -7899,6 +8655,15 @@ schema:associatedArticle a rdf:Property ;
     schema:domainIncludes schema:MediaObject ;
     schema:rangeIncludes schema:NewsArticle .
 
+schema:associatedClaimReview a rdf:Property ;
+    rdfs:label "associatedClaimReview" ;
+    rdfs:comment "An associated [[ClaimReview]], related by specific common content, topic or claim. The expectation is that this property would be most typically used in cases where a single activity is conducting both claim reviews and media reviews, in which case [[relatedMediaReview]] would commonly be used on a [[ClaimReview]], while [[relatedClaimReview]] would be used on [[MediaReview]]." ;
+    rdfs:subPropertyOf schema:associatedReview ;
+    schema:domainIncludes schema:Review ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:Review ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2450> .
+
 schema:associatedDisease a rdf:Property ;
     rdfs:label "associatedDisease" ;
     dcterms:source <http://www.bioschemas.org/BioChemEntity> ;
@@ -7912,8 +8677,19 @@ schema:associatedDisease a rdf:Property ;
 schema:associatedMedia a rdf:Property ;
     rdfs:label "associatedMedia" ;
     rdfs:comment "A media object that encodes this CreativeWork. This property is a synonym for encoding." ;
-    schema:domainIncludes schema:CreativeWork ;
+    schema:domainIncludes schema:CreativeWork,
+        schema:HyperToc,
+        schema:HyperTocEntry ;
     schema:rangeIncludes schema:MediaObject .
+
+schema:associatedMediaReview a rdf:Property ;
+    rdfs:label "associatedMediaReview" ;
+    rdfs:comment "An associated [[MediaReview]], related by specific common content, topic or claim. The expectation is that this property would be most typically used in cases where a single activity is conducting both claim reviews and media reviews, in which case [[relatedMediaReview]] would commonly be used on a [[ClaimReview]], while [[relatedClaimReview]] would be used on [[MediaReview]]." ;
+    rdfs:subPropertyOf schema:associatedReview ;
+    schema:domainIncludes schema:Review ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:Review ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2450> .
 
 schema:associatedPathophysiology a rdf:Property ;
     rdfs:label "associatedPathophysiology" ;
@@ -8691,6 +9467,23 @@ schema:checkoutTime a rdf:Property ;
     schema:rangeIncludes schema:DateTime,
         schema:Time .
 
+schema:chemicalComposition a rdf:Property ;
+    rdfs:label "chemicalComposition" ;
+    dcterms:source <http://www.bioschemas.org/ChemicalSubstance> ;
+    rdfs:comment "The chemical composition describes the identity and relative ratio of the chemical elements that make up the substance." ;
+    schema:domainIncludes schema:ChemicalSubstance ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:Text .
+
+schema:chemicalRole a rdf:Property ;
+    rdfs:label "chemicalRole" ;
+    dcterms:source <http://www.bioschemas.org/ChemicalSubstance> ;
+    rdfs:comment "A role played by the BioChemEntity within a chemical context." ;
+    schema:domainIncludes schema:ChemicalSubstance,
+        schema:MolecularEntity ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:DefinedTerm .
+
 schema:childMaxAge a rdf:Property ;
     rdfs:label "childMaxAge" ;
     rdfs:comment "Maximal age of the child." ;
@@ -9114,6 +9907,22 @@ schema:countriesSupported a rdf:Property ;
     schema:domainIncludes schema:SoftwareApplication ;
     schema:rangeIncludes schema:Text .
 
+schema:countryOfAssembly a rdf:Property ;
+    rdfs:label "countryOfAssembly" ;
+    rdfs:comment "The place where the product was assembled." ;
+    schema:domainIncludes schema:Product ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:Text ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/991> .
+
+schema:countryOfLastProcessing a rdf:Property ;
+    rdfs:label "countryOfLastProcessing" ;
+    rdfs:comment "The place where the item (typically [[Product]]) was last processed and tested before importation." ;
+    schema:domainIncludes schema:Product ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:Text ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/991> .
+
 schema:countryOfOrigin a rdf:Property ;
     rdfs:label "countryOfOrigin" ;
     rdfs:comment """The country of origin of something, including products as well as creative  works such as movie and TV content.
@@ -9254,6 +10063,30 @@ schema:customer a rdf:Property ;
         schema:Order ;
     schema:rangeIncludes schema:Organization,
         schema:Person .
+
+schema:customerRemorseReturnFees a rdf:Property ;
+    rdfs:label "customerRemorseReturnFees" ;
+    rdfs:comment "The type of return fees if the product is returned due to customer remorse." ;
+    schema:domainIncludes schema:MerchantReturnPolicy ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:ReturnFeesEnumeration ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2880> .
+
+schema:customerRemorseReturnLabelSource a rdf:Property ;
+    rdfs:label "customerRemorseReturnLabelSource" ;
+    rdfs:comment "The method (from an enumeration) by which the customer obtains a return shipping label for a product returned due to customer remorse." ;
+    schema:domainIncludes schema:MerchantReturnPolicy ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:ReturnLabelSourceEnumeration ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2880> .
+
+schema:customerRemorseReturnShippingFeesAmount a rdf:Property ;
+    rdfs:label "customerRemorseReturnShippingFeesAmount" ;
+    rdfs:comment "The amount of shipping costs if a product is returned due to customer remorse. Applicable when property [[customerRemorseReturnFees]] equals [[ReturnShippingFees]]." ;
+    schema:domainIncludes schema:MerchantReturnPolicy ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:MonetaryAmount ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2880> .
 
 schema:cutoffTime a rdf:Property ;
     rdfs:label "cutoffTime" ;
@@ -9668,6 +10501,14 @@ schema:differentialDiagnosis a rdf:Property ;
     schema:isPartOf <https://health-lifesci.schema.org> ;
     schema:rangeIncludes schema:DDxElement .
 
+schema:directApply a rdf:Property ;
+    rdfs:label "directApply" ;
+    rdfs:comment "Indicates whether an [[url]] that is associated with a [[JobPosting]] enables direct application for the job, via the posting website. A job posting is considered to have directApply of [[True]] if an application process for the specified job can be directly initiated via the url(s) given (noting that e.g. multiple internet domains might nevertheless be involved at an implementation level). A value of [[False]] is appropriate if there is no clear path to applying directly online for the specified job, navigating directly from the JobPosting url(s) supplied." ;
+    schema:domainIncludes schema:JobPosting ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:Boolean ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2907> .
+
 schema:directors a rdf:Property ;
     rdfs:label "directors" ;
     rdfs:comment "A director of e.g. tv, radio, movie, video games etc. content. Directors can be associated with individual items or with a series, episode, clip." ;
@@ -10000,7 +10841,8 @@ schema:editor a rdf:Property ;
 schema:eduQuestionType a rdf:Property ;
     rdfs:label "eduQuestionType" ;
     rdfs:comment "For questions that are part of learning resources (e.g. Quiz), eduQuestionType indicates the format of question being given. Example: \"Multiple choice\", \"Open ended\", \"Flashcard\"." ;
-    schema:domainIncludes schema:Question ;
+    schema:domainIncludes schema:Question,
+        schema:SolveMathAction ;
     schema:isPartOf <https://pending.schema.org> ;
     schema:rangeIncludes schema:Text ;
     schema:source <https://github.com/schemaorg/schemaorg/issues/2636> .
@@ -10225,6 +11067,7 @@ schema:endDate a rdf:Property ;
         schema:DatedMoneySpecification,
         schema:EducationalOccupationalProgram,
         schema:Event,
+        schema:MerchantReturnPolicySeasonalOverride,
         schema:Role,
         schema:Schedule ;
     schema:rangeIncludes schema:Date,
@@ -10236,7 +11079,8 @@ schema:endOffset a rdf:Property ;
     rdfs:comment "The end time of the clip expressed as the number of seconds from the beginning of the work." ;
     schema:domainIncludes schema:Clip ;
     schema:isPartOf <https://pending.schema.org> ;
-    schema:rangeIncludes schema:Number ;
+    schema:rangeIncludes schema:HyperTocEntry,
+        schema:Number ;
     schema:source <https://github.com/schemaorg/schemaorg/issues/2021> .
 
 schema:endTime a rdf:Property ;
@@ -10266,6 +11110,22 @@ schema:endorsers a rdf:Property ;
     schema:isPartOf <https://health-lifesci.schema.org> ;
     schema:rangeIncludes schema:Organization,
         schema:Person .
+
+schema:energyEfficiencyScaleMax a rdf:Property ;
+    rdfs:label "energyEfficiencyScaleMax" ;
+    rdfs:comment "Specifies the most energy efficient class on the regulated EU energy consumption scale for the product category a product belongs to. For example, energy consumption for televisions placed on the market after January 1, 2020 is scaled from D to A+++." ;
+    schema:domainIncludes schema:EnergyConsumptionDetails ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:EUEnergyEfficiencyEnumeration ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2670> .
+
+schema:energyEfficiencyScaleMin a rdf:Property ;
+    rdfs:label "energyEfficiencyScaleMin" ;
+    rdfs:comment "Specifies the least energy efficient class on the regulated EU energy consumption scale for the product category a product belongs to. For example, energy consumption for televisions placed on the market after January 1, 2020 is scaled from D to A+++." ;
+    schema:domainIncludes schema:EnergyConsumptionDetails ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:EUEnergyEfficiencyEnumeration ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2670> .
 
 schema:engineDisplacement a rdf:Property ;
     rdfs:label "engineDisplacement" ;
@@ -10514,12 +11374,21 @@ schema:expectsAcceptanceOf a rdf:Property ;
     schema:rangeIncludes schema:Offer ;
     schema:source <https://github.com/schemaorg/schemaorg/issues/1741> .
 
+schema:experienceInPlaceOfEducation a rdf:Property ;
+    rdfs:label "experienceInPlaceOfEducation" ;
+    rdfs:comment "Indicates whether a [[JobPosting]] will accept experience (as indicated by [[OccupationalExperienceRequirements]]) in place of its formal educational qualifications (as indicated by [[educationRequirements]]). If true, indicates that satisfying one of these requirements is sufficient." ;
+    schema:domainIncludes schema:JobPosting ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:Boolean ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2681> .
+
 schema:experienceRequirements a rdf:Property ;
     rdfs:label "experienceRequirements" ;
     rdfs:comment "Description of skills and experience needed for the position or Occupation." ;
     schema:domainIncludes schema:JobPosting,
         schema:Occupation ;
-    schema:rangeIncludes schema:Text ;
+    schema:rangeIncludes schema:OccupationalExperienceRequirements,
+        schema:Text ;
     schema:source <https://github.com/schemaorg/schemaorg/issues/1698> .
 
 schema:expertConsiderations a rdf:Property ;
@@ -10534,6 +11403,17 @@ schema:expires a rdf:Property ;
     rdfs:comment "Date the content expires and is no longer useful or available. For example a [[VideoObject]] or [[NewsArticle]] whose availability or relevance is time-limited, or a [[ClaimReview]] fact check whose publisher wants to indicate that it may no longer be relevant (or helpful to highlight) after some date." ;
     schema:domainIncludes schema:CreativeWork ;
     schema:rangeIncludes schema:Date .
+
+schema:expressedIn a rdf:Property ;
+    rdfs:label "expressedIn" ;
+    dcterms:source <http://www.bioschemas.org/Gene> ;
+    rdfs:comment "Tissue, organ, biological sample, etc in which activity of this gene has been observed experimentally. For example brain, digestive system." ;
+    schema:domainIncludes schema:Gene ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:AnatomicalStructure,
+        schema:AnatomicalSystem,
+        schema:BioChemEntity,
+        schema:DefinedTerm .
 
 schema:familyName a rdf:Property ;
     rdfs:label "familyName" ;
@@ -10797,6 +11677,15 @@ schema:funder a rdf:Property ;
         schema:Person ;
     schema:rangeIncludes schema:Organization,
         schema:Person .
+
+schema:gameAvailabilityType a rdf:Property ;
+    rdfs:label "gameAvailabilityType" ;
+    rdfs:comment "Indicates the availability type of the game content associated with this action, such as whether it is a full version or a demo." ;
+    schema:domainIncludes schema:PlayGameAction ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:GameAvailabilityEnumeration,
+        schema:Text ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/3058> .
 
 schema:gameEdition a rdf:Property ;
     rdfs:label "gameEdition" ;
@@ -11161,6 +12050,22 @@ schema:hasDriveThroughService a rdf:Property ;
     schema:rangeIncludes schema:Boolean ;
     schema:source <https://github.com/schemaorg/schemaorg/issues/2490> .
 
+schema:hasEnergyConsumptionDetails a rdf:Property ;
+    rdfs:label "hasEnergyConsumptionDetails" ;
+    rdfs:comment "Defines the energy efficiency Category (also known as \"class\" or \"rating\") for a product according to an international energy efficiency standard." ;
+    schema:domainIncludes schema:Product ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:EnergyConsumptionDetails ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2670> .
+
+schema:hasEnergyEfficiencyCategory a rdf:Property ;
+    rdfs:label "hasEnergyEfficiencyCategory" ;
+    rdfs:comment "Defines the energy efficiency Category (which could be either a rating out of range of values or a yes/no certification) for a product according to an international energy efficiency standard." ;
+    schema:domainIncludes schema:EnergyConsumptionDetails ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:EnergyEfficiencyEnumeration ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2670> .
+
 schema:hasHealthAspect a rdf:Property ;
     rdfs:label "hasHealthAspect" ;
     rdfs:comment "Indicates the aspect or aspects specifically addressed in some [[HealthTopicContent]]. For example, that the content is an overview, or that it talks about treatment, self-care, treatments or their side-effects." ;
@@ -11496,6 +12401,24 @@ schema:inBroadcastLineup a rdf:Property ;
     schema:domainIncludes schema:BroadcastChannel ;
     schema:rangeIncludes schema:CableOrSatelliteService .
 
+schema:inChI a rdf:Property ;
+    rdfs:label "inChI" ;
+    dcterms:source <http://www.bioschemas.org/MolecularEntity> ;
+    rdfs:comment "Non-proprietary identifier for molecular entity that can be used in printed and electronic data sources thus enabling easier linking of diverse data compilations." ;
+    rdfs:subPropertyOf schema:hasRepresentation ;
+    schema:domainIncludes schema:MolecularEntity ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:Text .
+
+schema:inChIKey a rdf:Property ;
+    rdfs:label "inChIKey" ;
+    dcterms:source <http://www.bioschemas.org/MolecularEntity> ;
+    rdfs:comment "InChIKey is a hashed version of the full InChI (using the SHA-256 algorithm)." ;
+    rdfs:subPropertyOf schema:hasRepresentation ;
+    schema:domainIncludes schema:MolecularEntity ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:Text .
+
 schema:inCodeSet a rdf:Property ;
     rdfs:label "inCodeSet" ;
     rdfs:comment "A [[CategoryCodeSet]] that contains this category code." ;
@@ -11732,6 +12655,16 @@ schema:interestRate a rdf:Property ;
         schema:QuantitativeValue ;
     schema:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#FIBO> .
 
+schema:interpretedAsClaim a rdf:Property ;
+    rdfs:label "interpretedAsClaim" ;
+    rdfs:comment "Used to indicate a specific claim contained, implied, translated or refined from the content of a [[MediaObject]] or other [[CreativeWork]]. The interpreting party can be indicated using [[claimInterpreter]]." ;
+    rdfs:subPropertyOf schema:description ;
+    schema:domainIncludes schema:CreativeWork,
+        schema:MediaObject ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:Claim ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2450> .
+
 schema:inventoryLevel a rdf:Property ;
     rdfs:label "inventoryLevel" ;
     rdfs:comment "The current approximate inventory level for the item or items." ;
@@ -11894,6 +12827,14 @@ schema:isicV4 a rdf:Property ;
     schema:rangeIncludes schema:Text ;
     schema:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsTerms> .
 
+schema:iso6523Code a rdf:Property ;
+    rdfs:label "iso6523Code" ;
+    rdfs:comment "An organization identifier as defined in ISO 6523(-1). Note that many existing organization identifiers such as [leiCode](https://schema.org/leiCode), [duns](https://schema.org/duns) and [vatID](https://schema.org/vatID) can be expressed as an ISO 6523 identifier by setting the ICD part of the ISO 6523 identifier accordingly. " ;
+    schema:domainIncludes schema:Organization ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:Text ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2915> .
+
 schema:isrcCode a rdf:Property ;
     rdfs:label "isrcCode" ;
     rdfs:comment "The International Standard Recording Code for the recording." ;
@@ -11958,6 +12899,30 @@ schema:itemCondition a rdf:Property ;
         schema:Offer,
         schema:Product ;
     schema:rangeIncludes schema:OfferItemCondition .
+
+schema:itemDefectReturnFees a rdf:Property ;
+    rdfs:label "itemDefectReturnFees" ;
+    rdfs:comment "The type of return fees for returns of defect products." ;
+    schema:domainIncludes schema:MerchantReturnPolicy ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:ReturnFeesEnumeration ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2880> .
+
+schema:itemDefectReturnLabelSource a rdf:Property ;
+    rdfs:label "itemDefectReturnLabelSource" ;
+    rdfs:comment "The method (from an enumeration) by which the customer obtains a return shipping label for a defect product." ;
+    schema:domainIncludes schema:MerchantReturnPolicy ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:ReturnLabelSourceEnumeration ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2880> .
+
+schema:itemDefectReturnShippingFeesAmount a rdf:Property ;
+    rdfs:label "itemDefectReturnShippingFeesAmount" ;
+    rdfs:comment "Amount of shipping costs for defect product returns. Applicable when property [[itemDefectReturnFees]] equals [[ReturnShippingFees]]." ;
+    schema:domainIncludes schema:MerchantReturnPolicy ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:MonetaryAmount ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2880> .
 
 schema:itemListElement a rdf:Property ;
     rdfs:label "itemListElement" ;
@@ -12587,6 +13552,15 @@ schema:materialExtent a rdf:Property ;
         schema:Text ;
     schema:source <https://github.com/schemaorg/schemaorg/issues/1759> .
 
+schema:mathExpression a rdf:Property ;
+    rdfs:label "mathExpression" ;
+    rdfs:comment "A mathematical expression (e.g. 'x^2-3x=0') that may be solved for a specific variable, simplified, or transformed. This can take many formats, e.g. LaTeX, Ascii-Math, or math as you would write with a keyboard." ;
+    schema:domainIncludes schema:MathSolver ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:SolveMathAction,
+        schema:Text ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2740> .
+
 schema:maxPrice a rdf:Property ;
     rdfs:label "maxPrice" ;
     rdfs:comment "The highest price if the price is a range." ;
@@ -12703,6 +13677,14 @@ schema:mediaAuthenticityCategory a rdf:Property ;
     schema:rangeIncludes schema:MediaManipulationRatingEnumeration ;
     schema:source <https://github.com/schemaorg/schemaorg/issues/2450> .
 
+schema:mediaItemAppearance a rdf:Property ;
+    rdfs:label "mediaItemAppearance" ;
+    rdfs:comment "In the context of a [[MediaReview]], indicates specific media item(s) that are grouped using a [[MediaReviewItem]]." ;
+    schema:domainIncludes schema:MediaReviewItem ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:MediaObject ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2450> .
+
 schema:median a rdf:Property ;
     rdfs:label "median" ;
     rdfs:comment "The median value." ;
@@ -12810,7 +13792,8 @@ schema:merchant a rdf:Property ;
 schema:merchantReturnDays a rdf:Property ;
     rdfs:label "merchantReturnDays" ;
     rdfs:comment "Specifies either a fixed return date or the number of days (from the delivery date) that a product can be returned. Used when the [[returnPolicyCategory]] property is specified as [[MerchantReturnFiniteReturnWindow]]." ;
-    schema:domainIncludes schema:MerchantReturnPolicy;
+    schema:domainIncludes schema:MerchantReturnPolicy,
+        schema:MerchantReturnPolicySeasonalOverride ;
     schema:isPartOf <https://pending.schema.org> ;
     schema:rangeIncludes schema:Date,
         schema:DateTime,
@@ -12933,6 +13916,7 @@ schema:monthlyMinimumRepaymentAmount a rdf:Property ;
 schema:monthsOfExperience a rdf:Property ;
     rdfs:label "monthsOfExperience" ;
     rdfs:comment "Indicates the minimal number of months of experience required for a position." ;
+    schema:domainIncludes schema:OccupationalExperienceRequirements ;
     schema:isPartOf <https://pending.schema.org> ;
     schema:rangeIncludes schema:Number ;
     schema:source <https://github.com/schemaorg/schemaorg/issues/2681> .
@@ -13045,6 +14029,17 @@ schema:naturalProgression a rdf:Property ;
     schema:domainIncludes schema:MedicalCondition ;
     schema:isPartOf <https://health-lifesci.schema.org> ;
     schema:rangeIncludes schema:Text .
+
+schema:negativeNotes a rdf:Property ;
+    rdfs:label "negativeNotes" ;
+    rdfs:comment "Indicates, in the context of a [[Review]] (e.g. framed as 'pro' vs 'con' considerations), negative considerations - either as unstructured text, or a list." ;
+    schema:domainIncludes schema:Review ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:ItemList,
+        schema:ListItem,
+        schema:Text,
+        schema:WebContent ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2832> .
 
 schema:nerve a rdf:Property ;
     rdfs:label "nerve" ;
@@ -13539,6 +14534,15 @@ schema:originAddress a rdf:Property ;
     schema:domainIncludes schema:ParcelDelivery ;
     schema:rangeIncludes schema:PostalAddress .
 
+schema:originalMediaContextDescription a rdf:Property ;
+    rdfs:label "originalMediaContextDescription" ;
+    rdfs:comment "Describes, in a [[MediaReview]] when dealing with [[DecontextualizedContent]], background information that can contribute to better interpretation of the [[MediaObject]]." ;
+    rdfs:subPropertyOf schema:description ;
+    schema:domainIncludes schema:MediaReview ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:Text ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2450> .
+
 schema:originalMediaLink a rdf:Property ;
     rdfs:label "originalMediaLink" ;
     rdfs:comment "Link to the page containing an original version of the content, or directly to an online copy of the original [[MediaObject]] content, e.g. video file." ;
@@ -13953,6 +14957,17 @@ schema:populationType a rdf:Property ;
     schema:rangeIncludes schema:Class ;
     schema:source <https://github.com/schemaorg/schemaorg/issues/2291> .
 
+schema:positiveNotes a rdf:Property ;
+    rdfs:label "positiveNotes" ;
+    rdfs:comment "Indicates, in the context of a [[Review]] (e.g. framed as 'pro' vs 'con' considerations), positive considerations - either as unstructured text, or a list." ;
+    schema:domainIncludes schema:Review ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:ItemList,
+        schema:ListItem,
+        schema:Text,
+        schema:WebContent ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2832> .
+
 schema:possibleComplication a rdf:Property ;
     rdfs:label "possibleComplication" ;
     rdfs:comment "A possible unexpected and unfavorable evolution of a medical condition. Complications may include worsening of the signs or symptoms of the disease, extension of the condition to other organ systems, etc." ;
@@ -14160,10 +15175,10 @@ schema:priceSpecification a rdf:Property ;
 
 schema:priceType a rdf:Property ;
     rdfs:label "priceType" ;
-    rdfs:comment "Defines the type of a price specified for an offered product, for example a list price, a (temporary) sale price or a manufacturer suggested retail price." ;
+    rdfs:comment "Defines the type of a price specified for an offered product, for example a list price, a (temporary) sale price or a manufacturer suggested retail price. If multiple prices are specified for an offer the [[priceType]] property can be used to identify the type of each such specified price. The value of priceType can be specified as a value from enumeration PriceTypeEnumeration or as a free form text string for price types that are not already predefined in PriceTypeEnumeration." ;
     schema:domainIncludes schema:CompoundPriceSpecification,
         schema:UnitPriceSpecification ;
-    schema:rangeIncludes schema:PriceSpecification ,
+    schema:rangeIncludes schema:PriceTypeEnumeration,
         schema:Text ;
     schema:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsTerms> .
 
@@ -14928,6 +15943,64 @@ schema:resultReview a rdf:Property ;
     schema:domainIncludes schema:ReviewAction ;
     schema:rangeIncludes schema:Review .
 
+schema:returnFees a rdf:Property ;
+    rdfs:label "returnFees" ;
+    rdfs:comment "The type of return fees for purchased products (for any return reason)" ;
+    schema:domainIncludes schema:MerchantReturnPolicy ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:ReturnFeesEnumeration ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2288> .
+
+schema:returnLabelSource a rdf:Property ;
+    rdfs:label "returnLabelSource" ;
+    rdfs:comment "The method (from an enumeration) by which the customer obtains a return shipping label for a product returned for any reason." ;
+    schema:domainIncludes schema:MerchantReturnPolicy ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:ReturnLabelSourceEnumeration ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2880> .
+
+schema:returnMethod a rdf:Property ;
+    rdfs:label "returnMethod" ;
+    rdfs:comment "The type of return method offered, specified from an enumeration." ;
+    schema:domainIncludes schema:MerchantReturnPolicy ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:ReturnMethodEnumeration ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2880> .
+
+schema:returnPolicyCategory a rdf:Property ;
+    rdfs:label "returnPolicyCategory" ;
+    rdfs:comment "Specifies an applicable return policy (from an enumeration)." ;
+    schema:domainIncludes schema:MerchantReturnPolicy,
+        schema:MerchantReturnPolicySeasonalOverride ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:MerchantReturnEnumeration ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2288> .
+
+schema:returnPolicyCountry a rdf:Property ;
+    rdfs:label "returnPolicyCountry" ;
+    rdfs:comment "The country where the product has to be sent to for returns, for example \"Ireland\" using the [[name]] property of [[Country]]. You can also provide the two-letter [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1). Note that this can be different from the country where the product was originally shipped from or sent too." ;
+    schema:domainIncludes schema:MerchantReturnPolicy ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:Country,
+        schema:Text ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2880> .
+
+schema:returnPolicySeasonalOverride a rdf:Property ;
+    rdfs:label "returnPolicySeasonalOverride" ;
+    rdfs:comment "Seasonal override of a return policy." ;
+    schema:domainIncludes schema:MerchantReturnPolicy ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:MerchantReturnPolicySeasonalOverride ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2880> .
+
+schema:returnShippingFeesAmount a rdf:Property ;
+    rdfs:label "returnShippingFeesAmount" ;
+    rdfs:comment "Amount of shipping costs for product returns (for any reason). Applicable when property [[returnFees]] equals [[ReturnShippingFees]]." ;
+    schema:domainIncludes schema:MerchantReturnPolicy ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:MonetaryAmount ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2880> .
+
 schema:reviewAspect a rdf:Property ;
     rdfs:label "reviewAspect" ;
     rdfs:comment "This Review or Rating is relevant to this part or facet of the itemReviewed." ;
@@ -15433,6 +16506,15 @@ schema:size a rdf:Property ;
         schema:Text ;
     schema:source <https://github.com/schemaorg/schemaorg/issues/1797> .
 
+schema:sizeGroup a rdf:Property ;
+    rdfs:label "sizeGroup" ;
+    rdfs:comment "The size group (also known as \"size type\") for a product's size. Size groups are common in the fashion industry to define size segments and suggested audiences for wearable products. Multiple values can be combined, for example \"men's big and tall\", \"petite maternity\" or \"regular\"" ;
+    schema:domainIncludes schema:SizeSpecification ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:SizeGroupEnumeration,
+        schema:Text ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2811> .
+
 schema:sizeSystem a rdf:Property ;
     rdfs:label "sizeSystem" ;
     rdfs:comment "The size system used to identify a product's size. Typically either a standard (for example, \"GS1\" or \"ISO-EN13402\"), country code (for example \"US\" or \"JP\"), or a measuring system (for example \"Metric\" or \"Imperial\")." ;
@@ -15470,6 +16552,15 @@ schema:slogan a rdf:Property ;
         schema:Place,
         schema:Product,
         schema:Service ;
+    schema:rangeIncludes schema:Text .
+
+schema:smiles a rdf:Property ;
+    rdfs:label "smiles" ;
+    dcterms:source <http://www.bioschemas.org/MolecularEntity> ;
+    rdfs:comment "A specification in form of a line notation for describing the structure of chemical species using short ASCII strings.  Double bond stereochemistry \\ indicators may need to be escaped in the string in formats where the backslash is an escape character." ;
+    rdfs:subPropertyOf schema:hasRepresentation ;
+    schema:domainIncludes schema:MolecularEntity ;
+    schema:isPartOf <https://pending.schema.org> ;
     schema:rangeIncludes schema:Text .
 
 schema:smokingAllowed a rdf:Property ;
@@ -15657,6 +16748,7 @@ schema:startDate a rdf:Property ;
         schema:DatedMoneySpecification,
         schema:EducationalOccupationalProgram,
         schema:Event,
+        schema:MerchantReturnPolicySeasonalOverride,
         schema:Role,
         schema:Schedule ;
     schema:rangeIncludes schema:Date,
@@ -15669,7 +16761,8 @@ schema:startOffset a rdf:Property ;
     schema:domainIncludes schema:Clip,
         schema:SeekToAction ;
     schema:isPartOf <https://pending.schema.org> ;
-    schema:rangeIncludes schema:Number ;
+    schema:rangeIncludes schema:HyperTocEntry,
+        schema:Number ;
     schema:source <https://github.com/schemaorg/schemaorg/issues/2021> .
 
 schema:startTime a rdf:Property ;
@@ -16167,6 +17260,23 @@ schema:toRecipient a rdf:Property ;
         schema:Organization,
         schema:Person .
 
+schema:tocContinuation a rdf:Property ;
+    rdfs:label "tocContinuation" ;
+    rdfs:comment "A [[HyperTocEntry]] can have a [[tocContinuation]] indicated, which is another [[HyperTocEntry]] that would be the default next item to play or render." ;
+    schema:domainIncludes schema:HyperTocEntry ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:HyperTocEntry ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2766> .
+
+schema:tocEntry a rdf:Property ;
+    rdfs:label "tocEntry" ;
+    rdfs:comment "Indicates a [[HyperTocEntry]] in a [[HyperToc]]." ;
+    rdfs:subPropertyOf schema:hasPart ;
+    schema:domainIncludes schema:HyperToc ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:HyperTocEntry ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2766> .
+
 schema:tongueWeight a rdf:Property ;
     rdfs:label "tongueWeight" ;
     rdfs:comment "The permitted vertical load (TWR) of a trailer attached to the vehicle. Also referred to as Tongue Load Rating (TLR) or Vertical Load Rating (VLR)\\n\\nTypical unit code(s): KGM for kilogram, LBR for pound\\n\\n* Note 1: You can indicate additional information in the [[name]] of the [[QuantitativeValue]] node.\\n* Note 2: You may also link to a [[QualitativeValue]] node that provides additional information using [[valueReference]].\\n* Note 3: Note that you can use [[minValue]] and [[maxValue]] to indicate ranges." ;
@@ -16515,6 +17625,14 @@ schema:usesHealthPlanIdStandard a rdf:Property ;
         schema:URL ;
     schema:source <https://github.com/schemaorg/schemaorg/issues/1062> .
 
+schema:utterances a rdf:Property ;
+    rdfs:label "utterances" ;
+    rdfs:comment "Text of an utterances (spoken words, lyrics etc.) that occurs at a certain section of a media object, represented as a [[HyperTocEntry]]." ;
+    schema:domainIncludes schema:HyperTocEntry ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:Text ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2766> .
+
 schema:validFor a rdf:Property ;
     rdfs:label "validFor" ;
     rdfs:comment "The duration of validity of a permit or similar thing." ;
@@ -16616,6 +17734,7 @@ schema:valueReference a rdf:Property ;
         schema:QuantitativeValue ;
     schema:rangeIncludes schema:DefinedTerm,
         schema:Enumeration,
+        schema:MeasurementTypeEnumeration,
         schema:PropertyValue,
         schema:QualitativeValue,
         schema:QuantitativeValue,
@@ -17978,6 +19097,14 @@ schema:actor a rdf:Property ;
         schema:VideoGameSeries,
         schema:VideoObject ;
     schema:rangeIncludes schema:Person .
+
+schema:associatedReview a rdf:Property ;
+    rdfs:label "associatedReview" ;
+    rdfs:comment "An associated [[Review]]." ;
+    schema:domainIncludes schema:Review ;
+    schema:isPartOf <https://pending.schema.org> ;
+    schema:rangeIncludes schema:Review ;
+    schema:source <https://github.com/schemaorg/schemaorg/issues/2450> .
 
 schema:competitor a rdf:Property ;
     rdfs:label "competitor" ;
