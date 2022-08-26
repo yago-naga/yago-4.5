@@ -4,20 +4,18 @@ Creates the YAGO 4 taxonomy from the Wikidata taxonomy and the YAGO 4 schema
 (c) 2021 Fabian M. Suchanek
 
 Call:
-  python3 01-make-taxonomy.py
+  python3 02-make-taxonomy.py
 
 Input:
-- a folder "input-data" with 
-  - the hard-coded YAGO top-level taxonomy
-  - a wikidata file 00-wikidata.ttl.gz
+- 00-wikidata.ttl(.gz), the Wikidata file
+- 01-yago-schema.ttl, the YAGO schema
 
 Output:
-- The YAGO top-level taxonomy in 01-yago-schema.ttl
-- The YAGO lower level taxonomy in 01-yago-taxonomy.tsv
-- Unmapped classes (which appear in Wikidata but not in YAGO, and whose instances have to be attached to a superclass in YAGO) in 01-non-yago-classes.tsv
+- 02-yago-taxonomy.tsv, the YAGO lower level taxonomy in 
+- 02-non-yago-classes.tsv, the unmapped classes (which appear in Wikidata but not in YAGO, and whose instances have to be attached to a superclass in YAGO)
     
 Algorithm:
-1) Start with top-level YAGO classes
+1) Start with top-level YAGO classes from the YAGO schema
 2) For each YAGO top level class y that is mapped to a Wikidata class w,
    glue the entire subtree of w under y,
    - excluding bad classes
@@ -26,8 +24,9 @@ Algorithm:
 """
 
 TEST=True
-OUTPUT_FOLDER="test-data/01-make-taxonomy/" if TEST else "yago-data/"
-WIKIDATA_FILE= "test-data/01-make-taxonomy/00-wikidata.ttl" if TEST else "input-data/wikidata.ttl.gz"
+OUTPUT_FOLDER="test-data/02-make-taxonomy/" if TEST else "yago-data/"
+WIKIDATA_FILE= "test-data/02-make-taxonomy/00-wikidata.ttl" if TEST else "input-data/wikidata.ttl.gz"
+SCHEMA_FILE = "test-data/02-make-taxonomy/01-yago-schema.ttl" if TEST else "yago-data/01-yago-schema.ttl"
 
 ###########################################################################
 #           Booting
@@ -41,11 +40,8 @@ import sys
 from os.path import exists
 from collections import defaultdict
 import evaluator
+from itertools import chain
 print("done")
-
-if not(exists("input-data")):
-    print("  'input-data' folder not found\nfailed")
-    exit()
 
 ###########################################################################
 #           Load YAGO top-level taxonomy and Wikidata taxonomy
@@ -54,8 +50,7 @@ if not(exists("input-data")):
 # Load YAGO schema
 print("  Loading YAGO schema...", end="", flush=True)
 yagoSchema = Graph()
-yagoSchema.parse("input-data/schema-v1.ttl", format="turtle")
-yagoSchema.parse("input-data/shapes.ttl", format="turtle")
+yagoSchema.parse(SCHEMA_FILE, format="turtle")
 print("done")
 
 # YAGO taxonomy
@@ -71,7 +66,8 @@ wikidataTaxonomy = Graph()
 wikidataClassesWithWikipediaPage=set()
 
 for graph in utils.readWikidataEntities(WIKIDATA_FILE):
-    for s,p,o in graph.triples((None, utils.wikidataSubClassOf, None)):
+    # We join in ParentTaxon, because Wikidata is inconsistent on the use of it
+    for s,p,o in chain(graph.triples((None, utils.wikidataSubClassOf, None)), graph.triples((None, utils.wikidataParentTaxon, None))):
         wikidataTaxonomy.add((s,RDFS.subClassOf,o))
         for w in graph.subjects(utils.schemaAbout, s):
             if w.startswith("https://en.wikipedia.org/wiki/"):
@@ -158,13 +154,8 @@ print("done")
 #           Serialize the result
 ###########################################################################
 
-# The schema is most beautiful in native TTL
-print("  Writing schema...", end="", flush=True)
-yagoSchema.serialize(destination=(OUTPUT_FOLDER+"01-yago-schema.ttl"), format="turtle", encoding="UTF-8")
-print("done")
-
 print("  Writing taxonomy...", end="", flush=True)
-with utils.TsvFileWriter(OUTPUT_FOLDER+"01-yago-taxonomy.tsv") as taxonomyWriter:
+with utils.TsvFileWriter(OUTPUT_FOLDER+"02-yago-taxonomy.tsv") as taxonomyWriter:
     for cls in yagoTaxonomyUp:
         for superclass in yagoTaxonomyUp[cls]:
             taxonomyWriter.writeFact(utils.compressPrefix(cls), "rdfs:subClassOf", utils.compressPrefix(superclass))
@@ -172,6 +163,5 @@ print("done")
 print("done")
 
 if TEST:
-    evaluator.compare(OUTPUT_FOLDER+"01-non-yago-classes.tsv")
-    evaluator.compare(OUTPUT_FOLDER+"01-yago-taxonomy.tsv")
-    print("YAGO Schema has to be compared by hand")
+    evaluator.compare(OUTPUT_FOLDER+"02-non-yago-classes.tsv")
+    evaluator.compare(OUTPUT_FOLDER+"02-yago-taxonomy.tsv")

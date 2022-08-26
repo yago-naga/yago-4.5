@@ -19,6 +19,8 @@ wikidataType = URIRef("http://www.wikidata.org/prop/direct/P31")
 
 wikidataSubClassOf = URIRef("http://www.wikidata.org/prop/direct/P279")
 
+wikidataParentTaxon = URIRef("http://www.wikidata.org/prop/direct/P171")
+
 wikidataDuring = URIRef("http://www.wikidata.org/prop/qualifier/P585")
 
 wikidataStart = URIRef("http://www.wikidata.org/prop/qualifier/P580")
@@ -87,7 +89,8 @@ prefixes = {
 "pr": "http://www.wikidata.org/prop/reference/",
 "prv": "http://www.wikidata.org/prop/reference/value/",
 "prn": "http://www.wikidata.org/prop/reference/value-normalized/",
-"wdno": "http://www.wikidata.org/prop/novalue/"
+"wdno": "http://www.wikidata.org/prop/novalue/",
+"ys": "http://yago-knowledge.org/schema#" 
 }
 
 # For turtle parsing, see TODO further down

@@ -18,8 +18,8 @@ def compare(output_file, gold_file=None):
         goldContent=set(gold)
         with open(output_file) as out:
             outContent = set(out)
-            not_in_gold = goldContent.difference(outContent)
-            not_in_output = outContent.difference(goldContent)
+            not_in_output = goldContent.difference(outContent)
+            not_in_gold = outContent.difference(goldContent)
 
     print(f"  Lines in the gold standard that are not in the output file: {len(not_in_output)}")
     for line in not_in_output:

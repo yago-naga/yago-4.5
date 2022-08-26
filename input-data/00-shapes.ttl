@@ -29,28 +29,23 @@ schema:Event owl:disjointWith
 schema:Organization owl:disjointWith 
     schema:CreativeWork,
     schema:Event.
-schema:Person owl:disjointWith 
+# Fabian 2022-08-25: Humans now under organisms	
+ys:Organism owl:disjointWith 
     schema:CreativeWork,
     schema:Event,
     schema:Organization.
 schema:Place owl:disjointWith 
     schema:CreativeWork,
     schema:Event,
-    schema:Person. # But not organization
-schema:MedicalEntity owl:disjointWith
-    schema:CreativeWork,
-    schema:Event,
-    schema:Organization,
-    schema:Person,
-    schema:Place.
+    ys:Organism. # But not organization
 schema:Product owl:disjointWith
-    schema:Person,
+    ys:Organism,
     schema:Place.
 schema:BioChemEntity owl:disjointWith
     schema:Event,
     schema:Organization,
-    schema:Person,
-    schema:Place.
+    ys:Organism,
+    schema:Place.	
 
 schema:Thing a sh:NodeShape ;
     ys:fromClass wd:Q35120 ;
@@ -1078,7 +1073,8 @@ schema:Event a sh:NodeShape ;
                 sh:node schema:Person
             ]
             [
-                sh:node schema:MusicGroup
+			# Fabian 2022-08-26: changed from MusicGroup to Organization
+                sh:node schema:Organization
             ]
         ) ;
         ys:fromProperty wdt:P664 ;
@@ -1239,7 +1235,7 @@ schema:Language a sh:NodeShape ;
 #        ys:fromProperty wdt:P2789 ;
 #    ] .
 
-# Fabian 2022-08-24: remobved, we won't have instances
+# Fabian 2022-08-24: removed, we won't have instances
 #schema:Artery a sh:NodeShape ;
 #    ys:fromClass wd:Q9655 .
 #
@@ -1264,7 +1260,9 @@ schema:Language a sh:NodeShape ;
 #schema:Vessel a sh:NodeShape ;
 #    ys:fromClass wd:Q382386 .
 
+# Fabian 2022-08-26: We plug this under intangible instead of medicalentity
 schema:MedicalCondition a sh:NodeShape ;
+	rdfs:subClassOf schema:Intangible ;
     ys:fromClass wd:Q12136 ;
     sh:property [
         sh:path schema:possibleTreatment ;
@@ -1302,9 +1300,9 @@ schema:MedicalCondition a sh:NodeShape ;
     #] ;
     sh:property [
         sh:path schema:riskFactor ;
-        sh:node rdf:Class ; # TODO: should be schema:MedicalRiskFactor
+        sh:node rdf:Class ; 
         ys:fromProperty wdt:P5642 ;
-    ] ;
+    ] .
 # Fabian 2022-08-24: removed
 #    sh:property [
 #        sh:path schema:medicalExamination ;
@@ -1316,18 +1314,19 @@ schema:MedicalCondition a sh:NodeShape ;
 #        sh:node schema:AnatomicalStructure ; 
 #        ys:fromProperty wdt:P927 ;
 #    ] ;
-    sh:property [
-        sh:path schema:signOrSymptom ;
-        sh:node schema:MedicalSignOrSymptom ;
-        ys:fromProperty wdt:P780 ;
-    ] .
+#    sh:property [
+#        sh:path schema:signOrSymptom ;
+#        sh:node schema:MedicalSignOrSymptom ;
+#        ys:fromProperty wdt:P780 ;
+#    ] .
 
 schema:InfectiousDisease a sh:NodeShape ;
     ys:fromClass wd:Q18123741 .
 
-schema:MedicalDevice a sh:NodeShape ;
-    ys:fromClass wd:Q6554101 .
-
+# Fabian 2022-08-26: removed
+#schema:MedicalDevice a sh:NodeShape ;
+#    ys:fromClass wd:Q6554101 .
+#
 # Fabian 2022-08-24: removed, no mapping
 #schema:MedicalGuideline a sh:NodeShape ;
 #    ys:fromClass wd:Q878041 .
@@ -1351,30 +1350,32 @@ schema:MedicalDevice a sh:NodeShape ;
 #schema:RadiationTherapy a sh:NodeShape ;
 #    ys:fromClass wd:Q180507 .
 
-schema:MedicalSignOrSymptom a sh:NodeShape ;
-    sh:property [
-        sh:path schema:possibleTreatment ;
-        sh:node schema:Drug ; 
-        # Fabian 2022-08-25: removed 
-        #sh:or (
-        #    [
-        #        sh:node schema:Drug
-        #    ]
-        #    [
-        #        sh:node schema:Therapy
-        #    ]
-        #    [
-        #        sh:node schema:MedicalTherapy
-        #    ]
-        #) ;
-        ys:fromProperty wdt:P924 ;
-    ] .
-
-schema:MedicalSign a sh:NodeShape ;
-    ys:fromClass wd:Q1441305 .
-
-schema:MedicalSymptom a sh:NodeShape ;
-    ys:fromClass wd:Q169872 .
+# Fabian 2022-08-26: removed
+#schema:MedicalSignOrSymptom a sh:NodeShape ;
+#	rdfs:subClassOf schema:Intangible ;
+#    sh:property [
+#        sh:path schema:possibleTreatment ;
+#        sh:node schema:Drug ; 
+#        # Fabian 2022-08-25: removed 
+#        #sh:or (
+#        #    [
+#        #        sh:node schema:Drug
+#        #    ]
+#        #    [
+#        #        sh:node schema:Therapy
+#        #    ]
+#        #    [
+#        #        sh:node schema:MedicalTherapy
+#        #    ]
+#        #) ;
+#        ys:fromProperty wdt:P924 ;
+#    ] .
+#
+#schema:MedicalSign a sh:NodeShape ;
+#    ys:fromClass wd:Q1441305 .
+#
+#schema:MedicalSymptom a sh:NodeShape ;
+#    ys:fromClass wd:Q169872 .
 
 # Fabian 2022-08-24: removed
 #
@@ -1387,9 +1388,12 @@ schema:MedicalSymptom a sh:NodeShape ;
 #schema:BloodTest a sh:NodeShape ;
 #    ys:fromClass wd:Q886837 .
 
+# Fabian 2022-08-26: substances are used in schema.org for drugs
+#schema:Substance a sh:NodeShape ;
+#    ys:fromClass wd:Q27166344 .
 schema:Substance a sh:NodeShape ;
-    ys:fromClass wd:Q27166344 .
-
+	rdfs:subClassOf schema:BioChemEntity.
+	
 schema:Drug a sh:NodeShape ;
 # Fabian 2022-08-24: removed
 # sh:property [
@@ -1741,8 +1745,10 @@ ys:Gender a sh:NodeShape ;
     rdfs:subclassOf schema:Intangible ;
     rdf:label "Gender" .
   
+# Fabian 2022-08-26: make humans equivalent to persons, subclass of organisms
 schema:Person a sh:NodeShape ;
-    ys:fromClass wd:Q215627 ;
+	rdfs:subClassOf ys:Organism ;
+    ys:fromClass wd:Q5 ;
     sh:property [
         sh:path schema:affiliation ;
         sh:node schema:Organization ;
@@ -2081,7 +2087,6 @@ schema:Place a sh:NodeShape ;
 #        ys:fromProperty wdt:P1329 ;
 #    ] . 
 
-
 schema:AdministrativeArea a sh:NodeShape ;
     ys:fromClass wd:Q56061 .
 
@@ -2097,7 +2102,13 @@ schema:City a sh:NodeShape ;
 #        ys:fromProperty wdt:P238 ;
 #    ] .
 
+# Fabian 2022-08-26: added capital 
 schema:Country a sh:NodeShape ;
+    sh:property [
+        sh:path ys:capital ;
+        sh:node schema:City ;
+        ys:fromProperty wdt:P36 ;
+    ] ;
     ys:fromClass wd:Q6256 .
 
 schema:State a sh:NodeShape ;
@@ -2567,13 +2578,14 @@ schema:Product a sh:NodeShape ;
 #        ys:fromProperty wdt:P2049 ;
 #    ] .
 
+# Fabian 2022-08-26 rmeoved callSign (is experimental)
 schema:Vehicle a sh:NodeShape ;
-    ys:fromClass wd:Q42889 ;
-    sh:property [
-        sh:path schema:callSign ;
-        sh:datatype xsd:string ;
-        ys:fromProperty wdt:P2317 ;
-    ] .
+    ys:fromClass wd:Q42889 .
+    #sh:property [
+    #    sh:path schema:callSign ;
+    #    sh:datatype xsd:string ;
+    #    ys:fromProperty wdt:P2317 ;
+    #] .
 
 schema:BusOrCoach a sh:NodeShape ;
     ys:fromClass wd:Q5638 .
@@ -2755,6 +2767,13 @@ schema:Protein a sh:NodeShape ;
 #        ys:fromProperty wdt:P105 ;
 #    ] .
 
+# Fabian 2022-08-26: taxons are a mess in Wikidata
+ys:Organism a sh:NodeShape;
+	rdfs:label "Organism" ;
+	rdfs:description "a living being" ;
+	rdfs:subClassOf schema:Thing ;
+	ys:fromClass wd:Q7239.
+	
 ################################################################
 #                Time annotation
 ################################################################

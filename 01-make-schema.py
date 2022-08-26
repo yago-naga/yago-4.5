@@ -15,7 +15,7 @@ Output:
     
 Algorithm:
 1) Load schema.org taxonomy and hard-coded shapes
-2) From the taxonomy keep only the classes that are mentioned in shapes, together with their superclasses
+2) From the taxonomy keep only the classes that are mentioned in shapes, together with their superclasses. Force this to be a tree.
 """
 
 TEST=True
@@ -59,13 +59,24 @@ print("done")
 #           Construct YAGO schema
 ###########################################################################
 
+# Add in all super-classes
+
 def addSuperClasses(schemaClass):
+    """ Adds all the superclasses of the given class from schema.org to yagoShapes, forcing a tree structure"""
+    existingSuperClasses=[s for s in yagoShapes.objects(schemaClass, RDFS.subClassOf)]
     for superClass in schemaTaxonomy.objects(schemaClass, RDFS.subClassOf):
+        if superClass in existingSuperClasses:
+            continue
+        if existingSuperClasses:
+            print("  Info:",schemaClass,"already has the superclasses",[str(s) for s in existingSuperClasses],", not adding",superClass)
+            continue
         yagoShapes.add((schemaClass, RDFS.subClassOf, superClass))
         addSuperClasses(superClass)
         
 for schemaClass in yagoShapes.subjects(utils.fromClass, None):
     addSuperClasses(schemaClass)
+
+# Verify self-containedness
 
 permitted_namespaces = ["http://www.opengis.net/ont/geosparql#", "http://www.w3.org/1999/02/22-rdf-syntax-ns#", "http://yago-knowledge.org/schema#", "http://www.w3.org/2001/XMLSchema#"]
 
