@@ -78,7 +78,7 @@ for schemaClass in yagoShapes.subjects(utils.fromClass, None):
 
 # Verify self-containedness
 
-permitted_namespaces = ["http://www.opengis.net/ont/geosparql#", "http://www.w3.org/1999/02/22-rdf-syntax-ns#", "http://yago-knowledge.org/schema#", "http://www.w3.org/2001/XMLSchema#"]
+permitted_namespaces = ["http://www.opengis.net/ont/geosparql#", "http://www.w3.org/1999/02/22-rdf-syntax-ns#", "http://yago-knowledge.org/resource/", "http://www.w3.org/2001/XMLSchema#"]
 
 for targetClass in yagoShapes.objects(None, utils.shaclNode):
     if targetClass==utils.schemaThing:
@@ -86,7 +86,7 @@ for targetClass in yagoShapes.objects(None, utils.shaclNode):
     if any(targetClass.startswith(s) for s in permitted_namespaces):
         continue    
     if (targetClass, RDFS.subClassOf, None) not in yagoShapes:
-        print("  *** Undefined range:",targetClass)
+        print("  Warning: the range",targetClass,"is undefined in the schema")
     
 ###########################################################################
 #           Write and test YAGO schema

@@ -10,6 +10,7 @@
 @prefix wpq: <http://www.wikidata.org/prop/qualifier/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix ys: <http://yago-knowledge.org/schema#> .
+@prefix yago: <http://yago-knowledge.org/resource/> .
 
 # This is the manually designed schema of YAGO 4.1.
 # Do not overwrite this file.
@@ -29,22 +30,29 @@ schema:Event owl:disjointWith
 schema:Organization owl:disjointWith 
     schema:CreativeWork,
     schema:Event.
-# Fabian 2022-08-25: Humans now under organisms	
-ys:Organism owl:disjointWith 
+# Fabian 2022-08-25: Added organisms	
+yago:Organism owl:disjointWith 
     schema:CreativeWork,
     schema:Event,
     schema:Organization.
+schema:Person owl:disjointWith 
+    schema:CreativeWork,
+    schema:Event,
+    schema:Organization,
+	schema:Organism.
 schema:Place owl:disjointWith 
     schema:CreativeWork,
     schema:Event,
-    ys:Organism. # But not organization
+	schema:Person,
+    yago:Organism. # But not organization
 schema:Product owl:disjointWith
-    ys:Organism,
+    yago:Organism,
     schema:Place.
 schema:BioChemEntity owl:disjointWith
     schema:Event,
     schema:Organization,
-    ys:Organism,
+    yago:Organism,
+	schema:Person,
     schema:Place.	
 
 schema:Thing a sh:NodeShape ;
@@ -149,7 +157,7 @@ schema:TelevisionChannel a sh:NodeShape ;
     ys:fromClass wd:Q2001305 .
 
 # Fabian 2022-08-25: introduced this since schema.org uses a string
-ys:Award a sh:NodeShape ;
+yago:Award a sh:NodeShape ;
     ys:fromClass wd:Q618779 ;
     rdfs:subclassOf schema:Intangible ;
     rdf:label "Award" .
@@ -163,7 +171,7 @@ schema:CreativeWork a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path schema:award ;
-        sh:node ys:Award ;
+        sh:node yago:Award ;
         ys:fromProperty wdt:P166 ;
     ] ;
     sh:property [
@@ -1156,7 +1164,7 @@ schema:Event a sh:NodeShape ;
 #schema:EventSeries a sh:NodeShape ;
 #    ys:fromClass wd:Q15275719 .
 
-ys:Sport a sh:NodeShape ;
+yago:Sport a sh:NodeShape ;
     ys:fromClass wd:Q349 ;
     rdfs:subclassOf schema:Intangible ;
     rdf:label "Sport" .
@@ -1177,7 +1185,7 @@ schema:SportsEvent a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path schema:sport ;
-        sh:node ys:Sport ;
+        sh:node yago:Sport ;
         ys:fromProperty wdt:P641 ;
     ] .
 
@@ -1419,7 +1427,7 @@ schema:Organization a sh:NodeShape ;
     ys:fromClass wd:Q43229 ;
     sh:property [
         sh:path schema:award ;
-        sh:node ys:Award ;
+        sh:node yago:Award ;
         ys:fromProperty wdt:P166 ;
     ] ;
     sh:property [
@@ -1622,9 +1630,10 @@ schema:Corporation a sh:NodeShape ;
         sh:datatype xsd:string ;
         ys:fromProperty wdt:P414 ;
     ] ;
+	# Fabian 2022-08-27: products are now classes
     sh:property [
         sh:path schema:productProduced ;
-        sh:node schema:Product ; # TODO make sure this works with brand etc.
+        sh:node rdf:Class ;
         ys:fromProperty wdt:P1056 ;
     ] .
 
@@ -1740,14 +1749,13 @@ schema:WorkersUnion a sh:NodeShape ;
 schema:Occupation a sh:NodeShape ;
     ys:fromClass wd:Q12737077 .
 
-ys:Gender a sh:NodeShape ;
+yago:Gender a sh:NodeShape ;
     ys:fromClass wd:Q48264 ;
     rdfs:subclassOf schema:Intangible ;
     rdf:label "Gender" .
   
-# Fabian 2022-08-26: make humans equivalent to persons, subclass of organisms
+# Fabian 2022-08-26: make humans equivalent to persons
 schema:Person a sh:NodeShape ;
-	rdfs:subClassOf ys:Organism ;
     ys:fromClass wd:Q5 ;
     sh:property [
         sh:path schema:affiliation ;
@@ -1761,7 +1769,7 @@ schema:Person a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path schema:award ;
-        sh:node ys:Award ;
+        sh:node yago:Award ;
         ys:fromProperty wdt:P166 ;
     ] ;
     sh:property [
@@ -1844,7 +1852,7 @@ schema:Person a sh:NodeShape ;
 #    ] ;
     sh:property [
         sh:path schema:gender ;
-        sh:node ys:Gender ;
+        sh:node yago:Gender ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P21 ;
     ] ;
@@ -2533,7 +2541,7 @@ schema:Product a sh:NodeShape ;
     ys:fromClass wd:Q2424752 ;
     sh:property [
         sh:path schema:award ;
-        sh:node ys:Award ;
+        sh:node yago:Award ;
         ys:fromProperty wdt:P166 ;
     ] ;
 # Fabian 2022-08-24: removed
@@ -2768,7 +2776,7 @@ schema:Protein a sh:NodeShape ;
 #    ] .
 
 # Fabian 2022-08-26: taxons are a mess in Wikidata
-ys:Organism a sh:NodeShape;
+yago:Organism a sh:NodeShape;
 	rdfs:label "Organism" ;
 	rdfs:description "a living being" ;
 	rdfs:subClassOf schema:Thing ;
