@@ -9,6 +9,7 @@
 @prefix wdt: <http://www.wikidata.org/prop/direct/> .
 @prefix wpq: <http://www.wikidata.org/prop/qualifier/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yago: <http://yago-knowledge.org/resource/> .
 @prefix ys: <http://yago-knowledge.org/schema#> .
 
 rdfs:Class a sh:NodeShape ;
@@ -152,7 +153,7 @@ schema:Corporation a sh:NodeShape ;
             sh:maxCount 1 ;
             sh:path schema:stockExchange ;
             ys:fromProperty wdt:P414 ],
-        [ sh:node schema:Product ;
+        [ sh:node rdf:Class ;
             sh:path schema:productProduced ;
             ys:fromProperty wdt:P1056 ] ;
     ys:fromClass wd:Q167037 .
@@ -338,7 +339,7 @@ schema:SportsEvent a sh:NodeShape ;
             sh:path schema:competitor ;
             ys:fromProperty wdt:P1923,
                 wdt:P710 ],
-        [ sh:node ys:Sport ;
+        [ sh:node yago:Sport ;
             sh:path schema:sport ;
             ys:fromProperty wdt:P641 ] ;
     ys:fromClass wd:Q16510064 .
@@ -413,12 +414,12 @@ schema:WorkersUnion a sh:NodeShape ;
     rdfs:subClassOf schema:Organization ;
     ys:fromClass wd:Q178790 .
 
-ys:Gender a sh:NodeShape ;
+yago:Gender a sh:NodeShape ;
     rdf:label "Gender" ;
     rdfs:subclassOf schema:Intangible ;
     ys:fromClass wd:Q48264 .
 
-ys:Sport a sh:NodeShape ;
+yago:Sport a sh:NodeShape ;
     rdf:label "Sport" ;
     rdfs:subclassOf schema:Intangible ;
     ys:fromClass wd:Q349 .
@@ -498,6 +499,28 @@ schema:BroadcastChannel a sh:NodeShape ;
 schema:CreativeWorkSeries rdfs:subClassOf schema:CreativeWork,
         schema:Series .
 
+schema:Product a sh:NodeShape ;
+    rdfs:subClassOf schema:Thing ;
+    owl:disjointWith yago:Organism,
+        schema:Place ;
+    sh:property [ sh:node yago:Award ;
+            sh:path schema:award ;
+            ys:fromProperty wdt:P166 ],
+        [ sh:datatype xsd:string ;
+            sh:path schema:gtin ;
+            sh:pattern "^\\d{12,14}|\\d{8}$" ;
+            ys:fromProperty wdt:P3962 ] ;
+    ys:fromClass wd:Q2424752 .
+
+yago:Organism a sh:NodeShape ;
+    rdfs:label "Organism" ;
+    rdfs:description "a living being" ;
+    rdfs:subClassOf schema:Thing ;
+    owl:disjointWith schema:CreativeWork,
+        schema:Event,
+        schema:Organization ;
+    ys:fromClass wd:Q7239 .
+
 schema:AdministrativeArea a sh:NodeShape ;
     rdfs:subClassOf schema:Place ;
     ys:fromClass wd:Q56061 .
@@ -515,19 +538,6 @@ schema:Language a sh:NodeShape ;
 
 schema:PerformingGroup rdfs:subClassOf schema:Organization .
 
-schema:Product a sh:NodeShape ;
-    rdfs:subClassOf schema:Thing ;
-    owl:disjointWith ys:Organism,
-        schema:Place ;
-    sh:property [ sh:node ys:Award ;
-            sh:path schema:award ;
-            ys:fromProperty wdt:P166 ],
-        [ sh:datatype xsd:string ;
-            sh:path schema:gtin ;
-            sh:pattern "^\\d{12,14}|\\d{8}$" ;
-            ys:fromProperty wdt:P3962 ] ;
-    ys:fromClass wd:Q2424752 .
-
 schema:SoftwareApplication a sh:NodeShape ;
     rdfs:subClassOf schema:CreativeWork ;
     sh:property [ sh:node schema:SoftwareApplication ;
@@ -539,19 +549,10 @@ schema:Vehicle a sh:NodeShape ;
     rdfs:subClassOf schema:Product ;
     ys:fromClass wd:Q42889 .
 
-ys:Award a sh:NodeShape ;
+yago:Award a sh:NodeShape ;
     rdf:label "Award" ;
     rdfs:subclassOf schema:Intangible ;
     ys:fromClass wd:Q618779 .
-
-ys:Organism a sh:NodeShape ;
-    rdfs:label "Organism" ;
-    rdfs:description "a living being" ;
-    rdfs:subClassOf schema:Thing ;
-    owl:disjointWith schema:CreativeWork,
-        schema:Event,
-        schema:Organization ;
-    ys:fromClass wd:Q7239 .
 
 schema:Landform a sh:NodeShape ;
     rdfs:subClassOf schema:Place ;
@@ -563,9 +564,10 @@ schema:PlaceOfWorship a sh:NodeShape ;
 
 schema:BioChemEntity a sh:NodeShape ;
     rdfs:subClassOf schema:Thing ;
-    owl:disjointWith ys:Organism,
+    owl:disjointWith yago:Organism,
         schema:Event,
         schema:Organization,
+        schema:Person,
         schema:Place ;
     sh:property [ sh:node schema:BioChemEntity ;
             sh:path schema:bioChemInteraction ;
@@ -668,39 +670,12 @@ schema:Thing a sh:NodeShape ;
             sh:path owl:sameAs ] ;
     ys:fromClass wd:Q35120 .
 
-schema:CreativeWork a rdf:Class,
-        sh:NodeShape ;
-    rdfs:subClassOf schema:Thing ;
-    sh:property [ sh:node schema:Thing ;
-            sh:path schema:about ;
-            ys:fromProperty wdt:P921 ],
-        [ sh:node ys:Award ;
-            sh:path schema:award ;
-            ys:fromProperty wdt:P166 ],
-        [ sh:or ( [ sh:node schema:Organization ] [ sh:node schema:Person ] ) ;
-            sh:path schema:author ;
-            ys:fromProperty wdt:170,
-                wdt:P50 ],
-        [ sh:node schema:Person ;
-            sh:path schema:character ;
-            ys:fromProperty wdt:P674 ],
-        [ sh:node schema:Place ;
-            sh:path schema:contentLocation ;
-            ys:fromProperty wdt:P840 ],
-        [ sh:maxCount 1 ;
-            sh:or ( [ sh:datatype xsd:dateTime ] [ sh:datatype xsd:date ] [ sh:datatype xsd:gYearMonth ] [ sh:datatype xsd:gYear ] ) ;
-            sh:path schema:dateCreated ;
-            ys:fromProperty wdt:P571 ],
-        [ sh:node schema:Language ;
-            sh:path schema:inLanguage ;
-            ys:fromProperty wdt:P407 ] ;
-    ys:fromClass wd:Q17537576 .
-
 schema:Place a sh:NodeShape ;
     rdfs:subClassOf schema:Thing ;
-    owl:disjointWith ys:Organism,
+    owl:disjointWith yago:Organism,
         schema:CreativeWork,
-        schema:Event ;
+        schema:Event,
+        schema:Person ;
     sh:property [ sh:node schema:Place ;
             sh:path schema:containedInPlace ;
             ys:fromProperty wdt:P131,
@@ -780,11 +755,39 @@ schema:Place a sh:NodeShape ;
             ys:fromProperty wdt:P625 ] ;
     ys:fromClass wd:Q17334923 .
 
+schema:CreativeWork a rdf:Class,
+        sh:NodeShape ;
+    rdfs:subClassOf schema:Thing ;
+    sh:property [ sh:node schema:Thing ;
+            sh:path schema:about ;
+            ys:fromProperty wdt:P921 ],
+        [ sh:node yago:Award ;
+            sh:path schema:award ;
+            ys:fromProperty wdt:P166 ],
+        [ sh:or ( [ sh:node schema:Organization ] [ sh:node schema:Person ] ) ;
+            sh:path schema:author ;
+            ys:fromProperty wdt:170,
+                wdt:P50 ],
+        [ sh:node schema:Person ;
+            sh:path schema:character ;
+            ys:fromProperty wdt:P674 ],
+        [ sh:node schema:Place ;
+            sh:path schema:contentLocation ;
+            ys:fromProperty wdt:P840 ],
+        [ sh:maxCount 1 ;
+            sh:or ( [ sh:datatype xsd:dateTime ] [ sh:datatype xsd:date ] [ sh:datatype xsd:gYearMonth ] [ sh:datatype xsd:gYear ] ) ;
+            sh:path schema:dateCreated ;
+            ys:fromProperty wdt:P571 ],
+        [ sh:node schema:Language ;
+            sh:path schema:inLanguage ;
+            ys:fromProperty wdt:P407 ] ;
+    ys:fromClass wd:Q17537576 .
+
 schema:Organization a sh:NodeShape ;
     rdfs:subClassOf schema:Thing ;
     owl:disjointWith schema:CreativeWork,
         schema:Event ;
-    sh:property [ sh:node ys:Award ;
+    sh:property [ sh:node yago:Award ;
             sh:path schema:award ;
             ys:fromProperty wdt:P166 ],
         [ sh:maxCount 1 ;
@@ -836,14 +839,18 @@ schema:Organization a sh:NodeShape ;
     ys:fromClass wd:Q43229 .
 
 schema:Person a sh:NodeShape ;
-    rdfs:subClassOf ys:Organism ;
+    rdfs:subClassOf schema:Thing ;
+    owl:disjointWith schema:CreativeWork,
+        schema:Event,
+        schema:Organism,
+        schema:Organization ;
     sh:property [ sh:node schema:Organization ;
             sh:path schema:affiliation ;
             ys:fromProperty wdt:P1416 ],
         [ sh:node schema:Organization ;
             sh:path schema:alumniOf ;
             ys:fromProperty wdt:P69 ],
-        [ sh:node ys:Award ;
+        [ sh:node yago:Award ;
             sh:path schema:award ;
             ys:fromProperty wdt:P166 ],
         [ sh:maxCount 1 ;
@@ -866,7 +873,7 @@ schema:Person a sh:NodeShape ;
             sh:path schema:deathPlace ;
             ys:fromProperty wdt:P20 ],
         [ sh:maxCount 1 ;
-            sh:node ys:Gender ;
+            sh:node yago:Gender ;
             sh:path schema:gender ;
             ys:fromProperty wdt:P21 ],
         [ sh:node schema:Occupation ;
