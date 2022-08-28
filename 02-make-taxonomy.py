@@ -109,7 +109,7 @@ def addSubClasses(lastGoodYagoClass, wikidataClass, unmappedClassesWriter, treat
     pathToRoot.pop()
 
 print("  Creating YAGO taxonomy...", end="", flush=True)
-with utils.TsvFileWriter(OUTPUT_FOLDER+"01-non-yago-classes.tsv") as unmappedClassesWriter:
+with utils.TsvFileWriter(OUTPUT_FOLDER+"02-non-yago-classes.tsv") as unmappedClassesWriter:
     treated=set()
     for s,p,o in yagoSchema.triples((None, utils.fromClass, None)):
         if s!=utils.schemaThing:

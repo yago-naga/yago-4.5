@@ -7,13 +7,13 @@ Call:
   python3 make-facts.py
 
 Input:
-- 01-yago-taxonomy.tsv
 - 01-yago-schema.ttl
-- 01-non-yago-classes.tsv
-- Wikidata file in input-data/wikidata.ttl.gz
+- 02-yago-taxonomy.tsv
+- 02-non-yago-classes.tsv
+- Wikidata file
 
 Output:
-- 02-yago-facts-to-type-check.tsv
+- 03-yago-facts-to-type-check.tsv
 
 Algorithm:
 - run through all entities of Wikidata, with its associated facts
@@ -26,8 +26,8 @@ Algorithm:
 """
 
 TEST=True
-FOLDER="test-data/02-make-facts/" if TEST else "yago-data/"
-WIKIDATA_FILE= "test-data/02-make-facts/00-wikidata.ttl" if TEST else "input-data/wikidata.ttl.gz"
+FOLDER="test-data/03-make-facts/" if TEST else "yago-data/"
+WIKIDATA_FILE= "test-data/03-make-facts/00-wikidata.ttl" if TEST else "input-data/wikidata.ttl.gz"
 
 ##########################################################################
 #             Booting
@@ -51,12 +51,12 @@ disjointClasses=[ (utils.compressPrefix(c1), utils.compressPrefix(c2)) for (c1, 
 print("done")
 
 yagoTaxonomyUp=defaultdict(set)
-for triple in utils.readTsvTuples(FOLDER+"01-yago-taxonomy.tsv", "  Loading YAGO taxonomy"):
+for triple in utils.readTsvTuples(FOLDER+"02-yago-taxonomy.tsv", "  Loading YAGO taxonomy"):
     if len(triple)>3:
         yagoTaxonomyUp[triple[0]].add(triple[2])
 
 nonYagoClasses={}
-for triple in utils.readTsvTuples(FOLDER+"01-non-yago-classes.tsv", "  Loading non-YAGO classes"):
+for triple in utils.readTsvTuples(FOLDER+"02-non-yago-classes.tsv", "  Loading non-YAGO classes"):
     if len(triple)>3:
         nonYagoClasses[triple[0]]=utils.expandPrefix(triple[2])
 
@@ -292,7 +292,7 @@ def checkRange(p, o):
 #             Main method
 ##########################################################################
 
-with utils.TsvFileWriter(FOLDER+"02-yago-facts-to-type-check.tsv") as yagoFacts:
+with utils.TsvFileWriter(FOLDER+"03-yago-facts-to-type-check.tsv") as yagoFacts:
     for entityFacts in utils.readWikidataEntities(WIKIDATA_FILE):         
         # Anything that is rdf:type in Wikidata is meta-statements, 
         # and should go away
@@ -335,4 +335,4 @@ with utils.TsvFileWriter(FOLDER+"02-yago-facts-to-type-check.tsv") as yagoFacts:
 print("done")
 
 if TEST:
-    evaluator.compare(FOLDER+"02-yago-facts-to-type-check.tsv")
+    evaluator.compare(FOLDER+"03-yago-facts-to-type-check.tsv")
