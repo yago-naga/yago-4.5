@@ -30,6 +30,19 @@ FOLDER="test-data/03-make-facts/" if TEST else "yago-data/"
 WIKIDATA_FILE= "test-data/03-make-facts/00-wikidata.ttl" if TEST else "input-data/wikidata.ttl.gz"
 
 ##########################################################################
+#             Debugging
+##########################################################################
+
+def debug(message):
+    """ Prints a message if we're in TEST mode"""
+    if TEST:
+        print("  ",message)
+
+def oneSubject(graph):
+    for s in graph.subjects(None, None):
+        return(utils.compressPrefix(s))
+        
+##########################################################################
 #             Booting
 ##########################################################################
 
@@ -218,11 +231,11 @@ def checkDomain(p, classes):
 
 def checkDatatype(datatype, o):
     """True if the object <o> conforms to the <datatype>"""
-    #print("  Checking if "+str(o)+" has datatype "+str(datatype))
+    debug("  Checking if "+str(o)+" has datatype "+str(datatype))
     if datatype==XSD.anyURI:
         return isinstance(o,URIRef)
     if not isinstance(o, Literal):
-        #print("  "+str(o)+" is not a literal")
+        debug("  "+str(o)+" is not a literal")
         return False
     if datatype==XSD.string:
         return o.datatype is None
@@ -236,17 +249,17 @@ def checkRangePropertyNode(propertyNode, o):
     disjunctObject = next(yagoSchema.objects(propertyNode, utils.shaclOr), None)
     if disjunctObject:
         possiblePropertyNodes = collection.Collection(yagoSchema, disjunctObject)
-        #print("   is disjunction: "+str(possiblePropertyNodes))
+        debug("   is disjunction: "+str(possiblePropertyNodes))
         resultList=[]
         for possiblePropertyNode in possiblePropertyNodes:
             result=checkRangePropertyNode(possiblePropertyNode, o)
-            #print("    checking: "+str(result))
+            debug("    checking: "+str(result))
             if result==True:
                return True
             if result==False:
                 continue
             resultList=resultList+result
-        #print("   disjunction result: "+str(resultList))
+        debug("   disjunction result: "+str(resultList))
         if len(resultList)==0:
             return False
         return resultList
@@ -256,14 +269,14 @@ def checkRangePropertyNode(propertyNode, o):
     patternObject = next(yagoSchema.objects(propertyNode, utils.shaclPattern), None)
     if patternObject: 
        if not isinstance(o, Literal):
-           #print("  Pattern "+str(patternObject)+" cannot match because object is not a string: "+str(o))
+           debug("  Pattern "+str(patternObject)+" cannot match because object is not a string: "+str(o))
            return False
        string = o.value    
        if not isinstance(patternObject, Literal):
             raise Exception("SHACL pattern has to be a string: "+str(propertyNode)+" "+str(patternObject))
        patternString = patternObject.value    
        if not re.match(patternString, string):
-           #print("  Pattern "+patternString+" does not match: "+string)
+           debug("  Pattern "+patternString+" does not match: "+string)
            return False
     
     # Datatypes
@@ -283,7 +296,7 @@ def checkRange(p, o):
     """True if the object <o> conforms to the range constraint of predicate <p>. False if it does not. Otherwise, returns a list of classes that <o> would have to belong to."""
     # ASSUMPTION: the object types for the predicate p are the same, no matter the subject type
     propertyNode = next(yagoSchema.subjects(utils.shaclPath, p), None)
-    #print("  Range check for "+str(p)+" "+str(o)+" with prop node "+str(propertyNode))
+    debug("  Range check for "+str(p)+" "+str(o)+" with prop node "+str(propertyNode))
     if not propertyNode:
         return False
     return checkRangePropertyNode(propertyNode, o)
@@ -294,6 +307,7 @@ def checkRange(p, o):
 
 with utils.TsvFileWriter(FOLDER+"03-yago-facts-to-type-check.tsv") as yagoFacts:
     for entityFacts in utils.readWikidataEntities(WIKIDATA_FILE):         
+        debug(oneSubject(entityFacts))
         # Anything that is rdf:type in Wikidata is meta-statements, 
         # and should go away
         entityFacts.remove((None, RDF.type, None))    
@@ -309,27 +323,27 @@ with utils.TsvFileWriter(FOLDER+"03-yago-facts-to-type-check.tsv") as yagoFacts:
             checkCardinalityConstraints(p, entityFacts)
         
         for s,p,o in entityFacts:
-            #print(" Predicate: "+str(p))
+            debug(" Predicate: "+str(p))
             if p==RDF.type:
                 yagoFacts.writeFact(utils.compressPrefix(s),"rdf:type",utils.compressPrefix(o))
                 continue
             else:
                 yagoPredicate = wikidataPredicate2YagoPredicate(p)
-            #print(" in YAGO: "+str(yagoPredicate))
+            debug(" in YAGO: "+str(yagoPredicate))
             if not yagoPredicate:
                 continue
             if not checkDomain(yagoPredicate, classes):
-                #print(" domain check failed")
+                debug(" domain check failed")
                 continue
             rangeResult=checkRange(yagoPredicate, o)
             if rangeResult is False:
-                #print(" range check failed")
+                debug(" range check failed")
                 continue
             (startDate, endDate) = getStartAndEndDate(s, p, o, entityFacts)
             if rangeResult is True:
                 yagoFacts.write(utils.compressPrefix(s),utils.compressPrefix(yagoPredicate),utils.compressPrefix(o), ".", "", utils.compressPrefix(startDate), utils.compressPrefix(endDate))
             else:
-                #print(str(rangeResult))
+                debug(str(rangeResult))
                 yagoFacts.write(utils.compressPrefix(s),utils.compressPrefix(yagoPredicate),utils.compressPrefix(o),". # IF",(", ".join(rangeResult)), utils.compressPrefix(startDate), utils.compressPrefix(endDate))           
 
 print("done")

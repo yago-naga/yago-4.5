@@ -4,8 +4,8 @@ Utility functions for the creation of YAGO
 (c) 2022 Fabian M. Suchanek
 """
 
-from rdflib import URIRef, Graph, Namespace
-import gzip
+from rdflib import URIRef, Graph, Namespace, Literal
+from datetime import date
 import gzip
 import os
 
@@ -54,6 +54,8 @@ shaclNodeKind=URIRef("http://www.w3.org/ns/shacl#nodeKind")
 shaclPattern=URIRef("http://www.w3.org/ns/shacl#pattern")
 
 shaclProperty=URIRef("http://www.w3.org/ns/shacl#property")
+
+xsdYear = URIRef('http://www.w3.org/2001/XMLSchema#gYear')
 
 prefixes = {
 "bioschema": "http://bioschemas.org/",
@@ -225,9 +227,11 @@ def printGraph(graph, out=None):
         print(str(graph.serialize(format="turtle", encoding="utf-8"), "utf-8"))
 
 def compressPrefix(entity):
-    """ Compresses the URI prefix of Wikidata to "wd:" etc. Returns the empty string for None. """
+    """ Compresses the URI prefix of Wikidata to "wd:" etc. Fixes Gregorian years to years. Returns the empty string for None. """
     if not entity:
         return ""
+    if isinstance(entity, Literal) and entity.datatype==xsdYear and isinstance(entity.value, date) and entity.value.year:
+        return('"'+str(entity.value.year)+'"^^xsd:gYear')
     for p in prefixes:
         if entity.startswith(prefixes[p]):
             return p+":"+entity[len(prefixes[p]):]

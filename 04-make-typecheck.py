@@ -7,12 +7,12 @@ Call:
   python3 make-typecheck.py
 
 Input:
-- 01-yago-taxonomy.tsv
-- 02-yago-facts-to-type-check.tsv
+- 02-yago-taxonomy.tsv
+- 03-yago-facts-to-type-check.tsv
 
 Output:
-- 03-yago-facts-to-rename.tsv (type checked YAGO facts without correct ids)
-- 03-yago-ids.tsv (maps Wikidata ids to YAGO ids)
+- 04-yago-facts-to-rename.tsv (type checked YAGO facts without correct ids)
+- 04-yago-ids.tsv (maps Wikidata ids to YAGO ids)
 
 Algorithm:
 - run through all entities of yago-facts-to-type-check.tsv, load classes
@@ -23,7 +23,7 @@ Algorithm:
 """
 
 TEST=True
-FOLDER="test-data/03-make-typecheck/" if TEST else "yago-data/"
+FOLDER="test-data/04-make-typecheck/" if TEST else "yago-data/"
 
 ##########################################################################
 #             Booting
@@ -42,12 +42,12 @@ from collections import defaultdict
 print("done")
 
 yagoTaxonomyUp=defaultdict(set)
-for tuple in utils.readTsvTuples(FOLDER+"01-yago-taxonomy.tsv", "  Loading YAGO taxonomy"):
+for tuple in utils.readTsvTuples(FOLDER+"02-yago-taxonomy.tsv", "  Loading YAGO taxonomy"):
     if len(tuple)>3:
         yagoTaxonomyUp[tuple[0]].add(tuple[2])
 
 yagoInstances=defaultdict(set)
-for tuple in utils.readTsvTuples(FOLDER+"02-yago-facts-to-type-check.tsv", "  Loading YAGO instances"):
+for tuple in utils.readTsvTuples(FOLDER+"03-yago-facts-to-type-check.tsv", "  Loading YAGO instances"):
     if len(tuple)>2 and tuple[1]=="rdf:type":
         yagoInstances[tuple[0]].add(tuple[2])
 
@@ -107,13 +107,13 @@ def isSubclassOf(c1, c2):
 def instanceOf(obj, cls):
     return any(isSubclassOf(c, cls) for c in yagoInstances[obj])
     
-with utils.TsvFileWriter(FOLDER+"03-yago-facts-to-rename.tsv") as out:
-    with utils.TsvFileWriter(FOLDER+"03-yago-ids.tsv") as idsFile:
+with utils.TsvFileWriter(FOLDER+"04-yago-facts-to-rename.tsv") as out:
+    with utils.TsvFileWriter(FOLDER+"04-yago-ids.tsv") as idsFile:
         currentTopic=""
         currentLabel=""
         currentWikipediaPage=""
         wroteFacts=False # True if the entity had any valid facts
-        for split in utils.readTsvTuples(FOLDER+"02-yago-facts-to-type-check.tsv", "  Type-checking facts"):
+        for split in utils.readTsvTuples(FOLDER+"03-yago-facts-to-type-check.tsv", "  Type-checking facts"):
             if len(split)<3:
                 continue
             if split[0]!=currentTopic:
@@ -139,5 +139,5 @@ with utils.TsvFileWriter(FOLDER+"03-yago-facts-to-rename.tsv") as out:
 print("done")
 
 if TEST:
-    evaluator.compare(FOLDER+"03-yago-facts-to-rename.tsv")
-    evaluator.compare(FOLDER+"03-yago-ids.tsv")
+    evaluator.compare(FOLDER+"04-yago-facts-to-rename.tsv")
+    evaluator.compare(FOLDER+"04-yago-ids.tsv")

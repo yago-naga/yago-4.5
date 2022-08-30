@@ -29,13 +29,7 @@ wd:Q_Elvis wdt:P31 wd:Q_rock_singer;
 	# Normal range: fact should survive
 	wdt:P40 wd:Q_child;
 	# Disjunctive range: should be OK
-	wdt:P1716 wd:Q_brand;
-	# Strings: should be OK
-	wdt:P2317 "test string";
-	# Patterns: should be OK
-	wdt:P2900 "+33-33-333-333";
-	# Datatypes: should be OK
-	wdt:P570 "1970"^^xsd:gYear .
+	wdt:P569 "1935"^^xsd:gYear .
 	
 # Start and end dates should survive
 wd:Q_Elvis p:P40 s:Q_Elvis-5b0fdcdf-4815-583c-4dd3-914e1c5d95c0 .
@@ -68,4 +62,3 @@ wd:Q_singer  rdfs:label "singer"@en ;
 	schema:name "chanteur"@fr ;	
 	schema:description "this is a singer"@en;
 	skos:altLabel "this is a human being"@en .
-		

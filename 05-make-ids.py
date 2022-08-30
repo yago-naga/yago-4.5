@@ -4,13 +4,13 @@ Replaces the ids of the facts by YAGO ids
 (c) 2022 Fabian M. Suchanek
 
 Input:
-- 03-yago-facts-to-rename.tsv
-- 03-yago-ids.tsv
+- 04-yago-facts-to-rename.tsv
+- 04-yago-ids.tsv
 
 Output:
-- 04-yago-final-wikipedia.tsv
-- 04-yago-final-full.tsv
-- 04-yago-final-meta.tsv
+- 05-yago-final-wikipedia.tsv
+- 05-yago-final-full.tsv
+- 05-yago-final-meta.tsv
 
 Algorithm:
 - load yago-ids.tsv
@@ -21,7 +21,7 @@ Algorithm:
 """
 
 TEST=True
-FOLDER="test-data/04-make-ids/" if TEST else "yago-data/"
+FOLDER="test-data/05-make-ids/" if TEST else "yago-data/"
 
 ##########################################################################
 #             Booting
@@ -35,7 +35,7 @@ print("Renaming YAGO entities...")
 
 yagoIds={}
 entitiesWithWikipediaPage=set()
-for split in utils.readTsvTuples(FOLDER+"03-yago-ids.tsv", "  Loading YAGO ids"):
+for split in utils.readTsvTuples(FOLDER+"04-yago-ids.tsv", "  Loading YAGO ids"):
     if len(split)<4:
         continue
     yagoIds[split[0]]=split[2]
@@ -70,10 +70,10 @@ def hasWikipediaPage(entity):
 #             Main
 ##########################################################################
 
-with utils.TsvFileWriter(FOLDER+"04-yago-final-meta.tsv") as metaFacts:
-    with utils.TsvFileWriter(FOLDER+"04-yago-final-full.tsv") as fullFacts:
-        with utils.TsvFileWriter(FOLDER+"04-yago-final-wikipedia.tsv") as wikipediaFacts:
-            for split in utils.readTsvTuples(FOLDER+"03-yago-facts-to-rename.tsv", "  Renaming"):
+with utils.TsvFileWriter(FOLDER+"05-yago-final-meta.tsv") as metaFacts:
+    with utils.TsvFileWriter(FOLDER+"05-yago-final-full.tsv") as fullFacts:
+        with utils.TsvFileWriter(FOLDER+"05-yago-final-wikipedia.tsv") as wikipediaFacts:
+            for split in utils.readTsvTuples(FOLDER+"04-yago-facts-to-rename.tsv", "  Renaming"):
                 if len(split)<3:
                     continue
                 subject=toYagoEntity(split[0])
@@ -100,7 +100,7 @@ with utils.TsvFileWriter(FOLDER+"04-yago-final-meta.tsv") as metaFacts:
 print("done")
 
 if TEST:
-    evaluator.compare(FOLDER+"04-yago-final-wikipedia.tsv")
-    evaluator.compare(FOLDER+"04-yago-final-full.tsv")
-    evaluator.compare(FOLDER+"04-yago-final-meta.tsv")
+    evaluator.compare(FOLDER+"05-yago-final-wikipedia.tsv")
+    evaluator.compare(FOLDER+"05-yago-final-full.tsv")
+    evaluator.compare(FOLDER+"05-yago-final-meta.tsv")
     
