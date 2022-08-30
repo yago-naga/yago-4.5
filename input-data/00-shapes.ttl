@@ -80,10 +80,11 @@ schema:Thing a sh:NodeShape ;
         sh:datatype rdf:langString ;
         sh:uniqueLang true ;
     ] ;
-    sh:property [
-        sh:path schema:sameAs ;
-        sh:datatype xsd:anyURI ;
-    ] ;
+# Fabian 2022-08-30: we alreay have owl:sameAs    
+#    sh:property [
+#        sh:path schema:sameAs ;
+#        sh:datatype xsd:anyURI ;
+#    ] ;
     sh:property [
         sh:path schema:mainEntityOfPage ;
         sh:datatype xsd:anyURI ;
@@ -97,6 +98,8 @@ schema:Thing a sh:NodeShape ;
     sh:property [
         sh:path owl:sameAs ;
         sh:nodeKind sh:IRI ;
+        # Fabian 2022-08-30: added FreebaseID and IMDB ID
+        ys:fromProperty wdt:P646, wdt:P345;
     ] .
 
 rdfs:Class a sh:NodeShape ;

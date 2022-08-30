@@ -14,20 +14,20 @@
 
 rdfs:Class a sh:NodeShape ;
     sh:property [ sh:datatype rdf:langString ;
-            sh:path rdfs:label ;
-            sh:uniqueLang true ],
-        [ sh:datatype xsd:anyURI ;
-            sh:path schema:sameAs ],
-        [ sh:datatype xsd:anyURI ;
-            sh:path schema:mainEntityOfPage ],
-        [ sh:datatype rdf:langString ;
             sh:disjoint rdfs:label ;
             sh:path schema:alternateName ;
             ys:fromProperty skos:altLabel ],
         [ sh:datatype rdf:langString ;
             sh:path rdfs:comment ;
             sh:uniqueLang true ;
-            ys:fromProperty schema:description ] .
+            ys:fromProperty schema:description ],
+        [ sh:datatype rdf:langString ;
+            sh:path rdfs:label ;
+            sh:uniqueLang true ],
+        [ sh:datatype xsd:anyURI ;
+            sh:path schema:sameAs ],
+        [ sh:datatype xsd:anyURI ;
+            sh:path schema:mainEntityOfPage ] .
 
 ys: rdfs:label "Manual YAGO 4.1 shapes declaration"@en .
 
@@ -604,20 +604,7 @@ schema:MusicGroup a sh:NodeShape ;
 schema:Event a sh:NodeShape ;
     rdfs:subClassOf schema:Thing ;
     owl:disjointWith schema:CreativeWork ;
-    sh:property [ sh:maxCount 1 ;
-            sh:or ( [ sh:datatype xsd:dateTime ] [ sh:datatype xsd:date ] [ sh:datatype xsd:gYearMonth ] [ sh:datatype xsd:gYear ] ) ;
-            sh:path schema:endDate ;
-            ys:fromProperty wdt:P582 ],
-        [ sh:or ( [ sh:node schema:Organization ] [ sh:node schema:Person ] ) ;
-            sh:path schema:sponsor ;
-            ys:fromProperty wdt:P859 ],
-        [ sh:node schema:Event ;
-            sh:path schema:superEvent ;
-            ys:fromProperty wdt:P361 ],
-        [ sh:node schema:Event ;
-            sh:path schema:subEvent ;
-            ys:fromProperty wdt:P527 ],
-        [ sh:node schema:Thing ;
+    sh:property [ sh:node schema:Thing ;
             sh:path schema:about ;
             ys:fromProperty wdt:P921 ],
         [ sh:or ( [ sh:node schema:Person ] [ sh:node schema:MusicGroup ] ) ;
@@ -641,7 +628,20 @@ schema:Event a sh:NodeShape ;
         [ sh:maxCount 1 ;
             sh:or ( [ sh:datatype xsd:dateTime ] [ sh:datatype xsd:date ] [ sh:datatype xsd:gYearMonth ] [ sh:datatype xsd:gYear ] ) ;
             sh:path schema:startDate ;
-            ys:fromProperty wdt:P580 ] ;
+            ys:fromProperty wdt:P580 ],
+        [ sh:maxCount 1 ;
+            sh:or ( [ sh:datatype xsd:dateTime ] [ sh:datatype xsd:date ] [ sh:datatype xsd:gYearMonth ] [ sh:datatype xsd:gYear ] ) ;
+            sh:path schema:endDate ;
+            ys:fromProperty wdt:P582 ],
+        [ sh:or ( [ sh:node schema:Organization ] [ sh:node schema:Person ] ) ;
+            sh:path schema:sponsor ;
+            ys:fromProperty wdt:P859 ],
+        [ sh:node schema:Event ;
+            sh:path schema:superEvent ;
+            ys:fromProperty wdt:P361 ],
+        [ sh:node schema:Event ;
+            sh:path schema:subEvent ;
+            ys:fromProperty wdt:P527 ] ;
     ys:fromClass wd:Q1656682 .
 
 schema:Intangible rdfs:subClassOf schema:Thing .
@@ -659,15 +659,15 @@ schema:Thing a sh:NodeShape ;
             sh:path rdfs:label ;
             sh:uniqueLang true ],
         [ sh:datatype xsd:anyURI ;
-            sh:path schema:sameAs ],
-        [ sh:datatype xsd:anyURI ;
             sh:path schema:mainEntityOfPage ],
         [ sh:datatype xsd:anyURI ;
             sh:maxCount 1 ;
             sh:path schema:url ;
             ys:fromProperty wdt:P856 ],
         [ sh:nodeKind sh:IRI ;
-            sh:path owl:sameAs ] ;
+            sh:path owl:sameAs ;
+            ys:fromProperty wdt:P345,
+                wdt:P646 ] ;
     ys:fromClass wd:Q35120 .
 
 schema:Place a sh:NodeShape ;

@@ -12,7 +12,7 @@ def compare(output_file, gold_file=None):
         Returns: 0 if comparison is successful, 
                  -1 if there were problems reading the files"""
     print("Evaluating "+output_file)
-    gold_standard = f"{output_file[0:-4]}-gold.tsv" if gold_file == None else f"{gold_file}" # standard file path
+    gold_standard = f"{output_file[0:-4]}-gold.tsv" if gold_file == None else gold_file # standard file path
 
     with open(gold_standard) as gold:
         goldContent=set(gold)

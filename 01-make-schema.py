@@ -100,4 +100,4 @@ print("done")
 print("done")
 
 if TEST:
-    print("The schema is TTL and thus cannot be compared automatically to the gold standard.")
+    evaluator.compare(OUTPUT_FOLDER+"01-yago-schema.ttl", OUTPUT_FOLDER+"01-yago-schema-gold.ttl")

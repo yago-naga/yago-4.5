@@ -56,7 +56,7 @@ def toYagoEntity(entity):
         return entity
     if entity.startswith('<http://') or entity.startswith('<https://'):
         return entity
-    if entity.startswith("yago:") or entity.startswith("schema:") or entity.startswith("bioschema:"):
+    if entity.startswith("yago:") or entity.startswith("schema:"):
         return entity
     if entity in yagoIds:
         return yagoIds[entity]
