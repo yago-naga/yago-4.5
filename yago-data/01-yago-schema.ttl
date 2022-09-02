@@ -1,0 +1,903 @@
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <https://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix wpq: <http://www.wikidata.org/prop/qualifier/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix yago: <http://yago-knowledge.org/resource/> .
+@prefix ys: <http://yago-knowledge.org/schema#> .
+
+rdfs:Class a sh:NodeShape ;
+    sh:property [ sh:datatype rdf:langString ;
+            sh:disjoint rdfs:label ;
+            sh:path schema:alternateName ;
+            ys:fromProperty skos:altLabel ],
+        [ sh:datatype rdf:langString ;
+            sh:path rdfs:comment ;
+            sh:uniqueLang true ;
+            ys:fromProperty schema:description ],
+        [ sh:datatype rdf:langString ;
+            sh:path rdfs:label ;
+            sh:uniqueLang true ],
+        [ sh:datatype xsd:anyURI ;
+            sh:path schema:sameAs ],
+        [ sh:datatype xsd:anyURI ;
+            sh:path schema:mainEntityOfPage ] .
+
+ys: rdfs:label "Manual YAGO 4.1 shapes declaration"@en .
+
+ys:endDateAnnotation a ys:AnnotationPropertyShape ;
+    sh:maxCount 1 ;
+    sh:or ( [ sh:datatype xsd:dateTime ] [ sh:datatype xsd:date ] [ sh:datatype xsd:gYearMonth ] [ sh:datatype xsd:gYear ] ) ;
+    sh:path schema:endDate ;
+    ys:fromProperty wpq:P582 .
+
+ys:startDateAnnotation a ys:AnnotationPropertyShape ;
+    sh:maxCount 1 ;
+    sh:or ( [ sh:datatype xsd:dateTime ] [ sh:datatype xsd:date ] [ sh:datatype xsd:gYearMonth ] [ sh:datatype xsd:gYear ] ) ;
+    sh:path schema:startDate ;
+    ys:fromProperty wpq:P580 .
+
+schema:Airline a sh:NodeShape ;
+    rdfs:subClassOf schema:Organization ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path schema:iataCode ;
+            sh:pattern "^[A-Z0-9]{2}$" ;
+            ys:fromProperty wdt:P229 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path schema:icaoCode ;
+            sh:pattern "^[A-Z]{3}$" ;
+            ys:fromProperty wdt:P230 ] ;
+    ys:fromClass wd:Q46970 .
+
+schema:Airport a sh:NodeShape ;
+    rdfs:subClassOf schema:CivicStructure ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path schema:iataCode ;
+            sh:pattern "^[A-Z]{3}$" ;
+            ys:fromProperty wdt:P238 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path schema:icaoCode ;
+            sh:pattern "^([A-Z]{2}|[CKY][A-Z0-9])[A-Z0-9]{2}$" ;
+            ys:fromProperty wdt:P239 ] ;
+    ys:fromClass wd:Q1248784 .
+
+schema:Book a sh:NodeShape ;
+    rdfs:subClassOf schema:CreativeWork ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path schema:isbn ;
+            sh:pattern "^(97[89]-([0-57]-(\\d-\\d{7}|\\d\\d-\\d{6}|\\d\\d\\d-\\d{5}|\\d{4}-\\d{4}|\\d{5}-\\d\\d\\d|\\d{6}-\\d\\d|\\d{7}-\\d)|[89]\\d-(\\d-\\d{6}|\\d\\d-\\d{5}|\\d\\d\\d-\\d{4}|\\d{4}-\\d\\d\\d|\\d{5}-\\d\\d|\\d{6}-\\d)|[69]\\d\\d-(\\d-\\d{5}|\\d\\d-\\d{4}|\\d\\d\\d-\\d\\d\\d|\\d{4}-\\d\\d|\\d{5}-\\d)|99[0-8]\\d-\\d-\\d{4}|99[0-8]\\d-\\d\\d-\\d\\d\\d|99[0-8]\\d-\\d\\d\\d-\\d\\d|99[0-8]\\d-\\d{4}-\\d|999\\d\\d-\\d-\\d\\d\\d|999\\d\\d-\\d\\d-\\d\\d|999\\d\\d-\\d\\d\\d-\\d)-\\d|\\d{9}(\\d|X))|(\\d{1,5}-\\d{1,7}-\\d{1,6}-[0-9X])$" ;
+            ys:fromProperty wdt:P212,
+                wdt:P957 ],
+        [ sh:datatype xsd:integer ;
+            sh:maxCount 1 ;
+            sh:path schema:numberOfPages ;
+            ys:fromProperty wdt:P1104 ] ;
+    ys:fromClass wd:Q571 .
+
+schema:Bridge a sh:NodeShape ;
+    rdfs:subClassOf schema:CivicStructure ;
+    ys:fromClass wd:Q12280 .
+
+schema:BuddhistTemple a sh:NodeShape ;
+    rdfs:subClassOf schema:PlaceOfWorship ;
+    ys:fromClass wd:Q5393308 .
+
+schema:BusOrCoach a sh:NodeShape ;
+    rdfs:subClassOf schema:Vehicle ;
+    ys:fromClass wd:Q5638 .
+
+schema:Canal a sh:NodeShape ;
+    rdfs:subClassOf schema:BodyOfWater ;
+    ys:fromClass wd:Q12284 .
+
+schema:Car a sh:NodeShape ;
+    rdfs:subClassOf schema:Vehicle ;
+    ys:fromClass wd:Q1144312 .
+
+schema:CatholicChurch a sh:NodeShape ;
+    rdfs:subClassOf schema:Church ;
+    ys:fromClass wd:Q1088552 .
+
+schema:ChemicalSubstance a sh:NodeShape ;
+    rdfs:subClassOf schema:BioChemEntity ;
+    ys:fromClass wd:Q79529 .
+
+schema:CollegeOrUniversity a sh:NodeShape ;
+    rdfs:subClassOf schema:EducationalOrganization ;
+    ys:fromClass wd:Q38723 .
+
+schema:ComicStory a sh:NodeShape ;
+    rdfs:subClassOf schema:CreativeWork ;
+    sh:property [ sh:node schema:Person ;
+            sh:path schema:colorist ;
+            ys:fromProperty wdt:P6338 ] ;
+    ys:fromClass wd:Q1004 .
+
+schema:ComputerLanguage a sh:NodeShape ;
+    rdfs:subClassOf schema:Intangible ;
+    ys:fromClass wd:Q629206 .
+
+schema:Continent a sh:NodeShape ;
+    rdfs:subClassOf schema:Landform ;
+    ys:fromClass wd:Q5107 .
+
+schema:Corporation a sh:NodeShape ;
+    rdfs:subClassOf schema:Organization ;
+    sh:property [ sh:datatype xsd:double ;
+            sh:path schema:assets ;
+            ys:fromProperty wdt:P2403 ],
+        [ sh:datatype xsd:double ;
+            sh:maxCount 1 ;
+            sh:path schema:equity ;
+            ys:fromProperty wdt:P2137 ],
+        [ sh:datatype xsd:double ;
+            sh:maxCount 1 ;
+            sh:path schema:revenue ;
+            ys:fromProperty wdt:P2139 ],
+        [ sh:datatype xsd:double ;
+            sh:maxCount 1 ;
+            sh:path schema:netProfit ;
+            ys:fromProperty wdt:P2295 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path schema:stockExchange ;
+            ys:fromProperty wdt:P414 ],
+        [ sh:node rdf:Class ;
+            sh:path schema:productProduced ;
+            ys:fromProperty wdt:P1056 ] ;
+    ys:fromClass wd:Q167037 .
+
+schema:DanceGroup a sh:NodeShape ;
+    rdfs:subClassOf schema:PerformingGroup ;
+    ys:fromClass wd:Q2393314 .
+
+schema:Drawing a sh:NodeShape ;
+    rdfs:subClassOf schema:CreativeWork ;
+    ys:fromClass wd:Q93184 .
+
+schema:Festival a sh:NodeShape ;
+    rdfs:subClassOf schema:Event ;
+    ys:fromClass wd:Q132241 .
+
+schema:GovernmentOrganization a sh:NodeShape ;
+    rdfs:subClassOf schema:Organization ;
+    ys:fromClass wd:Q2659904 .
+
+schema:HinduTemple a sh:NodeShape ;
+    rdfs:subClassOf schema:PlaceOfWorship ;
+    ys:fromClass wd:Q842402 .
+
+schema:InfectiousDisease a sh:NodeShape ;
+    rdfs:subClassOf schema:MedicalCondition ;
+    ys:fromClass wd:Q18123741 .
+
+schema:LakeBodyOfWater a sh:NodeShape ;
+    rdfs:subClassOf schema:BodyOfWater ;
+    ys:fromClass wd:Q23397 .
+
+schema:LandmarksOrHistoricalBuildings a sh:NodeShape ;
+    rdfs:subClassOf schema:Place ;
+    ys:fromClass wd:Q51369558 .
+
+schema:MedicalOrganization a sh:NodeShape ;
+    rdfs:subClassOf schema:Organization ;
+    ys:fromClass wd:Q4287745 .
+
+schema:MobileApplication a sh:NodeShape ;
+    rdfs:subClassOf schema:SoftwareApplication ;
+    ys:fromClass wd:Q620615 .
+
+schema:MolecularEntity a sh:NodeShape ;
+    rdfs:subClassOf schema:BioChemEntity ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path schema:inChI ;
+            sh:pattern "^1S/([0-9]*[A-Z][ub]?[a-z]?[0-9]*\\.?)+(/[0-9A-Za-z+\\-(),.*;?]+)*$" ;
+            ys:fromProperty wdt:P234 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path schema:inChIKey ;
+            sh:pattern "^[A-Z]{14}-[A-Z]{10}-[A-Z]$" ;
+            ys:fromProperty wdt:P235 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path schema:molecularFormula ;
+            ys:fromProperty wdt:P274 ],
+        [ sh:datatype xsd:string ;
+            sh:path schema:smiles ;
+            sh:pattern "^[A-Za-z0-9+\\-\\*=#$:().>/\\\\\\[\\]%]+$" ;
+            ys:fromProperty wdt:P233 ] ;
+    ys:fromClass wd:Q2393187 .
+
+schema:Mosque a sh:NodeShape ;
+    rdfs:subClassOf schema:PlaceOfWorship ;
+    ys:fromClass wd:Q32815 .
+
+schema:Motorcycle a sh:NodeShape ;
+    rdfs:subClassOf schema:Vehicle ;
+    ys:fromClass wd:Q34493 .
+
+schema:Mountain a sh:NodeShape ;
+    rdfs:subClassOf schema:Landform ;
+    ys:fromClass wd:Q8502 .
+
+schema:Movie a sh:NodeShape ;
+    rdfs:subClassOf schema:CreativeWork ;
+    sh:property [ sh:node schema:Person ;
+            sh:path schema:actor ;
+            ys:fromProperty wdt:P161 ],
+        [ sh:node schema:Country ;
+            sh:path schema:countryOfOrigin ;
+            ys:fromProperty wdt:P495 ],
+        [ sh:node schema:Person ;
+            sh:path schema:director ;
+            ys:fromProperty wdt:P57 ],
+        [ sh:datatype xsd:duration ;
+            sh:path schema:duration ;
+            ys:fromProperty wdt:P2047 ],
+        [ sh:or ( [ sh:node schema:Person ] [ sh:node schema:MusicGroup ] ) ;
+            sh:path schema:musicBy ;
+            ys:fromProperty wdt:P86 ],
+        [ sh:node schema:Organization ;
+            sh:path schema:productionCompany ;
+            ys:fromProperty wdt:P272 ] ;
+    ys:fromClass wd:Q11424 .
+
+schema:Museum a sh:NodeShape ;
+    rdfs:subClassOf schema:CivicStructure ;
+    ys:fromClass wd:Q33506 .
+
+schema:MusicAlbum a sh:NodeShape ;
+    rdfs:subClassOf schema:MusicPlaylist ;
+    sh:property [ sh:maxCount 1 ;
+            sh:node schema:MusicGroup ;
+            sh:path schema:byArtist ;
+            ys:fromProperty wdt:P175 ] ;
+    ys:fromClass wd:Q482994 .
+
+schema:MusicComposition a sh:NodeShape ;
+    rdfs:subClassOf schema:CreativeWork ;
+    sh:property [ sh:or ( [ sh:node schema:Person ] [ sh:node schema:MusicGroup ] ) ;
+            sh:path schema:composer ;
+            ys:fromProperty wdt:P86 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path schema:iswcCode ;
+            sh:pattern "^T-[0-9]{3}\\.[0-9]{3}\\.[0-9]{3}-[0-9]$" ;
+            ys:fromProperty wdt:P1827 ],
+        [ sh:or ( [ sh:node schema:Person ] [ sh:node schema:MusicGroup ] ) ;
+            sh:path schema:lyricist ;
+            ys:fromProperty wdt:P676 ] ;
+    ys:fromClass wd:Q207628 .
+
+schema:NGO a sh:NodeShape ;
+    rdfs:subClassOf schema:Organization ;
+    ys:fromClass wd:Q79913 .
+
+schema:Newspaper a sh:NodeShape ;
+    rdfs:subClassOf schema:Periodical ;
+    ys:fromClass wd:Q11032 .
+
+schema:OceanBodyOfWater a sh:NodeShape ;
+    rdfs:subClassOf schema:BodyOfWater ;
+    ys:fromClass wd:Q9430 .
+
+schema:Painting a sh:NodeShape ;
+    rdfs:subClassOf schema:CreativeWork ;
+    ys:fromClass wd:Q3305213 .
+
+schema:Park a sh:NodeShape ;
+    rdfs:subClassOf schema:CivicStructure ;
+    ys:fromClass wd:Q22698 .
+
+schema:PerformingArtsTheater a sh:NodeShape ;
+    rdfs:subClassOf schema:CivicStructure ;
+    ys:fromClass wd:Q24354 .
+
+schema:Play a sh:NodeShape ;
+    rdfs:subClassOf schema:CreativeWork ;
+    ys:fromClass wd:Q25379 .
+
+schema:Protein a sh:NodeShape ;
+    rdfs:subClassOf schema:BioChemEntity ;
+    ys:fromClass wd:Q8054 .
+
+schema:RadioChannel a sh:NodeShape ;
+    rdfs:subClassOf schema:BroadcastChannel ;
+    ys:fromClass wd:Q25582589 .
+
+schema:ResearchOrganization a sh:NodeShape ;
+    rdfs:subClassOf schema:Organization ;
+    ys:fromClass wd:Q16519632 .
+
+schema:RiverBodyOfWater a sh:NodeShape ;
+    rdfs:subClassOf schema:BodyOfWater ;
+    ys:fromClass wd:Q4022 .
+
+schema:Sculpture a sh:NodeShape ;
+    rdfs:subClassOf schema:CreativeWork ;
+    ys:fromClass wd:Q860861 .
+
+schema:SeaBodyOfWater a sh:NodeShape ;
+    rdfs:subClassOf schema:BodyOfWater ;
+    ys:fromClass wd:Q165 .
+
+schema:SportsEvent a sh:NodeShape ;
+    rdfs:subClassOf schema:Event ;
+    sh:property [ sh:or ( [ sh:node schema:Person ] [ sh:node schema:SportsTeam ] ) ;
+            sh:path schema:competitor ;
+            ys:fromProperty wdt:P1923,
+                wdt:P710 ],
+        [ sh:node yago:Sport ;
+            sh:path schema:sport ;
+            ys:fromProperty wdt:P641 ] ;
+    ys:fromClass wd:Q16510064 .
+
+schema:State a sh:NodeShape ;
+    rdfs:subClassOf schema:AdministrativeArea ;
+    ys:fromClass wd:Q107390 .
+
+schema:Synagogue a sh:NodeShape ;
+    rdfs:subClassOf schema:PlaceOfWorship ;
+    ys:fromClass wd:Q34627 .
+
+schema:TVSeries a sh:NodeShape ;
+    rdfs:subClassOf schema:CreativeWork,
+        schema:CreativeWorkSeries ;
+    sh:property [ sh:node schema:Person ;
+            sh:path schema:actor ;
+            ys:fromProperty wdt:P161 ],
+        [ sh:node schema:Country ;
+            sh:path schema:countryOfOrigin ;
+            ys:fromProperty wdt:P495 ],
+        [ sh:node schema:Person ;
+            sh:path schema:director ],
+        [ sh:datatype xsd:integer ;
+            sh:maxCount 1 ;
+            sh:path schema:numberOfEpisodes ;
+            ys:fromProperty wdt:P1113 ],
+        [ sh:datatype xsd:integer ;
+            sh:maxCount 1 ;
+            sh:path schema:numberOfSeasons ;
+            ys:fromProperty wdt:P2437 ],
+        [ sh:or ( [ sh:node schema:Person ] [ sh:node schema:MusicGroup ] ) ;
+            sh:path schema:musicBy ;
+            ys:fromProperty wdt:P86 ],
+        [ sh:node schema:Organization ;
+            sh:path schema:productionCompany ;
+            ys:fromProperty wdt:P272 ] ;
+    ys:fromClass wd:Q5398426 .
+
+schema:TelevisionChannel a sh:NodeShape ;
+    rdfs:subClassOf schema:BroadcastChannel ;
+    ys:fromClass wd:Q2001305 .
+
+schema:TheaterGroup a sh:NodeShape ;
+    rdfs:subClassOf schema:PerformingGroup ;
+    ys:fromClass wd:Q2416217 .
+
+schema:VideoGame a sh:NodeShape ;
+    rdfs:subClassOf schema:Game,
+        schema:SoftwareApplication ;
+    sh:property [ sh:node schema:Person ;
+            sh:path schema:actor ;
+            ys:fromProperty wdt:P161 ],
+        [ sh:maxCount 1 ;
+            sh:node schema:Person ;
+            sh:path schema:director ;
+            ys:fromProperty wdt:P57 ],
+        [ sh:or ( [ sh:node schema:Person ] [ sh:node schema:MusicGroup ] ) ;
+            sh:path schema:musicBy ;
+            ys:fromProperty wdt:P86 ] ;
+    ys:fromClass wd:Q7889 .
+
+schema:Volcano a sh:NodeShape ;
+    rdfs:subClassOf schema:Landform ;
+    ys:fromClass wd:Q8072 .
+
+schema:Waterfall a sh:NodeShape ;
+    rdfs:subClassOf schema:BodyOfWater ;
+    ys:fromClass wd:Q34038 .
+
+schema:WorkersUnion a sh:NodeShape ;
+    rdfs:subClassOf schema:Organization ;
+    ys:fromClass wd:Q178790 .
+
+yago:Gender a sh:NodeShape ;
+    rdf:label "Gender" ;
+    rdfs:subclassOf schema:Intangible ;
+    ys:fromClass wd:Q48264 .
+
+yago:Sport a sh:NodeShape ;
+    rdf:label "Sport" ;
+    rdfs:subclassOf schema:Intangible ;
+    ys:fromClass wd:Q349 .
+
+schema:Church a sh:NodeShape ;
+    rdfs:subClassOf schema:PlaceOfWorship ;
+    ys:fromClass wd:Q16970 .
+
+schema:City a sh:NodeShape ;
+    rdfs:subClassOf schema:AdministrativeArea ;
+    ys:fromClass wd:Q515 .
+
+schema:Drug a sh:NodeShape ;
+    rdfs:subClassOf schema:Substance ;
+    ys:fromClass wd:Q12140 .
+
+schema:EducationalOrganization a sh:NodeShape ;
+    rdfs:subClassOf schema:CivicStructure,
+        schema:Organization ;
+    sh:property [ sh:datatype xsd:integer ;
+            sh:path schema:studentsCount ;
+            ys:fromProperty wdt:P2196 ] ;
+    ys:fromClass wd:Q5341295 .
+
+schema:Game a sh:NodeShape ;
+    rdfs:subClassOf schema:CreativeWork ;
+    ys:fromClass wd:Q11410 .
+
+schema:Gene a sh:NodeShape ;
+    rdfs:subClassOf schema:BioChemEntity ;
+    sh:property [ sh:node schema:BioChemEntity ;
+            sh:path schema:encodesBioChemEntity ;
+            ys:fromProperty wdt:P688 ] ;
+    ys:fromClass wd:Q7187 .
+
+schema:MedicalCondition a sh:NodeShape ;
+    rdfs:subClassOf schema:Intangible ;
+    sh:property [ sh:node schema:Drug ;
+            sh:path schema:possibleTreatment ;
+            ys:fromProperty wdt:P2176,
+                wdt:P924 ],
+        [ sh:node rdf:Class ;
+            sh:path schema:riskFactor ;
+            ys:fromProperty wdt:P5642 ] ;
+    ys:fromClass wd:Q12136 .
+
+schema:MusicPlaylist rdfs:subClassOf schema:CreativeWork .
+
+schema:Occupation a sh:NodeShape ;
+    rdfs:subClassOf schema:Intangible ;
+    ys:fromClass wd:Q12737077 .
+
+schema:Periodical rdfs:subClassOf schema:CreativeWorkSeries .
+
+schema:Series rdfs:subClassOf schema:Intangible .
+
+schema:SportsOrganization a sh:NodeShape ;
+    rdfs:subClassOf schema:Organization ;
+    ys:fromClass wd:Q4438121 .
+
+schema:SportsTeam a sh:NodeShape ;
+    rdfs:subClassOf schema:SportsOrganization ;
+    ys:fromClass wd:Q12973014 .
+
+schema:Substance a sh:NodeShape ;
+    rdfs:subClassOf schema:BioChemEntity .
+
+ys:AnnotationPropertyShape a rdfs:Property ;
+    rdfs:subPropertyOf sh:PropertyShape .
+
+schema:BroadcastChannel a sh:NodeShape ;
+    rdfs:subClassOf schema:Intangible ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:path schema:broadcastChannelId ;
+            ys:fromProperty wdt:P3970 ] .
+
+schema:CreativeWorkSeries rdfs:subClassOf schema:CreativeWork,
+        schema:Series .
+
+schema:Product a sh:NodeShape ;
+    rdfs:subClassOf schema:Thing ;
+    owl:disjointWith yago:Organism,
+        schema:Place ;
+    sh:property [ sh:node yago:Award ;
+            sh:path schema:award ;
+            ys:fromProperty wdt:P166 ],
+        [ sh:datatype xsd:string ;
+            sh:path schema:gtin ;
+            sh:pattern "^\\d{12,14}|\\d{8}$" ;
+            ys:fromProperty wdt:P3962 ] ;
+    ys:fromClass wd:Q2424752 .
+
+yago:Organism a sh:NodeShape ;
+    rdfs:label "Organism" ;
+    rdfs:description "a living being" ;
+    rdfs:subClassOf schema:Thing ;
+    owl:disjointWith schema:CreativeWork,
+        schema:Event,
+        schema:Organization ;
+    ys:fromClass wd:Q7239 .
+
+schema:AdministrativeArea a sh:NodeShape ;
+    rdfs:subClassOf schema:Place ;
+    ys:fromClass wd:Q56061 .
+
+schema:Country a sh:NodeShape ;
+    rdfs:subClassOf schema:AdministrativeArea ;
+    sh:property [ sh:node schema:City ;
+            sh:path ys:capital ;
+            ys:fromProperty wdt:P36 ] ;
+    ys:fromClass wd:Q6256 .
+
+schema:Language a sh:NodeShape ;
+    rdfs:subClassOf schema:Intangible ;
+    ys:fromClass wd:Q34770 .
+
+schema:PerformingGroup rdfs:subClassOf schema:Organization .
+
+schema:SoftwareApplication a sh:NodeShape ;
+    rdfs:subClassOf schema:CreativeWork ;
+    sh:property [ sh:node schema:SoftwareApplication ;
+            sh:path schema:operatingSystem ;
+            ys:fromProperty wdt:P306 ] ;
+    ys:fromClass wd:Q166142 .
+
+schema:Vehicle a sh:NodeShape ;
+    rdfs:subClassOf schema:Product ;
+    ys:fromClass wd:Q42889 .
+
+yago:Award a sh:NodeShape ;
+    rdf:label "Award" ;
+    rdfs:subclassOf schema:Intangible ;
+    ys:fromClass wd:Q618779 .
+
+schema:Landform a sh:NodeShape ;
+    rdfs:subClassOf schema:Place ;
+    ys:fromClass wd:Q271669 .
+
+schema:PlaceOfWorship a sh:NodeShape ;
+    rdfs:subClassOf schema:CivicStructure ;
+    ys:fromClass wd:Q1370598 .
+
+schema:BioChemEntity a sh:NodeShape ;
+    rdfs:subClassOf schema:Thing ;
+    owl:disjointWith yago:Organism,
+        schema:Event,
+        schema:Organization,
+        schema:Person,
+        schema:Place ;
+    sh:property [ sh:node schema:BioChemEntity ;
+            sh:path schema:bioChemInteraction ;
+            ys:fromProperty wdt:P769 ],
+        [ sh:node schema:Gene ;
+            sh:path schema:isEncodedByBioChemEntity ;
+            ys:fromProperty wdt:P702 ],
+        [ sh:datatype xsd:double ;
+            sh:path schema:mass ;
+            ys:fromProperty wdt:P2067 ],
+        [ sh:datatype xsd:double ;
+            sh:path schema:meltingPoint ;
+            ys:fromProperty wdt:P2101 ],
+        [ sh:datatype xsd:string ;
+            sh:path schema:formula ;
+            ys:fromProperty wdt:P274 ] .
+
+schema:BodyOfWater a sh:NodeShape ;
+    rdfs:subClassOf schema:Landform ;
+    ys:fromClass wd:Q15324 .
+
+schema:CivicStructure rdfs:subClassOf schema:Place .
+
+schema:MusicGroup a sh:NodeShape ;
+    rdfs:subClassOf schema:PerformingGroup ;
+    sh:property [ sh:node schema:Person ;
+            sh:path schema:influencedBy ;
+            ys:fromProperty wdt:P737 ],
+        [ sh:node schema:Person ;
+            sh:path schema:members ;
+            ys:fromProperty wdt:P527 ] ;
+    ys:fromClass wd:Q215380 .
+
+schema:Event a sh:NodeShape ;
+    rdfs:subClassOf schema:Thing ;
+    owl:disjointWith schema:CreativeWork ;
+    sh:property [ sh:node schema:Thing ;
+            sh:path schema:about ;
+            ys:fromProperty wdt:P921 ],
+        [ sh:or ( [ sh:node schema:Person ] [ sh:node schema:MusicGroup ] ) ;
+            sh:path schema:composer ;
+            ys:fromProperty wdt:P86 ],
+        [ sh:or ( [ sh:node schema:Organization ] [ sh:node schema:Person ] ) ;
+            sh:path schema:contributor ;
+            ys:fromProperty wdt:P767 ],
+        [ sh:datatype xsd:duration ;
+            sh:path schema:duration ;
+            ys:fromProperty wdt:P2047 ],
+        [ sh:node schema:Place ;
+            sh:path schema:location ;
+            ys:fromProperty wdt:P131,
+                wdt:P276,
+                wdt:P4552,
+                wdt:P706 ],
+        [ sh:or ( [ sh:node schema:Person ] [ sh:node schema:Organization ] ) ;
+            sh:path schema:organizer ;
+            ys:fromProperty wdt:P664 ],
+        [ sh:maxCount 1 ;
+            sh:or ( [ sh:datatype xsd:dateTime ] [ sh:datatype xsd:date ] [ sh:datatype xsd:gYearMonth ] [ sh:datatype xsd:gYear ] ) ;
+            sh:path schema:startDate ;
+            ys:fromProperty wdt:P580 ],
+        [ sh:maxCount 1 ;
+            sh:or ( [ sh:datatype xsd:dateTime ] [ sh:datatype xsd:date ] [ sh:datatype xsd:gYearMonth ] [ sh:datatype xsd:gYear ] ) ;
+            sh:path schema:endDate ;
+            ys:fromProperty wdt:P582 ],
+        [ sh:or ( [ sh:node schema:Organization ] [ sh:node schema:Person ] ) ;
+            sh:path schema:sponsor ;
+            ys:fromProperty wdt:P859 ],
+        [ sh:node schema:Event ;
+            sh:path schema:superEvent ;
+            ys:fromProperty wdt:P361 ],
+        [ sh:node schema:Event ;
+            sh:path schema:subEvent ;
+            ys:fromProperty wdt:P527 ] ;
+    ys:fromClass wd:Q1656682 .
+
+schema:Intangible rdfs:subClassOf schema:Thing .
+
+schema:Thing a sh:NodeShape ;
+    sh:property [ sh:datatype rdf:langString ;
+            sh:disjoint rdfs:label ;
+            sh:path schema:alternateName ;
+            ys:fromProperty skos:altLabel ],
+        [ sh:datatype rdf:langString ;
+            sh:path rdfs:comment ;
+            sh:uniqueLang true ;
+            ys:fromProperty schema:description ],
+        [ sh:datatype rdf:langString ;
+            sh:path rdfs:label ;
+            sh:uniqueLang true ],
+        [ sh:datatype xsd:anyURI ;
+            sh:path schema:mainEntityOfPage ],
+        [ sh:datatype xsd:anyURI ;
+            sh:maxCount 1 ;
+            sh:path schema:url ;
+            ys:fromProperty wdt:P856 ],
+        [ sh:nodeKind sh:IRI ;
+            sh:path owl:sameAs ;
+            ys:fromProperty wdt:P345,
+                wdt:P646 ] ;
+    ys:fromClass wd:Q35120 .
+
+schema:Place a sh:NodeShape ;
+    rdfs:subClassOf schema:Thing ;
+    owl:disjointWith yago:Organism,
+        schema:CreativeWork,
+        schema:Event,
+        schema:Person ;
+    sh:property [ sh:node schema:Place ;
+            sh:path schema:containedInPlace ;
+            ys:fromProperty wdt:P131,
+                wdt:P276,
+                wdt:P4552,
+                wdt:P706 ],
+        [ sh:datatype xsd:dateTime ;
+            sh:path schema:inception ;
+            ys:fromProperty wdt:P571 ],
+        [ sh:datatype xsd:string ;
+            sh:path schema:demonym ;
+            ys:fromProperty wdt:P1549 ],
+        [ sh:node schema:Person ;
+            sh:path schema:leader ;
+            ys:fromProperty wdt:P35,
+                wdt:P6 ],
+        [ sh:datatype xsd:integer ;
+            sh:path schema:populationNumber ;
+            ys:fromProperty wdt:P1082 ],
+        [ sh:datatype xsd:string ;
+            sh:path schema:timezone ;
+            ys:fromProperty wdt:P421 ],
+        [ sh:datatype xsd:string ;
+            sh:path schema:area ;
+            ys:fromProperty wdt:P2046 ],
+        [ sh:datatype xsd:string ;
+            sh:path schema:postalCode ;
+            ys:fromProperty wdt:P281 ],
+        [ sh:datatype xsd:anyURI ;
+            sh:path schema:officialWebsite ;
+            ys:fromProperty wdt:P856 ],
+        [ sh:node schema:Language ;
+            sh:path schema:officialLanguage ;
+            ys:fromProperty wdt:P37 ],
+        [ sh:datatype xsd:string ;
+            sh:path schema:motto ;
+            ys:fromProperty wdt:P1451 ],
+        [ sh:node schema:Place ;
+            sh:path schema:highestPoint ;
+            ys:fromProperty wdt:P610 ],
+        [ sh:node schema:Place ;
+            sh:path schema:lowestPoint ;
+            ys:fromProperty wdt:P1589 ],
+        [ sh:node schema:Organization ;
+            sh:path schema:memberOf ;
+            ys:fromProperty wdt:P463 ],
+        [ sh:node schema:Place ;
+            sh:path schema:administrates ;
+            ys:fromProperty wdt:P150 ],
+        [ sh:datatype xsd:string ;
+            sh:path schema:currency ;
+            ys:fromProperty wdt:P38 ],
+        [ sh:datatype xsd:double ;
+            sh:path schema:humanDevelopmentIndex ;
+            ys:fromProperty wdt:P1081 ],
+        [ sh:datatype xsd:string ;
+            sh:path schema:unemploymentRate ;
+            ys:fromProperty wdt:P1198 ],
+        [ sh:node schema:Place ;
+            sh:path schema:neighbors ;
+            ys:fromProperty wdt:P47 ],
+        [ sh:node schema:BodyOfWater ;
+            sh:path schema:neighborsBodyOfWater ;
+            ys:fromProperty wdt:P206 ],
+        [ sh:datatype xsd:string ;
+            sh:path schema:internetDomain ;
+            ys:fromProperty wdt:P78 ],
+        [ sh:datatype xsd:integer ;
+            sh:path schema:medianIncome ;
+            ys:fromProperty wdt:P3529 ],
+        [ sh:datatype xsd:double ;
+            sh:path schema:elevation ;
+            ys:fromProperty wdt:P2044 ],
+        [ sh:maxCount 1 ;
+            sh:node geo:wktLiteral ;
+            sh:path schema:geo ;
+            ys:fromProperty wdt:P625 ] ;
+    ys:fromClass wd:Q17334923 .
+
+schema:CreativeWork a rdf:Class,
+        sh:NodeShape ;
+    rdfs:subClassOf schema:Thing ;
+    sh:property [ sh:node schema:Thing ;
+            sh:path schema:about ;
+            ys:fromProperty wdt:P921 ],
+        [ sh:node yago:Award ;
+            sh:path schema:award ;
+            ys:fromProperty wdt:P166 ],
+        [ sh:or ( [ sh:node schema:Organization ] [ sh:node schema:Person ] ) ;
+            sh:path schema:author ;
+            ys:fromProperty wdt:170,
+                wdt:P50 ],
+        [ sh:node schema:Person ;
+            sh:path schema:character ;
+            ys:fromProperty wdt:P674 ],
+        [ sh:node schema:Place ;
+            sh:path schema:contentLocation ;
+            ys:fromProperty wdt:P840 ],
+        [ sh:maxCount 1 ;
+            sh:or ( [ sh:datatype xsd:dateTime ] [ sh:datatype xsd:date ] [ sh:datatype xsd:gYearMonth ] [ sh:datatype xsd:gYear ] ) ;
+            sh:path schema:dateCreated ;
+            ys:fromProperty wdt:P571 ],
+        [ sh:node schema:Language ;
+            sh:path schema:inLanguage ;
+            ys:fromProperty wdt:P407 ] ;
+    ys:fromClass wd:Q17537576 .
+
+schema:Organization a sh:NodeShape ;
+    rdfs:subClassOf schema:Thing ;
+    owl:disjointWith schema:CreativeWork,
+        schema:Event ;
+    sh:property [ sh:node yago:Award ;
+            sh:path schema:award ;
+            ys:fromProperty wdt:P166 ],
+        [ sh:maxCount 1 ;
+            sh:or ( [ sh:datatype xsd:dateTime ] [ sh:datatype xsd:date ] [ sh:datatype xsd:gYearMonth ] [ sh:datatype xsd:gYear ] ) ;
+            sh:path schema:dissolutionDate ;
+            ys:fromProperty wdt:P576 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path schema:duns ;
+            sh:pattern "^\\d{9}$" ;
+            ys:fromProperty wdt:P2771 ],
+        [ sh:node schema:Person ;
+            sh:path schema:founder ;
+            ys:fromProperty wdt:P112 ],
+        [ sh:node schema:Person ;
+            sh:path schema:leader ;
+            ys:fromProperty wdt:P35,
+                wdt:P6 ],
+        [ sh:datatype xsd:string ;
+            sh:path schema:motto ;
+            ys:fromProperty wdt:P1451 ],
+        [ sh:datatype xsd:string ;
+            sh:path schema:address ;
+            ys:fromProperty wdt:P6375 ],
+        [ sh:maxCount 1 ;
+            sh:or ( [ sh:datatype xsd:dateTime ] [ sh:datatype xsd:date ] [ sh:datatype xsd:gYearMonth ] [ sh:datatype xsd:gYear ] ) ;
+            sh:path schema:foundingDate ;
+            ys:fromProperty wdt:P571 ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:path schema:leiCode ;
+            sh:pattern "^[0-9A-Z]{18}[0-9]{2}$" ;
+            ys:fromProperty wdt:P1278 ],
+        [ sh:node schema:Place ;
+            sh:path schema:location ;
+            ys:fromProperty wdt:P131,
+                wdt:P276,
+                wdt:P4552,
+                wdt:P706 ],
+        [ sh:node schema:Organization ;
+            sh:path schema:memberOf ;
+            ys:fromProperty wdt:P463 ],
+        [ sh:datatype xsd:integer ;
+            sh:path schema:numberOfEmployees ;
+            ys:fromProperty wdt:P1128 ],
+        [ sh:node schema:Organization ;
+            sh:path schema:parentOrganization ;
+            ys:fromProperty wdt:P749 ] ;
+    ys:fromClass wd:Q43229 .
+
+schema:Person a sh:NodeShape ;
+    rdfs:subClassOf schema:Thing ;
+    owl:disjointWith schema:CreativeWork,
+        schema:Event,
+        schema:Organism,
+        schema:Organization ;
+    sh:property [ sh:node schema:Organization ;
+            sh:path schema:affiliation ;
+            ys:fromProperty wdt:P1416 ],
+        [ sh:node schema:Organization ;
+            sh:path schema:alumniOf ;
+            ys:fromProperty wdt:P69 ],
+        [ sh:node yago:Award ;
+            sh:path schema:award ;
+            ys:fromProperty wdt:P166 ],
+        [ sh:maxCount 1 ;
+            sh:or ( [ sh:datatype xsd:dateTime ] [ sh:datatype xsd:date ] [ sh:datatype xsd:gYearMonth ] [ sh:datatype xsd:gYear ] ) ;
+            sh:path schema:birthDate ;
+            ys:fromProperty wdt:P569 ],
+        [ sh:maxCount 1 ;
+            sh:node schema:Place ;
+            sh:path schema:birthPlace ;
+            ys:fromProperty wdt:P19 ],
+        [ sh:node schema:Person ;
+            sh:path schema:children ;
+            ys:fromProperty wdt:P40 ],
+        [ sh:maxCount 1 ;
+            sh:or ( [ sh:datatype xsd:dateTime ] [ sh:datatype xsd:date ] [ sh:datatype xsd:gYearMonth ] [ sh:datatype xsd:gYear ] ) ;
+            sh:path schema:deathDate ;
+            ys:fromProperty wdt:P570 ],
+        [ sh:maxCount 1 ;
+            sh:node schema:Place ;
+            sh:path schema:deathPlace ;
+            ys:fromProperty wdt:P20 ],
+        [ sh:maxCount 1 ;
+            sh:node yago:Gender ;
+            sh:path schema:gender ;
+            ys:fromProperty wdt:P21 ],
+        [ sh:node schema:Occupation ;
+            sh:path schema:hasOccupation ;
+            ys:fromProperty wdt:P106 ],
+        [ sh:node schema:Place ;
+            sh:path schema:homeLocation ;
+            ys:fromProperty wdt:P551 ],
+        [ sh:node schema:Language ;
+            sh:path schema:knowsLanguage ;
+            ys:fromProperty wdt:P1412 ],
+        [ sh:node schema:Organization ;
+            sh:path schema:memberOf ;
+            ys:fromProperty wdt:P102,
+                wdt:P463,
+                wdt:P54 ],
+        [ sh:node schema:Country ;
+            sh:path schema:nationality ;
+            ys:fromProperty wdt:P27 ],
+        [ sh:node schema:Product ;
+            sh:path schema:owns ;
+            ys:fromProperty wdt:P1830 ],
+        [ sh:node schema:Person ;
+            sh:path schema:spouse ;
+            ys:fromProperty wdt:P26 ] ;
+    ys:fromClass wd:Q5 .
+
