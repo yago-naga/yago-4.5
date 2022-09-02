@@ -12,7 +12,7 @@ Input:
 
 Output:
 - 02-yago-taxonomy.tsv, the YAGO lower level taxonomy in 
-- 02-non-yago-classes.tsv, the unmapped classes (which appear in Wikidata but not in YAGO, and whose instances have to be attached to a superclass in YAGO)
+- 02-non-yago-classes.tsv, which maps classes that exist in Wikidata but not in YAGO to the nearest superclass in YAGO
     
 Algorithm:
 1) Start with top-level YAGO classes from the YAGO schema
@@ -23,9 +23,9 @@ Algorithm:
 3) Remove a class and its descendants if it transitively subclasses two disjoint classes
 """
 
-TEST=True
+TEST=False
 OUTPUT_FOLDER="test-data/02-make-taxonomy/" if TEST else "yago-data/"
-WIKIDATA_FILE= "test-data/02-make-taxonomy/00-wikidata.ttl" if TEST else "input-data/wikidata.ttl.gz"
+WIKIDATA_FILE= "test-data/02-make-taxonomy/00-wikidata.ttl" if TEST else "input-data/wikidata.ttl"
 SCHEMA_FILE = "test-data/02-make-taxonomy/01-yago-schema.ttl" if TEST else "yago-data/01-yago-schema.ttl"
 
 ###########################################################################
@@ -66,7 +66,8 @@ wikidataTaxonomy = Graph()
 wikidataClassesWithWikipediaPage=set()
 
 for graph in utils.readWikidataEntities(WIKIDATA_FILE):
-    # We join in ParentTaxon, because Wikidata is inconsistent on the use of it
+    # We use the Wikidata property "ParentTaxon" as "rdfs:subclassOf",
+    # because Wikidata sometimes uses only one of them
     for s,p,o in chain(graph.triples((None, utils.wikidataSubClassOf, None)), graph.triples((None, utils.wikidataParentTaxon, None))):
         wikidataTaxonomy.add((s,RDFS.subClassOf,o))
         for w in graph.subjects(utils.schemaAbout, s):
@@ -109,7 +110,7 @@ def addSubClasses(lastGoodYagoClass, wikidataClass, unmappedClassesWriter, treat
     pathToRoot.pop()
 
 print("  Creating YAGO taxonomy...", end="", flush=True)
-with utils.TsvFileWriter(OUTPUT_FOLDER+"02-non-yago-classes.tsv") as unmappedClassesWriter:
+with utils.TsvFileWriter(OUTPUT_FOLDER+"02-class-mappings.tsv") as unmappedClassesWriter:
     treated=set()
     for s,p,o in yagoSchema.triples((None, utils.fromClass, None)):
         if s!=utils.schemaThing:
@@ -164,4 +165,4 @@ print("done")
 
 if TEST:
     evaluator.compare(OUTPUT_FOLDER+"02-non-yago-classes.tsv")
-    evaluator.compare(OUTPUT_FOLDER+"02-yago-taxonomy.tsv")
+    evaluator.compare(OUTPUT_FOLDER+"02-yago-taxonomy.tsv"

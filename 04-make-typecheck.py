@@ -22,7 +22,7 @@ Algorithm:
    
 """
 
-TEST=True
+TEST=False
 FOLDER="test-data/04-make-typecheck/" if TEST else "yago-data/"
 
 ##########################################################################
@@ -85,6 +85,10 @@ def yagoIdFromWikidataId(wikidataEntity):
     return wikidataEntity[4:]
 
 def writeYagoId(out, currentTopic, currentLabel, currentWikipediaPage):
+    """ Writes wd:Q303 owl:sameAs yago:Elvis """ 
+    # Don't print ids for built-in classes
+    if currentTopic.startswith("schema:"):
+        return
     if currentWikipediaPage:
         out.write(currentTopic,"owl:sameAs","yago:"+yagoIdFromWikipediaPage(currentWikipediaPage),". #WIKI")
     elif currentLabel:

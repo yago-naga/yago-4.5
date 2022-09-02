@@ -25,23 +25,33 @@ Algorithm:
   - write out facts that fulfill the constraints to yago-facts-to-type-check.tsv  
 """
 
-TEST=True
+TEST=False
 FOLDER="test-data/03-make-facts/" if TEST else "yago-data/"
-WIKIDATA_FILE= "test-data/03-make-facts/00-wikidata.ttl" if TEST else "input-data/wikidata.ttl.gz"
+WIKIDATA_FILE= "test-data/03-make-facts/00-wikidata.ttl" if TEST else "input-data/wikidata.ttl"
 
 ##########################################################################
 #             Debugging
 ##########################################################################
 
-def debug(message):
+def debug(*message):
     """ Prints a message if we're in TEST mode"""
     if TEST:
-        print("  ",message)
+        for m in message:
+            # Using this instead of print to allow for piping unicode chars
+            sys.stdout.buffer.write(str(m).encode('utf8'))
+        print("")
 
 def oneSubject(graph):
     for s in graph.subjects(None, None):
         return(utils.compressPrefix(s))
-        
+
+def factsAbout(entity, graph):
+    result=[]
+    for (s, p, o) in graph:
+        if s==entity:
+            result+=(utils.compressPrefix(s), utils.compressPrefix(p), utils.compressPrefix(o))
+    return result
+    
 ##########################################################################
 #             Booting
 ##########################################################################
@@ -82,16 +92,27 @@ def cleanArticles(entityFacts):
     entityAndPage=[ (s, o) for s, p, o in entityFacts.triples((None, utils.schemaAbout, None))]
     entityFacts.remove((None, utils.schemaAbout, None))
     for (s, o) in entityAndPage:
-        entityFacts.add((o, URIRef("https://schema.org/mainEntityOfPage"), s))
+        entityFacts.add((o, utils.schemaPage, s))
                 
 def checkIfClass(entityFacts):
-    """Adds <subject, rdf:type, rdfs:Class> if this is a class. Removes all other type relationships."""
-    for s in entityFacts.subjects(RDFS.label, None):
-        if utils.compressPrefix(s) in yagoTaxonomyUp:
-            entityFacts.add((s,RDF.type,RDFS.Class))
-    if (None,RDF.type,RDFS.Class) in entityFacts:
-        entityFacts.remove((None, utils.wikidataType, None))    
+    """Adds <subject, rdf:type, rdfs:Class> if this is a class. Removes all other type relationships. Returns new entityFacts."""
+    if (None, RDFS.label, None) not in entityFacts:
+        return entityFacts
+    mainEntity=entityFacts.subjects(RDFS.label, None).__next__()
+    if (None, utils.fromClass, mainEntity) in yagoSchema:
+        entityFacts.add((mainEntity,RDF.type,RDFS.Class))
+        yagoClass=yagoSchema.subjects(utils.fromClass, mainEntity).__next__()
+        # Replace all entities by the new one
+        newEntityFacts=Graph()
+        for (s,p,o) in entityFacts:
+            newEntityFacts.add((yagoClass if s==mainEntity else s, p, o))
+        return newEntityFacts
+    if utils.compressPrefix(mainEntity) in yagoTaxonomyUp:
+        entityFacts.add((mainEntity,RDF.type,RDFS.Class))
+        entityFacts.remove((mainEntity, utils.wikidataType, None))    
 
+    return entityFacts
+    
 def cleanClasses(entityFacts):
     """Replace all facts <subject, wikidata:type, wikidataClass> by <subject, rdf:type, yagoClass>"""
     for s,p,o in entityFacts.triples((None, utils.wikidataType, None)):
@@ -100,6 +121,8 @@ def cleanClasses(entityFacts):
             entityFacts.add((s,RDF.type,nonYagoClasses[compressedO]))
         if compressedO in yagoTaxonomyUp:
             entityFacts.add((s,RDF.type,o))
+        if (None, utils.fromClass, o) in yagoSchema:
+            entityFacts.add((s,RDF.type,yagoSchema.subjects(utils.fromClass, o).__next__()))
     entityFacts.remove((None, utils.wikidataType, None))    
     return (None, RDF.type, None) in entityFacts
 
@@ -131,7 +154,8 @@ def wikidataPredicate2YagoPredicate(p):
 #	pq:P585 "2014-01-01T00:00:00Z"^^xsd:dateTime ;
 
 def getStartAndEndDate(s, p, o, entityGraph):
-    """ Returns a tuple of a start date and an end date for this fact. Unknown components are None. """
+    """ Returns a tuple of a start date and an end date for this fact.
+        Unknown components are None. """
     # The property should be in the namespace WDT
     if not p.startswith("http://www.wikidata.org/prop/direct/"):
         return (None, None)
@@ -200,8 +224,9 @@ def checkCardinalityConstraints(p, entityFacts):
         return
     if not isinstance(maxCount, Literal) or int(maxCount.value)<=0:
         raise Exception("Maxcount has to be a positive int, not "+maxCount)
-    if len(set(entityFacts.objects(None, p)))>int(maxCount.value):
-        entityFacts.remove((None, p, None))        
+    for s in entityFacts.subjects():
+        if len(set(entityFacts.objects(s, p)))>int(maxCount.value):
+            entityFacts.remove((s, p, None))        
     
         
 ##########################################################################
@@ -231,11 +256,9 @@ def checkDomain(p, classes):
 
 def checkDatatype(datatype, o):
     """True if the object <o> conforms to the <datatype>"""
-    debug("  Checking if "+str(o)+" has datatype "+str(datatype))
     if datatype==XSD.anyURI:
         return isinstance(o,URIRef)
     if not isinstance(o, Literal):
-        debug("  "+str(o)+" is not a literal")
         return False
     if datatype==XSD.string:
         return o.datatype is None
@@ -249,17 +272,14 @@ def checkRangePropertyNode(propertyNode, o):
     disjunctObject = next(yagoSchema.objects(propertyNode, utils.shaclOr), None)
     if disjunctObject:
         possiblePropertyNodes = collection.Collection(yagoSchema, disjunctObject)
-        debug("   is disjunction: "+str(possiblePropertyNodes))
         resultList=[]
         for possiblePropertyNode in possiblePropertyNodes:
             result=checkRangePropertyNode(possiblePropertyNode, o)
-            debug("    checking: "+str(result))
             if result==True:
                return True
             if result==False:
                 continue
             resultList=resultList+result
-        debug("   disjunction result: "+str(resultList))
         if len(resultList)==0:
             return False
         return resultList
@@ -269,14 +289,12 @@ def checkRangePropertyNode(propertyNode, o):
     patternObject = next(yagoSchema.objects(propertyNode, utils.shaclPattern), None)
     if patternObject: 
        if not isinstance(o, Literal):
-           debug("  Pattern "+str(patternObject)+" cannot match because object is not a string: "+str(o))
            return False
        string = o.value    
        if not isinstance(patternObject, Literal):
             raise Exception("SHACL pattern has to be a string: "+str(propertyNode)+" "+str(patternObject))
        patternString = patternObject.value    
        if not re.match(patternString, string):
-           debug("  Pattern "+patternString+" does not match: "+string)
            return False
     
     # Datatypes
@@ -296,7 +314,6 @@ def checkRange(p, o):
     """True if the object <o> conforms to the range constraint of predicate <p>. False if it does not. Otherwise, returns a list of classes that <o> would have to belong to."""
     # ASSUMPTION: the object types for the predicate p are the same, no matter the subject type
     propertyNode = next(yagoSchema.subjects(utils.shaclPath, p), None)
-    debug("  Range check for "+str(p)+" "+str(o)+" with prop node "+str(propertyNode))
     if not propertyNode:
         return False
     return checkRangePropertyNode(propertyNode, o)
@@ -307,43 +324,42 @@ def checkRange(p, o):
 
 with utils.TsvFileWriter(FOLDER+"03-yago-facts-to-type-check.tsv") as yagoFacts:
     for entityFacts in utils.readWikidataEntities(WIKIDATA_FILE):         
-        debug(oneSubject(entityFacts))
+               
         # Anything that is rdf:type in Wikidata is meta-statements, 
         # and should go away
         entityFacts.remove((None, RDF.type, None))    
-        cleanArticles(entityFacts)
+                   
+        cleanArticles(entityFacts)               
         
-        checkIfClass(entityFacts)
+        entityFacts=checkIfClass(entityFacts)
+                   
         if not cleanClasses(entityFacts):
             continue
+                        
         classes = getClasses(entityFacts)
         if anyDisjoint(classes):
             continue
+                        
         for p in set(entityFacts.predicates()):
             checkCardinalityConstraints(p, entityFacts)
-        
+            
         for s,p,o in entityFacts:
-            debug(" Predicate: "+str(p))
             if p==RDF.type:
                 yagoFacts.writeFact(utils.compressPrefix(s),"rdf:type",utils.compressPrefix(o))
                 continue
             else:
                 yagoPredicate = wikidataPredicate2YagoPredicate(p)
-            debug(" in YAGO: "+str(yagoPredicate))
             if not yagoPredicate:
                 continue
             if not checkDomain(yagoPredicate, classes):
-                debug(" domain check failed")
                 continue
             rangeResult=checkRange(yagoPredicate, o)
             if rangeResult is False:
-                debug(" range check failed")
-                continue
+                continue            
             (startDate, endDate) = getStartAndEndDate(s, p, o, entityFacts)
             if rangeResult is True:
                 yagoFacts.write(utils.compressPrefix(s),utils.compressPrefix(yagoPredicate),utils.compressPrefix(o), ".", "", utils.compressPrefix(startDate), utils.compressPrefix(endDate))
             else:
-                debug(str(rangeResult))
                 yagoFacts.write(utils.compressPrefix(s),utils.compressPrefix(yagoPredicate),utils.compressPrefix(o),". # IF",(", ".join(rangeResult)), utils.compressPrefix(startDate), utils.compressPrefix(endDate))           
 
 print("done")

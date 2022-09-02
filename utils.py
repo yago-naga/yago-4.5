@@ -8,6 +8,7 @@ from rdflib import URIRef, Graph, Namespace, Literal
 from datetime import date
 import gzip
 import os
+import sys
 
 TEST=True
 
@@ -97,6 +98,10 @@ prefixes = {
 
 # For turtle parsing, see TODO further down
 prefixesAsString="\n".join([ "@prefix "+p+": <"+prefixes[p]+"> ." for p in prefixes])
+
+# For prefix resolution in compressPrefix
+prefixesAsList= [ (s, prefixes[s]) for s in prefixes]
+prefixesAsList.sort(key=(lambda t : t[1]), reverse=True)
 
 ##########################################################################
 #             Reading lines of a file
@@ -226,15 +231,20 @@ def printGraph(graph, out=None):
     else:
         print(str(graph.serialize(format="turtle", encoding="utf-8"), "utf-8"))
 
+def forcePrintGraph(graph):
+    """Prints an RDF graph in TSV format even with bad characters"""
+    for (s,p,o) in graph:
+        sys.stdout.buffer.write((compressPrefix(s)+" "+compressPrefix(p)+" "+compressPrefix(o)+"\n").encode("utf8"))
+
 def compressPrefix(entity):
     """ Compresses the URI prefix of Wikidata to "wd:" etc. Fixes Gregorian years to years. Returns the empty string for None. """
     if not entity:
         return ""
     if isinstance(entity, Literal) and entity.datatype==xsdYear and isinstance(entity.value, date) and entity.value.year:
         return('"'+str(entity.value.year)+'"^^xsd:gYear')
-    for p in prefixes:
-        if entity.startswith(prefixes[p]):
-            return p+":"+entity[len(prefixes[p]):]
+    for (s,l) in prefixesAsList:
+        if entity.startswith(l):
+            return s+":"+entity[len(l):]
     return entity.n3()
 
 def expandPrefix(entity):
@@ -250,9 +260,8 @@ def expandPrefix(entity):
 
 if TEST and __name__ == '__main__':
     print("Test run of utils...")
-    with open("test-data/utils/test-output.ttl", "wb") as out:
+    with TsvFileWriter("test-data/utils/test-output.ttl") as out:
         for entityFacts in readWikidataEntities("test-data/utils/test-input.ttl"):
-            printGraph(entityFacts, out)
-            for s,p,o in entityFacts:
-                out.write(bytes(compress(s)+"\t"+compress(p)+"\t"+compress(o)+"\n","utf-8"))
+            for (s,p,o) in entityFacts:
+                out.writeFact(compressPrefix(s), compressPrefix(p), compressPrefix(o))
     print("done")

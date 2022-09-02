@@ -14,20 +14,27 @@ def compare(output_file, gold_file=None):
     print("Evaluating "+output_file)
     gold_standard = f"{output_file[0:-4]}-gold.tsv" if gold_file == None else gold_file # standard file path
 
-    with open(gold_standard) as gold:
+    with open(gold_standard, encoding='utf8') as gold:
         goldContent=set(gold)
-        with open(output_file) as out:
+        with open(output_file, encoding='utf8') as out:
             outContent = set(out)
             not_in_output = goldContent.difference(outContent)
             not_in_gold = outContent.difference(goldContent)
 
     print(f"  Lines in the gold standard that are not in the output file: {len(not_in_output)}")
     for line in not_in_output:
-        print(f"    {str(line)}", end="")
+        try:
+            print(f"    {str(line)}", end="")        
+        except:
+            # too idiotic to print
+            pass
     print(f"  Lines in output file that are not in the gold standard: {len(not_in_gold)}")
     for line in not_in_gold:
-        print(f"    {str(line)}", end="")
-
+        try:
+            print(f"    {str(line)}", end="")
+        except:
+            # too idiotic to print
+            pass
     precision = round((len(goldContent) - len(not_in_output)) / len(goldContent), 3)
     recall = round((len(outContent) - len(not_in_gold)) / len(outContent), 3)
     print("  Precision: ", precision)
@@ -35,4 +42,4 @@ def compare(output_file, gold_file=None):
 
 # quick test
 if __name__ == '__main__':
-    compare("test-data/01-make-taxonomy/01-yago-taxonomy.tsv")
+    compare("test-data/02-make-taxonomy/02-yago-taxonomy.tsv")
