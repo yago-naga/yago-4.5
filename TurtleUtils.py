@@ -4,59 +4,13 @@ Reading Turtle files
 (c) 2022 Fabian M. Suchanek
 """
 
-from rdflib import URIRef, Graph, Namespace, Literal
-from datetime import date
 import gzip
 import os
 import sys
-import TsvUtils
+from io import StringIO
+import Prefixes
 
 TEST=True
-
-##########################################################################
-#             Wikidata and schema.org URIs
-##########################################################################
-
-wikidataType = "wdt:P31"
-
-wikidataSubClassOf = "wdt:P279"
-
-wikidataParentTaxon = "wdt:P171"
-
-wikidataDuring = "pq:P585"
-
-wikidataStart = "pq:P580"
-
-wikidataEnd = "pq:P582"
-
-owlDisjointWith = "owl:disjointWith"
-
-schemaAbout = "schema:about"
-
-schemaPage = "schema:mainEntityOfPage"
-
-schemaThing = "schema:Thing"
-
-fromClass = "ys:fromClass"
-
-fromProperty = "ys:fromProperty"
-
-shaclPath="shacl:path"
-
-shaclNode="shacl:node"
-
-shaclMaxCount="shacl:maxCount"
-
-shaclDatatype="shacl:datatype"
-
-shaclOr="shacl:or"
-
-shaclNodeKind="shacl:nodeKind"
-
-shaclPattern="shacl:pattern"
-
-shaclProperty="shacl:property"
-
 
 ##########################################################################
 #             Parsing Turtle
@@ -66,8 +20,10 @@ def printError(*args, **kwargs):
     """ Prints an error to StdErr """
     print(*args, file=sys.stderr, **kwargs)
 
-def charsOfFile(file, message="Parsing"):
+def charsOfFile(file, message=None):
     """ Iterator over the chars of a GZ or text file, with progress bar """
+    if not message:
+       message="  Parsing"
     print(message,"...", end="", flush=True)
     totalNumberOfDots=60-len(message)
     coveredSize=0
@@ -160,7 +116,7 @@ def termsAndSeparators(generator):
                             break
                         literal=literal+char
             # Make all literals simple literals without line breaks
-            literal=literal.replace('\n','\\u000D').replace('\t','\\u0009')
+            literal=literal.replace('\n','\\n').replace('\t','\\t').replace('\r','')
             char=next(generator)
             if char=='^':
                 # Datatypes
@@ -206,13 +162,13 @@ def termsAndSeparators(generator):
                     printError("Unexpected end of file in URL",uri)
                     break
             yield uri+">"
-        elif char in ['.',',',';','[',']']:
+        elif char in ['.',',',';','[',']','(',')']:
             # Separators
             yield char
         else:
             # Local names
             iri=""
-            while not char.isspace() and char not in ['.',',',';','[',']','"',"'",'^','@']:
+            while not char.isspace() and char not in ['.',',',';','[',']','"',"'",'^','@','(',')']:
                 iri=iri+char
                 char=next(generator)
                 if not char:
@@ -221,25 +177,46 @@ def termsAndSeparators(generator):
             pushBack=char
             yield iri 
 
+# Counts blank nodes to give a unique name to each of them
 blankNodeCounter=0
-        
+
+def blankNodeName(subject, predicate=None):
+    """ Generates a legible name for a blank node """
+    global blankNodeCounter
+    if ':' in subject:
+        lastIndex=len(subject) - subject[::-1].index(':') - 1
+        subject=subject[lastIndex+1:]+"_"
+    elif predicate:
+        subject=""
+    if predicate and ':' in predicate:
+        lastIndex=len(predicate) - predicate[::-1].index(':') - 1
+        predicate=predicate[lastIndex+1:]
+    else:
+        predicate=""
+    blankNodeCounter=blankNodeCounter+1
+    return "_:"+subject+predicate+"_"+str(blankNodeCounter)
+    
 def triplesFromTerms(generator, givenSubject=None):
     """ Iterator over the triples of a term generator """
     while True:        
         term=next(generator)
         if not term or term==']':
             return
-        if term=='.':
+        if term=='.' or (term==';' and givenSubject):
             continue
+        # If we're inside a [...]
         if givenSubject:
             subject=givenSubject
+            if term!=',':
+                predicate=term            
+        # If we're in a normal statement     
         else:
             if term!=';' and term!=',':
                 subject=term
-        if term!=',':
-           predicate=next(generator)
-           if predicate=='a':
-                predicate='rdf:type'
+            if term!=',':
+                predicate=next(generator)
+        if predicate=='a':
+            predicate='rdf:type'
         # read the object
         object=next(generator)
         if not object:
@@ -248,25 +225,154 @@ def triplesFromTerms(generator, givenSubject=None):
         elif object in ['.',',',';']:
             printError("Unexpected",object,"after",subject,predicate)
             return
+        elif object=='(':
+            listNode=blankNodeName("list")
+            previousListNode=None
+            yield (subject, predicate, listNode)
+            while True:
+                term=next(generator)
+                if not term:
+                    printError("Unexpected end of file in collection (...)")
+                    break  
+                elif term==')':
+                    break
+                else:
+                    if previousListNode:
+                        yield (previousListNode, 'rdf:rest', listNode)
+                    if term=='[':
+                        term=blankNodeName("element")
+                        yield (listNode, 'rdf:first', term)
+                        yield from triplesFromTerms(generator, givenSubject=term)
+                    else:    
+                        yield (listNode, 'rdf:first', term)
+                    previousListNode=listNode
+                    listNode=blankNodeName("list")
+            yield (previousListNode, 'rdf:rest', 'rdf:nil')
         elif object=='[':
-            object='_'+blankNodeCounter
-            blankNodeCounter=blankNodeCounter+1
+            object=blankNodeName(subject, predicate)
             yield (subject, predicate, object)
-            triplesFromTerms(generator, givenSubject=object)
+            yield from triplesFromTerms(generator, givenSubject=object)
         else:
             yield (subject, predicate, object)
 
-def triples(file, message="Parsing"):
+def turtleTriples(file, message=None):
     """ Iterator over the triples in a TTL file """
     return triplesFromTerms(termsAndSeparators(charsOfFile(file, message)))
+
+##########################################################################
+#             Graphs
+##########################################################################
+
+class Graph(object):
+    """ A graph of triples """
+    def __init__(self):
+        self.index={}
+        return
+    def add(self, triple):
+        (subject, predicate, obj) = triple
+        if subject not in self.index:
+            self.index[subject]={}
+        m=self.index[subject]
+        if predicate not in m:
+            m[predicate]=set()
+        m[predicate].add(obj)
+    def remove(self, triple):
+        (subject, predicate, obj) = triple
+        if subject not in self.index:
+            return
+        m=self.index[subject]
+        if predicate not in m:
+            return
+        m[predicate].remove(obj)
+    def __contains__(self, triple):
+        (subject, predicate, obj) = triple
+        if subject not in self.index:
+            return false
+        m=self.index[subject]
+        if predicate not in m:
+            return false
+        return obj in m[predicate]
+    def loadTurtleFile(self, file, message=None):
+        for triple in turtleTriples(file, message):
+            self.add(triple)
+    def objects(self, subject=None, predicate=None):
+        # We create a copy here instead of using a generator
+        # because the user loop may want to change the graph
+        result=[]
+        if subject and subject not in self.index:
+            return result
+        for s in ([subject] if subject else self.index):
+            for p in ([predicate] if predicate else self.index[s]):
+                if p in self.index[s]:
+                    result.extend(self.index[s][p])
+        return result
+    def subjects(self, predicate=None, object=None):        
+        if not predicate and not object:
+            return [s for s in self.index]
+        result=[]
+        for s in self.index:            
+            for p in ([predicate] if predicate else self.index[s]):                
+                if p in self.index[s] and (not object or object in self.index[s][p]):
+                    result.append(s)
+                    break            
+        return result
+    def triplesWithPredicate(self, predicate):
+        result=[]
+        for subject in self.index:
+            if predicate in self.index[subject]:
+                for object in self.index[subject][predicate]:
+                    result.append((subject, predicate, object))
+        return result 
+    def printToWriter(self, result):        
+        for subject in self.index:
+            if subject.startswith("_:list_"):
+                continue
+            result.write("\n")
+            result.write(subject)
+            result.write(' ')
+            hasPreviousPred=False
+            for predicate in self.index[subject]:
+                if hasPreviousPred:
+                    result.write(' ;\n\t')
+                hasPreviousPred=True            
+                result.write(predicate)
+                result.write(' ')
+                hasPrevious=False
+                for obj in self.index[subject][predicate]:                    
+                    if hasPrevious:
+                        result.write(', ')
+                    if obj.startswith("_:list_"):
+                        result.write("(")
+                        while True:
+                            result.write(list(self.index[obj]['rdf:first'])[0])
+                            obj=list(self.index[obj]['rdf:rest'])[0]
+                            if obj=='rdf:nil':
+                                break
+                            result.write(" ")
+                        result.write(")")
+                    else:
+                        result.write(obj)
+                    hasPrevious=True
+            result.write(' .\n')
+    def printToFile(self, file):
+        with open(file, "wt", encoding="utf-8") as out:
+            for p in Prefixes.prefixes:
+                out.write("@prefix "+p+": <"+Prefixes.prefixes[p]+"> .\n")
+            self.printToWriter(out)
+    def __str__(self):
+        buffer=StringIO()
+        buffer.write("# RDF Graph\n")
+        self.printToWriter(buffer)
+        return buffer.getvalue()
         
 ##########################################################################
 #             Test
 ##########################################################################
 
 if TEST and __name__ == '__main__':
-    print("Test run of utils...")
-    with TsvUtils.TsvFileWriter("test-data/turtleUtils/test-output.tsv") as out:
-        for triple in triples("test-data/turtleUtils/test-input.ttl"):
-            out.writeFact(triple[0], triple[1], triple[2])
+    print("Test run of TurtleUtils...")
+    graph=Graph()
+    graph.loadTurtleFile("test-data/turtleUtils/shapes.ttl")
+    graph.printToFile("test-data/turtleUtils/shapes-out.ttl")
     print("done")
+    

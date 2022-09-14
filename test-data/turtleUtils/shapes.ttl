@@ -1,0 +1,2831 @@
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix schema: <https://schema.org/> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix wpq: <http://www.wikidata.org/prop/qualifier/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ys: <http://yago-knowledge.org/schema#> .
+@prefix yago: <http://yago-knowledge.org/resource/> .
+
+# This is the manually designed schema of YAGO 4.1.
+# Do not overwrite this file.
+# Comment any modifications you make.
+
+################################################################
+#                Top level classes
+################################################################
+
+ys:
+	rdfs:label "Manual YAGO 4.1 shapes declaration"@en .
+
+# Top-level Disjoint classes
+schema:CreativeWork a rdf:Class .
+schema:Event owl:disjointWith 
+    schema:CreativeWork.
+schema:Organization owl:disjointWith 
+    schema:CreativeWork,
+    schema:Event.
+# Fabian 2022-08-25: Added organisms	
+yago:Organism owl:disjointWith 
+    schema:CreativeWork,
+    schema:Event,
+    schema:Organization.
+schema:Person owl:disjointWith 
+    schema:CreativeWork,
+    schema:Event,
+    schema:Organization,
+	schema:Organism.
+schema:Place owl:disjointWith 
+    schema:CreativeWork,
+    schema:Event,
+	schema:Person,
+    yago:Organism. # But not organization
+schema:Product owl:disjointWith
+    yago:Organism,
+    schema:Place.
+schema:BioChemEntity owl:disjointWith
+    schema:Event,
+    schema:Organization,
+    yago:Organism,
+	schema:Person,
+    schema:Place.	
+
+schema:Thing a sh:NodeShape ;
+    ys:fromClass wd:Q35120 ;
+    sh:property [
+        sh:path schema:alternateName ;
+        sh:datatype rdf:langString ;
+        sh:disjoint rdfs:label ;
+        ys:fromProperty skos:altLabel ;
+    ] ;
+    sh:property [
+        sh:path rdfs:comment ;
+        sh:datatype rdf:langString ;
+        sh:uniqueLang true ;
+        ys:fromProperty schema:description ;
+    ] ;
+# Fabian 2022-08-25: we do not have images    
+#    sh:property [
+#        sh:path schema:image ;
+#        sh:node schema:ImageObject ;
+#        ys:fromProperty wdt:P18 ;
+#    ] ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:datatype rdf:langString ;
+        sh:uniqueLang true ;
+    ] ;
+# Fabian 2022-08-30: we alreay have owl:sameAs    
+#    sh:property [
+#        sh:path schema:sameAs ;
+#        sh:datatype xsd:anyURI ;
+#    ] ;
+    sh:property [
+        sh:path schema:mainEntityOfPage ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+    sh:property [
+        sh:path schema:url ;
+        sh:datatype xsd:anyURI ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P856 ;
+    ] ;
+    sh:property [
+        sh:path owl:sameAs ;
+        sh:nodeKind sh:IRI ;
+        # Fabian 2022-08-30: added FreebaseID and IMDB ID
+        ys:fromProperty wdt:P646, wdt:P345;
+    ] .
+
+rdfs:Class a sh:NodeShape ;
+    sh:property [
+        sh:path schema:alternateName ;
+        sh:datatype rdf:langString ;
+        sh:disjoint rdfs:label ;
+        ys:fromProperty skos:altLabel ;
+    ] ;
+    sh:property [
+        sh:path rdfs:comment ;
+        sh:datatype rdf:langString ;
+        sh:uniqueLang true ;
+        ys:fromProperty schema:description ;
+    ] ;
+# Fabian 2022-08-25: removed, we don't have images
+#    sh:property [
+#        sh:path schema:image ;
+#        sh:node schema:ImageObject ;
+#        ys:fromProperty wdt:P18 ;
+#    ] ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:datatype rdf:langString ;
+        sh:uniqueLang true ;
+    ] ;
+    sh:property [
+        sh:path schema:sameAs ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+    sh:property [
+        sh:path schema:mainEntityOfPage ;
+        sh:datatype xsd:anyURI ;
+    ] . 
+# Removed by Fabian 2022-08-24    
+#    sh:property [
+#        sh:path schema:url ;
+#        sh:datatype xsd:anyURI ;
+#        sh:maxCount 1 ;
+#        ys:fromProperty wdt:P856 ;
+#    ] .
+
+################################################################
+#                Media
+################################################################
+
+schema:BroadcastChannel a sh:NodeShape ;
+    sh:property [
+        sh:path schema:broadcastChannelId ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P3970 ;
+    ] .
+
+schema:RadioChannel a sh:NodeShape ;
+    ys:fromClass wd:Q25582589 .
+
+schema:TelevisionChannel a sh:NodeShape ;
+    ys:fromClass wd:Q2001305 .
+
+# Fabian 2022-08-25: introduced this since schema.org uses a string
+yago:Award a sh:NodeShape ;
+    ys:fromClass wd:Q618779 ;
+    rdfs:subclassOf schema:Intangible ;
+    rdf:label "Award" .
+    
+schema:CreativeWork a sh:NodeShape ;
+    ys:fromClass wd:Q17537576 ;
+    sh:property [
+        sh:path schema:about ;
+        sh:node schema:Thing ;
+        ys:fromProperty wdt:P921 ;
+    ] ;
+    sh:property [
+        sh:path schema:award ;
+        sh:node yago:Award ;
+        ys:fromProperty wdt:P166 ;
+    ] ;
+    sh:property [
+        sh:path schema:author ;
+        sh:or (
+            [
+                sh:node schema:Organization
+            ]
+            [
+                sh:node schema:Person
+            ]
+        ) ;
+        ys:fromProperty wdt:P50 ;
+# Fabian 2022-08-24: merging in "creator",         
+        ys:fromProperty wdt:170 ;
+    ] ;
+# Fabian 2022-08-25: removed
+#    sh:property [
+#        sh:path schema:citation ;
+#        sh:node schema:CreativeWork ;
+#        ys:fromProperty wdt:P2860 ;
+#    ] ;
+    sh:property [
+        sh:path schema:character ;
+        sh:node schema:Person ;
+        ys:fromProperty wdt:P674 ;
+    ] ;
+    sh:property [
+        sh:path schema:contentLocation ;
+        sh:node schema:Place ;
+        ys:fromProperty wdt:P840 ;
+    ] ;
+# Fabian 2022-08-24: removed    
+#    sh:property [
+#        sh:path schema:contributor ;
+#        sh:or (
+#            [
+#                sh:node schema:Organization
+#            ]
+#            [
+#                sh:node schema:Person
+#            ]
+#        ) ;
+#        ys:fromProperty wdt:P767 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:copyrightHolder ;
+#        sh:or (
+#            [
+#                sh:node schema:Organization
+#            ]
+#            [
+#                sh:node schema:Person
+#            ]
+#        ) ;
+#        ys:fromProperty wdt:P3931 ;
+#    ] ;
+#
+# Fabian 2022-08-24 merged to "author"
+#
+#    sh:property [
+#        sh:path schema:creator ;
+#        sh:or (
+#            [
+#                sh:node schema:Organization
+#            ]
+#            [
+#                sh:node schema:Person
+#            ]
+#        ) ;
+#        ys:fromProperty wdt:P170 ;
+#    ] ;
+    sh:property [
+        sh:path schema:dateCreated ;
+        sh:or (
+            [
+                sh:datatype xsd:dateTime
+            ]
+            [
+                sh:datatype xsd:date
+            ]
+            [
+                sh:datatype xsd:gYearMonth
+            ]
+            [
+                sh:datatype xsd:gYear
+            ]
+        ) ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P571 ;
+    ] ;
+# Fabian 2022-08-24: removed    
+#    
+#    sh:property [
+#        sh:path schema:datePublished ;
+#        sh:or (
+#            [
+#                sh:datatype xsd:dateTime
+#            ]
+#            [
+#                sh:datatype xsd:date
+#            ]
+#            [
+#                sh:datatype xsd:gYearMonth
+#            ]
+#            [
+#                sh:datatype xsd:gYear
+#            ]
+#        ) ;
+#        sh:maxCount 1 ;
+#        ys:fromProperty wdt:P577 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:editor ;
+#        sh:node schema:Person ;
+#        ys:fromProperty wdt:P98 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:exampleOfWork ;
+#        sh:node schema:CreativeWork ;
+#        ys:fromProperty wdt:P629 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:encodingFormat ;
+#        sh:datatype xsd:string ;
+#        sh:pattern "^(application|audio|example|font|image|message|model|multipart|text|video)/[a-zA-Z0-9-+.]+$" ;
+#        sh:maxCount 1 ;
+#        ys:fromProperty wdt:P1163 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:genre ;
+#        sh:node schema:Thing ;
+#        ys:fromProperty wdt:P136 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:hasPart ;
+#        sh:node schema:CreativeWork ;
+#        ys:fromProperty wdt:P527 , wdt:P658 ;
+#    ] ;
+    sh:property [
+        sh:path schema:inLanguage ;
+        sh:node schema:Language ;
+        ys:fromProperty wdt:P407 ;
+    ] .
+    
+# Fabian 2022-08-24: removed    
+#    sh:property [
+#        sh:path schema:isBasedOn ;
+#        sh:node schema:CreativeWork ;
+#        ys:fromProperty wdt:P144 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:isPartOf ;
+#        sh:node schema:CreativeWork ;
+#        ys:fromProperty wdt:P195 , wdt:P361 , wdt:P1433 ; # TODO: map with P195 (collection?)
+#    ] ;
+#    sh:property [
+#        sh:path schema:license ;
+#        sh:node schema:CreativeWork ;
+#        ys:fromProperty wdt:P275 ;
+#    ] .
+# Fabian 2022-08-24: removed    
+#    sh:property [
+#        sh:path schema:locationCreated ;
+#        sh:node schema:Place ;
+#        ys:fromProperty wdt:P1071 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:material ;
+#        sh:node schema:Thing ;
+#        ys:fromProperty wdt:P186 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:position ;
+#        sh:datatype xsd:integer ;
+#        sh:maxCount 1 ;
+#        ys:fromProperty wdt:P1545 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:producer ;
+#        sh:or (
+#            [
+#                sh:node schema:Organization
+#            ]
+#            [
+#                sh:node schema:Person
+#            ]
+#        ) ;
+#        ys:fromProperty wdt:P162 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:provider ;
+#        sh:or (
+#            [
+#                sh:node schema:Organization
+#            ]
+#            [
+#                sh:node schema:Person
+#            ]
+#        ) ;
+#        ys:fromProperty wdt:P176 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:publisher ;
+#        sh:or (
+#            [
+#                sh:node schema:Organization
+#            ]
+#            [
+#                sh:node schema:Person
+#            ]
+#        ) ;
+#        ys:fromProperty wdt:P123 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:contentRating ;
+#        sh:node schema:Rating ;
+#        ys:fromProperty wdt:P1657 , wdt:P1981 , wdt:P2747 , wdt:P5970 , wdt:P6452 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:sponsor ;
+#        sh:or (
+#            [
+#                sh:node schema:Organization
+#            ]
+#            [
+#                sh:node schema:Person
+#            ]
+#        ) ;
+#        ys:fromProperty wdt:P859 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:translator ;
+#        sh:or (
+#            [
+#                sh:node schema:Organization
+#            ]
+#            [
+#                sh:node schema:Person
+#            ]
+#        ) ;
+#        ys:fromProperty wdt:P655 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:workExample ;
+#        sh:node schema:CreativeWork ;
+#        ys:fromProperty wdt:P747 ;
+#    ] .
+#
+# Fabian 2022-08-24: removed    
+# schema:Article a sh:NodeShape ;
+#    ys:fromClass wd:Q191067 .
+#    sh:property [
+#        sh:path schema:pagination ; # TODO: pattern
+#        sh:datatype xsd:string ;
+#        ys:fromProperty wdt:P304 ;
+#    ] .
+
+
+# Fabian 2022-08-24: removed    
+# schema:NewsArticle a sh:NodeShape ;
+#    ys:fromClass wd:Q5707594 .
+
+#schema:Report a sh:NodeShape ;
+#    ys:fromClass wd:Q10870555 .
+
+#schema:ScholarlyArticle a sh:NodeShape ;
+#    ys:fromClass wd:Q13442814 .
+
+#schema:SocialMediaPosting a sh:NodeShape ;
+#    ys:fromClass wd:Q7216866 .
+
+#schema:BlogPosting a sh:NodeShape ;
+#    ys:fromClass wd:Q17928402 .
+
+#schema:Atlas a sh:NodeShape ;
+#    ys:fromClass wd:Q162827 .
+
+#schema:Blog a sh:NodeShape ;
+#    ys:fromClass wd:Q30849 .
+
+schema:Book a sh:NodeShape ;
+    ys:fromClass wd:Q571 ;    
+# Fabian 2022-08-24: removed    
+#    sh:property [
+#        sh:path schema:illustrator ;
+#        sh:node schema:Person ;
+#        ys:fromProperty wdt:P110 ;
+#    ] ;
+    sh:property [
+        sh:path schema:isbn ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P212 , wdt:P957 ;
+        sh:pattern "^(97[89]-([0-57]-(\\d-\\d{7}|\\d\\d-\\d{6}|\\d\\d\\d-\\d{5}|\\d{4}-\\d{4}|\\d{5}-\\d\\d\\d|\\d{6}-\\d\\d|\\d{7}-\\d)|[89]\\d-(\\d-\\d{6}|\\d\\d-\\d{5}|\\d\\d\\d-\\d{4}|\\d{4}-\\d\\d\\d|\\d{5}-\\d\\d|\\d{6}-\\d)|[69]\\d\\d-(\\d-\\d{5}|\\d\\d-\\d{4}|\\d\\d\\d-\\d\\d\\d|\\d{4}-\\d\\d|\\d{5}-\\d)|99[0-8]\\d-\\d-\\d{4}|99[0-8]\\d-\\d\\d-\\d\\d\\d|99[0-8]\\d-\\d\\d\\d-\\d\\d|99[0-8]\\d-\\d{4}-\\d|999\\d\\d-\\d-\\d\\d\\d|999\\d\\d-\\d\\d-\\d\\d|999\\d\\d-\\d\\d\\d-\\d)-\\d|\\d{9}(\\d|X))|(\\d{1,5}-\\d{1,7}-\\d{1,6}-[0-9X])$"
+    ] ;
+    sh:property [
+        sh:path schema:numberOfPages ;
+        sh:datatype xsd:integer ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P1104 ;
+    ] .
+
+# Fabian 2022-08-24: removed    
+#schema:Chapter a sh:NodeShape ;
+#    ys:fromClass wd:Q1980247 .
+#
+#schema:Collection a sh:NodeShape ;
+#    ys:fromClass wd:Q2668072 .
+#
+
+# Fabian 2022-08-25: removed for now, would have to ensure part-of relation TODO
+#
+#schema:CreativeWorkSeason a sh:NodeShape ;
+#    ys:fromClass wd:Q70990126 ;
+#    sh:property [
+#        sh:path schema:actor ;
+#        sh:node schema:Person ;
+#        ys:fromProperty wdt:P161 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:numberOfEpisodes ;
+#        sh:datatype xsd:integer ;
+#        sh:maxCount 1 ;
+#        ys:fromProperty wdt:P1113 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:partOfSeries ;
+#        sh:node schema:CreativeWorkSeries ;
+#        ys:fromProperty wdt:P179 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:productionCompany ;
+#        sh:node schema:Organization ;
+#        ys:fromProperty wdt:P272 ;
+#    ] .
+#
+#schema:TVSeason a sh:NodeShape ;
+#    ys:fromClass wd:Q3464665 ;
+#    sh:property [
+#        sh:path schema:countryOfOrigin ;
+#        sh:node schema:Country ;
+#        ys:fromProperty wdt:P495 ;
+#    ] .
+#
+#
+#schema:CreativeWorkSeries a sh:NodeShape ;
+#    ys:fromClass wd:Q7725310 ;
+#    sh:property [
+#        sh:path schema:issn ;
+#        sh:datatype xsd:string ;
+#        sh:pattern "^[0-9]{4}-[0-9]{3}[0-9X]$" ;
+#        sh:maxCount 1 ;
+#        ys:fromProperty wdt:P236 ;
+#    ] .
+#
+#schema:BookSeries a sh:NodeShape ;
+#    ys:fromClass wd:Q277759 .
+#
+#schema:ComicSeries a sh:NodeShape ;
+#    ys:fromClass wd:Q14406742 .
+
+# Fabian 2022-08-24: removed, no mapping to Wikidata
+#schema:MovieSeries a sh:NodeShape ;
+#    sh:property [
+#        sh:path schema:actor ;
+#        sh:node schema:Person ;
+#        ys:fromProperty wdt:P161 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:director ;
+#        sh:node schema:Person ;
+#        ys:fromProperty wdt:P57 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:musicBy ;
+#        sh:or (
+#            [
+#                sh:node schema:Person
+#            ]
+#            [
+#                sh:node schema:MusicGroup
+#            ]
+#        ) ;
+#        ys:fromProperty wdt:P86 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:productionCompany ;
+#        sh:node schema:Organization ;
+#        ys:fromProperty wdt:P272 ;
+#    ] .
+#
+#schema:Course a sh:NodeShape ;
+#    ys:fromClass wd:Q600134 .
+#
+#schema:DataCatalog a sh:NodeShape ;
+#    ys:fromClass wd:Q29937289 .
+#
+#schema:Dataset a sh:NodeShape ;
+#    ys:fromClass wd:Q1172284 .
+#
+#schema:Periodical a sh:NodeShape ;
+#    ys:fromClass wd:Q1002697 .
+#
+schema:Newspaper a sh:NodeShape ;
+    ys:fromClass wd:Q11032 .
+
+# Fabian 2022-08-24: removed    
+#schema:PodcastSeries a sh:NodeShape ;
+#    ys:fromClass wd:Q24634210 .
+#
+#schema:RadioSeries a sh:NodeShape ;
+#    ys:fromClass wd:Q14623351 ;
+#    sh:property [
+#        sh:path schema:actor ;
+#        sh:node schema:Person ;
+#        ys:fromProperty wdt:P161 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:director ;
+#        sh:node schema:Person ;
+#        ys:fromProperty wdt:P57 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:musicBy ;
+#        sh:or (
+#            [
+#                sh:node schema:Person
+#            ]
+#            [
+#                sh:node schema:MusicGroup
+#            ]
+#        ) ;
+#        ys:fromProperty wdt:P86 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:numberOfEpisodes ;
+#        sh:datatype xsd:integer ;
+#        sh:maxCount 1 ;
+#        ys:fromProperty wdt:P1113 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:numberOfSeasons ;
+#        sh:datatype xsd:integer ;
+#        sh:maxCount 1 ;
+#        ys:fromProperty wdt:P2437 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:productionCompany ;
+#        sh:node schema:Organization ;
+#        ys:fromProperty wdt:P272 ;
+#    ] .
+#
+schema:TVSeries a sh:NodeShape ;
+    ys:fromClass wd:Q5398426 ;
+    sh:property [
+        sh:path schema:actor ;
+        sh:node schema:Person ;
+        ys:fromProperty wdt:P161 ;
+    ] ;
+    sh:property [
+        sh:path schema:countryOfOrigin ;
+        sh:node schema:Country ;
+        ys:fromProperty wdt:P495 ;
+    ] ;
+    sh:property [
+        sh:path schema:director ;
+        sh:node schema:Person ;
+    ] ;
+    sh:property [
+        sh:path schema:numberOfEpisodes ;
+        sh:datatype xsd:integer ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P1113 ;
+    ] ;
+    sh:property [
+        sh:path schema:numberOfSeasons ;
+        sh:datatype xsd:integer ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P2437 ;
+    ] ;
+    sh:property [
+        sh:path schema:musicBy ;
+        sh:or (
+            [
+                sh:node schema:Person
+            ]
+            [
+                sh:node schema:MusicGroup
+            ]
+        ) ;
+        ys:fromProperty wdt:P86 ;
+    ] ;
+    sh:property [
+        sh:path schema:productionCompany ;
+        sh:node schema:Organization ;
+        ys:fromProperty wdt:P272 ;
+    ] .
+
+# Fabian 2022-08-25 removed
+#schema:VideoGameSeries a sh:NodeShape ;
+#    ys:fromClass wd:Q7058673 ;
+#    sh:property [
+#        sh:path schema:director ;
+#        sh:node schema:Person ;
+#        ys:fromProperty wdt:P57 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:musicBy ;
+#        sh:or (
+#            [
+#                sh:node schema:Person
+#            ]
+#            [
+#                sh:node schema:MusicGroup
+#            ]
+#        ) ;
+#        ys:fromProperty wdt:P86 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:numberOfEpisodes ;
+#        sh:datatype xsd:integer ;
+#        sh:maxCount 1 ;
+#        ys:fromProperty wdt:P1113 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:numberOfSeasons ;
+#        sh:datatype xsd:integer ;
+#        sh:maxCount 1 ;
+#        ys:fromProperty wdt:P2437 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:productionCompany ;
+#        sh:node schema:Organization ;
+#        ys:fromProperty wdt:P272 ;
+#    ] .
+
+
+# Fabian 2022-08-24: removed
+#schema:MediaObject a sh:NodeShape .
+#
+#schema:AudioObject a sh:NodeShape .
+#
+#schema:ImageObject a sh:NodeShape .
+#
+#schema:VideoObject a sh:NodeShape .
+
+
+schema:ComicStory a sh:NodeShape ;
+    ys:fromClass wd:Q1004 ;
+    sh:property [
+        sh:path schema:colorist ;
+        sh:node schema:Person ;
+        ys:fromProperty wdt:P6338 ;
+    ] .
+
+# Fabian 2022-08-25 removed
+#schema:Episode a sh:NodeShape ;
+#    ys:fromClass wd:Q1983062 ;
+#    sh:property [
+#        sh:path schema:actor ;
+#        sh:node schema:Person ;
+#        ys:fromProperty wdt:P161 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:director ;
+#        sh:node schema:Person ;
+#        ys:fromProperty wdt:P57 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:musicBy ;
+#        sh:or (
+#            [
+#                sh:node schema:Person
+#            ]
+#            [
+#                sh:node schema:MusicGroup
+#            ]
+#        ) ;
+#        ys:fromProperty wdt:P86 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:partOfSeason ;
+#        sh:node schema:CreativeWorkSeason ;
+#        sh:maxCount 1 ;
+#        ys:fromProperty wdt:P4908 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:partOfSeries ;
+#        sh:node schema:CreativeWorkSeries ;
+#        ys:fromProperty wdt:P179 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:productionCompany ;
+#        sh:node schema:Organization ;
+#        ys:fromProperty wdt:P272 ;
+#    ] .
+#
+#schema:TVEpisode a sh:NodeShape ;
+#    ys:fromClass wd:Q21191270 ;
+#    sh:property [
+#        sh:path schema:countryOfOrigin ;
+#        sh:node schema:Country ;
+#        ys:fromProperty wdt:P495 ;
+#    ] .
+
+
+schema:Game a sh:NodeShape ;
+    ys:fromClass wd:Q11410 .
+
+# Fabian 2022-08-24: removed    
+#schema:Legislation a sh:NodeShape ;
+#    ys:fromClass wd:Q820655 .
+#
+#schema:Manuscript a sh:NodeShape ;
+#    ys:fromClass wd:Q87167 .
+#
+#schema:Map a sh:NodeShape ;
+#    ys:fromClass wd:Q4006 .
+
+schema:MusicComposition a sh:NodeShape ;
+    ys:fromClass wd:Q207628 ;
+    sh:property [
+        sh:path schema:composer ;
+        sh:or (
+            [
+                sh:node schema:Person
+            ]
+            [
+                sh:node schema:MusicGroup
+            ]
+        ) ;
+        ys:fromProperty wdt:P86 ;
+    ] ;
+    sh:property [
+        sh:path schema:iswcCode ;
+        sh:datatype xsd:string ;
+        sh:pattern "^T-[0-9]{3}\\.[0-9]{3}\\.[0-9]{3}-[0-9]$" ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P1827 ;
+    ] ;
+    sh:property [
+        sh:path schema:lyricist ;
+        sh:or (
+            [
+                sh:node schema:Person
+            ]
+            [
+                sh:node schema:MusicGroup
+            ]
+        ) ;
+        ys:fromProperty wdt:P676 ;
+    ] .
+
+
+# Fabian 2022-08-24: removed    
+#schema:MusicPlaylist a sh:NodeShape .
+
+schema:MusicAlbum a sh:NodeShape ;
+   ys:fromClass wd:Q482994 ;
+   sh:property [
+       sh:path schema:byArtist ;
+       sh:maxCount 1 ;
+       sh:node schema:MusicGroup ;
+       ys:fromProperty wdt:P175 ;
+   ] .
+
+# Fabian 2022-08-25 removed
+#schema:MusicRelease a sh:NodeShape ;
+#    sh:property [
+#        sh:path schema:duration ;
+#        sh:datatype xsd:duration ;
+#        ys:fromProperty wdt:P2047 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:musicReleaseFormat ;
+#        sh:node schema:Thing ;
+#        ys:fromProperty wdt:P437 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:recordLabel ;
+#        sh:node schema:Organization ;
+#        ys:fromProperty wdt:P264 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:releaseOf ;
+#        sh:node schema:MusicAlbum ;
+#        ys:fromProperty wdt:P2550 ;
+#    ] .
+
+
+schema:Movie a sh:NodeShape ;
+    ys:fromClass wd:Q11424 ;
+    sh:property [
+        sh:path schema:actor ;
+        sh:node schema:Person ;
+        ys:fromProperty wdt:P161 ;
+    ] ;
+    sh:property [
+        sh:path schema:countryOfOrigin ;
+        sh:node schema:Country ;
+        ys:fromProperty wdt:P495 ;
+    ] ;
+    sh:property [
+        sh:path schema:director ;
+        sh:node schema:Person ;
+        ys:fromProperty wdt:P57 ;
+    ] ;
+    sh:property [
+        sh:path schema:duration ;
+        sh:datatype xsd:duration ;
+        ys:fromProperty wdt:P2047 ;
+    ] ;
+    sh:property [
+        sh:path schema:musicBy ;
+        sh:or (
+            [
+                sh:node schema:Person
+            ]
+            [
+                sh:node schema:MusicGroup
+            ]
+        ) ;
+        ys:fromProperty wdt:P86 ;
+    ] ;
+    sh:property [
+        sh:path schema:productionCompany ;
+        sh:node schema:Organization ;
+        ys:fromProperty wdt:P272 ;
+    ] .
+
+# Fabian 2022-08-24: removed    
+#schema:Photograph a sh:NodeShape ;
+#    ys:fromClass wd:Q125191 .
+
+schema:Play a sh:NodeShape ;
+    ys:fromClass wd:Q25379 .
+
+# Fabian 2022-08-24: removed    
+#schema:Poster a sh:NodeShape ;
+#    ys:fromClass wd:Q429785 .
+#schema:PublicationIssue a sh:NodeShape ;
+#    ys:fromClass wd:Q28869365 ;
+#    sh:property [
+#        sh:path schema:pagination ;
+#        sh:datatype xsd:string ;
+#        ys:fromProperty wdt:P304 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:issueNumber ;
+#        sh:datatype xsd:string ;
+#        ys:fromProperty wdt:P433 ;
+#    ] .
+#
+#
+#schema:PublicationVolume a sh:NodeShape ;
+#    ys:fromClass wd:Q1238720 ;
+#    sh:property [
+#        sh:path schema:pagination ;
+#        sh:datatype xsd:string ;
+#        ys:fromProperty wdt:P304 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:volumeNumber ;
+#        sh:datatype xsd:string ;
+#        ys:fromProperty wdt:P478 ;
+#    ] .
+#
+#schema:SheetMusic a sh:NodeShape ;
+#    ys:fromClass wd:Q187947 .
+
+schema:SoftwareApplication a sh:NodeShape ;
+    ys:fromClass wd:Q166142 ;
+    sh:property [
+        sh:path schema:operatingSystem ;
+        sh:node schema:SoftwareApplication ;
+        ys:fromProperty wdt:P306 ;
+    ] .
+
+schema:MobileApplication a sh:NodeShape ;
+    ys:fromClass wd:Q620615 .
+
+schema:VideoGame a sh:NodeShape ;
+    ys:fromClass wd:Q7889 ;
+    sh:property [
+        sh:path schema:actor ;
+        sh:node schema:Person ;
+        ys:fromProperty wdt:P161 ;
+    ] ;
+    sh:property [
+        sh:path schema:director ;
+        sh:maxCount 1 ;
+        sh:node schema:Person ;
+        ys:fromProperty wdt:P57 ;
+    ] ;
+    sh:property [
+        sh:path schema:musicBy ;
+        sh:or (
+            [
+                sh:node schema:Person
+            ]
+            [
+                sh:node schema:MusicGroup
+            ]
+        ) ;
+        ys:fromProperty wdt:P86 ;
+    ] .
+
+# Fabian 2022-08-24: removed    
+#schema:Thesis a sh:NodeShape ;
+#    ys:fromClass wd:Q1266946 .
+#
+#schema:VisualArtwork a sh:NodeShape ;
+#    ys:fromClass wd:Q4502142 ;
+#    sh:property [
+#        sh:path schema:colorist ;
+#        sh:node schema:Person ;
+#        ys:fromProperty wdt:P6338 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:depth ;
+#        sh:node schema:QuantitativeValue ;
+#        ys:fromProperty wdt:P5524 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:height ;
+#        sh:node schema:QuantitativeValue ;
+#        sh:maxCount 1 ;
+#        ys:fromProperty wdt:P2048 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:width ;
+#        sh:node schema:QuantitativeValue ;
+#        sh:maxCount 1 ;
+#        ys:fromProperty wdt:P2049 ;
+#    ] .
+
+schema:Drawing a sh:NodeShape ;
+    ys:fromClass wd:Q93184 .
+
+schema:Painting a sh:NodeShape ;
+    ys:fromClass wd:Q3305213 .
+
+schema:Sculpture a sh:NodeShape ;
+    ys:fromClass wd:Q860861 .
+
+# Fabian 2022-08-24: removed, URL is sufficient
+#schema:WebPage a sh:NodeShape ;
+#    ys:fromClass wd:Q36774 .
+#
+#schema:WebSite a sh:NodeShape ;
+#    ys:fromClass wd:Q35127 .
+
+schema:ComputerLanguage a sh:NodeShape ;
+    ys:fromClass wd:Q629206 .
+
+
+################################################################
+#                Events
+################################################################
+
+schema:Event a sh:NodeShape ;
+    ys:fromClass wd:Q1656682 ;
+    sh:property [
+        sh:path schema:about ;
+        sh:node schema:Thing ;
+        ys:fromProperty wdt:P921 ;
+    ] ;
+    sh:property [
+        sh:path schema:composer ;
+        sh:or (
+            [
+                sh:node schema:Person
+            ]
+            [
+                sh:node schema:MusicGroup
+            ]
+        ) ;
+        ys:fromProperty wdt:P86 ;
+    ] ;
+    sh:property [
+        sh:path schema:contributor ;
+        sh:or (
+            [
+                sh:node schema:Organization
+            ]
+            [
+                sh:node schema:Person
+            ]
+        ) ;
+        ys:fromProperty wdt:P767 ;
+    ] ;
+    sh:property [
+        sh:path schema:duration ;
+        sh:datatype xsd:duration ;
+        ys:fromProperty wdt:P2047 ;
+    ] ;
+    sh:property [
+        sh:path schema:location ;
+        sh:node schema:Place ;
+        ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552 ;
+    ] ;
+    sh:property [
+        sh:path schema:organizer ;
+        sh:or (
+            [
+                sh:node schema:Person
+            ]
+            [
+			# Fabian 2022-08-26: changed from MusicGroup to Organization
+                sh:node schema:Organization
+            ]
+        ) ;
+        ys:fromProperty wdt:P664 ;
+    ] ;
+    sh:property [
+        sh:path schema:startDate ;
+        sh:or (
+            [
+                sh:datatype xsd:dateTime
+            ]
+            [
+                sh:datatype xsd:date
+            ]
+            [
+                sh:datatype xsd:gYearMonth
+            ]
+            [
+                sh:datatype xsd:gYear
+            ]
+        ) ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P580 ;
+    ] ;
+    sh:property [
+        sh:path schema:endDate ;
+        sh:or (
+            [
+                sh:datatype xsd:dateTime
+            ]
+            [
+                sh:datatype xsd:date
+            ]
+            [
+                sh:datatype xsd:gYearMonth
+            ]
+            [
+                sh:datatype xsd:gYear
+            ]
+        ) ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P582 ;
+    ] ;
+    sh:property [
+        sh:path schema:sponsor ;
+        sh:or (
+            [
+                sh:node schema:Organization
+            ]
+            [
+                sh:node schema:Person
+            ]
+        ) ;
+        ys:fromProperty wdt:P859 ;
+    ] ;
+    sh:property [
+        sh:path schema:superEvent ;
+        sh:node schema:Event ;
+        ys:fromProperty wdt:P361 ;
+    ] ;
+    sh:property [
+        sh:path schema:subEvent ;
+        sh:node schema:Event ;
+        ys:fromProperty wdt:P527 ;
+    ] .
+# Fabian 2022-08-24: removed    
+#    sh:property [
+#        sh:path schema:translator ;
+#        sh:or (
+#            [
+#                sh:node schema:Organization
+#            ]
+#            [
+#                sh:node schema:Person
+#            ]
+#        ) ;
+#        ys:fromProperty wdt:P655 ;
+#    ] .
+#
+#schema:EventSeries a sh:NodeShape ;
+#    ys:fromClass wd:Q15275719 .
+
+yago:Sport a sh:NodeShape ;
+    ys:fromClass wd:Q349 ;
+    rdfs:subclassOf schema:Intangible ;
+    rdf:label "Sport" .
+
+schema:SportsEvent a sh:NodeShape ;
+    ys:fromClass wd:Q16510064 ;
+    sh:property [
+        sh:path schema:competitor ;
+        sh:or (
+            [
+                sh:node schema:Person
+            ]
+            [
+                sh:node schema:SportsTeam
+            ]
+        ) ;
+        ys:fromProperty wdt:P710 , wdt:P1923 ;
+    ] ;
+    sh:property [
+        sh:path schema:sport ;
+        sh:node yago:Sport ;
+        ys:fromProperty wdt:P641 ;
+    ] .
+
+
+schema:Festival a sh:NodeShape ;
+    ys:fromClass wd:Q132241 .
+
+
+schema:Language a sh:NodeShape ;
+    ys:fromClass wd:Q34770 .
+
+################################################################
+#                Medical Entities
+################################################################
+
+# Fabian 2022-08-25: removed, no mapping
+# schema:MedicalEntity a sh:NodeShape ;
+#    sh:property [
+#        sh:path schema:legalStatus ;
+#        sh:node schema:DrugLegalStatus ;
+#        ys:fromProperty wdt:P3493 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:relevantSpecialty ;
+#        sh:node schema:MedicalSpecialty ;
+#        ys:fromProperty wdt:P1995 ;
+#    ] .
+
+# Fabian 2022-08-24: removed
+#schema:DrugLegalStatus a sh:NodeShape ;
+#    ys:fromClass wd:Q26715005 .
+
+# Fabian 2022-08-24: removed, we will have a problem of instances vs classes
+#
+#schema:AnatomicalStructure a sh:NodeShape ;
+#    ys:fromClass wd:Q4936952 ;
+#    sh:property [
+#        sh:path schema:foundationalModelOfAnatomyID ;
+#        sh:datatype xsd:anyURI ;
+#        ys:fromProperty wdt:P1402 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:partOf ;
+#        sh:node schema:AnatomicalStructure ;
+#        ys:fromProperty wdt:P361 ; # TODO still do not know if this is going to work for a 1-n relationship
+#    ] ;
+#    sh:property [
+#        sh:path schema:hasParts ;
+#        sh:node schema:AnatomicalStructure ;
+#        ys:fromProperty wdt:P527 ; # TODO still do not know if this is going to work for a 1-n relationship
+#    ] ;
+#    sh:property [
+#        sh:path schema:connectedTo ;
+#        sh:node schema:AnatomicalStructure ;
+#        ys:fromProperty wdt:P2789 ;
+#    ] .
+
+# Fabian 2022-08-24: removed, we won't have instances
+#schema:Artery a sh:NodeShape ;
+#    ys:fromClass wd:Q9655 .
+#
+#schema:Bone a sh:NodeShape ;
+#    ys:fromClass wd:Q265868 .
+#
+#schema:Joint a sh:NodeShape ;
+#    ys:fromClass wd:Q9644 .
+#
+#schema:Ligament a sh:NodeShape ;
+#    ys:fromClass wd:Q39888 .
+#
+#schema:Muscle a sh:NodeShape ;
+#    ys:fromClass wd:Q7365 .
+#
+#schema:Nerve a sh:NodeShape ;
+#    ys:fromClass wd:Q9620 .
+#
+#schema:Vein a sh:NodeShape ;
+#    ys:fromClass wd:Q9609 .
+#
+#schema:Vessel a sh:NodeShape ;
+#    ys:fromClass wd:Q382386 .
+
+# Fabian 2022-08-26: We plug this under intangible instead of medicalentity
+schema:MedicalCondition a sh:NodeShape ;
+	rdfs:subClassOf schema:Intangible ;
+    ys:fromClass wd:Q12136 ;
+    sh:property [
+        sh:path schema:possibleTreatment ;
+        # Fabian 2022-08-25: removed, we won't have therapies
+        #sh:or (
+        #    [
+        #        sh:node schema:Drug
+        #    ]
+        #    [
+        #        sh:node schema:Therapy
+        #    ]
+        #    [
+        #        sh:node schema:MedicalTherapy
+        #    ]
+        #) ;
+        sh:node schema:Drug ;
+        ys:fromProperty wdt:P2176 ;
+        # Fabian 2022-08-24: merging in drugOrTherapyTreatment
+        ys:fromProperty wdt:P924
+    ] ;
+    #sh:property [
+    #    sh:path schema:possibleTreatment ;
+    #    sh:or (
+    #        [
+    #            sh:node schema:Drug
+    #        ]
+    #        [
+    #            sh:node schema:Therapy
+    #        ]
+    #        [
+    #            sh:node schema:MedicalTherapy
+    #        ]
+    #    ) ;
+    #    ys:fromProperty wdt:P924 ;
+    #] ;
+    sh:property [
+        sh:path schema:riskFactor ;
+        sh:node rdf:Class ; 
+        ys:fromProperty wdt:P5642 ;
+    ] .
+# Fabian 2022-08-24: removed
+#    sh:property [
+#        sh:path schema:medicalExamination ;
+#        sh:node schema:MedicalTest ; 
+#        ys:fromProperty wdt:P923 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:anatomicalLocation ;
+#        sh:node schema:AnatomicalStructure ; 
+#        ys:fromProperty wdt:P927 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:signOrSymptom ;
+#        sh:node schema:MedicalSignOrSymptom ;
+#        ys:fromProperty wdt:P780 ;
+#    ] .
+
+schema:InfectiousDisease a sh:NodeShape ;
+    ys:fromClass wd:Q18123741 .
+
+# Fabian 2022-08-26: removed
+#schema:MedicalDevice a sh:NodeShape ;
+#    ys:fromClass wd:Q6554101 .
+#
+# Fabian 2022-08-24: removed, no mapping
+#schema:MedicalGuideline a sh:NodeShape ;
+#    ys:fromClass wd:Q878041 .
+#
+#schema:MedicalProcedure a sh:NodeShape ;
+#    ys:fromClass wd:Q796194 .
+#
+#schema:DiagnosticProcedure a sh:NodeShape ;
+#    ys:fromClass wd:Q177719 .
+#
+#schema:PhysicalExam a sh:NodeShape ;
+#    ys:fromClass wd:Q835153 .
+#
+#schema:TherapeuticProcedure a sh:NodeShape .
+#
+# schema:SurgicalProcedure a sh:NodeShape ;
+#    ys:fromClass wd:Q15636229 .
+#
+#schema:MedicalTherapy a sh:NodeShape .
+#
+#schema:RadiationTherapy a sh:NodeShape ;
+#    ys:fromClass wd:Q180507 .
+
+# Fabian 2022-08-26: removed
+#schema:MedicalSignOrSymptom a sh:NodeShape ;
+#	rdfs:subClassOf schema:Intangible ;
+#    sh:property [
+#        sh:path schema:possibleTreatment ;
+#        sh:node schema:Drug ; 
+#        # Fabian 2022-08-25: removed 
+#        #sh:or (
+#        #    [
+#        #        sh:node schema:Drug
+#        #    ]
+#        #    [
+#        #        sh:node schema:Therapy
+#        #    ]
+#        #    [
+#        #        sh:node schema:MedicalTherapy
+#        #    ]
+#        #) ;
+#        ys:fromProperty wdt:P924 ;
+#    ] .
+#
+#schema:MedicalSign a sh:NodeShape ;
+#    ys:fromClass wd:Q1441305 .
+#
+#schema:MedicalSymptom a sh:NodeShape ;
+#    ys:fromClass wd:Q169872 .
+
+# Fabian 2022-08-24: removed
+#
+#schema:MedicalSpecialty a sh:NodeShape ;
+#    ys:fromClass wd:Q930752 .
+#
+#schema:MedicalTest a sh:NodeShape ;
+#    ys:fromClass wd:Q2671652 .
+#
+#schema:BloodTest a sh:NodeShape ;
+#    ys:fromClass wd:Q886837 .
+
+# Fabian 2022-08-26: substances are used in schema.org for drugs
+#schema:Substance a sh:NodeShape ;
+#    ys:fromClass wd:Q27166344 .
+schema:Substance a sh:NodeShape ;
+	rdfs:subClassOf schema:BioChemEntity.
+	
+schema:Drug a sh:NodeShape ;
+# Fabian 2022-08-24: removed
+# sh:property [
+#        sh:path schema:definedDailyDose ;
+#        sh:datatype xsd:string ;
+#        ys:fromProperty wdt:P4250 ;
+#    ] ;
+# Fabian 2022-08-24: duplicate, already linked from the medical condition
+#    sh:property [
+#        sh:path schema:medicalConditionTreated ;
+#        sh:node schema:MedicalCondition ;
+#        ys:fromProperty wdt:P2175 ;
+#    ] ;
+    ys:fromClass wd:Q12140 .
+
+
+################################################################
+#                Organizations
+################################################################
+
+
+schema:Organization a sh:NodeShape ;
+    ys:fromClass wd:Q43229 ;
+    sh:property [
+        sh:path schema:award ;
+        sh:node yago:Award ;
+        ys:fromProperty wdt:P166 ;
+    ] ;
+    sh:property [
+        sh:path schema:dissolutionDate ;
+        sh:or (
+            [
+                sh:datatype xsd:dateTime
+            ]
+            [
+                sh:datatype xsd:date
+            ]
+            [
+                sh:datatype xsd:gYearMonth
+            ]
+            [
+                sh:datatype xsd:gYear
+            ]
+        ) ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P576 ;
+    ] ;
+    sh:property [
+        sh:path schema:duns ;
+        sh:datatype xsd:string ;
+        sh:pattern "^\\d{9}$" ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P2771 ;
+    ] ;
+# Fabian 2022-08-24: removed
+#    sh:property [
+#        sh:path schema:faxNumber ;
+#        sh:datatype xsd:string ;
+#        sh:pattern "^\\+([17]|[2345689]\\d{1,2})(-\\d{1,14})+$" ;
+#        ys:fromProperty wdt:P2900 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:socialMediaFollowers ;
+#        sh:datatype xsd:integer ;
+#        ys:fromProperty wdt:P8687 ;
+#    ] ;
+    sh:property [
+        sh:path schema:founder ;
+        sh:node schema:Person ;
+        ys:fromProperty wdt:P112 ;
+    ] ;
+    sh:property [
+        sh:path schema:leader ;
+        sh:node schema:Person ;
+        ys:fromProperty wdt:P35, wdt:P6 ;
+    ] ;
+    sh:property [
+        sh:path schema:motto ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P1451 ;
+    ] ;
+    sh:property [
+        sh:path schema:address ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P6375 ;
+    ] ;
+    sh:property [
+        sh:path schema:foundingDate ;
+        sh:or (
+            [
+                sh:datatype xsd:dateTime
+            ]
+            [
+                sh:datatype xsd:date
+            ]
+            [
+                sh:datatype xsd:gYearMonth
+            ]
+            [
+                sh:datatype xsd:gYear
+            ]
+        ) ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P571 ;
+    ] ;
+# Fabian 2022-08-24: removed
+#    sh:property [
+#        sh:path schema:donations ;
+#        sh:datatype xsd:string ;
+#        ys:fromProperty wdt:P8093 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:foundingLocation ;
+#        sh:node schema:Place ;
+#        ys:fromProperty wdt:P740 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:knowsLanguage ;
+#        sh:node schema:Language ;
+#        ys:fromProperty wdt:P1412 ;
+#    ] ;
+    sh:property [
+        sh:path schema:leiCode ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[0-9A-Z]{18}[0-9]{2}$" ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P1278 ;
+    ] ;
+    sh:property [
+        sh:path schema:location ;
+        sh:node schema:Place ;
+        ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552 ;
+    ] ;
+# Fabian 2022-08-24: removed
+#    sh:property [
+#        sh:path schema:logo ;
+#        sh:node schema:ImageObject ;
+#        ys:fromProperty wdt:P154 ;
+#    ] ;
+    sh:property [
+        sh:path schema:memberOf ;
+        sh:node schema:Organization ;
+        ys:fromProperty wdt:P463 ;
+    ] ;
+    sh:property [
+        sh:path schema:numberOfEmployees ;
+        sh:datatype xsd:integer ;
+        ys:fromProperty wdt:P1128 ;
+    ] ;
+    sh:property [
+        sh:path schema:parentOrganization ;
+        sh:node schema:Organization ;
+        ys:fromProperty wdt:P749 ;
+    ] .
+# Fabian 2022-08-24: removed
+#   sh:property [
+#        sh:path schema:sponsor ;
+#        sh:or (
+#            [
+#                sh:node schema:Organization
+#            ]
+#            [
+#                sh:node schema:Person
+#            ]
+#        ) ;
+#        ys:fromProperty wdt:P859 ;
+#    ] ;
+# Fabian 2022-08-24: removed, we have "parentOrganization"
+#    sh:property [
+#        sh:path schema:subOrganization ;
+#        sh:node schema:Organization ;
+#        ys:fromProperty wdt:P355 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:telephone ;
+#        sh:datatype xsd:string ;
+#        sh:pattern "^\\+([17]|[2345689]\\d{1,2})(-\\d{1,14})+$" ;
+#        ys:fromProperty wdt:P1329 ;
+#    ] .
+
+schema:Airline a sh:NodeShape ;
+    ys:fromClass wd:Q46970 ;
+    sh:property [
+        sh:path schema:iataCode ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[A-Z0-9]{2}$" ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P229 ;
+    ] ;
+    sh:property [
+        sh:path schema:icaoCode ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[A-Z]{3}$" ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P230 ;
+    ] .
+
+schema:Corporation a sh:NodeShape ;
+    ys:fromClass wd:Q167037 ;
+        sh:property [ 
+        sh:path schema:assets ;
+        sh:datatype xsd:double ;
+        ys:fromProperty wdt:P2403 ;
+    ] ;
+    sh:property [
+        sh:path schema:equity ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        ys:fromProperty wdt:P2137 ;
+    ] ;
+    sh:property [
+        sh:path schema:revenue ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        ys:fromProperty wdt:P2139 ;
+    ] ;
+    sh:property [
+        sh:path schema:netProfit ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        ys:fromProperty wdt:P2295 ;
+    ] ;
+    sh:property [
+        sh:path schema:stockExchange ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P414 ;
+    ] ;
+	# Fabian 2022-08-27: products are now classes
+    sh:property [
+        sh:path schema:productProduced ;
+        sh:node rdf:Class ;
+        ys:fromProperty wdt:P1056 ;
+    ] .
+
+schema:EducationalOrganization a sh:NodeShape ;
+    ys:fromClass wd:Q5341295 ;
+# Fabian 2022-08-24: removed    
+#    sh:property [
+#        sh:path schema:chairperson ;
+#        sh:maxCount 1 ;
+#        sh:node schema:Person ;
+#        ys:fromProperty wdt:P488 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:fee ;
+#        sh:maxCount 1 ;
+#        sh:datatype xsd:string ;
+#        ys:fromProperty wdt:P2555 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:admissionRate ;
+#        sh:maxCount 1 ;
+#        sh:datatype xsd:double ;
+#        ys:fromProperty wdt:P5822 ;
+#    ] ;
+    sh:property [
+        sh:path schema:studentsCount ;
+        sh:datatype xsd:integer ;
+        ys:fromProperty wdt:P2196 ;
+    ] .
+
+schema:ResearchOrganization a sh:NodeShape ; 
+    ys:fromClass wd:Q16519632 .
+
+schema:CollegeOrUniversity a sh:NodeShape ;
+    ys:fromClass wd:Q38723 .
+
+# Fabian 2022-08-25 removed
+#schema:ElementarySchool a sh:NodeShape ;
+#    ys:fromClass wd:Q20950067 .
+#
+#schema:MiddleSchool a sh:NodeShape ;
+#    ys:fromClass wd:Q149566 .
+#
+#schema:Preschool a sh:NodeShape ;
+#    ys:fromClass wd:Q1076052 .
+#
+#schema:School a sh:NodeShape ;
+#    ys:fromClass wd:Q3914 .
+
+schema:GovernmentOrganization a sh:NodeShape ;
+    ys:fromClass wd:Q2659904 .
+
+schema:MedicalOrganization a sh:NodeShape ;
+    ys:fromClass wd:Q4287745 .
+
+schema:NGO a sh:NodeShape ;
+    ys:fromClass wd:Q79913 .
+
+# Fabian 2022-08-24: removed, no mapping
+# schema:PerformingGroup a sh:NodeShape .
+
+schema:DanceGroup a sh:NodeShape ;
+    ys:fromClass wd:Q2393314 .
+
+schema:MusicGroup a sh:NodeShape ;
+    ys:fromClass wd:Q215380 ;
+    sh:property [
+        sh:path schema:influencedBy ;
+        sh:node schema:Person ;
+        ys:fromProperty wdt:P737 ;
+    ] ;
+# Fabian 2022-08-24: removed
+#    sh:property [
+#        sh:path schema:fandom ;
+#        sh:datatype xsd:string ;
+#        ys:fromProperty wdt:P8693 ;
+#    ] ;
+    sh:property [
+        sh:path schema:members ;
+        sh:node schema:Person ;
+        ys:fromProperty wdt:P527 ;
+    ] .
+# Fabian 2022-08-24: removed
+#    sh:property [
+#        sh:path schema:genre ;
+#        sh:node schema:Thing ;
+#        ys:fromProperty wdt:P136 ;
+#    ] .
+
+schema:TheaterGroup a sh:NodeShape ;
+    ys:fromClass wd:Q2416217 .
+
+schema:SportsOrganization a sh:NodeShape ;
+    ys:fromClass wd:Q4438121 .
+# Fabian 2022-08-24: removed, no target class
+#   sh:property [
+#        sh:path schema:sport ;
+#        sh:node schema:Thing ;
+#        ys:fromProperty wdt:P641 ;
+#    ] .
+
+schema:SportsTeam a sh:NodeShape ;
+    ys:fromClass wd:Q12973014 .
+
+schema:WorkersUnion a sh:NodeShape ;
+    ys:fromClass wd:Q178790 .
+
+
+################################################################
+#                Persons
+################################################################
+
+schema:Occupation a sh:NodeShape ;
+    ys:fromClass wd:Q12737077 .
+
+yago:Gender a sh:NodeShape ;
+    ys:fromClass wd:Q48264 ;
+    rdfs:subclassOf schema:Intangible ;
+    rdf:label "Gender" .
+  
+# Fabian 2022-08-26: make humans equivalent to persons
+schema:Person a sh:NodeShape ;
+    ys:fromClass wd:Q5 ;
+    sh:property [
+        sh:path schema:affiliation ;
+        sh:node schema:Organization ;
+        ys:fromProperty wdt:P1416 ;
+    ] ;
+    sh:property [
+        sh:path schema:alumniOf ;
+        sh:node schema:Organization ;
+        ys:fromProperty wdt:P69 ;
+    ] ;
+    sh:property [
+        sh:path schema:award ;
+        sh:node yago:Award ;
+        ys:fromProperty wdt:P166 ;
+    ] ;
+    sh:property [
+        sh:path schema:birthDate ;
+        sh:or (
+            [
+                sh:datatype xsd:dateTime
+            ]
+            [
+                sh:datatype xsd:date
+            ]
+            [
+                sh:datatype xsd:gYearMonth
+            ]
+            [
+                sh:datatype xsd:gYear
+            ]
+        ) ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P569 ;
+    ] ;
+    sh:property [
+        sh:path schema:birthPlace ;
+        sh:node schema:Place ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P19 ;
+    ] ;
+# Fabian 2022-08-24: removed    
+#    sh:property [
+#        sh:path schema:callSign ;
+#        sh:datatype xsd:string ;
+#        ys:fromProperty wdt:P2317 ;
+#    ] ;
+    sh:property [
+        sh:path schema:children ;
+        sh:node schema:Person ;
+       ys:fromProperty wdt:P40 ;
+    ] ;
+    sh:property [
+        sh:path schema:deathDate ;
+        sh:or (
+            [
+                sh:datatype xsd:dateTime
+            ]
+            [
+                sh:datatype xsd:date
+            ]
+            [
+                sh:datatype xsd:gYearMonth
+            ]
+            [
+                sh:datatype xsd:gYear
+            ]
+        ) ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P570 ;
+    ] ;
+    sh:property [
+        sh:path schema:deathPlace ;
+        sh:node schema:Place ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P20 ;
+    ] ;
+# Fabian 2022-08-24: removed    
+#    sh:property [
+#        sh:path schema:faxNumber ;
+#        sh:datatype xsd:string ;
+#        sh:pattern "^\\+([17]|[2345689]\\d{1,2})(-\\d{1,14})+$" ;
+#        ys:fromProperty wdt:P2900 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:familyName ;
+#        sh:node schema:Thing ;
+#        ys:fromProperty wdt:P734 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:givenName ;
+#        sh:node schema:Thing ;
+#        ys:fromProperty wdt:P735 ;
+#    ] ;
+    sh:property [
+        sh:path schema:gender ;
+        sh:node yago:Gender ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P21 ;
+    ] ;
+    sh:property [
+        sh:path schema:hasOccupation ;
+        sh:node schema:Occupation ;
+        ys:fromProperty wdt:P106 ;
+    ] ;
+# Fabian 2022-08-24: removed    
+#    sh:property [
+#        sh:path schema:height ;
+#        sh:node schema:QuantitativeValue ;
+#        sh:maxCount 1 ;
+#        ys:fromProperty wdt:P2048 ;
+#    ] ;
+    sh:property [
+        sh:path schema:homeLocation ;
+        sh:node schema:Place ;
+        ys:fromProperty wdt:P551 ;
+    ] ;
+# Fabian 2022-08-24: removed    
+#    sh:property [
+#        sh:path schema:honorificPrefix ;
+#        sh:node schema:Thing ;
+#        ys:fromProperty wdt:P511 ;
+#    ] ;
+    sh:property [
+        sh:path schema:knowsLanguage ;
+        sh:node schema:Language ;
+        ys:fromProperty wdt:P1412 ;
+    ] ;
+    sh:property [
+        sh:path schema:memberOf ;
+        sh:node schema:Organization ;
+        ys:fromProperty wdt:P463 , wdt:P54 , wdt:P102 ;
+    ] ;
+    sh:property [
+        sh:path schema:nationality ;
+        sh:node schema:Country ;
+        ys:fromProperty wdt:P27 ;
+    ] ;
+# Fabian 2022-08-24: removed    
+#    sh:property [
+#        sh:path schema:netWorth ;
+#        sh:node schema:QuantitativeValue ;
+#        ys:fromProperty wdt:P2218 ;
+#    ] ;
+    sh:property [
+        sh:path schema:owns ;
+        sh:node schema:Product ; # TODO make sure this works with brands etc.
+        ys:fromProperty wdt:P1830 ;
+    ] ;
+# Fabian 2022-08-24: removed, we have children
+#    sh:property [
+#        sh:path schema:parent ;
+#        sh:node schema:Person ;
+#        sh:maxCount 2 ;
+#        ys:fromProperty wdt:P22 , wdt:P25 ;
+#    ] ;
+    sh:property [
+        sh:path schema:spouse ;
+        sh:node schema:Person ;
+        ys:fromProperty wdt:P26 ;
+    ] .
+# Fabian 2022-08-24: removed    
+#    sh:property [
+#        sh:path schema:telephone ;
+#        sh:datatype xsd:string ;
+#        sh:pattern "^\\+([17]|[2345689]\\d{1,2})(-\\d{1,14})+$" ;
+#        ys:fromProperty wdt:P1329 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:weight ;
+#        sh:node schema:QuantitativeValue ;
+#        ys:fromProperty wdt:P2067 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:worksFor ;
+#        sh:node schema:Person ;
+#        ys:fromProperty wdt:P108 ;
+#    ] .
+
+################################################################
+#                Places
+################################################################
+
+schema:Place a sh:NodeShape ;
+    ys:fromClass wd:Q17334923 ;
+# Fabian 2022-08-24: removed, we have containedInPlace
+#    sh:property [
+#        sh:path schema:containsPlace ;
+#        sh:node schema:Place ;
+#        ys:fromProperty wdt:P150 ;
+#    ] ;
+    sh:property [
+        sh:path schema:containedInPlace ;
+        sh:node schema:Place ;
+        ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552 ;
+    ] ;
+    sh:property [
+        sh:path schema:inception ;
+        sh:datatype xsd:dateTime ;
+        ys:fromProperty wdt:P571 ;
+    ] ;
+    sh:property [
+        sh:path schema:demonym ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P1549 ;
+    ] ;
+    sh:property [
+        sh:path schema:leader ;
+        sh:node schema:Person ;
+        ys:fromProperty wdt:P6, wdt:P35 ;
+    ] ;
+    sh:property [
+        sh:path schema:populationNumber ;
+        sh:datatype xsd:integer ;
+        ys:fromProperty wdt:P1082 ;
+    ] ;
+    sh:property [
+        sh:path schema:timezone ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P421 ;
+    ] ;
+    sh:property [
+        sh:path schema:area ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P2046 ;
+    ] ;
+    sh:property [
+        sh:path schema:postalCode ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P281 ;
+    ] ;
+    sh:property [
+        sh:path schema:officialWebsite ;
+        sh:datatype xsd:anyURI ;
+        ys:fromProperty wdt:P856 ;
+    ] ;
+# Fabian 2022-08-24: removed
+#    sh:property [
+#        sh:path schema:lifeExpectancy ;
+#        sh:datatype xsd:string ;
+#        sh:pattern "^[0-9]{3} years$" ;
+#        ys:fromProperty wdt:P2250 ;
+#    ] ;
+    sh:property [
+        sh:path schema:officialLanguage ;
+        sh:node schema:Language ;
+        ys:fromProperty wdt:P37 ;
+    ] ;
+    sh:property [
+        sh:path schema:motto ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P1451 ;
+    ] ;
+    sh:property [
+        sh:path schema:highestPoint ;
+        sh:node schema:Place ;
+        ys:fromProperty wdt:P610 ;
+    ] ;
+    sh:property [
+        sh:path schema:lowestPoint ;
+        sh:node schema:Place ;
+        ys:fromProperty wdt:P1589 ;
+    ] ;
+    sh:property [
+        sh:path schema:memberOf ;
+        sh:node schema:Organization ;
+        ys:fromProperty wdt:P463 ;
+    ] ;
+    sh:property [
+        sh:path schema:administrates ;
+        sh:node schema:Place ;
+        ys:fromProperty wdt:P150 ;
+    ] ;
+    sh:property [
+        sh:path schema:currency ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P38 ;
+    ] ;
+    sh:property [
+        sh:path schema:humanDevelopmentIndex ;
+        sh:datatype xsd:double ;
+        ys:fromProperty wdt:P1081 ;
+    ] ;
+    sh:property [
+        sh:path schema:unemploymentRate ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P1198 ;
+    ] ;
+    sh:property [
+        sh:path schema:neighbors ;
+        sh:node schema:Place ;
+        ys:fromProperty wdt:P47 ;
+    ] ;
+    sh:property [
+        sh:path schema:neighborsBodyOfWater ;
+        sh:node schema:BodyOfWater ;
+        ys:fromProperty wdt:P206 ;
+    ] ;
+    sh:property [
+        sh:path schema:internetDomain ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P78 ;
+    ] ;
+    sh:property [
+        sh:path schema:medianIncome ;
+        sh:datatype xsd:integer ;
+        ys:fromProperty wdt:P3529 ;
+    ] ;
+    sh:property [
+        sh:path schema:elevation ;
+        sh:datatype xsd:double ;
+        ys:fromProperty wdt:P2044 ;
+    ] ;
+# Fabian 2022-08-24: removed
+#    sh:property [
+#        sh:path schema:faxNumber ;
+#        sh:datatype xsd:string ;
+#        sh:pattern "^\\+([17]|[2345689]\\d{1,2})(-\\d{1,14})+$" ;
+#        ys:fromProperty wdt:P2900 ;
+#    ] ;
+    sh:property [
+        sh:path schema:geo ;
+        sh:node geo:wktLiteral ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P625 ;
+    ] .
+# Fabian 2022-08-24: removed
+#    sh:property [
+#        sh:path schema:logo ;
+#        sh:node schema:ImageObject ;
+#        ys:fromProperty wdt:P154 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:telephone ;
+#        sh:datatype xsd:string ;
+#        sh:pattern "^\\+([17]|[2345689]\\d{1,2})(-\\d{1,14})+$" ;
+#        ys:fromProperty wdt:P1329 ;
+#    ] . 
+
+schema:AdministrativeArea a sh:NodeShape ;
+    ys:fromClass wd:Q56061 .
+
+schema:City a sh:NodeShape ;
+    ys:fromClass wd:Q515 .
+# Fabian 2022-08-24: removed code is for airports
+#    
+#    sh:property [
+#        sh:path schema:iataCode ;
+#        sh:datatype xsd:string ;
+#        sh:pattern "^[A-Z]{3}$" ;
+#        sh:maxCount 1 ;
+#        ys:fromProperty wdt:P238 ;
+#    ] .
+
+# Fabian 2022-08-26: added capital 
+schema:Country a sh:NodeShape ;
+    sh:property [
+        sh:path ys:capital ;
+        sh:node schema:City ;
+        ys:fromProperty wdt:P36 ;
+    ] ;
+    ys:fromClass wd:Q6256 .
+
+schema:State a sh:NodeShape ;
+    ys:fromClass wd:Q107390 .
+
+# Fabian 2022-08-24: removed, no mapping
+#schema:CivicStructure a sh:NodeShape .
+
+schema:Airport a sh:NodeShape ;
+    ys:fromClass wd:Q1248784 ;
+    sh:property [
+        sh:path schema:iataCode ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[A-Z]{3}$" ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P238 ;
+    ] ;
+    sh:property [
+        sh:path schema:icaoCode ;
+        sh:datatype xsd:string ;
+        sh:pattern "^([A-Z]{2}|[CKY][A-Z0-9])[A-Z0-9]{2}$" ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P239 ;
+    ] .
+
+# Fabian 2022-08-24: removed
+#schema:Aquarium a sh:NodeShape ;
+#    ys:fromClass wd:Q2281788 .
+#
+#schema:Beach a sh:NodeShape ;
+#   ys:fromClass wd:Q40080 .
+#
+schema:Bridge a sh:NodeShape ;
+    ys:fromClass wd:Q12280 .
+
+# Fabian 2022-08-24: removed
+#schema:BusStation a sh:NodeShape ;
+#    ys:fromClass wd:Q494829 .
+#
+#schema:BusStop a sh:NodeShape ;
+#    ys:fromClass wd:Q953806 .
+#
+#schema:Campground a sh:NodeShape ;
+#    ys:fromClass wd:Q27108230 .
+#
+#schema:Cemetery a sh:NodeShape ;
+#    ys:fromClass wd:Q39614 .
+#
+# Fabian 2022-08-24: removed
+#schema:Crematorium a sh:NodeShape ;
+#    ys:fromClass wd:Q157570 .
+#
+#schema:EventVenue a sh:NodeShape ;
+#    ys:fromClass wd:Q18674739 .
+#
+#schema:FireStation a sh:NodeShape ;
+#    ys:fromClass wd:Q1195942 .
+
+#schema:GovernmentBuilding a sh:NodeShape ;
+#    ys:fromClass wd:Q16831714 .
+#
+#schema:CityHall a sh:NodeShape ;
+#    ys:fromClass wd:Q543654 .
+#
+#schema:Courthouse a sh:NodeShape ;
+#    ys:fromClass wd:Q1137809 .
+#
+#schema:DefenceEstablishment a sh:NodeShape ;
+#    ys:fromClass wd:Q18691599 .
+#
+#schema:Embassy a sh:NodeShape ;
+#    ys:fromClass wd:Q3917681 .
+#
+#schema:Hospital a sh:NodeShape ;
+#    ys:fromClass wd:Q16917 .
+#
+#schema:MovieTheater a sh:NodeShape ;
+#    ys:fromClass wd:Q41253 .
+
+schema:Museum a sh:NodeShape ;
+    ys:fromClass wd:Q33506 .
+
+#schema:MusicVenue a sh:NodeShape ;
+#    ys:fromClass wd:Q8719053 .
+
+schema:Park a sh:NodeShape ;
+    ys:fromClass wd:Q22698 .
+
+# Fabian 2022-08-24: removed
+# schema:ParkingFacility a sh:NodeShape ;
+#    ys:fromClass wd:Q6501349 .
+
+schema:PerformingArtsTheater a sh:NodeShape ;
+    ys:fromClass wd:Q24354 .
+
+schema:PlaceOfWorship a sh:NodeShape ;
+    ys:fromClass wd:Q1370598 .
+
+schema:BuddhistTemple a sh:NodeShape ;
+    ys:fromClass wd:Q5393308 .
+
+schema:Church a sh:NodeShape ;
+    ys:fromClass wd:Q16970 .
+
+schema:CatholicChurch a sh:NodeShape ;
+    ys:fromClass wd:Q1088552 .
+
+schema:HinduTemple a sh:NodeShape ;
+    ys:fromClass wd:Q842402 .
+
+schema:Mosque a sh:NodeShape ;
+    ys:fromClass wd:Q32815 .
+
+schema:Synagogue a sh:NodeShape ;
+    ys:fromClass wd:Q34627 .
+
+# Fabian 2022-08-24: removed
+#
+#schema:Playground a sh:NodeShape ;
+#    ys:fromClass wd:Q13607440 .
+#
+#schema:PoliceStation a sh:NodeShape ;
+#    ys:fromClass wd:Q861951 .
+#
+#schema:PublicToilet a sh:NodeShape ;
+#    ys:fromClass wd:Q813966 .
+#
+#schema:StadiumOrArena a sh:NodeShape ;
+#    ys:fromClass wd:Q483110 .
+
+
+# Fabian 2022-08-24: removed
+#
+#schema:SubwayStation a sh:NodeShape ;
+#    ys:fromClass wd:Q928830 .
+#
+#schema:TrainStation a sh:NodeShape ;
+#    ys:fromClass wd:Q55488 .
+#
+#schema:Zoo a sh:NodeShape ;
+#    ys:fromClass wd:Q43501 .
+
+schema:Landform a sh:NodeShape ;
+    ys:fromClass wd:Q271669 .
+
+schema:BodyOfWater a sh:NodeShape ;
+    ys:fromClass wd:Q15324 .
+
+schema:Canal a sh:NodeShape ;
+    ys:fromClass wd:Q12284 .
+
+schema:LakeBodyOfWater a sh:NodeShape ;
+    ys:fromClass wd:Q23397 .
+
+schema:OceanBodyOfWater a sh:NodeShape ;
+    ys:fromClass wd:Q9430 .
+
+# Fabian 2022-08-24: removed
+#
+#schema:Pond a sh:NodeShape ;
+#    ys:fromClass wd:Q3253281 .
+#
+#schema:Reservoir a sh:NodeShape ;
+#    ys:fromClass wd:Q131681 .
+
+schema:RiverBodyOfWater a sh:NodeShape ;
+    ys:fromClass wd:Q4022 .
+
+schema:SeaBodyOfWater a sh:NodeShape ;
+    ys:fromClass wd:Q165 .
+
+schema:Waterfall a sh:NodeShape ;
+    ys:fromClass wd:Q34038 .
+
+schema:Continent a sh:NodeShape ;
+    ys:fromClass wd:Q5107 .
+
+schema:Mountain a sh:NodeShape ;
+    ys:fromClass wd:Q8502 .
+
+schema:Volcano a sh:NodeShape ;
+    ys:fromClass wd:Q8072 .
+
+schema:LandmarksOrHistoricalBuildings a sh:NodeShape ;
+    ys:fromClass wd:Q51369558 .
+
+# Fabian 2022-08-24: removed
+#
+#schema:TouristAttraction a sh:NodeShape ;
+#    ys:fromClass wd:Q570116 .
+#
+#schema:Accommodation a sh:NodeShape .
+#
+#schema:Apartment a sh:NodeShape ;
+#    ys:fromClass wd:Q188507 .
+#
+#schema:House a sh:NodeShape ;
+#    ys:fromClass wd:Q3947 .
+#
+#schema:LocalBusiness a sh:NodeShape ;
+#    ys:fromClass wd:Q62849941 .
+#
+#schema:AnimalShelter a sh:NodeShape ;
+#    ys:fromClass wd:Q1411287 .
+#
+#schema:ArchiveOrganization a sh:NodeShape ;
+#    ys:fromClass wd:Q166118 .
+#
+#schema:AutomotiveBusiness a sh:NodeShape .
+#
+#schema:AutoRental a sh:NodeShape ;
+#    ys:fromClass wd:Q291240 .
+#
+#schema:GasStation a sh:NodeShape ;
+#    ys:fromClass wd:Q205495 .
+#
+#schema:ChildCare a sh:NodeShape ;
+#    ys:fromClass wd:Q27008444 .
+#
+#schema:EntertainmentBusiness a sh:NodeShape .
+#
+#schema:AmusementPark a sh:NodeShape ;
+#    ys:fromClass wd:Q194195 .
+#
+#schema:ArtGallery a sh:NodeShape ;
+#    ys:fromClass wd:Q1007870 .
+#
+#schema:Casino a sh:NodeShape ;
+#    ys:fromClass wd:Q133215 .
+#
+#schema:ComedyClub a sh:NodeShape ;
+#    ys:fromClass wd:Q2814066 .
+#
+#schema:NightClub a sh:NodeShape ;
+#    ys:fromClass wd:Q622425 .
+#
+#schema:EmergencyService a sh:NodeShape ;
+#    ys:fromClass wd:Q814610 .
+#
+#schema:EmploymentAgency a sh:NodeShape ;
+#    ys:fromClass wd:Q261362 .
+#
+#schema:FinancialService a sh:NodeShape ;
+#    ys:fromClass wd:Q837171 .
+#
+#schema:BankOrCreditUnion a sh:NodeShape ;
+#    ys:fromClass wd:Q730038 .
+#
+#schema:FoodEstablishment a sh:NodeShape ;
+#    ys:fromClass wd:Q27038993 ;
+#    sh:property [
+#        sh:path schema:servesCuisine ;
+#        sh:node schema:Thing ;
+#        ys:fromProperty wdt:P2012 ;
+#    ] .
+#
+#schema:Bakery a sh:NodeShape ;
+#    ys:fromClass wd:Q274393 .
+#
+#schema:BarOrPub a sh:NodeShape ;
+#    ys:fromClass wd:Q5307737 .
+#
+#schema:Brewery a sh:NodeShape ;
+#    ys:fromClass wd:Q131734 .
+#
+#schema:CafeOrCoffeeShop a sh:NodeShape ;
+#    ys:fromClass wd:Q30022 .
+#
+#schema:Distillery a sh:NodeShape ;
+#    ys:fromClass wd:Q1251750 .
+#
+#schema:IceCreamShop a sh:NodeShape ;
+#    ys:fromClass wd:Q1311064 .
+#
+#schema:LiquorStore a sh:NodeShape ;
+#    ys:fromClass wd:Q2632011 .
+#
+#schema:Restaurant a sh:NodeShape ;
+#    ys:fromClass wd:Q11707 .
+#
+#schema:Winery a sh:NodeShape ;
+#    ys:fromClass wd:Q156362 .
+#
+#schema:GovernmentOffice a sh:NodeShape ;
+#    ys:fromClass wd:Q327333 .
+#
+#schema:PostOffice a sh:NodeShape ;
+#    ys:fromClass wd:Q35054 .
+#
+#schema:HealthAndBeautyBusiness a sh:NodeShape .
+#
+#schema:BeautySalon a sh:NodeShape ;
+#    ys:fromClass wd:Q1195245 .
+#
+#schema:DaySpa a sh:NodeShape ;
+#    ys:fromClass wd:Q11290050 .
+#
+#schema:NailSalon a sh:NodeShape ;
+#    ys:fromClass wd:Q8007048 .
+#
+#schema:TattooParlor a sh:NodeShape ;
+#    ys:fromClass wd:Q27038997 .
+#
+#schema:Library a sh:NodeShape ;
+#    ys:fromClass wd:Q7075 .
+#
+#schema:LodgingBusiness a sh:NodeShape .
+#
+#schema:BedAndBreakfast a sh:NodeShape ;
+#    ys:fromClass wd:Q367914 .
+#
+#schema:Hostel a sh:NodeShape ;
+#    ys:fromClass wd:Q654772 .
+#
+#schema:Hotel a sh:NodeShape ;
+#    ys:fromClass wd:Q27686 .
+#
+#schema:Motel a sh:NodeShape ;
+#    ys:fromClass wd:Q216212 .
+#
+#schema:Resort a sh:NodeShape ;
+#    ys:fromClass wd:Q875157 .
+#
+#schema:MedicalBusiness a sh:NodeShape .
+#
+#schema:MedicalClinic a sh:NodeShape ;
+#    ys:fromClass wd:Q1774898 .
+#
+#schema:Optician a sh:NodeShape ;
+#    ys:fromClass wd:Q1996635 .
+#
+#schema:Pharmacy a sh:NodeShape ;
+#    ys:fromClass wd:Q13107184 .
+#
+#schema:SportsActivityLocation a sh:NodeShape .
+#
+#schema:BowlingAlley a sh:NodeShape ;
+#    ys:fromClass wd:Q27106471 .
+#
+#schema:GolfCourse a sh:NodeShape ;
+#    ys:fromClass wd:Q1048525 .
+#
+#schema:HealthClub a sh:NodeShape ;
+#    ys:fromClass wd:Q1065656 .
+#
+#schema:PublicSwimmingPool a sh:NodeShape ;
+#    ys:fromClass wd:Q27106886 .
+#
+#schema:SkiResort a sh:NodeShape ;
+#    ys:fromClass wd:Q130003 .
+#
+#schema:TennisComplex a sh:NodeShape ;
+#    ys:fromClass wd:Q13380226 .
+#
+#schema:RadioStation a sh:NodeShape ;
+#    ys:fromClass wd:Q14350 .
+#
+#schema:RecyclingCenter a sh:NodeShape ;
+#    ys:fromClass wd:Q27106436 .
+#
+#schema:SelfStorage a sh:NodeShape ;
+#    ys:fromClass wd:Q401404 .
+#
+#schema:Store a sh:NodeShape ;
+#    ys:fromClass wd:Q213441 .
+#
+#schema:BookStore a sh:NodeShape ;
+#    ys:fromClass wd:Q200764 .
+#
+#schema:GroceryStore a sh:NodeShape ;
+#    ys:fromClass wd:Q1295201 .
+#
+#schema:OutletStore a sh:NodeShape ;
+#    ys:fromClass wd:Q76470 .
+#
+#schema:PawnShop a sh:NodeShape ;
+#    ys:fromClass wd:Q176637 .
+#
+#schema:PetStore a sh:NodeShape ;
+#    ys:fromClass wd:Q220142 .
+#
+#schema:ShoeStore a sh:NodeShape ;
+#    ys:fromClass wd:Q7500021 .
+#
+#schema:ToyStore a sh:NodeShape ;
+#    ys:fromClass wd:Q1318959 .
+#
+#schema:ShoppingCenter a sh:NodeShape ;
+#    ys:fromClass wd:Q11315 .
+#
+#schema:TelevisionStation a sh:NodeShape ;
+#    ys:fromClass wd:Q1616075 .
+#
+#schema:TouristInformationCenter a sh:NodeShape ;
+#    ys:fromClass wd:Q1587716 .
+#
+#schema:TravelAgency a sh:NodeShape ;
+#    ys:fromClass wd:Q217107 .
+#
+#
+#schema:Service a sh:NodeShape .
+#
+#schema:BroadcastService a sh:NodeShape ;
+#    ys:fromClass wd:Q15265344 ;
+#    sh:property [
+#        sh:path schema:callSign ;
+#        sh:datatype xsd:string ;
+#        ys:fromProperty wdt:P2317 ;
+#    ] .
+#
+#schema:FinancialProduct a sh:NodeShape ;
+#    ys:fromClass wd:Q15809678 .
+
+
+################################################################
+#                Commercial Products
+################################################################
+
+# TODO make sure this works with brands etc.
+
+schema:Product a sh:NodeShape ;
+    ys:fromClass wd:Q2424752 ;
+    sh:property [
+        sh:path schema:award ;
+        sh:node yago:Award ;
+        ys:fromProperty wdt:P166 ;
+    ] ;
+# Fabian 2022-08-24: removed
+#    sh:property [
+#        sh:path schema:depth ;
+#        sh:node schema:QuantitativeValue ;
+#        ys:fromProperty wdt:P5524 ;
+#    ] ;
+    sh:property [
+        sh:path schema:gtin ;
+        sh:datatype xsd:string ;
+        sh:pattern "^\\d{12,14}|\\d{8}$" ;
+        ys:fromProperty wdt:P3962 ;
+    ] .
+# Fabian 2022-08-24: removed
+#    sh:property [
+#        sh:path schema:height ;
+#        sh:node schema:QuantitativeValue ;
+#        sh:maxCount 1 ;
+#        ys:fromProperty wdt:P2048 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:logo ;
+#        sh:node schema:ImageObject ;
+#        ys:fromProperty wdt:P154 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:material ;
+#        sh:node schema:Thing ;
+#        ys:fromProperty wdt:P186 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:weight ;
+#        sh:node schema:QuantitativeValue ;
+#        sh:maxCount 1 ;
+#        ys:fromProperty wdt:P2067 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:width ;
+#        sh:node schema:QuantitativeValue ;
+#        sh:maxCount 1 ;
+#        ys:fromProperty wdt:P2049 ;
+#    ] .
+
+# Fabian 2022-08-26 rmeoved callSign (is experimental)
+schema:Vehicle a sh:NodeShape ;
+    ys:fromClass wd:Q42889 .
+    #sh:property [
+    #    sh:path schema:callSign ;
+    #    sh:datatype xsd:string ;
+    #    ys:fromProperty wdt:P2317 ;
+    #] .
+
+schema:BusOrCoach a sh:NodeShape ;
+    ys:fromClass wd:Q5638 .
+
+schema:Car a sh:NodeShape ;
+    ys:fromClass wd:Q1144312 .
+
+schema:Motorcycle a sh:NodeShape ;
+    ys:fromClass wd:Q34493 .
+
+# Fabian 2022-08-24: removed
+#schema:Rating a sh:NodeShape ;
+#    ys:fromClass wd:Q23649976 .
+#
+#schema:Specialty a sh:NodeShape ;
+#    ys:fromClass wd:Q1047113 .
+#schema:ProductModel a sh:NodeShape ;
+#    ys:fromClass wd:Q17444171 .
+
+
+################################################################
+#                Value types
+################################################################
+
+# Fabian 2022-08-25: we will use the geo-namespace
+#schema:GeoCoordinates a sh:NodeShape ;
+#    sh:property [
+#        sh:path schema:latitude ;
+#        sh:datatype xsd:double ;
+#        sh:minCount 1 ;
+#        sh:maxCount 1 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:longitude ;
+#        sh:datatype xsd:double ;
+#        sh:minCount 1 ;
+#        sh:maxCount 1 ;
+#    ] .
+
+# Fabian 2022-08-25: we will just have the double value
+#schema:QuantitativeValue a sh:NodeShape ;
+#    sh:property [
+#        sh:path schema:value ;
+#        sh:datatype xsd:decimal ;
+#        sh:minCount 1 ;
+#        sh:maxCount 1 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:minValue ;
+#        sh:datatype xsd:decimal ;
+#        sh:minCount 1 ;
+#        sh:maxCount 1 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:maxValue ;
+#        sh:datatype xsd:decimal ;
+#        sh:minCount 1 ;
+#        sh:maxCount 1 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:unitCode ;
+#        sh:node schema:Thing ;
+#        sh:minCount 1 ;
+#        sh:maxCount 1 ;
+#    ] .
+
+################################################################
+#                Biochemical entities and taxons
+################################################################
+
+schema:BioChemEntity a sh:NodeShape ;
+    sh:property [
+        sh:path schema:bioChemInteraction ;
+        sh:node schema:BioChemEntity ;
+        ys:fromProperty wdt:P769 ;
+    ] ;
+    # Fabian 2022-08-25: removed, we won't be able to fill it
+    #sh:property [
+    #    sh:path schema:hasMolecularFunction ;
+    #    sh:node schema:Thing ; # TODO this won't work
+    #    ys:fromProperty wdt:P680 ;
+    #] ;
+    sh:property [
+        sh:path schema:isEncodedByBioChemEntity ;
+        sh:node schema:Gene ;
+        ys:fromProperty wdt:P702 ;
+    ] ;
+    # Fabian 2022-08-25: removed, we won't be able to fill it
+    #sh:property [
+    #    sh:path schema:isInvolvedInBiologicalProcess ;
+    #    sh:node schema:Thing ; # TODO this won't work
+    #    ys:fromProperty wdt:P682 ;
+    #] ;
+# Fabian 2022-08-24: removed
+#    sh:property [
+#        sh:path schema:chemicalStructure ;
+#        sh:maxCount 1 ;
+#        sh:node schema:ImageObject ;
+#        ys:fromProperty wdt:P117 ;
+#    ] ;
+    sh:property [
+        sh:path schema:mass ;
+        sh:datatype xsd:double ; # TODO need quantitative value here
+        ys:fromProperty wdt:P2067 ;
+    ] ;
+    sh:property [
+        sh:path schema:meltingPoint ;
+        sh:datatype xsd:double ; # TODO need quantitative value here
+        ys:fromProperty wdt:P2101 ;
+    ] ;
+    sh:property [
+        sh:path schema:formula ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P274 ;
+    ] .
+    # Fabian 2022-08-25: removed, we won't be able to fill it
+    #sh:property [
+    #    sh:path schema:isLocatedInSubcellularLocation ;
+    #    sh:node schema:Thing ; # TODO this won't work
+    #    ys:fromProperty wdt:P681 ;
+    #] .
+
+schema:ChemicalSubstance a sh:NodeShape ;
+    ys:fromClass wd:Q79529 .
+
+schema:Gene a sh:NodeShape ;
+    ys:fromClass wd:Q7187 ;
+    sh:property [
+        sh:path schema:encodesBioChemEntity ;
+        sh:node schema:BioChemEntity ;
+        ys:fromProperty wdt:P688 ;
+    ] .
+
+schema:MolecularEntity a sh:NodeShape ;
+    ys:fromClass wd:Q2393187 ;
+    sh:property [
+        sh:path schema:inChI ;
+        sh:datatype xsd:string ;
+        sh:pattern "^1S/([0-9]*[A-Z][ub]?[a-z]?[0-9]*\\.?)+(/[0-9A-Za-z+\\-(),.*;?]+)*$" ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P234 ;
+    ] ;
+    sh:property [
+        sh:path schema:inChIKey ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[A-Z]{14}-[A-Z]{10}-[A-Z]$" ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P235 ;
+    ] ;
+    sh:property [
+        sh:path schema:molecularFormula ;
+        sh:datatype xsd:string ;
+        # TODO: sh:pattern
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P274 ;
+    ] ;
+    sh:property [
+        sh:path schema:smiles ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[A-Za-z0-9+\\-\\*=#$:().>/\\\\\\[\\]%]+$" ;
+        ys:fromProperty wdt:P233 ;
+    ] .
+
+schema:Protein a sh:NodeShape ;
+    ys:fromClass wd:Q8054 .
+
+# Fabian 2022-08-25: removed, we won't be able to fill it
+#schema:Taxon a sh:NodeShape ;
+#    ys:fromClass wd:Q16521 ;
+#    sh:property [
+#        sh:path schema:parentTaxon ;
+#        sh:node schema:Taxon ; # TODO this won't work
+#        ys:fromProperty wdt:P171 ;
+#    ] ;
+#    sh:property [
+#        sh:path schema:taxonRank ;
+#        sh:node schema:Thing ; # TODO this won't work
+#        sh:maxCount 1 ;
+#        ys:fromProperty wdt:P105 ;
+#    ] .
+
+# Fabian 2022-08-26: taxons are a mess in Wikidata
+yago:Organism a sh:NodeShape;
+	rdfs:label "Organism" ;
+	rdfs:description "a living being" ;
+	rdfs:subClassOf schema:Thing ;
+	ys:fromClass wd:Q7239.
+	
+################################################################
+#                Time annotation
+################################################################
+
+ys:AnnotationPropertyShape a rdfs:Property ;
+    rdfs:subPropertyOf sh:PropertyShape .
+
+ys:startDateAnnotation a ys:AnnotationPropertyShape ;
+    sh:path schema:startDate ;
+    sh:or (
+        [
+            sh:datatype xsd:dateTime
+        ]
+        [
+            sh:datatype xsd:date
+        ]
+        [
+            sh:datatype xsd:gYearMonth
+        ]
+        [
+            sh:datatype xsd:gYear
+        ]
+    ) ;
+    sh:maxCount 1 ;
+    ys:fromProperty wpq:P580 .
+
+ys:endDateAnnotation a ys:AnnotationPropertyShape ;
+    sh:path schema:endDate ;
+    sh:or (
+        [
+            sh:datatype xsd:dateTime
+        ]
+        [
+            sh:datatype xsd:date
+        ]
+        [
+            sh:datatype xsd:gYearMonth
+        ]
+        [
+            sh:datatype xsd:gYear
+        ]
+    ) ;
+    sh:maxCount 1 ;
+    ys:fromProperty wpq:P582 .

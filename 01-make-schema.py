@@ -18,7 +18,7 @@ Algorithm:
 2) From the taxonomy keep only the classes that are mentioned in shapes, together with their superclasses. Force this to be a tree.
 """
 
-TEST=False
+TEST=True
 OUTPUT_FOLDER="test-data/01-make-schema/" if TEST else "yago-data/"
 INPUT_FOLDER= "input-data"
 
@@ -28,11 +28,11 @@ INPUT_FOLDER= "input-data"
 
 print("Creating YAGO schema...")
 print("  Importing...",end="", flush=True)
-from rdflib import URIRef, RDFS, Graph
-import utils
+from TurtleUtils import Graph
 import sys
 from os.path import exists
 import evaluator
+import Prefixes
 print("done")
 
 if not(exists("input-data")):
@@ -44,16 +44,12 @@ if not(exists("input-data")):
 ###########################################################################
 
 # Load YAGO shapes
-print("  Loading YAGO shapes...", end="", flush=True)
 yagoShapes = Graph()
-yagoShapes.parse(INPUT_FOLDER+"/00-shapes.ttl", format="turtle")
-print("done")
+yagoShapes.loadTurtleFile(INPUT_FOLDER+"/00-shapes.ttl", "  Loading YAGO shapes")
 
 # Load Schema.org taxonomy
-print("  Loading Schema.org taxonomy...", end="", flush=True)
 schemaTaxonomy = Graph()
-schemaTaxonomy.parse(INPUT_FOLDER+"/00-schema-org.ttl", format="turtle")
-print("done")
+schemaTaxonomy.loadTurtleFile(INPUT_FOLDER+"/00-schema-org.ttl", "  Loading Schema.org taxonomy")
 
 ###########################################################################
 #           Construct YAGO schema
@@ -63,41 +59,41 @@ print("done")
 
 def addSuperClasses(schemaClass):
     """ Adds all the superclasses of the given class from schema.org to yagoShapes, forcing a tree structure"""
-    existingSuperClasses=[s for s in yagoShapes.objects(schemaClass, RDFS.subClassOf)]
-    for superClass in schemaTaxonomy.objects(schemaClass, RDFS.subClassOf):
+    existingSuperClasses=yagoShapes.objects(schemaClass, Prefixes.rdfsSubClassOf)
+    for superClass in schemaTaxonomy.objects(schemaClass, Prefixes.rdfsSubClassOf):
         if superClass in existingSuperClasses:
             continue
         if existingSuperClasses:
-            print("  Info:",schemaClass,"already has the superclasses",[str(s) for s in existingSuperClasses],", not adding",superClass)
+            print("  Info:",schemaClass,"already has the superclasses",existingSuperClasses,", not adding",superClass)
             continue
-        yagoShapes.add((schemaClass, RDFS.subClassOf, superClass))
+        yagoShapes.add((schemaClass, Prefixes.rdfsSubClassOf, superClass))
         addSuperClasses(superClass)
         
-for schemaClass in yagoShapes.subjects(utils.fromClass, None):
+for schemaClass in yagoShapes.subjects(Prefixes.fromClass):
     addSuperClasses(schemaClass)
 
-# Verify self-containedness
+# Now we verify self-containedness
 
 permitted_namespaces = ["http://www.opengis.net/ont/geosparql#", "http://www.w3.org/1999/02/22-rdf-syntax-ns#", "http://yago-knowledge.org/resource/", "http://www.w3.org/2001/XMLSchema#"]
 
-for targetClass in yagoShapes.objects(None, utils.shaclNode):
-    if targetClass==utils.schemaThing:
+for targetClass in yagoShapes.objects(None, Prefixes.shaclNode):
+    if targetClass==Prefixes.schemaThing:
         continue
     if any(targetClass.startswith(s) for s in permitted_namespaces):
         continue    
-    if (targetClass, RDFS.subClassOf, None) not in yagoShapes:
+    if not yagoShapes.objects(targetClass, Prefixes.rdfsSubClassOf):
         print("  Warning: the range",targetClass,"is undefined in the schema")
     
 ###########################################################################
 #           Write and test YAGO schema
 ###########################################################################
 
-# The schema is most beautiful in native TTL
+# The schema is best in TTL
 print("  Writing schema...", end="", flush=True)
-yagoShapes.serialize(destination=(OUTPUT_FOLDER+"01-yago-schema.ttl"), format="turtle", encoding="UTF-8")
+yagoShapes.printToFile(OUTPUT_FOLDER+"01-yago-schema.ttl")
 print("done")
 
 print("done")
 
-if TEST:
-    evaluator.compare(OUTPUT_FOLDER+"01-yago-schema.ttl", OUTPUT_FOLDER+"01-yago-schema-gold.ttl")
+#if TEST:
+    #evaluator.compare(OUTPUT_FOLDER+"01-yago-schema.ttl", OUTPUT_FOLDER+"01-yago-schema-gold.ttl")
