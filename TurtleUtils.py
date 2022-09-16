@@ -115,8 +115,8 @@ def termsAndSeparators(generator):
                         if char=='"' and not literal.endswith('\\'):
                             break
                         literal=literal+char
-            # Make all literals simple literals without line breaks
-            literal=literal.replace('\n','\\n').replace('\t','\\t').replace('\r','')
+            # Make all literals simple literals without line breaks and quotes
+            literal=literal.replace('\n','\\n').replace('\t','\\t').replace('\r','').replace('\\"','\\u0022')
             char=next(generator)
             if char=='^':
                 # Datatypes
@@ -255,7 +255,7 @@ def triplesFromTerms(generator, givenSubject=None):
         else:
             yield (subject, predicate, object)
 
-def turtleTriples(file, message=None):
+def triplesFromTurtleFile(file, message=None):
     """ Iterator over the triples in a TTL file """
     return triplesFromTerms(termsAndSeparators(charsOfFile(file, message)))
 
@@ -265,8 +265,10 @@ def turtleTriples(file, message=None):
 
 class Graph(object):
     """ A graph of triples """
-    def __init__(self):
+    def __init__(self, hasInverse=True):
         self.index={}
+        # We add an inverse graph to query more easily for subjects of a given predicate and object
+        self.inverseGraph=Graph(False) if hasInverse else None
         return
     def add(self, triple):
         (subject, predicate, obj) = triple
@@ -276,6 +278,8 @@ class Graph(object):
         if predicate not in m:
             m[predicate]=set()
         m[predicate].add(obj)
+        if self.inverseGraph!=None:
+            self.inverseGraph.add((obj,predicate,subject))
     def remove(self, triple):
         (subject, predicate, obj) = triple
         if subject not in self.index:
@@ -284,6 +288,8 @@ class Graph(object):
         if predicate not in m:
             return
         m[predicate].remove(obj)
+        if self.inverseGraph!=None:
+            self.inverseGraph.remove((obj,predicate,subject))        
     def __contains__(self, triple):
         (subject, predicate, obj) = triple
         if subject not in self.index:
@@ -293,8 +299,17 @@ class Graph(object):
             return false
         return obj in m[predicate]
     def loadTurtleFile(self, file, message=None):
-        for triple in turtleTriples(file, message):
+        for triple in triplesFromTurtleFile(file, message):
             self.add(triple)
+    def getList(self, listStart):
+        """ Returns the elements of an RDF list"""
+        result=[]
+        while listStart and listStart!='rdf:nil':
+            result.extend(self.index[listStart].get('rdf:first',[]))
+            if 'rdf:rest' not in self.index[listStart]:
+                break
+            listStart=list(self.index[listStart]['rdf:rest'])[0]            
+        return result
     def objects(self, subject=None, predicate=None):
         # We create a copy here instead of using a generator
         # because the user loop may want to change the graph
@@ -307,15 +322,10 @@ class Graph(object):
                     result.extend(self.index[s][p])
         return result
     def subjects(self, predicate=None, object=None):        
-        if not predicate and not object:
-            return [s for s in self.index]
-        result=[]
-        for s in self.index:            
-            for p in ([predicate] if predicate else self.index[s]):                
-                if p in self.index[s] and (not object or object in self.index[s][p]):
-                    result.append(s)
-                    break            
-        return result
+        if self.inverseGraph!=None:
+            return self.inverseGraph.objects(subject=object, predicate=predicate)
+        else:
+            raise Exception("subjects() cannot be called on inverse graph")
     def triplesWithPredicate(self, predicate):
         result=[]
         for subject in self.index:
@@ -343,12 +353,7 @@ class Graph(object):
                         result.write(', ')
                     if obj.startswith("_:list_"):
                         result.write("(")
-                        while True:
-                            result.write(list(self.index[obj]['rdf:first'])[0])
-                            obj=list(self.index[obj]['rdf:rest'])[0]
-                            if obj=='rdf:nil':
-                                break
-                            result.write(" ")
+                        result.write(", ".join(self.getList(obj)))
                         result.write(")")
                     else:
                         result.write(obj)
@@ -364,6 +369,40 @@ class Graph(object):
         buffer.write("# RDF Graph\n")
         self.printToWriter(buffer)
         return buffer.getvalue()
+    def __len__(self):
+        return len(self.index)
+       
+##########################################################################
+#             Reading Wikidata entities
+##########################################################################
+
+def about(triple):
+    """ Returns the Wikidata subject of the triple"""
+    s,p,o=triple
+    if p=="schema:about":
+        s=o
+    if s.startswith("wd:Q"): 
+        return s
+    if s.startswith("s:Q") or s.startswith("s:q"):
+        return "wd"+s[1:s.index('-')]
+    return None
+    
+def readWikidataEntities(file, message=None):
+    """ Yields graphs of facts about entities """
+    result=Graph()
+    currentSubject="Elvis"
+    for triple in triplesFromTurtleFile(file, message):
+        newSubject=about(triple)
+        if not newSubject: 
+            continue
+        if newSubject!=currentSubject:
+            if len(result):
+                yield result
+                result=Graph()
+            currentSubject=newSubject
+        result.add(triple)
+    if len(result):
+        yield result
         
 ##########################################################################
 #             Test

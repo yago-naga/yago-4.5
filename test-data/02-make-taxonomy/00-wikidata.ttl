@@ -1,6 +1,6 @@
-@prefix schema: <https://schema.org/ .
-@prefix wd: <http://www.wikidata.org/entity/ .
-@prefix wdt: <http://www.wikidata.org/prop/ direct/ .
+@prefix schema: <https://schema.org/> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
 
 # European books should be a subclass of Books in YAGO
 wd:Q_European_book a wd:item .
