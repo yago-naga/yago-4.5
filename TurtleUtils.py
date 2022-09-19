@@ -108,7 +108,7 @@ def termsAndSeparators(generator):
                     literal=secondChar
                     char=None
                 else:    
-                    literal=secondChar+thirdChar
+                    literal=[secondChar,thirdChar]
                     if thirdChar=='\\' and secondChar!='\\':
                         literal+=next(generator)
                     while True:
@@ -117,12 +117,14 @@ def termsAndSeparators(generator):
                             printError("Unexpected end of file in literal",literal)
                             break
                         elif char=='\\':
-                            literal+=char+next(generator)
+                            literal+=char
+                            literal+=next(generator)
                             continue
                         elif char=='"':
                             break
                         literal+=char
                     char=None
+                    literal="".join(literal)
             # Make all literals simple literals without line breaks and quotes
             literal=literal.replace('\n','\\n').replace('\t','\\t').replace('\r','').replace('\\"','\\u0022')
             if not char:
@@ -166,28 +168,29 @@ def termsAndSeparators(generator):
                 yield('"'+literal+'"')
         elif char=='<':
             # URIs
-            uri=""
+            uri=[]
             while char!='>':
-                uri=uri+char
+                uri+=char
                 char=next(generator)
                 if not char:
                     printError("Unexpected end of file in URL",uri)
                     break
-            yield uri+">"
+            uri+='>'
+            yield "".join(uri)
         elif char in ['.',',',';','[',']','(',')']:
             # Separators
             yield char
         else:
             # Local names
-            iri=""
+            iri=[]
             while not char.isspace() and char not in ['.',',',';','[',']','"',"'",'^','@','(',')']:
-                iri=iri+char
+                iri+=char
                 char=next(generator)
                 if not char:
                     printError("Unexpected end of file in IRI",iri)
                     break
             pushBack=char
-            yield iri 
+            yield "".join(iri)
 
 # Counts blank nodes to give a unique name to each of them
 blankNodeCounter=0
