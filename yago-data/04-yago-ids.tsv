@@ -33,3 +33,4 @@
 @prefix prn: <http://www.wikidata.org/prop/reference/value-normalized/> .
 @prefix wdno: <http://www.wikidata.org/prop/novalue/> .
 @prefix ys: <http://yago-knowledge.org/schema#> .
+wd:Q234773	owl:sameAs	yago:Priscilla_Presley	. #WIKI
