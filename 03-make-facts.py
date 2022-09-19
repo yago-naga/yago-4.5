@@ -27,7 +27,7 @@ Algorithm:
 
 TEST=False
 FOLDER="test-data/03-make-facts/" if TEST else "yago-data/"
-WIKIDATA_FILE= "test-data/03-make-facts/00-wikidata.ttl" if TEST else "input-data/wikidata.ttl.gz"
+WIKIDATA_FILE= "test-data/03-make-facts/00-wikidata.ttl" if TEST else "input-data/wikidata.ttl"
 
 ##########################################################################
 #             Debugging
