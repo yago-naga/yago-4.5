@@ -143,9 +143,10 @@ def termsAndSeparators(generator):
                     if not char:
                         printError("Unexpected end of file in language of",literal)
                         break
-                    if char!='-' and (char<'A' or char>'z'):
-                        break
-                    language=language+char
+                    if char=='-' or (char>='A' and char<='Z') or (char>='a' and char<='z') or (char>='0' and char<='9'):
+                        language=language+char
+                        continue
+                    break
                 if not language or len(language)>10 or len(language)<2:
                     printError("Invalid literal language:", language)
                 pushBack=char
