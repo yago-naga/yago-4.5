@@ -122,18 +122,20 @@ def termsAndSeparators(generator):
             if char=='^':
                 # Datatypes
                 next(generator)
-                datatype=""
+                datatype=''
                 while True:
                     char=next(generator)
                     if not char:
                         printError("Unexpected end of file in datatype of",literal)
                         break
-                    if char!=':' and (char<'A' or char>'z'):
+                    if len(datatype)>0 and datatype[0]!='<' and char!=':' and (char<'A' or char>'z'):
+                        pushBack=char
                         break
                     datatype=datatype+char
+                    if datatype.startswith('<') and datatype.endswith('>'):
+                        break
                 if not datatype or len(datatype)<3:
                     printError("Invalid literal datatype:", datatype)
-                pushBack=char
                 yield('"'+literal+'"^^'+datatype)
             elif char=='@':
                 # Languages
@@ -450,10 +452,10 @@ def readWikidataEntities(file, message=None):
 
 # Test on Wikidata
 #
-#with open('t.ttl','wt',encoding='utf-8') as out:
-#    for g in readWikidataEntities('input-data/wikidata.ttl'):
-#        out.write('#####################################\n')
-#        g.printToWriter(out)
+with open('test-out.ttl','wt',encoding='utf-8') as out:
+    for g in readWikidataEntities('input-data/wikidata.ttl'):
+        out.write('#####################################\n')
+        g.printToWriter(out)
  
 # Test on Shapes
 # 
