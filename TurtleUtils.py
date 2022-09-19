@@ -113,7 +113,10 @@ def termsAndSeparators(generator):
                         if not char:
                             printError("Unexpected end of file in literal",literal)
                             break
-                        if char=='"' and not literal.endswith('\\'):
+                        elif char=='\\':
+                            literal=literal+char+next(generator)
+                            continue
+                        elif char=='"':
                             break
                         literal=literal+char
             # Make all literals simple literals without line breaks and quotes
@@ -452,10 +455,10 @@ def readWikidataEntities(file, message=None):
 
 # Test on Wikidata
 #
-with open('test-out.ttl','wt',encoding='utf-8') as out:
-    for g in readWikidataEntities('input-data/wikidata.ttl'):
-        out.write('#####################################\n')
-        g.printToWriter(out)
+#with open('test-out.ttl','wt',encoding='utf-8') as out:
+#    for g in readWikidataEntities('input-data/wikidata.ttl'):
+#        out.write('#####################################\n')
+#        g.printToWriter(out)
  
 # Test on Shapes
 # 
