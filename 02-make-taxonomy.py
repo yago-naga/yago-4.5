@@ -62,14 +62,14 @@ for (s,p,o) in yagoSchema.triplesWithPredicate(Prefixes.rdfsSubClassOf):
     yagoTaxonomyDown[o].add(s)
     
 # Load Wikidata taxonomy
-wikidataTaxonomy = Graph()
+wikidataTaxonomyDown=defaultdict(set)
 wikidataClassesWithWikipediaPage=set()
 
 for graph in TurtleUtils.readWikidataEntities(WIKIDATA_FILE):
     # We use the Wikidata property "ParentTaxon" as "rdfs:subclassOf",
     # because Wikidata sometimes uses only one of them
     for s,p,o in chain(graph.triplesWithPredicate(Prefixes.wikidataSubClassOf), graph.triplesWithPredicate(Prefixes.wikidataParentTaxon)):
-        wikidataTaxonomy.add((s,Prefixes.rdfsSubClassOf,o))
+        wikidataTaxonomyDown[o].add(s)
         for w in graph.subjects(Prefixes.schemaAbout, s):
             if w.startswith("<https://en.wikipedia.org/wiki/"):
                 wikidataClassesWithWikipediaPage.add(s)
@@ -105,7 +105,7 @@ def addSubClasses(lastGoodYagoClass, wikidataClass, unmappedClassesWriter, treat
         return
     treated.add(wikidataClass)
     pathToRoot.append(wikidataClass)
-    for subClass in wikidataTaxonomy.subjects(Prefixes.rdfsSubClassOf, wikidataClass):    
+    for subClass in wikidataTaxonomyDown[wikidataClass]:    
         addSubClasses(lastGoodYagoClass, subClass, unmappedClassesWriter, treated, pathToRoot)
     pathToRoot.pop()
 
@@ -114,7 +114,7 @@ with TsvUtils.TsvFileWriter(OUTPUT_FOLDER+"02-non-yago-classes.tsv") as unmapped
     treated=set()
     for s,p,o in yagoSchema.triplesWithPredicate(Prefixes.fromClass):
         if s!=Prefixes.schemaThing:
-            for subclass in wikidataTaxonomy.subjects(Prefixes.rdfsSubClassOf, o):
+            for subclass in wikidataTaxonomyDown[o]:
                 addSubClasses(s,subclass, unmappedClassesWriter,treated,[o])
 print("done")
 

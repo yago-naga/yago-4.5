@@ -157,7 +157,7 @@ def termsAndSeparators(generator):
                         language=language+char
                         continue
                     break
-                if not language or len(language)>10 or len(language)<2:
+                if not language or len(language)>20 or len(language)<2:
                     printError("Invalid literal language:", language)
                 pushBack=char
                 yield('"'+literal+'"@'+language)
