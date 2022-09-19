@@ -11,7 +11,7 @@ import sys
 from io import StringIO
 import Prefixes
 
-TEST=True
+TEST=False
 
 ##########################################################################
 #             Parsing Turtle
@@ -211,7 +211,7 @@ def blankNodeName(subject, predicate=None):
     blankNodeCounter=blankNodeCounter+1
     return "_:"+subject+predicate+"_"+str(blankNodeCounter)
     
-def triplesFromTerms(generator, givenSubject=None):
+def triplesFromTerms(generator, predicates=None, givenSubject=None):
     """ Iterator over the triples of a term generator """
     while True:        
         term=next(generator)
@@ -257,7 +257,7 @@ def triplesFromTerms(generator, givenSubject=None):
                     if term=='[':
                         term=blankNodeName("element")
                         yield (listNode, 'rdf:first', term)
-                        yield from triplesFromTerms(generator, givenSubject=term)
+                        yield from triplesFromTerms(generator, predicates, givenSubject=term)
                     else:    
                         yield (listNode, 'rdf:first', term)
                     previousListNode=listNode
@@ -266,13 +266,14 @@ def triplesFromTerms(generator, givenSubject=None):
         elif object=='[':
             object=blankNodeName(subject, predicate)
             yield (subject, predicate, object)
-            yield from triplesFromTerms(generator, givenSubject=object)
+            yield from triplesFromTerms(generator, predicates, givenSubject=object)
         else:
-            yield (subject, predicate, object)
+            if not predicates or predicate in predicates:
+                yield (subject, predicate, object)
 
-def triplesFromTurtleFile(file, message=None):
+def triplesFromTurtleFile(file, message=None, predicates=None):
     """ Iterator over the triples in a TTL file """
-    return triplesFromTerms(termsAndSeparators(charsOfFile(file, message)))
+    return triplesFromTerms(termsAndSeparators(charsOfFile(file, message)), predicates)
 
 ##########################################################################
 #             Graphs
@@ -440,11 +441,11 @@ def about(triple):
         return "wd:Q"+s[3:s.index('-')]
     return None
     
-def readWikidataEntities(file, message=None):
+def readWikidataEntities(file, message=None, predicates=None):
     """ Yields graphs of facts about entities """
     result=Graph()
     currentSubject="Elvis"
-    for triple in triplesFromTurtleFile(file, message):
+    for triple in triplesFromTurtleFile(file, message, predicates):
         newSubject=about(triple)
         if not newSubject: 
             continue
@@ -463,11 +464,12 @@ def readWikidataEntities(file, message=None):
 
 # Test on Wikidata
 #
-#with open('test-out.ttl','wt',encoding='utf-8') as out:
-#    for g in readWikidataEntities('input-data/wikidata.ttl'):
-#    for g in readWikidataEntities('test-in.ttl'):
-#        out.write('#####################################\n')
-#        g.printToWriter(out)
+if TEST and __name__ == '__main__':
+    with open('test-out.ttl','wt',encoding='utf-8') as out:
+        for g in readWikidataEntities('input-data/wikidata.ttl'):
+            #for g in readWikidataEntities('test-in.ttl'):
+            out.write('#####################################\n')
+            g.printToWriter(out)
  
 # Test on Shapes
 # 

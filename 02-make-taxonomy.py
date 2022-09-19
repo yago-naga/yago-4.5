@@ -65,7 +65,7 @@ for (s,p,o) in yagoSchema.triplesWithPredicate(Prefixes.rdfsSubClassOf):
 wikidataTaxonomyDown=defaultdict(set)
 wikidataClassesWithWikipediaPage=set()
 
-for graph in TurtleUtils.readWikidataEntities(WIKIDATA_FILE):
+for graph in TurtleUtils.readWikidataEntities(WIKIDATA_FILE, "Parsing", [Prefixes.wikidataSubClassOf, Prefixes.wikidataParentTaxon, Prefixes.schemaAbout]):
     # We use the Wikidata property "ParentTaxon" as "rdfs:subclassOf",
     # because Wikidata sometimes uses only one of them
     for s,p,o in chain(graph.triplesWithPredicate(Prefixes.wikidataSubClassOf), graph.triplesWithPredicate(Prefixes.wikidataParentTaxon)):
