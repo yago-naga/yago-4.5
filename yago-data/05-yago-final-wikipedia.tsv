@@ -33,200 +33,201 @@
 @prefix prn: <http://www.wikidata.org/prop/reference/value-normalized/> .
 @prefix wdno: <http://www.wikidata.org/prop/novalue/> .
 @prefix ys: <http://yago-knowledge.org/schema#> .
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu"@cs	.
+yago:Priscilla_Presley	rdfs:label	"普里西拉·普里斯萊"@zh-hant	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@it	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@pt-br	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@et	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@cy	.
+yago:Priscilla_Presley	rdfs:label	"پریسیلا پریسلی"@azb	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@nn	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Presleyová"@sk	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@de	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@eu	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@hu	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@fi	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@sq	.
+yago:Priscilla_Presley	rdfs:label	"프리실라 프레슬리"@ko	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@ca	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@la	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@eo	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@id	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@pl	.
+yago:Priscilla_Presley	rdfs:label	"普里西拉·普里斯萊"@zh	.
+yago:Priscilla_Presley	rdfs:label	"普瑞希拉·普雷斯利"@zh-hans	.
+yago:Priscilla_Presley	rdfs:label	"Прісцила Преслі"@uk	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@nb	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@nl	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@vo	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@pt	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@es	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@ast	.
+yago:Priscilla_Presley	rdfs:label	"Присила Пресли"@bg	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@sco	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@io	.
+yago:Priscilla_Presley	rdfs:label	"別斯娜·皮禮士利"@zh-hk	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Beaulieu Presley"@ee	.
+yago:Priscilla_Presley	rdfs:label	"প্রিসিলা প্রিসলে"@bn	.
+yago:Priscilla_Presley	rdfs:label	"普瑞希拉·普雷斯利"@zh-cn	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@ro	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@sl	.
+yago:Priscilla_Presley	rdfs:label	"პრისცილა პრესლი"@ka	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@da	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@af	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@sv	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Presleyová"@cs	.
+yago:Priscilla_Presley	rdfs:label	"普里西拉·普雷斯利"@zh-sg	.
+yago:Priscilla_Presley	rdfs:label	"Прысцыла Прэслі"@be	.
+yago:Priscilla_Presley	rdfs:label	"Πρισίλα Πρίσλεϋ"@el	.
+yago:Priscilla_Presley	rdfs:label	"פריסילה פרסלי"@he	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@scn	.
+yago:Priscilla_Presley	rdfs:label	"بريسيلا بريسلى"@arz	.
+yago:Priscilla_Presley	rdfs:label	"بريسيلا بريسلي"@ar	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@fr	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@pap	.
+yago:Priscilla_Presley	rdfs:label	"பிரிஸ்சில்லா பிரெஸ்லி"@ta	.
+yago:Priscilla_Presley	rdfs:label	"普里西拉·普里斯萊"@zh-tw	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@ms	.
+yago:Priscilla_Presley	rdfs:label	"پریسیلا پریسلی"@fa	.
+yago:Priscilla_Presley	rdfs:label	"പ്രിസില്ല പ്രെസ്‍ലി"@ml	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@en	.
+yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@ga	.
+yago:Priscilla_Presley	rdfs:label	"Присцилла Пресли"@ru	.
+yago:Priscilla_Presley	rdfs:label	"普里西拉·皮禮士利"@zh-mo	.
+yago:Priscilla_Presley	rdfs:label	"プリシラ・プレスリー"@ja	.
+yago:Priscilla_Presley	rdfs:comment	"שחקנית אמריקאית"@he	.
+yago:Priscilla_Presley	rdfs:comment	"amerikansk skådespelare, fotomodell och författare"@sv	.
+yago:Priscilla_Presley	rdfs:comment	"atriz e empresária dos Estados Unidos"@pt-br	.
+yago:Priscilla_Presley	rdfs:comment	"aktore estatubatuarra"@eu	.
+yago:Priscilla_Presley	rdfs:comment	"atriz e empresária dos Estados Unidos"@pt	.
+yago:Priscilla_Presley	rdfs:comment	"aktorka amerykańska, żona Elvisa Presleya"@pl	.
+yago:Priscilla_Presley	rdfs:comment	"amerikansk skuespiller og forretningsdrivende"@nb	.
+yago:Priscilla_Presley	rdfs:comment	"كاتبة أمريكية"@ar	.
 yago:Priscilla_Presley	rdfs:comment	"американская актриса и предпринимательница, единственная жена певца Элвиса Пресли"@ru	.
+yago:Priscilla_Presley	rdfs:comment	"actriță și femeie de afaceri americană"@ro	.
+yago:Priscilla_Presley	rdfs:comment	"American actress and businesswoman and former wife of Elvis Presley"@en	.
+yago:Priscilla_Presley	rdfs:comment	"amerikai színésznő, producer, üzletasszony, Elvis Presley egykori felesége"@hu	.
+yago:Priscilla_Presley	rdfs:comment	"americká herečka a obchodníčka"@sk	.
+yago:Priscilla_Presley	rdfs:comment	"americká herečka"@cs	.
+yago:Priscilla_Presley	rdfs:comment	"അമേരിക്കന്‍ ചലചിത്ര നടന്‍"@ml	.
+yago:Priscilla_Presley	rdfs:comment	"aktor merikano"@pap	.
+yago:Priscilla_Presley	rdfs:comment	"attrice statunitense"@it	.
+yago:Priscilla_Presley	rdfs:comment	"baaŋa ŋun nyɛ paɣa"@dag	.
+yago:Priscilla_Presley	rdfs:comment	"US-amerikanische Schauspielerin"@de	.
+yago:Priscilla_Presley	rdfs:comment	"actriz estadounidense"@es	.
 yago:Priscilla_Presley	rdfs:comment	"actrice américaine"@fr	.
 yago:Priscilla_Presley	rdfs:comment	"yhdysvaltalainen televisio- ja elokuvanäyttelijä, Elvis Presleyn ex-vaimo"@fi	.
-yago:Priscilla_Presley	schema:alternateName	"Priscila Presley"@es	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@sco	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Wagnerová"@cs	.
-yago:Priscilla_Presley	rdfs:comment	"actriz estadounidense"@es	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Wagner"@cs	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu Presley"@nl	.
-yago:Priscilla_Presley	rdfs:label	"پریسیلا پریسلی"@fa	.
-yago:Priscilla_Presley	rdfs:label	"普瑞希拉·普雷斯利"@zh-hans	.
-yago:Priscilla_Presley	rdfs:label	"프리실라 프레슬리"@ko	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu Presley"@es	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://nl.wikipedia.org/wiki/Priscilla_Presley>	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://ms.wikipedia.org/wiki/Priscilla_Presley>	.
-yago:Priscilla_Presley	schema:alternateName	"普丽西拉·普雷斯利"@zh-cn	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu"@en	.
-yago:Priscilla_Presley	rdfs:comment	"atriz e empresária dos Estados Unidos"@pt	.
-yago:Priscilla_Presley	schema:alternateName	"普莉西拉·普雷斯利"@zh	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@scn	.
-yago:Priscilla_Presley	rdfs:comment	"שחקנית אמריקאית"@he	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://ka.wikipedia.org/wiki/%E1%83%9E%E1%83%A0%E1%83%98%E1%83%A1%E1%83%AA%E1%83%98%E1%83%9A%E1%83%90_%E1%83%9E%E1%83%A0%E1%83%94%E1%83%A1%E1%83%9A%E1%83%98>	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://bn.wikipedia.org/wiki/%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A6%BF%E0%A6%B8%E0%A6%BF%E0%A6%B2%E0%A6%BE_%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A6%BF%E0%A6%B8%E0%A6%B2%E0%A7%87>	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://hu.wikipedia.org/wiki/Priscilla_Presley>	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Ann Wagner"@nb	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu"@nb	.
-yago:Priscilla_Presley	rdfs:comment	"americká herečka"@cs	.
-yago:Priscilla_Presley	schema:alternateName	"Пресли П."@ru	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Presleyová"@sk	.
-yago:Priscilla_Presley	rdfs:comment	"attrice statunitense"@it	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://scn.wikipedia.org/wiki/Priscilla_Presley>	.
-yago:Priscilla_Presley	rdfs:comment	"amerikai színésznő, producer, üzletasszony, Elvis Presley egykori felesége"@hu	.
-yago:Priscilla_Presley	schema:alternateName	"普瑞希拉·普里斯萊"@zh	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu Presley"@da	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@ast	.
-yago:Priscilla_Presley	rdfs:label	"പ്രിസില്ല പ്രെസ്‍ലി"@ml	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@cy	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://el.wikipedia.org/wiki/%CE%A0%CF%81%CE%B9%CF%83%CE%AF%CE%BB%CE%B1_%CE%A0%CF%81%CE%AF%CF%83%CE%BB%CE%B5%CF%8B>	.
-yago:Priscilla_Presley	schema:alternateName	"پریشیلا بیولو"@fa	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://af.wikipedia.org/wiki/Priscilla_Presley>	.
-yago:Priscilla_Presley	rdf:type	schema:Person	.
-yago:Priscilla_Presley	schema:alternateName	"普莉西拉.普雷斯利"@zh	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://id.wikipedia.org/wiki/Priscilla_Presley>	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@af	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://commons.wikimedia.org/wiki/Priscilla_Presley>	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://fr.wikipedia.org/wiki/Priscilla_Presley>	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://fi.wikipedia.org/wiki/Priscilla_Presley>	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla"@da	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://ro.wikipedia.org/wiki/Priscilla_Presley>	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@nl	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@pap	.
-yago:Priscilla_Presley	schema:alternateName	"普丽西拉·普雷斯利"@zh	.
-yago:Priscilla_Presley	schema:alternateName	"普莉西拉·皮禮士利"@zh-hant	.
-yago:Priscilla_Presley	rdfs:comment	"അമേരിക്കന്‍ ചലചിത്ര നടന്‍"@ml	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://ar.wikipedia.org/wiki/%D8%A8%D8%B1%D9%8A%D8%B3%D9%8A%D9%84%D8%A7_%D8%A8%D8%B1%D9%8A%D8%B3%D9%84%D9%8A>	.
-yago:Priscilla_Presley	rdfs:label	"بريسيلا بريسلي"@ar	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://ja.wikipedia.org/wiki/%E3%83%97%E3%83%AA%E3%82%B7%E3%83%A9%E3%83%BB%E3%83%97%E3%83%AC%E3%82%B9%E3%83%AA%E3%83%BC>	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://ca.wikipedia.org/wiki/Priscilla_Presley>	.
-yago:Priscilla_Presley	rdfs:comment	"كاتبة أمريكية"@ar	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://sk.wikipedia.org/wiki/Priscilla_Presleyov%C3%A1>	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu Presley"@sv	.
-yago:Priscilla_Presley	schema:alternateName	"Присцилла Боле Пресли"@ru	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@da	.
-yago:Priscilla_Presley	schema:alternateName	"普丽西拉·普雷斯利"@zh-hans	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://pl.wikiquote.org/wiki/Priscilla_Presley>	.
-yago:Priscilla_Presley	schema:alternateName	"Prisсilla Beaulieu Presley"@fr	.
-yago:Priscilla_Presley	schema:alternateName	"Pricilla Presley"@nb	.
-yago:Priscilla_Presley	rdfs:label	"Присцилла Пресли"@ru	.
-yago:Priscilla_Presley	schema:alternateName	"普莉西拉·普利斯萊"@zh	.
-yago:Priscilla_Presley	rdfs:comment	"actriță și femeie de afaceri americană"@ro	.
-yago:Priscilla_Presley	rdfs:comment	"amerikansk skådespelare, fotomodell och författare"@sv	.
-yago:Priscilla_Presley	schema:alternateName	"プリシラ・アン・ボーリュー"@ja	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@ms	.
-yago:Priscilla_Presley	schema:alternateName	"Presley"@sv	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://io.wikipedia.org/wiki/Priscilla_Presley>	.
-yago:Priscilla_Presley	rdfs:comment	"Amerikaans actrice"@nl	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu"@ro	.
-yago:Priscilla_Presley	rdfs:comment	"americká herečka a obchodníčka"@sk	.
-yago:Priscilla_Presley	rdfs:comment	"aktor merikano"@pap	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://ko.wikipedia.org/wiki/%ED%94%84%EB%A6%AC%EC%8B%A4%EB%9D%BC_%ED%94%84%EB%A0%88%EC%8A%AC%EB%A6%AC>	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu Presley"@pt	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@fr	.
-yago:Priscilla_Presley	rdfs:label	"Πρισίλα Πρίσλεϋ"@el	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://it.wikipedia.org/wiki/Priscilla_Presley>	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Presley"@ru	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://arz.wikipedia.org/wiki/%D8%A8%D8%B1%D9%8A%D8%B3%D9%8A%D9%84%D8%A7_%D8%A8%D8%B1%D9%8A%D8%B3%D9%84%D9%89>	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu Presley"@de	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@la	.
-yago:Priscilla_Presley	rdfs:comment	"American actress and businesswoman and former wife of Elvis Presley"@en	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@es	.
-yago:Priscilla_Presley	schema:birthDate	"1945-05-24T00:00:00+00:00"^^<http://www.w3.org/2001/XMLSchema#dateTime>	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Ann Presley"@en	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@pl	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://es.wikipedia.org/wiki/Priscilla_Presley>	.
-yago:Priscilla_Presley	rdfs:label	"Прысцыла Прэслі"@be	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@en	.
-yago:Priscilla_Presley	rdfs:comment	"amerikansk skuespiller og forretningsdrivende"@nb	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Beaulieu Presley"@ee	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://uk.wikipedia.org/wiki/%D0%9F%D1%80%D1%96%D1%81%D1%86%D0%B8%D0%BB%D0%B0_%D0%9F%D1%80%D0%B5%D1%81%D0%BB%D1%96>	.
-yago:Priscilla_Presley	rdfs:comment	"atriz e empresária dos Estados Unidos"@pt-br	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu Presley"@en	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://et.wikipedia.org/wiki/Priscilla_Presley>	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Ann Wagner"@de	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Ann Beaulieu"@nb	.
-yago:Priscilla_Presley	rdfs:label	"بريسيلا بريسلى"@arz	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@hu	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://de.wikipedia.org/wiki/Priscilla_Presley>	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@sl	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://fa.wikipedia.org/wiki/%D9%BE%D8%B1%DB%8C%D8%B3%DB%8C%D9%84%D8%A7_%D9%BE%D8%B1%DB%8C%D8%B3%D9%84%DB%8C>	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://la.wikipedia.org/wiki/Priscilla_Presley>	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://eo.wikipedia.org/wiki/Priscilla_Presley>	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Ann Wagner"@cs	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@it	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Presleyová"@cs	.
-yago:Priscilla_Presley	schema:alternateName	"Пресли, Присцилла"@ru	.
 yago:Priscilla_Presley	rdfs:comment	"pemeran perempuan asal Amerika Serikat"@id	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://zh.wikipedia.org/wiki/%E6%99%AE%E9%87%8C%E8%A5%BF%E6%8B%89%C2%B7%E6%99%AE%E9%87%8C%E6%96%AF%E8%90%8A>	.
+yago:Priscilla_Presley	rdfs:comment	"Amerikaans actrice"@nl	.
+yago:Priscilla_Presley	schema:alternateName	"プリシラ・アン・ボーリュー"@ja	.
+yago:Priscilla_Presley	schema:alternateName	"普丽西拉·普雷斯利"@zh-hans	.
 yago:Priscilla_Presley	schema:alternateName	"Priscilla Ann Wagner"@en	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Ann Wagner"@fr	.
-yago:Priscilla_Presley	rdfs:label	"প্রিসিলা প্রিসলে"@bn	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Ann Wagner"@pl	.
-yago:Priscilla_Presley	rdfs:comment	"aktorka amerykańska, żona Elvisa Presleya"@pl	.
-yago:Priscilla_Presley	rdfs:label	"普里西拉·普里斯萊"@zh-tw	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu"@pl	.
-yago:Priscilla_Presley	rdfs:comment	"US-amerikanische Schauspielerin"@de	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Ann Wagner"@la	.
-yago:Priscilla_Presley	schema:alternateName	"普麗西拉·普雷斯利"@zh-hant	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu Presley"@fi	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu"@fr	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://simple.wikipedia.org/wiki/Priscilla_Presley>	.
-yago:Priscilla_Presley	rdfs:comment	"baaŋa ŋun nyɛ paɣa"@dag	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://pt.wikipedia.org/wiki/Priscilla_Presley>	.
-yago:Priscilla_Presley	schema:alternateName	"プリシラ・アン・ワグナー"@ja	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu Presley"@pl	.
-yago:Priscilla_Presley	rdfs:label	"Присила Пресли"@bg	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@eo	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@nn	.
-yago:Priscilla_Presley	rdfs:label	"普瑞希拉·普雷斯利"@zh-cn	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://sv.wikipedia.org/wiki/Priscilla_Presley>	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://azb.wikipedia.org/wiki/%D9%BE%D8%B1%DB%8C%D8%B3%DB%8C%D9%84%D8%A7_%D9%BE%D8%B1%DB%8C%D8%B3%D9%84%DB%8C>	.
-yago:Priscilla_Presley	rdfs:label	"普里西拉·皮禮士利"@zh-mo	.
-yago:Priscilla_Presley	schema:alternateName	"Пресли Присцилла"@ru	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu Presley"@fr	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://pl.wikipedia.org/wiki/Priscilla_Presley>	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://da.wikipedia.org/wiki/Priscilla_Presley>	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://no.wikipedia.org/wiki/Priscilla_Presley>	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu Presley"@nn	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Ann Wagner"@es	.
-yago:Priscilla_Presley	rdfs:label	"பிரிஸ்சில்லா பிரெஸ்லி"@ta	.
-yago:Priscilla_Presley	schema:alternateName	"Пресли, Присцилла Боле"@ru	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%B5%D1%81%D0%BB%D0%B8,_%D0%9F%D1%80%D0%B8%D1%81%D1%86%D0%B8%D0%BB%D0%BB%D0%B0>	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Wagner"@nb	.
-yago:Priscilla_Presley	rdfs:label	"プリシラ・プレスリー"@ja	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@id	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://bg.wikipedia.org/wiki/%D0%9F%D1%80%D0%B8%D1%81%D0%B8%D0%BB%D0%B0_%D0%9F%D1%80%D0%B5%D1%81%D0%BB%D0%B8>	.
-yago:Priscilla_Presley	rdfs:label	"Прісцила Преслі"@uk	.
-yago:Priscilla_Presley	rdfs:label	"پریسیلا پریسلی"@azb	.
 yago:Priscilla_Presley	schema:alternateName	"پریسلا پریسلی"@fa	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@de	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu Presley"@it	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://ml.wikipedia.org/wiki/%E0%B4%AA%E0%B5%8D%E0%B4%B0%E0%B4%BF%E0%B4%B8%E0%B4%BF%E0%B4%B2%E0%B5%8D%E0%B4%B2_%E0%B4%AA%E0%B5%8D%E0%B4%B0%E0%B5%86%E0%B4%B8%E0%B5%8D%E2%80%8D%E0%B4%B2%E0%B4%BF>	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Presley"@cs	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@fi	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@vo	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu Presley"@nb	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@ro	.
-yago:Priscilla_Presley	rdfs:label	"普里西拉·普里斯萊"@zh	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://en.wikiquote.org/wiki/Priscilla_Presley>	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Ann Wagner"@fi	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@sv	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@ca	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@ga	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@io	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Priscilla_Presley>	.
-yago:Priscilla_Presley	rdfs:label	"普里西拉·普雷斯利"@zh-sg	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@eu	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu"@de	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Ann Beaulieu"@cs	.
-yago:Priscilla_Presley	rdfs:label	"普里西拉·普里斯萊"@zh-hant	.
-yago:Priscilla_Presley	rdfs:label	"別斯娜·皮禮士利"@zh-hk	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@et	.
-yago:Priscilla_Presley	schema:alternateName	"Пресли Присцилла Боле"@ru	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://cs.wikipedia.org/wiki/Priscilla_Presleyov%C3%A1>	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@nb	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@pt	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://eu.wikipedia.org/wiki/Priscilla_Presley>	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@pt-br	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://he.wikipedia.org/wiki/%D7%A4%D7%A8%D7%99%D7%A1%D7%99%D7%9C%D7%94_%D7%A4%D7%A8%D7%A1%D7%9C%D7%99>	.
-yago:Priscilla_Presley	schema:mainEntityOfPage	<https://vo.wikipedia.org/wiki/Priscilla_Presley>	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu Presley"@ca	.
-yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu Presley"@cs	.
-yago:Priscilla_Presley	rdfs:label	"Priscilla Presley"@sq	.
-yago:Priscilla_Presley	rdfs:label	"პრისცილა პრესლი"@ka	.
-yago:Priscilla_Presley	rdfs:comment	"aktore estatubatuarra"@eu	.
-yago:Priscilla_Presley	rdfs:label	"פריסילה פרסלי"@he	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Ann Wagner"@nb	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Wagner"@nb	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Ann Wagner"@pl	.
 yago:Priscilla_Presley	schema:alternateName	"Priscilla Wagner"@es	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu Presley"@it	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Wagner"@cs	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Ann Wagner"@de	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu Presley"@es	.
+yago:Priscilla_Presley	schema:alternateName	"普莉西拉·皮禮士利"@zh-hant	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Presley"@ru	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu Presley"@cs	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla"@da	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu"@en	.
+yago:Priscilla_Presley	schema:alternateName	"普丽西拉·普雷斯利"@zh-cn	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Ann Presley"@en	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu Presley"@ca	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu"@nb	.
+yago:Priscilla_Presley	schema:alternateName	"Пресли Присцилла Боле"@ru	.
+yago:Priscilla_Presley	schema:alternateName	"Presley"@sv	.
+yago:Priscilla_Presley	schema:alternateName	"پریشیلا بیولو"@fa	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu Presley"@pl	.
+yago:Priscilla_Presley	schema:alternateName	"Pricilla Presley"@nb	.
+yago:Priscilla_Presley	schema:alternateName	"Prisсilla Beaulieu Presley"@fr	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu Presley"@de	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu"@de	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu"@ro	.
+yago:Priscilla_Presley	schema:alternateName	"普瑞希拉·普里斯萊"@zh	.
+yago:Priscilla_Presley	schema:alternateName	"Пресли, Присцилла Боле"@ru	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Ann Wagner"@fi	.
+yago:Priscilla_Presley	schema:alternateName	"Пресли Присцилла"@ru	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu Presley"@fi	.
+yago:Priscilla_Presley	schema:alternateName	"Пресли П."@ru	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu Presley"@fr	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Ann Beaulieu"@cs	.
+yago:Priscilla_Presley	schema:alternateName	"普麗西拉·普雷斯利"@zh-hant	.
+yago:Priscilla_Presley	schema:alternateName	"普莉西拉·普利斯萊"@zh	.
+yago:Priscilla_Presley	schema:alternateName	"Priscila Presley"@es	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Ann Wagner"@la	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu Presley"@sv	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Ann Wagner"@fr	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu Presley"@nn	.
+yago:Priscilla_Presley	schema:alternateName	"普丽西拉·普雷斯利"@zh	.
+yago:Priscilla_Presley	schema:alternateName	"普莉西拉.普雷斯利"@zh	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu"@fr	.
+yago:Priscilla_Presley	schema:alternateName	"プリシラ・アン・ワグナー"@ja	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Ann Beaulieu"@nb	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu"@cs	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu Presley"@en	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu Presley"@nb	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Wagnerová"@cs	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu"@pl	.
+yago:Priscilla_Presley	schema:alternateName	"Присцилла Боле Пресли"@ru	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Presley"@cs	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu Presley"@pt	.
+yago:Priscilla_Presley	schema:alternateName	"普莉西拉·普雷斯利"@zh	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu Presley"@nl	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Ann Wagner"@cs	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Beaulieu Presley"@da	.
+yago:Priscilla_Presley	schema:alternateName	"Priscilla Ann Wagner"@es	.
+yago:Priscilla_Presley	schema:alternateName	"Пресли, Присцилла"@ru	.
+yago:Priscilla_Presley	schema:birthDate	"1945-05-24T00:00:00Z"^^xsd:dateTime	.
+yago:Priscilla_Presley	schema:url	<http://www.priscillapresley.com>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://pl.wikiquote.org/wiki/Priscilla_Presley>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://he.wikipedia.org/wiki/%D7%A4%D7%A8%D7%99%D7%A1%D7%99%D7%9C%D7%94_%D7%A4%D7%A8%D7%A1%D7%9C%D7%99>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://sk.wikipedia.org/wiki/Priscilla_Presleyov%C3%A1>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://bg.wikipedia.org/wiki/%D0%9F%D1%80%D0%B8%D1%81%D0%B8%D0%BB%D0%B0_%D0%9F%D1%80%D0%B5%D1%81%D0%BB%D0%B8>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://commons.wikimedia.org/wiki/Priscilla_Presley>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://fa.wikipedia.org/wiki/%D9%BE%D8%B1%DB%8C%D8%B3%DB%8C%D9%84%D8%A7_%D9%BE%D8%B1%DB%8C%D8%B3%D9%84%DB%8C>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://io.wikipedia.org/wiki/Priscilla_Presley>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://scn.wikipedia.org/wiki/Priscilla_Presley>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://pt.wikipedia.org/wiki/Priscilla_Presley>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://bn.wikipedia.org/wiki/%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A6%BF%E0%A6%B8%E0%A6%BF%E0%A6%B2%E0%A6%BE_%E0%A6%AA%E0%A7%8D%E0%A6%B0%E0%A6%BF%E0%A6%B8%E0%A6%B2%E0%A7%87>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://fi.wikipedia.org/wiki/Priscilla_Presley>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://zh.wikipedia.org/wiki/%E6%99%AE%E9%87%8C%E8%A5%BF%E6%8B%89%C2%B7%E6%99%AE%E9%87%8C%E6%96%AF%E8%90%8A>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://af.wikipedia.org/wiki/Priscilla_Presley>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://ca.wikipedia.org/wiki/Priscilla_Presley>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://vo.wikipedia.org/wiki/Priscilla_Presley>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://azb.wikipedia.org/wiki/%D9%BE%D8%B1%DB%8C%D8%B3%DB%8C%D9%84%D8%A7_%D9%BE%D8%B1%DB%8C%D8%B3%D9%84%DB%8C>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://ms.wikipedia.org/wiki/Priscilla_Presley>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://el.wikipedia.org/wiki/%CE%A0%CF%81%CE%B9%CF%83%CE%AF%CE%BB%CE%B1_%CE%A0%CF%81%CE%AF%CF%83%CE%BB%CE%B5%CF%8B>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://ar.wikipedia.org/wiki/%D8%A8%D8%B1%D9%8A%D8%B3%D9%8A%D9%84%D8%A7_%D8%A8%D8%B1%D9%8A%D8%B3%D9%84%D9%8A>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Priscilla_Presley>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%B5%D1%81%D0%BB%D0%B8,_%D0%9F%D1%80%D0%B8%D1%81%D1%86%D0%B8%D0%BB%D0%BB%D0%B0>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://da.wikipedia.org/wiki/Priscilla_Presley>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://la.wikipedia.org/wiki/Priscilla_Presley>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://sv.wikipedia.org/wiki/Priscilla_Presley>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://ko.wikipedia.org/wiki/%ED%94%84%EB%A6%AC%EC%8B%A4%EB%9D%BC_%ED%94%84%EB%A0%88%EC%8A%AC%EB%A6%AC>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://et.wikipedia.org/wiki/Priscilla_Presley>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://en.wikiquote.org/wiki/Priscilla_Presley>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://ka.wikipedia.org/wiki/%E1%83%9E%E1%83%A0%E1%83%98%E1%83%A1%E1%83%AA%E1%83%98%E1%83%9A%E1%83%90_%E1%83%9E%E1%83%A0%E1%83%94%E1%83%A1%E1%83%9A%E1%83%98>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://uk.wikipedia.org/wiki/%D0%9F%D1%80%D1%96%D1%81%D1%86%D0%B8%D0%BB%D0%B0_%D0%9F%D1%80%D0%B5%D1%81%D0%BB%D1%96>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://eu.wikipedia.org/wiki/Priscilla_Presley>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://pl.wikipedia.org/wiki/Priscilla_Presley>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://id.wikipedia.org/wiki/Priscilla_Presley>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://no.wikipedia.org/wiki/Priscilla_Presley>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://hu.wikipedia.org/wiki/Priscilla_Presley>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://fr.wikipedia.org/wiki/Priscilla_Presley>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://nl.wikipedia.org/wiki/Priscilla_Presley>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://cs.wikipedia.org/wiki/Priscilla_Presleyov%C3%A1>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://de.wikipedia.org/wiki/Priscilla_Presley>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://arz.wikipedia.org/wiki/%D8%A8%D8%B1%D9%8A%D8%B3%D9%8A%D9%84%D8%A7_%D8%A8%D8%B1%D9%8A%D8%B3%D9%84%D9%89>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://ro.wikipedia.org/wiki/Priscilla_Presley>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://it.wikipedia.org/wiki/Priscilla_Presley>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://ja.wikipedia.org/wiki/%E3%83%97%E3%83%AA%E3%82%B7%E3%83%A9%E3%83%BB%E3%83%97%E3%83%AC%E3%82%B9%E3%83%AA%E3%83%BC>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://ml.wikipedia.org/wiki/%E0%B4%AA%E0%B5%8D%E0%B4%B0%E0%B4%BF%E0%B4%B8%E0%B4%BF%E0%B4%B2%E0%B5%8D%E0%B4%B2_%E0%B4%AA%E0%B5%8D%E0%B4%B0%E0%B5%86%E0%B4%B8%E0%B5%8D%E2%80%8D%E0%B4%B2%E0%B4%BF>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://es.wikipedia.org/wiki/Priscilla_Presley>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://simple.wikipedia.org/wiki/Priscilla_Presley>	.
+yago:Priscilla_Presley	schema:mainEntityOfPage	<https://eo.wikipedia.org/wiki/Priscilla_Presley>	.
+yago:Priscilla_Presley	rdf:type	schema:Person	.

@@ -25,7 +25,7 @@ Algorithm:
   - write out facts that fulfill the constraints to yago-facts-to-type-check.tsv  
 """
 
-TEST=True
+TEST=False
 FOLDER="test-data/03-make-facts/" if TEST else "yago-data/"
 WIKIDATA_FILE= "test-data/03-make-facts/00-wikidata.ttl" if TEST else "input-data/wikidata.ttl"
 
@@ -354,7 +354,10 @@ with TsvUtils.TsvFileWriter(FOLDER+"03-yago-facts-to-type-check.tsv") as yagoFac
                 continue            
             (startDate, endDate) = getStartAndEndDate(s, p, o, entityFacts)
             if rangeResult is True:
-                yagoFacts.write(s,yagoPredicate,o, ". #", "", startDate, endDate)
+                if startDate or endDate:
+                    yagoFacts.write(s,yagoPredicate,o, ". #", "", startDate, endDate)
+                else:
+                    yagoFacts.writeFact(s,yagoPredicate,o)
             else:
                 yagoFacts.write(s,yagoPredicate,o,". # IF",(", ".join(rangeResult)), startDate, endDate)           
 

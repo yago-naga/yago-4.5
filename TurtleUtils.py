@@ -298,10 +298,10 @@ class Graph(object):
     def __contains__(self, triple):
         (subject, predicate, obj) = triple
         if subject not in self.index:
-            return false
+            return False
         m=self.index[subject]
         if predicate not in m:
-            return false
+            return False
         return obj in m[predicate]
     def __iter__(self):
         for s in self.index:
@@ -423,7 +423,7 @@ def about(triple):
     if s.startswith("wd:Q"): 
         return s
     if s.startswith("s:Q") or s.startswith("s:q"):
-        return "wd"+s[1:s.index('-')]
+        return "wd:Q"+s[3:s.index('-')]
     return None
     
 def readWikidataEntities(file, message=None):
@@ -447,10 +447,19 @@ def readWikidataEntities(file, message=None):
 #             Test
 ##########################################################################
 
-if TEST and __name__ == '__main__':
-    print("Test run of TurtleUtils...")
-    graph=Graph()
-    graph.loadTurtleFile("test-data/turtleUtils/shapes.ttl")
-    graph.printToFile("test-data/turtleUtils/shapes-out.ttl")
-    print("done")
+# Test on Wikidata
+#
+#with open('t.ttl','wt',encoding='utf-8') as out:
+#    for g in readWikidataEntities('input-data/wikidata.ttl'):
+#        out.write('#####################################\n')
+#        g.printToWriter(out)
+ 
+# Test on Shapes
+# 
+#if TEST and __name__ == '__main__':
+#    print("Test run of TurtleUtils...")
+#    graph=Graph()
+#    graph.loadTurtleFile("test-data/turtleUtils/shapes.ttl")
+#    graph.printToFile("test-data/turtleUtils/shapes-out.ttl")
+#    print("done")
     

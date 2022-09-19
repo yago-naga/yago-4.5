@@ -24,7 +24,7 @@ ys:
 	rdfs:label "Manual YAGO 4.1 shapes declaration"@en .
 
 # Top-level Disjoint classes
-schema:CreativeWork a rdf:Class .
+schema:CreativeWork a rdfs:Class .
 schema:Event owl:disjointWith 
     schema:CreativeWork.
 schema:Organization owl:disjointWith 
@@ -1311,7 +1311,7 @@ schema:MedicalCondition a sh:NodeShape ;
     #] ;
     sh:property [
         sh:path schema:riskFactor ;
-        sh:node rdf:Class ; 
+        sh:node rdfs:Class ; 
         ys:fromProperty wdt:P5642 ;
     ] .
 # Fabian 2022-08-24: removed
@@ -1636,7 +1636,7 @@ schema:Corporation a sh:NodeShape ;
 	# Fabian 2022-08-27: products are now classes
     sh:property [
         sh:path schema:productProduced ;
-        sh:node rdf:Class ;
+        sh:node rdfs:Class ;
         ys:fromProperty wdt:P1056 ;
     ] .
 

@@ -18,7 +18,7 @@ Algorithm:
 2) From the taxonomy keep only the classes that are mentioned in shapes, together with their superclasses. Force this to be a tree.
 """
 
-TEST=True
+TEST=False
 OUTPUT_FOLDER="test-data/01-make-schema/" if TEST else "yago-data/"
 INPUT_FOLDER= "input-data"
 
@@ -74,7 +74,7 @@ for schemaClass in yagoShapes.subjects(Prefixes.fromClass):
 
 # Now we verify self-containedness
 
-permitted_namespaces = ["http://www.opengis.net/ont/geosparql#", "http://www.w3.org/1999/02/22-rdf-syntax-ns#", "http://yago-knowledge.org/resource/", "http://www.w3.org/2001/XMLSchema#"]
+permitted_namespaces = ["geo:", "rdfs:", "yago:", "xsd:"]
 
 for targetClass in yagoShapes.objects(None, Prefixes.shaclNode):
     if targetClass==Prefixes.schemaThing:

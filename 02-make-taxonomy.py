@@ -23,7 +23,7 @@ Algorithm:
 3) Remove a class and its descendants if it transitively subclasses two disjoint classes
 """
 
-TEST=True
+TEST=False
 OUTPUT_FOLDER="test-data/02-make-taxonomy/" if TEST else "yago-data/"
 WIKIDATA_FILE= "test-data/02-make-taxonomy/00-wikidata.ttl" if TEST else "input-data/wikidata.ttl"
 SCHEMA_FILE = "test-data/02-make-taxonomy/01-yago-schema.ttl" if TEST else "yago-data/01-yago-schema.ttl"
@@ -68,7 +68,6 @@ wikidataClassesWithWikipediaPage=set()
 for graph in TurtleUtils.readWikidataEntities(WIKIDATA_FILE):
     # We use the Wikidata property "ParentTaxon" as "rdfs:subclassOf",
     # because Wikidata sometimes uses only one of them
-    print("Next graph:",graph)
     for s,p,o in chain(graph.triplesWithPredicate(Prefixes.wikidataSubClassOf), graph.triplesWithPredicate(Prefixes.wikidataParentTaxon)):
         wikidataTaxonomy.add((s,Prefixes.rdfsSubClassOf,o))
         for w in graph.subjects(Prefixes.schemaAbout, s):
