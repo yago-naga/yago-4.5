@@ -68,11 +68,12 @@ wikidataClassesWithWikipediaPage=set()
 for graph in TurtleUtils.readWikidataEntities(WIKIDATA_FILE, "Parsing", [Prefixes.wikidataSubClassOf, Prefixes.wikidataParentTaxon, Prefixes.schemaAbout]):
     # We use the Wikidata property "ParentTaxon" as "rdfs:subclassOf",
     # because Wikidata sometimes uses only one of them
-    for s,p,o in chain(graph.triplesWithPredicate(Prefixes.wikidataSubClassOf), graph.triplesWithPredicate(Prefixes.wikidataParentTaxon)):
-        wikidataTaxonomyDown[o].add(s)
-        for w in graph.subjects(Prefixes.schemaAbout, s):
-            if w.startswith("<https://en.wikipedia.org/wiki/"):
-                wikidataClassesWithWikipediaPage.add(s)
+    for s,p,o in graph:
+        if p==Prefixes.wikidataSubClassOf or p==Prefixes.wikidataParentTaxon:
+            wikidataTaxonomyDown[o].add(s)
+            for w in graph.subjects(Prefixes.schemaAbout, s):
+                if w.startswith("<https://en.wikipedia.org/wiki/"):
+                    wikidataClassesWithWikipediaPage.add(s)
 
 ###########################################################################
 #           Create YAGO taxonomy
