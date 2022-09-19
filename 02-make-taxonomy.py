@@ -68,6 +68,7 @@ wikidataClassesWithWikipediaPage=set()
 for graph in TurtleUtils.readWikidataEntities(WIKIDATA_FILE):
     # We use the Wikidata property "ParentTaxon" as "rdfs:subclassOf",
     # because Wikidata sometimes uses only one of them
+    print("Next graph:",graph)
     for s,p,o in chain(graph.triplesWithPredicate(Prefixes.wikidataSubClassOf), graph.triplesWithPredicate(Prefixes.wikidataParentTaxon)):
         wikidataTaxonomy.add((s,Prefixes.rdfsSubClassOf,o))
         for w in graph.subjects(Prefixes.schemaAbout, s):

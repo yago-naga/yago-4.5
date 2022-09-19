@@ -52,6 +52,18 @@ prefixes = {
 #             Wikidata and schema.org URIs
 ##########################################################################
 
+xsdAnyURI='xsd:anyURI'
+
+xsdString='xsd:string'
+
+rdfLangString='rdf:langString'
+
+rdfType='rdf:type'
+
+rdfsLabel='rdfs:label'
+
+rdfsClass='rdfs:Class'
+
 rdfsSubClassOf = "rdfs:subClassOf"
 
 wikidataType = "wdt:P31"
@@ -78,18 +90,18 @@ fromClass = "ys:fromClass"
 
 fromProperty = "ys:fromProperty"
 
-shaclPath="shacl:path"
+shaclPath="sh:path"
 
-shaclNode="shacl:node"
+shaclNode="sh:node"
 
-shaclMaxCount="shacl:maxCount"
+shaclMaxCount="sh:maxCount"
 
-shaclDatatype="shacl:datatype"
+shaclDatatype="sh:datatype"
 
-shaclOr="shacl:or"
+shaclOr="sh:or"
 
-shaclNodeKind="shacl:nodeKind"
+shaclNodeKind="sh:nodeKind"
 
-shaclPattern="shacl:pattern"
+shaclPattern="sh:pattern"
 
-shaclProperty="shacl:property"
+shaclProperty="sh:property"

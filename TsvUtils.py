@@ -61,9 +61,9 @@ class TsvFileWriter(object):
         
     def write(self, *args):
         for i in range(0,len(args)-1):
-            self.file.write(args[i])
+            self.file.write(args[i] if args[i] else '')
             self.file.write("\t")
-        self.file.write(args[-1])
+        self.file.write(args[-1] if args[-1] else '')
         self.file.write("\n")
   
     def writeFact(self, subject, predicate, object):

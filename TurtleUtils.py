@@ -6,6 +6,7 @@ Reading Turtle files
 
 import gzip
 import os
+import re
 import sys
 from io import StringIO
 import Prefixes
@@ -288,6 +289,10 @@ class Graph(object):
         if predicate not in m:
             return
         m[predicate].remove(obj)
+        if len(m[predicate])==0:
+            self.index[subject].pop(predicate)
+            if len(self.index[subject])==0:
+                self.index.pop(subject)
         if self.inverseGraph!=None:
             self.inverseGraph.remove((obj,predicate,subject))        
     def __contains__(self, triple):
@@ -298,6 +303,11 @@ class Graph(object):
         if predicate not in m:
             return false
         return obj in m[predicate]
+    def __iter__(self):
+        for s in self.index:
+            for p in self.index[s]:
+                for o in self.index[s][p]:
+                    yield (s,p,o)
     def loadTurtleFile(self, file, message=None):
         for triple in triplesFromTurtleFile(file, message):
             self.add(triple)
@@ -309,6 +319,12 @@ class Graph(object):
             if 'rdf:rest' not in self.index[listStart]:
                 break
             listStart=list(self.index[listStart]['rdf:rest'])[0]            
+        return result
+    def predicates(self):
+        result=set()
+        for s in self.index:
+            for p in self.index[s]:
+                result.add(p)
         return result
     def objects(self, subject=None, predicate=None):
         # We create a copy here instead of using a generator
@@ -371,7 +387,30 @@ class Graph(object):
         return buffer.getvalue()
     def __len__(self):
         return len(self.index)
-       
+
+literalRegex=re.compile('"([^"]*)"(@([a-z-]+))?(\\^\\^(.*))?')
+
+intRegex=re.compile('[+-]?[0-9.]+')
+
+def splitLiteral(term):
+    """ Returns String value, int value, language, and datatype of a term (or None, None, None, None)"""
+    match=re.match(intRegex, term)
+    if match:
+        try:
+            intValue=int(term)
+        except:
+            return(None, None, None, None)
+        return(term, intValue, None, 'xsd:integer')
+    # This works only because our Turtle Parser replaces all quotes in strings by \u0022!
+    match=re.match(literalRegex, term)
+    if not match:
+        return(None, None, None, None)
+    try:
+        intValue=int(match.group(1))
+    except:
+        intValue=None
+    return (match.group(1), intValue, match.group(3), match.group(5))
+    
 ##########################################################################
 #             Reading Wikidata entities
 ##########################################################################

@@ -22,7 +22,7 @@ Algorithm:
    
 """
 
-TEST=False
+TEST=True
 FOLDER="test-data/04-make-typecheck/" if TEST else "yago-data/"
 
 ##########################################################################
@@ -32,9 +32,8 @@ FOLDER="test-data/04-make-typecheck/" if TEST else "yago-data/"
 print("Type-checking YAGO facts...")
 print("  Importing...",end="", flush=True)
 # Importing alone takes so much time that a status message is in order...
-from rdflib import URIRef, RDFS, RDF, Graph, Literal, XSD
-import utils
 import sys
+import TsvUtils
 import re
 import unicodedata
 import evaluator
@@ -42,12 +41,12 @@ from collections import defaultdict
 print("done")
 
 yagoTaxonomyUp=defaultdict(set)
-for tuple in utils.readTsvTuples(FOLDER+"02-yago-taxonomy.tsv", "  Loading YAGO taxonomy"):
+for tuple in TsvUtils.tsvTuples(FOLDER+"02-yago-taxonomy.tsv", "  Loading YAGO taxonomy"):
     if len(tuple)>3:
         yagoTaxonomyUp[tuple[0]].add(tuple[2])
 
 yagoInstances=defaultdict(set)
-for tuple in utils.readTsvTuples(FOLDER+"03-yago-facts-to-type-check.tsv", "  Loading YAGO instances"):
+for tuple in TsvUtils.tsvTuples(FOLDER+"03-yago-facts-to-type-check.tsv", "  Loading YAGO instances"):
     if len(tuple)>2 and tuple[1]=="rdf:type":
         yagoInstances[tuple[0]].add(tuple[2])
 
@@ -111,13 +110,13 @@ def isSubclassOf(c1, c2):
 def instanceOf(obj, cls):
     return any(isSubclassOf(c, cls) for c in yagoInstances[obj])
     
-with utils.TsvFileWriter(FOLDER+"04-yago-facts-to-rename.tsv") as out:
-    with utils.TsvFileWriter(FOLDER+"04-yago-ids.tsv") as idsFile:
+with TsvUtils.TsvFileWriter(FOLDER+"04-yago-facts-to-rename.tsv") as out:
+    with TsvUtils.TsvFileWriter(FOLDER+"04-yago-ids.tsv") as idsFile:
         currentTopic=""
         currentLabel=""
         currentWikipediaPage=""
         wroteFacts=False # True if the entity had any valid facts
-        for split in utils.readTsvTuples(FOLDER+"03-yago-facts-to-type-check.tsv", "  Type-checking facts"):
+        for split in TsvUtils.tsvTuples(FOLDER+"03-yago-facts-to-type-check.tsv", "  Type-checking facts"):
             if len(split)<3:
                 continue
             if split[0]!=currentTopic:

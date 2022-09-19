@@ -20,22 +20,22 @@ Algorithm:
    
 """
 
-TEST=False
+TEST=True
 FOLDER="test-data/05-make-ids/" if TEST else "yago-data/"
 
 ##########################################################################
 #             Booting
 ##########################################################################
 
-import utils
 import sys
 import evaluator
+import TsvUtils
 
 print("Renaming YAGO entities...")
 
 yagoIds={}
 entitiesWithWikipediaPage=set()
-for split in utils.readTsvTuples(FOLDER+"04-yago-ids.tsv", "  Loading YAGO ids"):
+for split in TsvUtils.tsvTuples(FOLDER+"04-yago-ids.tsv", "  Loading YAGO ids"):
     if len(split)<4:
         continue
     yagoIds[split[0]]=split[2]
@@ -70,16 +70,16 @@ def hasWikipediaPage(entity):
 #             Main
 ##########################################################################
 
-with utils.TsvFileWriter(FOLDER+"05-yago-final-meta.tsv") as metaFacts:
-    with utils.TsvFileWriter(FOLDER+"05-yago-final-full.tsv") as fullFacts:
-        with utils.TsvFileWriter(FOLDER+"05-yago-final-wikipedia.tsv") as wikipediaFacts:
-            for split in utils.readTsvTuples(FOLDER+"04-yago-facts-to-rename.tsv", "  Renaming"):
+with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-meta.tsv") as metaFacts:
+    with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-full.tsv") as fullFacts:
+        with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-wikipedia.tsv") as wikipediaFacts:
+            for split in TsvUtils.tsvTuples(FOLDER+"04-yago-facts-to-rename.tsv", "  Renaming"):
                 if len(split)<3:
                     continue
                 subject=toYagoEntity(split[0])
                 if not subject:
                     # Should not happen
-                    # print("Entity does not appear in YAGO:", split[0])
+                    print("Entity does not appear in YAGO:", split[0])
                     continue
                 relation=split[1]
                 object=split[2] if relation=="rdf:type" else toYagoEntity(split[2])
