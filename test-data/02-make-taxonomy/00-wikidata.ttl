@@ -2,6 +2,9 @@
 @prefix wd: <http://www.wikidata.org/entity/> .
 @prefix wdt: <http://www.wikidata.org/prop/direct/> .
 
+# Wikidata item to position the parallelized Wikidata reader
+Elvis a wikibase:Item .
+
 # European books should be a subclass of Books in YAGO
 wd:Q_European_book a wd:item .
 <https://en.wikipedia.org/wiki/Blah> schema:about wd:Q_European_book .

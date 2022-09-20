@@ -6,12 +6,14 @@ Reading Turtle files
 
 import gzip
 import os
+import codecs
 import re
 import sys
 from io import StringIO
 import Prefixes
+import threading
 
-TEST=False
+TEST=True
 
 ##########################################################################
 #             Parsing Turtle
@@ -20,43 +22,14 @@ TEST=False
 def printError(*args, **kwargs):
     """ Prints an error to StdErr """
     print(*args, file=sys.stderr, **kwargs)
-
-def charsOfFile(file, message=None):
-    """ Iterator over the chars of a GZ or text file, with progress bar """
-    if not message:
-       message="  Parsing"
-    print(message,"...", end="", flush=True)
-    totalNumberOfDots=60-len(message)
-    coveredSize=0
-    printedDots=0
-    fileSize=os.path.getsize(file)
-    isGZ=file.endswith(".gz")
-    if isGZ:
-        fileSize*=20
-    with (gzip.open(file, mode='rt', encoding='UTF-8') if isGZ else open(file, mode='rt', encoding='UTF-8')) as input:
-        while True:
-            char=input.read(1)
-            if not char:
-                break
-            coveredSize+=1
-            if coveredSize / fileSize * totalNumberOfDots > printedDots:
-                print(".", end="", flush=True)
-                printedDots+=1
-            yield char
-    print("done")
-    # Yield a few None's so that following code has the occasion to understand the file is over
-    yield None
-    yield None
-    yield None
-    yield None
-        
+    
 def termsAndSeparators(generator):
-    """ Iterator over the terms of a char-generator """
+    """ Iterator over the terms of char reader """
     pushBack=None
     while True:
         # Scroll to next term
         while True:
-            char=pushBack if pushBack else next(generator)
+            char=pushBack if pushBack else next(generator, None)
             pushBack=None
             if not char: 
                 # end of file
@@ -73,7 +46,7 @@ def termsAndSeparators(generator):
             elif char=='#':
                 # comments
                 while char and char!='\n':
-                    char=next(generator)
+                    char=next(generator, None)
             elif char.isspace():
                 # whitespace
                 pass
@@ -82,13 +55,13 @@ def termsAndSeparators(generator):
                 
         # Strings
         if char=='"':
-            secondChar=next(generator)
-            thirdChar=next(generator)
+            secondChar=next(generator, None)
+            thirdChar=next(generator, None)
             if secondChar=='"' and thirdChar=='"':
                 # long string quote
                 literal=""
                 while True:
-                    char=next(generator)
+                    char=next(generator, None)
                     if char:
                         literal=literal+char
                     else:
@@ -110,15 +83,15 @@ def termsAndSeparators(generator):
                 else:    
                     literal=[secondChar,thirdChar]
                     if thirdChar=='\\' and secondChar!='\\':
-                        literal+=next(generator)
+                        literal+=next(generator, ' ')
                     while True:
-                        char=next(generator)
+                        char=next(generator, None)
                         if not char:
                             printError("Unexpected end of file in literal",literal)
                             break
                         elif char=='\\':
                             literal+=char
-                            literal+=next(generator)
+                            literal+=next(generator, ' ')
                             continue
                         elif char=='"':
                             break
@@ -128,13 +101,13 @@ def termsAndSeparators(generator):
             # Make all literals simple literals without line breaks and quotes
             literal=literal.replace('\n','\\n').replace('\t','\\t').replace('\r','').replace('\\"','\\u0022')
             if not char:
-                char=next(generator)
+                char=next(generator, None)
             if char=='^':
                 # Datatypes
-                next(generator)
+                next(generator, None)
                 datatype=''
                 while True:
-                    char=next(generator)
+                    char=next(generator, None)
                     if not char:
                         printError("Unexpected end of file in datatype of",literal)
                         break
@@ -151,7 +124,7 @@ def termsAndSeparators(generator):
                 # Languages
                 language=""
                 while True:
-                    char=next(generator)
+                    char=next(generator, None)
                     if not char:
                         printError("Unexpected end of file in language of",literal)
                         break
@@ -171,7 +144,7 @@ def termsAndSeparators(generator):
             uri=[]
             while char!='>':
                 uri+=char
-                char=next(generator)
+                char=next(generator, None)
                 if not char:
                     printError("Unexpected end of file in URL",uri)
                     break
@@ -185,13 +158,13 @@ def termsAndSeparators(generator):
             iri=[]
             while not char.isspace() and char not in ['.',',',';','[',']','"',"'",'^','@','(',')']:
                 iri+=char
-                char=next(generator)
+                char=next(generator, None)
                 if not char:
                     printError("Unexpected end of file in IRI",iri)
                     break
             pushBack=char
             yield "".join(iri)
-
+    
 # Counts blank nodes to give a unique name to each of them
 blankNodeCounter=0
 
@@ -214,7 +187,7 @@ def blankNodeName(subject, predicate=None):
 def triplesFromTerms(generator, predicates=None, givenSubject=None):
     """ Iterator over the triples of a term generator """
     while True:        
-        term=next(generator)
+        term=next(generator, None)
         if not term or term==']':
             return
         if term=='.' or (term==';' and givenSubject):
@@ -229,11 +202,11 @@ def triplesFromTerms(generator, predicates=None, givenSubject=None):
             if term!=';' and term!=',':
                 subject=term
             if term!=',':
-                predicate=next(generator)
+                predicate=next(generator, None)
         if predicate=='a':
             predicate='rdf:type'
         # read the object
-        object=next(generator)
+        object=next(generator, None)
         if not object:
             printError("File ended unexpectedly after", subject, predicate)
             return
@@ -245,7 +218,7 @@ def triplesFromTerms(generator, predicates=None, givenSubject=None):
             previousListNode=None
             yield (subject, predicate, listNode)
             while True:
-                term=next(generator)
+                term=next(generator, None)
                 if not term:
                     printError("Unexpected end of file in collection (...)")
                     break  
@@ -271,10 +244,30 @@ def triplesFromTerms(generator, predicates=None, givenSubject=None):
             if not predicates or predicate in predicates:
                 yield (subject, predicate, object)
 
+##########################################################################
+#             Reading files
+##########################################################################
+
+def byteGenerator(byteReader):
+    """ Generates bytes from the reader """
+    while True:
+        b=byteReader.read(1)
+        if b:
+            yield b
+        else:
+            break
+
+def charGenerator(byteGenerator):
+    """ Generates chars from bytes """
+    return codecs.iterdecode(byteGenerator, "utf-8")
+
 def triplesFromTurtleFile(file, message=None, predicates=None):
     """ Iterator over the triples in a TTL file """
-    return triplesFromTerms(termsAndSeparators(charsOfFile(file, message)), predicates)
-
+    print((message if message else "  Parsing "+file)+"... ",end="", flush=True)
+    with open(file,"rb") as reader:
+        yield from triplesFromTerms(termsAndSeparators(charGenerator(byteGenerator(reader))), predicates)
+    print("done")
+    
 ##########################################################################
 #             Graphs
 ##########################################################################
@@ -403,8 +396,10 @@ class Graph(object):
     def __len__(self):
         return len(self.index)
 
+# Regex for literals
 literalRegex=re.compile('"([^"]*)"(@([a-z-]+))?(\\^\\^(.*))?')
 
+# Regex for int values
 intRegex=re.compile('[+-]?[0-9.]+')
 
 def splitLiteral(term):
@@ -440,43 +435,63 @@ def about(triple):
     if s.startswith("s:Q") or s.startswith("s:q"):
         return "wd:Q"+s[3:s.index('-')]
     return None
-    
-def readWikidataEntities(file, message=None, predicates=None):
-    """ Yields graphs of facts about entities """
-    result=Graph()
-    currentSubject="Elvis"
-    for triple in triplesFromTurtleFile(file, message, predicates):
-        newSubject=about(triple)
-        if not newSubject: 
-            continue
-        if newSubject!=currentSubject:
-            if len(result):
-                yield result
-                result=Graph()
-            currentSubject=newSubject
-        result.add(triple)
+               
+def visitWikidataEntities(file, visitor, visitorArgs, predicates, portion, size):
+    """ Visits the Wikidata entities starting from portion*size """
+    print("    Initializing Wikidata reader",portion+1)
+    with open(file,"rb") as wikidataReader:
+        wikidataReader.seek(portion*size)
+        for line in wikidataReader:
+            if line.rstrip().endswith(b"a wikibase:Item ."):
+                break
+        print("    Running Wikidata reader",portion+1,"at",wikidataReader.tell(),"with \"",line.rstrip().decode("utf-8"),'"')        
+        result=Graph()
+        currentSubject="Elvis"
+        for triple in triplesFromTerms(termsAndSeparators(charGenerator(byteGenerator(wikidataReader))), predicates):
+            newSubject=about(triple)
+            if not newSubject: 
+                continue
+            if newSubject!=currentSubject:
+                if len(result):
+                    visitor(result, visitorArgs)
+                    result=Graph()
+                currentSubject=newSubject
+                if wikidataReader.tell()>portion*size+size:
+                    print("    Wikidata reader",portion+1,"finishes before",currentSubject)
+                    break
+            result.add(triple)
     if len(result):
-        yield result
-        
+        visitor(result, visitorArgs) 
+    print("    Finished Wikidata reader",portion+1)        
+
+def visitWikidata(file, visitor, visitorArgs, predicates, numThreads=1):
+    """ Runs numThreads parallel threads that each visit a portion of Wikidata with the visitor"""
+    fileSize=os.path.getsize(file)
+    if numThreads>fileSize/10000000:
+        numThreads=int(fileSize/10000000)+1
+    print("  Running",numThreads,"Wikidata readers")
+    portionSize=int(fileSize/numThreads)
+    result=[]
+    for i in range(numThreads):
+        t=threading.Thread(target=visitWikidataEntities, args=(file, visitor, visitorArgs, predicates, i, portionSize,))
+        t.start()
+        result.append(t)
+    for t in result:
+        t.join()
+    print("  done")
+    
 ##########################################################################
 #             Test
 ##########################################################################
 
-# Test on Wikidata
-#
+def printWD(graph, out):
+    """ A Wikidata visitor that just prints the graph """
+    out.lock.acquire()
+    out.write('#####################################\n')
+    graph.printToWriter(out)
+    out.lock.release()
+    
 if TEST and __name__ == '__main__':
     with open('test-out.ttl','wt',encoding='utf-8') as out:
-        for g in readWikidataEntities('input-data/wikidata.ttl'):
-            #for g in readWikidataEntities('test-in.ttl'):
-            out.write('#####################################\n')
-            g.printToWriter(out)
- 
-# Test on Shapes
-# 
-#if TEST and __name__ == '__main__':
-#    print("Test run of TurtleUtils...")
-#    graph=Graph()
-#    graph.loadTurtleFile("test-data/turtleUtils/shapes.ttl")
-#    graph.printToFile("test-data/turtleUtils/shapes-out.ttl")
-#    print("done")
-    
+        out.lock=threading.Lock()
+        visitWikidata('input-data/wikidata.ttl', printWD, out,2)            

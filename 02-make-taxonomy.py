@@ -23,7 +23,7 @@ Algorithm:
 3) Remove a class and its descendants if it transitively subclasses two disjoint classes
 """
 
-TEST=False
+TEST=True
 OUTPUT_FOLDER="test-data/02-make-taxonomy/" if TEST else "yago-data/"
 WIKIDATA_FILE= "test-data/02-make-taxonomy/00-wikidata.ttl" if TEST else "input-data/wikidata.ttl"
 SCHEMA_FILE = "test-data/02-make-taxonomy/01-yago-schema.ttl" if TEST else "yago-data/01-yago-schema.ttl"
@@ -36,6 +36,7 @@ print("Creating YAGO taxonomy...")
 print("  Importing...",end="", flush=True)
 import TurtleUtils
 from TurtleUtils import Graph
+import threading
 import TsvUtils
 import Prefixes
 import sys
@@ -63,17 +64,25 @@ for (s,p,o) in yagoSchema.triplesWithPredicate(Prefixes.rdfsSubClassOf):
     
 # Load Wikidata taxonomy
 wikidataTaxonomyDown=defaultdict(set)
+lock=threading.Lock()
 wikidataClassesWithWikipediaPage=set()
 
-for graph in TurtleUtils.readWikidataEntities(WIKIDATA_FILE, "Parsing", [Prefixes.wikidataSubClassOf, Prefixes.wikidataParentTaxon, Prefixes.schemaAbout]):
-    # We use the Wikidata property "ParentTaxon" as "rdfs:subclassOf",
-    # because Wikidata sometimes uses only one of them
+# Parallelized loading of the Wikidata taxonomy
+
+def wikidataVisitor(graph, dummy):
+    """ Will be called in parallel on each Wikidata entity graph, fills wikiTaxonomyDown """
     for s,p,o in graph:
+        # We use the Wikidata property "ParentTaxon" as "rdfs:subclassOf",
+        # because Wikidata sometimes uses only one of them
         if p==Prefixes.wikidataSubClassOf or p==Prefixes.wikidataParentTaxon:
+            lock.acquire()
             wikidataTaxonomyDown[o].add(s)
             for w in graph.subjects(Prefixes.schemaAbout, s):
                 if w.startswith("<https://en.wikipedia.org/wiki/"):
                     wikidataClassesWithWikipediaPage.add(s)
+            lock.release()
+    
+TurtleUtils.visitWikidata(WIKIDATA_FILE, wikidataVisitor, None, [Prefixes.wikidataSubClassOf, Prefixes.wikidataParentTaxon, Prefixes.schemaAbout], 20)
 
 ###########################################################################
 #           Create YAGO taxonomy
