@@ -82,7 +82,7 @@ def wikidataVisitor(graph, dummy):
                     wikidataClassesWithWikipediaPage.add(s)
             lock.release()
     
-TurtleUtils.visitWikidata(WIKIDATA_FILE, wikidataVisitor, None, [Prefixes.wikidataSubClassOf, Prefixes.wikidataParentTaxon, Prefixes.schemaAbout], 20)
+TurtleUtils.visitWikidata(WIKIDATA_FILE, wikidataVisitor, None, [Prefixes.wikidataSubClassOf, Prefixes.wikidataParentTaxon, Prefixes.schemaAbout], 50)
 
 ###########################################################################
 #           Create YAGO taxonomy
