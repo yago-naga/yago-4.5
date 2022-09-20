@@ -266,7 +266,7 @@ def triplesFromTurtleFile(file, message=None, predicates=None):
     print((message if message else "  Parsing "+file)+"... ",end="", flush=True)
     with open(file,"rb") as reader:
         yield from triplesFromTerms(termsAndSeparators(charGenerator(byteGenerator(reader))), predicates)
-    print("done")
+    print("done", flush=True)
     
 ##########################################################################
 #             Graphs
@@ -444,7 +444,7 @@ def visitWikidataEntities(file, visitor, visitorArgs, predicates, portion, size)
         for line in wikidataReader:
             if line.rstrip().endswith(b"a wikibase:Item ."):
                 break
-        print("    Running Wikidata reader",portion+1,"at",wikidataReader.tell(),"with \"",line.rstrip().decode("utf-8"),'"')        
+        print("    Running Wikidata reader",portion+1,"at",wikidataReader.tell(),"with \"",line.rstrip().decode("utf-8"),'"', flush=True)        
         result=Graph()
         currentSubject="Elvis"
         for triple in triplesFromTerms(termsAndSeparators(charGenerator(byteGenerator(wikidataReader))), predicates):
@@ -457,19 +457,19 @@ def visitWikidataEntities(file, visitor, visitorArgs, predicates, portion, size)
                     result=Graph()
                 currentSubject=newSubject
                 if wikidataReader.tell()>portion*size+size:
-                    print("    Wikidata reader",portion+1,"finishes before",currentSubject)
+                    print("    Wikidata reader",portion+1,"finishes before",currentSubject, flush=True)
                     break
             result.add(triple)
     if len(result):
         visitor(result, visitorArgs) 
-    print("    Finished Wikidata reader",portion+1)        
+    print("    Finished Wikidata reader",portion+1, flush=True)        
 
 def visitWikidata(file, visitor, visitorArgs, predicates, numThreads=1):
     """ Runs numThreads parallel threads that each visit a portion of Wikidata with the visitor"""
     fileSize=os.path.getsize(file)
     if numThreads>fileSize/10000000:
         numThreads=int(fileSize/10000000)+1
-    print("  Running",numThreads,"Wikidata readers")
+    print("  Running",numThreads,"Wikidata readers", flush=True)
     portionSize=int(fileSize/numThreads)
     result=[]
     for i in range(numThreads):
@@ -478,7 +478,7 @@ def visitWikidata(file, visitor, visitorArgs, predicates, numThreads=1):
         result.append(t)
     for t in result:
         t.join()
-    print("  done")
+    print("  done", flush=True)
     
 ##########################################################################
 #             Test
