@@ -99,8 +99,9 @@ def checkIfClass(entityFacts):
         for (s,p,o) in entityFacts:
             newEntityFacts.add((yagoClass if s==mainEntity else s, p, o))
         return newEntityFacts
-    if mainEntity in yagoTaxonomyUp:
-        entityFacts.add((mainEntity,Prefixes.rdfType,Prefixes.rdfsClass))
+    if mainEntity in yagoTaxonomyUp or mainEntity in nonYagoClasses:
+		if mainEntity in yagoTaxonomyUp:
+        	  entityFacts.add((mainEntity,Prefixes.rdfType,Prefixes.rdfsClass))
         for t in entityFacts.triplesWithPredicate(Prefixes.wikidataType):
             entityFacts.remove(t)
     return entityFacts

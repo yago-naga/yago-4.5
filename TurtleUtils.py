@@ -241,7 +241,7 @@ def triplesFromTerms(generator, predicates=None, givenSubject=None):
             yield (subject, predicate, object)
             yield from triplesFromTerms(generator, predicates, givenSubject=object)
         else:
-            if not predicates or predicate in predicates:
+            if (not predicates) or (predicate in predicates):
                 yield (subject, predicate, object)
 
 ##########################################################################
@@ -439,7 +439,7 @@ def about(triple):
 def visitWikidataEntities(file, visitor, visitorArgs, predicates, portion, size):
     """ Visits the Wikidata entities starting from portion*size """
     print("    Initializing Wikidata reader",portion+1)
-    with open(file,"rb") as wikidataReader:
+    with open(file,"rb", buffering=10000000) as wikidataReader:
         wikidataReader.seek(portion*size)
         for line in wikidataReader:
             if line.rstrip().endswith(b"a wikibase:Item ."):
@@ -494,4 +494,4 @@ def printWD(graph, out):
 if TEST and __name__ == '__main__':
     with open('test-out.ttl','wt',encoding='utf-8') as out:
         out.lock=threading.Lock()
-        visitWikidata('input-data/wikidata.ttl', printWD, out,2)            
+        visitWikidata('input-data/wikidata.ttl', printWD, out,None,2)            
