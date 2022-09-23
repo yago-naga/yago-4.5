@@ -435,11 +435,16 @@ def about(triple):
     if s.startswith("s:Q") or s.startswith("s:q"):
         return "wd:Q"+s[3:s.index('-')]
     return None
-               
+
+# Buffer sizes  
+kilo=1024
+mega=1024*kilo
+giga=1024*mega
+
 def visitWikidataEntities(file, visitor, visitorArgs, predicates, portion, size):
     """ Visits the Wikidata entities starting from portion*size """
     print("    Initializing Wikidata reader",portion+1)
-    with open(file,"rb", buffering=10000000) as wikidataReader:
+    with open(file,"rb", buffering=100*mega) as wikidataReader:
         wikidataReader.seek(portion*size)
         for line in wikidataReader:
             if line.rstrip().endswith(b"a wikibase:Item ."):
@@ -464,7 +469,7 @@ def visitWikidataEntities(file, visitor, visitorArgs, predicates, portion, size)
         visitor(result, visitorArgs) 
     print("    Finished Wikidata reader",portion+1, flush=True)        
 
-def visitWikidata(file, visitor, visitorArgs, predicates, numThreads=1):
+def visitWikidata(file, visitor, visitorArgs, predicates, numThreads=200):
     """ Runs numThreads parallel threads that each visit a portion of Wikidata with the visitor"""
     fileSize=os.path.getsize(file)
     if numThreads>fileSize/10000000:
