@@ -444,7 +444,7 @@ giga=1024*mega
 def visitWikidataEntities(file, visitor, predicates, portion, size):
     """ Visits the Wikidata entities starting from portion*size """
     print("    Initializing Wikidata reader",portion+1)
-    with open(file,"rb", buffering=1*giga) as wikidataReader:
+    with open(file,"rb", buffering=10*giga) as wikidataReader:
         wikidataReader.seek(portion*size)
         for line in wikidataReader:
             if line.rstrip().endswith(b"a wikibase:Item ."):
