@@ -69,20 +69,33 @@ wikidataClassesWithWikipediaPage=set()
 
 # Parallelized loading of the Wikidata taxonomy
 
-def wikidataVisitor(graph, dummy):
-    """ Will be called in parallel on each Wikidata entity graph, fills wikiTaxonomyDown """
-    for s,p,o in graph:
-        # We use the Wikidata property "ParentTaxon" as "rdfs:subclassOf",
-        # because Wikidata sometimes uses only one of them
-        if p==Prefixes.wikidataSubClassOf or p==Prefixes.wikidataParentTaxon:
-            lock.acquire()
-            wikidataTaxonomyDown[o].add(s)
-            for w in graph.subjects(Prefixes.schemaAbout, s):
-                if w.startswith("<https://en.wikipedia.org/wiki/"):
-                    wikidataClassesWithWikipediaPage.add(s)
-            lock.release()
+class wikidataVisitor:
+    """ An object whose "visit"-method is called with every Wikidata graph, in order to fill wikidataTaxonomyDown"""
+    def __init__(self, num):
+        self.myWikidataTaxonomyDown=defaultdict(set)
+        self.myWikidataClassesWithWikipediaPage=set()    
+        self.num=num
+    def visit(self, graph):
+        """ Will be called in parallel on each Wikidata entity graph, fills myWikiTaxonomyDown """
+        for s,p,o in graph:
+            # We use the Wikidata property "ParentTaxon" as "rdfs:subclassOf",
+            # because Wikidata sometimes uses only one of them
+            if p==Prefixes.wikidataSubClassOf or p==Prefixes.wikidataParentTaxon:
+                self.myWikidataTaxonomyDown[o].add(s)
+                for w in graph.subjects(Prefixes.schemaAbout, s):
+                    if w.startswith("<https://en.wikipedia.org/wiki/"):
+                        self.myWikidataClassesWithWikipediaPage.add(s)
+    def done(self):
+        print("    Merging taxonomy",self.num,"...", flush=True, end="")                    
+        lock.acquire()
+        for c in self.myWikidataTaxonomyDown:
+            for d in self.myWikidataTaxonomyDown[c]:
+                wikidataTaxonomyDown[c].add(d)
+        wikidataClassesWithWikipediaPage.update(self.myWikidataClassesWithWikipediaPage)
+        lock.release()
+        print(" done")
     
-TurtleUtils.visitWikidata(WIKIDATA_FILE, wikidataVisitor, None, [Prefixes.wikidataSubClassOf, Prefixes.wikidataParentTaxon, Prefixes.schemaAbout])
+TurtleUtils.visitWikidata(WIKIDATA_FILE, wikidataVisitor, [Prefixes.wikidataSubClassOf, Prefixes.wikidataParentTaxon, Prefixes.schemaAbout])
 
 ###########################################################################
 #           Create YAGO taxonomy

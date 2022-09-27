@@ -441,7 +441,7 @@ kilo=1024
 mega=1024*kilo
 giga=1024*mega
 
-def visitWikidataEntities(file, visitor, visitorArgs, predicates, portion, size):
+def visitWikidataEntities(file, visitor, predicates, portion, size):
     """ Visits the Wikidata entities starting from portion*size """
     print("    Initializing Wikidata reader",portion+1)
     with open(file,"rb", buffering=100*mega) as wikidataReader:
@@ -458,7 +458,7 @@ def visitWikidataEntities(file, visitor, visitorArgs, predicates, portion, size)
                 continue
             if newSubject!=currentSubject:
                 if len(result):
-                    visitor(result, visitorArgs)
+                    visitor.visit(result)
                     result=Graph()
                 currentSubject=newSubject
                 if wikidataReader.tell()>portion*size+size:
@@ -466,10 +466,11 @@ def visitWikidataEntities(file, visitor, visitorArgs, predicates, portion, size)
                     break
             result.add(triple)
     if len(result):
-        visitor(result, visitorArgs) 
+        visitor.visit(result) 
+    visitor.done()    
     print("    Finished Wikidata reader",portion+1, flush=True)        
 
-def visitWikidata(file, visitor, visitorArgs, predicates, numThreads=200):
+def visitWikidata(file, visitor, predicates, numThreads=200):
     """ Runs numThreads parallel threads that each visit a portion of Wikidata with the visitor"""
     fileSize=os.path.getsize(file)
     if numThreads>fileSize/10000000:
@@ -478,7 +479,7 @@ def visitWikidata(file, visitor, visitorArgs, predicates, numThreads=200):
     portionSize=int(fileSize/numThreads)
     result=[]
     for i in range(numThreads):
-        t=threading.Thread(target=visitWikidataEntities, args=(file, visitor, visitorArgs, predicates, i, portionSize,))
+        t=threading.Thread(target=visitWikidataEntities, args=(file, visitor(i+1), predicates, i, portionSize,))
         t.start()
         result.append(t)
     for t in result:
