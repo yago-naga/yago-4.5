@@ -23,7 +23,7 @@ Algorithm:
 3) Remove a class and its descendants if it transitively subclasses two disjoint classes
 """
 
-TEST=False
+TEST=True
 OUTPUT_FOLDER="test-data/02-make-taxonomy/" if TEST else "yago-data/"
 WIKIDATA_FILE= "test-data/02-make-taxonomy/00-wikidata.ttl" if TEST else "input-data/wikidata.ttl"
 SCHEMA_FILE = "test-data/02-make-taxonomy/01-yago-schema.ttl" if TEST else "yago-data/01-yago-schema.ttl"
