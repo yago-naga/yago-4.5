@@ -444,7 +444,7 @@ giga=1024*mega
 def visitWikidataEntities(file, visitor, predicates, portion, size):
     """ Visits the Wikidata entities starting from portion*size """
     print("    Initializing Wikidata reader",portion+1)
-    with open(file,"rb", buffering=1*giga) as wikidataReader:
+    with open(file,"rb", buffering=2*giga) as wikidataReader:
         wikidataReader.seek(portion*size)
         for line in wikidataReader:
             if line.rstrip().endswith(b"a wikibase:Item ."):
@@ -470,7 +470,7 @@ def visitWikidataEntities(file, visitor, predicates, portion, size):
     visitor.done()    
     print("    Finished Wikidata reader",portion+1, flush=True)        
 
-def visitWikidata(file, visitor, predicates, numThreads=200):
+def visitWikidata(file, visitor, predicates, numThreads=90):
     """ Runs numThreads parallel threads that each visit a portion of Wikidata with the visitor"""
     fileSize=os.path.getsize(file)
     if numThreads>fileSize/10000000:
