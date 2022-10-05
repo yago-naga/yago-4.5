@@ -25,7 +25,7 @@ Algorithm:
 
 TEST=False
 OUTPUT_FOLDER="test-data/02-make-taxonomy/" if TEST else "yago-data/"
-WIKIDATA_FILE= "test-data/02-make-taxonomy/00-wikidata.ttl" if TEST else "input-data/wikidata.ttl"
+WIKIDATA_FILE= "test-data/02-make-taxonomy/00-wikidata.ttl" if TEST else "../wikidata.ttl"
 SCHEMA_FILE = "test-data/02-make-taxonomy/01-yago-schema.ttl" if TEST else "yago-data/01-yago-schema.ttl"
 
 ###########################################################################

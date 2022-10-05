@@ -506,6 +506,7 @@ def visitWikidata(file, visitor, predicates, numThreads=90, chunkSize=200*1024*1
                 t.join()
             print("      Done running Wikidata readers", flush=True)
             print("    Done with chunk",chunkNumber+1,"of",numChunks, flush=True)
+            inMemoryFile.close()
     print("  Done parsing Wikidata")
     
 ##########################################################################

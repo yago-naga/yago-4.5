@@ -33,4 +33,3 @@
 @prefix prn: <http://www.wikidata.org/prop/reference/value-normalized/> .
 @prefix wdno: <http://www.wikidata.org/prop/novalue/> .
 @prefix ys: <http://yago-knowledge.org/schema#> .
-wd:Q_nonwikipediapage_book	rdfs:subClassOf	wd:Q_European_book	.
