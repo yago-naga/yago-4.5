@@ -86,7 +86,7 @@ class wikidataVisitor:
                     if w.startswith("<https://en.wikipedia.org/wiki/"):
                         self.myWikidataClassesWithWikipediaPage.add(s)
     def done(self):
-        print("    Merging taxonomy",self.num,"...", flush=True, end="")                    
+        print("        Merging taxonomy",self.num,"...", flush=True, end="")                    
         lock.acquire()
         for c in self.myWikidataTaxonomyDown:
             for d in self.myWikidataTaxonomyDown[c]:
@@ -94,7 +94,7 @@ class wikidataVisitor:
         wikidataClassesWithWikipediaPage.update(self.myWikidataClassesWithWikipediaPage)
         lock.release()
         print(" done")
-    
+
 TurtleUtils.visitWikidata(WIKIDATA_FILE, wikidataVisitor, [Prefixes.wikidataSubClassOf, Prefixes.wikidataParentTaxon, Prefixes.schemaAbout])
 
 ###########################################################################

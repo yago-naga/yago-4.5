@@ -12,6 +12,7 @@ import sys
 from io import StringIO
 import Prefixes
 import threading
+import mmap
 
 TEST=True
 
@@ -261,6 +262,10 @@ def charGenerator(byteGenerator):
     """ Generates chars from bytes """
     return codecs.iterdecode(byteGenerator, "utf-8")
 
+def charGeneratorForMmap(mmap, startPos, endPos):
+    """ Generates chars from an in-memory file """
+    return codecs.iterdecode( (mmap[i].to_bytes(1, byteorder='big', signed=False) for i in range(startPos, min(endPos,len(mmap)))), "utf-8")
+    
 def triplesFromTurtleFile(file, message=None, predicates=None):
     """ Iterator over the triples in a TTL file """
     print((message if message else "  Parsing "+file)+"... ",end="", flush=True)
@@ -441,50 +446,67 @@ kilo=1024
 mega=1024*kilo
 giga=1024*mega
 
-def visitWikidataEntities(file, visitor, predicates, portion, size):
+def visitWikidataEntities(inMemoryFile, visitor, predicates, portion, size):
     """ Visits the Wikidata entities starting from portion*size """
-    print("    Initializing Wikidata reader",portion+1)
-    with open(file,"rb", buffering=1*giga) as wikidataReader:
-        wikidataReader.seek(portion*size)
-        for line in wikidataReader:
-            if line.rstrip().endswith(b"a wikibase:Item ."):
-                break
-        print("    Running Wikidata reader",portion+1,"at",wikidataReader.tell(),"with \"",line.rstrip().decode("utf-8"),'"', flush=True)        
-        result=Graph()
-        currentSubject="Elvis"
-        for triple in triplesFromTerms(termsAndSeparators(charGenerator(byteGenerator(wikidataReader))), predicates):
-            newSubject=about(triple)
-            if not newSubject: 
-                continue
-            if newSubject!=currentSubject:
-                if len(result):
-                    visitor.visit(result)
-                    result=Graph()
-                currentSubject=newSubject
-                if wikidataReader.tell()>portion*size+size:
-                    print("    Wikidata reader",portion+1,"finishes before",currentSubject, flush=True)
-                    break
-            result.add(triple)
+    print("      Initializing Wikidata reader",portion+1)
+    # Scroll to next Wikidata item at the beginning of my portion
+    startPos=inMemoryFile.find(b" a wikibase:Item .", portion*size, min(len(inMemoryFile),portion*size+size))   
+    if startPos==-1:
+        print("        Wikidata reader",portion+1,"did not find a start item and finishes")
+        return    
+    startPos+=18
+    # Scroll to next Wikidata item after the end of my portion
+    if portion*size+size>=len(inMemoryFile):
+        endPos=len(inMemoryFile)
+    else:
+        endPos=inMemoryFile.find(b" a wikibase:Item .", portion*size+size)
+        if endPos==-1:
+            endPos=len(inMemoryFile)
+        else:
+            endPos+=18 # Go beyond the dot
+    print("        Running Wikidata reader",portion+1,"at position",startPos, flush=True)        
+    result=Graph()
+    currentSubject="Elvis"
+    for triple in triplesFromTerms(termsAndSeparators(charGeneratorForMmap(inMemoryFile, startPos, endPos)), predicates):
+        newSubject=about(triple)
+        if not newSubject: 
+            continue
+        if newSubject!=currentSubject:
+            if len(result):
+                visitor.visit(result)
+                result=Graph()
+            currentSubject=newSubject
+        result.add(triple)
     if len(result):
         visitor.visit(result) 
     visitor.done()    
-    print("    Finished Wikidata reader",portion+1, flush=True)        
+    print("        Finished Wikidata reader",portion+1, flush=True)        
 
-def visitWikidata(file, visitor, predicates, numThreads=90):
-    """ Runs numThreads parallel threads that each visit a portion of Wikidata with the visitor"""
+def visitWikidata(file, visitor, predicates, numThreads=90, chunkSize=200*1024*1024*1024):
+    """ Loads the file in chunks. Runs numThreads parallel threads that each visit a portion of the chunk with the visitor """
     fileSize=os.path.getsize(file)
-    if numThreads>fileSize/10000000:
-        numThreads=int(fileSize/10000000)+1
-    print("  Running",numThreads,"Wikidata readers", flush=True)
-    portionSize=int(fileSize/numThreads)
-    result=[]
-    for i in range(numThreads):
-        t=threading.Thread(target=visitWikidataEntities, args=(file, visitor(i+1), predicates, i, portionSize,))
-        t.start()
-        result.append(t)
-    for t in result:
-        t.join()
-    print("  done", flush=True)
+    numChunks=int(fileSize/chunkSize)+1
+    print("  Parsing Wikidata")
+    with open(file, "rb") as fileHandle:
+        for chunkNumber in range(0,numChunks):
+            print("    Treating chunk",chunkNumber+1,"of",numChunks, flush=True)
+            print("      Reading chunk",chunkNumber+1,"...", end="",flush=True)
+            inMemoryFile=mmap.mmap(fileHandle.fileno(),min(chunkSize, fileSize-chunkNumber*chunkSize), access=mmap.ACCESS_READ, offset=chunkNumber*chunkSize)
+            print(" done")
+            if numThreads>len(inMemoryFile)/1024/1024:
+                numThreads=int(len(inMemoryFile)/1024/1024)+1
+            print("      Running",numThreads,"Wikidata readers", flush=True)
+            portionSize=int(len(inMemoryFile)/numThreads)
+            result=[]
+            for i in range(numThreads):
+                t=threading.Thread(target=visitWikidataEntities, args=(inMemoryFile, visitor(i+1), predicates, i, portionSize,))
+                t.start()
+                result.append(t)
+            for t in result:
+                t.join()
+            print("      Done running Wikidata readers", flush=True)
+            print("    Done with chunk",chunkNumber+1,"of",numChunks, flush=True)
+    print("  Done parsing Wikidata")
     
 ##########################################################################
 #             Test
