@@ -119,7 +119,7 @@ schema:CreativeWork	rdfs:subClassOf	schema:Thing	.
 schema:Organization	rdfs:subClassOf	schema:Thing	.
 schema:Person	rdfs:subClassOf	schema:Thing	.
 wd:Q_European_book	rdfs:subClassOf	schema:Book	.
-wd:Q_wikipediapage_book	rdfs:subClassOf	wd:Q_European_book	.
 wd:Q_English_book	rdfs:subClassOf	wd:Q_European_book	.
 wd:Q_loop_book	rdfs:subClassOf	wd:Q_English_book	.
+wd:Q_wikipediapage_book	rdfs:subClassOf	wd:Q_European_book	.
 wd:Q_European_event	rdfs:subClassOf	schema:Event	.

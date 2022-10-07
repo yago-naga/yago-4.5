@@ -32,73 +32,42 @@ SCHEMA_FILE = "test-data/02-make-taxonomy/01-yago-schema.ttl" if TEST else "yago
 #           Booting
 ###########################################################################
 
-print("Creating YAGO taxonomy...")
-print("  Importing...",end="", flush=True)
 import TurtleUtils
 from TurtleUtils import Graph
-import threading
+from multiprocessing import Manager, Process, Array
 import TsvUtils
 import Prefixes
 import sys
 from os.path import exists
+import os
 from collections import defaultdict
 import evaluator
 from itertools import chain
-print("done")
+                
 
 ###########################################################################
-#           Load YAGO top-level taxonomy and Wikidata taxonomy
+#           Loading the Wikidata taxonomy
 ###########################################################################
 
-# Load YAGO schema
-yagoSchema = Graph()
-yagoSchema.loadTurtleFile(SCHEMA_FILE, "  Loading YAGO schema")
+def wikidataVisitor(graph, context):
+    """ Will be called in parallel on each Wikidata entity graph, fills wikiTaxonomyDown """
+    if 'wikidataTaxonomyDown' not in context:
+        context['wikidataTaxonomyDown']={}
+        context['wikidataClassesWithWikipediaPage']=set()
+    for s,p,o in graph:
+        # We use the Wikidata property "ParentTaxon" as "rdfs:subclassOf",
+        # because Wikidata sometimes uses only one of them
+        if p==Prefixes.wikidataSubClassOf or p==Prefixes.wikidataParentTaxon:
+            if o not in context['wikidataTaxonomyDown']:
+                context['wikidataTaxonomyDown'][o]=set()
+            context['wikidataTaxonomyDown'][o].add(s)
+            for w in graph.subjects(Prefixes.schemaAbout, s):
+                if w.startswith("<https://en.wikipedia.org/wiki/"):
+                    context['wikidataClassesWithWikipediaPage'].add(s)
 
-# YAGO taxonomy
-# mapping a subclass to its superclasses and vice versa
-yagoTaxonomyUp = defaultdict(set)
-yagoTaxonomyDown = defaultdict(set)
-for (s,p,o) in yagoSchema.triplesWithPredicate(Prefixes.rdfsSubClassOf):
-    yagoTaxonomyUp[s].add(o)
-    yagoTaxonomyDown[o].add(s)
-    
-# Load Wikidata taxonomy
-wikidataTaxonomyDown=defaultdict(set)
-lock=threading.Lock()
-wikidataClassesWithWikipediaPage=set()
-
-# Parallelized loading of the Wikidata taxonomy
-
-class wikidataVisitor:
-    """ An object whose "visit"-method is called with every Wikidata graph, in order to fill wikidataTaxonomyDown"""
-    def __init__(self, num):
-        self.myWikidataTaxonomyDown=defaultdict(set)
-        self.myWikidataClassesWithWikipediaPage=set()    
-        self.num=num
-    def visit(self, graph):
-        """ Will be called in parallel on each Wikidata entity graph, fills myWikiTaxonomyDown """
-        for s,p,o in graph:
-            # We use the Wikidata property "ParentTaxon" as "rdfs:subclassOf",
-            # because Wikidata sometimes uses only one of them
-            if p==Prefixes.wikidataSubClassOf or p==Prefixes.wikidataParentTaxon:
-                self.myWikidataTaxonomyDown[o].add(s)
-                for w in graph.subjects(Prefixes.schemaAbout, s):
-                    if w.startswith("<https://en.wikipedia.org/wiki/"):
-                        self.myWikidataClassesWithWikipediaPage.add(s)
-    def done(self):
-        print("        Merging taxonomy",self.num,"...", flush=True, end="")                    
-        lock.acquire()
-        for c in self.myWikidataTaxonomyDown:
-            for d in self.myWikidataTaxonomyDown[c]:
-                wikidataTaxonomyDown[c].add(d)
-        wikidataClassesWithWikipediaPage.update(self.myWikidataClassesWithWikipediaPage)
-        lock.release()
-        print(" done")
-
-TurtleUtils.visitWikidata(WIKIDATA_FILE, wikidataVisitor, [Prefixes.wikidataSubClassOf, Prefixes.wikidataParentTaxon, Prefixes.schemaAbout])
 
 ###########################################################################
-#           Create YAGO taxonomy
+#           Creating the YAGO taxonomy
 ###########################################################################
 
 # Classes that will not be added to YAGO, and whose children won't be added either
@@ -128,21 +97,13 @@ def addSubClasses(lastGoodYagoClass, wikidataClass, unmappedClassesWriter, treat
         return
     treated.add(wikidataClass)
     pathToRoot.append(wikidataClass)
-    for subClass in wikidataTaxonomyDown[wikidataClass]:    
+    for subClass in wikidataTaxonomyDown.get(wikidataClass,[]):    
         addSubClasses(lastGoodYagoClass, subClass, unmappedClassesWriter, treated, pathToRoot)
     pathToRoot.pop()
 
-print("  Creating YAGO taxonomy...", end="", flush=True)
-with TsvUtils.TsvFileWriter(OUTPUT_FOLDER+"02-non-yago-classes.tsv") as unmappedClassesWriter:
-    treated=set()
-    for s,p,o in yagoSchema.triplesWithPredicate(Prefixes.fromClass):
-        if s!=Prefixes.schemaThing:
-            for subclass in wikidataTaxonomyDown[o]:
-                addSubClasses(s,subclass, unmappedClassesWriter,treated,[o])
-print("done")
 
 ###########################################################################
-#           Remove classes that subclass two disjoint top-level classes
+#           Removing classes that subclass two disjoint top-level classes
 ###########################################################################
 
 def disjoint(disjointTopLevelClass, cls):
@@ -169,23 +130,60 @@ def checkDisjointness(disjointTopLevelClass, currentClass):
                 removeClass(subClass)
         checkDisjointness(disjointTopLevelClass, subClass)
 
-print("  Removing disjoint-inconsistent classes...", end="", flush=True)
-for s,p,o in yagoSchema.triplesWithPredicate(Prefixes.owlDisjointWith):
-    checkDisjointness(s, Prefixes.schemaThing)
-print("done")
 
 ###########################################################################
-#           Serialize the result
+#           Main
 ###########################################################################
 
-print("  Writing taxonomy...", end="", flush=True)
-with TsvUtils.TsvFileWriter(OUTPUT_FOLDER+"02-yago-taxonomy.tsv") as taxonomyWriter:
-    for cls in yagoTaxonomyUp:
-        for superclass in yagoTaxonomyUp[cls]:
-            taxonomyWriter.writeFact(cls, "rdfs:subClassOf", superclass)
-print("done")
-print("done")
+if __name__ == '__main__':
+    print("Creating YAGO taxonomy...")
 
-if TEST:
-    evaluator.compare(OUTPUT_FOLDER+"02-non-yago-classes.tsv")
-    evaluator.compare(OUTPUT_FOLDER+"02-yago-taxonomy.tsv")
+    # Load YAGO schema
+    yagoSchema = Graph()
+    yagoSchema.loadTurtleFile(SCHEMA_FILE, "  Loading YAGO schema")
+
+    # YAGO taxonomy
+    # mapping a subclass to its superclasses and vice versa
+    yagoTaxonomyUp = defaultdict(set)
+    yagoTaxonomyDown = defaultdict(set)
+    for (s,p,o) in yagoSchema.triplesWithPredicate(Prefixes.rdfsSubClassOf):
+        yagoTaxonomyUp[s].add(o)
+        yagoTaxonomyDown[o].add(s)
+        
+    # Load Wikidata taxonomy
+    results=TurtleUtils.visitWikidata(WIKIDATA_FILE, wikidataVisitor)
+    wikidataClassesWithWikipediaPage=set()
+    wikidataTaxonomyDown=dict()
+    for result in results:
+        wikidataClassesWithWikipediaPage.update(result['wikidataClassesWithWikipediaPage'])
+        for key in result['wikidataTaxonomyDown']:
+            if key not in wikidataTaxonomyDown:
+                wikidataTaxonomyDown[key]=set()
+            wikidataTaxonomyDown[key].update(result['wikidataTaxonomyDown'][key])
+    
+    print("  Writing non-YAGO classes...", end="", flush=True)
+    with TsvUtils.TsvFileWriter(OUTPUT_FOLDER+"02-non-yago-classes.tsv") as unmappedClassesWriter:
+        treated=set()
+        for s,p,o in yagoSchema.triplesWithPredicate(Prefixes.fromClass):
+            if s!=Prefixes.schemaThing:
+                for subclass in wikidataTaxonomyDown.get(o,set()):
+                    addSubClasses(s,subclass, unmappedClassesWriter,treated,[o])
+    print("done")
+
+    print("  Removing disjoint-inconsistent classes...", end="", flush=True)
+    for s,p,o in yagoSchema.triplesWithPredicate(Prefixes.owlDisjointWith):
+        checkDisjointness(s, Prefixes.schemaThing)
+    print("done")
+
+
+    print("  Writing taxonomy...", end="", flush=True)
+    with TsvUtils.TsvFileWriter(OUTPUT_FOLDER+"02-yago-taxonomy.tsv") as taxonomyWriter:
+        for cls in yagoTaxonomyUp:
+            for superclass in yagoTaxonomyUp[cls]:
+                taxonomyWriter.writeFact(cls, "rdfs:subClassOf", superclass)
+    print("done")
+    print("done")
+
+    if TEST:
+        evaluator.compare(OUTPUT_FOLDER+"02-non-yago-classes.tsv")
+        evaluator.compare(OUTPUT_FOLDER+"02-yago-taxonomy.tsv")
