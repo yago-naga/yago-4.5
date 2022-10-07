@@ -27,7 +27,7 @@ Algorithm:
 
 TEST=True
 FOLDER="test-data/03-make-facts/" if TEST else "yago-data/"
-WIKIDATA_FILE= "test-data/03-make-facts/00-wikidata.ttl" if TEST else "input-data/wikidata.ttl.gz"
+WIKIDATA_FILE= "test-data/03-make-facts/00-wikidata.ttl" if TEST else "../wikidata.ttl"
 
 ##########################################################################
 #             Debugging
@@ -45,9 +45,6 @@ def debug(*message):
 #             Booting
 ##########################################################################
 
-print("Creating YAGO facts...")
-print("  Importing...",end="", flush=True)
-# Importing alone takes so much time that a status message is in order...
 import Prefixes
 import TsvUtils
 import TurtleUtils
@@ -56,21 +53,6 @@ import sys
 import re
 import evaluator
 from collections import defaultdict
-print("done")
-
-yagoSchema=Graph()
-yagoSchema.loadTurtleFile(FOLDER+"01-yago-schema.ttl", "  Loading YAGO schema")
-disjointClasses=[ (c1, c2) for (c1, p, c2) in yagoSchema.triplesWithPredicate(Prefixes.owlDisjointWith) ]
-
-yagoTaxonomyUp=defaultdict(set)
-for triple in TsvUtils.tsvTuples(FOLDER+"02-yago-taxonomy.tsv", "  Loading YAGO taxonomy"):
-    if len(triple)>3:
-        yagoTaxonomyUp[triple[0]].add(triple[2])
-
-nonYagoClasses={}
-for triple in TsvUtils.tsvTuples(FOLDER+"02-non-yago-classes.tsv", "  Loading non-YAGO classes"):
-    if len(triple)>3:
-        nonYagoClasses[triple[0]]=triple[2]
 
 def getFirst(myList):
     """ Returns the first element of a list or None """    
@@ -318,51 +300,71 @@ def checkRange(p, o):
 #             Main method
 ##########################################################################
 
-with TsvUtils.TsvFileWriter(FOLDER+"03-yago-facts-to-type-check.tsv") as yagoFacts:
-    for entityFacts in TurtleUtils.readWikidataEntities(WIKIDATA_FILE):         
-        
-        # Anything that is rdf:type in Wikidata is meta-statements, 
-        # and should go away
-        for t in entityFacts.triplesWithPredicate(Prefixes.rdfType):
-            entityFacts.remove(t)
-                   
-        cleanArticles(entityFacts)               
-        
-        entityFacts=checkIfClass(entityFacts)
-        
-        if not cleanClasses(entityFacts):
+def treatWikidataEntity(entityFacts, context):
+    """ Writes out the facts for a single Wikidata entity """
+    
+    # Anything that is rdf:type in Wikidata is meta-statements, 
+    # and should go away
+    for t in entityFacts.triplesWithPredicate(Prefixes.rdfType):
+        entityFacts.remove(t)
+               
+    cleanArticles(entityFacts)               
+    
+    entityFacts=checkIfClass(entityFacts)
+    
+    if not cleanClasses(entityFacts):
+        continue
+         
+    classes = getClasses(entityFacts)
+    if anyDisjoint(classes):
+        continue
+
+    for p in entityFacts.predicates():
+        checkCardinalityConstraints(p, entityFacts)
+
+    for s,p,o in entityFacts:
+        if p==Prefixes.rdfType:
+            yagoFacts.writeFact(s,"rdf:type",o)
             continue
-             
-        classes = getClasses(entityFacts)
-        if anyDisjoint(classes):
+        else:
+            yagoPredicate = wikidataPredicate2YagoPredicate(p)
+        if not yagoPredicate:
             continue
-
-        for p in entityFacts.predicates():
-            checkCardinalityConstraints(p, entityFacts)
-
-        for s,p,o in entityFacts:
-            if p==Prefixes.rdfType:
-                yagoFacts.writeFact(s,"rdf:type",o)
-                continue
+        if not checkDomain(yagoPredicate, classes):
+            continue
+        rangeResult=checkRange(yagoPredicate, o)
+        if rangeResult is False:
+            continue            
+        (startDate, endDate) = getStartAndEndDate(s, p, o, entityFacts)
+        if rangeResult is True:
+            if startDate or endDate:
+                yagoFacts.write(s,yagoPredicate,o, ". #", "", startDate, endDate)
             else:
-                yagoPredicate = wikidataPredicate2YagoPredicate(p)
-            if not yagoPredicate:
-                continue
-            if not checkDomain(yagoPredicate, classes):
-                continue
-            rangeResult=checkRange(yagoPredicate, o)
-            if rangeResult is False:
-                continue            
-            (startDate, endDate) = getStartAndEndDate(s, p, o, entityFacts)
-            if rangeResult is True:
-                if startDate or endDate:
-                    yagoFacts.write(s,yagoPredicate,o, ". #", "", startDate, endDate)
-                else:
-                    yagoFacts.writeFact(s,yagoPredicate,o)
-            else:
-                yagoFacts.write(s,yagoPredicate,o,". # IF",(", ".join(rangeResult)), startDate, endDate)           
+                yagoFacts.writeFact(s,yagoPredicate,o)
+        else:
+            yagoFacts.write(s,yagoPredicate,o,". # IF",(", ".join(rangeResult)), startDate, endDate)           
 
-print("done")
+if __name__ == '__main__':
+    print("Creating YAGO facts...")
 
-if TEST:
-    evaluator.compare(FOLDER+"03-yago-facts-to-type-check.tsv")
+    yagoSchema=Graph()
+    yagoSchema.loadTurtleFile(FOLDER+"01-yago-schema.ttl", "  Loading YAGO schema")
+    disjointClasses=[ (c1, c2) for (c1, p, c2) in yagoSchema.triplesWithPredicate(Prefixes.owlDisjointWith) ]
+
+    yagoTaxonomyUp=defaultdict(set)
+    for triple in TsvUtils.tsvTuples(FOLDER+"02-yago-taxonomy.tsv", "  Loading YAGO taxonomy"):
+        if len(triple)>3:
+            yagoTaxonomyUp[triple[0]].add(triple[2])
+
+    nonYagoClasses={}
+    for triple in TsvUtils.tsvTuples(FOLDER+"02-non-yago-classes.tsv", "  Loading non-YAGO classes"):
+        if len(triple)>3:
+            nonYagoClasses[triple[0]]=triple[2]
+
+    with TsvUtils.TsvFileWriter(FOLDER+"03-yago-facts-to-type-check.tsv") as yagoFacts:
+        visitWikidata(WIKIDATA_FILE, treatWikidataEntity)            
+
+    print("done")
+
+    if TEST:
+        evaluator.compare(FOLDER+"03-yago-facts-to-type-check.tsv")

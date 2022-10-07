@@ -50,7 +50,11 @@ from itertools import chain
 ###########################################################################
 
 def wikidataVisitor(graph, context):
-    """ Will be called in parallel on each Wikidata entity graph, fills wikiTaxonomyDown """
+    """ Will be called in parallel on each Wikidata entity graph, fills context[wikiTaxonomyDown] and context[wikidataClassesWithWikipediaPage]. """
+    # Both wikidataTaxonomyDown and wikidataClassesWithWikipediaPage
+    # should be variables that persist across several calls to this
+    # function. However, due to the multithreading, we don't have such global
+    # variables. Hence, we use a dictionary that stores these two variables.
     if 'wikidataTaxonomyDown' not in context:
         context['wikidataTaxonomyDown']={}
         context['wikidataClassesWithWikipediaPage']=set()
@@ -86,7 +90,13 @@ def addSubClasses(lastGoodYagoClass, wikidataClass, unmappedClassesWriter, treat
         return
     if wikidataClass in pathToRoot:
         return
-    if wikidataClass in wikidataClassesWithWikipediaPage:
+    # Due to loops, multiple inheritance, and inheritance between
+    # class that have been mapped to YAGO, we might walk again
+    # through a class that has been mapped to schema.org.
+    # We have already done the subtree, so we can quit
+    if yagoSchema.subjects(Prefixes.fromClass, wikidataClass):
+        return
+    elif wikidataClass in wikidataClassesWithWikipediaPage:
         yagoTaxonomyUp[wikidataClass].add(lastGoodYagoClass)
         yagoTaxonomyDown[lastGoodYagoClass].add(wikidataClass)
         lastGoodYagoClass=wikidataClass
@@ -142,7 +152,7 @@ if __name__ == '__main__':
     yagoSchema = Graph()
     yagoSchema.loadTurtleFile(SCHEMA_FILE, "  Loading YAGO schema")
 
-    # YAGO taxonomy
+    # Create YAGO taxonomy as two dictionaries,
     # mapping a subclass to its superclasses and vice versa
     yagoTaxonomyUp = defaultdict(set)
     yagoTaxonomyDown = defaultdict(set)
@@ -152,6 +162,10 @@ if __name__ == '__main__':
         
     # Load Wikidata taxonomy
     results=TurtleUtils.visitWikidata(WIKIDATA_FILE, wikidataVisitor)
+    # <results> is a list of context dictionaries,
+    # each of which contains the result of one thread.
+    # We now merge them together in the global variables
+    # <wikidataClassesWithWikipediaPage> and <wikidataTaxonomyDown>
     wikidataClassesWithWikipediaPage=set()
     wikidataTaxonomyDown=dict()
     for result in results:
@@ -161,21 +175,24 @@ if __name__ == '__main__':
                 wikidataTaxonomyDown[key]=set()
             wikidataTaxonomyDown[key].update(result['wikidataTaxonomyDown'][key])
     
+    # Write out non-YAGO classes
     print("  Writing non-YAGO classes...", end="", flush=True)
     with TsvUtils.TsvFileWriter(OUTPUT_FOLDER+"02-non-yago-classes.tsv") as unmappedClassesWriter:
         treated=set()
         for s,p,o in yagoSchema.triplesWithPredicate(Prefixes.fromClass):
             if s!=Prefixes.schemaThing:
-                for subclass in wikidataTaxonomyDown.get(o,set()):
-                    addSubClasses(s,subclass, unmappedClassesWriter,treated,[o])
+                for subclass in wikidataTaxonomyDown.get(o,[]):
+                    addSubClasses(s, subclass, unmappedClassesWriter, treated, [o])
     print("done")
 
+    # Remove disjoint inconsistent classes
     print("  Removing disjoint-inconsistent classes...", end="", flush=True)
     for s,p,o in yagoSchema.triplesWithPredicate(Prefixes.owlDisjointWith):
+        print("    Checking disjointness for",s)
         checkDisjointness(s, Prefixes.schemaThing)
     print("done")
 
-
+    # Write resulting taxonomy
     print("  Writing taxonomy...", end="", flush=True)
     with TsvUtils.TsvFileWriter(OUTPUT_FOLDER+"02-yago-taxonomy.tsv") as taxonomyWriter:
         for cls in yagoTaxonomyUp:

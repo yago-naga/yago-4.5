@@ -442,26 +442,37 @@ mega=1024*kilo
 giga=1024*mega
 
 def visitWikidataEntities(args):
-    """ Visits the Wikidata entities starting from portion*size """    
+    """ Visits the Wikidata entities. The arguments are
+              file, visitor, portion, size
+    The visitor is called on all Wikidata entities in the file,
+    starting from portion*size """
+    # The arguments are packed in a single argument
+    # so that we can call Pool.map() with this function.
+    # So we unpack them.
     file, visitor, portion, size = args
     print("    Initializing Wikidata reader",portion+1)
     percentagePrinted=0
     with open(file,"rb", buffering=1*giga) as wikidataReader:
         wikidataReader.seek(portion*size)
+        # Seek to next Wikidata item
         for line in wikidataReader:
             if line.rstrip().endswith(b"a wikibase:Item ."):
                 break
         print("    Running Wikidata reader",portion+1,"at",wikidataReader.tell(),"with \"",line.rstrip().decode("utf-8"),'"', flush=True)        
         graph=Graph()
         currentSubject="Elvis"
+        # We give the visitor a dictionary that the visitor can use freely
+        # to maintain a state between different calls
         context=dict()
+        # Collect triples about the same subject in a graph
+        # call the visitor on each such graph
         for triple in triplesFromTerms(termsAndSeparators(charGenerator(byteGenerator(wikidataReader)))):
             newSubject=about(triple)
             if not newSubject: 
                 continue
             if newSubject!=currentSubject:
                 if len(graph):
-                    while percentagePrinted<(wikidataReader.tell()-portion*size)/size*10:
+                    while percentagePrinted<(wikidataReader.tell()-portion*size)//size*10:
                         percentagePrinted+=1
                         print("    Wikidata reader",portion+1,"is at",percentagePrinted*10,"%", flush=True)
                     visitor(graph, context)
@@ -474,10 +485,11 @@ def visitWikidataEntities(args):
     if len(graph):
         visitor(graph, context)     
     print("    Finished Wikidata reader",portion+1, flush=True)        
+    # Return whatever the visitor accumulated in the <context> map
     return context
 
 def visitWikidata(file, visitor, numThreads=90):
-    """ Runs numThreads parallel threads that each visit a portion of Wikidata with the visitor"""
+    """ Runs numThreads parallel threads that each visit a portion of Wikidata with the visitor """
     fileSize=os.path.getsize(file)
     if numThreads>fileSize/10000000:
         numThreads=int(fileSize/10000000)+1
