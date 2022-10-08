@@ -54,7 +54,14 @@ schema:BioChemEntity owl:disjointWith
     yago:Organism,
 	schema:Person,
     schema:Place.	
-
+schema:Intangible  owl:disjointWith
+    schema:Event,
+    schema:Organization,
+    yago:Organism,
+	schema:Person,
+    schema:Place,
+	schema:BioChemEntity.	
+	
 schema:Thing a sh:NodeShape ;
     ys:fromClass wd:Q35120 ;
     sh:property [
@@ -162,7 +169,7 @@ schema:TelevisionChannel a sh:NodeShape ;
 # Fabian 2022-08-25: introduced this since schema.org uses a string
 yago:Award a sh:NodeShape ;
     ys:fromClass wd:Q618779 ;
-    rdfs:subclassOf schema:Intangible ;
+    rdfs:subClassOf schema:Intangible ;
     rdf:label "Award" .
     
 schema:CreativeWork a sh:NodeShape ;
@@ -1169,7 +1176,7 @@ schema:Event a sh:NodeShape ;
 
 yago:Sport a sh:NodeShape ;
     ys:fromClass wd:Q349 ;
-    rdfs:subclassOf schema:Intangible ;
+    rdfs:subClassOf schema:Intangible ;
     rdf:label "Sport" .
 
 schema:SportsEvent a sh:NodeShape ;
@@ -1754,7 +1761,7 @@ schema:Occupation a sh:NodeShape ;
 
 yago:Gender a sh:NodeShape ;
     ys:fromClass wd:Q48264 ;
-    rdfs:subclassOf schema:Intangible ;
+    rdfs:subClassOf schema:Intangible ;
     rdf:label "Gender" .
   
 # Fabian 2022-08-26: make humans equivalent to persons

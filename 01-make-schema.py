@@ -18,7 +18,7 @@ Algorithm:
 2) From the taxonomy keep only the classes that are mentioned in shapes, together with their superclasses. Force this to be a tree.
 """
 
-TEST=False
+TEST=True
 OUTPUT_FOLDER="test-data/01-make-schema/" if TEST else "yago-data/"
 INPUT_FOLDER= "input-data"
 
@@ -60,11 +60,13 @@ schemaTaxonomy.loadTurtleFile(INPUT_FOLDER+"/00-schema-org.ttl", "  Loading Sche
 def addSuperClasses(schemaClass):
     """ Adds all the superclasses of the given class from schema.org to yagoShapes, forcing a tree structure"""
     existingSuperClasses=yagoShapes.objects(schemaClass, Prefixes.rdfsSubClassOf)
+    if not existingSuperClasses and not schemaTaxonomy.objects(schemaClass, Prefixes.rdfsSubClassOf) and not schemaClass==Prefixes.schemaThing:
+        print("  Warning:",schemaClass,"is not a transitive subclass of schema:Thing")
     for superClass in schemaTaxonomy.objects(schemaClass, Prefixes.rdfsSubClassOf):
         if superClass in existingSuperClasses:
             continue
         if existingSuperClasses:
-            print("  Info:",schemaClass,"already has the superclasses",existingSuperClasses,", not adding",superClass)
+            print("  Info:",schemaClass,"already has the superclass",existingSuperClasses[0],", not adding",superClass)
             continue
         yagoShapes.add((schemaClass, Prefixes.rdfsSubClassOf, superClass))
         addSuperClasses(superClass)
