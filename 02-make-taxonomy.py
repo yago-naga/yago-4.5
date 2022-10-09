@@ -119,8 +119,7 @@ class2disjointTopLevelClasses=defaultdict(set)
 
 def checkDisjoint(currentClass, superClass, disjointTopLevelClassesSoFar, disjointPairs):
     """ Dissolves the link between the currentClass and the superClass if this link causes a disjointness violation """
-    if any( b for (currentClass,b) in disjointPairs) or any(b for (b, currentClass) in disjointPairs):
-       class2disjointTopLevelClasses[currentClass].add(currentClass)
+    if any( b for (currentClass,b) in disjointPairs) or any(b for (b, currentClass) in disjointPairs):       
        disjointTopLevelClassesSoFar.add(currentClass)
     if any(a in class2disjointTopLevelClasses[currentClass] and b in disjointTopLevelClassesSoFar for (a,b) in disjointPairs):
         yagoTaxonomyDown[superClass].remove(currentClass)

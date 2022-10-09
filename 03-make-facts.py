@@ -258,7 +258,7 @@ def checkRangePropertyNode(propertyNode, o, yagoSchema):
                return True
             if result==False:
                continue
-            resultList.append(result)
+            resultList+=result
         if len(resultList)==0:
             return False
         return resultList
@@ -327,7 +327,7 @@ class treatWikidataEntity():
         
     def visit(self,entityFacts):
         """ Writes out the facts for a single Wikidata entity """
-        
+
         # Anything that is rdf:type in Wikidata is meta-statements, 
         # and should go away
         for t in entityFacts.triplesWithPredicate(Prefixes.rdfType):
