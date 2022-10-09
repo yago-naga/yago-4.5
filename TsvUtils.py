@@ -60,6 +60,9 @@ class TsvFileWriter(object):
         return self
         
     def write(self, *args):
+        self.writeTuple(args)
+
+    def writeTuple(self, args):
         for i in range(0,len(args)-1):
             self.file.write(args[i] if args[i] else '')
             self.file.write("\t")

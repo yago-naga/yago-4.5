@@ -300,6 +300,15 @@ def checkRange(p, o):
 #             Main method
 ##########################################################################
 
+def yagoFactsWriter(q, file):
+    '''listens for messages on the queue q, writes to file. '''
+    with TsvUtils.TsvFileWriter(file) as yagoFacts:
+        while True:
+            m = q.get()
+            if m == 'kill':
+                break
+            f.writeTuple(m)
+            
 def treatWikidataEntity(entityFacts, context):
     """ Writes out the facts for a single Wikidata entity """
     
@@ -338,11 +347,11 @@ def treatWikidataEntity(entityFacts, context):
         (startDate, endDate) = getStartAndEndDate(s, p, o, entityFacts)
         if rangeResult is True:
             if startDate or endDate:
-                yagoFacts.write(s,yagoPredicate,o, ". #", "", startDate, endDate)
+                context['queue'].put((s,yagoPredicate,o, ". #", "", startDate, endDate))
             else:
-                yagoFacts.writeFact(s,yagoPredicate,o)
+                context['queue'].put((s,yagoPredicate,o))
         else:
-            yagoFacts.write(s,yagoPredicate,o,". # IF",(", ".join(rangeResult)), startDate, endDate)           
+            context['queue'].put((s,yagoPredicate,o,". # IF",(", ".join(rangeResult)), startDate, endDate))
 
 if __name__ == '__main__':
     print("Creating YAGO facts...")
@@ -360,10 +369,12 @@ if __name__ == '__main__':
     for triple in TsvUtils.tsvTuples(FOLDER+"02-non-yago-classes.tsv", "  Loading non-YAGO classes"):
         if len(triple)>3:
             nonYagoClasses[triple[0]]=triple[2]
-
-    with TsvUtils.TsvFileWriter(FOLDER+"03-yago-facts-to-type-check.tsv") as yagoFacts:
+    with Manager() as manager:
+        queue=manager.Queue()
+        writerTask=pool.apply_async(yagoFactsWriter, (FOLDER+"03-yago-facts-to-type-check.tsv", queue,))
         visitWikidata(WIKIDATA_FILE, treatWikidataEntity)            
-
+        queue.put("kill")
+        
     print("done")
 
     if TEST:

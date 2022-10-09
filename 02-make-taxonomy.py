@@ -23,7 +23,7 @@ Algorithm:
 3) Remove a class and its descendants if it transitively subclasses two disjoint classes
 """
 
-TEST=True
+TEST=False
 OUTPUT_FOLDER="test-data/02-make-taxonomy/" if TEST else "yago-data/"
 WIKIDATA_FILE= "test-data/02-make-taxonomy/00-wikidata.ttl" if TEST else "../wikidata.ttl"
 SCHEMA_FILE = "test-data/02-make-taxonomy/01-yago-schema.ttl" if TEST else "yago-data/01-yago-schema.ttl"
@@ -140,7 +140,20 @@ def checkDisjointness(disjointTopLevelClass, currentClass):
                 removeClass(subClass)
         checkDisjointness(disjointTopLevelClass, subClass)
 
+# stores for each class its disjoint toplevel classes
+class2disjointTopLevelClasses=defaultdict(set)
 
+def checkDisjoint(currentClass, disjointTopLevelClassesSoFar, disjointPairs):
+    if any( (a,b) for (a,b) in disjointPairs if a==currentClass or b==currentClass ):
+        disjointTopLevelClassesSoFar.add(currentClass)
+    class2disjointTopLevelClasses[currentClass].update(disjointTopLevelClassesSoFar)
+    if any( a in class2disjointTopLevelClasses[currentClass] and b in class2disjointTopLevelClasses[currentClass] for (a,b) in disjointPairs ):
+        removeClass(currentClass)
+    else:
+        for subClass in set(yagoTaxonomyDown[currentClass]):
+            checkDisjoint(subClass, disjointTopLevelClassesSoFar, disjointPairs)
+    disjointTopLevelClassesSoFar.discard(currentClass)
+    
 ###########################################################################
 #           Main
 ###########################################################################
@@ -151,7 +164,8 @@ if __name__ == '__main__':
     # Load YAGO schema
     yagoSchema = Graph()
     yagoSchema.loadTurtleFile(SCHEMA_FILE, "  Loading YAGO schema")
-
+    disjointClasses=[ (c1, c2) for (c1, p, c2) in yagoSchema.triplesWithPredicate(Prefixes.owlDisjointWith) ]
+    
     # Create YAGO taxonomy as two dictionaries,
     # mapping a subclass to its superclasses and vice versa
     yagoTaxonomyUp = defaultdict(set)
@@ -187,9 +201,10 @@ if __name__ == '__main__':
 
     # Remove disjoint inconsistent classes
     print("  Removing disjoint-inconsistent classes...", end="", flush=True)
-    for s,p,o in yagoSchema.triplesWithPredicate(Prefixes.owlDisjointWith):
-        print("    Checking disjointness for",s)
-        checkDisjointness(s, Prefixes.schemaThing)
+    #for s,p,o in yagoSchema.triplesWithPredicate(Prefixes.owlDisjointWith):
+    #    print("    Checking disjointness for",s,o)
+    #    checkDisjointness(s, Prefixes.schemaThing)
+    checkDisjoint(Prefixes.schemaThing, set(), disjointClasses)
     print("done")
 
     # Write resulting taxonomy

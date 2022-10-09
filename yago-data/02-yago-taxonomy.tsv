@@ -45,6 +45,9 @@ schema:BroadcastChannel	rdfs:subClassOf	schema:Intangible	.
 schema:RadioChannel	rdfs:subClassOf	schema:BroadcastChannel	.
 schema:TelevisionChannel	rdfs:subClassOf	schema:BroadcastChannel	.
 schema:Book	rdfs:subClassOf	schema:CreativeWork	.
+schema:Newspaper	rdfs:subClassOf	schema:Periodical	.
+schema:TVSeries	rdfs:subClassOf	schema:CreativeWorkSeries	.
+schema:TVSeries	rdfs:subClassOf	schema:CreativeWork	.
 schema:ComicStory	rdfs:subClassOf	schema:CreativeWork	.
 schema:Game	rdfs:subClassOf	schema:CreativeWork	.
 schema:MusicComposition	rdfs:subClassOf	schema:CreativeWork	.
@@ -53,6 +56,8 @@ schema:Movie	rdfs:subClassOf	schema:CreativeWork	.
 schema:Play	rdfs:subClassOf	schema:CreativeWork	.
 schema:SoftwareApplication	rdfs:subClassOf	schema:CreativeWork	.
 schema:MobileApplication	rdfs:subClassOf	schema:SoftwareApplication	.
+schema:VideoGame	rdfs:subClassOf	schema:Game	.
+schema:VideoGame	rdfs:subClassOf	schema:SoftwareApplication	.
 schema:Drawing	rdfs:subClassOf	schema:CreativeWork	.
 schema:Painting	rdfs:subClassOf	schema:CreativeWork	.
 schema:Sculpture	rdfs:subClassOf	schema:CreativeWork	.
@@ -66,7 +71,10 @@ schema:Substance	rdfs:subClassOf	schema:BioChemEntity	.
 schema:Drug	rdfs:subClassOf	schema:Substance	.
 schema:Airline	rdfs:subClassOf	schema:Organization	.
 schema:Corporation	rdfs:subClassOf	schema:Organization	.
+schema:EducationalOrganization	rdfs:subClassOf	schema:Organization	.
+schema:EducationalOrganization	rdfs:subClassOf	schema:CivicStructure	.
 schema:ResearchOrganization	rdfs:subClassOf	schema:Organization	.
+schema:CollegeOrUniversity	rdfs:subClassOf	schema:EducationalOrganization	.
 schema:GovernmentOrganization	rdfs:subClassOf	schema:Organization	.
 schema:MedicalOrganization	rdfs:subClassOf	schema:Organization	.
 schema:NGO	rdfs:subClassOf	schema:Organization	.
@@ -114,6 +122,9 @@ schema:Gene	rdfs:subClassOf	schema:BioChemEntity	.
 schema:MolecularEntity	rdfs:subClassOf	schema:BioChemEntity	.
 schema:Protein	rdfs:subClassOf	schema:BioChemEntity	.
 schema:Intangible	rdfs:subClassOf	schema:Thing	.
+schema:Periodical	rdfs:subClassOf	schema:CreativeWorkSeries	.
+schema:CreativeWorkSeries	rdfs:subClassOf	schema:Series	.
+schema:CreativeWorkSeries	rdfs:subClassOf	schema:CreativeWork	.
 schema:Series	rdfs:subClassOf	schema:Intangible	.
 schema:MusicPlaylist	rdfs:subClassOf	schema:CreativeWork	.
 schema:CivicStructure	rdfs:subClassOf	schema:Place	.
