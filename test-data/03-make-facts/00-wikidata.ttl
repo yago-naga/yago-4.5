@@ -10,6 +10,8 @@
 @prefix wpq: <http://www.wikidata.org/prop/qualifier/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+# Dummy item for the reader to start here
+wd:Elvis a wikibase:Item .
 
 # Disjoint classes should be removed
 

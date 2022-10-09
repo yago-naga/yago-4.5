@@ -11,9 +11,10 @@ import re
 import sys
 from io import StringIO
 import Prefixes
-from multiprocessing import Process, Pool
+import TsvUtils
+from multiprocessing import Process, Pool, Queue, Manager
 
-TEST=True
+TEST=False
 
 ##########################################################################
 #             Parsing Turtle
@@ -263,10 +264,12 @@ def charGenerator(byteGenerator):
 
 def triplesFromTurtleFile(file, message=None, predicates=None):
     """ Iterator over the triples in a TTL file """
-    print((message if message else "  Parsing "+file)+"... ",end="", flush=True)
+    if message:
+        print(message+"... ",end="",flush=True)
     with open(file,"rb") as reader:
         yield from triplesFromTerms(termsAndSeparators(charGenerator(byteGenerator(reader))), predicates)
-    print("done", flush=True)
+    if message:
+        print("done", flush=True)
     
 ##########################################################################
 #             Graphs
@@ -393,6 +396,10 @@ class Graph(object):
         buffer.write("# RDF Graph\n")
         self.printToWriter(buffer)
         return buffer.getvalue()
+    def someSubject(self):
+        for key in self.index:
+            return key
+        return None
     def __len__(self):
         return len(self.index)
 
@@ -450,7 +457,7 @@ def visitWikidataEntities(args):
     # so that we can call Pool.map() with this function.
     # So we unpack them.
     file, visitor, portion, size = args
-    print("    Initializing Wikidata reader",portion+1)
+    print("    Starting Wikidata reader",portion+1)
     percentagePrinted=0
     with open(file,"rb", buffering=1*giga) as wikidataReader:
         wikidataReader.seek(portion*size)
@@ -461,9 +468,6 @@ def visitWikidataEntities(args):
         print("    Running Wikidata reader",portion+1,"at",wikidataReader.tell(),"with \"",line.rstrip().decode("utf-8"),'"', flush=True)        
         graph=Graph()
         currentSubject="Elvis"
-        # We give the visitor a dictionary that the visitor can use freely
-        # to maintain a state between different calls
-        context=dict()
         # Collect triples about the same subject in a graph
         # call the visitor on each such graph
         for triple in triplesFromTerms(termsAndSeparators(charGenerator(byteGenerator(wikidataReader)))):
@@ -475,7 +479,7 @@ def visitWikidataEntities(args):
                     while percentagePrinted<(wikidataReader.tell()-portion*size)//size*10:
                         percentagePrinted+=1
                         print("    Wikidata reader",portion+1,"is at",percentagePrinted*10,"%", flush=True)
-                    visitor(graph, context)
+                    visitor.visit(graph)
                     graph=Graph()
                 currentSubject=newSubject
                 if wikidataReader.tell()>portion*size+size:
@@ -483,10 +487,9 @@ def visitWikidataEntities(args):
                     break
             graph.add(triple)
     if len(graph):
-        visitor(graph, context)     
+        visitor.visit(graph)     
     print("    Finished Wikidata reader",portion+1, flush=True)        
-    # Return whatever the visitor accumulated in the <context> map
-    return context
+    return visitor.result()
 
 def visitWikidata(file, visitor, numThreads=90):
     """ Runs numThreads parallel threads that each visit a portion of Wikidata with the visitor """
@@ -496,7 +499,34 @@ def visitWikidata(file, visitor, numThreads=90):
     print("  Running",numThreads,"Wikidata readers", flush=True)
     portionSize=int(fileSize/numThreads)
     with Pool(processes=numThreads) as pool:
-        result=pool.map(visitWikidataEntities, ((file, visitor, i, portionSize,) for i in range(0,numThreads)), 1)
+        result=pool.map(visitWikidataEntities, ((file, visitor(), i, portionSize,) for i in range(0,numThreads)), 1)
+    print("  done", flush=True)
+    return(result)
+
+def tupleWriter(file, queue):
+    '''listens for messages on the queue q, writes to file. '''
+    with TsvUtils.TsvFileWriter(file) as writer:
+        while True:
+            tup = queue.get()
+            if tup == 'kill':
+                break
+            writer.writeTuple(tup)
+
+def visitWikidataWithWriter(file, visitor, out, numThreads=90):
+    """ Runs numThreads parallel threads that each visit a portion of Wikidata with the visitor """
+    fileSize=os.path.getsize(file)
+    if numThreads>fileSize/10000000:
+        numThreads=int(fileSize/10000000)+1
+    print("  Running",numThreads,"Wikidata readers", flush=True)
+    portionSize=int(fileSize/numThreads)
+    with Manager() as manager:
+        queue=manager.Queue()
+        writerTask=Process(target=tupleWriter, args=(out, queue,))
+        writerTask.start()
+        with Pool(processes=numThreads) as pool:
+            result=pool.map(visitWikidataEntities, ((file, visitor(queue, i), i, portionSize,) for i in range(0,numThreads)), 1)
+        queue.put("kill")
+        writerTask.join()
     print("  done", flush=True)
     return(result)
     

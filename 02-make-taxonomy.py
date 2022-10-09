@@ -23,7 +23,7 @@ Algorithm:
 3) Remove a class and its descendants if it transitively subclasses two disjoint classes
 """
 
-TEST=False
+TEST=True
 OUTPUT_FOLDER="test-data/02-make-taxonomy/" if TEST else "yago-data/"
 WIKIDATA_FILE= "test-data/02-make-taxonomy/00-wikidata.ttl" if TEST else "../wikidata.ttl"
 SCHEMA_FILE = "test-data/02-make-taxonomy/01-yago-schema.ttl" if TEST else "yago-data/01-yago-schema.ttl"
@@ -49,26 +49,24 @@ from itertools import chain
 #           Loading the Wikidata taxonomy
 ###########################################################################
 
-def wikidataVisitor(graph, context):
+class wikidataVisitor():
     """ Will be called in parallel on each Wikidata entity graph, fills context[wikiTaxonomyDown] and context[wikidataClassesWithWikipediaPage]. """
-    # Both wikidataTaxonomyDown and wikidataClassesWithWikipediaPage
-    # should be variables that persist across several calls to this
-    # function. However, due to the multithreading, we don't have such global
-    # variables. Hence, we use a dictionary that stores these two variables.
-    if 'wikidataTaxonomyDown' not in context:
-        context['wikidataTaxonomyDown']={}
-        context['wikidataClassesWithWikipediaPage']=set()
-    for s,p,o in graph:
-        # We use the Wikidata property "ParentTaxon" as "rdfs:subclassOf",
-        # because Wikidata sometimes uses only one of them
-        if p==Prefixes.wikidataSubClassOf or p==Prefixes.wikidataParentTaxon:
-            if o not in context['wikidataTaxonomyDown']:
-                context['wikidataTaxonomyDown'][o]=set()
-            context['wikidataTaxonomyDown'][o].add(s)
-            for w in graph.subjects(Prefixes.schemaAbout, s):
-                if w.startswith("<https://en.wikipedia.org/wiki/"):
-                    context['wikidataClassesWithWikipediaPage'].add(s)
-
+    def __init__(self):
+        self.wikidataTaxonomyDown={}
+        self.wikidataClassesWithWikipediaPage=set()
+    def visit(self,graph):    
+        for s,p,o in graph:
+            # We use the Wikidata property "ParentTaxon" as "rdfs:subclassOf",
+            # because Wikidata sometimes uses only one of them
+            if p==Prefixes.wikidataSubClassOf or p==Prefixes.wikidataParentTaxon:
+                if o not in self.wikidataTaxonomyDown:
+                    self.wikidataTaxonomyDown[o]=set()
+                self.wikidataTaxonomyDown[o].add(s)
+                for w in graph.subjects(Prefixes.schemaAbout, s):
+                    if w.startswith("<https://en.wikipedia.org/wiki/"):
+                        self.wikidataClassesWithWikipediaPage.add(s)
+    def result(self):
+        return(self.wikidataTaxonomyDown, self.wikidataClassesWithWikipediaPage)
 
 ###########################################################################
 #           Creating the YAGO taxonomy
@@ -115,43 +113,22 @@ def addSubClasses(lastGoodYagoClass, wikidataClass, unmappedClassesWriter, treat
 ###########################################################################
 #           Removing classes that subclass two disjoint top-level classes
 ###########################################################################
-
-def disjoint(disjointTopLevelClass, cls):
-    """TRUE if cls is a transitive subclass of a class that is disjoint with disjointTopLevelClass"""    
-    return (disjointTopLevelClass, Prefixes.owlDisjointWith, cls) in yagoSchema \
-        or any(disjoint(disjointTopLevelClass, superclass) for superclass in yagoTaxonomyUp[cls])
-
-def removeClass(cls):
-    """ Removes the class from the YAGO taxonomy """    
-    for subClass in set(yagoTaxonomyDown[cls]):
-        removeClass(subClass)
-    yagoTaxonomyDown.pop(cls)
-    for superclass in yagoTaxonomyUp[cls]:
-        yagoTaxonomyDown[superclass].remove(cls)    
-    yagoTaxonomyUp.pop(cls)
     
-def checkDisjointness(disjointTopLevelClass, currentClass):
-    """ Recursively top-down removes any classes that are disjoint with disjointTopLevelClass, starting with currentClass """   
-    for subClass in set(yagoTaxonomyDown[currentClass]):
-        for otherSuperclass in yagoTaxonomyUp[subClass]:
-            if otherSuperclass==currentClass:
-                continue
-            if disjoint(disjointTopLevelClass, otherSuperclass):
-                removeClass(subClass)
-        checkDisjointness(disjointTopLevelClass, subClass)
-
 # stores for each class its disjoint toplevel classes
 class2disjointTopLevelClasses=defaultdict(set)
 
-def checkDisjoint(currentClass, disjointTopLevelClassesSoFar, disjointPairs):
-    if any( (a,b) for (a,b) in disjointPairs if a==currentClass or b==currentClass ):
-        disjointTopLevelClassesSoFar.add(currentClass)
-    class2disjointTopLevelClasses[currentClass].update(disjointTopLevelClassesSoFar)
-    if any( a in class2disjointTopLevelClasses[currentClass] and b in class2disjointTopLevelClasses[currentClass] for (a,b) in disjointPairs ):
-        removeClass(currentClass)
-    else:
+def checkDisjoint(currentClass, superClass, disjointTopLevelClassesSoFar, disjointPairs):
+    """ Dissolves the link between the currentClass and the superClass if this link causes a disjointness violation """
+    if any( b for (currentClass,b) in disjointPairs) or any(b for (b, currentClass) in disjointPairs):
+       class2disjointTopLevelClasses[currentClass].add(currentClass)
+       disjointTopLevelClassesSoFar.add(currentClass)
+    if any(a in class2disjointTopLevelClasses[currentClass] and b in disjointTopLevelClassesSoFar for (a,b) in disjointPairs):
+        yagoTaxonomyDown[superClass].remove(currentClass)
+        yagoTaxonomyUp[currentClass].remove(superClass)
+    else:    
+        class2disjointTopLevelClasses[currentClass].update(disjointTopLevelClassesSoFar)
         for subClass in set(yagoTaxonomyDown[currentClass]):
-            checkDisjoint(subClass, disjointTopLevelClassesSoFar, disjointPairs)
+            checkDisjoint(subClass, currentClass, disjointTopLevelClassesSoFar, disjointPairs)
     disjointTopLevelClassesSoFar.discard(currentClass)
     
 ###########################################################################
@@ -176,18 +153,17 @@ if __name__ == '__main__':
         
     # Load Wikidata taxonomy
     results=TurtleUtils.visitWikidata(WIKIDATA_FILE, wikidataVisitor)
-    # <results> is a list of context dictionaries,
-    # each of which contains the result of one thread.
+    # <results> is a list pairs of local results
     # We now merge them together in the global variables
     # <wikidataClassesWithWikipediaPage> and <wikidataTaxonomyDown>
     wikidataClassesWithWikipediaPage=set()
     wikidataTaxonomyDown=dict()
     for result in results:
-        wikidataClassesWithWikipediaPage.update(result['wikidataClassesWithWikipediaPage'])
-        for key in result['wikidataTaxonomyDown']:
+        wikidataClassesWithWikipediaPage.update(result[1])
+        for key in result[0]:
             if key not in wikidataTaxonomyDown:
                 wikidataTaxonomyDown[key]=set()
-            wikidataTaxonomyDown[key].update(result['wikidataTaxonomyDown'][key])
+            wikidataTaxonomyDown[key].update(result[0][key])
     
     # Write out non-YAGO classes
     print("  Writing non-YAGO classes...", end="", flush=True)
@@ -200,11 +176,8 @@ if __name__ == '__main__':
     print("done")
 
     # Remove disjoint inconsistent classes
-    print("  Removing disjoint-inconsistent classes...", end="", flush=True)
-    #for s,p,o in yagoSchema.triplesWithPredicate(Prefixes.owlDisjointWith):
-    #    print("    Checking disjointness for",s,o)
-    #    checkDisjointness(s, Prefixes.schemaThing)
-    checkDisjoint(Prefixes.schemaThing, set(), disjointClasses)
+    print("  Removing disjoint-inconsistent subclass links...", end="", flush=True)
+    checkDisjoint(Prefixes.schemaThing, None, set(), disjointClasses)
     print("done")
 
     # Write resulting taxonomy

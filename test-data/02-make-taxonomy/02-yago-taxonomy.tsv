@@ -48,8 +48,8 @@ schema:TelevisionChannel	rdfs:subClassOf	schema:BroadcastChannel	.
 yago:Award	rdfs:subClassOf	schema:Intangible	.
 schema:Book	rdfs:subClassOf	schema:CreativeWork	.
 schema:Newspaper	rdfs:subClassOf	schema:Periodical	.
-schema:TVSeries	rdfs:subClassOf	schema:CreativeWork	.
 schema:TVSeries	rdfs:subClassOf	schema:CreativeWorkSeries	.
+schema:TVSeries	rdfs:subClassOf	schema:CreativeWork	.
 schema:ComicStory	rdfs:subClassOf	schema:CreativeWork	.
 schema:Game	rdfs:subClassOf	schema:CreativeWork	.
 schema:MusicComposition	rdfs:subClassOf	schema:CreativeWork	.
@@ -126,14 +126,15 @@ schema:Gene	rdfs:subClassOf	schema:BioChemEntity	.
 schema:MolecularEntity	rdfs:subClassOf	schema:BioChemEntity	.
 schema:Protein	rdfs:subClassOf	schema:BioChemEntity	.
 schema:Periodical	rdfs:subClassOf	schema:CreativeWorkSeries	.
-schema:CreativeWorkSeries	rdfs:subClassOf	schema:CreativeWork	.
 schema:CreativeWorkSeries	rdfs:subClassOf	schema:Series	.
+schema:CreativeWorkSeries	rdfs:subClassOf	schema:CreativeWork	.
 schema:Series	rdfs:subClassOf	schema:Intangible	.
 schema:MusicPlaylist	rdfs:subClassOf	schema:CreativeWork	.
 schema:CivicStructure	rdfs:subClassOf	schema:Place	.
 schema:PerformingGroup	rdfs:subClassOf	schema:Organization	.
 wd:Q_European_event	rdfs:subClassOf	schema:Event	.
+wd:Q_book_and_event	rdfs:subClassOf	wd:Q_European_event	.
 wd:Q_European_book	rdfs:subClassOf	schema:Book	.
+wd:Q_wikipediapage_book	rdfs:subClassOf	wd:Q_European_book	.
 wd:Q_English_book	rdfs:subClassOf	wd:Q_European_book	.
 wd:Q_loop_book	rdfs:subClassOf	wd:Q_English_book	.
-wd:Q_wikipediapage_book	rdfs:subClassOf	wd:Q_European_book	.

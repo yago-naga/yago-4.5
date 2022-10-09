@@ -25,7 +25,7 @@ Algorithm:
   - write out facts that fulfill the constraints to yago-facts-to-type-check.tsv  
 """
 
-TEST=True
+TEST=False
 FOLDER="test-data/03-make-facts/" if TEST else "yago-data/"
 WIKIDATA_FILE= "test-data/03-make-facts/00-wikidata.ttl" if TEST else "../wikidata.ttl"
 
@@ -39,6 +39,7 @@ def debug(*message):
         for m in message:
             # Using this instead of print to allow printing unicode chars to pipes
             sys.stdout.buffer.write(str(m).encode('utf8'))
+            sys.stdout.buffer.write(b" ")
         print("")
     
 ##########################################################################
@@ -68,7 +69,7 @@ def cleanArticles(entityFacts):
         entityFacts.remove((s, Prefixes.schemaAbout, o))
         entityFacts.add((o, Prefixes.schemaPage, s))
                 
-def checkIfClass(entityFacts):
+def checkIfClass(entityFacts, yagoSchema, yagoTaxonomyUp, nonYagoClasses):
     """Adds <subject, rdf:type, rdfs:Class> if this is a class. Removes all other type relationships. Returns new entityFacts."""
     if not entityFacts.triplesWithPredicate(Prefixes.rdfsLabel):
         return entityFacts
@@ -82,13 +83,13 @@ def checkIfClass(entityFacts):
             newEntityFacts.add((yagoClass if s==mainEntity else s, p, o))
         return newEntityFacts
     if mainEntity in yagoTaxonomyUp or mainEntity in nonYagoClasses:
-		if mainEntity in yagoTaxonomyUp:
+        if mainEntity in yagoTaxonomyUp:
         	  entityFacts.add((mainEntity,Prefixes.rdfType,Prefixes.rdfsClass))
         for t in entityFacts.triplesWithPredicate(Prefixes.wikidataType):
             entityFacts.remove(t)
     return entityFacts
     
-def cleanClasses(entityFacts):
+def cleanClasses(entityFacts, yagoSchema, yagoTaxonomyUp, nonYagoClasses):
     """Replace all facts <subject, wikidata:type, wikidataClass> by <subject, rdf:type, yagoClass>"""
     for s,p,o in entityFacts.triplesWithPredicate(Prefixes.wikidataType):
         if o in nonYagoClasses:
@@ -101,7 +102,7 @@ def cleanClasses(entityFacts):
         entityFacts.remove(t)
     return any(entityFacts.triplesWithPredicate(Prefixes.rdfType))
 
-def wikidataPredicate2YagoPredicate(p):
+def wikidataPredicate2YagoPredicate(p, yagoSchema):
     """Translates a Wikidata predicate to a YAGO predicate -- or None"""
     # Try directly via sh:path
     if any(yagoSchema.subjects(Prefixes.shaclPath, p)) :
@@ -153,24 +154,24 @@ def getStartAndEndDate(s, p, o, entityGraph):
 #             Taxonomy checks
 ##########################################################################
 
-def getSuperClasses(cls, classes):
+def getSuperClasses(cls, classes, yagoTaxonomyUp):
     """Adds all superclasses of a class <cls> (including <cls>) to the set <classes>"""
     classes.add(cls)
     # Make a check before because it's a defaultdict,
     # which would create cls if it's not there
     if cls in yagoTaxonomyUp:
         for sc in yagoTaxonomyUp[cls]:
-            getSuperClasses(sc, classes)
+            getSuperClasses(sc, classes, yagoTaxonomyUp)
 
-def anyDisjoint(classes):
+def anyDisjoint(classes, disjointClasses):
     """True if the set <classes> contains any classes that are declared disjoint"""
     return any( (c1 in classes) and (c2 in classes) for (c1, c2) in disjointClasses )        
 
-def getClasses(entityFacts):
+def getClasses(entityFacts, yagoTaxonomyUp):
     """Returns the set of all classes and their superclasses that the subject is an instance of"""
     classes=set()
     for directClass in entityFacts.objects(None, Prefixes.rdfType):
-        getSuperClasses(directClass, classes)        
+        getSuperClasses(directClass, classes, yagoTaxonomyUp)        
     return classes
 
 ##########################################################################
@@ -186,9 +187,9 @@ def getClasses(entityFacts):
 # yago-shape-prop:schema-Person-schema-birthDate
 #   sh:maxCount  "1"^^xsd:integer
 
-def checkCardinalityConstraints(p, entityFacts):
+def checkCardinalityConstraints(p, entityFacts, yagoSchema):
     """Removes from <entityFacts> any facts with predicate <p> that violate the maxCount property"""
-    yagoPredicate=wikidataPredicate2YagoPredicate(p)
+    yagoPredicate=wikidataPredicate2YagoPredicate(p, yagoSchema)
     if not yagoPredicate:
         return
     propertyNode = getFirst(yagoSchema.subjects(Prefixes.shaclPath, yagoPredicate))
@@ -223,7 +224,7 @@ def checkCardinalityConstraints(p, entityFacts):
 #   sh:datatype  xsd:string
 #   sh:pattern  <regex>
 
-def checkDomain(p, classes):
+def checkDomain(p, classes, yagoSchema):
     """True if the domain of predicate <p> appears in the set <classes>"""
     for c in classes:        
         for propertyNode in yagoSchema.objects(c, Prefixes.shaclProperty):
@@ -231,7 +232,7 @@ def checkDomain(p, classes):
                 return True
     return False    
 
-def checkDatatype(datatype, o):
+def checkDatatype(datatype, o, yagoSchema):
     """True if the object <o> conforms to the <datatype>"""
     if datatype==Prefixes.xsdAnyURI:
         return not o.startswith('"')
@@ -244,7 +245,7 @@ def checkDatatype(datatype, o):
         return literalDataType is None and lang is not None
     return literalDataType==datatype        
         
-def checkRangePropertyNode(propertyNode, o):
+def checkRangePropertyNode(propertyNode, o, yagoSchema):
     """True if the object <o> conforms to the range constraints given by the yago-shape-prop node <propertNode>. False if it does not. Otherwise, returns a list of permissible types."""
     # Disjunctions
     disjunctObject = getFirst(yagoSchema.objects(propertyNode, Prefixes.shaclOr))
@@ -252,11 +253,11 @@ def checkRangePropertyNode(propertyNode, o):
         possiblePropertyNodes = yagoSchema.getList(disjunctObject)
         resultList=[]
         for possiblePropertyNode in possiblePropertyNodes:
-            result=checkRangePropertyNode(possiblePropertyNode, o)
+            result=checkRangePropertyNode(possiblePropertyNode, o, yagoSchema)
             if result==True:
                return True
             if result==False:
-                continue
+               continue
             resultList.append(result)
         if len(resultList)==0:
             return False
@@ -278,7 +279,7 @@ def checkRangePropertyNode(propertyNode, o):
     # Datatypes
     datatype = getFirst(yagoSchema.objects(propertyNode, Prefixes.shaclDatatype))
     if datatype:
-       return checkDatatype(datatype, o)
+       return checkDatatype(datatype, o, yagoSchema)
     
     # Classes
     rangeClass = getFirst(yagoSchema.objects(propertyNode, Prefixes.shaclNode))
@@ -288,93 +289,92 @@ def checkRangePropertyNode(propertyNode, o):
     # If no type can be established, we fail
     return False
     
-def checkRange(p, o):
+def checkRange(p, o, yagoSchema):
     """True if the object <o> conforms to the range constraint of predicate <p>. False if it does not. Otherwise, returns a list of classes that <o> would have to belong to."""
     # ASSUMPTION: the object types for the predicate p are the same, no matter the subject type
     propertyNode = getFirst(yagoSchema.subjects(Prefixes.shaclPath, p))
     if not propertyNode:
         return False
-    return checkRangePropertyNode(propertyNode, o)
+    return checkRangePropertyNode(propertyNode, o, yagoSchema)
     
 ##########################################################################
 #             Main method
 ##########################################################################
+  
+class treatWikidataEntity():
+    """ Visitor that wil handle every Wikidata entity """
+    def __init__(self,queue, i):
+        """ We load everything once per process (!) in order to avoid problems with shared memory """
+        print("    Initializing Wikidata reader",i+1, flush=True)
+        self.queue=queue
+        self.yagoSchema=Graph()
+        print("    Wikidata reader",i+1, "loads YAGO schema", flush=True)
+        self.yagoSchema.loadTurtleFile(FOLDER+"01-yago-schema.ttl")
+        self.disjointClasses=[ (c1, c2) for (c1, p, c2) in self.yagoSchema.triplesWithPredicate(Prefixes.owlDisjointWith) ]
 
-def yagoFactsWriter(q, file):
-    '''listens for messages on the queue q, writes to file. '''
-    with TsvUtils.TsvFileWriter(file) as yagoFacts:
-        while True:
-            m = q.get()
-            if m == 'kill':
-                break
-            f.writeTuple(m)
-            
-def treatWikidataEntity(entityFacts, context):
-    """ Writes out the facts for a single Wikidata entity """
-    
-    # Anything that is rdf:type in Wikidata is meta-statements, 
-    # and should go away
-    for t in entityFacts.triplesWithPredicate(Prefixes.rdfType):
-        entityFacts.remove(t)
-               
-    cleanArticles(entityFacts)               
-    
-    entityFacts=checkIfClass(entityFacts)
-    
-    if not cleanClasses(entityFacts):
-        continue
-         
-    classes = getClasses(entityFacts)
-    if anyDisjoint(classes):
-        continue
-
-    for p in entityFacts.predicates():
-        checkCardinalityConstraints(p, entityFacts)
-
-    for s,p,o in entityFacts:
-        if p==Prefixes.rdfType:
-            yagoFacts.writeFact(s,"rdf:type",o)
-            continue
-        else:
-            yagoPredicate = wikidataPredicate2YagoPredicate(p)
-        if not yagoPredicate:
-            continue
-        if not checkDomain(yagoPredicate, classes):
-            continue
-        rangeResult=checkRange(yagoPredicate, o)
-        if rangeResult is False:
-            continue            
-        (startDate, endDate) = getStartAndEndDate(s, p, o, entityFacts)
-        if rangeResult is True:
-            if startDate or endDate:
-                context['queue'].put((s,yagoPredicate,o, ". #", "", startDate, endDate))
-            else:
-                context['queue'].put((s,yagoPredicate,o))
-        else:
-            context['queue'].put((s,yagoPredicate,o,". # IF",(", ".join(rangeResult)), startDate, endDate))
-
-if __name__ == '__main__':
-    print("Creating YAGO facts...")
-
-    yagoSchema=Graph()
-    yagoSchema.loadTurtleFile(FOLDER+"01-yago-schema.ttl", "  Loading YAGO schema")
-    disjointClasses=[ (c1, c2) for (c1, p, c2) in yagoSchema.triplesWithPredicate(Prefixes.owlDisjointWith) ]
-
-    yagoTaxonomyUp=defaultdict(set)
-    for triple in TsvUtils.tsvTuples(FOLDER+"02-yago-taxonomy.tsv", "  Loading YAGO taxonomy"):
-        if len(triple)>3:
-            yagoTaxonomyUp[triple[0]].add(triple[2])
-
-    nonYagoClasses={}
-    for triple in TsvUtils.tsvTuples(FOLDER+"02-non-yago-classes.tsv", "  Loading non-YAGO classes"):
-        if len(triple)>3:
-            nonYagoClasses[triple[0]]=triple[2]
-    with Manager() as manager:
-        queue=manager.Queue()
-        writerTask=pool.apply_async(yagoFactsWriter, (FOLDER+"03-yago-facts-to-type-check.tsv", queue,))
-        visitWikidata(WIKIDATA_FILE, treatWikidataEntity)            
-        queue.put("kill")
+        print("    Wikidata reader",i+1, "loads YAGO taxonomy", flush=True)
+        self.yagoTaxonomyUp=defaultdict(set)
+        for triple in TsvUtils.tsvTuples(FOLDER+"02-yago-taxonomy.tsv"):
+            if len(triple)>3:
+                self.yagoTaxonomyUp[triple[0]].add(triple[2])
+                
+        print("    Wikidata reader",i+1, "loads non-YAGO classes", flush=True)
+        self.nonYagoClasses={}
+        for triple in TsvUtils.tsvTuples(FOLDER+"02-non-yago-classes.tsv"):
+            if len(triple)>3:
+                self.nonYagoClasses[triple[0]]=triple[2]    
+        print("    Done initializing Wikidata reader",i+1, flush=True)
         
+    def visit(self,entityFacts):
+        """ Writes out the facts for a single Wikidata entity """
+        
+        # Anything that is rdf:type in Wikidata is meta-statements, 
+        # and should go away
+        for t in entityFacts.triplesWithPredicate(Prefixes.rdfType):
+            entityFacts.remove(t)
+                   
+        cleanArticles(entityFacts)               
+        
+        entityFacts=checkIfClass(entityFacts, self.yagoSchema, self.yagoTaxonomyUp, self.nonYagoClasses)
+        
+        if not cleanClasses(entityFacts, self.yagoSchema, self.yagoTaxonomyUp, self.nonYagoClasses):
+            return
+             
+        classes = getClasses(entityFacts, self.yagoTaxonomyUp)
+        if anyDisjoint(classes, self.disjointClasses):
+            return
+
+        for p in entityFacts.predicates():
+            checkCardinalityConstraints(p, entityFacts, self.yagoSchema)
+
+        for s,p,o in entityFacts:
+            if p==Prefixes.rdfType:
+                self.queue.put((s,"rdf:type",o,"."))
+                continue
+            else:
+                yagoPredicate = wikidataPredicate2YagoPredicate(p, self.yagoSchema)
+            if not yagoPredicate:                
+                continue
+            if not checkDomain(yagoPredicate, classes, self.yagoSchema):
+                continue
+            rangeResult=checkRange(yagoPredicate, o, self.yagoSchema)
+            if rangeResult is False:
+                continue          
+            (startDate, endDate) = getStartAndEndDate(s, p, o, entityFacts)
+            if rangeResult is True:
+                if startDate or endDate:
+                    self.queue.put((s,yagoPredicate,o, ". #", "", startDate, endDate))
+                else:
+                    self.queue.put((s,yagoPredicate,o,"."))
+            else:
+                self.queue.put((s,yagoPredicate,o,". # IF",(", ".join(rangeResult)), startDate, endDate))
+
+    def result(self):
+        return None
+        
+if __name__ == '__main__':
+    print("Creating YAGO facts...")      
+    TurtleUtils.visitWikidataWithWriter(WIKIDATA_FILE, treatWikidataEntity, FOLDER+"03-yago-facts-to-type-check.tsv")        
     print("done")
 
     if TEST:

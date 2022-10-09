@@ -16,10 +16,11 @@ TEST=True
 #             Reading lines of a file
 ##########################################################################
 
-def linesOfFile(file, message="Parsing"):
+def linesOfFile(file, message=None):
     """ Iterator over the lines of a GZ or text file, with progress bar """
-    print(message,"...", end="", flush=True)
-    totalNumberOfDots=60-len(message)
+    if message:
+        print(message,"...", end="", flush=True)
+    totalNumberOfDots=60-len(message) if message else 0
     coveredSize=0
     printedDots=0
     fileSize=os.path.getsize(file)
@@ -29,20 +30,21 @@ def linesOfFile(file, message="Parsing"):
     with (gzip.open(file, mode='rt', encoding='UTF-8') if isGZ else open(file, mode='rt', encoding='UTF-8')) as input:
         for line in input:
             coveredSize+=len(line)
-            while coveredSize / fileSize * totalNumberOfDots > printedDots:
+            while message and (coveredSize / fileSize * totalNumberOfDots > printedDots):
                 print(".", end="", flush=True)
                 printedDots+=1
             yield line
-    while coveredSize / fileSize * totalNumberOfDots > printedDots:
+    while message and (coveredSize / fileSize * totalNumberOfDots > printedDots):
         print(".", end="", flush=True)
         printedDots+=1
-    print("done")
+    if message:
+        print("done")
 
 ##########################################################################
 #             TSV files
 ##########################################################################
 
-def tsvTuples(file, message="Parsing"):
+def tsvTuples(file, message=None):
     """ Iterates over the tuples in a TSV file"""
     for line in linesOfFile(file, message):
         if not line.startswith("#") and not line.startswith("@"):

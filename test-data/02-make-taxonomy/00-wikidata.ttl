@@ -26,10 +26,10 @@ wd:Q_European_event a wd:item .
 <https://en.wikipedia.org/wiki/Blah> schema:about wd:Q_European_event .
 wd:Q_European_event wdt:P279 wd:Q1656682 .
 
-# Nonsense is a book and an event, and should not exist in YAGO
-wd:Q_nonsense a wd:item .
-<https://en.wikipedia.org/wiki/Blah> schema:about wd:Q_nonsense .
-wd:Q_nonsense wdt:P279 wd:Q_English_book ,
+# This is a book and an event, and should be just an event
+wd:Q_book_and_event a wd:item .
+<https://en.wikipedia.org/wiki/Blah> schema:about wd:Q_book_and_event .
+wd:Q_book_and_event wdt:P279 wd:Q_English_book ,
  wd:Q_European_event .
 
 # Disambiguation pages should not exist in YAGO
