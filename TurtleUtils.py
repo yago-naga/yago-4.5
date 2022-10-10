@@ -513,7 +513,7 @@ def tupleWriter(file, queue):
                 break
             writer.writeTuple(tup)
 
-def visitWikidataWithWriter(file, visitor, out, numThreads=90):
+def visitWikidataWithWriter(file, visitor, out, numThreads=30):
     """ Runs numThreads parallel threads that each visit a portion of Wikidata with the visitor """
     fileSize=os.path.getsize(file)
     if numThreads>fileSize/10000000:

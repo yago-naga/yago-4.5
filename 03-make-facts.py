@@ -307,6 +307,7 @@ class treatWikidataEntity():
         """ We load everything once per process (!) in order to avoid problems with shared memory """
         print("    Initializing Wikidata reader",i+1, flush=True)
         self.queue=queue
+        self.number=i
         self.yagoSchema=Graph()
         print("    Wikidata reader",i+1, "loads YAGO schema", flush=True)
         self.yagoSchema.loadTurtleFile(FOLDER+"01-yago-schema.ttl")
@@ -329,6 +330,7 @@ class treatWikidataEntity():
     
     def flush(self):  
         """ Flushes the tuples to the queue. """
+        print("    Wikidata reader",self.number+1,"flushes", flush=True)
         for t in self.buffer:
             self.queue.put(t)
         self.buffer.clear()

@@ -2742,7 +2742,8 @@ schema:MolecularEntity a sh:NodeShape ;
     sh:property [
         sh:path schema:inChI ;
         sh:datatype xsd:string ;
-        sh:pattern "^1S/([0-9]*[A-Z][ub]?[a-z]?[0-9]*\\.?)+(/[0-9A-Za-z+\\-(),.*;?]+)*$" ;
+		# Fabian 2022-10-10: unclear what happens with the backslashes
+        #sh:pattern "^1S/([0-9]*[A-Z][ub]?[a-z]?[0-9]*\\.?)+(/[0-9A-Za-z+\-(),.*;?]+)*$" ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P234 ;
     ] ;
