@@ -336,7 +336,7 @@ class treatWikidataEntity():
     def visit(self,entityFacts):
         """ Writes out the facts for a single Wikidata entity """
 
-        if len(self.buffer)>1024*1024:
+        if len(self.buffer)>1024*1024*1024:
             self.flush()
         
         # Anything that is rdf:type in Wikidata is meta-statements, 
