@@ -25,7 +25,7 @@ Algorithm:
   - write out facts that fulfill the constraints to yago-facts-to-type-check.tsv  
 """
 
-TEST=False
+TEST=True
 FOLDER="test-data/03-make-facts/" if TEST else "yago-data/"
 WIKIDATA_FILE= "test-data/03-make-facts/00-wikidata.ttl" if TEST else "../wikidata.ttl"
 
@@ -303,7 +303,7 @@ def checkRange(p, o, yagoSchema):
   
 class treatWikidataEntity():
     """ Visitor that wil handle every Wikidata entity """
-    def __init__(self,queue, i):
+    def __init__(self,queue,i):
         """ We load everything once per process (!) in order to avoid problems with shared memory """
         print("    Initializing Wikidata reader",i+1, flush=True)
         self.queue=queue
@@ -324,10 +324,21 @@ class treatWikidataEntity():
             if len(triple)>3:
                 self.nonYagoClasses[triple[0]]=triple[2]    
         print("    Done initializing Wikidata reader",i+1, flush=True)
-        
+        # We will buffer our writing to minimize access to the queue, which is an expensive shared object
+        self.buffer=[]
+    
+    def flush(self):  
+        """ Flushes the tuples to the queue. """
+        for t in self.buffer:
+            self.queue.put(t)
+        self.buffer.clear()
+            
     def visit(self,entityFacts):
         """ Writes out the facts for a single Wikidata entity """
 
+        if len(self.buffer)>1024*1024:
+            self.flush()
+        
         # Anything that is rdf:type in Wikidata is meta-statements, 
         # and should go away
         for t in entityFacts.triplesWithPredicate(Prefixes.rdfType):
@@ -349,7 +360,7 @@ class treatWikidataEntity():
 
         for s,p,o in entityFacts:
             if p==Prefixes.rdfType:
-                self.queue.put((s,"rdf:type",o,"."))
+                self.buffer.append((s,"rdf:type",o,"."))
                 continue
             else:
                 yagoPredicate = wikidataPredicate2YagoPredicate(p, self.yagoSchema)
@@ -363,13 +374,14 @@ class treatWikidataEntity():
             (startDate, endDate) = getStartAndEndDate(s, p, o, entityFacts)
             if rangeResult is True:
                 if startDate or endDate:
-                    self.queue.put((s,yagoPredicate,o, ". #", "", startDate, endDate))
+                    self.buffer.append((s,yagoPredicate,o, ". #", "", startDate, endDate))
                 else:
-                    self.queue.put((s,yagoPredicate,o,"."))
+                    self.buffer.append((s,yagoPredicate,o,"."))
             else:
-                self.queue.put((s,yagoPredicate,o,". # IF",(", ".join(rangeResult)), startDate, endDate))
+                self.buffer.append((s,yagoPredicate,o,". # IF",(", ".join(rangeResult)), startDate, endDate))
 
     def result(self):
+        self.flush()
         return None
         
 if __name__ == '__main__':

@@ -462,6 +462,7 @@ def visitWikidataEntities(args):
     with open(file,"rb", buffering=1*giga) as wikidataReader:
         wikidataReader.seek(portion*size)
         # Seek to next Wikidata item
+        line=b"NONE"
         for line in wikidataReader:
             if line.rstrip().endswith(b"a wikibase:Item ."):
                 break
