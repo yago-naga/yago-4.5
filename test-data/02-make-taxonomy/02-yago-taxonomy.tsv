@@ -58,8 +58,8 @@ schema:Movie	rdfs:subClassOf	schema:CreativeWork	.
 schema:Play	rdfs:subClassOf	schema:CreativeWork	.
 schema:SoftwareApplication	rdfs:subClassOf	schema:CreativeWork	.
 schema:MobileApplication	rdfs:subClassOf	schema:SoftwareApplication	.
-schema:VideoGame	rdfs:subClassOf	schema:SoftwareApplication	.
 schema:VideoGame	rdfs:subClassOf	schema:Game	.
+schema:VideoGame	rdfs:subClassOf	schema:SoftwareApplication	.
 schema:Drawing	rdfs:subClassOf	schema:CreativeWork	.
 schema:Painting	rdfs:subClassOf	schema:CreativeWork	.
 schema:Sculpture	rdfs:subClassOf	schema:CreativeWork	.

@@ -47,6 +47,7 @@ def debug(*message):
 ##########################################################################
 
 import Prefixes
+import glob
 import TsvUtils
 import TurtleUtils
 from TurtleUtils import Graph
@@ -303,10 +304,9 @@ def checkRange(p, o, yagoSchema):
   
 class treatWikidataEntity():
     """ Visitor that wil handle every Wikidata entity """
-    def __init__(self,queue,i):
+    def __init__(self,i):
         """ We load everything once per process (!) in order to avoid problems with shared memory """
         print("    Initializing Wikidata reader",i+1, flush=True)
-        self.queue=queue
         self.number=i
         self.yagoSchema=Graph()
         print("    Wikidata reader",i+1, "loads YAGO schema", flush=True)
@@ -325,22 +325,16 @@ class treatWikidataEntity():
             if len(triple)>3:
                 self.nonYagoClasses[triple[0]]=triple[2]    
         print("    Done initializing Wikidata reader",i+1, flush=True)
-        # We will buffer our writing to minimize access to the queue, which is an expensive shared object
-        self.buffer=[]
-    
-    def flush(self):  
-        """ Flushes the tuples to the queue. """
-        print("    Wikidata reader",self.number+1,"flushes", flush=True)
-        for t in self.buffer:
-            self.queue.put(t)
-        self.buffer.clear()
-            
+        self.writer=None
+                
     def visit(self,entityFacts):
         """ Writes out the facts for a single Wikidata entity """
 
-        if len(self.buffer)>1024*1024*1024:
-            self.flush()
-        
+        # We have to open the file here and not in init() to avoid pickling problems
+        if not self.writer:
+            self.writer=TsvUtils.TsvFileWriter(FOLDER+"03-yago-facts-to-type-check-"+str(self.number)+".tmp")
+            self.writer.__enter__()
+            
         # Anything that is rdf:type in Wikidata is meta-statements, 
         # and should go away
         for t in entityFacts.triplesWithPredicate(Prefixes.rdfType):
@@ -362,11 +356,11 @@ class treatWikidataEntity():
 
         for s,p,o in entityFacts:
             if p==Prefixes.rdfType:
-                self.buffer.append((s,"rdf:type",o,"."))
+                self.writer.write(s,"rdf:type",o,".")
                 continue
             else:
                 yagoPredicate = wikidataPredicate2YagoPredicate(p, self.yagoSchema)
-            if not yagoPredicate:                
+            if not yagoPredicate: 
                 continue
             if not checkDomain(yagoPredicate, classes, self.yagoSchema):
                 continue
@@ -376,19 +370,27 @@ class treatWikidataEntity():
             (startDate, endDate) = getStartAndEndDate(s, p, o, entityFacts)
             if rangeResult is True:
                 if startDate or endDate:
-                    self.buffer.append((s,yagoPredicate,o, ". #", "", startDate, endDate))
+                    self.writer.write(s,yagoPredicate,o, ". #", "", startDate, endDate)
                 else:
-                    self.buffer.append((s,yagoPredicate,o,"."))
+                    self.writer.write(s,yagoPredicate,o,".")
             else:
-                self.buffer.append((s,yagoPredicate,o,". # IF",(", ".join(rangeResult)), startDate, endDate))
+                self.writer.write(s,yagoPredicate,o,". # IF",(", ".join(rangeResult)), startDate, endDate)
 
     def result(self):
-        self.flush()
+        self.writer.__exit__()
         return None
         
 if __name__ == '__main__':
     print("Creating YAGO facts...")      
-    TurtleUtils.visitWikidataWithWriter(WIKIDATA_FILE, treatWikidataEntity, FOLDER+"03-yago-facts-to-type-check.tsv")        
+    TurtleUtils.visitWikidata(WIKIDATA_FILE, treatWikidataEntity) 
+    print("  Collecting results...")
+    with open(FOLDER+"03-yago-facts-to-type-check.tsv", "wb") as writer:
+        for file in glob.glob(FOLDER+"03-yago-facts-to-type-check-*.tmp"):
+            print("    Reading",file)
+            with open(file, "rb") as reader:
+                for line in reader:
+                    writer.write(line)
+    print("  done")
     print("done")
 
     if TEST:

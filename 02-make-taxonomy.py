@@ -23,7 +23,7 @@ Algorithm:
 3) Remove a class and its descendants if it transitively subclasses two disjoint classes
 """
 
-TEST=True
+TEST=False
 OUTPUT_FOLDER="test-data/02-make-taxonomy/" if TEST else "yago-data/"
 WIKIDATA_FILE= "test-data/02-make-taxonomy/00-wikidata.ttl" if TEST else "../wikidata.ttl"
 SCHEMA_FILE = "test-data/02-make-taxonomy/01-yago-schema.ttl" if TEST else "yago-data/01-yago-schema.ttl"
@@ -49,9 +49,9 @@ from itertools import chain
 #           Loading the Wikidata taxonomy
 ###########################################################################
 
-class wikidataVisitor():
+class wikidataVisitor(object):
     """ Will be called in parallel on each Wikidata entity graph, fills context[wikiTaxonomyDown] and context[wikidataClassesWithWikipediaPage]. """
-    def __init__(self):
+    def __init__(self, id):
         self.wikidataTaxonomyDown={}
         self.wikidataClassesWithWikipediaPage=set()
     def visit(self,graph):    

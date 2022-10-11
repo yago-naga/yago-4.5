@@ -663,18 +663,19 @@ schema:TVSeries a sh:NodeShape ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P2437 ;
     ] ;
-    sh:property [
-        sh:path schema:musicBy ;
-        sh:or (
-            [
-                sh:node schema:Person
-            ]
-            [
-                sh:node schema:MusicGroup
-            ]
-        ) ;
-        ys:fromProperty wdt:P86 ;
-    ] ;
+	# Fabian: removed 2022-10-11, not the right Wikidata property
+    #sh:property [
+    #    sh:path schema:musicBy ;
+    #    sh:or (
+    #        [
+    #            sh:node schema:Person
+    #        ]
+    #        [
+    #            sh:node schema:MusicGroup
+    #        ]
+    #    ) ;
+    #    ys:fromProperty wdt:P86 ;
+    #] ;
     sh:property [
         sh:path schema:productionCompany ;
         sh:node schema:Organization ;
@@ -895,18 +896,19 @@ schema:Movie a sh:NodeShape ;
         sh:datatype xsd:duration ;
         ys:fromProperty wdt:P2047 ;
     ] ;
-    sh:property [
-        sh:path schema:musicBy ;
-        sh:or (
-            [
-                sh:node schema:Person
-            ]
-            [
-                sh:node schema:MusicGroup
-            ]
-        ) ;
-        ys:fromProperty wdt:P86 ;
-    ] ;
+    # Fabian: removed 2022-10-11, not the right Wikidata property
+	#sh:property [
+    #    sh:path schema:musicBy ;
+    #    sh:or (
+    #        [
+    #            sh:node schema:Person
+    #        ]
+    #        [
+    #            sh:node schema:MusicGroup
+    #        ]
+    #    ) ;
+    #    ys:fromProperty wdt:P86 ;
+    #] ;
     sh:property [
         sh:path schema:productionCompany ;
         sh:node schema:Organization ;
@@ -976,19 +978,20 @@ schema:VideoGame a sh:NodeShape ;
         sh:maxCount 1 ;
         sh:node schema:Person ;
         ys:fromProperty wdt:P57 ;
-    ] ;
-    sh:property [
-        sh:path schema:musicBy ;
-        sh:or (
-            [
-                sh:node schema:Person
-            ]
-            [
-                sh:node schema:MusicGroup
-            ]
-        ) ;
-        ys:fromProperty wdt:P86 ;
     ] .
+	# Fabian: removed 2022-10-11, not the right Wikidata property
+    #sh:property [
+    #    sh:path schema:musicBy ;
+    #    sh:or (
+    #        [
+    #            sh:node schema:Person
+    #        ]
+    #        [
+    #            sh:node schema:MusicGroup
+    #        ]
+    #    ) ;
+    #    ys:fromProperty wdt:P86 ;
+    #] .
 
 # Fabian 2022-08-24: removed    
 #schema:Thesis a sh:NodeShape ;
@@ -1050,18 +1053,19 @@ schema:Event a sh:NodeShape ;
         sh:node schema:Thing ;
         ys:fromProperty wdt:P921 ;
     ] ;
-    sh:property [
-        sh:path schema:composer ;
-        sh:or (
-            [
-                sh:node schema:Person
-            ]
-            [
-                sh:node schema:MusicGroup
-            ]
-        ) ;
-        ys:fromProperty wdt:P86 ;
-    ] ;
+	# Fabian: removed 2022-10-11, not the right Wikidata property
+    #sh:property [
+    #    sh:path schema:composer ;
+    #    sh:or (
+    #        [
+    #            sh:node schema:Person
+    #        ]
+    #        [
+    #            sh:node schema:MusicGroup
+    #        ]
+    #    ) ;
+    #    ys:fromProperty wdt:P86 ;
+    #] ;
     sh:property [
         sh:path schema:contributor ;
         sh:or (
@@ -2742,8 +2746,7 @@ schema:MolecularEntity a sh:NodeShape ;
     sh:property [
         sh:path schema:inChI ;
         sh:datatype xsd:string ;
-		# Fabian 2022-10-10: unclear what happens with the backslashes
-        #sh:pattern "^1S/([0-9]*[A-Z][ub]?[a-z]?[0-9]*\\.?)+(/[0-9A-Za-z+\-(),.*;?]+)*$" ;
+		sh:pattern "^1S/([0-9]*[A-Z][ub]?[a-z]?[0-9]*\\.?)+(/[0-9A-Za-z+\\-(),.*;?]+)*$" ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P234 ;
     ] ;

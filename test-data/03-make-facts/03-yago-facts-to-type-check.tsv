@@ -37,8 +37,8 @@ wd:Q_Elvis	schema:children	wd:Q_child	. # IF	schema:Person	"2014-01-01T00:00:00Z
 wd:Q_Elvis	schema:birthDate	"1935"^^xsd:gYear	.
 wd:Q_Elvis	schema:mainEntityOfPage	<https://elvis.com>	.
 wd:Q_Elvis	rdf:type	wd:Q_singer	.
-wd:Q_movie	schema:musicBy	wd:Q_person_or_band	. # IF	schema:Person, schema:MusicGroup		
-wd:Q_movie	rdf:type	schema:Movie	.
+wd:Q_composition	schema:composer	wd:Q_person_or_band	. # IF	schema:Person, schema:MusicGroup		
+wd:Q_composition	rdf:type	schema:MusicComposition	.
 wd:Q_singer	rdfs:label	"singer"@en	.
 wd:Q_singer	rdfs:label	"chanteur"@fr	.
 wd:Q_singer	rdfs:comment	"this is a singer"@en	.

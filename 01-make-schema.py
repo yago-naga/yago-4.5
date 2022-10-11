@@ -29,10 +29,12 @@ INPUT_FOLDER= "input-data"
 print("Creating YAGO schema...")
 print("  Importing...",end="", flush=True)
 from TurtleUtils import Graph
+import TurtleUtils
 import sys
 from os.path import exists
 import evaluator
 import Prefixes
+import re
 print("done")
 
 if not(exists("input-data")):
@@ -85,7 +87,15 @@ for targetClass in yagoShapes.objects(None, Prefixes.shaclNode):
         continue    
     if not yagoShapes.objects(targetClass, Prefixes.rdfsSubClassOf):
         print("  Warning: the range",targetClass,"is undefined in the schema")
-    
+ 
+# We verify the SHACL patterns
+for s,p,o in yagoShapes.triplesWithPredicate(Prefixes.shaclPattern):
+    try:
+        re.compile(TurtleUtils.splitLiteral(o)[0])
+    except:
+        print("  Warning: the SHACL pattern",TurtleUtils.splitLiteral(o)[0],"does not compile as a regex, removing")
+        yagoShapes.remove((s,p,o))
+        
 ###########################################################################
 #           Write and test YAGO schema
 ###########################################################################

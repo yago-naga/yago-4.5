@@ -91,7 +91,6 @@ def termsAndSeparators(generator):
                             printError("Unexpected end of file in literal",literal)
                             break
                         elif char=='\\':
-                            literal+=char
                             literal+=next(generator, ' ')
                             continue
                         elif char=='"':
@@ -500,34 +499,7 @@ def visitWikidata(file, visitor, numThreads=90):
     print("  Running",numThreads,"Wikidata readers", flush=True)
     portionSize=int(fileSize/numThreads)
     with Pool(processes=numThreads) as pool:
-        result=pool.map(visitWikidataEntities, ((file, visitor(), i, portionSize,) for i in range(0,numThreads)), 1)
-    print("  done", flush=True)
-    return(result)
-
-def tupleWriter(file, queue):
-    '''listens for messages on the queue q, writes to file. '''
-    with TsvUtils.TsvFileWriter(file) as writer:
-        while True:
-            tup = queue.get()
-            if tup == 'kill':
-                break
-            writer.writeTuple(tup)
-
-def visitWikidataWithWriter(file, visitor, out, numThreads=30):
-    """ Runs numThreads parallel threads that each visit a portion of Wikidata with the visitor """
-    fileSize=os.path.getsize(file)
-    if numThreads>fileSize/10000000:
-        numThreads=int(fileSize/10000000)+1
-    print("  Running",numThreads,"Wikidata readers", flush=True)
-    portionSize=int(fileSize/numThreads)
-    with Manager() as manager:
-        queue=manager.Queue()
-        writerTask=Process(target=tupleWriter, args=(out, queue,))
-        writerTask.start()
-        with Pool(processes=numThreads) as pool:
-            result=pool.map(visitWikidataEntities, ((file, visitor(queue, i), i, portionSize,) for i in range(0,numThreads)), 1)
-        queue.put("kill")
-        writerTask.join()
+        result=pool.map(visitWikidataEntities, ((file, visitor(i), i, portionSize,) for i in range(0,numThreads)), 1)
     print("  done", flush=True)
     return(result)
     
