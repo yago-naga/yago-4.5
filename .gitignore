@@ -2,4 +2,3 @@ __pycache__/*
 .DS_Store
 .vs
 yago-data/
-input-data/wikidata*
