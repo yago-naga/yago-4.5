@@ -101,7 +101,7 @@ for s,p,o in yagoShapes.triplesWithPredicate(Prefixes.shaclPattern):
 ###########################################################################
 
 # The schema is best in TTL
-print("  Writing schema...", end="", flush=True)
+print("  Writing schema to",OUTPUT_FOLDER,"...", end="", flush=True)
 yagoShapes.printToFile(OUTPUT_FOLDER+"01-yago-schema.ttl")
 print("done")
 
