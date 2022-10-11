@@ -91,6 +91,7 @@ def termsAndSeparators(generator):
                             printError("Unexpected end of file in literal",literal)
                             break
                         elif char=='\\':
+                            literal+=char
                             literal+=next(generator, ' ')
                             continue
                         elif char=='"':
@@ -409,7 +410,7 @@ literalRegex=re.compile('"([^"]*)"(@([a-z-]+))?(\\^\\^(.*))?')
 intRegex=re.compile('[+-]?[0-9.]+')
 
 def splitLiteral(term):
-    """ Returns String value, int value, language, and datatype of a term (or None, None, None, None)"""
+    """ Returns String value, int value, language, and datatype of a term (or None, None, None, None). No good backslash handling """
     match=re.match(intRegex, term)
     if match:
         try:
@@ -425,7 +426,7 @@ def splitLiteral(term):
         intValue=int(match.group(1))
     except:
         intValue=None
-    return (match.group(1), intValue, match.group(3), match.group(5))
+    return (match.group(1).replace("\\\\","\\"), intValue, match.group(3), match.group(5))
     
 ##########################################################################
 #             Reading Wikidata entities
