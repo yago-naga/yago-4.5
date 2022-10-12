@@ -39,6 +39,8 @@ wd:Q_Elvis	schema:mainEntityOfPage	<https://elvis.com>	.
 wd:Q_Elvis	rdf:type	wd:Q_singer	.
 wd:Q_composition	schema:composer	wd:Q_person_or_band	. # IF	schema:Person, schema:MusicGroup		
 wd:Q_composition	rdf:type	schema:MusicComposition	.
+wd:Q_molecule	schema:inChI	"1S/C6H6/c1-2-4-6-5-3-1/h1-6H"	.
+wd:Q_molecule	rdf:type	schema:MolecularEntity	.
 wd:Q_singer	rdfs:label	"singer"@en	.
 wd:Q_singer	rdfs:label	"chanteur"@fr	.
 wd:Q_singer	rdfs:comment	"this is a singer"@en	.

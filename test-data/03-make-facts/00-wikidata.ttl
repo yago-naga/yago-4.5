@@ -49,7 +49,11 @@ s:Q_Elvis-5b0fdcdf-4815-583c-4dd3-914e1c5d95c0 a wikibase:Statement,
 # Disjoint ranges
 wd:Q_composition  wdt:P31 wd:Q207628;
 	wdt:P86 wd:Q_person_or_band .
-	
+
+# Patterns
+wd:Q_molecule wdt:P31 schema:MolecularEntity;
+		wdt:P234 "1S/C6H6/c1-2-4-6-5-3-1/h1-6H".
+		
 # Classes should survive
 
 <https://de.wikipedia.org/wiki/Mensch> a schema:Article ;

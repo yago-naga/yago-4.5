@@ -18,7 +18,7 @@ Algorithm:
 2) From the taxonomy keep only the classes that are mentioned in shapes, together with their superclasses. Force this to be a tree.
 """
 
-TEST=False
+TEST=True
 OUTPUT_FOLDER="test-data/01-make-schema/" if TEST else "yago-data/"
 INPUT_FOLDER= "input-data"
 

@@ -274,9 +274,14 @@ def checkRangePropertyNode(propertyNode, o, yagoSchema):
        patternString=TurtleUtils.splitLiteral(patternObject)[0]
        if patternString is None:
             raise Exception("SHACL pattern has to be a string: "+str(propertyNode)+" "+str(patternObject))
-       if not re.match(patternString, objectValue):
-           return False
-    
+       try:
+           if not re.match(patternString, objectValue):
+               return False
+       except:
+            # This should not happen
+            print("     Warning: regex does not complile:",patternString)
+            return False
+            
     # Datatypes
     datatype = getFirst(yagoSchema.objects(propertyNode, Prefixes.shaclDatatype))
     if datatype:
