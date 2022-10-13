@@ -56,7 +56,7 @@ def toYagoEntity(entity):
         return entity
     if entity.startswith('<http://') or entity.startswith('<https://'):
         return entity
-    if entity.startswith("yago:") or entity.startswith("schema:"):
+    if entity.startswith("yago:") or entity.startswith("schema:") or entity.startswith("rdfs:") :
         return entity
     if entity in yagoIds:
         return yagoIds[entity]
@@ -82,7 +82,7 @@ with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-meta.tsv") as metaFacts:
                     # Should not happen
                     continue
                 relation=split[1]
-                object=split[2] if relation=="rdf:type" else toYagoEntity(split[2])
+                object=toYagoEntity(split[2])
                 if not object:
                     # Should not happen
                     continue
