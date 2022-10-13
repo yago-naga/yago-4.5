@@ -45,7 +45,7 @@ def linesOfFile(file, message=None):
 ##########################################################################
 
 def tsvTuples(file, message=None):
-    """ Iterates over the tuples in a TSV file"""
+    """ Iterates over the tuples in a TSV file """
     for line in linesOfFile(file, message):
         if not line.startswith("#") and not line.startswith("@"):
             yield line.rstrip().split("\t")

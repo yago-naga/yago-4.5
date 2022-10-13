@@ -503,7 +503,21 @@ def visitWikidata(file, visitor, numThreads=90):
         result=pool.map(visitWikidataEntities, ((file, visitor(i), i, portionSize,) for i in range(0,numThreads)), 1)
     print("  done", flush=True)
     return(result)
-    
+
+def tsvEntities(file, message=None):
+    """ Iterates over the entity graphs in a TSV file """
+    previousEntity="Elvis"
+    graph=Graph()
+    for split in TsvUtils.tsvTuples(file, message):
+        if split[0]!=previousEntity:
+            if graph:
+                yield graph
+            graph=Graph()
+            previousEntity=split[0]
+        graph.add((split[0], split[1], split[2]))
+    if graph:
+        yield graph
+        
 ##########################################################################
 #             Test
 ##########################################################################
