@@ -27,7 +27,7 @@ def linesOfFile(file, message=None):
     isGZ=file.endswith(".gz")
     if isGZ:
         fileSize*=20
-    with (gzip.open(file, mode='rt', encoding='UTF-8') if isGZ else open(file, mode='rt', encoding='UTF-8')) as input:
+    with (gzip.open(file, mode='rt', encoding='UTF-8') if isGZ else open(file, mode='rt', encoding='UTF-8', buffering=1024*1024*1024)) as input:
         for line in input:
             coveredSize+=len(line)
             while message and (coveredSize / fileSize * totalNumberOfDots > printedDots):

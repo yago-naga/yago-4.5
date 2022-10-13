@@ -29,7 +29,7 @@ wd:Q_Elvis wdt:P31 wd:Q_rock_singer;
 	# Check bad property: fact should be removed
 	wdt:P10000000 wd:Q_bad_object;
 	# Normal range: fact should survive
-	wdt:P40 wd:Q_child;
+	wdt:P40 wd:Q_child;	
 	# Literal range: should be OK
 	wdt:P569 "1935"^^xsd:gYear .
 	
@@ -53,6 +53,10 @@ wd:Q_composition  wdt:P31 wd:Q207628;
 # Patterns
 wd:Q_molecule wdt:P31 schema:MolecularEntity;
 		wdt:P234 "1S/C6H6/c1-2-4-6-5-3-1/h1-6H".
+
+# Geo locations
+wd:Q31  wdt:P31	schema:Country ;
+	schema:geo      "Point(4.6680555555556 50.641111111111)"^^geo:wktLiteral        .
 		
 # Classes should survive
 
@@ -65,6 +69,7 @@ wd:Q_molecule wdt:P31 schema:MolecularEntity;
 wd:Q_singer  rdfs:label "singer"@en ;
 	skos:prefLabel "singer"@en ;
 	schema:name "singer"@en ;
+	wdt:P646	<https://freebase.com/id> ;
 	rdfs:label "chanteur"@fr ;
 	skos:prefLabel "chanteur"@fr ;
 	schema:name "chanteur"@fr ;	

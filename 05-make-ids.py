@@ -73,34 +73,56 @@ def hasWikipediaPage(entity):
 with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-meta.tsv") as metaFacts:
     with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-full.tsv") as fullFacts:
         with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-wikipedia.tsv") as wikipediaFacts:
+            previousEntity="Elvis"
             for split in TsvUtils.tsvTuples(FOLDER+"04-yago-facts-to-rename.tsv", "  Renaming"):
                 if len(split)<3:
                     continue
                 subject=toYagoEntity(split[0])
                 if not subject:
                     # Should not happen
-                    print("Entity does not appear in YAGO:", split[0])
                     continue
                 relation=split[1]
                 object=split[2] if relation=="rdf:type" else toYagoEntity(split[2])
                 if not object:
                     # Should not happen
-                    print("Entity does not appear in YAGO:", split[2])
                     continue
                 # Write facts to Wikipedia version of YAGO
                 if hasWikipediaPage(subject) and (relation=="rdf:type" or hasWikipediaPage(object)):
                     wikipediaFacts.writeFact(subject, relation, object)
+                    if subject!=previousEntity and split[0] in yagoIds:
+                       wikipediaFacts.writeFact(subject, "owl:sameAs", split[0])
                 # In any case, write (also) to the full version of YAGO
                 fullFacts.writeFact(subject, relation, object)
+                if subject!=previousEntity and split[0] in yagoIds:
+                   fullFacts.writeFact(subject, "owl:sameAs", split[0])                
                 # If there is a meta-fact, write it out as well
                 if len(split)>5:
-                    metaFacts.write("<<", subject, relation, object, ">>", "schema:startDate", split[4])
-                    metaFacts.write("<<", subject, relation, object, ">>", "schema:endDate", split[5])
-                    
+                    if split[4]: metaFacts.write("<<", subject, relation, object, ">>", "schema:startDate", split[4])
+                    if split[5]: metaFacts.write("<<", subject, relation, object, ">>", "schema:endDate", split[5])
+                previousEntity=subject
+                
+with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-taxonomy.tsv") as taxFacts:
+    for split in TsvUtils.tsvTuples(FOLDER+"02-yago-taxonomy-to-rename.tsv", "  Renaming classes"):
+        if len(split)<3:
+            continue
+        subject=toYagoEntity(split[0])
+        if not subject:
+            # Should not happen
+            print("Entity does not appear in YAGO:", split[0])
+            continue
+        relation=split[1]
+        object=split[2] if relation=="rdf:type" else toYagoEntity(split[2])
+        if not object:
+            # Should not happen
+            print("Entity does not appear in YAGO:", split[2])
+            continue
+        # Write taxonomic fact
+        taxFacts.writeFact(subject, relation, object)
+            
 print("done")
 
 if TEST:
     evaluator.compare(FOLDER+"05-yago-final-wikipedia.tsv")
     evaluator.compare(FOLDER+"05-yago-final-full.tsv")
     evaluator.compare(FOLDER+"05-yago-final-meta.tsv")
-    
+    evaluator.compare(FOLDER+"05-yago-final-taxonomy.tsv")

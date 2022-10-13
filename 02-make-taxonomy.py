@@ -11,7 +11,7 @@ Input:
 - 01-yago-schema.ttl, the YAGO schema
 
 Output:
-- 02-yago-taxonomy.tsv, the YAGO lower level taxonomy in 
+- 02-yago-taxonomy-to-rename.tsv, the YAGO lower level taxonomy in 
 - 02-non-yago-classes.tsv, which maps classes that exist in Wikidata but not in YAGO to the nearest superclass in YAGO
     
 Algorithm:
@@ -119,14 +119,18 @@ class2disjointTopLevelClasses=defaultdict(set)
 
 def checkDisjoint(currentClass, superClass, disjointTopLevelClassesSoFar, disjointPairs):
     """ Dissolves the link between the currentClass and the superClass if this link causes a disjointness violation """
-    if any( b for (currentClass,b) in disjointPairs) or any(b for (b, currentClass) in disjointPairs):       
+    if any( b for (a,b) in disjointPairs if a==currentClass) or any(b for (b, a) in disjointPairs if a==currentClass):               
        disjointTopLevelClassesSoFar.add(currentClass)
-    if any(a in class2disjointTopLevelClasses[currentClass] and b in disjointTopLevelClassesSoFar for (a,b) in disjointPairs):
+    if any(a in class2disjointTopLevelClasses[currentClass] and b in disjointTopLevelClassesSoFar for (a,b) in disjointPairs) \
+       or any(a in class2disjointTopLevelClasses[currentClass] and b in disjointTopLevelClassesSoFar for (b,a) in disjointPairs):
         yagoTaxonomyDown[superClass].remove(currentClass)
         yagoTaxonomyUp[currentClass].remove(superClass)
     else:    
         class2disjointTopLevelClasses[currentClass].update(disjointTopLevelClassesSoFar)
-        for subClass in set(yagoTaxonomyDown[currentClass]):
+        # Make this deterministic
+        subclasses=list(yagoTaxonomyDown[currentClass])
+        subclasses.sort()
+        for subClass in subclasses:
             checkDisjoint(subClass, currentClass, disjointTopLevelClassesSoFar, disjointPairs)
     disjointTopLevelClassesSoFar.discard(currentClass)
     
@@ -181,7 +185,7 @@ if __name__ == '__main__':
 
     # Write resulting taxonomy
     print("  Writing taxonomy...", end="", flush=True)
-    with TsvUtils.TsvFileWriter(OUTPUT_FOLDER+"02-yago-taxonomy.tsv") as taxonomyWriter:
+    with TsvUtils.TsvFileWriter(OUTPUT_FOLDER+"02-yago-taxonomy-to-rename.tsv") as taxonomyWriter:
         for cls in yagoTaxonomyUp:
             for superclass in yagoTaxonomyUp[cls]:
                 taxonomyWriter.writeFact(cls, "rdfs:subClassOf", superclass)
@@ -190,4 +194,4 @@ if __name__ == '__main__':
 
     if TEST:
         evaluator.compare(OUTPUT_FOLDER+"02-non-yago-classes.tsv")
-        evaluator.compare(OUTPUT_FOLDER+"02-yago-taxonomy.tsv")
+        evaluator.compare(OUTPUT_FOLDER+"02-yago-taxonomy-to-rename.tsv")

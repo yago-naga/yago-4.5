@@ -8,7 +8,7 @@ Call:
 
 Input:
 - 01-yago-schema.ttl
-- 02-yago-taxonomy.tsv
+- 02-yago-taxonomy-to-rename.tsv
 - 02-non-yago-classes.tsv
 - Wikidata file
 
@@ -53,6 +53,7 @@ import TurtleUtils
 from TurtleUtils import Graph
 import sys
 import re
+import os
 import evaluator
 from collections import defaultdict
 
@@ -235,8 +236,10 @@ def checkDomain(p, classes, yagoSchema):
 
 def checkDatatype(datatype, o, yagoSchema):
     """True if the object <o> conforms to the <datatype>"""
-    if datatype==Prefixes.xsdAnyURI:
+    if datatype==Prefixes.xsdAnytype:
         return not o.startswith('"')
+    if datatype==Prefixes.xsdAnyURI:
+        return o.startswith('<')
     literalValue, _, lang, literalDataType = TurtleUtils.splitLiteral(o)
     if literalValue is None:
         return False
@@ -320,7 +323,7 @@ class treatWikidataEntity():
 
         print("    Wikidata reader",i+1, "loads YAGO taxonomy", flush=True)
         self.yagoTaxonomyUp=defaultdict(set)
-        for triple in TsvUtils.tsvTuples(FOLDER+"02-yago-taxonomy.tsv"):
+        for triple in TsvUtils.tsvTuples(FOLDER+"02-yago-taxonomy-to-rename.tsv"):
             if len(triple)>3:
                 self.yagoTaxonomyUp[triple[0]].add(triple[2])
                 
@@ -396,6 +399,12 @@ if __name__ == '__main__':
                 for line in reader:
                     writer.write(line)
     print("  done")
+    
+    print("  Deleting temporary files...", end="", flush=True)
+    for file in set(glob.glob(FOLDER+"03-yago-facts-to-type-check-*.tmp")):
+        os.remove(file)
+    print(" done")
+    
     print("done")
 
     if TEST:

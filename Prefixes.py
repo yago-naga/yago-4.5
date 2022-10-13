@@ -54,6 +54,8 @@ prefixes = {
 
 xsdAnyURI='xsd:anyURI'
 
+xsdAnytype='xsd:anytype'
+
 xsdString='xsd:string'
 
 rdfLangString='rdf:langString'

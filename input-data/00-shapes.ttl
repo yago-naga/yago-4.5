@@ -104,7 +104,7 @@ schema:Thing a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path owl:sameAs ;
-        sh:nodeKind sh:IRI ;
+        sh:datatype xsd:anytype ;
         # Fabian 2022-08-30: added FreebaseID and IMDB ID
         ys:fromProperty wdt:P646, wdt:P345;
     ] .
@@ -134,8 +134,8 @@ rdfs:Class a sh:NodeShape ;
         sh:uniqueLang true ;
     ] ;
     sh:property [
-        sh:path schema:sameAs ;
-        sh:datatype xsd:anyURI ;
+        sh:path owl:sameAs ;
+        sh:datatype xsd:anytype ;
     ] ;
     sh:property [
         sh:path schema:mainEntityOfPage ;
@@ -2092,7 +2092,7 @@ schema:Place a sh:NodeShape ;
 #    ] ;
     sh:property [
         sh:path schema:geo ;
-        sh:node geo:wktLiteral ;
+        sh:datatype geo:wktLiteral ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P625 ;
     ] .

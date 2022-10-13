@@ -7,7 +7,7 @@ Call:
   python3 make-typecheck.py
 
 Input:
-- 02-yago-taxonomy.tsv
+- 02-yago-taxonomy-to-rename.tsv
 - 03-yago-facts-to-type-check.tsv
 
 Output:
@@ -41,7 +41,7 @@ from collections import defaultdict
 print("done")
 
 yagoTaxonomyUp=defaultdict(set)
-for tuple in TsvUtils.tsvTuples(FOLDER+"02-yago-taxonomy.tsv", "  Loading YAGO taxonomy"):
+for tuple in TsvUtils.tsvTuples(FOLDER+"02-yago-taxonomy-to-rename.tsv", "  Loading YAGO taxonomy"):
     if len(tuple)>3:
         yagoTaxonomyUp[tuple[0]].add(tuple[2])
 

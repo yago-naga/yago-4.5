@@ -41,8 +41,11 @@ wd:Q_composition	schema:composer	wd:Q_person_or_band	. # IF	schema:Person, schem
 wd:Q_composition	rdf:type	schema:MusicComposition	.
 wd:Q_molecule	schema:inChI	"1S/C6H6/c1-2-4-6-5-3-1/h1-6H"	.
 wd:Q_molecule	rdf:type	schema:MolecularEntity	.
-wd:Q_singer	rdfs:label	"singer"@en	.
+wd:Q31	schema:geo	"Point(4.6680555555556 50.641111111111)"^^geo:wktLiteral	.
+wd:Q31	rdf:type	schema:Country	.
 wd:Q_singer	rdfs:label	"chanteur"@fr	.
+wd:Q_singer	rdfs:label	"singer"@en	.
+wd:Q_singer	owl:sameAs	<https://freebase.com/id>	.
 wd:Q_singer	rdfs:comment	"this is a singer"@en	.
 wd:Q_singer	schema:alternateName	"this is a human being"@en	.
 wd:Q_singer	schema:mainEntityOfPage	<https://de.wikipedia.org/wiki/Mensch>	.
