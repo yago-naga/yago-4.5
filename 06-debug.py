@@ -4,6 +4,7 @@ Produces statistics about YAGO entities and predicates, and extracts samples
 (c) 2022 Fabian M. Suchanek
 
 Input:
+- 01-yago-schema.ttl
 - 05-yago-final-full.tsv
 - 05-yago-final-taxonomy.tsv
 
@@ -49,16 +50,29 @@ def getSuperClasses(cls, classes, yagoTaxonomyUp):
 
 print("Collecting YAGO statistics...")
 
+# Load YAGO schema
+yagoSchema = TurtleUtils.Graph()
+yagoSchema.loadTurtleFile(FOLDER+"01-yago-schema.ttl", "  Loading YAGO schema")
+
+# Load YAGO taxonomy
 yagoTaxonomyUp=defaultdict(set)
 for triple in TsvUtils.tsvTuples(FOLDER+"05-yago-final-taxonomy.tsv", "  Loading YAGO taxonomy"):
     if len(triple)>3:
         yagoTaxonomyUp[triple[0]].add(triple[2])
 
+# Initialize counters
 predicateStats=defaultdict(int)
 classStats=defaultdict(int)
 samples=[]
 entities=0
 
+# Initialize predicateStats with predicates from schema, same for classes
+for s, p, o in yagoSchema.triplesWithPredicate("sh:path"):
+    predicateStats[o]=0
+for s, p, o in yagoSchema.triplesWithPredicate("rdfs:subClassOf"):
+    classStats[s]=0
+        
+# Run through the facts
 for entityFacts in TurtleUtils.tsvEntities(FOLDER+"05-yago-final-full.tsv", "  Parsing YAGO"):
     classes=set()
     subject=None
@@ -91,11 +105,11 @@ print("  Writing out statistics... ",end="",flush=True)
 with TsvUtils.TsvFileWriter(FOLDER+"06-statistics.tsv") as writer:
     writer.write("yago:YAGO","yago:hasCount", str(entities))
     writer.write("\n#Predicates")
-    for pred in predicateStats:
-        writer.write(pred, "yago:hasCount", str(predicateStats[pred]))
+    for pred in sorted(predicateStats.items(), key=lambda x:-x[1]):
+        writer.write(pred[0], "yago:hasCount", str(pred[1]))
     writer.write("\n#Classes")
-    for pred in classStats:
-        writer.write(pred, "yago:hasCount", str(classStats[pred]))            
+    for pred in sorted(classStats.items(), key=lambda x:-x[1]):
+        writer.write(pred[0], "yago:hasCount", str(pred[1]))            
 print("done")
         
 print("done")
