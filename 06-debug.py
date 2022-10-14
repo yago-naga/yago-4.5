@@ -9,7 +9,7 @@ Input:
 - 05-yago-final-taxonomy.tsv
 
 Output:
-- 06-statistics.tsv
+- 06-statistics.txt
 - 06-sample-entities.ttl
 
 Algorithm:
@@ -32,6 +32,7 @@ import evaluator
 import TurtleUtils
 import TsvUtils
 import random
+import Prefixes
 from collections import defaultdict
 
 def getSuperClasses(cls, classes, yagoTaxonomyUp):
@@ -43,7 +44,14 @@ def getSuperClasses(cls, classes, yagoTaxonomyUp):
         for sc in yagoTaxonomyUp[cls]:
             getSuperClasses(sc, classes, yagoTaxonomyUp)
 
-
+def printTaxonomy(writer, yagoTaxonomyDown, classStats, cls=Prefixes.schemaThing, indent=0):
+    """ Prints the taxonomy to the writer """
+    for _ in range(0, indent):
+        writer.write(" ")
+    writer.write(cls+": "+str(classStats.get(cls,0))+"\n")
+    for subclass in yagoTaxonomyDown.get(cls, []):
+        printTaxonomy(writer, yagoTaxonomyDown, classStats, subclass, indent+2)
+        
 ##########################################################################
 #             Main
 ##########################################################################
@@ -55,16 +63,19 @@ yagoSchema = TurtleUtils.Graph()
 yagoSchema.loadTurtleFile(FOLDER+"01-yago-schema.ttl", "  Loading YAGO schema")
 
 # Load YAGO taxonomy
+yagoTaxonomyDown=defaultdict(set)
 yagoTaxonomyUp=defaultdict(set)
 for triple in TsvUtils.tsvTuples(FOLDER+"05-yago-final-taxonomy.tsv", "  Loading YAGO taxonomy"):
     if len(triple)>3:
         yagoTaxonomyUp[triple[0]].add(triple[2])
+        yagoTaxonomyDown[triple[2]].add(triple[0])
 
 # Initialize counters
 predicateStats=defaultdict(int)
 classStats=defaultdict(int)
 samples=[]
 entities=0
+entitiesThatAreNotThings=[]
 
 # Initialize predicateStats with predicates from schema, same for classes
 for s, p, o in yagoSchema.triplesWithPredicate("sh:path"):
@@ -86,7 +97,9 @@ for entityFacts in TurtleUtils.tsvEntities(FOLDER+"05-yago-final-full.tsv", "  P
     for c in classes:
         getSuperClasses(c, superClasses, yagoTaxonomyUp)
     for c in superClasses:
-        classStats[c]+=1        
+        classStats[c]+=1   
+    if Prefixes.schemaThing not in superClasses:
+        entitiesThatAreNotThings.append(entityFacts.someSubject())
     if subject and (len(samples)<100 or (len(samples)==100 and random.random()<0.01)):
         for c in superClasses:
             entityFacts.add((subject, 'rdf:type', c))
@@ -102,17 +115,20 @@ with open(FOLDER+"06-sample-entities.ttl", "wt", encoding="UTF-8") as sampleFile
 print("done")
 
 print("  Writing out statistics... ",end="",flush=True)    
-with TsvUtils.TsvFileWriter(FOLDER+"06-statistics.tsv") as writer:
-    writer.write("yago:YAGO","yago:hasCount", str(entities))
-    writer.write("\n#Predicates")
+with open(FOLDER+"06-statistics.txt", "wt", encoding="UTF-8") as writer:
+    writer.write("YAGO 4.1 statistics\n\n")
+    writer.write("Total number of entities: "+str(entities)+"\n\n")
+    writer.write("Predicates:\n")
     for pred in sorted(predicateStats.items(), key=lambda x:-x[1]):
-        writer.write(pred[0], "yago:hasCount", str(pred[1]))
-    writer.write("\n#Classes")
-    for pred in sorted(classStats.items(), key=lambda x:-x[1]):
-        writer.write(pred[0], "yago:hasCount", str(pred[1]))            
+        writer.write("  "+pred[0]+": "+str(pred[1])+"\n")
+    writer.write("Classes:\n\n")    
+    printTaxonomy(writer, yagoTaxonomyDown, classStats)
+    writer.write("\n\nEntities that are not schema:Thing:\n")
+    for e in entitiesThatAreNotThings:
+        writer.write(e+", ")
 print("done")
         
 print("done")
 
 if TEST:
-    evaluator.compare(FOLDER+"06-statistics.tsv")
+    evaluator.compare(FOLDER+"06-statistics.txt")

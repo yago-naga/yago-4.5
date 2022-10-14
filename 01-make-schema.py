@@ -18,8 +18,7 @@ Algorithm:
 2) From the taxonomy keep only the classes that are mentioned in shapes, together with their superclasses. Force this to be a tree.
 """
 
-TEST=True
-OUTPUT_FOLDER="test-data/01-make-schema/" if TEST else "yago-data/"
+OUTPUT_FOLDER="yago-data/"
 INPUT_FOLDER= "input-data"
 
 ###########################################################################
@@ -106,6 +105,3 @@ yagoShapes.printToFile(OUTPUT_FOLDER+"01-yago-schema.ttl")
 print("done")
 
 print("done")
-
-#if TEST:
-    #evaluator.compare(OUTPUT_FOLDER+"01-yago-schema.ttl", OUTPUT_FOLDER+"01-yago-schema-gold.ttl")

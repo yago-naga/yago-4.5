@@ -79,7 +79,8 @@ badClasses = {
     "wd:Q4167410",  # disambiguation page
     "wd:Q13406463", # list article
     "wd:Q17524420", # aspect of history
-    "wd:Q18340514"  # article about events in a specific year or time period
+    "wd:Q18340514", # article about events in a specific year or time period
+    "wd:Q29654788"  # Unicode characters
 }
 
 def addSubClasses(lastGoodYagoClass, wikidataClass, unmappedClassesWriter, treated, pathToRoot):

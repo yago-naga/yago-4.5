@@ -7,7 +7,7 @@ yago:Elvis rdf:type wd:Q_singer ;
 
 yago:Singer schema:mainEntityOfPage <https://en.wikipedia.org/wiki/Singer> ;
 	owl:sameAs wd:Q_singer ;
-	rdfs:label "singer"@en, "chanteur"@fr ;
+	rdfs:label "chanteur"@fr, "singer"@en ;
 	schema:alternateName "this is a human being"@en ;
 	rdfs:comment "this is a singer"@en ;
 	rdf:type rdfs:Class .
