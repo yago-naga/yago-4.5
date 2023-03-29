@@ -98,7 +98,7 @@ for entityFacts in TurtleUtils.tsvEntities(FOLDER+"05-yago-final-full.tsv", "  P
         getSuperClasses(c, superClasses, yagoTaxonomyUp)
     for c in superClasses:
         classStats[c]+=1   
-    if Prefixes.schemaThing not in superClasses:
+    if Prefixes.schemaThing not in superClasses and Prefixes.rdfsClass not in superClasses:
         entitiesThatAreNotThings.append(entityFacts.someSubject())
     if subject and (len(samples)<100 or (len(samples)==100 and random.random()<0.01)):
         for c in superClasses:
@@ -131,4 +131,4 @@ print("done")
 print("done")
 
 if TEST:
-    evaluator.compare(FOLDER+"06-statistics.txt")
+    evaluator.compare(FOLDER+"06-statistics.txt", FOLDER+"06-statistics-gold.txt")

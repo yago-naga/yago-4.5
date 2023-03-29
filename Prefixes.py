@@ -33,6 +33,7 @@ prefixes = {
 "ref": "http://www.wikidata.org/reference/",
 "v": "http://www.wikidata.org/value/",
 "wdt": "http://www.wikidata.org/prop/direct/",
+"wpq": "http://www.wikidata.org/prop/quant/",
 "wdtn": "http://www.wikidata.org/prop/direct-normalized/",
 "p": "http://www.wikidata.org/prop/",
 "ps": "http://www.wikidata.org/prop/statement/",
@@ -54,7 +55,7 @@ prefixes = {
 
 xsdAnyURI='xsd:anyURI'
 
-xsdAnytype='xsd:anytype'
+xsdAnytype='xsd:anyType'
 
 xsdString='xsd:string'
 
@@ -81,6 +82,8 @@ wikidataStart = "pq:P580"
 wikidataEnd = "pq:P582"
 
 owlDisjointWith = "owl:disjointWith"
+
+schemaTaxon = "schema:Taxon"
 
 schemaAbout = "schema:about"
 

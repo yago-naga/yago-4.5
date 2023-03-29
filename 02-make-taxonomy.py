@@ -11,15 +11,12 @@ Input:
 - 01-yago-schema.ttl, the YAGO schema
 
 Output:
-- 02-yago-taxonomy-to-rename.tsv, the YAGO lower level taxonomy in 
-- 02-non-yago-classes.tsv, which maps classes that exist in Wikidata but not in YAGO to the nearest superclass in YAGO
+- 02-yago-taxonomy-to-rename.tsv, the YAGO lower level taxonomy
     
 Algorithm:
 1) Start with top-level YAGO classes from the YAGO schema
 2) For each YAGO top level class y that is mapped to a Wikidata class w,
-   glue the entire subtree of w under y,
-   - excluding bad classes
-   - skipping over classes that do not have an English Wikipedia page
+   glue the entire subtree of w under y
 3) Remove a class and its descendants if it transitively subclasses two disjoint classes
 """
 
@@ -49,24 +46,28 @@ from itertools import chain
 #           Loading the Wikidata taxonomy
 ###########################################################################
 
+
+# Properties that indicate that the entity is an instance for YAGO
+instanceIndicators= {
+  "wdt:P171", # parent taxon -> instance of taxon
+  "wdt:P176", # manufacturer -> instance of Product
+  "wdt:P178"  # developer -> instance of Product
+}
+
 class wikidataVisitor(object):
-    """ Will be called in parallel on each Wikidata entity graph, fills context[wikiTaxonomyDown] and context[wikidataClassesWithWikipediaPage]. """
+    """ Will be called in parallel on each Wikidata entity graph, fills context[wikiTaxonomyDown]. """
     def __init__(self, id):
         self.wikidataTaxonomyDown={}
-        self.wikidataClassesWithWikipediaPage=set()
-    def visit(self,graph):    
-        for s,p,o in graph:
-            # We use the Wikidata property "ParentTaxon" as "rdfs:subclassOf",
-            # because Wikidata sometimes uses only one of them
-            if p==Prefixes.wikidataSubClassOf or p==Prefixes.wikidataParentTaxon:
+    def visit(self,graph): 
+        if not graph.predicates().isdisjoint(instanceIndicators):
+            return
+        for s,p,o in graph:            
+            if p==Prefixes.wikidataSubClassOf:
                 if o not in self.wikidataTaxonomyDown:
                     self.wikidataTaxonomyDown[o]=set()
-                self.wikidataTaxonomyDown[o].add(s)
-                for w in graph.subjects(Prefixes.schemaAbout, s):
-                    if w.startswith("<https://en.wikipedia.org/wiki/"):
-                        self.wikidataClassesWithWikipediaPage.add(s)
+                self.wikidataTaxonomyDown[o].add(s)                
     def result(self):
-        return(self.wikidataTaxonomyDown, self.wikidataClassesWithWikipediaPage)
+        return(self.wikidataTaxonomyDown)
 
 ###########################################################################
 #           Creating the YAGO taxonomy
@@ -80,36 +81,33 @@ badClasses = {
     "wd:Q13406463", # list article
     "wd:Q17524420", # aspect of history
     "wd:Q18340514", # article about events in a specific year or time period
+    "wd:Q24017414", # second-order class
     "wd:Q29654788"  # Unicode characters
 }
 
-def addSubClasses(lastGoodYagoClass, wikidataClass, unmappedClassesWriter, treated, pathToRoot):
-    """Adds the Wikidata classes to the YAGO taxonomy, excluding bad classes and classes without Wikipedia pages"""
-    if wikidataClass in badClasses:
+def addSubClass(superClass, subClass, treated, pathToRoot):
+    """Adds the Wikidata classes to the YAGO taxonomy, excluding bad classes"""
+    if subClass in badClasses:
         return
-    if wikidataClass in pathToRoot:
+    if subClass in pathToRoot:
         return
     # Due to loops, multiple inheritance, and inheritance between
-    # class that have been mapped to YAGO, we might walk again
+    # classes that have been mapped to YAGO, we might walk again
     # through a class that has been mapped to schema.org.
     # We have already done the subtree, so we can quit
-    if yagoSchema.subjects(Prefixes.fromClass, wikidataClass):
+    if yagoSchema.subjects(Prefixes.fromClass, subClass):
         return
-    elif wikidataClass in wikidataClassesWithWikipediaPage:
-        yagoTaxonomyUp[wikidataClass].add(lastGoodYagoClass)
-        yagoTaxonomyDown[lastGoodYagoClass].add(wikidataClass)
-        lastGoodYagoClass=wikidataClass
-    else:       
-        unmappedClassesWriter.writeFact(wikidataClass,"rdfs:subClassOf",lastGoodYagoClass)
+    yagoTaxonomyUp[subClass].add(superClass)
+    yagoTaxonomyDown[superClass].add(subClass)
     # "Treated" serves to avoid adding the subclasses again in case of double inheritance
-    if wikidataClass in treated:
+    if subClass in treated:
         return
-    treated.add(wikidataClass)
-    pathToRoot.append(wikidataClass)
-    for subClass in wikidataTaxonomyDown.get(wikidataClass,[]):    
-        addSubClasses(lastGoodYagoClass, subClass, unmappedClassesWriter, treated, pathToRoot)
+    treated.add(subClass)
+    pathToRoot.append(subClass)
+    for subClass2 in wikidataTaxonomyDown.get(subClass,[]):    
+        addSubClass(subClass, subClass2, treated, pathToRoot)    
     pathToRoot.pop()
-
+    
 
 ###########################################################################
 #           Removing classes that subclass two disjoint top-level classes
@@ -157,28 +155,21 @@ if __name__ == '__main__':
         
     # Load Wikidata taxonomy
     results=TurtleUtils.visitWikidata(WIKIDATA_FILE, wikidataVisitor)
-    # <results> is a list pairs of local results
-    # We now merge them together in the global variables
-    # <wikidataClassesWithWikipediaPage> and <wikidataTaxonomyDown>
-    wikidataClassesWithWikipediaPage=set()
+    # <results> is a list taxonomies
+    # We now merge them together in the global variable <wikidataTaxonomyDown>
     wikidataTaxonomyDown=dict()
     for result in results:
-        wikidataClassesWithWikipediaPage.update(result[1])
-        for key in result[0]:
+        for key in result:
             if key not in wikidataTaxonomyDown:
                 wikidataTaxonomyDown[key]=set()
-            wikidataTaxonomyDown[key].update(result[0][key])
+            wikidataTaxonomyDown[key].update(result[key])
     
-    # Write out non-YAGO classes
-    print("  Writing non-YAGO classes...", end="", flush=True)
-    with TsvUtils.TsvFileWriter(OUTPUT_FOLDER+"02-non-yago-classes.tsv") as unmappedClassesWriter:
-        treated=set()
-        for s,p,o in yagoSchema.triplesWithPredicate(Prefixes.fromClass):
+    # Now we merge the Wikidata taxonomy into the YAGO taxonomy
+    for s,p,o in yagoSchema.triplesWithPredicate(Prefixes.fromClass):
             if s!=Prefixes.schemaThing:
                 for subclass in wikidataTaxonomyDown.get(o,[]):
-                    addSubClasses(s, subclass, unmappedClassesWriter, treated, [o])
-    print("done")
-
+                    addSubClass(s, subclass,{s},[s])
+                    
     # Remove disjoint inconsistent classes
     print("  Removing disjoint-inconsistent subclass links...", end="", flush=True)
     checkDisjoint(Prefixes.schemaThing, None, set(), disjointClasses)
@@ -194,5 +185,4 @@ if __name__ == '__main__':
     print("done")
 
     if TEST:
-        evaluator.compare(OUTPUT_FOLDER+"02-non-yago-classes.tsv")
         evaluator.compare(OUTPUT_FOLDER+"02-yago-taxonomy-to-rename.tsv")

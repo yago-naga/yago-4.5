@@ -51,8 +51,8 @@ wd:Q_composition  wdt:P31 wd:Q207628;
 	wdt:P86 wd:Q_person_or_band .
 
 # Patterns
-wd:Q_molecule wdt:P31 schema:MolecularEntity;
-		wdt:P234 "1S/C6H6/c1-2-4-6-5-3-1/h1-6H".
+wd:Q_product wdt:P31 wd:Q2424752;
+		wdt:P3962 "12345678".
 
 # Geo locations
 wd:Q31  wdt:P31	schema:Country ;
@@ -74,4 +74,4 @@ wd:Q_singer  rdfs:label "singer"@en ;
 	skos:prefLabel "chanteur"@fr ;
 	schema:name "chanteur"@fr ;	
 	schema:description "this is a singer"@en;
-	skos:altLabel "this is a human being"@en .
+	skos:altLabel "this is a human singer"@en .

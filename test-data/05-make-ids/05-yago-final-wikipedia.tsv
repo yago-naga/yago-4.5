@@ -20,6 +20,7 @@
 @prefix ref: <http://www.wikidata.org/reference/> .
 @prefix v: <http://www.wikidata.org/value/> .
 @prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix wpq: <http://www.wikidata.org/prop/quant/> .
 @prefix wdtn: <http://www.wikidata.org/prop/direct-normalized/> .
 @prefix p: <http://www.wikidata.org/prop/> .
 @prefix ps: <http://www.wikidata.org/prop/statement/> .

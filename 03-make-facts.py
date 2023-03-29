@@ -9,7 +9,6 @@ Call:
 Input:
 - 01-yago-schema.ttl
 - 02-yago-taxonomy-to-rename.tsv
-- 02-non-yago-classes.tsv
 - Wikidata file
 
 Output:
@@ -71,7 +70,7 @@ def cleanArticles(entityFacts):
         entityFacts.remove((s, Prefixes.schemaAbout, o))
         entityFacts.add((o, Prefixes.schemaPage, s))
                 
-def checkIfClass(entityFacts, yagoSchema, yagoTaxonomyUp, nonYagoClasses):
+def checkIfClass(entityFacts, yagoSchema, yagoTaxonomyUp):
     """Adds <subject, rdf:type, rdfs:Class> if this is a class. Removes all other type relationships. Returns new entityFacts."""
     if not entityFacts.triplesWithPredicate(Prefixes.rdfsLabel):
         return entityFacts
@@ -84,24 +83,24 @@ def checkIfClass(entityFacts, yagoSchema, yagoTaxonomyUp, nonYagoClasses):
         for (s,p,o) in entityFacts:
             newEntityFacts.add((yagoClass if s==mainEntity else s, p, o))
         return newEntityFacts
-    if mainEntity in yagoTaxonomyUp or mainEntity in nonYagoClasses:
-        if mainEntity in yagoTaxonomyUp:
-        	  entityFacts.add((mainEntity,Prefixes.rdfType,Prefixes.rdfsClass))
+    if mainEntity in yagoTaxonomyUp:
+        entityFacts.add((mainEntity,Prefixes.rdfType,Prefixes.rdfsClass))
         for t in entityFacts.triplesWithPredicate(Prefixes.wikidataType):
             entityFacts.remove(t)
     return entityFacts
     
-def cleanClasses(entityFacts, yagoSchema, yagoTaxonomyUp, nonYagoClasses):
+def cleanClasses(entityFacts, yagoSchema, yagoTaxonomyUp):
     """Replace all facts <subject, wikidata:type, wikidataClass> by <subject, rdf:type, yagoClass>"""
     for s,p,o in entityFacts.triplesWithPredicate(Prefixes.wikidataType):
-        if o in nonYagoClasses:
-            entityFacts.add((s,Prefixes.rdfType,nonYagoClasses[o]))
         if o in yagoTaxonomyUp:
             entityFacts.add((s,Prefixes.rdfType,o))
-        if any(yagoSchema.subjects(Prefixes.fromClass, o)):
+        elif any(yagoSchema.subjects(Prefixes.fromClass, o)):
             entityFacts.add((s,Prefixes.rdfType,yagoSchema.subjects(Prefixes.fromClass, o)[0]))
     for t in entityFacts.triplesWithPredicate(Prefixes.wikidataType):
         entityFacts.remove(t)
+    # Anything that has a parent taxon is an instance of taxon
+    if Prefixes.wikidataParentTaxon in entityFacts.predicates():
+        entityFacts.add((s,Prefixes.rdfType,Prefixes.schemaTaxon))
     return any(entityFacts.triplesWithPredicate(Prefixes.rdfType))
 
 def wikidataPredicate2YagoPredicate(p, yagoSchema):
@@ -327,11 +326,6 @@ class treatWikidataEntity():
             if len(triple)>3:
                 self.yagoTaxonomyUp[triple[0]].add(triple[2])
                 
-        print("    Wikidata reader",i+1, "loads non-YAGO classes", flush=True)
-        self.nonYagoClasses={}
-        for triple in TsvUtils.tsvTuples(FOLDER+"02-non-yago-classes.tsv"):
-            if len(triple)>3:
-                self.nonYagoClasses[triple[0]]=triple[2]    
         print("    Done initializing Wikidata reader",i+1, flush=True)
         self.writer=None
                 
@@ -350,9 +344,9 @@ class treatWikidataEntity():
                    
         cleanArticles(entityFacts)               
         
-        entityFacts=checkIfClass(entityFacts, self.yagoSchema, self.yagoTaxonomyUp, self.nonYagoClasses)
+        entityFacts=checkIfClass(entityFacts, self.yagoSchema, self.yagoTaxonomyUp)
         
-        if not cleanClasses(entityFacts, self.yagoSchema, self.yagoTaxonomyUp, self.nonYagoClasses):
+        if not cleanClasses(entityFacts, self.yagoSchema, self.yagoTaxonomyUp):
             return
              
         classes = getClasses(entityFacts, self.yagoTaxonomyUp)

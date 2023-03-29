@@ -20,6 +20,7 @@
 @prefix ref: <http://www.wikidata.org/reference/> .
 @prefix v: <http://www.wikidata.org/value/> .
 @prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix wpq: <http://www.wikidata.org/prop/quant/> .
 @prefix wdtn: <http://www.wikidata.org/prop/direct-normalized/> .
 @prefix p: <http://www.wikidata.org/prop/> .
 @prefix ps: <http://www.wikidata.org/prop/statement/> .
@@ -33,18 +34,14 @@
 @prefix prn: <http://www.wikidata.org/prop/reference/value-normalized/> .
 @prefix wdno: <http://www.wikidata.org/prop/novalue/> .
 @prefix ys: <http://yago-knowledge.org/schema#> .
-wd:Q_Elvis	schema:callSign	"test string"	. #		
 wd:Q_Elvis	rdf:type	wd:Q_singer	. #		
-wd:Q_Elvis	schema:brand	wd:Q_brand	. #		
 wd:Q_Elvis	schema:deathDate	"1970-01-01"^^xsd:gYear	. #		
-wd:Q_Elvis	schema:faxNumber	"+33-33-333-333"	. #		
-wd:Q_Elvis	schema:children	wd:Q_child	. #	"1960"^^xml:gYear	"1980"^^xml:gYear
 wd:Q_Elvis	schema:mainEntityOfPage	<https://elvis.com>	. #		
 wd:Q_Elvis	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Elvis>	. #		
-wd:Q_brand	rdf:type	schema:Brand	. #		
-wd:Q_child	rdf:type	wd:Child	. #		
-wd:Q_bad_child	rdf:type	schema:Brand	. #		
-wd:Q_bad_child	rdfs:label	"Bad Child"@en	. #		
+wd:Q_Elvis	schema:children	wd:Q42	. #	"1960"^^xml:gYear	"1980"^^xml:gYear
+wd:Q42	rdf:type	wd:Q_singer	. #		
+wd:Q43	rdf:type	wd:Q_european_book	. #		
+wd:Q43	rdfs:label	"Bad child"@en	. #		
 wd:Q_singer	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Singer>	. #		
 wd:Q_singer	rdfs:label	"chanteur"@fr	. #		
 wd:Q_singer	schema:alternateName	"this is a human being"@en	. #		

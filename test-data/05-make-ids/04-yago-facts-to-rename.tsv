@@ -43,7 +43,7 @@ wd:Q_Elvis	schema:child	wd:Q_Elvis	.	"1977"^^xsd:gYear	"1978"^^xsd:gYear
 
 # These should go only to yago-full
 wd:Q_Elvis	schema:child	wd:Q_123456	.
-wd:Q_123456	schema:parent	wd:Q_Elvis	.
+wd:Q_123456	rdfs:label	"unknown child"	.
 
 # This one should not exist
 wd:nonsense	schema:child	wd:Q_123456	.

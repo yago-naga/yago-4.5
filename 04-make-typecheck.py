@@ -22,7 +22,7 @@ Algorithm:
    
 """
 
-TEST=True
+TEST=False
 FOLDER="test-data/04-make-typecheck/" if TEST else "yago-data/"
 
 ##########################################################################
@@ -30,7 +30,6 @@ FOLDER="test-data/04-make-typecheck/" if TEST else "yago-data/"
 ##########################################################################
 
 print("Type-checking YAGO facts...")
-print("  Importing...",end="", flush=True)
 # Importing alone takes so much time that a status message is in order...
 import sys
 import TsvUtils
@@ -38,7 +37,6 @@ import re
 import unicodedata
 import evaluator
 from collections import defaultdict
-print("done")
 
 yagoTaxonomyUp=defaultdict(set)
 for tuple in TsvUtils.tsvTuples(FOLDER+"02-yago-taxonomy-to-rename.tsv", "  Loading YAGO taxonomy"):
@@ -77,11 +75,11 @@ def yagoIdFromLabel(wikidataEntity,label):
             result+=c
         else: 
             result+="_"
-    return result+"_"+wikidataEntity[4:]
+    return result+"_"+wikidataEntity[3:]
 
 def yagoIdFromWikidataId(wikidataEntity):
     """ Creates a YAGO id from a Wikidata entity """
-    return wikidataEntity[4:]
+    return wikidataEntity[3:]
 
 def writeYagoId(out, currentTopic, currentLabel, currentWikipediaPage):
     """ Writes wd:Q303 owl:sameAs yago:Elvis """ 

@@ -380,7 +380,7 @@ class Graph(object):
                         result.write(', ')
                     if obj.startswith("_:list_"):
                         result.write("(")
-                        result.write(", ".join(self.getList(obj)))
+                        result.write(" ".join(self.getList(obj)))
                         result.write(")")
                     else:
                         result.write(obj)

@@ -20,6 +20,7 @@
 @prefix ref: <http://www.wikidata.org/reference/> .
 @prefix v: <http://www.wikidata.org/value/> .
 @prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix wpq: <http://www.wikidata.org/prop/quant/> .
 @prefix wdtn: <http://www.wikidata.org/prop/direct-normalized/> .
 @prefix p: <http://www.wikidata.org/prop/> .
 @prefix ps: <http://www.wikidata.org/prop/statement/> .
@@ -34,7 +35,6 @@
 @prefix wdno: <http://www.wikidata.org/prop/novalue/> .
 @prefix ys: <http://yago-knowledge.org/schema#> .
 wd:Q_Elvis	owl:sameAs	yago:Elvis	. #WIKI
-wd:Q_brand	owl:sameAs	yago:_brand	. #OTHER
-wd:Q_child	owl:sameAs	yago:_child	. #OTHER
-wd:Q_bad_child	owl:sameAs	yago:Bad_Child__bad_child	. #OTHER
+wd:Q42	owl:sameAs	yago:Q42	. #OTHER
+wd:Q43	owl:sameAs	yago:Bad_child_Q43	. #OTHER
 wd:Q_singer	owl:sameAs	yago:Singer	. #WIKI
