@@ -55,8 +55,8 @@ schema:SportsEvent	rdfs:subClassOf	schema:Event	.
 schema:Language	rdfs:subClassOf	schema:Intangible	.
 schema:Airline	rdfs:subClassOf	schema:Organization	.
 schema:Corporation	rdfs:subClassOf	schema:Organization	.
-schema:EducationalOrganization	rdfs:subClassOf	schema:CivicStructure	.
 schema:EducationalOrganization	rdfs:subClassOf	schema:Organization	.
+schema:EducationalOrganization	rdfs:subClassOf	schema:CivicStructure	.
 schema:MusicGroup	rdfs:subClassOf	schema:PerformingGroup	.
 schema:SportsTeam	rdfs:subClassOf	schema:SportsOrganization	.
 schema:Occupation	rdfs:subClassOf	schema:Intangible	.

@@ -85,28 +85,32 @@ badClasses = {
     "wd:Q29654788"  # Unicode characters
 }
 
-def addSubClass(superClass, subClass, treated, pathToRoot):
+def subClassesInclude(superClass, potentialSubClass):
+    """TRUE if the subclasses of superClass include subClass"""
+    if superClass==potentialSubClass:
+        return True
+    for subClass in yagoTaxonomyDown.get(superClass,[]):    
+        if subClassesInclude(subClass, potentialSubClass):
+            return True
+    return False
+    
+def addSubClass(superClass, subClass):
     """Adds the Wikidata classes to the YAGO taxonomy, excluding bad classes"""
     if subClass in badClasses:
         return
-    if subClass in pathToRoot:
+    if subClassesInclude(subClass, superClass):
         return
-    # Due to loops, multiple inheritance, and inheritance between
-    # classes that have been mapped to YAGO, we might walk again
-    # through a class that has been mapped to schema.org.
-    # We have already done the subtree, so we can quit
+    # Both a class and its subclass might be mapped to YAGO.
+    # So don't make a copy of the tree
     if yagoSchema.subjects(Prefixes.fromClass, subClass):
         return
     yagoTaxonomyUp[subClass].add(superClass)
     yagoTaxonomyDown[superClass].add(subClass)
-    # "Treated" serves to avoid adding the subclasses again in case of double inheritance
-    if subClass in treated:
+    # Avoid adding the subclasses again in case of double inheritance
+    if subClass in yagoTaxonomyDown:
         return
-    treated.add(subClass)
-    pathToRoot.append(subClass)
     for subClass2 in wikidataTaxonomyDown.get(subClass,[]):    
-        addSubClass(subClass, subClass2, treated, pathToRoot)    
-    pathToRoot.pop()
+        addSubClass(subClass, subClass2)        
     
 
 ###########################################################################
@@ -168,7 +172,7 @@ if __name__ == '__main__':
     for s,p,o in yagoSchema.triplesWithPredicate(Prefixes.fromClass):
             if s!=Prefixes.schemaThing:
                 for subclass in wikidataTaxonomyDown.get(o,[]):
-                    addSubClass(s, subclass,{s},[s])
+                    addSubClass(s, subclass)
                     
     # Remove disjoint inconsistent classes
     print("  Removing disjoint-inconsistent subclass links...", end="", flush=True)
