@@ -45,6 +45,11 @@ s:Q_Elvis-5b0fdcdf-4815-583c-4dd3-914e1c5d95c0 a wikibase:Statement,
 	pq:P585 "2014-01-01T00:00:00Z"^^xsd:dateTime ;
 	pqv:P585 v:c91277cf69500270615dc91eeba92a40 ;
 	prov:wasDerivedFrom ref:da8b01072f4a5eb69892a71023670b9a528a0b97 .
+
+
+# Animals become instances of taxon
+wd:Q_tiger wdt:P171 wd:Q_cat ;
+    wdt:1034 wd:Q_sheep .
     
 # Disjoint ranges
 wd:Q_composition  wdt:P31 wd:Q207628;

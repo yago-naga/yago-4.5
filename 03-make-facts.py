@@ -100,6 +100,7 @@ def cleanClasses(entityFacts, yagoSchema, yagoTaxonomyUp):
         entityFacts.remove(t)
     # Anything that has a parent taxon is an instance of taxon
     if Prefixes.wikidataParentTaxon in entityFacts.predicates():
+        s=entityFacts.subjects(Prefixes.wikidataParentTaxon)[0]
         entityFacts.add((s,Prefixes.rdfType,Prefixes.schemaTaxon))
     return any(entityFacts.triplesWithPredicate(Prefixes.rdfType))
 
