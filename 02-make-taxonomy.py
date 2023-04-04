@@ -59,7 +59,10 @@ class wikidataVisitor(object):
     def __init__(self, id):
         self.wikidataTaxonomyDown={}
     def visit(self,graph): 
-        if not graph.predicates().isdisjoint(instanceIndicators):
+        predicates=graph.predicates()
+        if not predicates.isdisjoint(instanceIndicators):
+            return
+        if not Prefixes.rdfsLabel in predicates:
             return
         for s,p,o in graph:            
             if p==Prefixes.wikidataSubClassOf:

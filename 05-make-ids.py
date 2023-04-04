@@ -11,6 +11,7 @@ Output:
 - 05-yago-final-wikipedia.tsv
 - 05-yago-final-full.tsv
 - 05-yago-final-meta.tsv
+- 05-yago-final-taxonomy.tsv
 
 Algorithm:
 - load yago-ids.tsv
@@ -107,14 +108,12 @@ with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-taxonomy.tsv") as taxFacts:
             continue
         subject=toYagoEntity(split[0])
         if not subject:
-            # Should not happen
-            print("Entity does not appear in YAGO:", split[0])
+            # Happens if a class has no label or no instances
             continue
         relation=split[1]
         object=split[2] if relation=="rdf:type" else toYagoEntity(split[2])
         if not object:
-            # Should not happen
-            print("Entity does not appear in YAGO:", split[2])
+            # Happens if a class has no label or no instances
             continue
         # Write taxonomic fact
         taxFacts.writeFact(subject, relation, object)

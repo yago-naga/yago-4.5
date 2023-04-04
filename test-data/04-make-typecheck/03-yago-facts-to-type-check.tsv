@@ -59,3 +59,11 @@ wd:Q_singer	schema:alternateName	"this is a human being"@en	.
 wd:Q_singer	rdfs:comment	"this is a singer"@en	.
 wd:Q_singer	rdf:type	rdfs:Class	.
 wd:Q_singer	rdfs:label	"singer"@en	.
+
+#... but only if they have instances
+wd:Q_prof	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Professor>	.
+wd:Q_prof	rdfs:label	"prof"@fr	.
+wd:Q_prof	schema:alternateName	"this is a human professor"@en	.
+wd:Q_prof	rdfs:comment	"this is a professor"@en	.
+wd:Q_prof	rdf:type	rdfs:Class	.
+wd:Q_prof	rdfs:label	"professor"@en	.

@@ -22,7 +22,7 @@ Algorithm:
    
 """
 
-TEST=False
+TEST=True
 FOLDER="test-data/04-make-typecheck/" if TEST else "yago-data/"
 
 ##########################################################################
@@ -38,16 +38,29 @@ import unicodedata
 import evaluator
 from collections import defaultdict
 
+##########################################################################
+#             Loading Classes
+##########################################################################
+
+# Load taxonomy
 yagoTaxonomyUp=defaultdict(set)
 for tuple in TsvUtils.tsvTuples(FOLDER+"02-yago-taxonomy-to-rename.tsv", "  Loading YAGO taxonomy"):
     if len(tuple)>3:
         yagoTaxonomyUp[tuple[0]].add(tuple[2])
 
+# Identify classes that have instances
+yagoClassesWithInstances=set()
+def tickOffClassAndSuperClasses(c):
+    yagoClassesWithInstances.add(c)
+    for superClass in yagoTaxonomyUp[c]:
+        tickOffClassAndSuperClasses(superClass)
+
 yagoInstances=defaultdict(set)
 for tuple in TsvUtils.tsvTuples(FOLDER+"03-yago-facts-to-type-check.tsv", "  Loading YAGO instances"):
     if len(tuple)>2 and tuple[1]=="rdf:type":
         yagoInstances[tuple[0]].add(tuple[2])
-
+        tickOffClassAndSuperClasses(tuple[2])
+        
 ##########################################################################
 #             YAGO ids
 ##########################################################################
@@ -124,6 +137,9 @@ with TsvUtils.TsvFileWriter(FOLDER+"04-yago-facts-to-rename.tsv") as out:
                 currentLabel=""
                 currentWikipediaPage=""
                 wroteFacts=False
+            # We skip any classes that don't have instances
+            if currentTopic in yagoTaxonomyUp and currentTopic not in yagoClassesWithInstances:
+                continue
             if split[1]=="rdfs:label" and split[2].endswith('"@en'):
                 currentLabel=split[2][1:-4]
             elif split[1]=="schema:mainEntityOfPage" and split[2].startswith('<https://en.wikipedia.org/wiki/'):

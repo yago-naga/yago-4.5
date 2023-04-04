@@ -133,4 +133,5 @@ schema:MusicPlaylist	rdfs:subClassOf	schema:CreativeWork	.
 schema:CivicStructure	rdfs:subClassOf	schema:Place	.
 schema:PerformingGroup	rdfs:subClassOf	schema:Organization	.
 wd:Q_singer	rdfs:subClassOf	schema:Person	.
+wd:Q_prof	rdfs:subClassOf	schema:Person	.
 wd:Q_european_book	rdfs:subClassOf	schema:Book	.
