@@ -49,8 +49,7 @@ schema:Taxon owl:disjointWith
 schema:Person owl:disjointWith 
     schema:CreativeWork,
     schema:Event,
-    schema:Organization,
-	schema:Organism.
+    schema:Organization.
 schema:Place owl:disjointWith 
     schema:CreativeWork,
     schema:Event,
@@ -237,7 +236,7 @@ schema:Book a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path schema:numberOfPages ;
-        sh:datatype xsd:integer ;
+        sh:datatype xsd:decimal ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P1104 ;
     ] .
@@ -289,13 +288,13 @@ schema:TVSeries a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path schema:numberOfEpisodes ;
-        sh:datatype xsd:integer ;
+        sh:datatype xsd:decimal ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P1113 ;
     ] ;
     sh:property [
         sh:path schema:numberOfSeasons ;
-        sh:datatype xsd:integer ;
+        sh:datatype xsd:decimal ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P2437 ;
     ] ;   
@@ -682,7 +681,7 @@ schema:Organization a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path schema:numberOfEmployees ;
-        sh:datatype xsd:integer ;
+        sh:datatype xsd:decimal ;
         ys:fromProperty wdt:P1128 ;
     ] ;
     sh:property [
@@ -727,7 +726,7 @@ schema:EducationalOrganization a sh:NodeShape ;
     ys:fromClass wd:Q5341295 ;
     sh:property [
         sh:path schema:studentsCount ;
-        sh:datatype xsd:integer ;
+        sh:datatype xsd:decimal ;
         ys:fromProperty wdt:P2196 ;
     ] .
 
@@ -934,7 +933,7 @@ schema:Place a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path schema:populationNumber ;
-        sh:datatype xsd:integer ;
+        sh:datatype xsd:decimal ;
         ys:fromProperty wdt:P1082 ;
     ] ;
     sh:property [
@@ -944,7 +943,7 @@ schema:Place a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path schema:area ;
-        sh:datatype xsd:string ;
+        sh:datatype xsd:decimal ;
         ys:fromProperty wdt:P2046 ;
     ] ;
     sh:property [
@@ -990,7 +989,7 @@ schema:Place a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path schema:elevation ;
-        sh:datatype xsd:double ;
+        sh:datatype xsd:decimal ;
         ys:fromProperty wdt:P2044 ;
     ] ;
     sh:property [
@@ -1021,24 +1020,17 @@ schema:Country a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path schema:humanDevelopmentIndex ;
-        sh:datatype xsd:double ;
+        sh:datatype xsd:decimal ;
         ys:fromProperty wdt:P1081 ;
     ] ;
     sh:property [
-		# Fabian 2023-03-28: TODO is that the correct range?
         sh:path schema:unemploymentRate ;
-        sh:datatype xsd:string ;
+        sh:datatype xsd:decimal ;
         ys:fromProperty wdt:P1198 ;
     ] ;
     sh:property [
-        sh:path schema:internetDomain ;
-        sh:datatype xsd:string ;
-        ys:fromProperty wdt:P78 ;
-    ] ;
-    sh:property [
-		# Fabian 2023-03-28: TODO is that the correct range?
         sh:path schema:medianIncome ;
-        sh:datatype xsd:integer ;
+        sh:datatype xsd:decimal ;
         ys:fromProperty wdt:P3529 ;
     ] ;
     ys:fromClass wd:Q6256 .
@@ -1128,8 +1120,8 @@ schema:Product a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path schema:manufacturer ;
-        sh:node rdfs:Corporation ;
-        ys:fromProperty wdt:P176, P178 ;
+        sh:node schema:Corporation ;
+        ys:fromProperty wdt:P176, wdt:P178 ;
     ] ;
     sh:property [
         sh:path schema:releaseDate ;
@@ -1183,7 +1175,7 @@ schema:Taxon a sh:NodeShape;
 	sh:property [
         sh:path yago:consumes ;
         sh:node schema:Taxon ;
-        ys:fromProperty wdt:1034 ;
+        ys:fromProperty wdt:P1034 ;
     ] ;
 	ys:fromClass wd:Q7239 .
 	
