@@ -37,58 +37,58 @@
 
 ys: rdfs:label "Manual YAGO 4.1 shapes declaration"@en .
 
-schema:CreativeWork rdf:type rdfs:Class, sh:NodeShape ;
+schema:CreativeWork rdf:type sh:NodeShape, rdfs:Class ;
 	ys:fromClass wd:Q17537576 ;
-	sh:property _:CreativeWork_property_28, _:CreativeWork_property_18, _:CreativeWork_property_20, _:CreativeWork_property_27, _:CreativeWork_property_19, _:CreativeWork_property_26, _:CreativeWork_property_38 ;
+	sh:property _:CreativeWork_property_27, _:CreativeWork_property_26, _:CreativeWork_property_20, _:CreativeWork_property_28, _:CreativeWork_property_18, _:CreativeWork_property_38, _:CreativeWork_property_19 ;
 	rdfs:subClassOf schema:Thing .
 
 schema:Event owl:disjointWith schema:CreativeWork ;
 	rdf:type sh:NodeShape ;
 	ys:fromClass wd:Q1656682 ;
-	sh:property _:Event_property_81, _:Event_property_114, _:Event_property_87, _:Event_property_80, _:Event_property_104, _:Event_property_120, _:Event_property_88, _:Event_property_94 ;
+	sh:property _:Event_property_94, _:Event_property_80, _:Event_property_81, _:Event_property_114, _:Event_property_87, _:Event_property_120, _:Event_property_104, _:Event_property_88 ;
 	rdfs:subClassOf schema:Thing .
 
-schema:Organization owl:disjointWith schema:Event, schema:CreativeWork ;
+schema:Organization owl:disjointWith schema:CreativeWork, schema:Event ;
 	rdf:type sh:NodeShape ;
 	ys:fromClass wd:Q43229 ;
-	sh:property _:Organization_property_129, _:Organization_property_157, _:Organization_property_141, _:Organization_property_155, _:Organization_property_156, _:Organization_property_142, _:Organization_property_154, _:Organization_property_159, _:Organization_property_143, _:Organization_property_158, _:Organization_property_139, _:Organization_property_128, _:Organization_property_140, _:Organization_property_144 ;
+	sh:property _:Organization_property_155, _:Organization_property_157, _:Organization_property_139, _:Organization_property_144, _:Organization_property_156, _:Organization_property_142, _:Organization_property_154, _:Organization_property_129, _:Organization_property_143, _:Organization_property_140, _:Organization_property_128, _:Organization_property_141, _:Organization_property_158 ;
 	rdfs:subClassOf schema:Thing .
 
-schema:Taxon owl:disjointWith schema:Event, schema:Organization, schema:CreativeWork ;
+schema:Taxon owl:disjointWith schema:CreativeWork, schema:Event, schema:Organization ;
 	rdf:type sh:NodeShape ;
-	sh:property _:Taxon_property_238, _:Taxon_property_237 ;
+	sh:property _:Taxon_property_232, _:Taxon_property_233 ;
 	ys:fromClass wd:Q7239 ;
 	rdfs:subClassOf schema:Thing .
 
-schema:Person owl:disjointWith schema:Organism, schema:Event, schema:Organization, schema:CreativeWork ;
+schema:Person owl:disjointWith schema:CreativeWork, schema:Event, schema:Organization ;
 	rdf:type sh:NodeShape ;
 	ys:fromClass wd:Q5 ;
-	sh:property _:Person_property_180, _:Person_property_168, _:Person_property_190, _:Person_property_193, _:Person_property_166, _:Person_property_196, _:Person_property_197, _:Person_property_167, _:Person_property_195, _:Person_property_191, _:Person_property_194, _:Person_property_165, _:Person_property_198, _:Person_property_179, _:Person_property_192, _:Person_property_178 ;
+	sh:property _:Person_property_165, _:Person_property_190, _:Person_property_178, _:Person_property_197, _:Person_property_192, _:Person_property_179, _:Person_property_166, _:Person_property_177, _:Person_property_193, _:Person_property_196, _:Person_property_194, _:Person_property_189, _:Person_property_195, _:Person_property_191, _:Person_property_167, _:Person_property_164 ;
 	rdfs:subClassOf schema:Thing .
 
-schema:Place owl:disjointWith schema:Event, schema:Taxon, schema:Person, schema:CreativeWork ;
+schema:Place owl:disjointWith schema:CreativeWork, schema:Event, schema:Taxon, schema:Person ;
 	rdf:type sh:NodeShape ;
 	ys:fromClass wd:Q17334923 ;
-	sh:property _:Place_property_208, _:Place_property_215, _:Place_property_207, _:Place_property_202, _:Place_property_212, _:Place_property_204, _:Place_property_214, _:Place_property_211, _:Place_property_200, _:Place_property_203, _:Place_property_209, _:Place_property_205, _:Place_property_210, _:Place_property_201, _:Place_property_213, _:Place_property_199, _:Place_property_206 ;
+	sh:property _:Place_property_198, _:Place_property_200, _:Place_property_203, _:Place_property_202, _:Place_property_199, _:Place_property_201, _:Place_property_204 ;
 	rdfs:subClassOf schema:Thing .
 
-schema:Product owl:disjointWith schema:Place, schema:Taxon ;
+schema:Product owl:disjointWith schema:Taxon, schema:Place ;
 	rdf:type sh:NodeShape ;
 	ys:fromClass wd:Q2424752 ;
-	sh:property _:Product_property_226, _:Product_property_225, _:Product_property_236, _:Product_property_224 ;
+	sh:property _:Product_property_221, _:Product_property_231, _:Product_property_220, _:Product_property_219 ;
 	rdfs:subClassOf schema:Thing .
 
-schema:Intangible owl:disjointWith schema:Place, schema:Organization, schema:Person, schema:Event, schema:Taxon ;
+schema:Intangible owl:disjointWith schema:Event, schema:Person, schema:Organization, schema:Taxon, schema:Place ;
 	rdfs:subClassOf schema:Thing .
 
 schema:Thing rdf:type sh:NodeShape ;
 	ys:fromClass wd:Q35120 ;
-	sh:property _:Thing_property_3, _:Thing_property_4, _:Thing_property_2, _:Thing_property_1, _:Thing_property_5, _:Thing_property_6 .
+	sh:property _:Thing_property_1, _:Thing_property_5, _:Thing_property_4, _:Thing_property_6, _:Thing_property_2, _:Thing_property_3 .
 
 _:Thing_property_1 sh:path schema:alternateName ;
 	sh:datatype rdf:langString ;
 	sh:disjoint rdfs:label ;
-	ys:fromProperty wdt:P225, wdt:1843, skos:altLabel .
+	ys:fromProperty wdt:1843, skos:altLabel, wdt:P225 .
 
 _:Thing_property_2 sh:path rdfs:comment ;
 	sh:datatype rdf:langString ;
@@ -108,10 +108,10 @@ _:Thing_property_5 sh:path schema:url ;
 
 _:Thing_property_6 sh:path owl:sameAs ;
 	sh:datatype xsd:anyType ;
-	ys:fromProperty wdt:P646, wdt:P345 .
+	ys:fromProperty wdt:P345, wdt:P646 .
 
 rdfs:Class rdf:type sh:NodeShape ;
-	sh:property _:Class_property_10, _:Class_property_9, _:Class_property_8, _:Class_property_7, _:Class_property_11 .
+	sh:property _:Class_property_11, _:Class_property_8, _:Class_property_9, _:Class_property_7, _:Class_property_10 .
 
 _:Class_property_7 sh:path schema:alternateName ;
 	sh:datatype rdf:langString ;
@@ -157,7 +157,7 @@ _:CreativeWork_property_19 sh:path schema:award ;
 
 _:CreativeWork_property_20 sh:path schema:author ;
 	sh:or (_:element_22 _:element_24) ;
-	ys:fromProperty wdt:P50, wdt:P175, wdt:P170 .
+	ys:fromProperty wdt:P175, wdt:P50, wdt:P170 .
 
 _:element_22 sh:node schema:Organization .
 
@@ -190,17 +190,17 @@ _:CreativeWork_property_38 sh:path schema:inLanguage ;
 
 schema:Book rdf:type sh:NodeShape ;
 	ys:fromClass wd:Q571 ;
-	sh:property _:Book_property_40, _:Book_property_39 ;
+	sh:property _:Book_property_39, _:Book_property_40 ;
 	rdfs:subClassOf schema:CreativeWork .
 
 _:Book_property_39 sh:path schema:isbn ;
 	sh:datatype xsd:string ;
 	sh:maxCount 1 ;
-	ys:fromProperty wdt:P957, wdt:P212 ;
+	ys:fromProperty wdt:P212, wdt:P957 ;
 	sh:pattern "^(97[89]-([0-57]-(\\d-\\d{7}|\\d\\d-\\d{6}|\\d\\d\\d-\\d{5}|\\d{4}-\\d{4}|\\d{5}-\\d\\d\\d|\\d{6}-\\d\\d|\\d{7}-\\d)|[89]\\d-(\\d-\\d{6}|\\d\\d-\\d{5}|\\d\\d\\d-\\d{4}|\\d{4}-\\d\\d\\d|\\d{5}-\\d\\d|\\d{6}-\\d)|[69]\\d\\d-(\\d-\\d{5}|\\d\\d-\\d{4}|\\d\\d\\d-\\d\\d\\d|\\d{4}-\\d\\d|\\d{5}-\\d)|99[0-8]\\d-\\d-\\d{4}|99[0-8]\\d-\\d\\d-\\d\\d\\d|99[0-8]\\d-\\d\\d\\d-\\d\\d|99[0-8]\\d-\\d{4}-\\d|999\\d\\d-\\d-\\d\\d\\d|999\\d\\d-\\d\\d-\\d\\d|999\\d\\d-\\d\\d\\d-\\d)-\\d|\\d{9}(\\d|X))|(\\d{1,5}-\\d{1,7}-\\d{1,6}-[0-9X])$" .
 
 _:Book_property_40 sh:path schema:numberOfPages ;
-	sh:datatype xsd:integer ;
+	sh:datatype xsd:decimal ;
 	sh:maxCount 1 ;
 	ys:fromProperty wdt:P1104 .
 
@@ -228,7 +228,7 @@ _:element_51 sh:node schema:Person .
 schema:TVSeries rdf:type sh:NodeShape ;
 	rdfs:subClassOf schema:CreativeWork ;
 	ys:fromClass wd:Q5398426 ;
-	sh:property _:TVSeries_property_55, _:TVSeries_property_58, _:TVSeries_property_54, _:TVSeries_property_56, _:TVSeries_property_53, _:TVSeries_property_57 .
+	sh:property _:TVSeries_property_56, _:TVSeries_property_57, _:TVSeries_property_55, _:TVSeries_property_54, _:TVSeries_property_58, _:TVSeries_property_53 .
 
 _:TVSeries_property_53 sh:path schema:actor ;
 	sh:node schema:Person ;
@@ -242,12 +242,12 @@ _:TVSeries_property_55 sh:path schema:director ;
 	sh:node schema:Person .
 
 _:TVSeries_property_56 sh:path schema:numberOfEpisodes ;
-	sh:datatype xsd:integer ;
+	sh:datatype xsd:decimal ;
 	sh:maxCount 1 ;
 	ys:fromProperty wdt:P1113 .
 
 _:TVSeries_property_57 sh:path schema:numberOfSeasons ;
-	sh:datatype xsd:integer ;
+	sh:datatype xsd:decimal ;
 	sh:maxCount 1 ;
 	ys:fromProperty wdt:P2437 .
 
@@ -257,7 +257,7 @@ _:TVSeries_property_58 sh:path schema:productionCompany ;
 
 schema:MusicComposition rdf:type sh:NodeShape ;
 	ys:fromClass wd:Q207628 ;
-	sh:property _:MusicComposition_property_59, _:MusicComposition_property_65, _:MusicComposition_property_66 ;
+	sh:property _:MusicComposition_property_65, _:MusicComposition_property_66, _:MusicComposition_property_59 ;
 	rdfs:subClassOf schema:CreativeWork .
 
 _:MusicComposition_property_59 sh:path schema:composer ;
@@ -284,7 +284,7 @@ _:element_70 sh:node schema:MusicGroup .
 
 schema:Movie rdf:type sh:NodeShape ;
 	ys:fromClass wd:Q11424 ;
-	sh:property _:Movie_property_76, _:Movie_property_75, _:Movie_property_77, _:Movie_property_74, _:Movie_property_72, _:Movie_property_73 ;
+	sh:property _:Movie_property_72, _:Movie_property_75, _:Movie_property_77, _:Movie_property_73, _:Movie_property_74, _:Movie_property_76 ;
 	rdfs:subClassOf schema:CreativeWork .
 
 _:Movie_property_72 sh:path schema:actor ;
@@ -300,7 +300,7 @@ _:Movie_property_74 sh:path schema:director ;
 	ys:fromProperty wdt:P57 .
 
 _:Movie_property_75 sh:path schema:duration ;
-	sh:datatype xsd:duration ;
+	sh:datatype xsd:decimal ;
 	ys:fromProperty wdt:P2047 .
 
 _:Movie_property_76 sh:path schema:genre ;
@@ -343,7 +343,7 @@ _:element_85 sh:node schema:Person .
 
 _:Event_property_87 sh:path schema:location ;
 	sh:node schema:Place ;
-	ys:fromProperty wdt:P131, wdt:P706, wdt:P276, wdt:P4552 .
+	ys:fromProperty wdt:P4552, wdt:P706, wdt:P276, wdt:P131 .
 
 _:Event_property_88 sh:path schema:organizer ;
 	sh:or (_:element_90 _:element_92) ;
@@ -398,7 +398,7 @@ yago:Sport rdf:type sh:NodeShape ;
 
 schema:SportsEvent rdf:type sh:NodeShape ;
 	ys:fromClass wd:Q16510064 ;
-	sh:property _:SportsEvent_property_121, _:SportsEvent_property_127 ;
+	sh:property _:SportsEvent_property_127, _:SportsEvent_property_121 ;
 	rdfs:subClassOf schema:Event .
 
 _:SportsEvent_property_121 sh:path schema:competitor ;
@@ -446,7 +446,7 @@ _:Organization_property_140 sh:path schema:founder ;
 
 _:Organization_property_141 sh:path schema:leader ;
 	sh:node schema:Person ;
-	ys:fromProperty wdt:P6, wdt:P35 .
+	ys:fromProperty wdt:P35, wdt:P6 .
 
 _:Organization_property_142 sh:path schema:motto ;
 	sh:datatype xsd:string ;
@@ -456,7 +456,7 @@ _:Organization_property_143 sh:path schema:address ;
 	sh:datatype xsd:string ;
 	ys:fromProperty wdt:P6375 .
 
-_:Organization_property_144 sh:path schema:foundingDate ;
+_:Organization_property_144 sh:path schema:dateCreated ;
 	sh:or (_:element_146 _:element_148 _:element_150 _:element_152) ;
 	sh:maxCount 1 ;
 	ys:fromProperty wdt:P571 .
@@ -477,36 +477,32 @@ _:Organization_property_154 sh:path schema:leiCode ;
 
 _:Organization_property_155 sh:path schema:location ;
 	sh:node schema:Place ;
-	ys:fromProperty wdt:P131, wdt:P706, wdt:P276, wdt:P4552 .
+	ys:fromProperty wdt:P4552, wdt:P706, wdt:P276, wdt:P131 .
 
 _:Organization_property_156 sh:path schema:memberOf ;
 	sh:node schema:Organization ;
 	ys:fromProperty wdt:P463 .
 
 _:Organization_property_157 sh:path schema:numberOfEmployees ;
-	sh:datatype xsd:integer ;
+	sh:datatype xsd:decimal ;
 	ys:fromProperty wdt:P1128 .
 
-_:Organization_property_158 sh:path schema:employee ;
-	sh:node schema:Person ;
-	ys:fromProperty wdt:P1128 .
-
-_:Organization_property_159 sh:path schema:parentOrganization ;
+_:Organization_property_158 sh:path schema:parentOrganization ;
 	sh:node schema:Organization ;
 	ys:fromProperty wdt:P749 .
 
 schema:Airline rdf:type sh:NodeShape ;
 	ys:fromClass wd:Q46970 ;
-	sh:property _:Airline_property_160, _:Airline_property_161 ;
+	sh:property _:Airline_property_160, _:Airline_property_159 ;
 	rdfs:subClassOf schema:Organization .
 
-_:Airline_property_160 sh:path schema:iataCode ;
+_:Airline_property_159 sh:path schema:iataCode ;
 	sh:datatype xsd:string ;
 	sh:pattern "^[A-Z0-9]{2}$" ;
 	sh:maxCount 1 ;
 	ys:fromProperty wdt:P229 .
 
-_:Airline_property_161 sh:path schema:icaoCode ;
+_:Airline_property_160 sh:path schema:icaoCode ;
 	sh:datatype xsd:string ;
 	sh:pattern "^[A-Z]{3}$" ;
 	sh:maxCount 1 ;
@@ -518,23 +514,23 @@ schema:Corporation rdf:type sh:NodeShape ;
 
 schema:EducationalOrganization rdf:type sh:NodeShape ;
 	ys:fromClass wd:Q5341295 ;
-	sh:property _:EducationalOrganization_property_162 ;
+	sh:property _:EducationalOrganization_property_161 ;
 	rdfs:subClassOf schema:Organization, schema:CivicStructure .
 
-_:EducationalOrganization_property_162 sh:path schema:studentsCount ;
-	sh:datatype xsd:integer ;
+_:EducationalOrganization_property_161 sh:path schema:studentsCount ;
+	sh:datatype xsd:decimal ;
 	ys:fromProperty wdt:P2196 .
 
 schema:MusicGroup rdf:type sh:NodeShape ;
 	ys:fromClass wd:Q215380 ;
-	sh:property _:MusicGroup_property_163, _:MusicGroup_property_164 ;
+	sh:property _:MusicGroup_property_163, _:MusicGroup_property_162 ;
 	rdfs:subClassOf schema:PerformingGroup .
 
-_:MusicGroup_property_163 sh:path schema:influencedBy ;
+_:MusicGroup_property_162 sh:path schema:influencedBy ;
 	sh:node schema:Person ;
 	ys:fromProperty wdt:P737 .
 
-_:MusicGroup_property_164 sh:path schema:genre ;
+_:MusicGroup_property_163 sh:path schema:genre ;
 	sh:datatype xsd:string ;
 	ys:fromProperty wdt:P136 .
 
@@ -551,285 +547,285 @@ yago:Gender rdf:type sh:NodeShape ;
 	rdfs:subClassOf schema:Intangible ;
 	rdf:label "Gender" .
 
-_:Person_property_165 sh:path schema:affiliation ;
+_:Person_property_164 sh:path schema:affiliation ;
 	sh:node schema:Organization ;
 	ys:fromProperty wdt:P1416 .
 
-_:Person_property_166 sh:path schema:alumniOf ;
+_:Person_property_165 sh:path schema:alumniOf ;
 	sh:node schema:Organization ;
 	ys:fromProperty wdt:P69 .
 
-_:Person_property_167 sh:path schema:award ;
+_:Person_property_166 sh:path schema:award ;
 	sh:node yago:Award ;
 	ys:fromProperty wdt:P166 .
 
-_:Person_property_168 sh:path schema:birthDate ;
-	sh:or (_:element_170 _:element_172 _:element_174 _:element_176) ;
+_:Person_property_167 sh:path schema:birthDate ;
+	sh:or (_:element_169 _:element_171 _:element_173 _:element_175) ;
 	sh:maxCount 1 ;
 	ys:fromProperty wdt:P569 .
 
-_:element_170 sh:datatype xsd:dateTime .
+_:element_169 sh:datatype xsd:dateTime .
 
-_:element_172 sh:datatype xsd:date .
+_:element_171 sh:datatype xsd:date .
 
-_:element_174 sh:datatype xsd:gYearMonth .
+_:element_173 sh:datatype xsd:gYearMonth .
 
-_:element_176 sh:datatype xsd:gYear .
+_:element_175 sh:datatype xsd:gYear .
 
-_:Person_property_178 sh:path schema:birthPlace ;
+_:Person_property_177 sh:path schema:birthPlace ;
 	sh:node schema:Place ;
 	sh:maxCount 1 ;
 	ys:fromProperty wdt:P19 .
 
-_:Person_property_179 sh:path schema:children ;
+_:Person_property_178 sh:path schema:children ;
 	sh:node schema:Person ;
 	ys:fromProperty wdt:P40 .
 
-_:Person_property_180 sh:path schema:deathDate ;
-	sh:or (_:element_182 _:element_184 _:element_186 _:element_188) ;
+_:Person_property_179 sh:path schema:deathDate ;
+	sh:or (_:element_181 _:element_183 _:element_185 _:element_187) ;
 	sh:maxCount 1 ;
 	ys:fromProperty wdt:P570 .
 
-_:element_182 sh:datatype xsd:dateTime .
+_:element_181 sh:datatype xsd:dateTime .
 
-_:element_184 sh:datatype xsd:date .
+_:element_183 sh:datatype xsd:date .
 
-_:element_186 sh:datatype xsd:gYearMonth .
+_:element_185 sh:datatype xsd:gYearMonth .
 
-_:element_188 sh:datatype xsd:gYear .
+_:element_187 sh:datatype xsd:gYear .
 
-_:Person_property_190 sh:path schema:deathPlace ;
+_:Person_property_189 sh:path schema:deathPlace ;
 	sh:node schema:Place ;
 	sh:maxCount 1 ;
 	ys:fromProperty wdt:P20 .
 
-_:Person_property_191 sh:path schema:gender ;
+_:Person_property_190 sh:path schema:gender ;
 	sh:node yago:Gender ;
 	sh:maxCount 1 ;
 	ys:fromProperty wdt:P21 .
 
-_:Person_property_192 sh:path schema:hasOccupation ;
+_:Person_property_191 sh:path schema:hasOccupation ;
 	sh:node schema:Occupation ;
 	ys:fromProperty wdt:P106 .
 
-_:Person_property_193 sh:path schema:homeLocation ;
+_:Person_property_192 sh:path schema:homeLocation ;
 	sh:node schema:Place ;
 	ys:fromProperty wdt:P551 .
 
-_:Person_property_194 sh:path schema:knowsLanguage ;
+_:Person_property_193 sh:path schema:knowsLanguage ;
 	sh:node schema:Language ;
 	ys:fromProperty wdt:P1412 .
 
-_:Person_property_195 sh:path schema:memberOf ;
+_:Person_property_194 sh:path schema:memberOf ;
 	sh:node schema:Organization ;
-	ys:fromProperty wdt:P463, wdt:P102, wdt:P54 .
+	ys:fromProperty wdt:P463, wdt:P54, wdt:P102 .
 
-_:Person_property_196 sh:path schema:nationality ;
+_:Person_property_195 sh:path schema:nationality ;
 	sh:node schema:Country ;
 	ys:fromProperty wdt:P27 .
 
-_:Person_property_197 sh:path schema:owns ;
+_:Person_property_196 sh:path schema:owns ;
 	sh:node schema:Thing ;
 	ys:fromProperty wdt:P1830 .
 
-_:Person_property_198 sh:path schema:spouse ;
+_:Person_property_197 sh:path schema:spouse ;
 	sh:node schema:Person ;
 	ys:fromProperty wdt:P26 .
 
-_:Place_property_199 sh:path schema:containedInPlace ;
+_:Place_property_198 sh:path schema:containedInPlace ;
 	sh:node schema:Place ;
-	ys:fromProperty wdt:P131, wdt:P706, wdt:P276, wdt:P4552 .
+	ys:fromProperty wdt:P4552, wdt:P706, wdt:P276, wdt:P131 .
 
-_:Place_property_200 sh:path schema:inception ;
-	sh:datatype xsd:dateTime ;
-	ys:fromProperty wdt:P571 .
-
-_:Place_property_201 sh:path schema:demonym ;
-	sh:datatype xsd:string ;
-	ys:fromProperty wdt:P1549 .
-
-_:Place_property_202 sh:path schema:leader ;
-	sh:node schema:Person ;
-	ys:fromProperty wdt:P6, wdt:P35 .
-
-_:Place_property_203 sh:path schema:populationNumber ;
-	sh:datatype xsd:integer ;
-	ys:fromProperty wdt:P1082 .
-
-_:Place_property_204 sh:path schema:timezone ;
-	sh:datatype xsd:string ;
-	ys:fromProperty wdt:P421 .
-
-_:Place_property_205 sh:path schema:area ;
-	sh:datatype xsd:string ;
+_:Place_property_199 sh:path schema:area ;
+	sh:datatype xsd:decimal ;
 	ys:fromProperty wdt:P2046 .
 
-_:Place_property_206 sh:path schema:postalCode ;
-	sh:datatype xsd:string ;
-	ys:fromProperty wdt:P281 .
-
-_:Place_property_207 sh:path schema:motto ;
-	sh:datatype xsd:string ;
-	ys:fromProperty wdt:P1451 .
-
-_:Place_property_208 sh:path schema:highestPoint ;
+_:Place_property_200 sh:path schema:highestPoint ;
 	sh:node schema:Place ;
 	ys:fromProperty wdt:P610 .
 
-_:Place_property_209 sh:path schema:lowestPoint ;
+_:Place_property_201 sh:path schema:lowestPoint ;
 	sh:node schema:Place ;
 	ys:fromProperty wdt:P1589 .
 
-_:Place_property_210 sh:path schema:memberOf ;
-	sh:node schema:Organization ;
-	ys:fromProperty wdt:P463 .
-
-_:Place_property_211 sh:path schema:administrates ;
+_:Place_property_202 sh:path schema:neighbors ;
 	sh:node schema:Place ;
-	ys:fromProperty wdt:P150 .
+	ys:fromProperty wdt:P47, wdt:P206 .
 
-_:Place_property_212 sh:path schema:neighbors ;
-	sh:node schema:Place ;
-	ys:fromProperty wdt:P47 .
-
-_:Place_property_213 sh:path schema:neighborsBodyOfWater ;
-	sh:node schema:BodyOfWater ;
-	ys:fromProperty wdt:P206 .
-
-_:Place_property_214 sh:path schema:elevation ;
-	sh:datatype xsd:double ;
+_:Place_property_203 sh:path schema:elevation ;
+	sh:datatype xsd:decimal ;
 	ys:fromProperty wdt:P2044 .
 
-_:Place_property_215 sh:path schema:geo ;
+_:Place_property_204 sh:path schema:geo ;
 	sh:datatype geo:wktLiteral ;
 	sh:maxCount 1 ;
 	ys:fromProperty wdt:P625 .
+
+schema:AdministrativeArea rdf:type sh:NodeShape ;
+	sh:property _:AdministrativeArea_property_209, _:AdministrativeArea_property_211, _:AdministrativeArea_property_210, _:AdministrativeArea_property_206, _:AdministrativeArea_property_207, _:AdministrativeArea_property_208, _:AdministrativeArea_property_212, _:AdministrativeArea_property_205 ;
+	ys:fromClass wd:Q56061 ;
+	rdfs:subClassOf schema:Place .
+
+_:AdministrativeArea_property_205 sh:path schema:dateCreated ;
+	sh:datatype xsd:dateTime ;
+	ys:fromProperty wdt:P571 ;
+	sh:maxCount 1 .
+
+_:AdministrativeArea_property_206 sh:path schema:demonym ;
+	sh:datatype xsd:string ;
+	ys:fromProperty wdt:P1549 .
+
+_:AdministrativeArea_property_207 sh:path schema:leader ;
+	sh:node schema:Person ;
+	ys:fromProperty wdt:P35, wdt:P6 .
+
+_:AdministrativeArea_property_208 sh:path schema:populationNumber ;
+	sh:datatype xsd:decimal ;
+	ys:fromProperty wdt:P1082 .
+
+_:AdministrativeArea_property_209 sh:path schema:postalCode ;
+	sh:datatype xsd:string ;
+	ys:fromProperty wdt:P281 .
+
+_:AdministrativeArea_property_210 sh:path schema:motto ;
+	sh:datatype xsd:string ;
+	ys:fromProperty wdt:P1451 .
+
+_:AdministrativeArea_property_211 sh:path schema:memberOf ;
+	sh:node schema:Organization ;
+	ys:fromProperty wdt:P463 .
+
+_:AdministrativeArea_property_212 sh:path schema:administrates ;
+	sh:node schema:Place ;
+	ys:fromProperty wdt:P150 .
+
+schema:BodyOfWater rdf:type sh:NodeShape ;
+	ys:fromClass wd:Q15324 ;
+	rdfs:subClassOf schema:Landform .
+
+schema:Continent rdf:type sh:NodeShape ;
+	ys:fromClass wd:Q5107 ;
+	rdfs:subClassOf schema:Landform .
+
+schema:Mountain rdf:type sh:NodeShape ;
+	ys:fromClass wd:Q8502 ;
+	rdfs:subClassOf schema:Landform .
+
+ys:ArtificialGeoObject rdf:type sh:NodeShape ;
+	rdfs:subClassOf schema:Place ;
+	ys:fromClass wd:Q811979 .
 
 schema:City rdf:type sh:NodeShape ;
 	ys:fromClass wd:Q515 ;
 	rdfs:subClassOf schema:AdministrativeArea .
 
 schema:Country rdf:type sh:NodeShape ;
-	sh:property _:Country_property_221, _:Country_property_217, _:Country_property_216, _:Country_property_219, _:Country_property_220, _:Country_property_218 ;
+	sh:property _:Country_property_216, _:Country_property_214, _:Country_property_213, _:Country_property_215 ;
 	ys:fromClass wd:Q6256 ;
 	rdfs:subClassOf schema:AdministrativeArea .
 
-_:Country_property_216 sh:path ys:capital ;
+_:Country_property_213 sh:path ys:capital ;
 	sh:node schema:City ;
 	ys:fromProperty wdt:P36 .
 
-_:Country_property_217 sh:path schema:officialLanguage ;
+_:Country_property_214 sh:path schema:officialLanguage ;
 	sh:node schema:Language ;
 	ys:fromProperty wdt:P37 .
 
-_:Country_property_218 sh:path schema:humanDevelopmentIndex ;
-	sh:datatype xsd:double ;
+_:Country_property_215 sh:path schema:humanDevelopmentIndex ;
+	sh:datatype xsd:decimal ;
 	ys:fromProperty wdt:P1081 .
 
-_:Country_property_219 sh:path schema:unemploymentRate ;
-	sh:datatype xsd:string ;
+_:Country_property_216 sh:path schema:unemploymentRate ;
+	sh:datatype xsd:decimal ;
 	ys:fromProperty wdt:P1198 .
-
-_:Country_property_220 sh:path schema:internetDomain ;
-	sh:datatype xsd:string ;
-	ys:fromProperty wdt:P78 .
-
-_:Country_property_221 sh:path schema:medianIncome ;
-	sh:datatype xsd:integer ;
-	ys:fromProperty wdt:P3529 .
 
 schema:Airport rdf:type sh:NodeShape ;
 	ys:fromClass wd:Q1248784 ;
-	sh:property _:Airport_property_223, _:Airport_property_222 ;
+	sh:property _:Airport_property_218, _:Airport_property_217 ;
 	rdfs:subClassOf schema:CivicStructure .
 
-_:Airport_property_222 sh:path schema:iataCode ;
+_:Airport_property_217 sh:path schema:iataCode ;
 	sh:datatype xsd:string ;
 	sh:pattern "^[A-Z]{3}$" ;
 	sh:maxCount 1 ;
 	ys:fromProperty wdt:P238 .
 
-_:Airport_property_223 sh:path schema:icaoCode ;
+_:Airport_property_218 sh:path schema:icaoCode ;
 	sh:datatype xsd:string ;
 	sh:pattern "^([A-Z]{2}|[CKY][A-Z0-9])[A-Z0-9]{2}$" ;
 	sh:maxCount 1 ;
 	ys:fromProperty wdt:P239 .
 
-schema:BodyOfWater rdf:type sh:NodeShape ;
-	ys:fromClass wd:Q15324 ;
-	rdfs:subClassOf schema:Landform .
-
-_:Product_property_224 sh:path schema:award ;
+_:Product_property_219 sh:path schema:award ;
 	sh:node yago:Award ;
 	ys:fromProperty wdt:P166 .
 
-_:Product_property_225 sh:path schema:manufacturer ;
-	sh:node rdfs:Corporation ;
-	ys:fromProperty P178, wdt:P176 .
+_:Product_property_220 sh:path schema:manufacturer ;
+	sh:node schema:Corporation ;
+	ys:fromProperty wdt:P176, wdt:P178 .
 
-_:Product_property_226 sh:path schema:releaseDate ;
-	sh:or (_:element_228 _:element_230 _:element_232 _:element_234) ;
+_:Product_property_221 sh:path schema:dateCreated ;
+	sh:or (_:element_223 _:element_225 _:element_227 _:element_229) ;
 	sh:maxCount 1 ;
-	ys:fromProperty wdt:P571 .
+	ys:fromProperty wdt:P577 .
 
-_:element_228 sh:datatype xsd:dateTime .
+_:element_223 sh:datatype xsd:dateTime .
 
-_:element_230 sh:datatype xsd:date .
+_:element_225 sh:datatype xsd:date .
 
-_:element_232 sh:datatype xsd:gYearMonth .
+_:element_227 sh:datatype xsd:gYearMonth .
 
-_:element_234 sh:datatype xsd:gYear .
+_:element_229 sh:datatype xsd:gYear .
 
-_:Product_property_236 sh:path schema:gtin ;
+_:Product_property_231 sh:path schema:gtin ;
 	sh:datatype xsd:string ;
 	sh:pattern "^\\d{12,14}|\\d{8}$" ;
 	ys:fromProperty wdt:P3962 .
 
-_:Taxon_property_237 sh:path schema:parentTaxon ;
+_:Taxon_property_232 sh:path schema:parentTaxon ;
 	sh:node schema:Taxon ;
 	ys:fromProperty wdt:P171 .
 
-_:Taxon_property_238 sh:path yago:consumes ;
+_:Taxon_property_233 sh:path yago:consumes ;
 	sh:node schema:Taxon ;
-	ys:fromProperty wdt:1034 .
+	ys:fromProperty wdt:P1034 .
 
 ys:AnnotationPropertyShape rdf:type rdfs:Property ;
 	rdfs:subPropertyOf sh:PropertyShape .
 
 ys:startDateAnnotation rdf:type ys:AnnotationPropertyShape ;
 	sh:path schema:startDate ;
-	sh:or (_:element_240 _:element_242 _:element_244 _:element_246) ;
+	sh:or (_:element_235 _:element_237 _:element_239 _:element_241) ;
 	sh:maxCount 1 ;
 	ys:fromProperty wpq:P580 .
 
-_:element_240 sh:datatype xsd:dateTime .
+_:element_235 sh:datatype xsd:dateTime .
 
-_:element_242 sh:datatype xsd:date .
+_:element_237 sh:datatype xsd:date .
 
-_:element_244 sh:datatype xsd:gYearMonth .
+_:element_239 sh:datatype xsd:gYearMonth .
 
-_:element_246 sh:datatype xsd:gYear .
+_:element_241 sh:datatype xsd:gYear .
 
 ys:endDateAnnotation rdf:type ys:AnnotationPropertyShape ;
 	sh:path schema:endDate ;
-	sh:or (_:element_249 _:element_251 _:element_253 _:element_255) ;
+	sh:or (_:element_244 _:element_246 _:element_248 _:element_250) ;
 	sh:maxCount 1 ;
 	ys:fromProperty wpq:P582 .
 
-_:element_249 sh:datatype xsd:dateTime .
+_:element_244 sh:datatype xsd:dateTime .
 
-_:element_251 sh:datatype xsd:date .
+_:element_246 sh:datatype xsd:date .
 
-_:element_253 sh:datatype xsd:gYearMonth .
+_:element_248 sh:datatype xsd:gYearMonth .
 
-_:element_255 sh:datatype xsd:gYear .
+_:element_250 sh:datatype xsd:gYear .
 
 schema:CivicStructure rdfs:subClassOf schema:Place .
 
 schema:PerformingGroup rdfs:subClassOf schema:Organization .
 
 schema:SportsOrganization rdfs:subClassOf schema:Organization .
-
-schema:AdministrativeArea rdfs:subClassOf schema:Place .
 
 schema:Landform rdfs:subClassOf schema:Place .

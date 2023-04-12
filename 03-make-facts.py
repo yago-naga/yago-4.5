@@ -204,10 +204,13 @@ def checkCardinalityConstraints(p, entityFacts, yagoSchema):
     if intMaxCount is None or intMaxCount<=0:
         raise Exception("Maxcount has to be a positive int, not "+maxCount)
     for s in entityFacts.subjects():
-        if len(set(entityFacts.objects(s, p)))>intMaxCount:
-            for o in entityFacts.objects(s,p):
-                entityFacts.remove((s, p, o))        
-    
+        # We take the first intCount, so as to take the earliest date
+        objects=entityFacts.objects(s, p)
+        if len(objects)<=intMaxCount:
+            continue            
+        objects.sort()
+        for i in range(intMaxCount,len(objects)):
+            entityFacts.remove((s, p, objects[i]))        
         
 ##########################################################################
 #             Domain and range checks

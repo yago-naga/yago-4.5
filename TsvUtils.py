@@ -10,7 +10,7 @@ import sys
 import evaluator
 import Prefixes
 
-TEST=True
+TEST=False
 
 ##########################################################################
 #             Reading lines of a file

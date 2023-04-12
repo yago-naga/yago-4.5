@@ -6,41 +6,41 @@
 Elvis a wikibase:Item .
 
 # European books should be a subclass of Books in YAGO
-wd:Q_European_book a wd:item .
+wd:Q_European_book a wd:item; rdfs:label "European book" .
 wd:Q_European_book wdt:P279 wd:Q571 .
 
 # English books should be a subclass of European Books in YAGO
-wd:Q_English_book a wd:item .
+wd:Q_English_book a wd:item; rdfs:label "English book" .
 wd:Q_English_book wdt:P279 wd:Q_European_book .
 
 # Loops should be removed in YAGO
-wd:Q_loop_book a wd:item .
+wd:Q_loop_book a wd:item; rdfs:label "Loop book" .
 wd:Q_loop_book wdt:P279 wd:Q_English_book .
 wd:Q_European_book wdt:P279 wd:Q_loop_book .
 
 # European events should be a subclass of Event in YAGO
-wd:Q_European_event a wd:item .
+wd:Q_European_event a wd:item; rdfs:label "European Event" .
 wd:Q_European_event wdt:P279 wd:Q1656682 .
 
 # This is a book and an event, and should be just an event
-wd:Q_book_and_event a wd:item .
+wd:Q_book_and_event a wd:item; rdfs:label "Event and book" .
 wd:Q_book_and_event wdt:P279 wd:Q_English_book ,
  wd:Q_European_event .
 
 # Disambiguation pages should not exist in YAGO
-wd:Q4167410 a wd:item .
+wd:Q4167410 a wd:item; rdfs:label "Disambuguation page" .
 wd:Q4167410 wdt:P279 wd:Q571 .
 
 # Disambiguation pages should not exist in YAGO
-wd:Q_English_disambiguation_page a wd:item .
+wd:Q_English_disambiguation_page a wd:item; rdfs:label "English disambiguation page" .
 wd:Q_English_disambiguation_page wdt:P279 wd:Q4167410 .
 
 # Animals should not get in, even if camouflaged as books
-wd:Q_tiger a wd:item .
+wd:Q_tiger a wd:item; rdfs:label "Tiger" .
 wd:Q_tiger wdt:P279 wd:Q_European_book .
 wd:Q_tiger wdt:P171 wd:Q_mammal .
 
 # Product instances should not get in, even if camouflaged as books
-wd:Q_iphone a wd:item .
+wd:Q_iphone a wd:item; rdfs:label "iPhone" .
 wd:Q_iphone wdt:P279 wd:Q_European_book .
 wd:Q_iphone wdt:P176 wd:Q_apple .

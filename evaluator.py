@@ -35,10 +35,10 @@ def compare(output_file, gold_file=None):
         except:
             # too idiotic to print
             pass
-    precision = round((len(goldContent) - len(not_in_output)) / len(goldContent), 3)
-    recall = round((len(outContent) - len(not_in_gold)) / len(outContent), 3)
-    print("  Precision: ", precision)
-    print("  Recall: ", recall)
+    if len(not_in_output)==0 and len(not_in_gold)==0:
+        print("OK!")
+    else:
+        print("FAILED!")
 
 # quick test
 if __name__ == '__main__':
