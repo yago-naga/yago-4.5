@@ -13,6 +13,7 @@ Input:
 Output:
 - 04-yago-facts-to-rename.tsv (type checked YAGO facts without correct ids)
 - 04-yago-ids.tsv (maps Wikidata ids to YAGO ids)
+- 04-yago-bad-classes.tsv (lists classes that don't have instances)
 
 Algorithm:
 - run through all entities of yago-facts-to-type-check.tsv, load classes
@@ -43,15 +44,20 @@ from collections import defaultdict
 ##########################################################################
 
 # Load taxonomy
-yagoTaxonomyUp=defaultdict(set)
+yagoTaxonomyUp={}
 for tuple in TsvUtils.tsvTuples(FOLDER+"02-yago-taxonomy-to-rename.tsv", "  Loading YAGO taxonomy"):
     if len(tuple)>3:
+        if tuple[0] not in yagoTaxonomyUp:
+            yagoTaxonomyUp[tuple[0]]=set()
         yagoTaxonomyUp[tuple[0]].add(tuple[2])
 
 # Identify classes that have instances
 yagoClassesWithInstances=set()
 def tickOffClassAndSuperClasses(c):
     yagoClassesWithInstances.add(c)
+    # Happens for schema:Thing and rdfs:Class
+    if c not in yagoTaxonomyUp:
+        return
     for superClass in yagoTaxonomyUp[c]:
         tickOffClassAndSuperClasses(superClass)
 
@@ -129,7 +135,9 @@ def createGenericInstance(subject, targetClass, outFile):
 
 def isSubclassOf(c1, c2):
     if c1==c2:
-        return True    
+        return True
+    if c1 not in yagoTaxonomyUp:
+        return
     for superclass in yagoTaxonomyUp[c1]:
         if isSubclassOf(superclass, c2):
             return True
@@ -154,9 +162,6 @@ with TsvUtils.TsvFileWriter(FOLDER+"04-yago-facts-to-rename.tsv") as out:
                 currentLabel=""
                 currentWikipediaPage=""
                 wroteFacts=False
-            # We skip any classes that don't have instances
-            if currentTopic in yagoTaxonomyUp and currentTopic not in yagoClassesWithInstances:
-                continue
             if split[1]=="rdfs:label" and split[2].endswith('"@en'):
                 currentLabel=split[2][1:-4]
             elif split[1]=="schema:mainEntityOfPage" and split[2].startswith('<https://en.wikipedia.org/wiki/'):
@@ -171,12 +176,21 @@ with TsvUtils.TsvFileWriter(FOLDER+"04-yago-facts-to-rename.tsv") as out:
                 newObject=createGenericInstance(split[0], split[1], out)
                 if newObject:
                     out.write(split[0], split[1], newObject, ". #", startDate, endDate)
+                    tickOffClassAndSuperClasses(split[2])
                     wroteFacts=True            
         # Also flush the ids of the last entity...
         if wroteFacts:
             writeYagoId(idsFile, currentTopic, currentLabel, currentWikipediaPage)
+
+# Write out classes that did not get any instances
+with TsvUtils.TsvFileWriter(FOLDER+"04-yago-bad-classes.tsv") as badClassFile:
+    for c in yagoTaxonomyUp:
+        if not c in yagoClassesWithInstances:
+            badClassFile.write(c)
+
 print("done")
 
 if TEST:
     evaluator.compare(FOLDER+"04-yago-facts-to-rename.tsv")
     evaluator.compare(FOLDER+"04-yago-ids.tsv")
+    evaluator.compare(FOLDER+"04-yago-bad-classes.tsv")

@@ -6,6 +6,7 @@ Replaces the ids of the facts by YAGO ids
 Input:
 - 04-yago-facts-to-rename.tsv
 - 04-yago-ids.tsv
+- 04-yago-bad-classes.tsv
 
 Output:
 - 05-yago-final-wikipedia.tsv
@@ -42,6 +43,9 @@ for split in TsvUtils.tsvTuples(FOLDER+"04-yago-ids.tsv", "  Loading YAGO ids"):
     yagoIds[split[0]]=split[2]
     if split[3]==". #WIKI":
         entitiesWithWikipediaPage.add(split[2])
+
+for split in TsvUtils.tsvTuples(FOLDER+"04-yago-bad-classes.tsv", "  Removing bad YAGO classes"):
+    yagoIds.pop(split[0], None)
 
 ##########################################################################
 #             Helper methods

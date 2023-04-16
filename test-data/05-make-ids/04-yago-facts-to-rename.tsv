@@ -58,3 +58,7 @@ wd:Q_singer	schema:alternateName	"this is a human being"@en	.
 wd:Q_singer	rdfs:comment	"this is a singer"@en	.
 wd:Q_singer	rdf:type	rdfs:Class	.
 wd:Q_singer	rdfs:label	"singer"@en	.
+
+# This class has no instances and hsould be removed
+wd:Q_empty	rdf:type	rdfs:Class	.
+wd:Q_empty	rdfs:label	"empty class"@en	.

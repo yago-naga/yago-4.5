@@ -61,7 +61,7 @@ wd:Q_singer	rdfs:comment	"this is a singer"@en	.
 wd:Q_singer	rdf:type	rdfs:Class	.
 wd:Q_singer	rdfs:label	"singer"@en	.
 
-#... but only if they have instances
+#... and this one should be a bad class
 wd:Q_prof	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Professor>	.
 wd:Q_prof	rdfs:label	"prof"@fr	.
 wd:Q_prof	schema:alternateName	"this is a human professor"@en	.
