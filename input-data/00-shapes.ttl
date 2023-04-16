@@ -103,7 +103,7 @@ schema:Thing a sh:NodeShape ;
         ys:fromProperty wdt:P646, wdt:P345;
     ] .
 
-# Class of all classes. Classes can have properties, too.
+# Class of all classes. Classes can have properties, too, but only annotation properties.
 rdfs:Class a sh:NodeShape ;
     sh:property [
         sh:path schema:alternateName ;
@@ -132,6 +132,39 @@ rdfs:Class a sh:NodeShape ;
     ] . 
 
 ################################################################
+#                Intangibles
+################################################################
+
+# Awards are needed as domain of schema:award
+yago:Award a sh:NodeShape ;
+    ys:fromClass wd:Q618779 ;
+    rdfs:subClassOf schema:Intangible ;
+    rdf:label "Award"@en ;
+    sh:property [
+        sh:path yago:conferredBy ; 
+        sh:or (
+            [
+                sh:node schema:Organization
+            ]
+            [
+                sh:node schema:Person
+            ]
+        ) ;
+        ys:fromProperty wdt:P1027 ;
+    ] .
+
+# Religions etc. are intangibles
+yago:BeliefSystem a sh:NodeShape ;
+	rdfs:subClassOf schema:Intangible ;
+    ys:fromClass Q5390013	.
+
+# We need genders as objects of yago:gender
+yago:Gender a sh:NodeShape ;
+    ys:fromClass wd:Q48264 ;
+    rdfs:subClassOf schema:Intangible .
+
+
+################################################################
 #                Media
 ################################################################
 
@@ -146,25 +179,6 @@ rdfs:Class a sh:NodeShape ;
 #     ys:fromClass wd:Q25582589 .
 # schema:TelevisionChannel a sh:NodeShape ;
 #     ys:fromClass wd:Q2001305 .
-
-# Awards are needed as domain of schema:award
-yago:Award a sh:NodeShape ;
-    ys:fromClass wd:Q618779 ;
-    rdfs:subClassOf schema:Intangible ;
-    rdf:label "Award" ;
-    sh:property [
-        sh:path yago:conferredBy ; 
-        sh:or (
-            [
-                sh:node schema:Organization
-            ]
-            [
-                sh:node schema:Person
-            ]
-        ) ;
-        ys:fromProperty wdt:P1027 ;
-    ] .
-
     
 schema:CreativeWork a sh:NodeShape ;
     ys:fromClass wd:Q17537576 ;
@@ -384,7 +398,33 @@ schema:Movie a sh:NodeShape ;
         sh:node schema:Organization ;
         ys:fromProperty wdt:P272 ;
     ] .
- 
+
+# Fictional entities are Things,
+# from  fictional entity (Q14897293) ,  imaginary character (Q115537581) ,  hypothetical entity (Q18706315) ,
+#  character that may or may not be fictional (Q21070598),  fictional creature (Q2593744) ,
+#  fictional character (Q95074),  non-existent entity (Q64728693),  fictional object (Q15706911)  
+yago:FictionalEntity a sh:NodeShape ;
+	rdfs:subClassOf schema:Thing ;
+	rdfs:label "Fictional entity"@en ;
+	sh:property [
+        sh:path yago:appearsIn ;
+        sh:node schema:CreativeWork ;
+        ys:fromProperty wdt:P1080, wdt:P1441, wdt:P4584 ;
+    ] ;
+	sh:property [
+        sh:path schema:author ;
+        sh:or (
+            [
+                sh:node schema:Organization
+            ]
+            [
+                sh:node schema:Person
+            ]
+        ) ;
+        ys:fromProperty wdt:P170, wdt:P50, wdt:P175 ;
+    ] ;
+	ys:fromClass wd:Q14897293, wd:Q115537581, wd:Q18706315, wd:Q21070598, wd:Q2593744, wd:Q95074, wd:Q64728693, wdt:Q15706911 .
+	
 # Fabian 2023-04-12: we can't have genre, because that goes to a class (“war films”)
 #schema:Play a sh:NodeShape ;
 #    ys:fromClass wd:Q25379 ;
@@ -442,7 +482,8 @@ schema:Movie a sh:NodeShape ;
 
 
 schema:Event a sh:NodeShape ;
-    ys:fromClass wd:Q1656682 ;
+    # Merge "occurrence" and "event", also to avoid having "event" twice in YAGO
+    ys:fromClass wd:Q1190554, wd:Q1656682 ;
     sh:property [
         sh:path schema:about ;
         sh:node schema:Thing ;
@@ -721,7 +762,9 @@ schema:Corporation a sh:NodeShape ;
     ys:fromClass wd:Q783794 ;
 	ys:fromClass wd:Q4830453 . # Fabian 2023-03-29: we merge in businesses here
 
+# We attach it under organization, to avoid CivicStructure
 schema:EducationalOrganization a sh:NodeShape ;
+	rdfs:subClassOf schema:Organization ;
     ys:fromClass wd:Q5341295 ;
     sh:property [
         sh:path schema:studentsCount ;
@@ -749,12 +792,13 @@ schema:MusicGroup a sh:NodeShape ;
         sh:path schema:influencedBy ;
         sh:node schema:Person ;
         ys:fromProperty wdt:P737 ;
-    ] ;
-    sh:property [
-        sh:path schema:genre ;
-        sh:datatype xsd:string ;
-        ys:fromProperty wdt:P136 ;
     ] .
+    # Fabian 2023-04-12: we can't have genre, because that goes to a class (“war films”)
+	#sh:property [
+    #    sh:path schema:genre ;
+    #    sh:datatype xsd:string ;
+    #    ys:fromProperty wdt:P136 ;
+    #] .
 	# Fabian 2023-03-28: removed to avoid redundancy with memberOf
     #sh:property [
     #    sh:path schema:members ;
@@ -783,13 +827,18 @@ schema:SportsTeam a sh:NodeShape ;
 schema:Occupation a sh:NodeShape ;
     ys:fromClass wd:Q12737077 .
 
-yago:Gender a sh:NodeShape ;
-    ys:fromClass wd:Q48264 ;
-    rdfs:subClassOf schema:Intangible ;
-    rdf:label "Gender" .
-  
 schema:Person a sh:NodeShape ;
-    ys:fromClass wd:Q5 ;
+    ys:fromClass wd:Q5 ;	
+    sh:property [
+        sh:path yago:beliefSystem ;
+        sh:node yago:BeliefSystem ;
+        ys:fromProperty wdt:P140 ;
+    ] ;
+    sh:property [
+        sh:path yago:academicDegree ;
+        sh:node yago:Award ;
+        ys:fromProperty wdt:P512 ;
+    ] ;
     sh:property [
         sh:path schema:affiliation ;
         sh:node schema:Organization ;
@@ -910,8 +959,10 @@ schema:Person a sh:NodeShape ;
 
 # General superclass for geographic places
 # We don't map this to Wikidata, because we want to control the types of places we have in YAGO
+
 schema:Place a sh:NodeShape ;
-    ys:fromClass wd:Q17334923 ;
+    # No mapping here, to avoid getting messy subclasses
+    # ys:fromClass wd:Q17334923 ; 
     sh:property [
         sh:path schema:containedInPlace ;
         sh:node schema:Place ;
@@ -955,7 +1006,10 @@ schema:Place a sh:NodeShape ;
         ys:fromProperty wdt:P625 ;
     ] .
 
-# One permissible subclass of schema:Place
+# ------------------ Administrative Areas ---------------
+
+# One permissible subclass of schema:Place is Admininstrative Area
+# We import all subclasses from Wikidata
 schema:AdministrativeArea a sh:NodeShape ;
     sh:property [
         sh:path schema:dateCreated ;
@@ -1001,35 +1055,15 @@ schema:AdministrativeArea a sh:NodeShape ;
     ] ;
     ys:fromClass wd:Q56061 .
 
-# One permissible subclass of schema:Place
-schema:BodyOfWater a sh:NodeShape ;
-	sh:property [
-        sh:path ys:flowsInto ;
-        sh:node schema:BodyOfWater ;
-        ys:fromProperty wdt:P403, wdt:P201 ;
-    ] ;
-    ys:fromClass wd:Q15324 .
-
-# One permissible subclass of schema:Place
-schema:Continent a sh:NodeShape ;
-    ys:fromClass wd:Q5107 .
-
-# One permissible subclass of schema:Place
-schema:Mountain a sh:NodeShape ;
-    ys:fromClass wd:Q8502 .
-
-# One permissible subclass of schema:Place, mapped to "architectural structure" Wikidata, not existing in schema.org
-ys:ArtificialGeoObject a sh:NodeShape ;
-	rdfs:subClassOf schema:Place ;
-    ys:fromClass wd:Q811979 .
-
-# Needed for capitals
+# Needed for capitals, mapped to "City or Town" in Wikidata, and to City.
+# "Human Settlement" , Q486972 contains very messy subclasses
 schema:City a sh:NodeShape ;
-    ys:fromClass wd:Q515 .
+    ys:fromClass wd:Q7930989, Q515 .
 
+# Needed because of additional properties
 schema:Country a sh:NodeShape ;
     sh:property [
-        sh:path ys:capital ;
+        sh:path yago:capital ;
         sh:node schema:City ;
         ys:fromProperty wdt:P36 ;
     ] ;
@@ -1060,7 +1094,53 @@ schema:Country a sh:NodeShape ;
 #schema:State a sh:NodeShape ;
 #    ys:fromClass wd:Q107390 .
 
+
+# --------------------- Land Forms ------------------------
+
+# One permissible subclass of schema:Place are land forms,
+# from natural geographic object, terrain, Landform, landmass, geolocation, georegion, geographical area
+schema:Landform a sh:NodeShape ;
+    rdfs:subClassOf schema:Place ;
+	ys:fromClass Q35145263, Q14524493, Q271669, Q205895, Q271669, Q2221906, Q3622002, Q82794.
+    
+# Bodies of water are Landforms.
+# Linked to body of water and marine body of water
+schema:BodyOfWater a sh:NodeShape ;
+	sh:property [
+        sh:path ys:flowsInto ;
+        sh:node schema:BodyOfWater ;
+        ys:fromProperty wdt:P403, wdt:P201 ;
+    ] ;
+    ys:fromClass wd:Q15324, Q116126039 .
+
+# Continents
+schema:Continent a sh:NodeShape ;
+    rdfs:subClassOf schema:Landform ;
+    ys:fromClass wd:Q5107 .
+
+
+# -------------------- Human-made Places --------------------
+
+# One permissible subclass of schema:Place are human made places.
+# Mapped to "architectural structure" and Human Made Feature (twice...) in Wikidata.
+# We thus import all subclasses from Wikidata here, 
+# and need to define classes only to define properties
+yago:HumanMadeGeographicalEntity a sh:NodeShape ;
+	rdfs:subClassOf schema:Place ;
+	rdfs:label "Human-made geographical entity"@en ;
+    ys:fromClass wd:Q811979, Q811430, Q811463 .
+
+# Transit routes such as roads and railways.
+# Mapped to "thoroughfare" Wikidata (not a subclass of arch struc), 
+# not existing in schema.org
+yago:Way a sh:NodeShape ;
+	rdfs:label "Way"@en ;	
+	rdfs:subClassOf yago:HumanMadeGeographicalEntity ;
+    ys:fromClass wd:Q83620 .
+
+# Listed here to add properties, and attached to yago:HumanMadeGeographicalEntity to avoid schema:CivicStructure
 schema:Airport a sh:NodeShape ;
+    rdfs:subClassOf yago:HumanMadeGeographicalEntity ;
     ys:fromClass wd:Q1248784 ;
     sh:property [
         sh:path schema:iataCode ;
@@ -1076,10 +1156,6 @@ schema:Airport a sh:NodeShape ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P239 ;
     ] .
-
-# Needed for neighborsBodyOfWater
-schema:BodyOfWater a sh:NodeShape ;
-    ys:fromClass wd:Q15324 .
 
 # schema:Bridge a sh:NodeShape ;
 #     ys:fromClass wd:Q12280 .

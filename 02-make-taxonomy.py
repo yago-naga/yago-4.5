@@ -65,7 +65,7 @@ class wikidataVisitor(object):
         if not Prefixes.rdfsLabel in predicates:
             return
         for s,p,o in graph:            
-            if p==Prefixes.wikidataSubClassOf:
+            if p==Prefixes.wikidataSubClassOf or p==Prefixes.wikidataAnalogousClass:
                 if o not in self.wikidataTaxonomyDown:
                     self.wikidataTaxonomyDown[o]=set()
                 self.wikidataTaxonomyDown[o].add(s)                
@@ -85,6 +85,8 @@ badClasses = {
     "wd:Q17524420", # aspect of history
     "wd:Q18340514", # article about events in a specific year or time period
     "wd:Q24017414", # second-order class
+    "wd:Q12335479", # templates
+    "wd:Q88392887", # scholarly articles, tweets, etc.
     "wd:Q29654788"  # Unicode characters
 }
 

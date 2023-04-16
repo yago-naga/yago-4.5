@@ -30,6 +30,8 @@ wd:Q_Elvis wdt:P31 wd:Q_rock_singer;
 	wdt:P10000000 wd:Q_bad_object;
 	# Normal range: fact should survive
 	wdt:P40 wd:Q_child;	
+	# Doctoral titles are OK
+	wdt:P512 wd:Q_doctoralDegree ;
 	# Literal range: should be OK
 	wdt:P569 "1935"^^xsd:gYear .
 	
@@ -63,10 +65,16 @@ wd:Q_product wdt:P31 wd:Q2424752;
 wd:Q31  wdt:P31	schema:Country ;
 	schema:geo      "Point(4.6680555555556 50.641111111111)"^^geo:wktLiteral        .
 	
-# Test of foundation date
+# Test of foundation date. A single one should survive
 wd:Q312 wdt:P31 schema:Corporation ;
     wdt:P571 "1976-04-01T00:00:00Z"^^xsd:dateTime,
              "1976-01-01T00:00:00Z"^^xsd:dateTime .
+
+# Fictional entities
+wd:Q_fictional wdt:P31 wd:Q2593744, wd:Q_rock_singer ;	
+	schema:geo      "Point(4.6680555555556 50.641111111111)"^^geo:wktLiteral  ;
+	wdt:P19 wd:Q_birth_place_1 ;
+	wdt:P1080 wd:Q_book .
 	
 # Classes should survive
 

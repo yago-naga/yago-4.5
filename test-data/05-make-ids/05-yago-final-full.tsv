@@ -38,6 +38,10 @@ yago:Elvis	rdf:type	yago:Singer	.
 yago:Elvis	owl:sameAs	wd:Q_Elvis	.
 yago:Elvis	schema:deathDate	"1970-01-01"^^xsd:gYear	.
 yago:Elvis	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Elvis>	.
+yago:Elvis’s_academicTitle	rdf:type	yago:academicTitle	.
+yago:Elvis’s_academicTitle	rdfs:label	"Generic instance of yago:academicTitle"@en	.
+yago:Elvis	yago:academicTitle	yago:Elvis’s_academicTitle	.
+yago:Elvis	owl:sameAs	wd:Q_Elvis	.
 yago:Elvis	schema:child	yago:Elvis	.
 yago:Elvis	schema:child	yago:Q_123456	.
 yago:Q_123456	rdfs:label	"unknown child"	.

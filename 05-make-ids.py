@@ -51,6 +51,10 @@ def isLiteral(entity):
     """ TRUE for literals and external URLs """
     return entity.startswith('"') or entity.startswith('<http://') or entity.startswith('<https://')
 
+def isGeneric(entity):
+    """ TRUE for generic instances """
+    return entity.startswith('_:')
+
 def toYagoEntity(entity):
     """ Translates an entity to a YAGO entity, passes through literals, returns NONE otherwise """
     if entity.startswith('"'):
@@ -59,12 +63,20 @@ def toYagoEntity(entity):
         return entity
     if entity.startswith("yago:") or entity.startswith("schema:") or entity.startswith("rdfs:") :
         return entity
+    if entity.startswith("_:"):
+        subjectEntity="wd:"+entity[2:entity.index("__")]
+        subjectEntity=yagoIds[subjectEntity]
+        if subjectEntity==None or subjectEntity.index(":")==-1:
+            subjectEntity="Generic"
+        else:
+            subjectEntity=subjectEntity[subjectEntity.index(":")+1:]+"’s"
+        return "yago:"+subjectEntity+"_"+entity[entity.index("__")+2:]            
     if entity in yagoIds:
         return yagoIds[entity]
     return None
 
 def hasWikipediaPage(entity):
-    """ TRUE if the entity is a literal or has a Wikipedia page """
+    """ TRUE if the entity is a literal or has a Wikipedia page or is a generic instance"""
     return isLiteral(entity) or entity in entitiesWithWikipediaPage
     
 ##########################################################################
@@ -88,7 +100,7 @@ with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-meta.tsv") as metaFacts:
                     # Should not happen
                     continue
                 # Write facts to Wikipedia version of YAGO
-                if hasWikipediaPage(subject) and (relation=="rdf:type" or hasWikipediaPage(object)):
+                if (hasWikipediaPage(subject) or isGeneric(split[0])) and (relation=="rdf:type" or hasWikipediaPage(object) or isGeneric(split[2])):
                     wikipediaFacts.writeFact(subject, relation, object)
                     if subject!=previousEntity and split[0] in yagoIds:
                        wikipediaFacts.writeFact(subject, "owl:sameAs", split[0])

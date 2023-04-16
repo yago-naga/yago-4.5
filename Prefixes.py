@@ -75,6 +75,8 @@ wikidataSubClassOf = "wdt:P279"
 
 wikidataParentTaxon = "wdt:P171"
 
+wikidataAnalogousClass = "wdt:P1074"
+
 wikidataDuring = "pq:P585"
 
 wikidataStart = "pq:P580"

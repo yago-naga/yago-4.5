@@ -30,12 +30,12 @@ FOLDER="test-data/04-make-typecheck/" if TEST else "yago-data/"
 ##########################################################################
 
 print("Type-checking YAGO facts...")
-# Importing alone takes so much time that a status message is in order...
 import sys
 import TsvUtils
 import re
 import unicodedata
 import evaluator
+import Prefixes
 from collections import defaultdict
 
 ##########################################################################
@@ -88,7 +88,7 @@ def yagoIdFromLabel(wikidataEntity,label):
             result+=c
         else: 
             result+="_"
-    return result+"_"+wikidataEntity[3:]
+    return result.capitalize()+"_"+wikidataEntity[3:]
 
 def yagoIdFromWikidataId(wikidataEntity):
     """ Creates a YAGO id from a Wikidata entity """
@@ -105,7 +105,24 @@ def writeYagoId(out, currentTopic, currentLabel, currentWikipediaPage):
         out.write(currentTopic,"owl:sameAs","yago:"+yagoIdFromLabel(currentTopic,currentLabel),". #OTHER")
     else:
         out.write(currentTopic,"owl:sameAs","yago:"+yagoIdFromWikidataId(currentTopic),". #OTHER")
+
+##########################################################################
+#             Creating generic objects
+##########################################################################
   
+def createGenericInstance(subject, targetClass, outFile):
+    """ Creates a generic instance for a subject and a target class """
+    if not subject.startswith("wd:"):
+        return None
+    subjectName=subject[3:]
+    if targetClass.find(":")==-1:
+        return None
+    targetClassName=targetClass[targetClass.find(":")+1:]
+    objectName="_:"+subjectName+"__"+targetClassName
+    outFile.write(objectName, Prefixes.rdfType, targetClass, ".")
+    outFile.write(objectName, Prefixes.rdfsLabel, '"Generic instance of '+targetClass+'"@en', ".")
+    return(objectName)
+    
 ##########################################################################
 #             Main
 ##########################################################################
@@ -150,6 +167,11 @@ with TsvUtils.TsvFileWriter(FOLDER+"04-yago-facts-to-rename.tsv") as out:
             if classes is None or any(instanceOf(split[2],c) for c in classes):
                 out.write(split[0], split[1], split[2], ". #", startDate, endDate)
                 wroteFacts=True
+            elif any(isSubclassOf(split[2],c) for c in classes):
+                newObject=createGenericInstance(split[0], split[1], out)
+                if newObject:
+                    out.write(split[0], split[1], newObject, ". #", startDate, endDate)
+                    wroteFacts=True            
         # Also flush the ids of the last entity...
         if wroteFacts:
             writeYagoId(idsFile, currentTopic, currentLabel, currentWikipediaPage)

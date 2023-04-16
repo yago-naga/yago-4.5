@@ -44,3 +44,13 @@ wd:Q_tiger wdt:P171 wd:Q_mammal .
 wd:Q_iphone a wd:item; rdfs:label "iPhone" .
 wd:Q_iphone wdt:P279 wd:Q_European_book .
 wd:Q_iphone wdt:P176 wd:Q_apple .
+
+# Fictional entities
+wd:Q_deity a wd:item ;
+  rdfs:label "Deity" ;
+  wdt:P279 wd:Q_character .
+  
+wd:Q_character a wd:item ;
+  rdfs:label "Character" ;
+  wdt:P1074 wd:Q5 ;
+  wdt:P279 wd:Q95074 .  

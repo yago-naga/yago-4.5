@@ -36,6 +36,7 @@
 @prefix ys: <http://yago-knowledge.org/schema#> .
 wd:Q_Elvis	schema:birthPlace	wd:Q_birth_place_1	. # IF	schema:Place		
 wd:Q_Elvis	schema:children	wd:Q_child	. # IF	schema:Person	"2014-01-01T00:00:00Z"^^xsd:dateTime	"2014-01-01T00:00:00Z"^^xsd:dateTime
+wd:Q_Elvis	yago:academicDegree	wd:Q_doctoralDegree	. # IF	yago:Award		
 wd:Q_Elvis	schema:birthDate	"1935"^^xsd:gYear	.
 wd:Q_Elvis	schema:mainEntityOfPage	<https://elvis.com>	.
 wd:Q_Elvis	rdf:type	wd:Q_rock_singer	.
@@ -50,8 +51,12 @@ wd:Q31	schema:geo	"Point(4.6680555555556 50.641111111111)"^^geo:wktLiteral	.
 wd:Q31	rdf:type	schema:Country	.
 wd:Q312	schema:dateCreated	"1976-01-01T00:00:00Z"^^xsd:dateTime	.
 wd:Q312	rdf:type	schema:Corporation	.
-wd:Q_singer	rdfs:label	"singer"@en	.
+wd:Q_fictional	schema:birthPlace	wd:Q_birth_place_1	. # IF	schema:Place		
+wd:Q_fictional	yago:appearsIn	wd:Q_book	. # IF	schema:CreativeWork		
+wd:Q_fictional	rdf:type	yago:FictionalEntity	.
+wd:Q_fictional	rdf:type	wd:Q_rock_singer	.
 wd:Q_singer	rdfs:label	"chanteur"@fr	.
+wd:Q_singer	rdfs:label	"singer"@en	.
 wd:Q_singer	owl:sameAs	<https://freebase.com/id>	.
 wd:Q_singer	rdfs:comment	"this is a singer"@en	.
 wd:Q_singer	schema:alternateName	"this is a human singer"@en	.

@@ -36,5 +36,4 @@
 @prefix ys: <http://yago-knowledge.org/schema#> .
 wd:Q_Elvis	owl:sameAs	yago:Elvis	. #WIKI
 wd:Q42	owl:sameAs	yago:Q42	. #OTHER
-wd:Q43	owl:sameAs	yago:Bad_child_Q43	. #OTHER
 wd:Q_singer	owl:sameAs	yago:Singer	. #WIKI
