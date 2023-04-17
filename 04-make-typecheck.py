@@ -115,18 +115,19 @@ def writeYagoId(out, currentTopic, currentLabel, currentWikipediaPage):
 ##########################################################################
 #             Creating generic objects
 ##########################################################################
-  
+
+# We have to distinguish generic instances, because the same person may have multiple objects
+genericInstanceCounter=0
+
 def createGenericInstance(subject, targetClass, outFile):
     """ Creates a generic instance for a subject and a target class """
+    global genericInstanceCounter
     if not subject.startswith("wd:"):
         return None
-    subjectName=subject[3:]
-    if targetClass.find(":")==-1:
-        return None
-    targetClassName=targetClass[targetClass.find(":")+1:]
-    objectName="_:"+subjectName+"__"+targetClassName
+    genericInstanceCounter+=1
+    objectName="_:"+subject+"?"+targetClass+"?"+str(genericInstanceCounter)
     outFile.write(objectName, Prefixes.rdfType, targetClass, ".")
-    outFile.write(objectName, Prefixes.rdfsLabel, '"Generic instance of '+targetClass+'"@en', ".")
+    outFile.write(objectName, Prefixes.rdfsLabel, '"Generic instance"@en', ".")
     return(objectName)
     
 ##########################################################################
@@ -173,7 +174,7 @@ with TsvUtils.TsvFileWriter(FOLDER+"04-yago-facts-to-rename.tsv") as out:
                 out.write(split[0], split[1], split[2], ". #", startDate, endDate)
                 wroteFacts=True
             elif any(isSubclassOf(split[2],c) for c in classes):
-                newObject=createGenericInstance(split[0], split[1], out)
+                newObject=createGenericInstance(split[0], split[2], out)
                 if newObject:
                     out.write(split[0], split[1], newObject, ". #", startDate, endDate)
                     tickOffClassAndSuperClasses(split[2])

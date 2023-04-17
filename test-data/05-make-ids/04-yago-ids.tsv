@@ -43,3 +43,4 @@ wd:Q570948	owl:sameAs	yago:Test_Class_2	. #WIKI
 wd:Q6550961	owl:sameAs	yago:Test_Class_3	. #WIKI
 wd:Q5185279	owl:sameAs	yago:Test_Class_4	. #WIKI
 wd:Q250090	owl:sameAs	yago:Test_Class_5	. #WIKI
+wd:Q_doctoralDegree	owl:sameAs	yago:DoctoralDegree	. #WIKI

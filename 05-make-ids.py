@@ -68,13 +68,22 @@ def toYagoEntity(entity):
     if entity.startswith("yago:") or entity.startswith("schema:") or entity.startswith("rdfs:") :
         return entity
     if entity.startswith("_:"):
-        subjectEntity="wd:"+entity[2:entity.index("__")]
-        subjectEntity=yagoIds[subjectEntity]
-        if subjectEntity==None or subjectEntity.index(":")==-1:
-            subjectEntity="Generic"
-        else:
-            subjectEntity=subjectEntity[subjectEntity.index(":")+1:]+"’s"
-        return "yago:"+subjectEntity+"_"+entity[entity.index("__")+2:]            
+        firstPos=entity.find("?")
+        secondPos=entity.rfind("?")
+        if firstPos==-1 or secondPos==-1 or secondPos-firstPos<1 or firstPos<3:
+            print("fail 1", entity, firstPos, secondPos)
+            return None
+        subjectEntity=entity[2:firstPos]
+        subjectEntity=yagoIds.get(subjectEntity, None)
+        if subjectEntity==None or subjectEntity.find(":")==-1:
+            print("fail 2", entity[2:firstPos])
+            return None
+        classEntity=entity[firstPos+1:secondPos]
+        classEntity=yagoIds.get(classEntity, None)
+        if classEntity==None or classEntity.find(":")==-1:
+            print("fail 3", entity[firstPos+1:secondPos])
+            return None            
+        return "yago:"+subjectEntity[subjectEntity.find(":")+1:]+"’s_"+classEntity[classEntity.find(":")+1:]+"_"+entity[secondPos+1:]            
     if entity in yagoIds:
         return yagoIds[entity]
     return None
