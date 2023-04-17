@@ -7,6 +7,7 @@ Reading and writing TSV files that are TTL-compatible
 import gzip
 import os
 import sys
+import datetime
 import evaluator
 import Prefixes
 
@@ -34,7 +35,7 @@ def linesOfFile(file, message=None):
                 print(".", end="", flush=True)
                 printedDots+=1
             yield line
-    while message and (coveredSize / fileSize * totalNumberOfDots > printedDots):
+    while message and (coveredSize / (fileSize+1) * totalNumberOfDots > printedDots):
         print(".", end="", flush=True)
         printedDots+=1
     if message:
@@ -76,6 +77,25 @@ class TsvFileWriter(object):
         
     def __exit__(self, *exceptions):
         self.file.close()
+
+##########################################################################
+#             Timing
+##########################################################################
+
+class Timer(object):
+    """ To be used in a WITH...AS clause to print time"""
+    def __init__(self, message):
+        self.startTime=datetime.datetime.now().replace(microsecond=0)
+        print(message,"...")
+        print("  Current time:", self.startTime)
+        
+    def __enter__(self):
+        return self
+                
+    def __exit__(self, *exceptions):
+        currentTime=datetime.datetime.now().replace(microsecond=0)
+        print("  Current time:", currentTime)
+        print(f"done ({currentTime-self.startTime})")
         
 if TEST and __name__ == '__main__':
     print("Test run of TsvFile...")

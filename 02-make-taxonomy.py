@@ -147,51 +147,49 @@ def checkDisjoint(currentClass, superClass, disjointTopLevelClassesSoFar, disjoi
 ###########################################################################
 
 if __name__ == '__main__':
-    print("Creating YAGO taxonomy...")
-
-    # Load YAGO schema
-    yagoSchema = Graph()
-    yagoSchema.loadTurtleFile(SCHEMA_FILE, "  Loading YAGO schema")
-    disjointClasses=[ (c1, c2) for (c1, p, c2) in yagoSchema.triplesWithPredicate(Prefixes.owlDisjointWith) ]
-    
-    # Create YAGO taxonomy as two dictionaries,
-    # mapping a subclass to its superclasses and vice versa
-    yagoTaxonomyUp = defaultdict(set)
-    yagoTaxonomyDown = defaultdict(set)
-    for (s,p,o) in yagoSchema.triplesWithPredicate(Prefixes.rdfsSubClassOf):
-        yagoTaxonomyUp[s].add(o)
-        yagoTaxonomyDown[o].add(s)
+    with TsvUtils.Timer("Creating YAGO taxonomy"):
+        # Load YAGO schema
+        yagoSchema = Graph()
+        yagoSchema.loadTurtleFile(SCHEMA_FILE, "  Loading YAGO schema")
+        disjointClasses=[ (c1, c2) for (c1, p, c2) in yagoSchema.triplesWithPredicate(Prefixes.owlDisjointWith) ]
         
-    # Load Wikidata taxonomy
-    results=TurtleUtils.visitWikidata(WIKIDATA_FILE, wikidataVisitor)
-    # <results> is a list taxonomies
-    # We now merge them together in the global variable <wikidataTaxonomyDown>
-    wikidataTaxonomyDown=dict()
-    for result in results:
-        for key in result:
-            if key not in wikidataTaxonomyDown:
-                wikidataTaxonomyDown[key]=set()
-            wikidataTaxonomyDown[key].update(result[key])
-    
-    # Now we merge the Wikidata taxonomy into the YAGO taxonomy
-    for s,p,o in yagoSchema.triplesWithPredicate(Prefixes.fromClass):
-            if s!=Prefixes.schemaThing:
-                for subclass in wikidataTaxonomyDown.get(o,[]):
-                    addSubClass(s, subclass)
-                    
-    # Remove disjoint inconsistent classes
-    print("  Removing disjoint-inconsistent subclass links...", end="", flush=True)
-    checkDisjoint(Prefixes.schemaThing, None, set(), disjointClasses)
-    print("done")
+        # Create YAGO taxonomy as two dictionaries,
+        # mapping a subclass to its superclasses and vice versa
+        yagoTaxonomyUp = defaultdict(set)
+        yagoTaxonomyDown = defaultdict(set)
+        for (s,p,o) in yagoSchema.triplesWithPredicate(Prefixes.rdfsSubClassOf):
+            yagoTaxonomyUp[s].add(o)
+            yagoTaxonomyDown[o].add(s)
+            
+        # Load Wikidata taxonomy
+        results=TurtleUtils.visitWikidata(WIKIDATA_FILE, wikidataVisitor)
+        # <results> is a list taxonomies
+        # We now merge them together in the global variable <wikidataTaxonomyDown>
+        wikidataTaxonomyDown=dict()
+        for result in results:
+            for key in result:
+                if key not in wikidataTaxonomyDown:
+                    wikidataTaxonomyDown[key]=set()
+                wikidataTaxonomyDown[key].update(result[key])
+        
+        # Now we merge the Wikidata taxonomy into the YAGO taxonomy
+        for s,p,o in yagoSchema.triplesWithPredicate(Prefixes.fromClass):
+                if s!=Prefixes.schemaThing:
+                    for subclass in wikidataTaxonomyDown.get(o,[]):
+                        addSubClass(s, subclass)
+                        
+        # Remove disjoint inconsistent classes
+        print("  Removing disjoint-inconsistent subclass links...", end="", flush=True)
+        checkDisjoint(Prefixes.schemaThing, None, set(), disjointClasses)
+        print("done")
 
-    # Write resulting taxonomy
-    print("  Writing taxonomy...", end="", flush=True)
-    with TsvUtils.TsvFileWriter(OUTPUT_FOLDER+"02-yago-taxonomy-to-rename.tsv") as taxonomyWriter:
-        for cls in yagoTaxonomyUp:
-            for superclass in yagoTaxonomyUp[cls]:
-                taxonomyWriter.writeFact(cls, "rdfs:subClassOf", superclass)
-    print("done")
-    print("done")
+        # Write resulting taxonomy
+        print("  Writing taxonomy...", end="", flush=True)
+        with TsvUtils.TsvFileWriter(OUTPUT_FOLDER+"02-yago-taxonomy-to-rename.tsv") as taxonomyWriter:
+            for cls in yagoTaxonomyUp:
+                for superclass in yagoTaxonomyUp[cls]:
+                    taxonomyWriter.writeFact(cls, "rdfs:subClassOf", superclass)
+        print("done")
 
     if TEST:
         evaluator.compare(OUTPUT_FOLDER+"02-yago-taxonomy-to-rename.tsv")

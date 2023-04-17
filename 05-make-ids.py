@@ -22,7 +22,7 @@ Algorithm:
    
 """
 
-TEST=False
+TEST=True
 FOLDER="test-data/05-make-ids/" if TEST else "yago-data/"
 
 ##########################################################################
@@ -32,20 +32,6 @@ FOLDER="test-data/05-make-ids/" if TEST else "yago-data/"
 import sys
 import evaluator
 import TsvUtils
-
-print("Renaming YAGO entities...")
-
-yagoIds={}
-entitiesWithWikipediaPage=set()
-for split in TsvUtils.tsvTuples(FOLDER+"04-yago-ids.tsv", "  Loading YAGO ids"):
-    if len(split)<4:
-        continue
-    yagoIds[split[0]]=split[2]
-    if split[3]==". #WIKI":
-        entitiesWithWikipediaPage.add(split[2])
-
-for split in TsvUtils.tsvTuples(FOLDER+"04-yago-bad-classes.tsv", "  Removing bad YAGO classes"):
-    yagoIds.pop(split[0], None)
 
 ##########################################################################
 #             Helper methods
@@ -68,21 +54,19 @@ def toYagoEntity(entity):
     if entity.startswith("yago:") or entity.startswith("schema:") or entity.startswith("rdfs:") :
         return entity
     if entity.startswith("_:"):
+        # Generic instances and anonymous members of lists
         firstPos=entity.find("?")
         secondPos=entity.rfind("?")
         if firstPos==-1 or secondPos==-1 or secondPos-firstPos<1 or firstPos<3:
-            print("fail 1", entity, firstPos, secondPos)
-            return None
+            return entity
         subjectEntity=entity[2:firstPos]
         subjectEntity=yagoIds.get(subjectEntity, None)
         if subjectEntity==None or subjectEntity.find(":")==-1:
-            print("fail 2", entity[2:firstPos])
-            return None
+            return entity
         classEntity=entity[firstPos+1:secondPos]
         classEntity=yagoIds.get(classEntity, None)
         if classEntity==None or classEntity.find(":")==-1:
-            print("fail 3", entity[firstPos+1:secondPos])
-            return None            
+            return entity          
         return "yago:"+subjectEntity[subjectEntity.find(":")+1:]+"’s_"+classEntity[classEntity.find(":")+1:]+"_"+entity[secondPos+1:]            
     if entity in yagoIds:
         return yagoIds[entity]
@@ -96,54 +80,66 @@ def hasWikipediaPage(entity):
 #             Main
 ##########################################################################
 
-with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-meta.tsv") as metaFacts:
-    with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-full.tsv") as fullFacts:
-        with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-wikipedia.tsv") as wikipediaFacts:
-            previousEntity="Elvis"
-            for split in TsvUtils.tsvTuples(FOLDER+"04-yago-facts-to-rename.tsv", "  Renaming"):
-                if len(split)<3:
-                    continue
-                subject=toYagoEntity(split[0])
-                if not subject:
-                    # Should not happen
-                    continue
-                relation=split[1]
-                object=toYagoEntity(split[2])
-                if not object:
-                    # Should not happen
-                    continue
-                # Write facts to Wikipedia version of YAGO
-                if (hasWikipediaPage(subject) or isGeneric(split[0])) and (relation=="rdf:type" or hasWikipediaPage(object) or isGeneric(split[2])):
-                    wikipediaFacts.writeFact(subject, relation, object)
+with TsvUtils.Timer("Renaming YAGO entities"):
+
+    yagoIds={}
+    entitiesWithWikipediaPage=set()
+    for split in TsvUtils.tsvTuples(FOLDER+"04-yago-ids.tsv", "  Loading YAGO ids"):
+        if len(split)<4:
+            continue
+        yagoIds[split[0]]=split[2]
+        if split[3]==". #WIKI":
+            entitiesWithWikipediaPage.add(split[2])
+
+    for split in TsvUtils.tsvTuples(FOLDER+"04-yago-bad-classes.tsv", "  Removing bad YAGO classes"):
+        yagoIds.pop(split[0], None)
+
+    with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-meta.tsv") as metaFacts:
+        with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-full.tsv") as fullFacts:
+            with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-wikipedia.tsv") as wikipediaFacts:
+                previousEntity="Elvis"
+                for split in TsvUtils.tsvTuples(FOLDER+"04-yago-facts-to-rename.tsv", "  Renaming"):
+                    if len(split)<3:
+                        continue
+                    subject=toYagoEntity(split[0])
+                    if not subject:
+                        # Should not happen
+                        continue
+                    relation=split[1]
+                    object=toYagoEntity(split[2])
+                    if not object:
+                        # Should not happen
+                        continue
+                    # Write facts to Wikipedia version of YAGO
+                    if (hasWikipediaPage(subject) or isGeneric(split[0])) and (relation=="rdf:type" or hasWikipediaPage(object) or isGeneric(split[2])):
+                        wikipediaFacts.writeFact(subject, relation, object)
+                        if subject!=previousEntity and split[0] in yagoIds:
+                           wikipediaFacts.writeFact(subject, "owl:sameAs", split[0])
+                    # In any case, write (also) to the full version of YAGO
+                    fullFacts.writeFact(subject, relation, object)
                     if subject!=previousEntity and split[0] in yagoIds:
-                       wikipediaFacts.writeFact(subject, "owl:sameAs", split[0])
-                # In any case, write (also) to the full version of YAGO
-                fullFacts.writeFact(subject, relation, object)
-                if subject!=previousEntity and split[0] in yagoIds:
-                   fullFacts.writeFact(subject, "owl:sameAs", split[0])                
-                # If there is a meta-fact, write it out as well
-                if len(split)>5:
-                    if split[4]: metaFacts.write("<<", subject, relation, object, ">>", "schema:startDate", split[4])
-                    if split[5]: metaFacts.write("<<", subject, relation, object, ">>", "schema:endDate", split[5])
-                previousEntity=subject
-                
-with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-taxonomy.tsv") as taxFacts:
-    for split in TsvUtils.tsvTuples(FOLDER+"02-yago-taxonomy-to-rename.tsv", "  Renaming classes"):
-        if len(split)<3:
-            continue
-        subject=toYagoEntity(split[0])
-        if not subject:
-            # Happens if a class has no label or no instances
-            continue
-        relation=split[1]
-        object=split[2] if relation=="rdf:type" else toYagoEntity(split[2])
-        if not object:
-            # Happens if a class has no label or no instances
-            continue
-        # Write taxonomic fact
-        taxFacts.writeFact(subject, relation, object)
-            
-print("done")
+                       fullFacts.writeFact(subject, "owl:sameAs", split[0])                
+                    # If there is a meta-fact, write it out as well
+                    if len(split)>5:
+                        if split[4]: metaFacts.write("<<", subject, relation, object, ">>", "schema:startDate", split[4])
+                        if split[5]: metaFacts.write("<<", subject, relation, object, ">>", "schema:endDate", split[5])
+                    previousEntity=subject
+                    
+    with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-taxonomy.tsv") as taxFacts:
+        for split in TsvUtils.tsvTuples(FOLDER+"02-yago-taxonomy-to-rename.tsv", "  Renaming classes"):
+            if len(split)<3:
+                continue
+            subject=toYagoEntity(split[0])
+            if not subject:
+                # Happens if a class has no label or no instances
+                continue
+            relation=split[1]
+            object=split[2] if relation=="rdf:type" else toYagoEntity(split[2])
+            if not object:
+                # Happens if a class has no label or no instances
+                continue
+            # Write taxonomic fact
+            taxFacts.writeFact(subject, relation, object)            
 
 if TEST:
     evaluator.compare(FOLDER+"05-yago-final-wikipedia.tsv")

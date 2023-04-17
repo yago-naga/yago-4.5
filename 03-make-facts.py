@@ -387,23 +387,21 @@ class treatWikidataEntity():
         return None
         
 if __name__ == '__main__':
-    print("Creating YAGO facts...")      
-    TurtleUtils.visitWikidata(WIKIDATA_FILE, treatWikidataEntity) 
-    print("  Collecting results...")
-    with open(FOLDER+"03-yago-facts-to-type-check.tsv", "wb") as writer:
-        for file in glob.glob(FOLDER+"03-yago-facts-to-type-check-*.tmp"):
-            print("    Reading",file)
-            with open(file, "rb") as reader:
-                for line in reader:
-                    writer.write(line)
-    print("  done")
+    with TsvUtils.Timer("Creating YAGO facts at"):
+        TurtleUtils.visitWikidata(WIKIDATA_FILE, treatWikidataEntity) 
+        print("  Collecting results...")
+        with open(FOLDER+"03-yago-facts-to-type-check.tsv", "wb") as writer:
+            for file in glob.glob(FOLDER+"03-yago-facts-to-type-check-*.tmp"):
+                print("    Reading",file)
+                with open(file, "rb") as reader:
+                    for line in reader:
+                        writer.write(line)
+        print("  done")
+        
+        print("  Deleting temporary files...", end="", flush=True)
+        for file in set(glob.glob(FOLDER+"03-yago-facts-to-type-check-*.tmp")):
+            os.remove(file)
+        print(" done")
     
-    print("  Deleting temporary files...", end="", flush=True)
-    for file in set(glob.glob(FOLDER+"03-yago-facts-to-type-check-*.tmp")):
-        os.remove(file)
-    print(" done")
-    
-    print("done")
-
     if TEST:
         evaluator.compare(FOLDER+"03-yago-facts-to-type-check.tsv")
