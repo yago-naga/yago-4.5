@@ -34,32 +34,29 @@ Predicates:
   schema:iswcCode: 0
   schema:lyricist: 0
   schema:duration: 0
-  schema:genre: 0
-  schema:operatingSystem: 0
-  schema:contributor: 0
+  yago:appearsIn: 0
   schema:location: 0
   schema:organizer: 0
   schema:startDate: 0
   schema:endDate: 0
   schema:subEvent: 0
   schema:competitor: 0
-  schema:sport: 0
   schema:dissolutionDate: 0
   schema:duns: 0
   schema:founder: 0
   schema:leader: 0
   schema:motto: 0
   schema:address: 0
-  schema:foundingDate: 0
   schema:leiCode: 0
   schema:memberOf: 0
   schema:numberOfEmployees: 0
-  schema:employee: 0
   schema:parentOrganization: 0
   schema:iataCode: 0
   schema:icaoCode: 0
   schema:studentsCount: 0
   schema:influencedBy: 0
+  yago:beliefSystem: 0
+  yago:academicDegree: 0
   schema:affiliation: 0
   schema:alumniOf: 0
   schema:birthDate: 0
@@ -74,75 +71,72 @@ Predicates:
   schema:owns: 0
   schema:spouse: 0
   schema:containedInPlace: 0
-  schema:inception: 0
-  schema:demonym: 0
-  schema:populationNumber: 0
-  schema:timezone: 0
   schema:area: 0
-  schema:postalCode: 0
   schema:highestPoint: 0
   schema:lowestPoint: 0
-  schema:administrates: 0
   schema:neighbors: 0
-  schema:neighborsBodyOfWater: 0
   schema:elevation: 0
   schema:geo: 0
-  ys:capital: 0
+  yago:parentBody: 0
+  yago:mass: 0
+  yago:distanceFromEarth: 0
+  schema:demonym: 0
+  schema:populationNumber: 0
+  schema:postalCode: 0
+  schema:administrates: 0
+  yago:capital: 0
   schema:officialLanguage: 0
   schema:humanDevelopmentIndex: 0
   schema:unemploymentRate: 0
-  schema:internetDomain: 0
-  schema:medianIncome: 0
+  yago:flowsInto: 0
   schema:manufacturer: 0
-  schema:releaseDate: 0
   schema:gtin: 0
   schema:parentTaxon: 0
   yago:consumes: 0
 Classes:
 
 schema:Thing: 1
-  schema:Event: 0
-    schema:SportsEvent: 0
-  schema:Organization: 0
-    schema:SportsOrganization: 0
-      schema:SportsTeam: 0
-    schema:Corporation: 0
-    schema:PerformingGroup: 0
-      schema:MusicGroup: 0
-    schema:Airline: 0
-    schema:EducationalOrganization: 0
-  schema:Product: 0
-  schema:Intangible: 0
-    yago:Award: 0
-    schema:Language: 0
-    yago:Sport: 0
-    schema:Occupation: 0
-    yago:Gender: 0
-  schema:Person: 1
-    yago:Singer: 1
-  schema:Taxon: 0
-  schema:Place: 0
-    schema:AdministrativeArea: 0
-      schema:City: 0
-      schema:Country: 0
-    schema:Landform: 0
-      schema:BodyOfWater: 0
-    schema:CivicStructure: 0
-      schema:Airport: 0
-      schema:EducationalOrganization: 0
   schema:CreativeWork: 0
-    schema:MusicComposition: 0
-    schema:Play: 0
+    schema:TVSeries: 0
+    schema:SoftwareApplication: 0
     schema:Newspaper: 0
-    schema:Book: 0
+    schema:MusicComposition: 0
     yago:Test_Class_1: 0
       yago:Test_Class_2: 0
         yago:Test_Class_3: 0
         yago:Test_Class_5: 0
-    schema:SoftwareApplication: 0
     schema:Movie: 0
-    schema:TVSeries: 0
+    schema:Play: 0
+    schema:Book: 0
+  schema:Product: 0
+  schema:Place: 0
+    schema:Landform: 0
+      schema:BodyOfWater: 0
+    schema:AdministrativeArea: 0
+      schema:Country: 0
+      schema:City: 0
+    schema:CivicStructure: 0
+      schema:EducationalOrganization: 0
+      schema:Airport: 0
+  schema:Intangible: 0
+    schema:Occupation: 0
+    yago:Award: 0
+    yago:Sport: 0
+    schema:Language: 0
+    yago:Gender: 0
+  schema:Organization: 0
+    schema:Corporation: 0
+    schema:Airline: 0
+    schema:EducationalOrganization: 0
+    schema:PerformingGroup: 0
+      schema:MusicGroup: 0
+    schema:SportsOrganization: 0
+      schema:SportsTeam: 0
+  schema:Event: 0
+    schema:SportsEvent: 0
+  schema:Person: 1
+    yago:Singer: 1
+  schema:Taxon: 0
 
 
 Entities that are not schema:Thing:
-yago:Q_123456, 

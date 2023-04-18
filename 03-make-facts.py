@@ -7,7 +7,7 @@ Call:
   python3 make-facts.py
 
 Input:
-- 01-yago-schema.ttl
+- 01-yago-final-schema.ttl
 - 02-yago-taxonomy-to-rename.tsv
 - Wikidata file
 
@@ -314,14 +314,14 @@ def checkRange(p, o, yagoSchema):
 ##########################################################################
   
 class treatWikidataEntity():
-    """ Visitor that wil handle every Wikidata entity """
+    """ Visitor that will handle every Wikidata entity """
     def __init__(self,i):
         """ We load everything once per process (!) in order to avoid problems with shared memory """
         print("    Initializing Wikidata reader",i+1, flush=True)
         self.number=i
         self.yagoSchema=Graph()
         print("    Wikidata reader",i+1, "loads YAGO schema", flush=True)
-        self.yagoSchema.loadTurtleFile(FOLDER+"01-yago-schema.ttl")
+        self.yagoSchema.loadTurtleFile(FOLDER+"01-yago-final-schema.ttl")
         self.disjointClasses=[ (c1, c2) for (c1, p, c2) in self.yagoSchema.triplesWithPredicate(Prefixes.owlDisjointWith) ]
 
         print("    Wikidata reader",i+1, "loads YAGO taxonomy", flush=True)

@@ -8,7 +8,7 @@ Call:
 
 Input:
 - 00-wikidata.ttl(.gz), the Wikidata file
-- 01-yago-schema.ttl, the YAGO schema
+- 01-yago-final-schema.ttl, the YAGO schema
 
 Output:
 - 02-yago-taxonomy-to-rename.tsv, the YAGO lower level taxonomy
@@ -23,7 +23,7 @@ Algorithm:
 TEST=False
 OUTPUT_FOLDER="test-data/02-make-taxonomy/" if TEST else "yago-data/"
 WIKIDATA_FILE= "test-data/02-make-taxonomy/00-wikidata.ttl" if TEST else "../wikidata.ttl"
-SCHEMA_FILE = "test-data/02-make-taxonomy/01-yago-schema.ttl" if TEST else "yago-data/01-yago-schema.ttl"
+SCHEMA_FILE = "test-data/02-make-taxonomy/01-yago-final-schema.ttl" if TEST else "yago-data/01-yago-final-schema.ttl"
 
 ###########################################################################
 #           Booting
@@ -87,6 +87,8 @@ badClasses = {
     "wd:Q24017414", # second-order class
     "wd:Q12335479", # templates
     "wd:Q88392887", # scholarly articles, tweets, etc.
+    "wd:Q591041",   # same
+    "wd:Q13442814", # same
     "wd:Q29654788"  # Unicode characters
 }
 

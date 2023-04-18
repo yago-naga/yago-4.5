@@ -11,7 +11,7 @@ Input:
 - 00-schema-org.ttl, the taxonomy from schema.org
 
 Output:
-- 01-yago-schema.ttl, the YAGO schema and top-level taxonomy
+- 01-yago-final-schema.ttl, the YAGO schema and top-level taxonomy
     
 Algorithm:
 1) Load schema.org taxonomy and hard-coded shapes
@@ -48,6 +48,10 @@ if not(exists("input-data")):
 yagoShapes = Graph()
 yagoShapes.loadTurtleFile(INPUT_FOLDER+"/00-shapes.ttl", "  Loading YAGO shapes")
 
+for s, p, o in yagoShapes:
+    for t in (s, p, o):
+        if not TurtleUtils.checkTerm(t):
+            print("  Warning: illegal term:", t)
 # Load Schema.org taxonomy
 schemaTaxonomy = Graph()
 schemaTaxonomy.loadTurtleFile(INPUT_FOLDER+"/00-schema-org.ttl", "  Loading Schema.org taxonomy")
@@ -101,7 +105,7 @@ for s,p,o in yagoShapes.triplesWithPredicate(Prefixes.shaclPattern):
 
 # The schema is best in TTL
 print("  Writing schema to",OUTPUT_FOLDER,"...", end="", flush=True)
-yagoShapes.printToFile(OUTPUT_FOLDER+"01-yago-schema.ttl")
+yagoShapes.printToFile(OUTPUT_FOLDER+"01-yago-final-schema.ttl")
 print("done")
 
 print("done")

@@ -522,6 +522,12 @@ def tsvEntities(file, message=None):
 #             Test
 ##########################################################################
 
+def checkTerm(term):
+    """ TRUE if the term is a constant, a literal, or has a prefix """
+    if term==None or len(term)<1:
+        return False
+    return term.startswith('"') or term.startswith('<http') or term=="true" or term=="false" or term.find(":")!=-1 or term[0] in "0123456789-+"
+    
 def printWD(graph, out):
     """ A Wikidata visitor that just prints the graph """
     out.lock.acquire()

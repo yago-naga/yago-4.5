@@ -31,6 +31,7 @@ FOLDER="test-data/04-make-typecheck/" if TEST else "yago-data/"
 ##########################################################################
 
 import sys
+from urllib import parse
 import TsvUtils
 import re
 import unicodedata
@@ -42,19 +43,27 @@ from collections import defaultdict
 #             YAGO ids
 ##########################################################################
 
+def hexCode(char):    
+    """ Percentage-encodes the character """
+    if char=='.':
+        return "%2E"
+    if char=='~':
+        return "%7E"
+    return parse.quote(char, safe='', errors='ignore')
+    
 def legal(char):
     """ TRUE if a character is a valid CURIE character. We're very restrictive here to make all parsers work. """
     category=unicodedata.category(char)[0]
-    return char in "()_.,+-" or category in "LN"
+    return char in "_-" or category in "LN"
     
 def yagoIdFromWikipediaPage(wikipediaPageTitle):
     """ Creates a YAGO id from a Wikipedia page title"""
     result=""
     for c in wikipediaPageTitle:
-        if legal(c):
+        if legal(c) or c=='%':
             result+=c
         else:
-            result+="_"
+            result+=hexCode(c)
     return result
 
 def yagoIdFromLabel(wikidataEntity,label):
@@ -64,7 +73,7 @@ def yagoIdFromLabel(wikidataEntity,label):
         if legal(c):
             result+=c
         else: 
-            result+="_"
+            result+=hexCode(c)
     return result.capitalize()+"_"+wikidataEntity[3:]
 
 def yagoIdFromWikidataId(wikidataEntity):

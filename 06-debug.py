@@ -4,8 +4,9 @@ Produces statistics about YAGO entities and predicates, and extracts samples
 (c) 2022 Fabian M. Suchanek
 
 Input:
-- 01-yago-schema.ttl
-- 05-yago-final-full.tsv
+- 01-yago-final-schema.ttl
+- 05-yago-final-beyond-wikipedia.tsv
+- 05-yago-final-wikipedia.tsv
 - 05-yago-final-taxonomy.tsv
 
 Output:
@@ -29,6 +30,7 @@ FOLDER="test-data/06-debug/" if TEST else "yago-data/"
 
 import sys
 import evaluator
+import itertools
 import TurtleUtils
 import TsvUtils
 import random
@@ -60,7 +62,7 @@ with TsvUtils.Timer("Collecting YAGO statistics"):
 
     # Load YAGO schema
     yagoSchema = TurtleUtils.Graph()
-    yagoSchema.loadTurtleFile(FOLDER+"01-yago-schema.ttl", "  Loading YAGO schema")
+    yagoSchema.loadTurtleFile(FOLDER+"01-yago-final-schema.ttl", "  Loading YAGO schema")
 
     # Load YAGO taxonomy
     yagoTaxonomyDown=defaultdict(set)
@@ -84,7 +86,7 @@ with TsvUtils.Timer("Collecting YAGO statistics"):
         classStats[s]=0
             
     # Run through the facts
-    for entityFacts in TurtleUtils.tsvEntities(FOLDER+"05-yago-final-full.tsv", "  Parsing YAGO"):
+    for entityFacts in itertools.chain(TurtleUtils.tsvEntities(FOLDER+"05-yago-final-wikipedia.tsv", "  Parsing YAGO Wikipedia"), TurtleUtils.tsvEntities(FOLDER+"05-yago-final-beyond-wikipedia.tsv", "  Parsing YAGO beyond Wikipedia")):
         classes=set()
         subject=None
         for s, p, o in entityFacts:
@@ -98,8 +100,9 @@ with TsvUtils.Timer("Collecting YAGO statistics"):
             getSuperClasses(c, superClasses, yagoTaxonomyUp)
         for c in superClasses:
             classStats[c]+=1   
-        if Prefixes.schemaThing not in superClasses and Prefixes.rdfsClass not in superClasses:
-            entitiesThatAreNotThings.append(entityFacts.someSubject())
+        # TODO: this collects all instances of YAGO (?)
+        #if Prefixes.schemaThing not in superClasses and Prefixes.rdfsClass not in superClasses:
+        #    entitiesThatAreNotThings.append(entityFacts.someSubject())
         if subject and (len(samples)<100 or (len(samples)==100 and random.random()<0.01)):
             for c in superClasses:
                 entityFacts.add((subject, 'rdf:type', c))

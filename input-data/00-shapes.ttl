@@ -56,8 +56,11 @@ schema:Place owl:disjointWith
 	schema:Person,
     schema:Taxon. 
 schema:Product owl:disjointWith
+    schema:Event,
+    schema:Organization,
     schema:Taxon,
-    schema:Place.
+	schema:Person,
+    schema:Place.	
 schema:Intangible  owl:disjointWith
     schema:Event,
     schema:Organization,
@@ -156,7 +159,7 @@ yago:Award a sh:NodeShape ;
 # Religions etc. are intangibles
 yago:BeliefSystem a sh:NodeShape ;
 	rdfs:subClassOf schema:Intangible ;
-    ys:fromClass Q5390013	.
+    ys:fromClass wd:Q5390013	.
 
 # We need genders as objects of yago:gender
 yago:Gender a sh:NodeShape ;
@@ -1006,6 +1009,30 @@ schema:Place a sh:NodeShape ;
         ys:fromProperty wdt:P625 ;
     ] .
 
+
+# ------------------ Planets ---------------
+
+# One permissible subclass of schema:Place is yago:AstronomicalObject
+# We import all subclasses from Wikidata
+yago:AstronomicalObject a sh:NodeShape ;
+	rdfs:subClassOf schema:Place ;
+	sh:property [
+        sh:path yago:parentBody ;
+        sh:node yago:AstronomicalObject ;
+        ys:fromProperty wdt:P397 ;
+    ] ;    
+	sh:property [
+        sh:path yago:mass ;
+        sh:datatype xsd:decimal ;
+        ys:fromProperty wdt:P2067 ;
+    ] ;    
+	sh:property [
+        sh:path yago:distanceFromEarth ;
+        sh:datatype xsd:decimal ;
+        ys:fromProperty wdt:P2583 ;
+    ] ;    
+	ys:fromClass wd:Q6999.
+
 # ------------------ Administrative Areas ---------------
 
 # One permissible subclass of schema:Place is Admininstrative Area
@@ -1058,7 +1085,7 @@ schema:AdministrativeArea a sh:NodeShape ;
 # Needed for capitals, mapped to "City or Town" in Wikidata, and to City.
 # "Human Settlement" , Q486972 contains very messy subclasses
 schema:City a sh:NodeShape ;
-    ys:fromClass wd:Q7930989, Q515 .
+    ys:fromClass wd:Q7930989, wd:Q515 .
 
 # Needed because of additional properties
 schema:Country a sh:NodeShape ;
@@ -1101,17 +1128,17 @@ schema:Country a sh:NodeShape ;
 # from natural geographic object, terrain, Landform, landmass, geolocation, georegion, geographical area
 schema:Landform a sh:NodeShape ;
     rdfs:subClassOf schema:Place ;
-	ys:fromClass Q35145263, Q14524493, Q271669, Q205895, Q271669, Q2221906, Q3622002, Q82794.
+	ys:fromClass wd:Q35145263, wd:Q14524493, wd:Q271669, wd:Q205895, wd:Q271669, wd:Q2221906, wd:Q3622002, wd:Q82794.
     
 # Bodies of water are Landforms.
 # Linked to body of water and marine body of water
 schema:BodyOfWater a sh:NodeShape ;
 	sh:property [
-        sh:path ys:flowsInto ;
+        sh:path yago:flowsInto ;
         sh:node schema:BodyOfWater ;
         ys:fromProperty wdt:P403, wdt:P201 ;
     ] ;
-    ys:fromClass wd:Q15324, Q116126039 .
+    ys:fromClass wd:Q15324, wd:Q116126039 .
 
 # Continents
 schema:Continent a sh:NodeShape ;
@@ -1128,7 +1155,7 @@ schema:Continent a sh:NodeShape ;
 yago:HumanMadeGeographicalEntity a sh:NodeShape ;
 	rdfs:subClassOf schema:Place ;
 	rdfs:label "Human-made geographical entity"@en ;
-    ys:fromClass wd:Q811979, Q811430, Q811463 .
+    ys:fromClass wd:Q811979, wd:Q811430, wd:Q811463 .
 
 # Transit routes such as roads and railways.
 # Mapped to "thoroughfare" Wikidata (not a subclass of arch struc), 

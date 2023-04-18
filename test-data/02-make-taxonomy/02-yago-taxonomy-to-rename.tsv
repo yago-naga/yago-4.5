@@ -59,6 +59,7 @@ schema:EducationalOrganization	rdfs:subClassOf	schema:Organization	.
 schema:MusicGroup	rdfs:subClassOf	schema:PerformingGroup	.
 schema:SportsTeam	rdfs:subClassOf	schema:SportsOrganization	.
 schema:Occupation	rdfs:subClassOf	schema:Intangible	.
+yago:AstronomicalObject	rdfs:subClassOf	schema:Place	.
 schema:AdministrativeArea	rdfs:subClassOf	schema:Place	.
 schema:City	rdfs:subClassOf	schema:AdministrativeArea	.
 schema:Country	rdfs:subClassOf	schema:AdministrativeArea	.
