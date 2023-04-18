@@ -59,7 +59,7 @@ def legal(char):
 def yagoIdFromWikipediaPage(wikipediaPageTitle):
     """ Creates a YAGO id from a Wikipedia page title"""
     result=""
-    for c in wikipediaPageTitle:
+    for c in parse.unquote(wikipediaPageTitle):
         if legal(c) or c=='%':
             result+=c
         else:

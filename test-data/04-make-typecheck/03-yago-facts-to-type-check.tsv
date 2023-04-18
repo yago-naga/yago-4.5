@@ -54,7 +54,7 @@ wd:Q43	rdf:type	wd:Q_european_book
 wd:Q43	rdfs:label	"Bad chèld"@en
 
 # Classes should survive
-wd:Q_singer	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/S%74ngerè>	. # Should remain encoded and get one more encoded at the end
+wd:Q_singer	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/S%74nger%C3%A8>	. # Should remain encoded and get one more encoded at the end
 wd:Q_singer	rdfs:label	"chanteur"@fr	.
 wd:Q_singer	schema:alternateName	"this is a human being"@en	.
 wd:Q_singer	rdfs:comment	"this is a singer"@en	.

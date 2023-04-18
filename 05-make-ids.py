@@ -22,7 +22,7 @@ Algorithm:
    
 """
 
-TEST=False
+TEST=True
 FOLDER="test-data/05-make-ids/" if TEST else "yago-data/"
 
 ##########################################################################
