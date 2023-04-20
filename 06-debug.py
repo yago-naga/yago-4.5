@@ -50,9 +50,9 @@ def getSuperClasses(cls, classes, yagoTaxonomyUp):
 def printTaxonomy(writer, yagoTaxonomyDown, classStats, cls=Prefixes.schemaThing):
     """ Prints the taxonomy to the writer """
     if cls not in yagoTaxonomyDown:
-        writer.write(f"<li>{cls}: {str(classStats.get(cls,0))}\n")
+        writer.write(f"<li>{cls.replace('yago:','y:')}: {str(classStats.get(cls,0))}\n")
         return
-    writer.write(f"<li><details><summary>{cls}: {str(classStats.get(cls,0))}</summary><ul>\n")
+    writer.write(f"<li><details><summary>{cls.replace('yago:','y:')}: {str(classStats.get(cls,0))}</summary><ul>\n")
     for subclass in yagoTaxonomyDown.get(cls, []):
         printTaxonomy(writer, yagoTaxonomyDown, classStats, subclass)
     writer.write("</ul></details>\n")
@@ -142,8 +142,7 @@ with TsvUtils.Timer("Step 06: Collecting YAGO statistics"):
  </head>      
  <body>
  <h1>YAGO Taxonomy</h1>
- <ul>
-        """)
+ <ul>\n""")
         printTaxonomy(writer, yagoTaxonomyDown, classStats)
         writer.write("</ul></body>\n</html>")
     print("done")

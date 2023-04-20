@@ -24,7 +24,7 @@ Algorithm:
   - write out facts that fulfill the constraints to yago-facts-to-type-check.tsv  
 """
 
-TEST=True
+TEST=False
 FOLDER="test-data/03-make-facts/" if TEST else "yago-data/"
 WIKIDATA_FILE= "test-data/03-make-facts/00-wikidata.ttl" if TEST else "../wikidata.ttl"
 
