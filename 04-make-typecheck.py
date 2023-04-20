@@ -60,6 +60,8 @@ def yagoIdFromWikipediaPage(wikipediaPageTitle):
     for c in parse.unquote(wikipediaPageTitle):
         if legal(c):
             result+=c
+        elif c in " +":
+            result+='_'
         else:
             result+=hexCode(c).replace('%','_') # Hermit cannot deal with percentages
     return result
@@ -70,6 +72,8 @@ def yagoIdFromLabel(wikidataEntity,label):
     for c in label:
         if legal(c):
             result+=c
+        elif c in " +":
+            result+='_'
         else: 
             result+=hexCode(c)
     return result.capitalize()+"_"+wikidataEntity[3:]

@@ -44,7 +44,7 @@ _:wd:Q_Elvis?wd:Q_doctoralDegree?1	rdfs:label	"Generic instance"@en	.
 wd:Q_Elvis	yago:academicTitle	_:wd:Q_Elvis?wd:Q_doctoralDegree?1	. #		
 wd:Q42	rdf:type	wd:Q_singer	. #		
 wd:Q43	rdf:type	wd:Q_european_book	. #		
-wd:Q43	rdfs:label	"Bad chèld"@en	. #		
+wd:Q43	rdfs:label	"Bad chè³ld"@en	. #		
 wd:Q_singer	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/S%74nger%C3%A8>	. #		
 wd:Q_singer	rdfs:label	"chanteur"@fr	. #		
 wd:Q_singer	schema:alternateName	"this is a human being"@en	. #		
