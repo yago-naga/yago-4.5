@@ -387,7 +387,7 @@ class treatWikidataEntity():
         return None
         
 if __name__ == '__main__':
-    with TsvUtils.Timer("Creating YAGO facts at"):
+    with TsvUtils.Timer("Step 03: Creating YAGO facts"):
         TurtleUtils.visitWikidata(WIKIDATA_FILE, treatWikidataEntity) 
         print("  Collecting results...")
         with open(FOLDER+"03-yago-facts-to-type-check.tsv", "wb") as writer:

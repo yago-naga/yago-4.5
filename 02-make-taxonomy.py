@@ -149,7 +149,7 @@ def checkDisjoint(currentClass, superClass, disjointTopLevelClassesSoFar, disjoi
 ###########################################################################
 
 if __name__ == '__main__':
-    with TsvUtils.Timer("Creating YAGO taxonomy"):
+    with TsvUtils.Timer("Step 02: Creating YAGO taxonomy"):
         # Load YAGO schema
         yagoSchema = Graph()
         yagoSchema.loadTurtleFile(SCHEMA_FILE, "  Loading YAGO schema")

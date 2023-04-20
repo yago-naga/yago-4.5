@@ -25,7 +25,7 @@ INPUT_FOLDER= "input-data"
 #           Booting
 ###########################################################################
 
-print("Creating YAGO schema...")
+print("Step 01: Creating YAGO schema...")
 print("  Importing...",end="", flush=True)
 from TurtleUtils import Graph
 import TurtleUtils

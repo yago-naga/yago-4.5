@@ -100,7 +100,7 @@ def termsAndSeparators(generator):
                     char=None
                     literal="".join(literal)
             # Make all literals simple literals without line breaks and quotes
-            literal=literal.replace('\n','\\n').replace('\t','\\t').replace('\r','').replace('\\"','\\u0022')
+            literal=literal.replace('\n','\\n').replace('\t','\\t').replace('\r','').replace('\\"',"'").replace("\\u0022","'")
             if not char:
                 char=next(generator, None)
             if char=='^':
@@ -492,7 +492,7 @@ def visitWikidataEntities(args):
     print("    Finished Wikidata reader",portion+1, flush=True)        
     return visitor.result()
 
-def visitWikidata(file, visitor, numThreads=90):
+def visitWikidata(file, visitor, numThreads=50):
     """ Runs numThreads parallel threads that each visit a portion of Wikidata with the visitor """
     fileSize=os.path.getsize(file)
     if numThreads>fileSize/10000000:

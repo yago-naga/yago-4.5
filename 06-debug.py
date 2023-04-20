@@ -11,6 +11,7 @@ Input:
 
 Output:
 - 06-statistics.txt
+- 06-taxonomy.html
 - 06-sample-entities.ttl
 
 Algorithm:
@@ -46,19 +47,21 @@ def getSuperClasses(cls, classes, yagoTaxonomyUp):
         for sc in yagoTaxonomyUp[cls]:
             getSuperClasses(sc, classes, yagoTaxonomyUp)
 
-def printTaxonomy(writer, yagoTaxonomyDown, classStats, cls=Prefixes.schemaThing, indent=0):
+def printTaxonomy(writer, yagoTaxonomyDown, classStats, cls=Prefixes.schemaThing):
     """ Prints the taxonomy to the writer """
-    for _ in range(0, indent):
-        writer.write(" ")
-    writer.write(cls+": "+str(classStats.get(cls,0))+"\n")
+    if cls not in yagoTaxonomyDown:
+        writer.write(f"<li>{cls}: {str(classStats.get(cls,0))}\n")
+        return
+    writer.write(f"<li><details><summary>{cls}: {str(classStats.get(cls,0))}</summary><ul>\n")
     for subclass in yagoTaxonomyDown.get(cls, []):
-        printTaxonomy(writer, yagoTaxonomyDown, classStats, subclass, indent+2)
+        printTaxonomy(writer, yagoTaxonomyDown, classStats, subclass)
+    writer.write("</ul></details>\n")
         
 ##########################################################################
 #             Main
 ##########################################################################
 
-with TsvUtils.Timer("Collecting YAGO statistics"):
+with TsvUtils.Timer("Step 06: Collecting YAGO statistics"):
 
     # Load YAGO schema
     yagoSchema = TurtleUtils.Graph()
@@ -77,7 +80,6 @@ with TsvUtils.Timer("Collecting YAGO statistics"):
     classStats=defaultdict(int)
     samples=[]
     entities=0
-    entitiesThatAreNotThings=[]
 
     # Initialize predicateStats with predicates from schema, same for classes
     for s, p, o in yagoSchema.triplesWithPredicate("sh:path"):
@@ -100,9 +102,6 @@ with TsvUtils.Timer("Collecting YAGO statistics"):
             getSuperClasses(c, superClasses, yagoTaxonomyUp)
         for c in superClasses:
             classStats[c]+=1   
-        # TODO: this collects all instances of YAGO (?)
-        #if Prefixes.schemaThing not in superClasses and Prefixes.rdfsClass not in superClasses:
-        #    entitiesThatAreNotThings.append(entityFacts.someSubject())
         if subject and (len(samples)<100 or (len(samples)==100 and random.random()<0.01)):
             for c in superClasses:
                 entityFacts.add((subject, 'rdf:type', c))
@@ -123,14 +122,32 @@ with TsvUtils.Timer("Collecting YAGO statistics"):
         writer.write("Total number of entities: "+str(entities)+"\n\n")
         writer.write("Predicates:\n")
         for pred in sorted(predicateStats.items(), key=lambda x:-x[1]):
-            writer.write("  "+pred[0]+": "+str(pred[1])+"\n")
-        writer.write("Classes:\n\n")    
-        printTaxonomy(writer, yagoTaxonomyDown, classStats)
-        writer.write("\n\nEntities that are not schema:Thing:\n")
-        for e in entitiesThatAreNotThings:
-            writer.write(e+", ")
+            writer.write("  "+pred[0]+": "+str(pred[1])+"\n")        
     print("done")
        
-
+    print("  Writing out taxonomy... ",end="",flush=True)    
+    with open(FOLDER+"06-taxonomy.html", "wt", encoding="UTF-8") as writer:
+        writer.write("""
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset=utf-8>
+  <meta name=viewport content="width=device-width, initial-scale=1.0">   
+  <title>
+   YAGO Taxonomy
+  </title>
+  <style>
+  ul {list-style-type:none}
+  </style>
+ </head>      
+ <body>
+ <h1>YAGO Taxonomy</h1>
+ <ul>
+        """)
+        printTaxonomy(writer, yagoTaxonomyDown, classStats)
+        writer.write("</ul></body>\n</html>")
+    print("done")
+    
 if TEST:
     evaluator.compare(FOLDER+"06-statistics.txt", FOLDER+"06-statistics-gold.txt")
+    evaluator.compare(FOLDER+"06-taxonomy.html", FOLDER+"06-taxonomy-gold.html")

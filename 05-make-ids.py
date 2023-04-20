@@ -22,7 +22,7 @@ Algorithm:
    
 """
 
-TEST=True
+TEST=False
 FOLDER="test-data/05-make-ids/" if TEST else "yago-data/"
 
 ##########################################################################
@@ -72,15 +72,29 @@ def toYagoEntity(entity):
         return yagoIds[entity]
     return None
 
+def isGenericForWikipediaEntity(entity):
+    """ TRUE if the entity is a generic instance for an entity that has a Wikipedia page"""
+    if entity.startswith("_:"):
+        # Generic instances and anonymous members of lists
+        firstPos=entity.find("?")
+        if firstPos==-1 or firstPos<3:
+            return True
+        entity=entity[2:firstPos]
+        if not entity in yagoIds:
+            return False
+        entity=yagoIds[entity]
+        return entity in entitiesWithWikipediaPage
+    return False
+        
 def hasWikipediaPage(entity):
-    """ TRUE if the entity is a literal or has a Wikipedia page or is a generic instance"""
+    """ TRUE if the entity is a literal or has a Wikipedia page"""
     return isLiteral(entity) or entity in entitiesWithWikipediaPage
     
 ##########################################################################
 #             Main
 ##########################################################################
 
-with TsvUtils.Timer("Renaming YAGO entities"):
+with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
 
     yagoIds={}
     entitiesWithWikipediaPage=set()
@@ -90,7 +104,7 @@ with TsvUtils.Timer("Renaming YAGO entities"):
         yagoIds[split[0]]=split[2]
         if split[3]==". #WIKI":
             entitiesWithWikipediaPage.add(split[2])
-
+    
     for split in TsvUtils.tsvTuples(FOLDER+"04-yago-bad-classes.tsv", "  Removing bad YAGO classes"):
         yagoIds.pop(split[0], None)
 
@@ -111,7 +125,7 @@ with TsvUtils.Timer("Renaming YAGO entities"):
                         # Should not happen
                         continue
                     # Write facts to Wikipedia version of YAGO
-                    if (hasWikipediaPage(subject) or isGeneric(split[0])) and (relation=="rdf:type" or hasWikipediaPage(object) or isGeneric(split[2])):
+                    if (hasWikipediaPage(subject) or isGenericForWikipediaEntity(split[0])) and (relation=="rdf:type" or hasWikipediaPage(object) or isGenericForWikipediaEntity(split[2])):
                         wikipediaFacts.writeFact(subject, relation, object)
                         if subject!=previousEntity and split[0] in yagoIds:
                            wikipediaFacts.writeFact(subject, "owl:sameAs", split[0])

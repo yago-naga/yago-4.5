@@ -44,26 +44,24 @@ from collections import defaultdict
 ##########################################################################
 
 def hexCode(char):    
-    """ Percentage-encodes the character """
-    if char=='.':
-        return "%2E"
-    if char=='~':
-        return "%7E"
-    return parse.quote(char, safe='', errors='ignore')
+    """ Hex-encodes the character """
+    return "u{0:04X}".format(ord(char))
     
 def legal(char):
-    """ TRUE if a character is a valid CURIE character. We're very restrictive here to make all parsers work. """
+    """ TRUE if a character is a valid CURIE character. We're very restrictive here to make all parsers work. 
+    Percentage codes are legal characters in the specification, but don't workin Hermit.
+    """
     category=unicodedata.category(char)[0]
-    return char in "_-" or category in "LN"
+    return char in "_-0123456789" or category=="L"
     
 def yagoIdFromWikipediaPage(wikipediaPageTitle):
     """ Creates a YAGO id from a Wikipedia page title"""
     result=""
     for c in parse.unquote(wikipediaPageTitle):
-        if legal(c) or c=='%':
+        if legal(c):
             result+=c
         else:
-            result+=hexCode(c)
+            result+=hexCode(c).replace('%','_') # Hermit cannot deal with percentages
     return result
 
 def yagoIdFromLabel(wikidataEntity,label):
@@ -127,7 +125,7 @@ def instanceOf(obj, cls):
 #             Main
 ##########################################################################
 
-with TsvUtils.Timer("Type-checking YAGO"):
+with TsvUtils.Timer("Step 04: Type-checking YAGO"):
     # Load taxonomy
     yagoTaxonomyUp={}
     for tuple in TsvUtils.tsvTuples(FOLDER+"02-yago-taxonomy-to-rename.tsv", "  Loading YAGO taxonomy"):
