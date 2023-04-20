@@ -48,7 +48,7 @@ def getSuperClasses(cls, classes, yagoTaxonomyUp):
             getSuperClasses(sc, classes, yagoTaxonomyUp)
 
 def printTaxonomy(writer, yagoTaxonomyDown, classStats, cls=Prefixes.schemaThing):
-    """ Prints the taxonomy to the writer """
+    """ Prints the taxonomy to the writer. <yagoTaxonomyDown> maps a class to the set of sub-classes. <classStats> maps a class to its number of instances. <cls> is the class to start with, i.e., the top-level class. """
     if cls not in yagoTaxonomyDown:
         writer.write(f"<li>{cls.replace('yago:','y:')}: {str(classStats.get(cls,0))}\n")
         return

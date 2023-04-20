@@ -45,6 +45,11 @@ def linesOfFile(file, message=None):
 #             TSV files
 ##########################################################################
 
+# Buffer sizes  
+kilo=1024
+mega=1024*kilo
+giga=1024*mega
+
 def tsvTuples(file, message=None):
     """ Iterates over the tuples in a TSV file """
     for line in linesOfFile(file, message):
@@ -57,7 +62,7 @@ class TsvFileWriter(object):
         self.file_name = file_name
       
     def __enter__(self):
-        self.file = open(self.file_name, "tw", encoding="utf=8", buffering=1024*1024*1024)
+        self.file = open(self.file_name, "tw", encoding="utf=8", buffering=100*mega)
         for p in Prefixes.prefixes:
             self.file.write("@prefix "+p+": <"+Prefixes.prefixes[p]+"> .\n")
         return self

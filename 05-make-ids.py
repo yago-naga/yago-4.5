@@ -54,41 +54,22 @@ def toYagoEntity(entity):
     if entity.startswith("yago:") or entity.startswith("schema:") or entity.startswith("rdfs:") :
         return entity
     if entity.startswith("_:"):
-        # Generic instances and anonymous members of lists
-        firstPos=entity.find("?")
-        secondPos=entity.rfind("?")
-        if firstPos==-1 or secondPos==-1 or secondPos-firstPos<1 or firstPos<3:
+        # Anonymous members of lists etc.
+        if not entity.endswith("_generic_instance"):
             return entity
-        subjectEntity=entity[2:firstPos]
-        subjectEntity=yagoIds.get(subjectEntity, None)
-        if subjectEntity==None or subjectEntity.find(":")==-1:
+        # Generic instances
+        cls=entity[2:-17]
+        cls=yagoIds.get(cls, None)
+        if cls==None or cls.find(":")==-1:
             return entity
-        classEntity=entity[firstPos+1:secondPos]
-        classEntity=yagoIds.get(classEntity, None)
-        if classEntity==None or classEntity.find(":")==-1:
-            return entity          
-        return "yago:"+subjectEntity[subjectEntity.find(":")+1:]+"s_"+classEntity[classEntity.find(":")+1:]+"_"+entity[secondPos+1:]            
+        return cls+"_generic_instance"
     if entity in yagoIds:
         return yagoIds[entity]
     return None
-
-def isGenericForWikipediaEntity(entity):
-    """ TRUE if the entity is a generic instance for an entity that has a Wikipedia page"""
-    if entity.startswith("_:"):
-        # Generic instances and anonymous members of lists
-        firstPos=entity.find("?")
-        if firstPos==-1 or firstPos<3:
-            return True
-        entity=entity[2:firstPos]
-        if not entity in yagoIds:
-            return False
-        entity=yagoIds[entity]
-        return entity in entitiesWithWikipediaPage
-    return False
-        
-def hasWikipediaPage(entity):
-    """ TRUE if the entity is a literal or has a Wikipedia page"""
-    return isLiteral(entity) or entity in entitiesWithWikipediaPage
+    
+def goesToWikipediaVersion(entity):
+    """ TRUE if the entity is a literal or has a Wikipedia page or is a generic instance"""
+    return isLiteral(entity) or entity in entitiesWithWikipediaPage or entity.endswith("_generic_instance")
     
 ##########################################################################
 #             Main
@@ -125,7 +106,7 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
                         # Should not happen
                         continue
                     # Write facts to Wikipedia version of YAGO
-                    if (hasWikipediaPage(subject) or isGenericForWikipediaEntity(split[0])) and (relation=="rdf:type" or hasWikipediaPage(object) or isGenericForWikipediaEntity(split[2])):
+                    if goesToWikipediaVersion(subject) and (relation=="rdf:type" or goesToWikipediaVersion(object)):
                         wikipediaFacts.writeFact(subject, relation, object)
                         if subject!=previousEntity and split[0] in yagoIds:
                            wikipediaFacts.writeFact(subject, "owl:sameAs", split[0])

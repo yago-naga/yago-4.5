@@ -72,7 +72,7 @@ schema:Intangible  owl:disjointWith
 # (excluding literals, classes, properties, etc.)
 	
 schema:Thing a sh:NodeShape ;
-    ys:fromClass wd:Q35120 ;
+    # ys:fromClass wd:Q35120 ; No mapping!
     sh:property [
         sh:path schema:alternateName ;
         sh:datatype rdf:langString ;
