@@ -62,7 +62,7 @@ class TsvFileWriter(object):
         self.file_name = file_name
       
     def __enter__(self):
-        self.file = open(self.file_name, "tw", encoding="utf=8", buffering=100*mega)
+        self.file = open(self.file_name, "tw", encoding="utf=8", buffering=1*giga)
         for p in Prefixes.prefixes:
             self.file.write("@prefix "+p+": <"+Prefixes.prefixes[p]+"> .\n")
         return self

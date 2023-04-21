@@ -492,7 +492,7 @@ def visitWikidataEntities(args):
     print("    Finished Wikidata reader",portion+1, flush=True)        
     return visitor.result()
 
-def visitWikidata(file, visitor, numThreads=10):
+def visitWikidata(file, visitor, numThreads=90):
     """ Runs numThreads parallel threads that each visit a portion of Wikidata with the visitor """
     fileSize=os.path.getsize(file)
     if numThreads>fileSize/10000000:

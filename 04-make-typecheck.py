@@ -49,7 +49,10 @@ def hexCode(char):
     return "_u{0:04X}_".format(ord(char))
     
 def legal(char):
-    """ TRUE if a character is a valid CURIE character. We're very restrictive here to make all parsers work. For example, percentage codes are legal characters in the specification, but don't work in Hermit. """
+    """ TRUE if a character is a valid CURIE character.
+    We're very restrictive here to make all parsers work.
+    For example, percentage codes are legal characters in the specification,
+    but don't work in Hermit. """
     category=unicodedata.category(char)[0]
     return char in "_-0123456789" or category=="L"
     
