@@ -49,6 +49,7 @@ schema:Taxon owl:disjointWith
 schema:Person owl:disjointWith 
     schema:CreativeWork,
     schema:Event,
+	schema:Taxon,
     schema:Organization.
 schema:Place owl:disjointWith 
     schema:CreativeWork,
@@ -184,7 +185,7 @@ yago:Gender a sh:NodeShape ;
 #     ys:fromClass wd:Q2001305 .
     
 schema:CreativeWork a sh:NodeShape ;
-    ys:fromClass wd:Q17537576 ;
+    ys:fromClass wd:Q17537576, Q386724 ;
     sh:property [
         sh:path schema:about ;
         sh:node schema:Thing ;
@@ -1155,7 +1156,7 @@ schema:Continent a sh:NodeShape ;
 yago:HumanMadeGeographicalEntity a sh:NodeShape ;
 	rdfs:subClassOf schema:Place ;
 	rdfs:label "Human-made geographical entity"@en ;
-    ys:fromClass wd:Q811979, wd:Q811430, wd:Q811463 .
+    ys:fromClass wd:Q811979, wd:Q811430, wd:Q811463, wd:Q35145743 .
 
 # Transit routes such as roads and railways.
 # Mapped to "thoroughfare" Wikidata (not a subclass of arch struc), 

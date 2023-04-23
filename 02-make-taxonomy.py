@@ -89,6 +89,12 @@ badClasses = {
     "wd:Q88392887", # scholarly articles, tweets, etc.
     "wd:Q591041",   # same
     "wd:Q13442814", # same
+    "wd:Q618123",   # geographical feature
+    "wd:Q13226383", # facility
+    "wd:Q15642541", # human-geographic territorial entity    
+    "wd:Q4835091",  # territory
+    "wd:Q4026292",  # Action
+    "wd:Q115668308",# Release
     "wd:Q29654788"  # Unicode characters
 }
 
