@@ -5,6 +5,8 @@ It is of use only for people who want to build YAGO themselves.
 
 If you are mainly interested in using YAGO, please see the [Web page of YAGO](https://yago-knowledge.org).
 
+<img src="https://yago-knowledge.org/assets/images/yago-logos/yago-logo.svg" height="70">
+
 ## Building YAGO
 
 The creation of YAGO proceeds in 6 steps, which each corresponds to one Python file. Run the steps sequentially.
