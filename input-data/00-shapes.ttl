@@ -185,7 +185,7 @@ yago:Gender a sh:NodeShape ;
 #     ys:fromClass wd:Q2001305 .
     
 schema:CreativeWork a sh:NodeShape ;
-    ys:fromClass wd:Q17537576, Q386724 ;
+    ys:fromClass wd:Q17537576, wd:Q386724 ;
     sh:property [
         sh:path schema:about ;
         sh:node schema:Thing ;
@@ -790,6 +790,11 @@ schema:EducationalOrganization a sh:NodeShape ;
 # schema:DanceGroup a sh:NodeShape ;
 #     ys:fromClass wd:Q2393314 .
 
+# We need this as a superclass of MusicGroup
+schema:PerformingGroup rdf:type sh:NodeShape ;
+    rdfs:subClassOf schema:Organization ;
+    ys:fromClass wd:Q105815710 .
+
 schema:MusicGroup a sh:NodeShape ;
     ys:fromClass wd:Q215380 ;
     sh:property [
@@ -813,8 +818,6 @@ schema:MusicGroup a sh:NodeShape ;
 # Fabian 2023-03-28: removed for lack of properties
 #schema:TheaterGroup a sh:NodeShape ;
 #    ys:fromClass wd:Q2416217 .
-#schema:SportsOrganization a sh:NodeShape ;
-#    ys:fromClass wd:Q4438121 .
 #schema:WorkersUnion a sh:NodeShape ;
 #    ys:fromClass wd:Q178790 .
 
@@ -822,6 +825,11 @@ schema:MusicGroup a sh:NodeShape ;
 schema:SportsTeam a sh:NodeShape ;
     ys:fromClass wd:Q12973014 .
 
+# Needed as superclass of SportsTeam
+schema:SportsOrganization rdf:type sh:NodeShape ;
+    rdfs:subClassOf schema:Organization ;
+    ys:fromClass wd:Q4438121 .
+	
 
 ################################################################
 #                Persons

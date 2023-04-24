@@ -459,7 +459,7 @@ def visitWikidataEntities(args):
     file, visitor, portion, size = args
     print("    Starting Wikidata reader",portion+1)
     percentagePrinted=0
-    with open(file,"rb", buffering=1*giga) as wikidataReader:
+    with open(file,"rb", buffering=1*mega) as wikidataReader:
         wikidataReader.seek(portion*size)
         # Seek to next Wikidata item
         line=b"NONE"
