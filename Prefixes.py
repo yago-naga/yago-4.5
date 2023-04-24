@@ -83,6 +83,8 @@ wikidataStart = "pq:P580"
 
 wikidataEnd = "pq:P582"
 
+wikidataOccupation = "wdt:P106"
+
 owlDisjointWith = "owl:disjointWith"
 
 schemaTaxon = "schema:Taxon"

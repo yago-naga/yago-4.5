@@ -54,31 +54,32 @@ def legal(char):
     For example, percentage codes are legal characters in the specification,
     but don't work in Hermit. """
     category=unicodedata.category(char)[0]
-    return char in "_-0123456789" or category=="L"
-    
-def yagoIdFromWikipediaPage(wikipediaPageTitle):
-    """ Creates a YAGO id from a Wikipedia page title"""
+    return char in "_-0123456789" or (category=="L" and (ord(char)>=0x00C0  or ord(char)<=ord('z')))
+ 
+def yagoIdFromString(s):
+    """ Creates a YAGO id from a string """
     result=""
-    for c in parse.unquote(wikipediaPageTitle):
+    for c in s:
         if legal(c):
             result+=c
         elif c in " +":
             result+='_'
         else:
             result+=hexCode(c)
+    # Special case that is disallowed
+    if result.startswith("-"):
+        result="Y"+result
+    # Special case for Hermit parser
+    result=result.replace("genid","gen_id")
     return result
-
+ 
+def yagoIdFromWikipediaPage(wikipediaPageTitle):
+    """ Creates a YAGO id from a Wikipedia page title"""
+    return yagoIdFromString(parse.unquote(wikipediaPageTitle))
+    
 def yagoIdFromLabel(wikidataEntity,label):
     """ Creates a YAGO id from a Wikidata entity and label """
-    result=""
-    for c in label:
-        if legal(c):
-            result+=c
-        elif c in " +":
-            result+='_'
-        else: 
-            result+=hexCode(c)
-    return result.capitalize()+"_"+wikidataEntity[3:]
+    return yagoIdFromString(label).capitalize()+"_"+wikidataEntity[3:]
 
 def yagoIdFromWikidataId(wikidataEntity):
     """ Creates a YAGO id from a Wikidata entity """

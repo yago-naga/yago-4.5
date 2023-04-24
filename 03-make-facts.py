@@ -24,7 +24,7 @@ Algorithm:
   - write out facts that fulfill the constraints to yago-facts-to-type-check.tsv  
 """
 
-TEST=False
+TEST=True
 FOLDER="test-data/03-make-facts/" if TEST else "yago-data/"
 WIKIDATA_FILE= "test-data/03-make-facts/00-wikidata.ttl" if TEST else "../wikidata.ttl"
 
@@ -51,6 +51,7 @@ import TsvUtils
 import TurtleUtils
 from TurtleUtils import Graph
 import sys
+import itertools
 import re
 import os
 import evaluator
@@ -91,7 +92,7 @@ def checkIfClass(entityFacts, yagoSchema, yagoTaxonomyUp):
     
 def cleanClasses(entityFacts, yagoSchema, yagoTaxonomyUp):
     """Replace all facts <subject, wikidata:type, wikidataClass> by <subject, rdf:type, yagoClass>"""
-    for s,p,o in entityFacts.triplesWithPredicate(Prefixes.wikidataType):
+    for s,p,o in itertools.chain(entityFacts.triplesWithPredicate(Prefixes.wikidataType),entityFacts.triplesWithPredicate(Prefixes.wikidataOccupation)):
         if o in yagoTaxonomyUp:
             entityFacts.add((s,Prefixes.rdfType,o))
         elif any(yagoSchema.subjects(Prefixes.fromClass, o)):

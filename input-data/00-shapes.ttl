@@ -827,9 +827,10 @@ schema:SportsTeam a sh:NodeShape ;
 #                Persons
 ################################################################
 
-# Needed as range of hasOccupation
-schema:Occupation a sh:NodeShape ;
-    ys:fromClass wd:Q12737077 .
+# Fabian 2023-04-24: Was needed as range of hasOccupation,
+# but occupations are now classes
+#schema:Occupation a sh:NodeShape ;
+#    ys:fromClass wd:Q12737077 .
 
 schema:Person a sh:NodeShape ;
     ys:fromClass wd:Q5 ;	
@@ -919,11 +920,12 @@ schema:Person a sh:NodeShape ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P21 ;
     ] ;
-    sh:property [
-        sh:path schema:hasOccupation ;
-        sh:node schema:Occupation ;
-        ys:fromProperty wdt:P106 ;
-    ] ;
+    # Fabian 2023-04-24: Occupations become class memberships
+    #sh:property [
+    #    sh:path schema:hasOccupation ;
+    #    sh:node schema:Occupation ;
+    #    ys:fromProperty wdt:P106 ;
+    #] ;
     sh:property [
         sh:path schema:homeLocation ;
         sh:node schema:Place ;
