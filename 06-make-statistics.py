@@ -41,6 +41,21 @@ import os
 import Prefixes
 from collections import defaultdict
 
+# Predicates that are excluded for fact counting
+excludePredicates=["rdfs:label", "rdfs:comment", "rdf:type", "schema:mainEntityOfPage", "owl:sameAs", "schema:alternateName"]
+
+##########################################################################
+#             Count facts on YAGO 4
+##########################################################################
+  
+def countYago4Facts(files):
+    """ Counts the facts of YAGO 4, excluding the exclude predicates"""
+    count=0
+    for s, p, o in itertools.chain([TsvUtils.tsvTuples(file, "Counting YAGO 4 facts in "+file) for file in files]):
+        if p not in excludePredicates:
+           count+=1
+    print("Found",count,"facts")
+    
 ##########################################################################
 #             Full Taxonomy as HTML
 ##########################################################################
@@ -169,7 +184,6 @@ with TsvUtils.Timer("Step 06: Collecting YAGO statistics"):
         writer.write("  ... of which generic: "+str(genericInstancesCount)+"\n\n")
         writer.write("Total number of classes: "+str(len(yagoTaxonomyUp))+"\n\n")
         writer.write("Total number of predicates: "+str(len(predicateStats))+"\n\n")
-        excludePredicates=["rdfs:label", "rdfs:comment", "rdf:type", "schema:mainEntityOfPage", "owl:sameAs", "schema:alternateName"]
         writer.write("Total number of facts (excluding labels etc.): "+str(sum([predicateStats[p] for p in predicateStats if p not in excludePredicates]))+"\n\n")
         writer.write("Total number of meta facts: "+str(metaFacts)+"\n\n")
         writer.write("Predicates:\n")
