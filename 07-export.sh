@@ -1,4 +1,5 @@
 echo "Packing YAGO files..."
+cd yago-data
 rm yago-4.5.0.zip
 mv 01-yago-final-schema.ttl yago-schema.ttl
 mv 05-yago-final-wikipedia.tsv yago-facts.ttl
