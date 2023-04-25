@@ -17,6 +17,11 @@ TEST=False
 #             Reading lines of a file
 ##########################################################################
 
+# Buffer sizes  
+kilo=1024
+mega=1024*kilo
+giga=1024*mega
+
 def linesOfFile(file, message=None):
     """ Iterator over the lines of a GZ or text file, with progress bar """
     if message:
@@ -28,7 +33,7 @@ def linesOfFile(file, message=None):
     isGZ=file.endswith(".gz")
     if isGZ:
         fileSize*=20
-    with (gzip.open(file, mode='rt', encoding='UTF-8') if isGZ else open(file, mode='rt', encoding='UTF-8', buffering=1024*1024*1024)) as input:
+    with (gzip.open(file, mode='rt', encoding='UTF-8') if isGZ else open(file, mode='rt', encoding='UTF-8', buffering=1*giga)) as input:
         for line in input:
             coveredSize+=len(line)
             while message and (coveredSize / fileSize * totalNumberOfDots > printedDots):
@@ -44,11 +49,6 @@ def linesOfFile(file, message=None):
 ##########################################################################
 #             TSV files
 ##########################################################################
-
-# Buffer sizes  
-kilo=1024
-mega=1024*kilo
-giga=1024*mega
 
 def tsvTuples(file, message=None):
     """ Iterates over the tuples in a TSV file """

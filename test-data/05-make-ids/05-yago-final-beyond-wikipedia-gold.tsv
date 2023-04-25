@@ -37,5 +37,3 @@
 yago:Elvis	schema:child	yago:Q_123456	.
 yago:Q_123456	rdfs:label	"unknown child"	.
 yago:Q_123456	owl:sameAs	wd:Q_123456	.
-yago:Q_123456s_DoctoralDegree_1	rdf:type	yago:DoctoralDegree	.
-yago:Q_123456s_DoctoralDegree_1	rdfs:label	"Generic instance"@en	.

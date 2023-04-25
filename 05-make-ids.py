@@ -118,7 +118,8 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
                     if len(split)>5:
                         if split[4]: metaFacts.write("<<", subject, relation, object, ">>", "schema:startDate", split[4])
                         if split[5]: metaFacts.write("<<", subject, relation, object, ">>", "schema:endDate", split[5])
-                    previousEntity=subject
+                    if not subject.startswith("_:"):
+                        previousEntity=subject
                     
     with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-taxonomy.tsv") as taxFacts:
         for split in TsvUtils.tsvTuples(FOLDER+"02-yago-taxonomy-to-rename.tsv", "  Renaming classes"):

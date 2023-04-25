@@ -48,13 +48,18 @@ excludePredicates=["rdfs:label", "rdfs:comment", "rdf:type", "schema:mainEntityO
 #             Count facts on YAGO 4
 ##########################################################################
   
-def countYago4Facts(files):
+def countYago4Facts(yago4file):
     """ Counts the facts of YAGO 4, excluding the exclude predicates"""
     count=0
-    for s, p, o in itertools.chain([TsvUtils.tsvTuples(file, "Counting YAGO 4 facts in "+file) for file in files]):
-        if p not in excludePredicates:
-           count+=1
-    print("Found",count,"facts")
+    predicate2facts=defaultdict(int)
+    for tuple in TsvUtils.tsvTuples(yago4file, "Counting YAGO 4 facts"):
+        if len(tuple)<3:
+            continue
+        predicate2facts[tuple[1]]+=1
+    with open(FOLDER+"06-yago-4-statistics.txt", "wt", encoding="UTF-8") as file:
+        file.write("YAGO 4 statistics\n\n")
+        for p in predicate2facts:
+            file.write(p+": "+str(predicate2facts[p])+"\n")
     
 ##########################################################################
 #             Full Taxonomy as HTML

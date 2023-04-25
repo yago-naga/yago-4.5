@@ -86,16 +86,22 @@ badClasses = {
     "wd:Q18340514", # article about events in a specific year or time period
     "wd:Q24017414", # second-order class
     "wd:Q12335479", # templates
+    "wd:Q12139612", # Lists
     "wd:Q88392887", # scholarly articles, tweets, etc.
     "wd:Q591041",   # same
     "wd:Q13442814", # same
+    "wd:Q3523102",  # same
+    "wd:Q115668308",# Release    
     "wd:Q618123",   # geographical feature
     "wd:Q13226383", # facility
     "wd:Q15642541", # human-geographic territorial entity    
     "wd:Q4835091",  # territory
     "wd:Q4026292",  # Action
-    "wd:Q115668308",# Release
-    "wd:Q29654788"  # Unicode characters
+    "wd:Q67518978", # Occurrent
+    "wd:Q2545446",  # Graphemes
+    "wd:Q32483",    # Characters
+    "wd:Q11953984", # Linguistic units, words etc
+    "wd:Q11563"     # Numbers
 }
 
 def subClassesInclude(superClass, potentialSubClass):
