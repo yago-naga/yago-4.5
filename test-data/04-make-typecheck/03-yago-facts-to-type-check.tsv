@@ -53,6 +53,11 @@ wd:Q42	rdf:type	wd:Q_singer
 wd:Q43	rdf:type	wd:Q_european_book
 wd:Q43	rdfs:label	"Bad chè³ld"@en
 
+# This Elvis should get a different ID than Elvis
+wd:Q_other_elvis	rdf:type	wd:Q_singer
+wd:Q_other_elvis	rdfs:label	"Eehlvis"@en
+wd:Q_other_elvis	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Elvis>
+
 # Classes should survive
 wd:Q_singer	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/S%74nger%C3%A8>	. # Should remain encoded and get one more encoded at the end
 wd:Q_singer	rdfs:label	"chanteur"@fr	.

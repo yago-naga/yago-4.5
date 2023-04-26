@@ -85,17 +85,23 @@ def yagoIdFromWikidataId(wikidataEntity):
     """ Creates a YAGO id from a Wikidata entity """
     return wikidataEntity[3:]
 
+# We collect Wikipedia page titles that are already in use
+# because some Wikidata entities point to the same Wikipedia page
+wikipediaPagesUsed=set()
+
 def writeYagoId(out, currentTopic, currentLabel, currentWikipediaPage):
     """ Writes wd:Q303 owl:sameAs yago:Elvis """ 
     # Don't print ids for built-in classes
     if currentTopic.startswith("schema:"):
         return
-    if currentWikipediaPage:
+    if currentWikipediaPage and currentWikipediaPage not in wikipediaPagesUsed:
         out.write(currentTopic,"owl:sameAs","yago:"+yagoIdFromWikipediaPage(currentWikipediaPage),". #WIKI")
-    elif currentLabel:
+        wikipediaPagesUsed.add(currentWikipediaPage)
+        return
+    if currentLabel:
         out.write(currentTopic,"owl:sameAs","yago:"+yagoIdFromLabel(currentTopic,currentLabel),". #OTHER")
-    else:
-        out.write(currentTopic,"owl:sameAs","yago:"+yagoIdFromWikidataId(currentTopic),". #OTHER")
+        return
+    out.write(currentTopic,"owl:sameAs","yago:"+yagoIdFromWikidataId(currentTopic),". #OTHER")
 
 ##########################################################################
 #             Class operations

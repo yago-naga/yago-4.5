@@ -336,7 +336,11 @@ class treatWikidataEntity():
                 
     def visit(self,entityFacts):
         """ Writes out the facts for a single Wikidata entity """
-
+        
+        # DEBUG
+        if "wd:Q954571" in entityFacts.subjects(Prefixes.wikidataType):
+            print("Found", entityFacts)
+            
         # We have to open the file here and not in init() to avoid pickling problems
         if not self.writer:
             self.writer=TsvUtils.TsvFileWriter(FOLDER+"03-yago-facts-to-type-check-"+str(self.number)+".tmp")
@@ -354,7 +358,7 @@ class treatWikidataEntity():
         if not cleanClasses(entityFacts, self.yagoSchema, self.yagoTaxonomyUp):
             return
              
-        classes = getClasses(entityFacts, self.yagoTaxonomyUp)
+        classes = getClasses(entityFacts, self.yagoTaxonomyUp)        
         if anyDisjoint(classes, self.disjointClasses):
             return
 

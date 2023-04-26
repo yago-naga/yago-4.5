@@ -70,3 +70,6 @@ schema:PerformingGroup	rdfs:subClassOf	schema:Organization	.
 schema:SportsOrganization	rdfs:subClassOf	schema:Organization	.
 wd:Q_singer	rdfs:subClassOf	schema:Person	.
 wd:Q_rock_singer	rdfs:subClassOf	wd:Q_singer		.
+
+
+wd:Q39614	rdfs:subClassOf	yago:HumanMadeGeographicalEntity	.

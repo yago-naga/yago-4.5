@@ -34,31 +34,500 @@
 @prefix prn: <http://www.wikidata.org/prop/reference/value-normalized/> .
 @prefix wdno: <http://www.wikidata.org/prop/novalue/> .
 @prefix ys: <http://yago-knowledge.org/schema#> .
-wd:Q_Elvis	schema:birthPlace	wd:Q_birth_place_1	. # IF	schema:Place		
-wd:Q_Elvis	schema:children	wd:Q_child	. # IF	schema:Person	"2014-01-01T00:00:00Z"^^xsd:dateTime	"2014-01-01T00:00:00Z"^^xsd:dateTime
-wd:Q_Elvis	yago:academicDegree	wd:Q_doctoralDegree	. # IF	yago:Award		
-wd:Q_Elvis	schema:birthDate	"1935"^^xsd:gYear	.
-wd:Q_Elvis	schema:mainEntityOfPage	<https://elvis.com>	.
-wd:Q_Elvis	rdf:type	wd:Q_rock_singer	.
-wd:Q_tiger	schema:parentTaxon	wd:Q_cat	. # IF	schema:Taxon		
-wd:Q_tiger	yago:consumes	wd:Q_sheep	. # IF	schema:Taxon		
-wd:Q_tiger	rdf:type	schema:Taxon	.
-wd:Q_composition	schema:composer	wd:Q_person_or_band	. # IF	schema:Person, schema:MusicGroup		
-wd:Q_composition	rdf:type	schema:MusicComposition	.
-wd:Q_product	schema:gtin	"12345678"	.
-wd:Q_product	rdf:type	schema:Product	.
-wd:Q31	schema:geo	"Point(4.6680555555556 50.641111111111)"^^geo:wktLiteral	.
-wd:Q31	rdf:type	schema:Country	.
-wd:Q312	schema:dateCreated	"1976-01-01T00:00:00Z"^^xsd:dateTime	.
-wd:Q312	rdf:type	schema:Corporation	.
-wd:Q_fictional	schema:birthPlace	wd:Q_birth_place_1	. # IF	schema:Place		
-wd:Q_fictional	yago:appearsIn	wd:Q_book	. # IF	schema:CreativeWork		
-wd:Q_fictional	rdf:type	wd:Q_rock_singer	.
-wd:Q_fictional	rdf:type	yago:FictionalEntity	.
-wd:Q_singer	rdfs:label	"singer"@en	.
-wd:Q_singer	rdfs:label	"chanteur"@fr	.
-wd:Q_singer	owl:sameAs	<https://freebase.com/id>	.
-wd:Q_singer	rdfs:comment	"this is a singer"@en	.
-wd:Q_singer	schema:alternateName	"this is a human singer"@en	.
-wd:Q_singer	schema:mainEntityOfPage	<https://de.wikipedia.org/wiki/Mensch>	.
-wd:Q_singer	rdf:type	rdfs:Class	.
+wd:Q954465	schema:birthDate	"1927-05-05T00:00:00Z"^^xsd:dateTime	.
+wd:Q954465	schema:gender	wd:Q6581097	. # IF	yago:Gender		
+wd:Q954465	schema:hasOccupation	wd:Q1607826	. # IF	schema:Occupation		
+wd:Q954465	schema:hasOccupation	wd:Q49757	. # IF	schema:Occupation		
+wd:Q954465	schema:hasOccupation	wd:Q1930187	. # IF	schema:Occupation		
+wd:Q954465	schema:hasOccupation	wd:Q40348	. # IF	schema:Occupation		
+wd:Q954465	schema:hasOccupation	wd:Q214917	. # IF	schema:Occupation		
+wd:Q954465	schema:alumniOf	wd:Q2039033	. # IF	schema:Organization		
+wd:Q954465	schema:nationality	wd:Q733	. # IF	schema:Country		
+wd:Q954465	schema:deathDate	"1998-01-01T00:00:00Z"^^xsd:dateTime	.
+wd:Q954465	schema:knowsLanguage	wd:Q1321	. # IF	schema:Language		
+wd:Q954465	schema:birthPlace	wd:Q2933	. # IF	schema:Place		
+wd:Q954465	schema:deathPlace	wd:Q2933	. # IF	schema:Place		
+wd:Q954465	rdfs:label	"José Luis Appleyard"@sv	.
+wd:Q954465	rdfs:label	"José Luis Appleyard"@nn	.
+wd:Q954465	rdfs:label	"چوس لويس اپليارد"@arz	.
+wd:Q954465	rdfs:label	"José Luis Appleyard"@de	.
+wd:Q954465	rdfs:label	"José Luis Appleyard"@ga	.
+wd:Q954465	rdfs:label	"José Luis Appleyard"@cs	.
+wd:Q954465	rdfs:label	"José Luis Appleyard"@gn	.
+wd:Q954465	rdfs:label	"José Luis Appleyard"@es	.
+wd:Q954465	rdfs:label	"José Luis Appleyard"@nl	.
+wd:Q954465	rdfs:label	"José Luis Appleyard"@nb	.
+wd:Q954465	rdfs:label	"José Luis Appleyard"@en	.
+wd:Q954465	rdfs:label	"José Luis Appleyard"@ast	.
+wd:Q954465	rdfs:label	"José Luis Appleyard"@ca	.
+wd:Q954465	rdfs:label	"Jose Luis Appleyard"@sq	.
+wd:Q954465	rdfs:label	"José Luis Appleyard"@fr	.
+wd:Q954465	rdfs:label	"José Luis Appleyard"@sl	.
+wd:Q954465	rdfs:label	"José Luis Appleyard"@da	.
+wd:Q954465	rdfs:comment	"شاعر باراغواياني"@ar	.
+wd:Q954465	rdfs:comment	"poeta paraguayo"@es	.
+wd:Q954465	rdfs:comment	"poet paraguayan"@ro	.
+wd:Q954465	rdfs:comment	"poeta paraguaià"@ca	.
+wd:Q954465	rdfs:comment	"paraguayansk poet"@nn	.
+wd:Q954465	rdfs:comment	"Paraguayan poet"@en-gb	.
+wd:Q954465	rdfs:comment	"Paraguayan poet"@en	.
+wd:Q954465	rdfs:comment	"משורר פרגוואי"@he	.
+wd:Q954465	rdfs:comment	"paraguayansk poet"@nb	.
+wd:Q954465	rdfs:comment	"poète paraguayen"@fr	.
+wd:Q954465	rdfs:comment	"dichter uit Paraguay (1927-)"@nl	.
+wd:Q954465	rdfs:comment	"paraguayansk poet"@da	.
+wd:Q954465	rdfs:comment	"poeta paraguaio"@gl	.
+wd:Q954465	rdfs:comment	"ژورنالیست و شاعر اهل پاراگوئه"@fa	.
+wd:Q954465	rdfs:comment	"প্যারাগুয়ীয় কবি"@bn	.
+wd:Q954465	rdfs:comment	"Paraguay luuletaja"@et	.
+wd:Q954465	rdfs:comment	"Paraguayan poet"@en-ca	.
+wd:Q954465	rdfs:comment	"file Paraguach"@ga	.
+wd:Q954465	rdfs:comment	"paraguayansk poet"@sv	.
+wd:Q954465	schema:alternateName	"Jose Luis Appleyard"@en	.
+wd:Q954465	schema:alternateName	"Jose Luis Appleyard"@es	.
+wd:Q954465	schema:mainEntityOfPage	<https://es.wikipedia.org/wiki/Jos%C3%A9_Luis_Appleyard>	.
+wd:Q954465	schema:mainEntityOfPage	<https://gn.wikipedia.org/wiki/Jos%C3%A9_Luis_Appleyard>	.
+wd:Q954465	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Jos%C3%A9_Luis_Appleyard>	.
+wd:Q954465	schema:mainEntityOfPage	<https://arz.wikipedia.org/wiki/%DA%86%D9%88%D8%B3_%D9%84%D9%88%D9%8A%D8%B3_%D8%A7%D9%BE%D9%84%D9%8A%D8%A7%D8%B1%D8%AF>	.
+wd:Q954465	rdf:type	schema:Person	.
+wd:Q954541	schema:gender	wd:Q6581097	. # IF	yago:Gender		
+wd:Q954541	schema:birthPlace	wd:Q641	. # IF	schema:Place		
+wd:Q954541	schema:deathPlace	wd:Q3370	. # IF	schema:Place		
+wd:Q954541	schema:deathDate	"1117-01-01T00:00:00Z"^^xsd:dateTime	.
+wd:Q954541	schema:nationality	wd:Q4948	. # IF	schema:Country		
+wd:Q954541	schema:birthDate	"1070-01-01T00:00:00Z"^^xsd:dateTime	.
+wd:Q954541	schema:hasOccupation	wd:Q47064	. # IF	schema:Occupation		
+wd:Q954541	rdfs:label	"Ordelafo Faliero"@hu	.
+wd:Q954541	rdfs:label	"オルデラッフォ・ファリエル"@ja	.
+wd:Q954541	rdfs:label	"Ordelafo Faliero"@sv	.
+wd:Q954541	rdfs:label	"Орделафо Фалиеро"@bg	.
+wd:Q954541	rdfs:label	"Ordelafo Faliero"@id	.
+wd:Q954541	rdfs:label	"奧爾德拉佛·法利埃羅"@zh	.
+wd:Q954541	rdfs:label	"Ordelafo Faliero"@nb	.
+wd:Q954541	rdfs:label	"Ορντελάφο Φαλιέρο"@el	.
+wd:Q954541	rdfs:label	"Орделафо Фальєро"@uk	.
+wd:Q954541	rdfs:label	"Ordelafo Faliero"@de	.
+wd:Q954541	rdfs:label	"אורדלאפו פאליירו"@he	.
+wd:Q954541	rdfs:label	"Орделаффо Фальер"@ru	.
+wd:Q954541	rdfs:label	"Ordelaffo Falier"@sh	.
+wd:Q954541	rdfs:label	"Ordelafo Faliero"@fr	.
+wd:Q954541	rdfs:label	"Ordelafo Faliero"@en	.
+wd:Q954541	rdfs:label	"Ordelafo Faliero"@es	.
+wd:Q954541	rdfs:label	"Ordelafo Faliero"@tr	.
+wd:Q954541	rdfs:label	"Ordelaffo Falier"@it	.
+wd:Q954541	rdfs:label	"Ordelafo Faliero"@nl	.
+wd:Q954541	rdfs:label	"Ordelafo Faliero"@pl	.
+wd:Q954541	rdfs:label	"Ordelaffo Falier"@nan	.
+wd:Q954541	rdfs:comment	"dux de Venecia"@es	.
+wd:Q954541	rdfs:comment	"militair uit Republiek Venetië (-1117)"@nl	.
+wd:Q954541	rdfs:comment	"Doge von Venedig (1102–1118)"@de	.
+wd:Q954541	rdfs:comment	"venetiansk doge"@sv	.
+wd:Q954541	rdfs:comment	"velencei dózse"@hu	.
+wd:Q954541	rdfs:comment	"doge de Venise"@fr	.
+wd:Q954541	rdfs:comment	"Venedik doçesi"@tr	.
+wd:Q954541	rdfs:comment	"Doge of Venice"@en	.
+wd:Q954541	rdfs:comment	"doge della Repubblica di Venezia"@it	.
+wd:Q954541	rdfs:comment	"Δόγης της Βενετίας"@el	.
+wd:Q954541	schema:alternateName	"אורדלאפו פליירו"@he	.
+wd:Q954541	schema:alternateName	"Oderlaffo Falier"@it	.
+wd:Q954541	schema:alternateName	"Фальер Орделаффо"@ru	.
+wd:Q954541	schema:alternateName	"אורדלאפו פאליירו דה דוני"@he	.
+wd:Q954541	schema:alternateName	"Фальер О."@ru	.
+wd:Q954541	schema:alternateName	"Фальер, Орделаффо"@ru	.
+wd:Q954541	schema:alternateName	"Фалиери Орделаффо"@ru	.
+wd:Q954541	schema:alternateName	"Орделаффо Фалиери"@ru	.
+wd:Q954541	schema:alternateName	"Ordelafo Falier"@fr	.
+wd:Q954541	schema:alternateName	"オルデラフォ・ファリエロ"@ja	.
+wd:Q954541	schema:alternateName	"Фальєро Орделафо"@uk	.
+wd:Q954541	schema:alternateName	"Фалиери, Орделаффо"@ru	.
+wd:Q954541	schema:alternateName	"אורדלאפו פאליירו דודוני"@he	.
+wd:Q954541	schema:alternateName	"Ordelafo Faliero"@it	.
+wd:Q954541	schema:alternateName	"Фальер, Орделафо"@ru	.
+wd:Q954541	schema:alternateName	"Орделафо Фальер"@ru	.
+wd:Q954541	schema:alternateName	"Ordelaffo Faliero"@it	.
+wd:Q954541	schema:alternateName	"Ordelafo Falier"@it	.
+wd:Q954541	schema:mainEntityOfPage	<https://bg.wikipedia.org/wiki/%D0%9E%D1%80%D0%B4%D0%B5%D0%BB%D0%B0%D1%84%D0%BE_%D0%A4%D0%B0%D0%BB%D0%B8%D0%B5%D1%80%D0%BE>	.
+wd:Q954541	schema:mainEntityOfPage	<https://it.wikipedia.org/wiki/Ordelaffo_Falier>	.
+wd:Q954541	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Ordelafo_Faliero>	.
+wd:Q954541	schema:mainEntityOfPage	<https://pl.wikipedia.org/wiki/Ordelafo_Faliero>	.
+wd:Q954541	schema:mainEntityOfPage	<https://de.wikipedia.org/wiki/Ordelafo_Faliero>	.
+wd:Q954541	schema:mainEntityOfPage	<https://hu.wikipedia.org/wiki/Ordelafo_Faliero>	.
+wd:Q954541	schema:mainEntityOfPage	<https://tr.wikipedia.org/wiki/Ordelafo_Faliero>	.
+wd:Q954541	schema:mainEntityOfPage	<https://uk.wikipedia.org/wiki/%D0%9E%D1%80%D0%B4%D0%B5%D0%BB%D0%B0%D1%84%D0%BE_%D0%A4%D0%B0%D0%BB%D1%8C%D1%94%D1%80%D0%BE>	.
+wd:Q954541	schema:mainEntityOfPage	<https://fr.wikipedia.org/wiki/Ordelafo_Faliero>	.
+wd:Q954541	schema:mainEntityOfPage	<https://zh-min-nan.wikipedia.org/wiki/Ordelaffo_Falier>	.
+wd:Q954541	schema:mainEntityOfPage	<https://he.wikipedia.org/wiki/%D7%90%D7%95%D7%A8%D7%93%D7%9C%D7%90%D7%A4%D7%95_%D7%A4%D7%90%D7%9C%D7%99%D7%99%D7%A8%D7%95>	.
+wd:Q954541	schema:mainEntityOfPage	<https://ru.wikipedia.org/wiki/%D0%A4%D0%B0%D0%BB%D1%8C%D0%B5%D1%80,_%D0%9E%D1%80%D0%B4%D0%B5%D0%BB%D0%B0%D1%84%D1%84%D0%BE>	.
+wd:Q954541	schema:mainEntityOfPage	<https://id.wikipedia.org/wiki/Ordelafo_Faliero>	.
+wd:Q954541	schema:mainEntityOfPage	<https://el.wikipedia.org/wiki/%CE%9F%CF%81%CE%BD%CF%84%CE%B5%CE%BB%CE%AC%CF%86%CE%BF_%CE%A6%CE%B1%CE%BB%CE%B9%CE%AD%CF%81>	.
+wd:Q954541	schema:mainEntityOfPage	<https://sh.wikipedia.org/wiki/Ordelaffo_Falier>	.
+wd:Q954541	schema:mainEntityOfPage	<https://no.wikipedia.org/wiki/Ordelafo_Faliero>	.
+wd:Q954541	schema:mainEntityOfPage	<https://sv.wikipedia.org/wiki/Ordelafo_Faliero>	.
+wd:Q954541	schema:mainEntityOfPage	<https://commons.wikimedia.org/wiki/Category:Ordelafo_Faliero>	.
+wd:Q954541	rdf:type	schema:Person	.
+wd:Q954570	schema:gender	wd:Q6581097	. # IF	yago:Gender		
+wd:Q954570	schema:deathDate	"2009-10-09T00:00:00Z"^^xsd:dateTime	.
+wd:Q954570	schema:birthDate	"1937-06-06T00:00:00Z"^^xsd:dateTime	.
+wd:Q954570	yago:beliefSystem	wd:Q9592	. # IF	yago:BeliefSystem		
+wd:Q954570	schema:hasOccupation	wd:Q250867	. # IF	schema:Occupation	"1961-03-18T00:00:00Z"^^xsd:dateTime	
+wd:Q954570	schema:nationality	wd:Q7603765	. # IF	schema:Country	"1964-01-01T00:00:00Z"^^xsd:dateTime	"1974-01-01T00:00:00Z"^^xsd:dateTime
+wd:Q954570	schema:nationality	wd:Q6744657	. # IF	schema:Country	"1937-01-01T00:00:00Z"^^xsd:dateTime	"1964-01-01T00:00:00Z"^^xsd:dateTime
+wd:Q954570	schema:nationality	wd:Q233	. # IF	schema:Country	"1974-01-01T00:00:00Z"^^xsd:dateTime	
+wd:Q954570	schema:deathPlace	wd:Q585187	. # IF	schema:Place		
+wd:Q954570	schema:birthPlace	wd:Q267431	. # IF	schema:Place		
+wd:Q954570	schema:knowsLanguage	wd:Q9166	. # IF	schema:Language		
+wd:Q954570	rdfs:label	"Francis Baldacchino"@ga	.
+wd:Q954570	rdfs:label	"فرانسيس بالداشينو"@arz	.
+wd:Q954570	rdfs:label	"Francis Baldacchino"@cy	.
+wd:Q954570	rdfs:label	"Francis Baldacchino"@nl	.
+wd:Q954570	rdfs:label	"Francis Baldacchino"@fr	.
+wd:Q954570	rdfs:label	"Francis Baldacchino"@ast	.
+wd:Q954570	rdfs:label	"Francis Baldacchino"@sq	.
+wd:Q954570	rdfs:label	"Francis Baldacchino"@en	.
+wd:Q954570	rdfs:label	"Francis Baldacchino"@es	.
+wd:Q954570	rdfs:label	"Francis Baldacchino"@pl	.
+wd:Q954570	rdfs:label	"Francis Baldacchino"@de	.
+wd:Q954570	rdfs:label	"Francis Baldacchino"@sl	.
+wd:Q954570	rdfs:comment	"Évêque catholique romain"@fr	.
+wd:Q954570	rdfs:comment	"Roman Catholic bishop (1937-2009)"@en	.
+wd:Q954570	rdfs:comment	"sacerdote católicu maltés (1937–2009)"@ast	.
+wd:Q954570	rdfs:comment	"priester uit Malta (1937-2009)"@nl	.
+wd:Q954570	rdfs:comment	"كهنوت مالطي"@ar	.
+wd:Q954570	rdfs:comment	"maltesischer Ordensgeistlicher, römisch-katholischer Bischof von Caicó"@de	.
+wd:Q954570	rdfs:comment	"maltański ksiądz katolicki"@pl	.
+wd:Q954570	rdfs:comment	"قسيس كاتوليك من مالطا"@arz	.
+wd:Q954570	rdfs:comment	"easpag Caitliceach"@ga	.
+wd:Q954570	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Francis_Baldacchino>	.
+wd:Q954570	schema:mainEntityOfPage	<https://pl.wikipedia.org/wiki/Francis_Baldacchino>	.
+wd:Q954570	schema:mainEntityOfPage	<https://arz.wikipedia.org/wiki/%D9%81%D8%B1%D8%A7%D9%86%D8%B3%D9%8A%D8%B3_%D8%A8%D8%A7%D9%84%D8%AF%D8%A7%D8%B4%D9%8A%D9%86%D9%88>	.
+wd:Q954570	schema:mainEntityOfPage	<https://de.wikipedia.org/wiki/Francis_Baldacchino>	.
+wd:Q954570	rdf:type	schema:Person	.
+wd:Q954571	schema:containedInPlace	wd:Q55	. # IF	schema:Place		
+wd:Q954571	schema:geo	"Point(5.805 50.8175)"^^geo:wktLiteral	.
+wd:Q954571	schema:area	"+60.5"^^xsd:decimal	.
+wd:Q954571	schema:url	<https://www.abmc.gov/cemeteries-memorials/europe/netherlands-american-cemetery>	.
+wd:Q954571	rdfs:label	"オランダ米国人墓地"@ja	.
+wd:Q954571	rdfs:label	"Amerikaanse Begraafplaats Margraten"@nl	.
+wd:Q954571	rdfs:label	"Netherlands American Cemetery and Memorial"@de	.
+wd:Q954571	rdfs:label	"Netherlands American Cemetery"@en	.
+wd:Q954571	rdfs:label	"Hollandiai amerikai katonai temető"@hu	.
+wd:Q954571	rdfs:label	"בית הקברות הצבאי והאנדרטה האמריקניים בהולנד"@he	.
+wd:Q954571	rdfs:label	"cimetière américain de Margraten"@fr	.
+wd:Q954571	rdfs:comment	"مقبرة في آيسدن- مارخراتن، هولندا"@ar	.
+wd:Q954571	rdfs:comment	"American military cemetery in the Netherlands"@en	.
+wd:Q954571	rdfs:comment	"amerikanischer Soldatenfriedhof im Königreich der Niederlande"@de	.
+wd:Q954571	rdfs:comment	"begraafplaats voor Amerikaanse militairen gesneuveld in de Tweede Wereldoorlog, Nederland"@nl	.
+wd:Q954571	rdfs:comment	"בית קברות בהולנד"@he	.
+wd:Q954571	schema:alternateName	"Netherlands American Cemetery"@nl	.
+wd:Q954571	schema:alternateName	"Netherlands American Cemetery and Memorial"@nl	.
+wd:Q954571	schema:alternateName	"בית הקברות הצבאי האמריקני בהולנד"@he	.
+wd:Q954571	schema:alternateName	"Amerikaanse Militaire Erebegraafplaats"@nl	.
+wd:Q954571	schema:alternateName	"Militaire begraafplaats Margraten"@nl	.
+wd:Q954571	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Netherlands_American_Cemetery>	.
+wd:Q954571	schema:mainEntityOfPage	<https://he.wikipedia.org/wiki/%D7%91%D7%99%D7%AA_%D7%94%D7%A7%D7%91%D7%A8%D7%95%D7%AA_%D7%94%D7%A6%D7%91%D7%90%D7%99_%D7%95%D7%94%D7%90%D7%A0%D7%93%D7%A8%D7%98%D7%94_%D7%94%D7%90%D7%9E%D7%A8%D7%99%D7%A7%D7%A0%D7%99%D7%99%D7%9D_%D7%91%D7%94%D7%95%D7%9C%D7%A0%D7%93>	.
+wd:Q954571	schema:mainEntityOfPage	<https://hu.wikipedia.org/wiki/Hollandiai_amerikai_katonai_temet%C5%91>	.
+wd:Q954571	schema:mainEntityOfPage	<https://commons.wikimedia.org/wiki/Category:Netherlands_American_Cemetery_and_Memorial>	.
+wd:Q954571	schema:mainEntityOfPage	<https://de.wikipedia.org/wiki/Netherlands_American_Cemetery_and_Memorial>	.
+wd:Q954571	schema:mainEntityOfPage	<https://fr.wikipedia.org/wiki/Cimeti%C3%A8re_am%C3%A9ricain_de_Margraten>	.
+wd:Q954571	schema:mainEntityOfPage	<https://nl.wikipedia.org/wiki/Amerikaanse_Begraafplaats_Margraten>	.
+wd:Q954571	rdf:type	wd:Q39614	.
+wd:Q954582	schema:gender	wd:Q6581097	. # IF	yago:Gender		
+wd:Q954582	schema:hasOccupation	wd:Q3665646	. # IF	schema:Occupation		
+wd:Q954582	schema:memberOf	wd:Q162990	. # IF	schema:Organization		
+wd:Q954582	schema:memberOf	wd:Q6365002	. # IF	schema:Organization	"1977-01-01T00:00:00Z"^^xsd:dateTime	"1981-01-01T00:00:00Z"^^xsd:dateTime
+wd:Q954582	schema:memberOf	wd:Q36419	. # IF	schema:Organization		
+wd:Q954582	schema:memberOf	wd:Q167253	. # IF	schema:Organization		
+wd:Q954582	schema:memberOf	wd:Q976396	. # IF	schema:Organization		
+wd:Q954582	schema:memberOf	wd:Q810279	. # IF	schema:Organization		
+wd:Q954582	schema:birthDate	"1959-02-03T00:00:00Z"^^xsd:dateTime	.
+wd:Q954582	schema:nationality	wd:Q30	. # IF	schema:Country		
+wd:Q954582	schema:birthPlace	wd:Q1297	. # IF	schema:Place		
+wd:Q954582	schema:alumniOf	wd:Q52413	. # IF	schema:Organization		
+wd:Q954582	schema:alumniOf	wd:Q7998138	. # IF	schema:Organization		
+wd:Q954582	rdfs:label	"Darnell Valentine"@en	.
+wd:Q954582	rdfs:label	"دارنيل فالنتاين"@ar	.
+wd:Q954582	rdfs:label	"Darnell Valentine"@sv	.
+wd:Q954582	rdfs:label	"Darnell Valentine"@sl	.
+wd:Q954582	rdfs:label	"Darnell Valentine"@nn	.
+wd:Q954582	rdfs:label	"Darnell Valentine"@nl	.
+wd:Q954582	rdfs:label	"Darnell Valentine"@es	.
+wd:Q954582	rdfs:label	"Darnell Valentine"@nb	.
+wd:Q954582	rdfs:label	"Darnell Valentine"@fr	.
+wd:Q954582	rdfs:label	"Darnell Valentine"@de	.
+wd:Q954582	rdfs:label	"Darnell Valentine"@ga	.
+wd:Q954582	rdfs:label	"دارنيل فالنتاين"@arz	.
+wd:Q954582	rdfs:label	"Darnell Valentine"@it	.
+wd:Q954582	rdfs:label	"Darnell Valentine"@ast	.
+wd:Q954582	rdfs:label	"Darnell Valentine"@yo	.
+wd:Q954582	rdfs:label	"Darnell Valentine"@ca	.
+wd:Q954582	rdfs:label	"Darnell Valentine"@da	.
+wd:Q954582	rdfs:label	"Darnell Valentine"@sq	.
+wd:Q954582	rdfs:comment	"بازیکن بسکتبال و ورزشکار آمریکایی"@fa	.
+wd:Q954582	rdfs:comment	"Amerikan basketbol oyuncusu"@tr	.
+wd:Q954582	rdfs:comment	"baloncestista estadounidense"@gl	.
+wd:Q954582	rdfs:comment	"jugador de bàsquet estatunidenc"@ca	.
+wd:Q954582	rdfs:comment	"amerykański koszykarz"@pl	.
+wd:Q954582	rdfs:comment	"baschetbalist american"@ro	.
+wd:Q954582	rdfs:comment	"Американски кошаркар"@mk	.
+wd:Q954582	rdfs:comment	"yhdysvaltalainen koripalloilija"@fi	.
+wd:Q954582	rdfs:comment	"cispheileadóir Meiriceánach"@ga	.
+wd:Q954582	rdfs:comment	"Ameerika Ühendriikide korvpallur"@et	.
+wd:Q954582	rdfs:comment	"美国篮球运动员"@zh-hans	.
+wd:Q954582	rdfs:comment	"মার্কিন বাস্কেটবল খেলোয়াড়"@bn	.
+wd:Q954582	rdfs:comment	"שחקן כדורסל אמריקאי"@he	.
+wd:Q954582	rdfs:comment	"американский баскетболист"@ru	.
+wd:Q954582	rdfs:comment	"Amerikaans basketballer"@nl	.
+wd:Q954582	rdfs:comment	"американський баскетболіст"@uk	.
+wd:Q954582	rdfs:comment	"لاعب كرة سلة أمريكي"@ar	.
+wd:Q954582	rdfs:comment	"cestista statunitense"@it	.
+wd:Q954582	rdfs:comment	"basketbollist amerikan"@sq	.
+wd:Q954582	rdfs:comment	"xugador de baloncestu estauxunidense"@ast	.
+wd:Q954582	rdfs:comment	"joueur de basket-ball américain"@fr	.
+wd:Q954582	rdfs:comment	"baloncestista estadounidense"@es	.
+wd:Q954582	rdfs:comment	"Agbábọ́ọ̀lù alápẹ̀rẹ̀ ọmọ orílẹ̀-èdè Amẹ́ríkà"@yo	.
+wd:Q954582	rdfs:comment	"saskibaloi jokalari estatubatuarra"@eu	.
+wd:Q954582	rdfs:comment	"American basketball player"@en	.
+wd:Q954582	rdfs:comment	"basquetebolista estadunidense"@pt	.
+wd:Q954582	schema:alternateName	"Darnell Terrell Valentine"@es	.
+wd:Q954582	schema:alternateName	"Darnell Terrell Valentine"@en	.
+wd:Q954582	schema:alternateName	"Darnell Terrell Valentine"@it	.
+wd:Q954582	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Darnell_Valentine>	.
+wd:Q954582	schema:mainEntityOfPage	<https://arz.wikipedia.org/wiki/%D8%AF%D8%A7%D8%B1%D9%86%D9%8A%D9%84_%D9%81%D8%A7%D9%84%D9%86%D8%AA%D8%A7%D9%8A%D9%86>	.
+wd:Q954582	schema:mainEntityOfPage	<https://it.wikipedia.org/wiki/Darnell_Valentine>	.
+wd:Q954582	schema:mainEntityOfPage	<https://es.wikipedia.org/wiki/Darnell_Valentine>	.
+wd:Q954582	schema:mainEntityOfPage	<https://ar.wikipedia.org/wiki/%D8%AF%D8%A7%D8%B1%D9%86%D9%8A%D9%84_%D9%81%D8%A7%D9%84%D9%86%D8%AA%D8%A7%D9%8A%D9%86>	.
+wd:Q954582	schema:mainEntityOfPage	<https://fr.wikipedia.org/wiki/Darnell_Valentine>	.
+wd:Q954582	rdf:type	schema:Person	.
+wd:Q954591	schema:gender	wd:Q6581097	. # IF	yago:Gender		
+wd:Q954591	schema:deathPlace	wd:Q16557	. # IF	schema:Place		
+wd:Q954591	schema:nationality	wd:Q30	. # IF	schema:Country		
+wd:Q954591	schema:deathDate	"1949-09-03T00:00:00Z"^^xsd:dateTime	.
+wd:Q954591	schema:birthDate	"1880-03-30T00:00:00Z"^^xsd:dateTime	.
+wd:Q954591	schema:birthPlace	wd:Q443852	. # IF	schema:Place		
+wd:Q954591	schema:award	wd:Q1774648	. # IF	yago:Award		
+wd:Q954591	schema:award	wd:Q17231624	. # IF	yago:Award		
+wd:Q954591	schema:alumniOf	wd:Q635078	. # IF	schema:Organization		
+wd:Q954591	schema:hasOccupation	wd:Q4991371	. # IF	schema:Occupation		
+wd:Q954591	schema:knowsLanguage	wd:Q1860	. # IF	schema:Language		
+wd:Q954591	rdfs:label	"ウォルター・ショート"@ja	.
+wd:Q954591	rdfs:label	"Walter Short"@ast	.
+wd:Q954591	rdfs:label	"Walter Short"@pl	.
+wd:Q954591	rdfs:label	"วอลเทอร์ ชอร์ต"@th	.
+wd:Q954591	rdfs:label	"Walter Short"@ga	.
+wd:Q954591	rdfs:label	"Walter Short"@af	.
+wd:Q954591	rdfs:label	"Walter Short"@nb	.
+wd:Q954591	rdfs:label	"Walter Short"@ca	.
+wd:Q954591	rdfs:label	"Walter Short"@nl	.
+wd:Q954591	rdfs:label	"Walter Short"@fr	.
+wd:Q954591	rdfs:label	"Walter Short"@da	.
+wd:Q954591	rdfs:label	"Walter Short"@es	.
+wd:Q954591	rdfs:label	"Walter Short"@cs	.
+wd:Q954591	rdfs:label	"Walter Short"@sv	.
+wd:Q954591	rdfs:label	"Walter Short"@tr	.
+wd:Q954591	rdfs:label	"Walter Short"@en	.
+wd:Q954591	rdfs:label	"Walter Short"@fi	.
+wd:Q954591	rdfs:label	"Walter Short"@nn	.
+wd:Q954591	rdfs:label	"Walter C. Short"@de	.
+wd:Q954591	rdfs:label	"沃爾特·肖特"@zh	.
+wd:Q954591	rdfs:label	"Шорт, Уолтер"@ru	.
+wd:Q954591	rdfs:label	"Walter Short"@it	.
+wd:Q954591	rdfs:label	"والتر شورت"@ar	.
+wd:Q954591	rdfs:label	"Walter Short"@sq	.
+wd:Q954591	rdfs:label	"Walter Short"@hu	.
+wd:Q954591	rdfs:comment	"soldado estadounidense"@es	.
+wd:Q954591	rdfs:comment	"United States general (1880-1949)"@en	.
+wd:Q954591	rdfs:comment	"soldado estadounidense"@gl	.
+wd:Q954591	rdfs:comment	"America linjima nira ŋun nyɛ doo"@dag	.
+wd:Q954591	rdfs:comment	"soldat estatunidenc"@ca	.
+wd:Q954591	rdfs:comment	"général américain"@fr	.
+wd:Q954591	rdfs:comment	"Amerikaans soldaat (1880-1949)"@nl	.
+wd:Q954591	rdfs:comment	"นายพลอเมริกัน"@th	.
+wd:Q954591	rdfs:comment	"soldadu estatubatuarra"@eu	.
+wd:Q954591	rdfs:comment	"американский генерал"@ru	.
+wd:Q954591	rdfs:comment	"az amerikai hadsereg tábornoka, 2. vh"@hu	.
+wd:Q954591	rdfs:comment	"generale statunitense"@it	.
+wd:Q954591	rdfs:comment	"US-amerikanischer General und Befehlshaber der Armeestreitkräfte während des Angriffs auf Pearl Harbor"@de	.
+wd:Q954591	rdfs:comment	"ginearál Meiriceánach"@ga	.
+wd:Q954591	rdfs:comment	"soldado norte-americano"@pt	.
+wd:Q954591	rdfs:comment	"soldáu estauxunidense (1880–1949)"@ast	.
+wd:Q954591	rdfs:comment	"amerykański generał"@pl	.
+wd:Q954591	schema:alternateName	"沃尔特·肖特"@zh	.
+wd:Q954591	schema:alternateName	"Walter C. Short"@en	.
+wd:Q954591	schema:alternateName	"Walter Campbell Short"@tr	.
+wd:Q954591	schema:alternateName	"Walter Campbell Short"@pl	.
+wd:Q954591	schema:alternateName	"Walter Campbell Short"@fi	.
+wd:Q954591	schema:alternateName	"Walter Short"@de	.
+wd:Q954591	schema:alternateName	"Walter Campbell Short"@en	.
+wd:Q954591	schema:alternateName	"Walter Campbell Short"@es	.
+wd:Q954591	schema:alternateName	"Walter Campbell Short"@af	.
+wd:Q954591	schema:alternateName	"Walter Campbell Short"@de	.
+wd:Q954591	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Walter_Short>	.
+wd:Q954591	schema:mainEntityOfPage	<https://no.wikipedia.org/wiki/Walter_Short>	.
+wd:Q954591	schema:mainEntityOfPage	<https://ja.wikipedia.org/wiki/%E3%82%A6%E3%82%A9%E3%83%AB%E3%82%BF%E3%83%BC%E3%83%BB%E3%82%B7%E3%83%A7%E3%83%BC%E3%83%88>	.
+wd:Q954591	schema:mainEntityOfPage	<https://it.wikipedia.org/wiki/Walter_Short>	.
+wd:Q954591	schema:mainEntityOfPage	<https://hu.wikipedia.org/wiki/Walter_Short>	.
+wd:Q954591	schema:mainEntityOfPage	<https://commons.wikimedia.org/wiki/Category:Walter_Short>	.
+wd:Q954591	schema:mainEntityOfPage	<https://es.wikipedia.org/wiki/Walter_Short>	.
+wd:Q954591	schema:mainEntityOfPage	<https://ca.wikipedia.org/wiki/Walter_Short>	.
+wd:Q954591	schema:mainEntityOfPage	<https://fi.wikipedia.org/wiki/Walter_Short>	.
+wd:Q954591	schema:mainEntityOfPage	<https://de.wikipedia.org/wiki/Walter_C._Short>	.
+wd:Q954591	schema:mainEntityOfPage	<https://af.wikipedia.org/wiki/Walter_Short>	.
+wd:Q954591	schema:mainEntityOfPage	<https://fr.wikipedia.org/wiki/Walter_Short>	.
+wd:Q954591	schema:mainEntityOfPage	<https://pl.wikipedia.org/wiki/Walter_Short>	.
+wd:Q954591	schema:mainEntityOfPage	<https://ru.wikipedia.org/wiki/%D0%A8%D0%BE%D1%80%D1%82,_%D0%A3%D0%BE%D0%BB%D1%82%D0%B5%D1%80>	.
+wd:Q954591	schema:mainEntityOfPage	<https://cs.wikipedia.org/wiki/Walter_Short>	.
+wd:Q954591	schema:mainEntityOfPage	<https://ar.wikipedia.org/wiki/%D9%88%D8%A7%D9%84%D8%AA%D8%B1_%D8%B4%D9%88%D8%B1%D8%AA>	.
+wd:Q954591	schema:mainEntityOfPage	<https://tr.wikipedia.org/wiki/Walter_Short>	.
+wd:Q954591	rdf:type	schema:Person	.
+wd:Q954617	schema:parentTaxon	wd:Q159372	. # IF	schema:Taxon		
+wd:Q954617	rdfs:label	"Mimulus angustatus"@uk	.
+wd:Q954617	rdfs:label	"Mimulus angustatus"@pl	.
+wd:Q954617	rdfs:label	"Mimulus angustatus"@ie	.
+wd:Q954617	rdfs:label	"Mimulus angustatus"@ast	.
+wd:Q954617	rdfs:label	"Mimulus angustatus"@an	.
+wd:Q954617	rdfs:label	"Mimulus angustatus"@vo	.
+wd:Q954617	rdfs:label	"Mimulus angustatus"@vi	.
+wd:Q954617	rdfs:label	"Mimulus angustatus"@pt	.
+wd:Q954617	rdfs:label	"Mimulus angustatus"@eu	.
+wd:Q954617	rdfs:label	"Mimulus angustatus"@bg	.
+wd:Q954617	rdfs:label	"Mimulus angustatus"@en	.
+wd:Q954617	rdfs:label	"Mimulus angustatus"@ia	.
+wd:Q954617	rdfs:label	"Mimulus angustatus"@io	.
+wd:Q954617	rdfs:label	"Mimulus angustatus"@gl	.
+wd:Q954617	rdfs:label	"Mimulus angustatus"@fi	.
+wd:Q954617	rdfs:label	"Mimulus angustatus"@eo	.
+wd:Q954617	rdfs:label	"Mimulus angustatus"@ro	.
+wd:Q954617	rdfs:label	"Mimulus angustatus"@oc	.
+wd:Q954617	rdfs:label	"Mimulus angustatus"@ceb	.
+wd:Q954617	rdfs:label	"Mimulus angustatus"@es	.
+wd:Q954617	rdfs:label	"Mimulus angustatus"@de	.
+wd:Q954617	rdfs:label	"Mimulus angustatus"@ru	.
+wd:Q954617	rdfs:label	"Mimulus angustatus"@la	.
+wd:Q954617	rdfs:label	"Mimulus angustatus"@it	.
+wd:Q954617	rdfs:label	"Mimulus angustatus"@ext	.
+wd:Q954617	rdfs:label	"Mimulus angustatus"@war	.
+wd:Q954617	rdfs:label	"Mimulus angustatus"@sq	.
+wd:Q954617	rdfs:label	"Mimulus angustatus"@ga	.
+wd:Q954617	rdfs:label	"Mimulus angustatus"@pt-br	.
+wd:Q954617	rdfs:label	"Mimulus angustatus"@fr	.
+wd:Q954617	rdfs:label	"Mimulus angustatus"@ca	.
+wd:Q954617	rdfs:label	"Mimulus angustatus"@nl	.
+wd:Q954617	rdfs:comment	"բույսերի տեսակ"@hy	.
+wd:Q954617	rdfs:comment	"specie de plante"@ro	.
+wd:Q954617	rdfs:comment	"نوع من النباتات"@ar	.
+wd:Q954617	rdfs:comment	"lloj i bimëve"@sq	.
+wd:Q954617	rdfs:comment	"species of plant"@en	.
+wd:Q954617	rdfs:comment	"вид растений"@ru	.
+wd:Q954617	rdfs:comment	"вид растение"@bg	.
+wd:Q954617	rdfs:comment	"вид рослин"@uk	.
+wd:Q954617	rdfs:comment	"מין של צמח"@he	.
+wd:Q954617	rdfs:comment	"druh rostliny"@cs	.
+wd:Q954617	rdfs:comment	"soort uit het geslacht Mimulus"@nl	.
+wd:Q954617	rdfs:comment	"specie di pianta"@it	.
+wd:Q954617	rdfs:comment	"especie de planta"@ast	.
+wd:Q954617	rdfs:comment	"espècie de planta"@ca	.
+wd:Q954617	rdfs:comment	"loài thực vật"@vi	.
+wd:Q954617	rdfs:comment	"speco di planto"@io	.
+wd:Q954617	rdfs:comment	"Art der Gattung Gauklerblumen (Mimulus)"@de	.
+wd:Q954617	rdfs:comment	"উদ্ভিদের প্রজাতি"@bn	.
+wd:Q954617	rdfs:comment	"especie de planta"@es	.
+wd:Q954617	rdfs:comment	"especie de planta"@gl	.
+wd:Q954617	schema:mainEntityOfPage	<https://fr.wikipedia.org/wiki/Mimulus_angustatus>	.
+wd:Q954617	rdf:type	schema:Taxon	.
+wd:Q954634	schema:parentTaxon	wd:Q10631	. # IF	schema:Taxon		
+wd:Q954634	rdfs:label	"Mecysmauchenius"@tr	.
+wd:Q954634	rdfs:label	"Mecysmauchenius"@io	.
+wd:Q954634	rdfs:label	"Mecysmauchenius"@war	.
+wd:Q954634	rdfs:label	"Mecysmauchenius"@oc	.
+wd:Q954634	rdfs:label	"Mecysmauchenius"@ie	.
+wd:Q954634	rdfs:label	"Mecysmauchenius"@fr	.
+wd:Q954634	rdfs:label	"Mecysmauchenius"@sv	.
+wd:Q954634	rdfs:label	"Mecysmauchenius"@uk	.
+wd:Q954634	rdfs:label	"Mecysmauchenius"@ga	.
+wd:Q954634	rdfs:label	"Mecysmauchenius"@ca	.
+wd:Q954634	rdfs:label	"Mecysmauchenius"@es	.
+wd:Q954634	rdfs:label	"Mecysmauchenius"@nl	.
+wd:Q954634	rdfs:label	"Mecysmauchenius"@eu	.
+wd:Q954634	rdfs:label	"Mecysmauchenius"@vi	.
+wd:Q954634	rdfs:label	"Mecysmauchenius"@ia	.
+wd:Q954634	rdfs:label	"Mecysmauchenius"@ro	.
+wd:Q954634	rdfs:label	"Mecysmauchenius"@it	.
+wd:Q954634	rdfs:label	"Mecysmauchenius"@ru	.
+wd:Q954634	rdfs:label	"Mecysmauchenius"@pt	.
+wd:Q954634	rdfs:label	"Mecysmauchenius"@eo	.
+wd:Q954634	rdfs:label	"Mecysmauchenius"@fi	.
+wd:Q954634	rdfs:label	"Mecysmauchenius"@pl	.
+wd:Q954634	rdfs:label	"Mecysmauchenius"@vo	.
+wd:Q954634	rdfs:label	"Mecysmauchenius"@gl	.
+wd:Q954634	rdfs:label	"Mecysmauchenius"@an	.
+wd:Q954634	rdfs:label	"Mecysmauchenius"@ext	.
+wd:Q954634	rdfs:label	"Mecysmauchenius"@de	.
+wd:Q954634	rdfs:label	"Mecysmauchenius"@ast	.
+wd:Q954634	rdfs:label	"Mecysmauchenius"@pt-br	.
+wd:Q954634	rdfs:label	"Mecysmauchenius"@bg	.
+wd:Q954634	rdfs:label	"Mecysmauchenius"@en	.
+wd:Q954634	rdfs:label	"Mecysmauchenius"@ceb	.
+wd:Q954634	rdfs:label	"Mecysmauchenius"@sq	.
+wd:Q954634	rdfs:label	"Mecysmauchenius"@la	.
+wd:Q954634	rdfs:comment	"genus of arachnids"@en	.
+wd:Q954634	rdfs:comment	"gen de arahnide"@ro	.
+wd:Q954634	rdfs:comment	"xéneru d'arácnidos"@ast	.
+wd:Q954634	rdfs:comment	"genre d'araignées"@fr	.
+wd:Q954634	rdfs:comment	"سرده‌ای از عنکبوت‌های گردن‌دراز"@fa	.
+wd:Q954634	rdfs:comment	"genus arachnida"@id	.
+wd:Q954634	rdfs:comment	"geslacht uit de familie Mecysmaucheniidae"@nl	.
+wd:Q954634	rdfs:comment	"рід павукоподібних"@uk	.
+wd:Q954634	rdfs:comment	"অ্যারাকনিডের গণ"@bn	.
+wd:Q954634	rdfs:comment	"gènere d'aràcnids"@ca	.
+wd:Q954634	rdfs:comment	"géineas araicnidí"@ga	.
+wd:Q954634	rdfs:comment	"род паякообразни"@bg	.
+wd:Q954634	rdfs:comment	"edderkoppslekt"@nb	.
+wd:Q954634	rdfs:comment	"rod pavoukovců"@cs	.
+wd:Q954634	rdfs:comment	"جنس من العنكبوتيات"@ar	.
+wd:Q954634	rdfs:comment	"edderkoppslekt"@nn	.
+wd:Q954634	rdfs:comment	"Gattung der Familie Mecysmaucheniidae"@de	.
+wd:Q954634	rdfs:comment	"סוג של עכביש"@he	.
+wd:Q954634	rdfs:comment	"género de arácnidos"@es	.
+wd:Q954634	rdfs:comment	"genere di ragni"@it	.
+wd:Q954634	rdfs:comment	"genero di aranei"@io	.
+wd:Q954634	schema:mainEntityOfPage	<https://war.wikipedia.org/wiki/Mecysmauchenius>	.
+wd:Q954634	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Mecysmauchenius>	.
+wd:Q954634	schema:mainEntityOfPage	<https://ceb.wikipedia.org/wiki/Mecysmauchenius>	.
+wd:Q954634	schema:mainEntityOfPage	<https://sv.wikipedia.org/wiki/Mecysmauchenius>	.
+wd:Q954634	schema:mainEntityOfPage	<https://vi.wikipedia.org/wiki/Mecysmauchenius>	.
+wd:Q954634	schema:mainEntityOfPage	<https://es.wikipedia.org/wiki/Mecysmauchenius>	.
+wd:Q954634	schema:mainEntityOfPage	<https://fr.wikipedia.org/wiki/Mecysmauchenius>	.
+wd:Q954634	schema:mainEntityOfPage	<https://nl.wikipedia.org/wiki/Mecysmauchenius>	.
+wd:Q954634	schema:mainEntityOfPage	<https://tr.wikipedia.org/wiki/Mecysmauchenius>	.
+wd:Q954634	schema:mainEntityOfPage	<https://ca.wikipedia.org/wiki/Mecysmauchenius>	.
+wd:Q954634	rdf:type	schema:Taxon	.
+wd:Q954657	schema:birthPlace	wd:Q182744	. # IF	schema:Place		
+wd:Q954657	schema:birthDate	"1810-02-20T00:00:00Z"^^xsd:dateTime	.
+wd:Q954657	schema:deathDate	"1883-12-14T00:00:00Z"^^xsd:dateTime	.
+wd:Q954657	schema:deathPlace	wd:Q90	. # IF	schema:Place		
+wd:Q954657	schema:memberOf	wd:Q329464	. # IF	schema:Organization		
+wd:Q954657	schema:memberOf	wd:Q161806	. # IF	schema:Organization	"1878-06-13T00:00:00Z"^^xsd:dateTime	
+wd:Q954657	schema:memberOf	wd:Q337543	. # IF	schema:Organization	"1871-01-01T00:00:00Z"^^xsd:dateTime	
+wd:Q954657	schema:nationality	wd:Q142	. # IF	schema:Country		
+wd:Q954657	schema:hasOccupation	wd:Q201788	. # IF	schema:Occupation		
+wd:Q954657	schema:hasOccupation	wd:Q82955	. # IF	schema:Occupation		
+wd:Q954657	schema:hasOccupation	wd:Q36180	. # IF	schema:Occupation		
+wd:Q954657	schema:knowsLanguage	wd:Q150	. # IF	schema:Language		
+wd:Q954657	schema:award	wd:Q3113738	. # IF	yago:Award	"1859-01-01T00:00:00Z"^^xsd:dateTime	"1859-01-01T00:00:00Z"^^xsd:dateTime
+wd:Q954657	schema:gender	wd:Q6581097	. # IF	yago:Gender		
+wd:Q954657	schema:mainEntityOfPage	<https://uk.wikipedia.org/wiki/%D0%90%D0%BD%D1%80%D1%96_%D0%9C%D0%B0%D1%80%D1%82%D0%B5%D0%BD>	.
+wd:Q954657	schema:mainEntityOfPage	<https://nl.wikipedia.org/wiki/Henri_Martin_(historicus)>	.
+wd:Q954657	schema:mainEntityOfPage	<https://ru.wikipedia.org/wiki/%D0%9C%D0%B0%D1%80%D1%82%D0%B5%D0%BD,_%D0%90%D0%BD%D1%80%D0%B8>	.
+wd:Q954657	schema:mainEntityOfPage	<https://it.wikipedia.org/wiki/Henri_Martin>	.
+wd:Q954657	schema:mainEntityOfPage	<https://fi.wikipedia.org/wiki/Henri_Martin>	.
+wd:Q954657	schema:mainEntityOfPage	<https://de.wikipedia.org/wiki/Henri_Martin_(Historiker)>	.
+wd:Q954657	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Henri_Martin_(historian)>	.
+wd:Q954657	schema:mainEntityOfPage	<https://en.wikisource.org/wiki/Author:Henri_Martin>	.
+wd:Q954657	schema:mainEntityOfPage	<https://pl.wikipedia.org/wiki/Henri_Martin>	.
+wd:Q954657	schema:mainEntityOfPage	<https://pt.wikipedia.org/wiki/Henri_Martin_(historiador)>	.
+wd:Q954657	schema:mainEntityOfPage	<https://ar.wikipedia.org/wiki/%D9%87%D9%86%D8%B1%D9%8A_%D9%85%D8%A7%D8%B1%D8%AA%D9%86_(%D8%B3%D9%8A%D8%A7%D8%B3%D9%8A)>	.
+wd:Q954657	schema:mainEntityOfPage	<https://tr.wikipedia.org/wiki/Henri_Martin>	.
+wd:Q954657	schema:mainEntityOfPage	<https://fr.wikipedia.org/wiki/Henri_Martin_(historien)>	.
+wd:Q954657	schema:mainEntityOfPage	<https://it.wikisource.org/wiki/Autore:Henri_Martin>	.
+wd:Q954657	schema:mainEntityOfPage	<https://fr.wikisource.org/wiki/Auteur:Henri_Martin>	.
+wd:Q954657	rdf:type	schema:Person	.
