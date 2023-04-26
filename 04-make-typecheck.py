@@ -24,7 +24,7 @@ Algorithm:
    
 """
 
-TEST=False
+TEST=True
 FOLDER="test-data/04-make-typecheck/" if TEST else "yago-data/"
 
 ##########################################################################
@@ -162,6 +162,7 @@ with TsvUtils.Timer("Step 04: Type-checking YAGO"):
         if len(tuple)>2 and tuple[1]=="rdf:type":
             yagoInstances[tuple[0]].add(tuple[2])
     
+    count=0
     with TsvUtils.TsvFileWriter(FOLDER+"04-yago-facts-to-rename.tsv") as out:
         with TsvUtils.TsvFileWriter(FOLDER+"04-yago-ids.tsv") as idsFile:
             currentTopic=""
@@ -194,18 +195,22 @@ with TsvUtils.Timer("Step 04: Type-checking YAGO"):
                 if classes is None or any(instanceOf(split[2],c) for c in classes):
                     out.write(split[0], split[1], split[2], ". #", startDate, endDate)
                     wroteFacts=True
+                    count+=1
                 elif any(isSubclassOf(split[2],c) for c in classes):
                     newObject=createGenericInstance(split[2], out)
                     out.write(split[0], split[1], newObject, ". #", startDate, endDate)
+                    count+=1
                     wroteFacts=True
                     
             # Also flush the ids of the last entity...
             if wroteFacts:
                 writeYagoId(idsFile, currentTopic, currentLabel, currentWikipediaPage)
 
+    print("  Info: Number of facts:",count)    
     # Write out classes that did not get any instances    
     for c in set([k for s in yagoInstances.values() for k in s]):
         removeClass(c)        
+    print("  Info: Number of classes that don't have instances:",len(yagoTaxonomyUp))
     with TsvUtils.TsvFileWriter(FOLDER+"04-yago-bad-classes.tsv") as badClassFile:
         for c in yagoTaxonomyUp:
             badClassFile.write(c)

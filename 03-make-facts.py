@@ -309,7 +309,34 @@ def checkRange(p, o, yagoSchema):
     if not propertyNode:
         return False
     return checkRangePropertyNode(propertyNode, o, yagoSchema)
-    
+
+###########################################################################
+#           Removing shortcuts
+###########################################################################
+
+def removeShortcutsAmong(directClasses, currentClass, yagoTaxonomyUp):
+    """ Removes from direct classes all those that are equal to currentClass or its super-classes """
+    if currentClass in directClasses:
+        directClasses.remove(currentClass)
+        if len(directClasses)<=1:
+            return        
+    for s in yagoTaxonomyUp.get(currentClass,[]):
+        removeShortcutsAmong(directClasses, s, yagoTaxonomyUp)
+        
+def removeShortcuts(entityFacts, yagoTaxonomyUp):
+    """ Removes all shortcuts in the list """
+    directClasses=entityFacts.objects(None, Prefixes.rdfType)
+    if len(directClasses)<=1:
+        return
+    for s in directClasses:
+        for ss in yagoTaxonomyUp.get(s,[]):
+            removeShortcutsAmong(directClasses, ss, yagoTaxonomyUp)
+    for t in entityFacts.triplesWithPredicate(Prefixes.rdfType):
+        subject=t[0]
+        entityFacts.remove(t)
+    for c in directClasses:
+        entityFacts.add((subject, Prefixes.rdfType, c))
+   
 ##########################################################################
 #             Main method
 ##########################################################################
@@ -357,7 +384,9 @@ class treatWikidataEntity():
         
         if not cleanClasses(entityFacts, self.yagoSchema, self.yagoTaxonomyUp):
             return
-             
+        
+        removeShortcuts(entityFacts, self.yagoTaxonomyUp)
+        
         classes = getClasses(entityFacts, self.yagoTaxonomyUp)        
         if anyDisjoint(classes, self.disjointClasses):
             return
@@ -395,13 +424,16 @@ if __name__ == '__main__':
     with TsvUtils.Timer("Step 03: Creating YAGO facts"):
         TurtleUtils.visitWikidata(WIKIDATA_FILE, treatWikidataEntity) 
         print("  Collecting results...")
+        count=0
         with open(FOLDER+"03-yago-facts-to-type-check.tsv", "wb") as writer:
             for file in glob.glob(FOLDER+"03-yago-facts-to-type-check-*.tmp"):
                 print("    Reading",file)
                 with open(file, "rb") as reader:
                     for line in reader:
                         writer.write(line)
+                        count+=1
         print("  done")
+        print("  Info: Number of facts:",count)
         
         print("  Deleting temporary files...", end="", flush=True)
         for file in set(glob.glob(FOLDER+"03-yago-facts-to-type-check-*.tmp")):

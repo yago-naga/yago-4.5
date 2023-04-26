@@ -133,6 +133,29 @@ def addSubClass(superClass, subClass):
     
 
 ###########################################################################
+#           Removing shortcuts
+###########################################################################
+
+def removeShortcutParentsOf(startClass, currentClass):
+    """ Removes direct superclasses of startClass that are equal to currentClass or its super-classes """
+    if currentClass in yagoTaxonomyUp.get(startClass,[]):
+        yagoTaxonomyUp[startClass].remove(currentClass)
+        yagoTaxonomyDown[currentClass].remove(startClass)
+        if len(yagoTaxonomyUp[startClass])==1:
+            return        
+    for s in yagoTaxonomyUp.get(currentClass,[]):
+        removeShortcutParentsOf(startClass, s)
+        
+def removeShortcuts():
+    """ Removes all shortcut links in the YAGO taxonomy """
+    for c in list(yagoTaxonomyUp):
+        if len(yagoTaxonomyUp.get(c,[]))>1:
+            for s in list(yagoTaxonomyUp.get(c,[])):
+                for ss in yagoTaxonomyUp.get(s,[]):
+                    removeShortcutParentsOf(c, ss)
+            
+            
+###########################################################################
 #           Removing classes that subclass two disjoint top-level classes
 ###########################################################################
     
@@ -185,18 +208,28 @@ if __name__ == '__main__':
                 if key not in wikidataTaxonomyDown:
                     wikidataTaxonomyDown[key]=set()
                 wikidataTaxonomyDown[key].update(result[key])
+        print("  Info: Total number of Wikidata classes and taxonomic links:", len(wikidataTaxonomyDown), " and ", sum(len(wikidataTaxonomyDown[s]) for s in wikidataTaxonomyDown))        
         
         # Now we merge the Wikidata taxonomy into the YAGO taxonomy
         for s,p,o in yagoSchema.triplesWithPredicate(Prefixes.fromClass):
                 if s!=Prefixes.schemaThing:
                     for subclass in wikidataTaxonomyDown.get(o,[]):
                         addSubClass(s, subclass)
+
+        print("  Info: YAGO classes and links before cleaning:",len(yagoTaxonomyUp), " and ", sum(len(yagoTaxonomyUp[s]) for s in yagoTaxonomyUp))
+        
+        # Remove shortcuts
+        print("  Removing shortcut links...", end="", flush=True)
+        removeShortcuts()
+        print("done")
+        print("  Info: Classes and links after shortcut removal:",len(yagoTaxonomyUp), " and ", sum(len(yagoTaxonomyUp[s]) for s in yagoTaxonomyUp))
                         
         # Remove disjoint inconsistent classes
         print("  Removing disjoint-inconsistent subclass links...", end="", flush=True)
         checkDisjoint(Prefixes.schemaThing, None, set(), disjointClasses)
         print("done")
-
+        print("  Info: Total number of YAGO classes and taxonomic links:",len(yagoTaxonomyUp), " and ", sum(len(yagoTaxonomyUp[s]) for s in yagoTaxonomyUp))
+        
         # Write resulting taxonomy
         print("  Writing taxonomy...", end="", flush=True)
         with TsvUtils.TsvFileWriter(OUTPUT_FOLDER+"02-yago-taxonomy-to-rename.tsv") as taxonomyWriter:

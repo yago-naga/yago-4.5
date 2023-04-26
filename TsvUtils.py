@@ -13,14 +13,16 @@ import Prefixes
 
 TEST=False
 
-##########################################################################
-#             Reading lines of a file
-##########################################################################
-
 # Buffer sizes  
 kilo=1024
 mega=1024*kilo
 giga=1024*mega
+
+BUFFER=1*giga
+
+##########################################################################
+#             Reading lines of a file
+##########################################################################
 
 def linesOfFile(file, message=None):
     """ Iterator over the lines of a GZ or text file, with progress bar """
@@ -33,7 +35,7 @@ def linesOfFile(file, message=None):
     isGZ=file.endswith(".gz")
     if isGZ:
         fileSize*=20
-    with (gzip.open(file, mode='rt', encoding='UTF-8') if isGZ else open(file, mode='rt', encoding='UTF-8', buffering=1*giga)) as input:
+    with (gzip.open(file, mode='rt', encoding='UTF-8') if isGZ else open(file, mode='rt', encoding='UTF-8', buffering=BUFFER)) as input:
         for line in input:
             coveredSize+=len(line)
             while message and (coveredSize / fileSize * totalNumberOfDots > printedDots):
@@ -62,7 +64,7 @@ class TsvFileWriter(object):
         self.file_name = file_name
       
     def __enter__(self):
-        self.file = open(self.file_name, "tw", encoding="utf=8", buffering=1*giga)
+        self.file = open(self.file_name, "tw", encoding="utf=8", buffering=BUFFER)
         for p in Prefixes.prefixes:
             self.file.write("@prefix "+p+": <"+Prefixes.prefixes[p]+"> .\n")
         return self

@@ -11,6 +11,8 @@ wd:Q_European_book wdt:P279 wd:Q571 .
 
 # English books should be a subclass of European Books in YAGO
 wd:Q_English_book a wd:item; rdfs:label "English book" .
+# Shortcuts should be removed
+wd:Q_English_book wdt:P279 wd:Q571 .
 wd:Q_English_book wdt:P279 wd:Q_European_book .
 
 # Loops should be removed in YAGO
