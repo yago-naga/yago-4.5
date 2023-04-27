@@ -11,4 +11,4 @@ The creation of YAGO proceeds in 6 steps, which each corresponds to one Python f
 
 ## License
 
-This work is licensed under the [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/ ) by [Fabian M. Suchanek](https://suchanek.name).
+This work is licensed under the [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/ ) by [the YAGO team](https://yago-knowledge.org).

@@ -16,7 +16,7 @@
 #                       Preamble
 ################################################################
 
-# This is the manually designed schema of YAGO 4.1.
+# This is the manually designed schema of YAGO 4.5.
 # Do not overwrite this file.
 #
 # Each class defined here will automatically draw 
@@ -33,7 +33,7 @@
 ################################################################
 
 ys:
-	rdfs:label "Manual YAGO 4.1 shapes declaration"@en .
+	rdfs:label "Manual YAGO 4.5 shapes declaration"@en .
 
 # Disjointness constraints
 schema:CreativeWork a rdfs:Class .
@@ -841,7 +841,7 @@ schema:SportsOrganization rdf:type sh:NodeShape ;
 #    ys:fromClass wd:Q12737077 .
 
 schema:Person a sh:NodeShape ;
-    ys:fromClass wd:Q5 ;	
+    ys:fromClass wd:Q5, wd:Q215627 ;	
     sh:property [
         sh:path yago:beliefSystem ;
         sh:node yago:BeliefSystem ;

@@ -79,7 +79,7 @@ def yagoIdFromWikipediaPage(wikipediaPageTitle):
     
 def yagoIdFromLabel(wikidataEntity,label):
     """ Creates a YAGO id from a Wikidata entity and label """
-    return yagoIdFromString(label).capitalize()+"_"+wikidataEntity[3:]
+    return yagoIdFromString(label).title()+"_"+wikidataEntity[3:]
 
 def yagoIdFromWikidataId(wikidataEntity):
     """ Creates a YAGO id from a Wikidata entity """
