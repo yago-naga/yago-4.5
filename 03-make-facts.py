@@ -251,6 +251,8 @@ def checkDatatype(datatype, o, yagoSchema):
         return literalDataType is None
     if datatype==Prefixes.rdfLangString:
         return literalDataType is None and lang is not None
+    if datatype==Prefixes.xsdDateTime and o.startswith('"0000'):
+        return False
     return literalDataType==datatype        
         
 def checkRangePropertyNode(propertyNode, o, yagoSchema):

@@ -100,6 +100,8 @@ badClasses = {
     "wd:Q67518978", # Occurrent
     "wd:Q2545446",  # Graphemes
     "wd:Q32483",    # Characters
+    "wd:Q3241972",  # Characters
+    "wd:Q29654788", # Unicode characters
     "wd:Q11953984", # Linguistic units, words etc
     "wd:Q11563"     # Numbers
 }

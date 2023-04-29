@@ -57,6 +57,8 @@ xsdAnyURI='xsd:anyURI'
 
 xsdAnytype='xsd:anyType'
 
+xsdDateTime='xsd:dateTime'
+
 xsdString='xsd:string'
 
 rdfLangString='rdf:langString'
