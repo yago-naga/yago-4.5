@@ -24,7 +24,7 @@ Algorithm:
    
 """
 
-TEST=True
+TEST=False
 FOLDER="test-data/04-make-typecheck/" if TEST else "yago-data/"
 
 ##########################################################################
