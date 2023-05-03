@@ -241,7 +241,7 @@ def checkDomain(p, classes, yagoSchema):
 def checkDatatype(datatype, o, yagoSchema):
     """True if the object <o> conforms to the <datatype>"""
     if datatype==Prefixes.xsdAnytype:
-        return not o.startswith('"')
+        return True
     if datatype==Prefixes.xsdAnyURI:
         return o.startswith('<')
     literalValue, _, lang, literalDataType = TurtleUtils.splitLiteral(o)

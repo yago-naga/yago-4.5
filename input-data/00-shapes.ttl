@@ -74,6 +74,11 @@ schema:Intangible  owl:disjointWith
 	
 schema:Thing a sh:NodeShape ;
     # ys:fromClass wd:Q35120 ; No mapping!
+	sh:property [
+        sh:path schema:image ;
+        sh:datatype xsd:anyURI ;
+        ys:fromProperty wdt:P18 ;
+    ] ;	
     sh:property [
         sh:path schema:alternateName ;
         sh:datatype rdf:langString ;
@@ -98,13 +103,13 @@ schema:Thing a sh:NodeShape ;
     sh:property [
         sh:path schema:url ;
         sh:datatype xsd:anyURI ;
-        # sh:maxCount 1 ;  # Jules Soria 2023-03-27: We allow several URLs per entity.
         ys:fromProperty wdt:P856 ;
     ] ;
+	# We map to Wikidata, Freebase, Google knowledge graph, and IMDB.
     sh:property [
-        sh:path owl:sameAs ;
+        sh:path schema:sameAs ;
         sh:datatype xsd:anyType ; # Jules Soria 2023-03-27: correctly capitalized        
-        ys:fromProperty wdt:P646, wdt:P345;
+        ys:fromProperty wdt:P646, wdt:P345, wdt:P2671, wdt:P1053;
     ] .
 
 # Class of all classes. Classes can have properties, too, but only annotation properties.
@@ -160,13 +165,26 @@ yago:Award a sh:NodeShape ;
 # Religions etc. are intangibles
 yago:BeliefSystem a sh:NodeShape ;
 	rdfs:subClassOf schema:Intangible ;
-    ys:fromClass wd:Q5390013	.
+    ys:fromClass wd:Q5390013 ;
+	sh:property [
+        sh:path yago:foundationalText ; 
+        sh:node schema:CreativeWork ;
+        ys:fromProperty wdt:P547 ;
+    ] ;
+    sh:property [
+        sh:path schema:founder ;
+        sh:node schema:Person ;
+        ys:fromProperty wdt:P112 ;
+    ] .
 
 # We need genders as objects of yago:gender
 yago:Gender a sh:NodeShape ;
     ys:fromClass wd:Q48264 ;
     rdfs:subClassOf schema:Intangible .
 
+# Needed as range of the property schema:inLanguage
+schema:Language a sh:NodeShape ;
+    ys:fromClass wd:Q34770 .
 
 ################################################################
 #                Media
@@ -252,6 +270,22 @@ schema:Book a sh:NodeShape ;
         ys:fromProperty wdt:P212 , wdt:P957 ;
         sh:pattern "^(97[89]-([0-57]-(\\d-\\d{7}|\\d\\d-\\d{6}|\\d\\d\\d-\\d{5}|\\d{4}-\\d{4}|\\d{5}-\\d\\d\\d|\\d{6}-\\d\\d|\\d{7}-\\d)|[89]\\d-(\\d-\\d{6}|\\d\\d-\\d{5}|\\d\\d\\d-\\d{4}|\\d{4}-\\d\\d\\d|\\d{5}-\\d\\d|\\d{6}-\\d)|[69]\\d\\d-(\\d-\\d{5}|\\d\\d-\\d{4}|\\d\\d\\d-\\d\\d\\d|\\d{4}-\\d\\d|\\d{5}-\\d)|99[0-8]\\d-\\d-\\d{4}|99[0-8]\\d-\\d\\d-\\d\\d\\d|99[0-8]\\d-\\d\\d\\d-\\d\\d|99[0-8]\\d-\\d{4}-\\d|999\\d\\d-\\d-\\d\\d\\d|999\\d\\d-\\d\\d-\\d\\d|999\\d\\d-\\d\\d\\d-\\d)-\\d|\\d{9}(\\d|X))|(\\d{1,5}-\\d{1,7}-\\d{1,6}-[0-9X])$"
     ] ;
+	sh:property [
+        sh:path schema:illustrator ;
+        sh:node schema:Person ;
+        ys:fromProperty wdt:P110 ;
+    ] ;
+    sh:property [
+        sh:path schema:editor ;
+        sh:node schema:Person ;
+        ys:fromProperty wdt:P98 ;
+    ] ;	
+    sh:property [
+        sh:path schema:publisher ;
+		sh:maxCount 1 ;
+        sh:node schema:Organization ;
+        ys:fromProperty wdt:P123 ;
+    ] ;	
     sh:property [
         sh:path schema:numberOfPages ;
         sh:datatype xsd:decimal ;
@@ -303,6 +337,7 @@ schema:TVSeries a sh:NodeShape ;
     sh:property [
         sh:path schema:director ;
         sh:node schema:Person ;
+		ys:fromProperty wdt:P57 ;
     ] ;
     sh:property [
         sh:path schema:numberOfEpisodes ;
@@ -322,14 +357,6 @@ schema:TVSeries a sh:NodeShape ;
         ys:fromProperty wdt:P272 ;
     ] .
 
-# Fabian 2023-03-28: removed because of lack of interesting properties
-#schema:ComicStory a sh:NodeShape ;
-#    ys:fromClass wd:Q1004 ;
-#    sh:property [
-#        sh:path schema:colorist ;
-#        sh:node schema:Person ;
-#        ys:fromProperty wdt:P6338 ;
-#    ] .
 
 schema:MusicComposition a sh:NodeShape ;
     ys:fromClass wd:Q207628 ;
@@ -388,12 +415,25 @@ schema:Movie a sh:NodeShape ;
         ys:fromProperty wdt:P495 ;
     ] ;
     sh:property [
+        sh:path schema:musicBy ; 
+        sh:or (
+            [
+                sh:node schema:MusicGroup
+            ]
+            [
+                sh:node schema:Person
+            ]
+        ) ;
+        ys:fromProperty wdt:P495 ;
+    ] ;	
+    sh:property [
         sh:path schema:director ;
         sh:node schema:Person ;
         ys:fromProperty wdt:P57 ;
     ] ;
     sh:property [
         sh:path schema:duration ;
+		sh:maxCount 1 ;
         sh:datatype xsd:decimal ;
         ys:fromProperty wdt:P2047 ;
     ] ;
@@ -580,17 +620,34 @@ schema:Event a sh:NodeShape ;
         ) ;
         ys:fromProperty wdt:P859 ;
     ] ;
-	# Fabian 2023-03-28: removed to avoid redundancy with subEvent
-    #sh:property [
-    #    sh:path schema:superEvent ;
-    #    sh:node schema:Event ;
-    #    ys:fromProperty wdt:P361 ;
-    #] ;
-    sh:property [
-        sh:path schema:subEvent ;
+	sh:property [
+        sh:path yago:follows ;
         sh:node schema:Event ;
-        ys:fromProperty wdt:P527 ;
+        ys:fromProperty wdt:P155 ;
+    ] ;
+	sh:property [
+        sh:path yago:participant ;
+        sh:or (
+            [
+                sh:node schema:Organization
+            ]
+            [
+                sh:node schema:Person
+            ]
+        ) ;
+        ys:fromProperty wdt:P710, wdt:P1923 ;
+    ] ;
+	sh:property [
+        sh:path schema:superEvent ;
+        sh:node schema:Event ;
+        ys:fromProperty wdt:P361 ;
     ] .
+    # Fabian 2023-03-28: removed to avoid redundancy with superEvent
+    #sh:property [
+    #    sh:path schema:subEvent ;
+    #    sh:node schema:Event ;
+    #    ys:fromProperty wdt:P527 ;
+    #] .
 
 # Needed for sports events, but too few facts
 #yago:Sport a sh:NodeShape ;
@@ -598,20 +655,21 @@ schema:Event a sh:NodeShape ;
 #    rdfs:subClassOf schema:Intangible ;
 #    rdf:label "Sport" .
 
-schema:SportsEvent a sh:NodeShape ;
-    ys:fromClass wd:Q16510064 ;
-    sh:property [
-        sh:path schema:competitor ;
-        sh:or (
-            [
-                sh:node schema:Person
-            ]
-            [
-                sh:node schema:SportsTeam
-            ]
-        ) ;
-        ys:fromProperty wdt:P710 , wdt:P1923 ;
-    ] .
+# Fabian: now covered by Event/participant
+#schema:SportsEvent a sh:NodeShape ;
+#    ys:fromClass wd:Q16510064 ;
+#    sh:property [
+#        sh:path schema:competitor ;
+#        sh:or (
+#            [
+#                sh:node schema:Person
+#            ]
+#            [
+#                sh:node schema:Organization
+#            ]
+#        ) ;
+#        ys:fromProperty wdt:P710 , wdt:P1923 ;
+#    ] .
 	# Fabian 2023-04-12: only 8 facts
     #sh:property [
     #    sh:path schema:sport ;
@@ -624,9 +682,6 @@ schema:SportsEvent a sh:NodeShape ;
 #    ys:fromClass wd:Q132241 .
 
 
-# Needed as range of the property schema:inLanguage
-schema:Language a sh:NodeShape ;
-    ys:fromClass wd:Q34770 .
 
 ################################################################
 #                Organizations
@@ -674,12 +729,17 @@ schema:Organization a sh:NodeShape ;
     sh:property [
         sh:path schema:leader ;
         sh:node schema:Person ;
-        ys:fromProperty wdt:P35, wdt:P6 ;
+        ys:fromProperty wdt:P35, wdt:P6, wdt:P168 ;
     ] ;
     sh:property [
         sh:path schema:motto ;
         sh:datatype xsd:string ;
         ys:fromProperty wdt:P1451 ;
+    ] ;
+    sh:property [
+        sh:path schema:motto ;
+        sh:node schema:Organization ; 
+        ys:fromProperty wdt:P463 ;
     ] ;
     sh:property [
         sh:path schema:address ;
@@ -715,12 +775,12 @@ schema:Organization a sh:NodeShape ;
     sh:property [
         sh:path schema:location ;
         sh:node schema:Place ;
-        ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552 ;
+        ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P159 ;
     ] ;
     sh:property [
         sh:path schema:memberOf ;
         sh:node schema:Organization ;
-        ys:fromProperty wdt:P463 ;
+        ys:fromProperty wdt:P463, wdt:P114 ;
     ] ;
     sh:property [
         sh:path schema:numberOfEmployees ;
@@ -745,8 +805,25 @@ schema:Organization a sh:NodeShape ;
         ys:fromProperty wdt:P749 ;
     ] .
 
+schema:Corporation a sh:NodeShape ;
+	sh:property [
+        sh:path schema:ownedBy ;
+        sh:or (
+            [
+                sh:node schema:Organization
+            ]
+            [
+                sh:node schema:Person
+            ]
+        ) ;
+        ys:fromProperty wdt:127, wdt:P749 ;
+    ] ;
+    ys:fromClass wd:Q783794 ;
+	ys:fromClass wd:Q4830453 . # Fabian 2023-03-29: we merge in businesses here
+
 schema:Airline a sh:NodeShape ;
     ys:fromClass wd:Q46970 ;
+	rdfs:subClassOf schema:Corporation ;
     sh:property [
         sh:path schema:iataCode ;
         sh:datatype xsd:string ;
@@ -762,16 +839,13 @@ schema:Airline a sh:NodeShape ;
         ys:fromProperty wdt:P230 ;
     ] .
 
-schema:Corporation a sh:NodeShape ;
-    ys:fromClass wd:Q783794 ;
-	ys:fromClass wd:Q4830453 . # Fabian 2023-03-29: we merge in businesses here
 
 # We attach it under organization, to avoid CivicStructure
 schema:EducationalOrganization a sh:NodeShape ;
 	rdfs:subClassOf schema:Organization ;
     ys:fromClass wd:Q5341295 ;
     sh:property [
-        sh:path schema:studentsCount ;
+        sh:path yago:studentsCount ;
         sh:datatype xsd:decimal ;
         ys:fromProperty wdt:P2196 ;
     ] .
@@ -801,6 +875,21 @@ schema:MusicGroup a sh:NodeShape ;
         sh:path schema:influencedBy ;
         sh:node schema:Person ;
         ys:fromProperty wdt:P737 ;
+    ];
+    sh:property [
+        sh:path yago:notableWork ;
+        sh:node schema:CreativeWork ;
+        ys:fromProperty wdt:P800 ;
+    ] ;	
+    sh:property [
+        sh:path schema:recordLabel ;
+        sh:node schema:Organization ;
+        ys:fromProperty wdt:P264 ;
+    ] ;		 
+	sh:property [
+        sh:path yago:director ;
+        sh:node schema:Person ;
+        ys:fromProperty wdt:P1037 ;
     ] .
     # Fabian 2023-04-12: we can't have genre, because that goes to a class (“war films”)
 	#sh:property [
@@ -821,14 +910,14 @@ schema:MusicGroup a sh:NodeShape ;
 #schema:WorkersUnion a sh:NodeShape ;
 #    ys:fromClass wd:Q178790 .
 
-# Needed for sport events
-schema:SportsTeam a sh:NodeShape ;
-    ys:fromClass wd:Q12973014 .
+# Needed for sport events. Fabian: no longer needed
+#schema:SportsTeam a sh:NodeShape ;
+#    ys:fromClass wd:Q12973014 .
 
-# Needed as superclass of SportsTeam
-schema:SportsOrganization rdf:type sh:NodeShape ;
-    rdfs:subClassOf schema:Organization ;
-    ys:fromClass wd:Q4438121 .
+# Needed as superclass of SportsTeam.  Fabian: no longer needed
+#schema:SportsOrganization rdf:type sh:NodeShape ;
+#    rdfs:subClassOf schema:Organization ;
+#    ys:fromClass wd:Q4438121 .
 	
 
 ################################################################
@@ -845,7 +934,7 @@ schema:Person a sh:NodeShape ;
     sh:property [
         sh:path yago:beliefSystem ;
         sh:node yago:BeliefSystem ;
-        ys:fromProperty wdt:P140 ;
+        ys:fromProperty wdt:P140, wdt:P1142 ;
     ] ;
     sh:property [
         sh:path yago:academicDegree ;
@@ -965,7 +1054,48 @@ schema:Person a sh:NodeShape ;
         ys:fromProperty wdt:P26 ;
     ] .
 
+# --------- Professions ---------------
 
+yago:Worker a sh:NodeShape ;
+    ys:fromClass wd:Q702269, wd:Q327055 ;	
+	rdfs:subClassOf schema:Person.
+
+yago:Creator a sh:NodeShape ;
+    ys:fromClass wd:Q483501 ;
+    rdfs:subClassOf yago:Worker ;
+    sh:property [
+        sh:path yago:notableWork ;
+        sh:node schema:CreativeWork ;
+        ys:fromProperty wdt:P800 ;
+    ] .
+
+yago:Academic a sh:NodeShape ;
+    ys:fromClass wd:Q66666685 ;	
+	rdfs:subClassOf yago:Worker ;
+    sh:property [
+        sh:path yago:doctoralAdvisor ;
+        sh:node schema:Person ;
+        ys:fromProperty wdt:P184 ;
+    ] .
+
+yago:SportsPerson a sh:NodeShape ;
+    ys:fromClass wd:Q50995749 ;	
+	rdfs:subClassOf yago:Worker ;
+    sh:property [
+        sh:path yago:playsIn ;
+        sh:node schema:Event ;
+        ys:fromProperty wdt:P118 ;
+    ] .
+
+yago:Politician a sh:NodeShape ;
+    ys:fromClass wd:Q82955 ;	
+	rdfs:subClassOf yago:Worker ;
+    sh:property [
+        sh:path yago:candidateIn ;
+        sh:node schema:Event ;
+        ys:fromProperty wdt:P3602 ;
+    ] .
+	
 ################################################################
 #                Places
 ################################################################
@@ -1139,7 +1269,7 @@ schema:Country a sh:NodeShape ;
 # from natural geographic object, terrain, Landform, landmass, geolocation, georegion, geographical area
 schema:Landform a sh:NodeShape ;
     rdfs:subClassOf schema:Place ;
-	ys:fromClass wd:Q35145263, wd:Q14524493, wd:Q271669, wd:Q205895, wd:Q271669, wd:Q2221906, wd:Q3622002, wd:Q82794.
+	ys:fromClass wd:Q35145263, wd:Q14524493, wd:Q271669, wd:Q205895, wd:Q271669, wd:Q2221906, wd:Q3622002, wd:Q82794, wd:Q35145263 .
     
 # Bodies of water are Landforms.
 # Linked to body of water and marine body of water
@@ -1166,7 +1296,25 @@ schema:Continent a sh:NodeShape ;
 yago:HumanMadeGeographicalEntity a sh:NodeShape ;
 	rdfs:subClassOf schema:Place ;
 	rdfs:label "Human-made geographical entity"@en ;
-    ys:fromClass wd:Q811979, wd:Q811430, wd:Q811463, wd:Q35145743 .
+    ys:fromClass wd:Q811979, wd:Q811430, wd:Q811463, wd:Q35145743 ;
+	sh:property [
+        sh:path schema:ownedBy ;
+        sh:or (
+            [
+                sh:node schema:Organization
+            ]
+            [
+                sh:node schema:Person
+            ]
+        ) ;
+        ys:fromProperty wdt:127, wdt:P749 ;
+    ] ;	
+	sh:property [
+        sh:path schema:dateCreated ;
+        sh:datatype xsd:dateTime ;
+        ys:fromProperty wdt:P571 ;
+		sh:maxCount 1 ;
+    ] .
 
 # Transit routes such as roads and railways.
 # Mapped to "thoroughfare" Wikidata (not a subclass of arch struc), 
@@ -1174,7 +1322,18 @@ yago:HumanMadeGeographicalEntity a sh:NodeShape ;
 yago:Way a sh:NodeShape ;
 	rdfs:label "Way"@en ;	
 	rdfs:subClassOf yago:HumanMadeGeographicalEntity ;
-    ys:fromClass wd:Q83620 .
+    ys:fromClass wd:Q83620 ;
+	sh:property [
+        sh:path yago:terminus ;
+        sh:node schema:Place ;
+        ys:fromProperty wdt:P609 ;
+    ] ;
+	sh:property [
+        sh:path yago:length ;
+        sh:datatype xsd:decimal ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P2043 ;
+    ] .
 
 # Listed here to add properties, and attached to yago:HumanMadeGeographicalEntity to avoid schema:CivicStructure
 schema:Airport a sh:NodeShape ;
@@ -1254,6 +1413,11 @@ schema:Product a sh:NodeShape ;
         ys:fromProperty wdt:P166 ;
     ] ;
     sh:property [
+        sh:path schema:material ;
+        sh:node schema:Product ;
+        ys:fromProperty wdt:P186 ;
+    ] ;
+    sh:property [
         sh:path schema:manufacturer ;
         sh:node schema:Corporation ;
         ys:fromProperty wdt:P176, wdt:P178 ;
@@ -1312,7 +1476,7 @@ schema:Taxon a sh:NodeShape;
         sh:node schema:Taxon ;
         ys:fromProperty wdt:P1034 ;
     ] ;
-	ys:fromClass wd:Q7239 .
+	ys:fromClass wd:Q16521 .
 	
 ################################################################
 #                Time annotation
