@@ -62,7 +62,7 @@ def yagoIdFromString(s):
     for c in s:
         if legal(c):
             result+=c
-        elif c in " +":
+        elif c==' ':
             result+='_'
         else:
             result+=hexCode(c)

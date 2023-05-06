@@ -1,7 +1,7 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix schema: <https://schema.org/> .
+@prefix schema: <http://schema.org/> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix wd: <http://www.wikidata.org/entity/> .
@@ -35,7 +35,7 @@ wd:Q_Elvis wdt:P31 wd:Q_rock_singer;
 	wdt:P40 wd:Q_child;	
 	# Doctoral titles are OK
 	wdt:P512 wd:Q_doctoralDegree ;
-	# Literal range with invalid date
+	# Literal range with invalid date should go away
 	wdt:P570 "0000-02-22T00:00:00Z"^^xsd:dateTime ;
 	# Literal range: should be OK
 	wdt:P569 "1935"^^xsd:gYear .
@@ -65,6 +65,10 @@ wd:Q_composition  wdt:P31 wd:Q207628;
 # Patterns
 wd:Q_product wdt:P31 wd:Q2424752;
 		wdt:P3962 "12345678".
+
+# Patterns
+wd:Q_org wdt:P31 schema:Organization;
+		wdt:P1451 "Blah blah"@en.
 
 # Geo locations
 wd:Q31  wdt:P31	schema:Country ;

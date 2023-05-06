@@ -80,6 +80,8 @@ class wikidataVisitor(object):
 badClasses = {
     "wd:Q17379835", # Wikimedia page outside the main knowledge tree
     "wd:Q17442446", # Wikimedia internal stuff
+    "wd:Q15474042", # same
+    "wd:Q111279923",# same 
     "wd:Q4167410",  # disambiguation page
     "wd:Q13406463", # list article
     "wd:Q17524420", # aspect of history
@@ -218,19 +220,19 @@ if __name__ == '__main__':
                     for subclass in wikidataTaxonomyDown.get(o,[]):
                         addSubClass(s, subclass)
 
-        print("  Info: YAGO classes and links before cleaning:",len(yagoTaxonomyUp), " and ", sum(len(yagoTaxonomyUp[s]) for s in yagoTaxonomyUp))
+        print("  Info: YAGO classes and links (= only those Wikidata classes that are below declared high-level classes) before cleaning:",len(yagoTaxonomyUp), " and ", sum(len(yagoTaxonomyUp[s]) for s in yagoTaxonomyUp))
         
         # Remove shortcuts
         print("  Removing shortcut links...", end="", flush=True)
         removeShortcuts()
         print("done")
-        print("  Info: Classes and links after shortcut removal:",len(yagoTaxonomyUp), " and ", sum(len(yagoTaxonomyUp[s]) for s in yagoTaxonomyUp))
+        print("  Info: YAGO classes and links after shortcut removal:",len(yagoTaxonomyUp), " and ", sum(len(yagoTaxonomyUp[s]) for s in yagoTaxonomyUp))
                         
         # Remove disjoint inconsistent classes
         print("  Removing disjoint-inconsistent subclass links...", end="", flush=True)
         checkDisjoint(Prefixes.schemaThing, None, set(), disjointClasses)
         print("done")
-        print("  Info: Total number of YAGO classes and taxonomic links:",len(yagoTaxonomyUp), " and ", sum(len(yagoTaxonomyUp[s]) for s in yagoTaxonomyUp))
+        print("  Info: Total number of YAGO classes and taxonomic links, before removing empty classes:",len(yagoTaxonomyUp), " and ", sum(len(yagoTaxonomyUp[s]) for s in yagoTaxonomyUp))
         
         # Write resulting taxonomy
         print("  Writing taxonomy...", end="", flush=True)

@@ -1,4 +1,4 @@
-@prefix schema: <https://schema.org/> .
+@prefix schema: <http://schema.org/> .
 @prefix wd: <http://www.wikidata.org/entity/> .
 @prefix wdt: <http://www.wikidata.org/prop/direct/> .
 

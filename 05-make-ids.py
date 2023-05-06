@@ -61,7 +61,7 @@ def toYagoEntity(entity):
         cls=entity[2:-17]
         cls=yagoIds.get(cls, None)
         if cls==None or cls.find(":")==-1:
-            return entity
+            return None
         return cls+"_generic_instance"
     if entity in yagoIds:
         return yagoIds[entity]

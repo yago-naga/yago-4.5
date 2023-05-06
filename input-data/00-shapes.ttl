@@ -4,7 +4,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema
 @prefix sh: <http://www.w3.org/ns/shacl
 @prefix skos: <http://www.w3.org/2004/02/skos/core
-@prefix schema: <https://schema.org/> .
+@prefix schema: <http://schema.org/> .
 @prefix wd: <http://www.wikidata.org/entity/> .
 @prefix wdt: <http://www.wikidata.org/prop/direct/> .
 @prefix wpq: <http://www.wikidata.org/prop/qualifier/> .
@@ -132,8 +132,9 @@ rdfs:Class a sh:NodeShape ;
         sh:uniqueLang true ;
     ] ;
     sh:property [
-        sh:path owl:sameAs ;
+        sh:path schema:sameAs ;
         sh:datatype xsd:anyType ; # Jules Soria 2023-03-27: correctly capitalized
+		ys:fromProperty wdt:P646, wdt:P345, wdt:P2671, wdt:P1053;
     ] ;
     sh:property [
         sh:path schema:mainEntityOfPage ;
@@ -148,7 +149,6 @@ rdfs:Class a sh:NodeShape ;
 yago:Award a sh:NodeShape ;
     ys:fromClass wd:Q618779 ;
     rdfs:subClassOf schema:Intangible ;
-    rdf:label "Award"@en ;
     sh:property [
         sh:path yago:conferredBy ; 
         sh:or (
@@ -226,11 +226,12 @@ schema:CreativeWork a sh:NodeShape ;
         ) ;
         ys:fromProperty wdt:P50, wdt:P175, wdt:P170 ; 
     ] ;
-    sh:property [
-        sh:path schema:character ;
-        sh:node schema:Person ;
-        ys:fromProperty wdt:P674 ;
-    ] ;
+    # Fabian: redundant with appearsIn
+	#sh:property [
+    #    sh:path schema:character ;
+    #    sh:node schema:Person ;
+    #    ys:fromProperty wdt:P674 ;
+    #] ;
     sh:property [
         sh:path schema:contentLocation ;
         sh:node schema:Place ;
@@ -324,6 +325,18 @@ schema:Newspaper a sh:NodeShape ;
 schema:TVSeries a sh:NodeShape ;
 	rdfs:subClassOf schema:CreativeWork ; # instead of series
     ys:fromClass wd:Q5398426 ;
+    sh:property [
+        sh:path schema:musicBy ; 
+        sh:or (
+            [
+                sh:node schema:MusicGroup
+            ]
+            [
+                sh:node schema:Person
+            ]
+        ) ;
+        ys:fromProperty wdt:P86 ;
+    ] ;		
     sh:property [
         sh:path schema:actor ;
         sh:node schema:Person ;
@@ -424,7 +437,7 @@ schema:Movie a sh:NodeShape ;
                 sh:node schema:Person
             ]
         ) ;
-        ys:fromProperty wdt:P495 ;
+        ys:fromProperty wdt:P86 ;
     ] ;	
     sh:property [
         sh:path schema:director ;
@@ -649,6 +662,11 @@ schema:Event a sh:NodeShape ;
     #    ys:fromProperty wdt:P527 ;
     #] .
 
+# Fabian 2023-05-04: In Wikidata, elections are subclasses of two disjoint classes, so we attach it under Event here
+yago:Election a sh:NodeShape ;
+	rdfs:subClassOf schema:Event ;
+    ys:fromClass wd:Q40231 .
+
 # Needed for sports events, but too few facts
 #yago:Sport a sh:NodeShape ;
 #    ys:fromClass wd:Q349 ;
@@ -696,6 +714,11 @@ schema:Organization a sh:NodeShape ;
         ys:fromProperty wdt:P166 ;
     ] ;
     sh:property [
+        sh:path schema:logo ;
+        sh:datatype xsd:anyURI ;
+        ys:fromProperty wdt:P154 ;
+    ] ;
+    sh:property [
         sh:path schema:dissolutionDate ;
         sh:or (
             [
@@ -729,7 +752,7 @@ schema:Organization a sh:NodeShape ;
     sh:property [
         sh:path schema:leader ;
         sh:node schema:Person ;
-        ys:fromProperty wdt:P35, wdt:P6, wdt:P168 ;
+        ys:fromProperty wdt:P35, wdt:P6, wdt:P168, wdt:P169 ;
     ] ;
     sh:property [
         sh:path schema:motto ;
@@ -737,7 +760,7 @@ schema:Organization a sh:NodeShape ;
         ys:fromProperty wdt:P1451 ;
     ] ;
     sh:property [
-        sh:path schema:motto ;
+        sh:path schema:memberOf ;
         sh:node schema:Organization ; 
         ys:fromProperty wdt:P463 ;
     ] ;
@@ -816,9 +839,9 @@ schema:Corporation a sh:NodeShape ;
                 sh:node schema:Person
             ]
         ) ;
-        ys:fromProperty wdt:127, wdt:P749 ;
+        ys:fromProperty wdt:P127;
     ] ;
-    ys:fromClass wd:Q783794 ;
+    ys:fromClass wd:Q783794, wd:Q783794 ; # Fabian 2023-05-04: we merge companies
 	ys:fromClass wd:Q4830453 . # Fabian 2023-03-29: we merge in businesses here
 
 schema:Airline a sh:NodeShape ;
@@ -866,11 +889,16 @@ schema:EducationalOrganization a sh:NodeShape ;
 
 # We need this as a superclass of MusicGroup
 schema:PerformingGroup rdf:type sh:NodeShape ;
-    rdfs:subClassOf schema:Organization ;
+    rdfs:subClassOf schema:Organization ; 
+	sh:property [
+        sh:path yago:director ;
+        sh:node schema:Person ;
+        ys:fromProperty wdt:P1037, wdt:P1875;
+    ] ;	
     ys:fromClass wd:Q105815710 .
 
 schema:MusicGroup a sh:NodeShape ;
-    ys:fromClass wd:Q215380 ;
+    ys:fromClass wd:Q2088357 ;
     sh:property [
         sh:path schema:influencedBy ;
         sh:node schema:Person ;
@@ -885,11 +913,6 @@ schema:MusicGroup a sh:NodeShape ;
         sh:path schema:recordLabel ;
         sh:node schema:Organization ;
         ys:fromProperty wdt:P264 ;
-    ] ;		 
-	sh:property [
-        sh:path yago:director ;
-        sh:node schema:Person ;
-        ys:fromProperty wdt:P1037 ;
     ] .
     # Fabian 2023-04-12: we can't have genre, because that goes to a class (“war films”)
 	#sh:property [
@@ -945,6 +968,11 @@ schema:Person a sh:NodeShape ;
         sh:path schema:affiliation ;
         sh:node schema:Organization ;
         ys:fromProperty wdt:P1416 ;
+    ] ;
+    sh:property [
+        sh:path schema:worksFor ;
+        sh:node schema:Organization ;
+        ys:fromProperty wdt:P108 ;
     ] ;
     sh:property [
         sh:path schema:alumniOf ;
@@ -1081,6 +1109,11 @@ yago:Academic a sh:NodeShape ;
 yago:SportsPerson a sh:NodeShape ;
     ys:fromClass wd:Q50995749 ;	
 	rdfs:subClassOf yago:Worker ;
+	sh:property [
+    	sh:path yago:sportNumber ;
+    	sh:datatype xsd:decimal ;
+    	ys:fromProperty wdt:P1618 ;
+	] ;	
     sh:property [
         sh:path yago:playsIn ;
         sh:node schema:Event ;
@@ -1307,7 +1340,7 @@ yago:HumanMadeGeographicalEntity a sh:NodeShape ;
                 sh:node schema:Person
             ]
         ) ;
-        ys:fromProperty wdt:127, wdt:P749 ;
+        ys:fromProperty wdt:P127, wdt:P749 ;
     ] ;	
 	sh:property [
         sh:path schema:dateCreated ;

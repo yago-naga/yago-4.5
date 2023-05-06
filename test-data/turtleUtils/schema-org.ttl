@@ -5,7 +5,7 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix schema: <https://schema.org/> .
+@prefix schema: <http://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix void: <http://rdfs.org/ns/void#> .
 
@@ -61,7 +61,7 @@ schema:AchieveAction a rdfs:Class ;
 
 schema:Action a rdfs:Class ;
     rdfs:label "Action" ;
-    rdfs:comment "An action performed by a direct agent and indirect participants upon a direct object. Optionally happens at a location with the help of an inanimate instrument. The execution of the action may produce a result. Specific action sub-type documentation specifies the exact expectation of each argument/role.\\n\\nSee also [blog post](http://blog.schema.org/2014/04/announcing-schemaorg-actions.html) and [Actions overview document](https://schema.org/docs/actions.html)." ;
+    rdfs:comment "An action performed by a direct agent and indirect participants upon a direct object. Optionally happens at a location with the help of an inanimate instrument. The execution of the action may produce a result. Specific action sub-type documentation specifies the exact expectation of each argument/role.\\n\\nSee also [blog post](http://blog.schema.org/2014/04/announcing-schemaorg-actions.html) and [Actions overview document](http://schema.org/docs/actions.html)." ;
     rdfs:subClassOf schema:Thing ;
     schema:source <http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_ActionCollabClass> .
 
@@ -8133,7 +8133,7 @@ schema:additionalNumberOfGuests a rdf:Property ;
 
 schema:additionalProperty a rdf:Property ;
     rdfs:label "additionalProperty" ;
-    rdfs:comment """A property-value pair representing an additional characteristics of the entitity, e.g. a product feature or another characteristic for which there is no matching property in schema.org.\\n\\nNote: Publishers should be aware that applications designed to use specific schema.org properties (e.g. https://schema.org/width, https://schema.org/color, https://schema.org/gtin13, ...) will typically expect such data to be provided using those properties, rather than using the generic property/value mechanism.
+    rdfs:comment """A property-value pair representing an additional characteristics of the entitity, e.g. a product feature or another characteristic for which there is no matching property in schema.org.\\n\\nNote: Publishers should be aware that applications designed to use specific schema.org properties (e.g. http://schema.org/width, http://schema.org/color, http://schema.org/gtin13, ...) will typically expect such data to be provided using those properties, rather than using the generic property/value mechanism.
 """ ;
     schema:domainIncludes schema:MerchantReturnPolicy,
         schema:Place,
@@ -11726,7 +11726,7 @@ schema:gameTip a rdf:Property ;
 
 schema:gender a rdf:Property ;
     rdfs:label "gender" ;
-    rdfs:comment "Gender of something, typically a [[Person]], but possibly also fictional characters, animals, etc. While https://schema.org/Male and https://schema.org/Female may be used, text strings are also acceptable for people who do not identify as a binary gender. The [[gender]] property can also be used in an extended sense to cover e.g. the gender of sports teams. As with the gender of individuals, we do not try to enumerate all possibilities. A mixed-gender [[SportsTeam]] can be indicated with a text value of \"Mixed\"." ;
+    rdfs:comment "Gender of something, typically a [[Person]], but possibly also fictional characters, animals, etc. While http://schema.org/Male and http://schema.org/Female may be used, text strings are also acceptable for people who do not identify as a binary gender. The [[gender]] property can also be used in an extended sense to cover e.g. the gender of sports teams. As with the gender of individuals, we do not try to enumerate all possibilities. A mixed-gender [[SportsTeam]] can be indicated with a text value of \"Mixed\"." ;
     schema:domainIncludes schema:Person,
         schema:SportsTeam ;
     schema:isPartOf <https://pending.schema.org> ;
@@ -12829,7 +12829,7 @@ schema:isicV4 a rdf:Property ;
 
 schema:iso6523Code a rdf:Property ;
     rdfs:label "iso6523Code" ;
-    rdfs:comment "An organization identifier as defined in ISO 6523(-1). Note that many existing organization identifiers such as [leiCode](https://schema.org/leiCode), [duns](https://schema.org/duns) and [vatID](https://schema.org/vatID) can be expressed as an ISO 6523 identifier by setting the ICD part of the ISO 6523 identifier accordingly. " ;
+    rdfs:comment "An organization identifier as defined in ISO 6523(-1). Note that many existing organization identifiers such as [leiCode](http://schema.org/leiCode), [duns](http://schema.org/duns) and [vatID](http://schema.org/vatID) can be expressed as an ISO 6523 identifier by setting the ICD part of the ISO 6523 identifier accordingly. " ;
     schema:domainIncludes schema:Organization ;
     schema:isPartOf <https://pending.schema.org> ;
     schema:rangeIncludes schema:Text ;
@@ -16161,7 +16161,7 @@ schema:scheduledTime a rdf:Property ;
 schema:schemaVersion a rdf:Property ;
     rdfs:label "schemaVersion" ;
     rdfs:comment """Indicates (by URL or string) a particular version of a schema used in some CreativeWork. This property was created primarily to
-    indicate the use of a specific schema.org release, e.g. ```10.0``` as a simple string, or more explicitly via URL, ```https://schema.org/docs/releases.html#v10.0```. There may be situations in which other schemas might usefully be referenced this way, e.g. ```http://dublincore.org/specifications/dublin-core/dces/1999-07-02/``` but this has not been carefully explored in the community.""" ;
+    indicate the use of a specific schema.org release, e.g. ```10.0``` as a simple string, or more explicitly via URL, ```http://schema.org/docs/releases.html#v10.0```. There may be situations in which other schemas might usefully be referenced this way, e.g. ```http://dublincore.org/specifications/dublin-core/dces/1999-07-02/``` but this has not been carefully explored in the community.""" ;
     schema:domainIncludes schema:CreativeWork ;
     schema:rangeIncludes schema:Text,
         schema:URL .

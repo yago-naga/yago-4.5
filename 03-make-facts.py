@@ -238,32 +238,40 @@ def checkDomain(p, classes, yagoSchema):
                 return True
     return False    
 
-def checkDatatype(datatype, o, yagoSchema):
-    """True if the object <o> conforms to the <datatype>"""
+def checkDatatype(datatype, listOfObjects, yagoSchema):
+    """True if the singleton object of listOfObjects conforms to the <datatype>. Modifies the object if necessary."""
+    o=listOfObjects[0]
     if datatype==Prefixes.xsdAnytype:
         return True
-    if datatype==Prefixes.xsdAnyURI:
-        return o.startswith('<')
+    if datatype==Prefixes.xsdAnyURI and  o.startswith('<'):
+        o='"'+o[1:-1]+'"^^xsd:anyURI'
+        listOfObjects[0]=o
+        return True
     literalValue, _, lang, literalDataType = TurtleUtils.splitLiteral(o)
     if literalValue is None:
         return False
     if datatype==Prefixes.xsdString:
-        return literalDataType is None
+        if literalDataType is not None:
+            return False
+        if lang is not None:
+            listOfObjects[0]='"'+literalValue+'"'
+        return True
     if datatype==Prefixes.rdfLangString:
         return literalDataType is None and lang is not None
     if datatype==Prefixes.xsdDateTime and o.startswith('"0000'):
         return False
     return literalDataType==datatype        
         
-def checkRangePropertyNode(propertyNode, o, yagoSchema):
-    """True if the object <o> conforms to the range constraints given by the yago-shape-prop node <propertNode>. False if it does not. Otherwise, returns a list of permissible types."""
+def checkRangePropertyNode(propertyNode, listOfObjects, yagoSchema):
+    """True if the singleton element of listOfObjects conforms to the range constraints given by the yago-shape-prop node <propertNode>. False if it does not. Otherwise, returns a list of permissible types. Modifies the object in the list if necessary."""
     # Disjunctions
+    o=listOfObjects[0]
     disjunctObject = getFirst(yagoSchema.objects(propertyNode, Prefixes.shaclOr))
     if disjunctObject:
         possiblePropertyNodes = yagoSchema.getList(disjunctObject)
         resultList=[]
         for possiblePropertyNode in possiblePropertyNodes:
-            result=checkRangePropertyNode(possiblePropertyNode, o, yagoSchema)
+            result=checkRangePropertyNode(possiblePropertyNode, listOfObjects, yagoSchema)
             if result==True:
                return True
             if result==False:
@@ -294,7 +302,7 @@ def checkRangePropertyNode(propertyNode, o, yagoSchema):
     # Datatypes
     datatype = getFirst(yagoSchema.objects(propertyNode, Prefixes.shaclDatatype))
     if datatype:
-       return checkDatatype(datatype, o, yagoSchema)
+       return checkDatatype(datatype, listOfObjects, yagoSchema)
     
     # Classes
     rangeClass = getFirst(yagoSchema.objects(propertyNode, Prefixes.shaclNode))
@@ -304,13 +312,13 @@ def checkRangePropertyNode(propertyNode, o, yagoSchema):
     # If no type can be established, we fail
     return False
     
-def checkRange(p, o, yagoSchema):
-    """True if the object <o> conforms to the range constraint of predicate <p>. False if it does not. Otherwise, returns a list of classes that <o> would have to belong to."""
+def checkRange(p, listOfObjects, yagoSchema):
+    """True if the singleton element of listOfObjects conforms to the range constraint of predicate <p>. False if it does not. Otherwise, returns a list of classes that the object would have to belong to. Modifies listOfObjects if necessary."""
     # ASSUMPTION: the object types for the predicate p are the same, no matter the subject type
     propertyNode = getFirst(yagoSchema.subjects(Prefixes.shaclPath, p))
     if not propertyNode:
         return False
-    return checkRangePropertyNode(propertyNode, o, yagoSchema)
+    return checkRangePropertyNode(propertyNode, listOfObjects, yagoSchema)
 
 ###########################################################################
 #           Removing shortcuts
@@ -365,11 +373,7 @@ class treatWikidataEntity():
                 
     def visit(self,entityFacts):
         """ Writes out the facts for a single Wikidata entity """
-        
-        # DEBUG
-        if "wd:Q954571" in entityFacts.subjects(Prefixes.wikidataType):
-            print("Found", entityFacts)
-            
+                    
         # We have to open the file here and not in init() to avoid pickling problems
         if not self.writer:
             self.writer=TsvUtils.TsvFileWriter(FOLDER+"03-yago-facts-to-type-check-"+str(self.number)+".tmp")
@@ -406,7 +410,9 @@ class treatWikidataEntity():
                 continue
             if not checkDomain(yagoPredicate, classes, self.yagoSchema):
                 continue
-            rangeResult=checkRange(yagoPredicate, o, self.yagoSchema)
+            listOfObjects=[o]    
+            rangeResult=checkRange(yagoPredicate, listOfObjects, self.yagoSchema)
+            o=listOfObjects[0]
             if rangeResult is False:
                 continue          
             (startDate, endDate) = getStartAndEndDate(s, p, o, entityFacts)
