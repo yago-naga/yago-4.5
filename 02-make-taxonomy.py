@@ -236,7 +236,7 @@ if __name__ == '__main__':
         print("  Removing disjoint-inconsistent subclass links...", end="", flush=True)
         checkDisjoint(Prefixes.schemaThing, None, set(), disjointClasses)
         print("done")
-        print("  Info: Total number of YAGO classes and taxonomic links, before removing empty classes:",len(yagoTaxonomyUp), " and ", sum(len(yagoTaxonomyUp[s]) for s in yagoTaxonomyUp))
+        print("  Info: Total number of YAGO classes and taxonomic links, after removing disjoints, before removing empty classes:",len(yagoTaxonomyUp), " and ", sum(len(yagoTaxonomyUp[s]) for s in yagoTaxonomyUp))
         
         # Write resulting taxonomy
         print("  Writing taxonomy...", end="", flush=True)

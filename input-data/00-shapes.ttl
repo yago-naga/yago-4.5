@@ -165,17 +165,18 @@ yago:Award a sh:NodeShape ;
 # Religions etc. are intangibles
 yago:BeliefSystem a sh:NodeShape ;
 	rdfs:subClassOf schema:Intangible ;
-    ys:fromClass wd:Q5390013 ;
-	sh:property [
-        sh:path yago:foundationalText ; 
-        sh:node schema:CreativeWork ;
-        ys:fromProperty wdt:P547 ;
-    ] ;
-    sh:property [
-        sh:path schema:founder ;
-        sh:node schema:Person ;
-        ys:fromProperty wdt:P112 ;
-    ] .
+    ys:fromClass wd:Q5390013 .
+	#; They are classes and cannot have properties
+	#sh:property [
+    #    sh:path yago:foundationalText ; 
+    #    sh:node schema:CreativeWork ;
+    #    ys:fromProperty wdt:P547 ;
+    #] ;
+    #sh:property [
+    #    sh:path schema:founder ;
+    #    sh:node schema:Person ;
+    #    ys:fromProperty wdt:P112 ;
+    #] .
 
 # We need genders as objects of yago:gender
 yago:Gender a sh:NodeShape ;
@@ -372,7 +373,7 @@ schema:TVSeries a sh:NodeShape ;
 
 
 schema:MusicComposition a sh:NodeShape ;
-    ys:fromClass wd:Q207628 ;
+    ys:fromClass wd:Q207628, wd:Q2188189 ;
     sh:property [
         sh:path schema:composer ;
         sh:or (
@@ -829,18 +830,19 @@ schema:Organization a sh:NodeShape ;
     ] .
 
 schema:Corporation a sh:NodeShape ;
-	sh:property [
-        sh:path schema:ownedBy ;
-        sh:or (
-            [
-                sh:node schema:Organization
-            ]
-            [
-                sh:node schema:Person
-            ]
-        ) ;
-        ys:fromProperty wdt:P127;
-    ] ;
+	# Fabian: redundant with parentOrganization
+	#sh:property [
+    #    sh:path schema:ownedBy ;
+    #    sh:or (
+    #        [
+    #            sh:node schema:Organization
+    #        ]
+    #        [
+    #            sh:node schema:Person
+    #        ]
+    #    ) ;
+    #    ys:fromProperty wdt:P127;
+    #] ;
     ys:fromClass wd:Q783794, wd:Q783794 ; # Fabian 2023-05-04: we merge companies
 	ys:fromClass wd:Q4830453 . # Fabian 2023-03-29: we merge in businesses here
 
@@ -1111,7 +1113,7 @@ yago:SportsPerson a sh:NodeShape ;
 	rdfs:subClassOf yago:Worker ;
 	sh:property [
     	sh:path yago:sportNumber ;
-    	sh:datatype xsd:decimal ;
+    	sh:datatype xsd:string ;
     	ys:fromProperty wdt:P1618 ;
 	] ;	
     sh:property [
