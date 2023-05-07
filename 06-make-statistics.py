@@ -32,6 +32,7 @@ FOLDER="test-data/06-make-statistics/" if TEST else "yago-data/"
 
 import sys
 import glob
+import re
 import evaluator
 import itertools
 import TurtleUtils
@@ -65,14 +66,16 @@ def countYago4Facts(yago4file):
 #             Full Taxonomy as HTML
 ##########################################################################
 
-def getSuperClasses(cls, classes, yagoTaxonomyUp):
+def getSuperClasses(cls, classes, yagoTaxonomyUp, pathsToRoot):
     """Adds all superclasses of a class <cls> (including <cls>) to the set <classes>"""
     classes.add(cls)
     # Make a check before because it's a defaultdict,
     # which would create cls if it's not there
+    if cls==Prefixes.schemaThing:
+        pathsToRoot[0]+=1
     if cls in yagoTaxonomyUp:
         for sc in yagoTaxonomyUp[cls]:
-            getSuperClasses(sc, classes, yagoTaxonomyUp)
+            getSuperClasses(sc, classes, yagoTaxonomyUp, pathsToRoot)
 
 def printTaxonomy(writer, yagoTaxonomyDown, classStats, cls=Prefixes.schemaThing):
     """ Prints the taxonomy to the writer. <yagoTaxonomyDown> maps a class to the set of sub-classes. <classStats> maps a class to its number of instances. <cls> is the class to start with, i.e., the top-level class. """
@@ -127,6 +130,9 @@ with TsvUtils.Timer("Step 06: Collecting YAGO statistics"):
     classStats=defaultdict(int)
     samples=[]
     entities=0
+    totalPathsToRoot=0
+    totalClassesPerInstance=0
+    humanReadableNames=0
 
     # Initialize predicateStats with predicates from schema, same for classes
     for s, p, o in yagoSchema.triplesWithPredicate("sh:path"):
@@ -147,13 +153,20 @@ with TsvUtils.Timer("Step 06: Collecting YAGO statistics"):
                 if s.endswith("_generic_instance"):
                     genericInstancesCount+=1
                 subject=s
+        if subject is None or "rdfs:Class" in classes:
+            continue
         entities+=1
         superClasses=set()
+        pathsToRoot=[0]
+        if not re.match(r"yago:Q[0-9]+", subject):
+            humanReadableNames+=1
         for c in classes:
-            getSuperClasses(c, superClasses, yagoTaxonomyUp)
+            getSuperClasses(c, superClasses, yagoTaxonomyUp, pathsToRoot)
         for c in superClasses:
-            classStats[c]+=1   
-        if subject and (len(samples)<100 or (len(samples)==100 and random.random()<0.01)):
+            classStats[c]+=1 
+        totalClassesPerInstance+=len(superClasses)   
+        totalPathsToRoot+=pathsToRoot[0]      
+        if (len(samples)<100 or (len(samples)==100 and random.random()<0.01)):
             for c in superClasses:
                 entityFacts.add((subject, 'rdf:type', c))
             if len(samples)<100:
@@ -183,19 +196,26 @@ with TsvUtils.Timer("Step 06: Collecting YAGO statistics"):
     
     print("  Writing out statistics... ",end="",flush=True)    
     with open(FOLDER+"06-statistics.txt", "wt", encoding="UTF-8") as writer:
-        writer.write("YAGO 4.1 statistics\n\n")
-        writer.write("Dump size: "+str(dumpSize)+"\n\n")
+        writer.write("YAGO 4.5 statistics\n\n")
+        writer.write("Dump size: "+str(dumpSize/1024/1024/1024)+" GB\n\n")
         writer.write("Total number of entities: "+str(entities)+"\n\n")
         writer.write("  ... of which generic: "+str(genericInstancesCount)+"\n\n")
         writer.write("Total number of classes: "+str(len(yagoTaxonomyUp))+"\n\n")
-        writer.write("Total number of predicates: "+str(len(predicateStats))+"\n\n")
+        writer.write("Disjointness statements: "+str(len(yagoSchema.triplesWithPredicate(Prefixes.owlDisjointWith)))+"\n\n")
+        writer.write("Avg number of paths to root: "+str(totalPathsToRoot/entities)+"\n\n")        
+        writer.write("Avg number of classes per instance: "+str(totalClassesPerInstance/entities)+"\n\n")        
+        writer.write("Human-readable names: "+str(humanReadableNames*100.0/entities)+"%\n\n")
         writer.write("Total number of facts (excluding labels etc.): "+str(sum([predicateStats[p] for p in predicateStats if p not in excludePredicates]))+"\n\n")
+        writer.write("Avg number of facts (excluding labels etc.) per entity: "+str(sum([predicateStats[p] for p in predicateStats if p not in excludePredicates])/entities)+"\n\n")
         writer.write("Total number of meta facts: "+str(metaFacts)+"\n\n")
+        writer.write("Total number of predicates: "+str(len(predicateStats))+"\n\n")
         writer.write("Predicates:\n")
         for pred in sorted(predicateStats.items(), key=lambda x:-x[1]):
             writer.write("  "+pred[0]+": "+str(pred[1])+"\n")        
     print("done")
-       
+     
+    # Class disjointness power
+    
     print("  Writing out taxonomy... ",end="",flush=True)    
     with open(FOLDER+"06-taxonomy.html", "wt", encoding="UTF-8") as writer:
         writer.write("""

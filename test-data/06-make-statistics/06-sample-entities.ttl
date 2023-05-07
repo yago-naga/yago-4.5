@@ -1,13 +1,6 @@
 
-yago:Elvis rdf:type schema:Thing, schema:Person, yago:Singer ;
+yago:Elvis rdf:type yago:Singer, schema:Person, schema:Thing ;
 	owl:sameAs wd:Q_Elvis ;
 	schema:deathDate "1970-01-01"^^xsd:gYear ;
 	schema:mainEntityOfPage <https://en.wikipedia.org/wiki/Elvis> ;
 	schema:child yago:Elvis, yago:Q_123456 .
-
-yago:Singer schema:mainEntityOfPage <https://en.wikipedia.org/wiki/Singer> ;
-	owl:sameAs wd:Q_singer ;
-	rdfs:label "singer"@en, "chanteur"@fr ;
-	schema:alternateName "this is a human being"@en ;
-	rdfs:comment "this is a singer"@en ;
-	rdf:type rdfs:Class .

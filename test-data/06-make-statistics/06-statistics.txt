@@ -1,18 +1,28 @@
-YAGO 4.1 statistics
+YAGO 4.5 statistics
 
-Dump size: 11202
+Dump size: 1.043267548084259e-05 GB
 
-Total number of entities: 3
+Total number of entities: 1
 
   ... of which generic: 0
 
 Total number of classes: 40
 
-Total number of predicates: 90
+Disjointness statements: 23
+
+Avg number of paths to root: 1.0
+
+Avg number of classes per instance: 3.0
+
+Human-readable names: 100.0%
 
 Total number of facts (excluding labels etc.): 3
 
+Avg number of facts (excluding labels etc.) per entity: 3.0
+
 Total number of meta facts: 2
+
+Total number of predicates: 90
 
 Predicates:
   rdfs:label: 3

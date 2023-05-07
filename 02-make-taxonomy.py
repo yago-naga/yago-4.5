@@ -116,12 +116,15 @@ def subClassesInclude(superClass, potentialSubClass):
         if subClassesInclude(subClass, potentialSubClass):
             return True
     return False
+
+loopCounter=0
     
 def addSubClass(superClass, subClass):
     """Adds the Wikidata classes to the YAGO taxonomy, excluding bad classes"""
     if subClass in badClasses:
         return
     if subClassesInclude(subClass, superClass):
+        loopCounter+=1
         return
     # Both a class and its subclass might be mapped to YAGO.
     # So don't make a copy of the tree
@@ -220,6 +223,7 @@ if __name__ == '__main__':
                     for subclass in wikidataTaxonomyDown.get(o,[]):
                         addSubClass(s, subclass)
 
+        print("  Info: Loops removed:", loopCounter)
         print("  Info: YAGO classes and links (= only those Wikidata classes that are below declared high-level classes) before cleaning:",len(yagoTaxonomyUp), " and ", sum(len(yagoTaxonomyUp[s]) for s in yagoTaxonomyUp))
         
         # Remove shortcuts
