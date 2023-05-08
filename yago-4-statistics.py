@@ -84,7 +84,7 @@ with TsvUtils.Timer("Collecting YAGO 4 statistics"):
             continue
         totalEntities+=1
         superClasses=set()
-        for c in classes:
+        for c in directClasses:
             getSuperClasses(c, superClasses, yagoTaxonomyUp, pathsToRoot)
         totalClassesPerInstance+=len(superClasses)   
         totalPathsToRoot+=pathsToRoot[0]  
