@@ -33,7 +33,7 @@ def removeCycles():
     """ Removes all cycles in the YAGO taxonomy """
     for c in list(yagoTaxonomyUp):
         if len(yagoTaxonomyUp.get(c,[]))>1:
-            removeCycles2(c,[])
+            removeCycles2(c,set())
 
 ###########################################################################
 #           Counting and removing shortcuts
