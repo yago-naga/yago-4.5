@@ -26,7 +26,9 @@ def removeCycles2(c, classesSeen):
     classesSeen.add(c)        
     for s in list(yagoTaxonomyUp.get(c,[])):
         if s in classesSeen:
-            yagoTaxonomyUp[c].remove(s)
+            if c in yagoTaxonomyUp:
+                yagoTaxonomyUp[c].remove(s)
+            continue
         removeCycles2(s,classesSeen)
         
 def removeCycles():
