@@ -21,19 +21,19 @@ from collections import defaultdict
 
 yagoTaxonomyUp=defaultdict(set)
 
-def removeCycles(c, classesSeen):
+def removeCycles2(c, classesSeen):
     """ Removes cycles """
     classesSeen.add(c)        
     for s in list(yagoTaxonomyUp.get(c,[])):
         if s in classesSeen:
             yagoTaxonomyUp[c].remove(s)
-        removeCycles(s,classesSeen)
+        removeCycles2(s,classesSeen)
         
 def removeCycles():
     """ Removes all cycles in the YAGO taxonomy """
     for c in list(yagoTaxonomyUp):
         if len(yagoTaxonomyUp.get(c,[]))>1:
-            removeCycles(c,[])
+            removeCycles2(c,[])
 
 ###########################################################################
 #           Counting and removing shortcuts
