@@ -84,6 +84,7 @@ with TsvUtils.Timer("Collecting Wikidata statistics"):
         if len(triple)==2:
             yagoTaxonomyUp[triple[0]].add(triple[1])
     
+    print("  Removing cycles...")
     removeCycles()
     
     before=sum(len(yagoTaxonomyUp[s]) for s in yagoTaxonomyUp)

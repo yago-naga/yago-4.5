@@ -200,7 +200,8 @@ with TsvUtils.Timer("Step 04: Type-checking YAGO"):
                         label=TurtleUtils.splitLiteral(split[2])[0]
                         if allLegal(label):
                             currentLabel=label
-                elif split[1]=="schema:mainEntityOfPage" and split[2].startswith('<https://en.wikipedia.org/wiki/'):
+################## HACK FOR PHP!                            
+                elif split[1]=="schema:mainEntityOfPage" and split[2].startswith('"https://en.wikipedia.org/wiki/A'):
                     currentWikipediaPage=split[2][31:-1]
                 
                 # Write out the fact
