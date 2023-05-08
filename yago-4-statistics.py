@@ -50,5 +50,5 @@ with TsvUtils.Timer("Collecting YAGO 4 statistics"):
             yagoTaxonomyUp[triple[0]].add(triple[2])
             
     print("  Taxonomic links before shortcut removal:", sum(len(yagoTaxonomyUp[s]) for s in yagoTaxonomyUp))
-    removeShortcuts():
+    removeShortcuts()
     print("  Taxonomic links after shortcut removal:", sum(len(yagoTaxonomyUp[s]) for s in yagoTaxonomyUp))
