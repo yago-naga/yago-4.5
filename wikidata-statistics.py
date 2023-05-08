@@ -58,11 +58,11 @@ def getSuperClasses(cls, classes, yagoTaxonomyUp, pathsToRoot):
 #             Main
 ##########################################################################
 
-with TsvUtils.Timer("Collecting YAGO 4 statistics"):
+with TsvUtils.Timer("Collecting Wikidata statistics"):
 
-    for triple in TsvUtils.tsvTuples("../yago-4/classes.nt", "  Loading YAGO 4 taxonomy"):
-        if len(triple)>3 and triple[1]=="<http://www.w3.org/2000/01/rdf-schema#subClassOf>":
-            yagoTaxonomyUp[triple[0]].add(triple[2])
+    for triple in TsvUtils.tsvTuples("/home/infres/bonald/wikidata/subclass.txt", "  Loading Wikidata taxonomy"):
+        if len(triple)==2:
+            yagoTaxonomyUp[triple[0]].add(triple[1])
      
     before=sum(len(yagoTaxonomyUp[s]) for s in yagoTaxonomyUp)
     print("  Taxonomic links before shortcut removal:", before)
@@ -76,11 +76,9 @@ with TsvUtils.Timer("Collecting YAGO 4 statistics"):
     totalEntities=0
     totalClassesPerInstance=0
     totalPathsToRoot=0
-    for triple in TsvUtils.tsvTuples("../yago-4/full-types-sorted.nt", "  Running through YAGO 4 types"):
-        if triple[1]!="<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>":
-            continue
+    for triple in TsvUtils.tsvTuples("/home/infres/bonald/wikidata/instances_without_scholarly_article.txt", "  Running through Wikidata types"):
         if triple[0]==currentSubject:
-            directClasses.add(triple[2])
+            directClasses.add(triple[1])
             continue
         totalEntities+=1
         superClasses=set()
@@ -91,7 +89,7 @@ with TsvUtils.Timer("Collecting YAGO 4 statistics"):
         totalPathsToRoot+=pathsToRoot[0]  
         directClasses=set()
         currentSubject=triple[0]
-        directClasses.add(triple[2])
+        directClasses.add(triple[1])
         
     print("  Total entities:", totalEntities)
     print("  Avg paths to root:", totalPathsToRoot/totalEntities)
