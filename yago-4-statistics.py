@@ -25,7 +25,7 @@ def removeShortcutParentsOf(startClass, currentClass):
     """ Removes direct superclasses of startClass that are equal to currentClass or its super-classes """
     if currentClass in yagoTaxonomyUp.get(startClass,[]):
         yagoTaxonomyUp[startClass].remove(currentClass)
-        print("   Removing",startClass,"to",currentClass)
+        # print("   Removing",startClass,"to",currentClass)
         if len(yagoTaxonomyUp[startClass])==1:
             return        
     for s in yagoTaxonomyUp.get(currentClass,[]):
@@ -48,7 +48,10 @@ with TsvUtils.Timer("Collecting YAGO 4 statistics"):
     for triple in TsvUtils.tsvTuples("../yago-4/classes.nt", "  Loading YAGO taxonomy"):
         if len(triple)>3 and triple[1]=="<http://www.w3.org/2000/01/rdf-schema#subClassOf>":
             yagoTaxonomyUp[triple[0]].add(triple[2])
-            
-    print("  Taxonomic links before shortcut removal:", sum(len(yagoTaxonomyUp[s]) for s in yagoTaxonomyUp))
+    
+    before=sum(len(yagoTaxonomyUp[s]) for s in yagoTaxonomyUp)
+    print("  Taxonomic links before shortcut removal:", before)
     removeShortcuts()
-    print("  Taxonomic links after shortcut removal:", sum(len(yagoTaxonomyUp[s]) for s in yagoTaxonomyUp))
+    after=sum(len(yagoTaxonomyUp[s]) for s in yagoTaxonomyUp)
+    print("  Taxonomic links after shortcut removal:", after)
+    print("  Links removed:", before-after)
