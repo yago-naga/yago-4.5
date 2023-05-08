@@ -25,7 +25,6 @@ def removeShortcutParentsOf(startClass, currentClass):
     """ Removes direct superclasses of startClass that are equal to currentClass or its super-classes """
     if currentClass in yagoTaxonomyUp.get(startClass,[]):
         yagoTaxonomyUp[startClass].remove(currentClass)
-        yagoTaxonomyDown[currentClass].remove(startClass)
         if len(yagoTaxonomyUp[startClass])==1:
             return        
     for s in yagoTaxonomyUp.get(currentClass,[]):
