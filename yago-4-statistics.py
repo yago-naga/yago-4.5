@@ -63,14 +63,7 @@ with TsvUtils.Timer("Collecting YAGO 4 statistics"):
     for triple in TsvUtils.tsvTuples("../yago-4/classes.nt", "  Loading YAGO 4 taxonomy"):
         if len(triple)>3 and triple[1]=="<http://www.w3.org/2000/01/rdf-schema#subClassOf>":
             yagoTaxonomyUp[triple[0]].add(triple[2])
-    
-    before=sum(len(yagoTaxonomyUp[s]) for s in yagoTaxonomyUp)
-    print("  Taxonomic links before shortcut removal:", before)
-    removeShortcuts()
-    after=sum(len(yagoTaxonomyUp[s]) for s in yagoTaxonomyUp)
-    print("  Taxonomic links after shortcut removal:", after)
-    print("  Links removed:", before-after)
-    
+        
     directClasses=set()
     currentSubject=""
     totalEntities=0
@@ -96,3 +89,10 @@ with TsvUtils.Timer("Collecting YAGO 4 statistics"):
     print("  Total entities:", totalEntities)
     print("  Avg paths to root:", totalPathsToRoot/totalEntities)
     print("  Avg classes per instance:", totalClassesPerInstance/totalEntities)
+    
+    before=sum(len(yagoTaxonomyUp[s]) for s in yagoTaxonomyUp)
+    print("  Taxonomic links before shortcut removal:", before)
+    removeShortcuts()
+    after=sum(len(yagoTaxonomyUp[s]) for s in yagoTaxonomyUp)
+    print("  Taxonomic links after shortcut removal:", after)
+    print("  Links removed:", before-after)
