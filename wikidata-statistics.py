@@ -48,7 +48,7 @@ def getSuperClasses(cls, classes, yagoTaxonomyUp, pathsToRoot):
     classes.add(cls)
     # Make a check before because it's a defaultdict,
     # which would create cls if it's not there
-    if cls=="<http://schema.org/Thing>":
+    if cls=="Q35120":
         pathsToRoot[0]+=1
     if cls in yagoTaxonomyUp:
         for sc in yagoTaxonomyUp[cls]:
@@ -60,7 +60,8 @@ def getSuperClasses(cls, classes, yagoTaxonomyUp, pathsToRoot):
 
 with TsvUtils.Timer("Collecting Wikidata statistics"):
 
-    for triple in TsvUtils.tsvTuples("/home/infres/bonald/wikidata/subclass.txt", "  Loading Wikidata taxonomy"):
+    for line in TsvUtils.linesOfFile("/home/infres/bonald/wikidata/subclass.txt", "  Loading Wikidata taxonomy"):
+        triple=line.split(' ')
         if len(triple)==2:
             yagoTaxonomyUp[triple[0]].add(triple[1])
      
@@ -76,7 +77,8 @@ with TsvUtils.Timer("Collecting Wikidata statistics"):
     totalEntities=0
     totalClassesPerInstance=0
     totalPathsToRoot=0
-    for triple in TsvUtils.tsvTuples("/home/infres/bonald/wikidata/instances_without_scholarly_article.txt", "  Running through Wikidata types"):
+    for line in TsvUtils.linesOfFile("/home/infres/bonald/wikidata/instances_without_scholarly_article.txt", "  Running through Wikidata types"):
+        triple=line.split(' ')
         if triple[0]==currentSubject:
             directClasses.add(triple[1])
             continue
