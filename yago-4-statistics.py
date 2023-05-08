@@ -46,7 +46,7 @@ def removeShortcuts():
 with TsvUtils.Timer("Collecting YAGO 4 statistics"):
 
     for triple in TsvUtils.tsvTuples("../yago-4/classes.nt", "  Loading YAGO taxonomy"):
-        if len(triple)>3:
+        if len(triple)>3 and triple[1]=="<http://www.w3.org/2000/01/rdf-schema#subClassOf>":
             yagoTaxonomyUp[triple[0]].add(triple[2])
             
     print("  Taxonomic links before shortcut removal:", sum(len(yagoTaxonomyUp[s]) for s in yagoTaxonomyUp))
