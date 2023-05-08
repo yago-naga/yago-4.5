@@ -61,7 +61,7 @@ def getSuperClasses(cls, classes, yagoTaxonomyUp, pathsToRoot):
 with TsvUtils.Timer("Collecting Wikidata statistics"):
 
     for line in TsvUtils.linesOfFile("/home/infres/bonald/wikidata/subclass.txt", "  Loading Wikidata taxonomy"):
-        triple=line.split(' ')
+        triple=line.rstrip().split(' ')
         if len(triple)==2:
             yagoTaxonomyUp[triple[0]].add(triple[1])
      
@@ -78,7 +78,7 @@ with TsvUtils.Timer("Collecting Wikidata statistics"):
     totalClassesPerInstance=0
     totalPathsToRoot=0
     for line in TsvUtils.linesOfFile("/home/infres/bonald/wikidata/instances_without_scholarly_article.txt", "  Running through Wikidata types"):
-        triple=line.split(' ')
+        triple=line.rstrip().split(' ')
         if triple[0]==currentSubject:
             directClasses.add(triple[1])
             continue
