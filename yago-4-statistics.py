@@ -43,7 +43,7 @@ def removeShortcuts():
 #           Retrieving superclasses
 ###########################################################################
 
- def getSuperClasses(cls, classes, yagoTaxonomyUp, pathsToRoot):
+def getSuperClasses(cls, classes, yagoTaxonomyUp, pathsToRoot):
     """Adds all superclasses of a class <cls> (including <cls>) to the set <classes>"""
     classes.add(cls)
     # Make a check before because it's a defaultdict,
