@@ -77,7 +77,7 @@ with TsvUtils.Timer("Collecting YAGO 4 statistics"):
     totalClassesPerInstance=0
     totalPathsToRoot=0
     for triple in TsvUtils.tsvTuples("../yago-4/full-types-sorted.nt", "  Running through YAGO 4 types"):
-        if triple[1]!="rdf:type":
+        if triple[1]!="<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>":
             continue
         if triple[0]==currentSubject:
             directClasses.add(triple[2])
