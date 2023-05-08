@@ -48,7 +48,7 @@ def getSuperClasses(cls, classes, yagoTaxonomyUp, pathsToRoot):
     classes.add(cls)
     # Make a check before because it's a defaultdict,
     # which would create cls if it's not there
-    if cls==Prefixes.schemaThing:
+    if cls=="<http://schema.org/Thing>":
         pathsToRoot[0]+=1
     if cls in yagoTaxonomyUp:
         for sc in yagoTaxonomyUp[cls]:
