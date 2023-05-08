@@ -37,6 +37,7 @@
 wd:Q_Elvis	owl:sameAs	yago:Elvis	. #WIKI
 wd:Q42	owl:sameAs	yago:Q42	. #OTHER
 wd:Q43	owl:sameAs	yago:Bad_Chè_U00B3_Ld_Q43	. #OTHER
+wd:Q45	owl:sameAs	yago:Test_Q45	. #OTHER
 wd:Q_other_elvis	owl:sameAs	yago:Eehlvis_Q_other_elvis	. #OTHER
 wd:Q_singer	owl:sameAs	yago:Stngerè	. #WIKI
 wd:Q_prof	owl:sameAs	yago:Professor	. #WIKI

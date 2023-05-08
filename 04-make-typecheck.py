@@ -34,6 +34,7 @@ FOLDER="test-data/04-make-typecheck/" if TEST else "yago-data/"
 import sys
 from urllib import parse
 import TsvUtils
+import TurtleUtils
 import re
 import unicodedata
 import evaluator
@@ -55,7 +56,11 @@ def legal(char):
     but don't work in Hermit. """
     category=unicodedata.category(char)[0]
     return char in "_-0123456789" or (category=="L" and (ord(char)>=0x00C0  or ord(char)<=ord('z')))
- 
+
+def allLegal(s):
+    """ True if all characters are legal characters """
+    return all(c==' ' or legal(c) for c in s)
+    
 def yagoIdFromString(s):
     """ Creates a YAGO id from a string """
     result=""
@@ -89,7 +94,7 @@ def yagoIdFromWikidataId(wikidataEntity):
 # because some Wikidata entities point to the same Wikipedia page
 wikipediaPagesUsed=set()
 
-def writeYagoId(out, currentTopic, currentLabel, currentWikipediaPage):
+def writeYagoId(out, currentTopic, currentEnglishLabel, currentLabel, currentWikipediaPage):
     """ Writes wd:Q303 owl:sameAs yago:Elvis """ 
     # Don't print ids for built-in classes
     if currentTopic.startswith("schema:"):
@@ -98,9 +103,12 @@ def writeYagoId(out, currentTopic, currentLabel, currentWikipediaPage):
         out.write(currentTopic,"owl:sameAs","yago:"+yagoIdFromWikipediaPage(currentWikipediaPage),". #WIKI")
         wikipediaPagesUsed.add(currentWikipediaPage)
         return
+    if currentEnglishLabel:
+        out.write(currentTopic,"owl:sameAs","yago:"+yagoIdFromLabel(currentTopic,currentEnglishLabel),". #OTHER")
+        return
     if currentLabel:
         out.write(currentTopic,"owl:sameAs","yago:"+yagoIdFromLabel(currentTopic,currentLabel),". #OTHER")
-        return
+        return        
     out.write(currentTopic,"owl:sameAs","yago:"+yagoIdFromWikidataId(currentTopic),". #OTHER")
 
 ##########################################################################
@@ -166,6 +174,7 @@ with TsvUtils.Timer("Step 04: Type-checking YAGO"):
     with TsvUtils.TsvFileWriter(FOLDER+"04-yago-facts-to-rename.tsv") as out:
         with TsvUtils.TsvFileWriter(FOLDER+"04-yago-ids.tsv") as idsFile:
             currentTopic=""
+            currentEnglishLabel=""
             currentLabel=""
             currentWikipediaPage=""
             wroteFacts=False # True if the entity had any valid facts
@@ -176,15 +185,21 @@ with TsvUtils.Timer("Step 04: Type-checking YAGO"):
                 # Next entity
                 if split[0]!=currentTopic:
                     if wroteFacts:
-                        writeYagoId(idsFile, currentTopic, currentLabel, currentWikipediaPage)
+                        writeYagoId(idsFile, currentTopic, currentEnglishLabel, currentLabel, currentWikipediaPage)
                     currentTopic=split[0]
+                    currentEnglishLabel=""
                     currentLabel=""
                     currentWikipediaPage=""
                     wroteFacts=False
                     
                 # Gather information for the entity id
-                if split[1]=="rdfs:label" and split[2].endswith('"@en'):
-                    currentLabel=split[2][1:-4]
+                if split[1]=="rdfs:label":
+                    if split[2].endswith('"@en'):
+                        currentEnglishLabel=split[2][1:-4]
+                    elif not currentEnglishLabel and not currentLabel:
+                        label=TurtleUtils.splitLiteral(split[2])[0]
+                        if allLegal(label):
+                            currentLabel=label
                 elif split[1]=="schema:mainEntityOfPage" and split[2].startswith('<https://en.wikipedia.org/wiki/'):
                     currentWikipediaPage=split[2][31:-1]
                 
@@ -204,7 +219,7 @@ with TsvUtils.Timer("Step 04: Type-checking YAGO"):
                     
             # Also flush the ids of the last entity...
             if wroteFacts:
-                writeYagoId(idsFile, currentTopic, currentLabel, currentWikipediaPage)
+                writeYagoId(idsFile, currentTopic, currentEnglishLabel, currentLabel, currentWikipediaPage)
 
     print("  Info: Number of facts:",count)    
     # Write out classes that did not get any instances    

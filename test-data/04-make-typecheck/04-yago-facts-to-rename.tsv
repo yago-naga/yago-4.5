@@ -45,6 +45,9 @@ wd:Q_Elvis	yago:academicTitle	_:wd:Q_doctoralDegree_generic_instance	. #
 wd:Q42	rdf:type	wd:Q_singer	. #		
 wd:Q43	rdf:type	wd:Q_european_book	. #		
 wd:Q43	rdfs:label	"Bad chè³ld"@en	. #		
+wd:Q43	rdfs:label	"Kind"@de	. #		
+wd:Q45	rdf:type	wd:Q_european_book	. #		
+wd:Q45	rdfs:label	"test"@de	. #		
 wd:Q_other_elvis	rdf:type	wd:Q_singer	. #		
 wd:Q_other_elvis	rdfs:label	"Eehlvis"@en	. #		
 wd:Q_other_elvis	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Elvis>	. #		

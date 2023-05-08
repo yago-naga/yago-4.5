@@ -470,6 +470,11 @@ yago:FictionalEntity a sh:NodeShape ;
         ys:fromProperty wdt:P1080, wdt:P1441, wdt:P4584 ;
     ] ;
 	sh:property [
+        sh:path schema:performer ;
+        sh:node schema:Person ;
+        ys:fromProperty wdt:P175  ;
+    ] ;
+	sh:property [
         sh:path schema:author ;
         sh:or (
             [
@@ -715,6 +720,11 @@ schema:Organization a sh:NodeShape ;
         ys:fromProperty wdt:P166 ;
     ] ;
     sh:property [
+        sh:path schema:locationCreated ;
+        sh:node schema:Place ;
+        ys:fromProperty wdt:P740 ;
+    ] ;
+    sh:property [
         sh:path schema:logo ;
         sh:datatype xsd:anyURI ;
         ys:fromProperty wdt:P154 ;
@@ -753,7 +763,7 @@ schema:Organization a sh:NodeShape ;
     sh:property [
         sh:path schema:leader ;
         sh:node schema:Person ;
-        ys:fromProperty wdt:P35, wdt:P6, wdt:P168, wdt:P169 ;
+        ys:fromProperty wdt:P35, wdt:P6, wdt:P168, wdt:P169, wdt:P1075 ;
     ] ;
     sh:property [
         sh:path schema:motto ;
@@ -903,8 +913,8 @@ schema:MusicGroup a sh:NodeShape ;
     ys:fromClass wd:Q2088357 ;
     sh:property [
         sh:path schema:influencedBy ;
-        sh:node schema:Person ;
-        ys:fromProperty wdt:P737 ;
+        sh:node schema:Thing ;
+        ys:fromProperty wdt:P737, wdt:P941 ;
     ];
     sh:property [
         sh:path yago:notableWork ;
@@ -1093,6 +1103,11 @@ yago:Worker a sh:NodeShape ;
 yago:Creator a sh:NodeShape ;
     ys:fromClass wd:Q483501 ;
     rdfs:subClassOf yago:Worker ;
+	sh:property [
+        sh:path schema:influencedBy ;
+        sh:node schema:Thing ;
+        ys:fromProperty wdt:P737, wdt:P941 ;
+    ];	
     sh:property [
         sh:path yago:notableWork ;
         sh:node schema:CreativeWork ;
@@ -1102,6 +1117,11 @@ yago:Creator a sh:NodeShape ;
 yago:Academic a sh:NodeShape ;
     ys:fromClass wd:Q66666685 ;	
 	rdfs:subClassOf yago:Worker ;
+	sh:property [
+    	sh:path yago:studentOf ;
+    	sh:node schema:Person ;
+    	ys:fromProperty wdt:P1066 ;
+	] ;	
     sh:property [
         sh:path yago:doctoralAdvisor ;
         sh:node schema:Person ;
@@ -1203,6 +1223,21 @@ yago:AstronomicalObject a sh:NodeShape ;
         ys:fromProperty wdt:P2067 ;
     ] ;    
 	sh:property [
+        sh:path yago:luminocity ;
+        sh:datatype xsd:decimal ;
+        ys:fromProperty wdt:P2060 ;
+    ] ;
+    sh:property [
+        sh:path yago:parallax  ;
+        sh:datatype xsd:decimal ;
+        ys:fromProperty wdt:P2214 ;
+    ] ;    
+	sh:property [
+        sh:path yago:radialVelocity  ;
+        sh:datatype xsd:decimal ;
+        ys:fromProperty wdt:P2216 ;
+    ] ;    
+	sh:property [
         sh:path yago:distanceFromEarth ;
         sh:datatype xsd:decimal ;
         ys:fromProperty wdt:P2583 ;
@@ -1229,6 +1264,11 @@ schema:AdministrativeArea a sh:NodeShape ;
         sh:path schema:leader ;
         sh:node schema:Person ;
         ys:fromProperty wdt:P6, wdt:P35 ;
+    ] ;
+    sh:property [
+        sh:path yago:replaces ;
+        sh:node schema:AdministrativeArea ;
+        ys:fromProperty wdt:P1365 ;
     ] ;
     sh:property [
         sh:path schema:populationNumber ;
