@@ -92,6 +92,6 @@ with TsvUtils.Timer("Collecting YAGO 4 statistics"):
         currentSubject=triple[0]
         directClasses.add(triple[2])
         
-     print("  Total entities:", totalEntities)
-     print("  Avg paths to root:", totalPathsToRoot/totalEntities)
-     print("  Avg classes per instance:", totalClassesPerInstance/totalEntities)
+    print("  Total entities:", totalEntities)
+    print("  Avg paths to root:", totalPathsToRoot/totalEntities)
+    print("  Avg classes per instance:", totalClassesPerInstance/totalEntities)
