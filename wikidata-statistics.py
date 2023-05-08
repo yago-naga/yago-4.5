@@ -16,10 +16,28 @@ import Prefixes
 from collections import defaultdict
 
 ###########################################################################
-#           Counting and removing shortcuts
+#           Counting and removing cycles
 ###########################################################################
 
 yagoTaxonomyUp=defaultdict(set)
+
+def removeCycles(c, classesSeen):
+    """ Removes cycles """
+    classesSeen.add(c)        
+    for s in list(yagoTaxonomyUp.get(c,[])):
+        if s in classesSeen:
+            yagoTaxonomyUp[c].remove(s)
+        removeCycles(s,classesSeen)
+        
+def removeCycles():
+    """ Removes all cycles in the YAGO taxonomy """
+    for c in list(yagoTaxonomyUp):
+        if len(yagoTaxonomyUp.get(c,[]))>1:
+            removeCycles(c,[])
+
+###########################################################################
+#           Counting and removing shortcuts
+###########################################################################
 
 def removeShortcutParentsOf(startClass, currentClass):
     """ Removes direct superclasses of startClass that are equal to currentClass or its super-classes """
@@ -37,17 +55,13 @@ def removeShortcuts():
         if len(yagoTaxonomyUp.get(c,[]))>1:
             for s in list(yagoTaxonomyUp.get(c,[])):
                 for ss in yagoTaxonomyUp.get(s,[]):
-                    removeShortcutParentsOf(c, ss)
- 
+                    removeShortcutParentsOf(c, ss) 
 ###########################################################################
 #           Retrieving superclasses
 ###########################################################################
 
 def getSuperClasses(cls, classes, yagoTaxonomyUp, pathsToRoot):
     """Adds all superclasses of a class <cls> (including <cls>) to the set <classes>"""
-    if cls in classes:
-        # Loop
-        return
     classes.add(cls)
     # Make a check before because it's a defaultdict,
     # which would create cls if it's not there
@@ -67,7 +81,9 @@ with TsvUtils.Timer("Collecting Wikidata statistics"):
         triple=line.rstrip().split(' ')
         if len(triple)==2:
             yagoTaxonomyUp[triple[0]].add(triple[1])
-     
+    
+    removeCycles()
+    
     before=sum(len(yagoTaxonomyUp[s]) for s in yagoTaxonomyUp)
     print("  Taxonomic links before shortcut removal:", before)
     removeShortcuts()
