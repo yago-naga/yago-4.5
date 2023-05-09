@@ -1,5 +1,5 @@
 
-yago:Elvis rdf:type yago:Singer, schema:Person, schema:Thing ;
+yago:Elvis rdf:type schema:Person, schema:Thing, yago:Singer ;
 	owl:sameAs wd:Q_Elvis ;
 	schema:deathDate "1970-01-01"^^xsd:gYear ;
 	schema:mainEntityOfPage <https://en.wikipedia.org/wiki/Elvis> ;

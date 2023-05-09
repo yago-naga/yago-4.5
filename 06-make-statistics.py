@@ -14,6 +14,7 @@ Output:
 - 06-taxonomy.html
 - 06-sample-entities.ttl
 - 06-tree.tex
+- 06-tree.html
 
 Algorithm:
 - load taxonomy
@@ -23,7 +24,7 @@ Algorithm:
    
 """
 
-TEST=False
+TEST=True
 FOLDER="test-data/06-make-statistics/" if TEST else "yago-data/"
 
 ##########################################################################
@@ -77,18 +78,40 @@ def getSuperClasses(cls, classes, yagoTaxonomyUp, pathsToRoot):
         for sc in yagoTaxonomyUp[cls]:
             getSuperClasses(sc, classes, yagoTaxonomyUp, pathsToRoot)
 
-def printTaxonomy(writer, yagoTaxonomyDown, classStats, cls=Prefixes.schemaThing):
-    """ Prints the taxonomy to the writer. <yagoTaxonomyDown> maps a class to the set of sub-classes. <classStats> maps a class to its number of instances. <cls> is the class to start with, i.e., the top-level class. """
+def printTaxonomy2(writer, cls=Prefixes.schemaThing):
+    """ Prints the taxonomy to the writer. <cls> is the class to start with, i.e., the top-level class. """
     if cls not in yagoTaxonomyDown:
         writer.write(f"<li>{cls.replace('yago:','y:')}: {str(classStats.get(cls,0))}\n")
         return
     writer.write(f"<li><details><summary>{cls.replace('yago:','y:')}: {str(classStats.get(cls,0))}</summary><ul>\n")
     for subclass in yagoTaxonomyDown.get(cls, []):
-        printTaxonomy(writer, yagoTaxonomyDown, classStats, subclass)
+        printTaxonomy2(writer, subclass)
     writer.write("</ul></details>\n")
 
+def printTaxonomy(file):
+    """ Prints the full taxonomy to the file """
+    with open(file, "wt", encoding="UTF-8") as writer:
+        writer.write("""
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset=utf-8>
+  <meta name=viewport content="width=device-width, initial-scale=1.0">   
+  <title>
+   YAGO Taxonomy
+  </title>
+  <style>
+  ul {list-style-type:none}
+  </style>
+ </head>      
+ <body>
+ <h1>YAGO Taxonomy</h1>
+ <ul>\n""")
+        printTaxonomy2(writer)
+        writer.write("</ul></body>\n</html>")
+
 ##########################################################################
-#             Top-level taxonomy as TEX
+#             Top-level taxonomy as HTML and TEX
 ##########################################################################
  
 def tree2tex(yagoSchema, file):
@@ -106,6 +129,43 @@ def tree2tex(yagoSchema, file):
         add_node("schema:Thing", 1)
         file.write("}\n\n\\end{document}")
 
+def printUpperTaxonomy(file):
+    """ Visualizes the top-level taxonomy as an HTML document"""
+    with open(file, "wt", encoding="UTF-8") as writer:
+        writer.write("""
+<!DOCTYPE html>
+<html vocab=http://schema.org/>
+ <head>
+  <meta charset=utf-8>
+  <meta name=viewport content="width=device-width, initial-scale=1.0">   
+  <title>
+   Upper-Level Taxonomy if YAGO 4.5 
+  </title>
+  <style>
+  ul {list-style-type:none}
+  </style>  
+ </head>
+ <body>
+<h1>YAGO Upper-Level Taxonomy</h1> 
+ <ul>
+        """)
+        def add_node(cls):
+            if not yagoSchema.objects(cls):
+                return
+            writer.write(f"<li><details><summary>{cls}</summary>Properties:<ul>\n")
+            for blank in yagoSchema.objects(cls,"sh:property"):
+                writer.write(f'<li>- {yagoSchema.objects(blank, "sh:path")[0]}\n')
+            writer.write("</ul>\n Appears as object of:<ul>")
+            for blank in yagoSchema.subjects("sh:node", cls):
+                c=yagoSchema.objects("sh:path", blank)
+                if len(c)>0:
+                    writer.write(f'<li>- {c[0]}\n')
+            writer.write("</ul>Subclasses:<ul>\n")
+            for subclass in yagoTaxonomyDown.get(cls, []):
+                add_node(subclass)
+            writer.write("</ul></details>\n")
+        add_node("schema:Thing")
+        writer.write("</ul></body>\n</html>")
  
 ##########################################################################
 #             Main
@@ -214,28 +274,9 @@ with TsvUtils.Timer("Step 06: Collecting YAGO statistics"):
             writer.write("  "+pred[0]+": "+str(pred[1])+"\n")        
     print("done")
      
-    # Class disjointness power
-    
     print("  Writing out taxonomy... ",end="",flush=True)    
-    with open(FOLDER+"06-taxonomy.html", "wt", encoding="UTF-8") as writer:
-        writer.write("""
-<!DOCTYPE html>
-<html>
- <head>
-  <meta charset=utf-8>
-  <meta name=viewport content="width=device-width, initial-scale=1.0">   
-  <title>
-   YAGO Taxonomy
-  </title>
-  <style>
-  ul {list-style-type:none}
-  </style>
- </head>      
- <body>
- <h1>YAGO Taxonomy</h1>
- <ul>\n""")
-        printTaxonomy(writer, yagoTaxonomyDown, classStats)
-        writer.write("</ul></body>\n</html>")
+    printTaxonomy(FOLDER+"06-taxonomy.html")
+    printUpperTaxonomy(FOLDER+"06-upper-taxonomy.html")
     print("done")
     
 if TEST:
