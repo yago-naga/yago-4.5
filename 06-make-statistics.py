@@ -24,7 +24,7 @@ Algorithm:
    
 """
 
-TEST=True
+TEST=False
 FOLDER="test-data/06-make-statistics/" if TEST else "yago-data/"
 
 ##########################################################################
@@ -152,15 +152,15 @@ def printUpperTaxonomy(file):
         def add_node(cls):
             if not yagoSchema.objects(cls):
                 return
-            writer.write(f"<li><details><summary>{cls}</summary>Properties:<ul>\n")
+            writer.write(f"<li><details><summary>{cls}</summary>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Properties:<ul>\n")
             for blank in yagoSchema.objects(cls,"sh:property"):
                 writer.write(f'<li>- {yagoSchema.objects(blank, "sh:path")[0]}\n')
-            writer.write("</ul>\n Appears as object of:<ul>")
+            writer.write("</ul>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Appears as object of:<ul>\n")
             for blank in yagoSchema.subjects("sh:node", cls):
-                c=yagoSchema.objects("sh:path", blank)
+                c=yagoSchema.objects(blank, "sh:path")
                 if len(c)>0:
                     writer.write(f'<li>- {c[0]}\n')
-            writer.write("</ul>Subclasses:<ul>\n")
+            writer.write("</ul>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subclasses:<ul>\n")
             for subclass in yagoTaxonomyDown.get(cls, []):
                 add_node(subclass)
             writer.write("</ul></details>\n")
@@ -283,3 +283,4 @@ if TEST:
     evaluator.compare(FOLDER+"06-statistics.txt", FOLDER+"06-statistics-gold.txt")
     evaluator.compare(FOLDER+"06-taxonomy.html", FOLDER+"06-taxonomy-gold.html")
     evaluator.compare(FOLDER+"06-tree.tex", FOLDER+"06-tree-gold.tex")
+    evaluator.compare(FOLDER+"06-upper-taxonomy.html", FOLDER+"06-upper-taxonomy-gold.html")

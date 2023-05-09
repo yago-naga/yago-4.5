@@ -1,18 +1,28 @@
-YAGO 4.1 statistics
+YAGO 4.5 statistics
 
-Dump size: 11202
+Dump size: 1.043267548084259e-05 GB
 
-Total number of entities: 3
+Total number of entities: 1
 
   ... of which generic: 0
 
 Total number of classes: 40
 
-Total number of predicates: 90
+Disjointness statements: 24
+
+Avg number of paths to root: 1.0
+
+Avg number of classes per instance: 3.0
+
+Human-readable names: 100.0%
 
 Total number of facts (excluding labels etc.): 3
 
+Avg number of facts (excluding labels etc.) per entity: 3.0
+
 Total number of meta facts: 2
+
+Total number of predicates: 114
 
 Predicates:
   rdfs:label: 3
@@ -23,19 +33,23 @@ Predicates:
   schema:alternateName: 1
   rdfs:comment: 1
   schema:deathDate: 1
+  schema:image: 0
   schema:url: 0
+  schema:sameAs: 0
   yago:conferredBy: 0
   schema:about: 0
   schema:award: 0
   schema:author: 0
-  schema:character: 0
   schema:contentLocation: 0
   schema:dateCreated: 0
   schema:inLanguage: 0
   schema:isbn: 0
-  schema:numberOfPages: 0
+  schema:illustrator: 0
+  schema:editor: 0
   schema:publisher: 0
+  schema:numberOfPages: 0
   schema:sponsor: 0
+  schema:musicBy: 0
   schema:actor: 0
   schema:countryOfOrigin: 0
   schema:director: 0
@@ -47,41 +61,53 @@ Predicates:
   schema:lyricist: 0
   schema:duration: 0
   yago:appearsIn: 0
+  schema:performer: 0
   schema:location: 0
   schema:organizer: 0
   schema:startDate: 0
   schema:endDate: 0
-  schema:subEvent: 0
-  schema:competitor: 0
+  yago:follows: 0
+  yago:participant: 0
+  schema:superEvent: 0
+  schema:locationCreated: 0
+  schema:logo: 0
   schema:dissolutionDate: 0
   schema:duns: 0
   schema:founder: 0
   schema:leader: 0
   schema:motto: 0
+  schema:memberOf: 0
   schema:address: 0
   schema:leiCode: 0
-  schema:memberOf: 0
   schema:numberOfEmployees: 0
   schema:parentOrganization: 0
   schema:iataCode: 0
   schema:icaoCode: 0
-  schema:studentsCount: 0
+  yago:studentsCount: 0
+  yago:director: 0
   schema:influencedBy: 0
+  yago:notableWork: 0
+  schema:recordLabel: 0
   yago:beliefSystem: 0
   yago:academicDegree: 0
   schema:affiliation: 0
+  schema:worksFor: 0
   schema:alumniOf: 0
   schema:birthDate: 0
   schema:birthPlace: 0
   schema:children: 0
   schema:deathPlace: 0
   schema:gender: 0
-  schema:hasOccupation: 0
   schema:homeLocation: 0
   schema:knowsLanguage: 0
   schema:nationality: 0
   schema:owns: 0
   schema:spouse: 0
+  yago:studentOf: 0
+  yago:doctoralAdvisor: 0
+  yago:sportNumber: 0
+  yago:playsIn: 0
+  yago:candidateIn: 0
   schema:containedInPlace: 0
   schema:area: 0
   schema:highestPoint: 0
@@ -91,8 +117,12 @@ Predicates:
   schema:geo: 0
   yago:parentBody: 0
   yago:mass: 0
+  yago:luminocity: 0
+  yago:parallax: 0
+  yago:radialVelocity: 0
   yago:distanceFromEarth: 0
   schema:demonym: 0
+  yago:replaces: 0
   schema:populationNumber: 0
   schema:postalCode: 0
   schema:administrates: 0
@@ -101,6 +131,10 @@ Predicates:
   schema:humanDevelopmentIndex: 0
   schema:unemploymentRate: 0
   yago:flowsInto: 0
+  schema:ownedBy: 0
+  yago:terminus: 0
+  yago:length: 0
+  schema:material: 0
   schema:manufacturer: 0
   schema:gtin: 0
   schema:parentTaxon: 0
