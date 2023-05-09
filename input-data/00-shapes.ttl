@@ -713,7 +713,7 @@ yago:Election a sh:NodeShape ;
 
 
 schema:Organization a sh:NodeShape ;
-    ys:fromClass wd:Q43229 ;
+    ys:fromClass wd:Q43229, wd:Q167037, wd:Q155076 ; # Fabian: we add corporations here (in the sense of legal entities), and juridical persons
     sh:property [
         sh:path schema:award ;
         sh:node yago:Award ;
@@ -848,7 +848,7 @@ schema:Corporation a sh:NodeShape ;
     #    ) ;
     #    ys:fromProperty wdt:P127;
     #] ;
-    ys:fromClass wd:Q783794, wd:Q783794 ; # Fabian 2023-05-04: we merge companies
+    ys:fromClass wd:Q783794, wd:Q783794 ; # Fabian 2023-05-04: we merge companies 
 	ys:fromClass wd:Q4830453 . # Fabian 2023-03-29: we merge in businesses here
 
 schema:Airline a sh:NodeShape ;
@@ -1294,8 +1294,8 @@ schema:AdministrativeArea a sh:NodeShape ;
     ys:fromClass wd:Q56061 .
 
 # Needed for capitals, mapped to "City or Town" in Wikidata, and to City.
-# "Human Settlement" , Q486972 contains very messy subclasses
 schema:City a sh:NodeShape ;
+    rdfs:subClassOf schema:AdministrativeArea ;
     ys:fromClass wd:Q7930989, wd:Q515 .
 
 # Needed because of additional properties
@@ -1474,9 +1474,10 @@ schema:Airport a sh:NodeShape ;
 #                Commercial Products
 ################################################################
 
-# An individual product with a GTIN
+# An individual product with a GTIN. 
+# Mapping also Collectables and Goods
 schema:Product a sh:NodeShape ;
-    ys:fromClass wd:Q2424752 ;
+    ys:fromClass wd:Q2424752, wd:Q2342494, wd:Q28877 ;
     sh:property [
         sh:path schema:award ;
         sh:node yago:Award ;

@@ -401,6 +401,9 @@ class treatWikidataEntity():
             checkCardinalityConstraints(p, entityFacts, self.yagoSchema)
 
         for s,p,o in entityFacts:
+            if s==o:
+                # Rare cases that are nonsense
+                continue
             if p==Prefixes.rdfType:
                 self.writer.write(s,"rdf:type",o,".")
                 continue

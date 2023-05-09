@@ -98,6 +98,7 @@ badClasses = {
     "wd:Q13226383", # facility
     "wd:Q15642541", # human-geographic territorial entity    
     "wd:Q4835091",  # territory
+    "wd:Q486972",   # Human settlement. Very messy subclasses that appear together with cities.
     "wd:Q4026292",  # Action
     "wd:Q67518978", # Occurrent
     "wd:Q2545446",  # Graphemes
