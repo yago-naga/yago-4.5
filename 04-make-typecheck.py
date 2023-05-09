@@ -199,10 +199,9 @@ with TsvUtils.Timer("Step 04: Type-checking YAGO"):
                     elif not currentEnglishLabel and not currentLabel:
                         label=TurtleUtils.splitLiteral(split[2])[0]
                         if allLegal(label):
-                            currentLabel=label
-################## HACK FOR PHP!                            
+                            currentLabel=label    
                 elif split[1]=="schema:mainEntityOfPage" and split[2].startswith('"https://en.wikipedia.org/wiki/'):
-                    currentWikipediaPage=split[2][31:-1]
+                    currentWikipediaPage=split[2][31:-13]
                 
                 # Write out the fact
                 startDate=split[5] if len(split)>5 else ""

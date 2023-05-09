@@ -37,7 +37,7 @@
 wd:Q_Elvis	rdf:type	wd:Q_singer	. #		
 wd:Q_Elvis	schema:deathDate	"1970-01-01"^^xsd:gYear	. #		
 wd:Q_Elvis	schema:mainEntityOfPage	<https://elvis.com>	. #		
-wd:Q_Elvis	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Elvis>	. #		
+wd:Q_Elvis	schema:mainEntityOfPage	"https://en.wikipedia.org/wiki/Elvis"^^xsd:anyURI	. #		
 wd:Q_Elvis	schema:children	wd:Q42	. #	"1960"^^xml:gYear	"1980"^^xml:gYear
 _:wd:Q_doctoralDegree_generic_instance	rdf:type	wd:Q_doctoralDegree	.
 _:wd:Q_doctoralDegree_generic_instance	rdfs:label	"Generic instance"@en	.
@@ -50,14 +50,14 @@ wd:Q45	rdf:type	wd:Q_european_book	. #
 wd:Q45	rdfs:label	"test"@de	. #		
 wd:Q_other_elvis	rdf:type	wd:Q_singer	. #		
 wd:Q_other_elvis	rdfs:label	"Eehlvis"@en	. #		
-wd:Q_other_elvis	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Elvis>	. #		
-wd:Q_singer	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/S%74nger%C3%A8>	. #		
+wd:Q_other_elvis	schema:mainEntityOfPage	"https://en.wikipedia.org/wiki/Elvis"^^xsd:anyURI	. #		
+wd:Q_singer	schema:mainEntityOfPage	"https://en.wikipedia.org/wiki/S%74nger%C3%A8"^^xsd:anyURI	. #		
 wd:Q_singer	rdfs:label	"chanteur"@fr	. #		
 wd:Q_singer	schema:alternateName	"this is a human being"@en	. #		
 wd:Q_singer	rdfs:comment	"this is a singer"@en	. #		
 wd:Q_singer	rdf:type	rdfs:Class	. #		
 wd:Q_singer	rdfs:label	"singer"@en	. #		
-wd:Q_prof	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Professor>	. #		
+wd:Q_prof	schema:mainEntityOfPage	"https://en.wikipedia.org/wiki/Professor"^^xsd:anyURI	. #		
 wd:Q_prof	rdfs:label	"prof"@fr	. #		
 wd:Q_prof	schema:alternateName	"this is a human professor"@en	. #		
 wd:Q_prof	rdfs:comment	"this is a professor"@en	. #		
