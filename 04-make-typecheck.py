@@ -201,7 +201,7 @@ with TsvUtils.Timer("Step 04: Type-checking YAGO"):
                         if allLegal(label):
                             currentLabel=label
 ################## HACK FOR PHP!                            
-                elif split[1]=="schema:mainEntityOfPage" and split[2].startswith('"https://en.wikipedia.org/wiki/A'):
+                elif split[1]=="schema:mainEntityOfPage" and split[2].startswith('"https://en.wikipedia.org/wiki/'):
                     currentWikipediaPage=split[2][31:-1]
                 
                 # Write out the fact
