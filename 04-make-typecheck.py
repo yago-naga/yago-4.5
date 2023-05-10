@@ -76,6 +76,9 @@ def yagoIdFromString(s):
         result="Y"+result
     # Special case for Hermit parser
     result=result.replace("genid","gen_id")
+    # List of... should go away
+    if result.startswith("List_of_"):
+        result=result[8:]
     return result
  
 def yagoIdFromWikipediaPage(wikipediaPageTitle):

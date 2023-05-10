@@ -1291,7 +1291,7 @@ schema:AdministrativeArea a sh:NodeShape ;
         sh:node schema:Place ;
         ys:fromProperty wdt:P150 ;
     ] ;
-    ys:fromClass wd:Q56061 .
+    ys:fromClass wd:Q56061, wd:Q486972 . # Fabian: also from human settlement, to avoid having it under land forms
 
 # Needed for capitals, mapped to "City or Town" in Wikidata, and to City.
 schema:City a sh:NodeShape ;
@@ -1336,10 +1336,11 @@ schema:Country a sh:NodeShape ;
 # --------------------- Land Forms ------------------------
 
 # One permissible subclass of schema:Place are land forms,
-# from natural geographic object, terrain, Landform, landmass, geolocation, georegion, geographical area
+# from natural geographic object, terrain, Landform, landmass, geolocation, geographical area
+# not from geographical region (Q82794) and geographic location  (Q2221906) because otherwise many administrative regions become Landforms
 schema:Landform a sh:NodeShape ;
     rdfs:subClassOf schema:Place ;
-	ys:fromClass wd:Q35145263, wd:Q14524493, wd:Q271669, wd:Q205895, wd:Q271669, wd:Q2221906, wd:Q3622002, wd:Q82794, wd:Q35145263 .
+	ys:fromClass wd:Q35145263, wd:Q14524493, wd:Q271669, wd:Q205895, wd:Q271669, wd:Q3622002, wd:Q35145263 .
     
 # Bodies of water are Landforms.
 # Linked to body of water and marine body of water
@@ -1477,7 +1478,7 @@ schema:Airport a sh:NodeShape ;
 # An individual product with a GTIN. 
 # Mapping also Collectables and Goods
 schema:Product a sh:NodeShape ;
-    ys:fromClass wd:Q2424752, wd:Q2342494, wd:Q28877 ;
+    ys:fromClass wd:Q2424752, wd:Q2342494, wd:Q28877, wd:Q2184715 ;
     sh:property [
         sh:path schema:award ;
         sh:node yago:Award ;
