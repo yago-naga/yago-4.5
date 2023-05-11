@@ -1,11 +1,5 @@
-echo "Creating small YAGO..."
-cd yago-data
-# Create a sample of YAGO
-#cp 01-yago-final-schema.ttl yago-small.ttl
-#grep -v -P '@prefix' 05-yago-final-taxonomy.tsv >> yago-small.ttl
-#grep -P 'yago:A[^\t]+\t[^\t]+\t("|yago:A|schema:)' >> yago-small.ttl
-#echo "Done"
 echo "Packing YAGO files..."
+cd yago-data
 rm yago-4.5.0.zip
 mv 01-yago-final-schema.ttl yago-schema.ttl
 mv 05-yago-final-wikipedia.tsv yago-facts.ttl

@@ -848,7 +848,7 @@ schema:Corporation a sh:NodeShape ;
     #    ) ;
     #    ys:fromProperty wdt:P127;
     #] ;
-    ys:fromClass wd:Q783794, wd:Q783794 ; # Fabian 2023-05-04: we merge companies 
+    ys:fromClass wd:Q783794 ; # Fabian 2023-05-04: we merge companies 
 	ys:fromClass wd:Q4830453 . # Fabian 2023-03-29: we merge in businesses here
 
 schema:Airline a sh:NodeShape ;
@@ -1340,7 +1340,7 @@ schema:Country a sh:NodeShape ;
 # not from geographical region (Q82794) and geographic location  (Q2221906) because otherwise many administrative regions become Landforms
 schema:Landform a sh:NodeShape ;
     rdfs:subClassOf schema:Place ;
-	ys:fromClass wd:Q35145263, wd:Q14524493, wd:Q271669, wd:Q205895, wd:Q271669, wd:Q3622002, wd:Q35145263 .
+	ys:fromClass wd:Q14524493, wd:Q205895, wd:Q271669, wd:Q3622002, wd:Q35145263 .
     
 # Bodies of water are Landforms.
 # Linked to body of water and marine body of water

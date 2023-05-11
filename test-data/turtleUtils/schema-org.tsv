@@ -9,7 +9,7 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix wikibase: <http://wikiba.se/ontology#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix schema: <https://schema.org/> .
+@prefix schema: <http://schema.org/> .
 @prefix cc: <http://creativecommons.org/ns#> .
 @prefix geo: <http://www.opengis.net/ont/geosparql#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
@@ -71,7 +71,7 @@ schema:AchieveAction	rdfs:comment	"The act of accomplishing something via previo
 schema:AchieveAction	rdfs:subClassOf	schema:Action	.
 schema:Action	rdf:type	rdfs:Class	.
 schema:Action	rdfs:label	"Action"	.
-schema:Action	rdfs:comment	"An action performed by a direct agent and indirect participants upon a direct object. Optionally happens at a location with the help of an inanimate instrument. The execution of the action may produce a result. Specific action sub-type documentation specifies the exact expectation of each argument/role.\\n\\nSee also [blog post](http://blog.schema.org/2014/04/announcing-schemaorg-actions.html) and [Actions overview document](https://schema.org/docs/actions.html)."	.
+schema:Action	rdfs:comment	"An action performed by a direct agent and indirect participants upon a direct object. Optionally happens at a location with the help of an inanimate instrument. The execution of the action may produce a result. Specific action sub-type documentation specifies the exact expectation of each argument/role.\\n\\nSee also [blog post](http://blog.schema.org/2014/04/announcing-schemaorg-actions.html) and [Actions overview document](http://schema.org/docs/actions.html)."	.
 schema:Action	rdfs:subClassOf	schema:Thing	.
 schema:Action	schema:source	<http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_ActionCollabClass>	.
 schema:ActionAccessSpecification	rdf:type	rdfs:Class	.
@@ -6496,7 +6496,7 @@ schema:additionalNumberOfGuests	schema:domainIncludes	schema:RsvpAction	.
 schema:additionalNumberOfGuests	schema:rangeIncludes	schema:Number	.
 schema:additionalProperty	rdf:type	rdf:Property	.
 schema:additionalProperty	rdfs:label	"additionalProperty"	.
-schema:additionalProperty	rdfs:comment	"A property-value pair representing an additional characteristics of the entitity, e.g. a product feature or another characteristic for which there is no matching property in schema.org.\\n\\nNote: Publishers should be aware that applications designed to use specific schema.org properties (e.g. https://schema.org/width, https://schema.org/color, https://schema.org/gtin13, ...) will typically expect such data to be provided using those properties, rather than using the generic property/value mechanism.\n"	.
+schema:additionalProperty	rdfs:comment	"A property-value pair representing an additional characteristics of the entitity, e.g. a product feature or another characteristic for which there is no matching property in schema.org.\\n\\nNote: Publishers should be aware that applications designed to use specific schema.org properties (e.g. http://schema.org/width, http://schema.org/color, http://schema.org/gtin13, ...) will typically expect such data to be provided using those properties, rather than using the generic property/value mechanism.\n"	.
 schema:additionalProperty	schema:domainIncludes	schema:MerchantReturnPolicy	.
 schema:additionalProperty	schema:domainIncludes	schema:Place	.
 schema:additionalProperty	schema:domainIncludes	schema:Product	.
@@ -9592,7 +9592,7 @@ schema:gameTip	schema:domainIncludes	schema:VideoGame	.
 schema:gameTip	schema:rangeIncludes	schema:CreativeWork	.
 schema:gender	rdf:type	rdf:Property	.
 schema:gender	rdfs:label	"gender"	.
-schema:gender	rdfs:comment	"Gender of something, typically a [[Person]], but possibly also fictional characters, animals, etc. While https://schema.org/Male and https://schema.org/Female may be used, text strings are also acceptable for people who do not identify as a binary gender. The [[gender]] property can also be used in an extended sense to cover e.g. the gender of sports teams. As with the gender of individuals, we do not try to enumerate all possibilities. A mixed-gender [[SportsTeam]] can be indicated with a text value of \"Mixed\"."	.
+schema:gender	rdfs:comment	"Gender of something, typically a [[Person]], but possibly also fictional characters, animals, etc. While http://schema.org/Male and http://schema.org/Female may be used, text strings are also acceptable for people who do not identify as a binary gender. The [[gender]] property can also be used in an extended sense to cover e.g. the gender of sports teams. As with the gender of individuals, we do not try to enumerate all possibilities. A mixed-gender [[SportsTeam]] can be indicated with a text value of \"Mixed\"."	.
 schema:gender	schema:domainIncludes	schema:Person	.
 schema:gender	schema:domainIncludes	schema:SportsTeam	.
 schema:gender	schema:isPartOf	<https://pending.schema.org>	.
@@ -10554,7 +10554,7 @@ schema:isicV4	schema:rangeIncludes	schema:Text	.
 schema:isicV4	schema:source	<http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsTerms>	.
 schema:iso6523Code	rdf:type	rdf:Property	.
 schema:iso6523Code	rdfs:label	"iso6523Code"	.
-schema:iso6523Code	rdfs:comment	"An organization identifier as defined in ISO 6523(-1). Note that many existing organization identifiers such as [leiCode](https://schema.org/leiCode), [duns](https://schema.org/duns) and [vatID](https://schema.org/vatID) can be expressed as an ISO 6523 identifier by setting the ICD part of the ISO 6523 identifier accordingly. "	.
+schema:iso6523Code	rdfs:comment	"An organization identifier as defined in ISO 6523(-1). Note that many existing organization identifiers such as [leiCode](http://schema.org/leiCode), [duns](http://schema.org/duns) and [vatID](http://schema.org/vatID) can be expressed as an ISO 6523 identifier by setting the ICD part of the ISO 6523 identifier accordingly. "	.
 schema:iso6523Code	schema:domainIncludes	schema:Organization	.
 schema:iso6523Code	schema:isPartOf	<https://pending.schema.org>	.
 schema:iso6523Code	schema:rangeIncludes	schema:Text	.
@@ -13446,7 +13446,7 @@ schema:scheduledTime	schema:domainIncludes	schema:PlanAction	.
 schema:scheduledTime	schema:rangeIncludes	schema:DateTime	.
 schema:schemaVersion	rdf:type	rdf:Property	.
 schema:schemaVersion	rdfs:label	"schemaVersion"	.
-schema:schemaVersion	rdfs:comment	"Indicates (by URL or string) a particular version of a schema used in some CreativeWork. This property was created primarily to\n    indicate the use of a specific schema.org release, e.g. ```10.0``` as a simple string, or more explicitly via URL, ```https://schema.org/docs/releases.html#v10.0```. There may be situations in which other schemas might usefully be referenced this way, e.g. ```http://dublincore.org/specifications/dublin-core/dces/1999-07-02/``` but this has not been carefully explored in the community."	.
+schema:schemaVersion	rdfs:comment	"Indicates (by URL or string) a particular version of a schema used in some CreativeWork. This property was created primarily to\n    indicate the use of a specific schema.org release, e.g. ```10.0``` as a simple string, or more explicitly via URL, ```http://schema.org/docs/releases.html#v10.0```. There may be situations in which other schemas might usefully be referenced this way, e.g. ```http://dublincore.org/specifications/dublin-core/dces/1999-07-02/``` but this has not been carefully explored in the community."	.
 schema:schemaVersion	schema:domainIncludes	schema:CreativeWork	.
 schema:schemaVersion	schema:rangeIncludes	schema:Text	.
 schema:schemaVersion	schema:rangeIncludes	schema:URL	.

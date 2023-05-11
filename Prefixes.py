@@ -22,7 +22,7 @@ prefixes = {
 "owl": "http://www.w3.org/2002/07/owl#",
 "wikibase": "http://wikiba.se/ontology#",
 "skos": "http://www.w3.org/2004/02/skos/core#",
-"schema": "https://schema.org/",
+"schema": "http://schema.org/",
 "cc": "http://creativecommons.org/ns#",
 "geo": "http://www.opengis.net/ont/geosparql#",
 "prov": "http://www.w3.org/ns/prov#",
