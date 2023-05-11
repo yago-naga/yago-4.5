@@ -1336,7 +1336,7 @@ schema:Country a sh:NodeShape ;
 # --------------------- Land Forms ------------------------
 
 # One permissible subclass of schema:Place are land forms,
-# from natural geographic object, terrain, Landform, landmass, geolocation, geographical area
+# from terrain, landmass, Landform, geographical area, natural geographic object
 # not from geographical region (Q82794) and geographic location  (Q2221906) because otherwise many administrative regions become Landforms
 schema:Landform a sh:NodeShape ;
     rdfs:subClassOf schema:Place ;
