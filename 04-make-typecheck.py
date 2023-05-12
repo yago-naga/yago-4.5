@@ -48,14 +48,19 @@ from collections import defaultdict
 def hexCode(char):    
     """ Hex-encodes the character """
     return "_u{0:04X}_".format(ord(char))
-    
+
+def inRange(char,start,end):
+    """ TRUE if the ordinal of the character is in the range of numbers"""
+    return ord(char)>=start and ord(char)<=end
+        
 def legal(char):
     """ TRUE if a character is a valid CURIE character.
     We're very restrictive here to make all parsers work.
     For example, percentage codes are legal characters in the specification,
-    but don't work in Hermit. """
-    category=unicodedata.category(char)[0]
-    return char in "_-0123456789" or (category=="L" and (ord(char)>=0x00C0  or ord(char)<=ord('z')))
+    but don't work in Hermit. 
+    The accepted characters are PN_CHARS_U | '-' | [0-9] 
+    """
+    return char=='_' or char=='-' or inRange(char, ord('0'), ord('9')) or inRange(char, ord('A'), ord('Z')) or inRange(char, ord('a'), ord('z')) or inRange(char, 0x00C0, 0x00D6) or inRange(char, 0x00D8, 0x00F6) or inRange(char, 0x00F8, 0x02FF) or inRange(char, 0x0370, 0x037D) or inRange(char, 0x037F, 0x1FFF) or inRange(char, 0x200C, 0x200D) or inRange(char, 0x2070, 0x218F) or inRange(char, 0x2C00, 0x2FEF) or inRange(char, 0x3001, 0xD7FF) or inRange(char, 0xF900, 0xFDCF) or inRange(char, 0xFDF0, 0xFFFD) or inRange(char, 0x10000, 0xEFFFF)
 
 def allLegal(s):
     """ True if all characters are legal characters """
