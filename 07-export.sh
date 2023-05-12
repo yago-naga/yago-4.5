@@ -12,4 +12,7 @@ mv yago-facts.ttl 05-yago-final-wikipedia.tsv
 mv yago-beyond-wikipedia.ttl 05-yago-final-beyond-wikipedia.tsv
 mv yago-meta-facts.ntx 05-yago-final-meta.tsv
 mv yago-taxonomy.ttl 05-yago-final-taxonomy.tsv
-echo Done
+echo "Done"
+echo "Copying YAGO file to Web server"
+scp yago-4.5.0.zip yago@yago.r2.enst.fr:/data/public/yago4.5
+echo "Done"
