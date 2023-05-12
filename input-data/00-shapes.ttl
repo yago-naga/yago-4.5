@@ -713,7 +713,7 @@ yago:Election a sh:NodeShape ;
 
 
 schema:Organization a sh:NodeShape ;
-    ys:fromClass wd:Q43229, wd:Q167037, wd:Q155076 ; # Fabian: we add corporations here (in the sense of legal entities), and juridical persons
+    ys:fromClass wd:Q43229, wd:Q895526, wd:Q167037, wd:Q155076 ; # Fabian: we add corporations here (in the sense of legal entities), and juridical persons, and organs
     sh:property [
         sh:path schema:award ;
         sh:node yago:Award ;

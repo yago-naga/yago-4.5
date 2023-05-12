@@ -84,6 +84,8 @@ def yagoIdFromString(s):
     # List of... should go away
     if result.startswith("List_of_"):
         result=result[8:]
+    if result.startswith("Lists_of_"):
+        result=result[9:]
     return result
  
 def yagoIdFromWikipediaPage(wikipediaPageTitle):

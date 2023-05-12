@@ -170,7 +170,7 @@ def termsAndSeparators(generator):
 blankNodeCounter=0
 
 def blankNodeName(subject, predicate=None):
-    """ Generates a legible name for a blank node """
+    """ Generates a legible name for a blank node in the YS namespace """
     global blankNodeCounter
     if ':' in subject:
         lastIndex=len(subject) - subject[::-1].index(':') - 1
@@ -182,8 +182,8 @@ def blankNodeName(subject, predicate=None):
         predicate=predicate[lastIndex+1:]
     else:
         predicate=""
-    blankNodeCounter=blankNodeCounter+1
-    return "_:"+subject+predicate+"_"+str(blankNodeCounter)
+    blankNodeCounter+=1
+    return "ys:"+subject+predicate+"_"+str(blankNodeCounter)
     
 def triplesFromTerms(generator, predicates=None, givenSubject=None):
     """ Iterator over the triples of a term generator """

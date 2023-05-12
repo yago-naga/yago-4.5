@@ -22,7 +22,7 @@ Algorithm:
 
 TEST=False
 OUTPUT_FOLDER="test-data/02-make-taxonomy/" if TEST else "yago-data/"
-WIKIDATA_FILE= "test-data/02-make-taxonomy/00-wikidata.ttl" if TEST else "../wikidata.ttl"
+WIKIDATA_FILE= "admin-center.ttl" #"test-data/02-make-taxonomy/00-wikidata.ttl" if TEST else "../wikidata.ttl"
 SCHEMA_FILE = "test-data/02-make-taxonomy/01-yago-final-schema.ttl" if TEST else "yago-data/01-yago-final-schema.ttl"
 
 ###########################################################################
@@ -96,6 +96,7 @@ badClasses = {
     "wd:Q115668308",# Release    
     "wd:Q618123",   # geographical feature
     "wd:Q13226383", # facility
+    "wd:Q2221906",  # geographical location
     "wd:Q15642541", # human-geographic territorial entity    
     "wd:Q4835091",  # territory
     "wd:Q4026292",  # Action
