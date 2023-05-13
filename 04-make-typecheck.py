@@ -58,9 +58,10 @@ def legal(char):
     We're very restrictive here to make all parsers work.
     For example, percentage codes are legal characters in the specification,
     but don't work in Hermit. 
-    The accepted characters are PN_CHARS_U | '-' | [0-9] 
+    The accepted characters are PN_CHARS_U | '-' | [0-9]  -- without ranges above 0xFFFF and
+    inRange(char, 0x037F, 0x1FFF) or inRange(char, 0x200C, 0x200D) or inRange(char, 0x2070, 0x218F) or inRange(char, 0x2C00, 0x2FEF) or inRange(char, 0x3001, 0xD7FF) or inRange(char, 0xF900, 0xFDCF) or inRange(char, 0xFDF0, 0xFFFD)
     """
-    return char=='_' or char=='-' or inRange(char, ord('0'), ord('9')) or inRange(char, ord('A'), ord('Z')) or inRange(char, ord('a'), ord('z')) or inRange(char, 0x00C0, 0x00D6) or inRange(char, 0x00D8, 0x00F6) or inRange(char, 0x00F8, 0x02FF) or inRange(char, 0x0370, 0x037D) or inRange(char, 0x037F, 0x1FFF) or inRange(char, 0x200C, 0x200D) or inRange(char, 0x2070, 0x218F) or inRange(char, 0x2C00, 0x2FEF) or inRange(char, 0x3001, 0xD7FF) or inRange(char, 0xF900, 0xFDCF) or inRange(char, 0xFDF0, 0xFFFD) or inRange(char, 0x10000, 0xEFFFF)
+    return char=='_' or char=='-' or inRange(char, ord('0'), ord('9')) or inRange(char, ord('A'), ord('Z')) or inRange(char, ord('a'), ord('z')) or inRange(char, 0x00C0, 0x00D6) or inRange(char, 0x00D8, 0x00F6) or inRange(char, 0x00F8, 0x02FF) or inRange(char, 0x0370, 0x037D)
 
 def allLegal(s):
     """ True if all characters are legal characters """
@@ -75,7 +76,7 @@ def yagoIdFromString(s):
         elif c==' ':
             result+='_'
         else:
-            result+=hexCode(c)
+            result+=hexCode(c)           
     # Special case that is disallowed
     if result.startswith("-"):
         result="Y"+result
@@ -109,14 +110,14 @@ def writeYagoId(out, currentTopic, currentEnglishLabel, currentLabel, currentWik
     # Don't print ids for built-in classes
     if currentTopic.startswith("schema:"):
         return
-    if currentWikipediaPage and currentWikipediaPage not in wikipediaPagesUsed:
+    if currentWikipediaPage and currentWikipediaPage not in wikipediaPagesUsed and len(currentWikipediaPage)>2:
         out.write(currentTopic,"owl:sameAs","yago:"+yagoIdFromWikipediaPage(currentWikipediaPage),". #WIKI")
         wikipediaPagesUsed.add(currentWikipediaPage)
         return
-    if currentEnglishLabel:
+    if currentEnglishLabel and len(currentEnglishLabel)>2:
         out.write(currentTopic,"owl:sameAs","yago:"+yagoIdFromLabel(currentTopic,currentEnglishLabel),". #OTHER")
         return
-    if currentLabel:
+    if currentLabel and len(currentLabel)>2
         out.write(currentTopic,"owl:sameAs","yago:"+yagoIdFromLabel(currentTopic,currentLabel),". #OTHER")
         return        
     out.write(currentTopic,"owl:sameAs","yago:"+yagoIdFromWikidataId(currentTopic),". #OTHER")
