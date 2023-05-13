@@ -117,7 +117,7 @@ def writeYagoId(out, currentTopic, currentEnglishLabel, currentLabel, currentWik
     if currentEnglishLabel and len(currentEnglishLabel)>2:
         out.write(currentTopic,"owl:sameAs","yago:"+yagoIdFromLabel(currentTopic,currentEnglishLabel),". #OTHER")
         return
-    if currentLabel and len(currentLabel)>2
+    if currentLabel and len(currentLabel)>2:
         out.write(currentTopic,"owl:sameAs","yago:"+yagoIdFromLabel(currentTopic,currentLabel),". #OTHER")
         return        
     out.write(currentTopic,"owl:sameAs","yago:"+yagoIdFromWikidataId(currentTopic),". #OTHER")
