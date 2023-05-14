@@ -1,4 +1,5 @@
 echo "Packing YAGO files..."
+date +"  Current time: %F %T"
 cd yago-data
 rm yago-4.5.0.zip
 mv 01-yago-final-schema.ttl yago-schema.ttl
@@ -16,3 +17,4 @@ echo "Done"
 echo "Copying YAGO file to Web server"
 scp yago-4.5.0.zip yago@yago.r2.enst.fr:/data/public/yago4.5
 echo "Done"
+date +"Current time: %F %T"
