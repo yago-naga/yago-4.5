@@ -79,10 +79,8 @@ def addSuperClasses(schemaClass):
 for schemaClass in yagoShapes.subjects(Prefixes.fromClass):
     addSuperClasses(schemaClass)
 
-# Now we verify self-containedness
-
+# Verify self-containedness
 permitted_namespaces = ["geo:", "rdfs:", "yago:", "xsd:"]
-
 for targetClass in yagoShapes.objects(None, Prefixes.shaclNode):
     if targetClass==Prefixes.schemaThing:
         continue
@@ -90,14 +88,27 @@ for targetClass in yagoShapes.objects(None, Prefixes.shaclNode):
         continue    
     if not yagoShapes.objects(targetClass, Prefixes.rdfsSubClassOf):
         print("  Warning: the range",targetClass,"is undefined in the schema")
- 
-# We verify the SHACL patterns
+
+# Verify unique property mappings
+for o in yagoShapes.objects(None, Prefixes.fromProperty):
+    mappedTo=set(c for b in yagoShapes.subjects(Prefixes.fromProperty, o) for c in yagoShapes.objects(b, Prefixes.shaclPath) )
+    if len(mappedTo)>1:
+        print("  Warning: the Wikidata property",o,"is mapped to more than one YAGO property:",mappedTo)
+        
+# Verify the SHACL patterns
 for s,p,o in yagoShapes.triplesWithPredicate(Prefixes.shaclPattern):
     try:
         re.compile(TurtleUtils.splitLiteral(o)[0])
     except:
         print("  Warning: the SHACL pattern",TurtleUtils.splitLiteral(o)[0],"does not compile as a regex, removing")
         yagoShapes.remove((s,p,o))
+
+# Verify max counts
+for o in yagoShapes.objects(None, Prefixes.shaclMaxCount):
+    _, intMaxCount, _, _ = TurtleUtils.splitLiteral(o)    
+    if intMaxCount is None or intMaxCount<=0:
+        print("  Warning: Maxcount has to be a positive int, not ",o)
+        
         
 ###########################################################################
 #           Write and test YAGO schema

@@ -82,7 +82,6 @@ schema:Thing a sh:NodeShape ;
     sh:property [
         sh:path schema:alternateName ;
         sh:datatype rdf:langString ;
-        sh:disjoint rdfs:label ;
         ys:fromProperty skos:altLabel, wdt:P225, wdt:1843 ;
     ] ;
     sh:property [
@@ -117,7 +116,6 @@ rdfs:Class a sh:NodeShape ;
     sh:property [
         sh:path schema:alternateName ;
         sh:datatype rdf:langString ;
-        sh:disjoint rdfs:label ;
         ys:fromProperty skos:altLabel ;
     ] ;
     sh:property [
@@ -225,7 +223,7 @@ schema:CreativeWork a sh:NodeShape ;
                 sh:node schema:Person
             ]
         ) ;
-        ys:fromProperty wdt:P50, wdt:P175, wdt:P170 ; 
+        ys:fromProperty wdt:P50, wdt:P170 ; 
     ] ;
     # Fabian: redundant with appearsIn
 	#sh:property [
@@ -375,7 +373,7 @@ schema:TVSeries a sh:NodeShape ;
 schema:MusicComposition a sh:NodeShape ;
     ys:fromClass wd:Q207628, wd:Q2188189 ;
     sh:property [
-        sh:path schema:composer ;
+        sh:path schema:musicBy ; # Fabian: cannot map to "composer", because a Wikidata property always has to go to the same schema property
         sh:or (
             [
                 sh:node schema:Person
@@ -484,7 +482,7 @@ yago:FictionalEntity a sh:NodeShape ;
                 sh:node schema:Person
             ]
         ) ;
-        ys:fromProperty wdt:P170, wdt:P50, wdt:P175 ;
+        ys:fromProperty wdt:P170, wdt:P50 ;
     ] ;
 	ys:fromClass wd:Q14897293, wd:Q115537581, wd:Q18706315, wd:Q21070598, wd:Q64728693 .
 	
@@ -829,25 +827,19 @@ schema:Organization a sh:NodeShape ;
     #     ys:fromProperty wdt:P355 ;
     # ] ;
     sh:property [
-        sh:path schema:parentOrganization ;
-        sh:node schema:Organization ;
-        ys:fromProperty wdt:P749 ;
-    ] .
+        sh:path schema:ownedBy ;
+        sh:or (
+            [
+                sh:node schema:Organization
+            ]
+            [
+                sh:node schema:Person
+            ]
+        ) ;
+        ys:fromProperty wdt:P127, wdt:P749 ;
+    ]  .
 
 schema:Corporation a sh:NodeShape ;
-	# Fabian: redundant with parentOrganization
-	#sh:property [
-    #    sh:path schema:ownedBy ;
-    #    sh:or (
-    #        [
-    #            sh:node schema:Organization
-    #        ]
-    #        [
-    #            sh:node schema:Person
-    #        ]
-    #    ) ;
-    #    ys:fromProperty wdt:P127;
-    #] ;
     ys:fromClass wd:Q783794 ; # Fabian 2023-05-04: we merge companies 
 	ys:fromClass wd:Q4830453 . # Fabian 2023-03-29: we merge in businesses here
 
@@ -1158,7 +1150,7 @@ schema:Place a sh:NodeShape ;
     # No mapping here, to avoid getting messy subclasses
     # ys:fromClass wd:Q17334923 ; 
     sh:property [
-        sh:path schema:containedInPlace ;
+        sh:path schema:location ;
         sh:node schema:Place ;
         ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17 ;
     ] ;

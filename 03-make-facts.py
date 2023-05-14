@@ -116,6 +116,10 @@ def wikidataPredicate2YagoPredicate(p, yagoSchema):
             return s
     return None
 
+def yagoPredicate2WikidataPredicates(p, yagoSchema):
+    """Translates a YAGO predicate to Wikidata predicates"""
+    return set(w for b in yagoSchema.subjects(Prefixes.shaclPath, p) for w in yagoSchema.objects(b, Prefixes.fromProperty))
+
 ##########################################################################
 #             Start and end dates
 ##########################################################################
@@ -199,19 +203,33 @@ def checkCardinalityConstraints(p, entityFacts, yagoSchema):
     if not propertyNode:
         return
     maxCount = getFirst(yagoSchema.objects(propertyNode, Prefixes.shaclMaxCount))
-    if not maxCount:
-        return
-    _, intMaxCount, _, _ = TurtleUtils.splitLiteral(maxCount)    
-    if intMaxCount is None or intMaxCount<=0:
-        raise Exception("Maxcount has to be a positive int, not "+maxCount)
-    for s in entityFacts.subjects():
-        # We take the first intCount, so as to take the earliest date
-        objects=entityFacts.objects(s, p)
-        if len(objects)<=intMaxCount:
-            continue            
-        objects.sort()
-        for i in range(intMaxCount,len(objects)):
-            entityFacts.remove((s, p, objects[i]))        
+    if maxCount:
+        _, intMaxCount, _, _ = TurtleUtils.splitLiteral(maxCount)    
+        if intMaxCount is None or intMaxCount<=0:
+            raise Exception("Maxcount has to be a positive int, not "+maxCount)
+        for s in set(entityFacts.subjects()):
+            # Consider all Wikidata predicates that are mapped to the same YAGO predicate
+            wikidataPredicates=yagoPredicate2WikidataPredicates(yagoPredicate, yagoSchema)
+            objects=set(o for w in wikidataPredicates for o in entityFacts.objects(s, w))
+            if len(objects)<=intMaxCount:
+                continue            
+            # We take the first intCount objects, so as to take the earliest date
+            objects=list(objects)
+            objects.sort()
+            for i in range(intMaxCount,len(objects)):
+                for w in wikidataPredicates:
+                    entityFacts.remove((s, w, objects[i]))        
+    if (propertyNode, Prefixes.shaclUniqueLang, "true") in yagoSchema:
+        usedLanguages=set()
+        triples=entityFacts.triplesWithPredicate(p)
+        triples.sort()
+        for s, _, o in triples:
+            literal=TurtleUtils.splitLiteral(o)
+            if literal is None or literal[2] in usedLanguages:
+                entityFacts.remove((s, p, o))
+                continue
+            usedLanguages.add(literal[2])
+        
         
 ##########################################################################
 #             Domain and range checks
@@ -258,7 +276,7 @@ def checkDatatype(datatype, listOfObjects, yagoSchema):
         return True
     if datatype==Prefixes.rdfLangString:
         return literalDataType is None and lang is not None
-    if datatype==Prefixes.xsdDateTime and o.startswith('"0000'):
+    if datatype==Prefixes.xsdDateTime and (o.startswith('"0000') or len(o)>len('"+0000-01-01T00:00:00Z"^^xsd:dateTime')):
         return False
     return literalDataType==datatype        
         

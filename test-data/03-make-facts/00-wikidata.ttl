@@ -98,6 +98,7 @@ wd:Q_singer  rdfs:label "singer"@en ;
 	schema:name "singer"@en ;
 	wdt:P646	<https://freebase.com/id> ;
 	rdfs:label "chanteur"@fr ;
+	rdfs:label "other french label"@fr ;
 	skos:prefLabel "chanteur"@fr ;
 	schema:name "chanteur"@fr ;	
 	schema:description "this is a singer"@en;

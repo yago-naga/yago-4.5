@@ -107,6 +107,10 @@ shaclNode="sh:node"
 
 shaclMaxCount="sh:maxCount"
 
+shaclUniqueLang="sh:uniqueLang"
+
+shaclDisjoint="sh:disjoint"
+
 shaclDatatype="sh:datatype"
 
 shaclOr="sh:or"
