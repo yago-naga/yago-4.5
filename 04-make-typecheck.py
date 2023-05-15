@@ -1,7 +1,7 @@
 """
 Typechecks the facts of YAGO
 
-(c) 2022 Fabian M. Suchanek
+CC-BY 2022 Fabian M. Suchanek
 
 Call:
   python3 make-typecheck.py

@@ -1,7 +1,7 @@
 """
 Reading Turtle files
 
-(c) 2022 Fabian M. Suchanek
+CC-BY 2022 Fabian M. Suchanek
 """
 
 import gzip

@@ -1,7 +1,7 @@
 """
 Creates the YAGO 4 taxonomy from the Wikidata taxonomy and the YAGO 4 schema
 
-(c) 2021 Fabian M. Suchanek
+CC-BY 2021 Fabian M. Suchanek
 
 Call:
   python3 02-make-taxonomy.py

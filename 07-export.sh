@@ -1,3 +1,5 @@
+# Exports YAGO into a ZIP file and to the Web server
+# CC-BY 2023 Fabian M. Suchanek
 echo "Packing YAGO files..."
 date +"  Current time: %F %T"
 cd yago-data

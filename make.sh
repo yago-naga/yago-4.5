@@ -1,3 +1,6 @@
+# Runs the entire YAGO pipeline
+# CC-BY Fabian M. Suchanek
+# Run with nohup &
 python3 01-make-schema.py
 python3 02-make-taxonomy.py
 python3 03-make-facts.py

@@ -1,7 +1,7 @@
 """
 Reading and writing TSV files that are TTL-compatible
 
-(c) 2022 Fabian M. Suchanek
+CC-BY 2022 Fabian M. Suchanek
 """
 
 import gzip

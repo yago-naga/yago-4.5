@@ -1,7 +1,7 @@
 """
 Produces statistics about YAGO entities and predicates, and extracts samples
 
-(c) 2022 Fabian M. Suchanek
+CC-BY 2022 Fabian M. Suchanek
 
 Input:
 - 01-yago-final-schema.ttl

@@ -1,1 +1,1 @@
-Not tested
+The schema generation is not tested

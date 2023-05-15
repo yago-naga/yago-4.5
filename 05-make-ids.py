@@ -1,7 +1,7 @@
 """
 Replaces the ids of the facts by YAGO ids
 
-(c) 2022 Fabian M. Suchanek
+CC-BY 2022 Fabian M. Suchanek
 
 Input:
 - 04-yago-facts-to-rename.tsv

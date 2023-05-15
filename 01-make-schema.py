@@ -1,7 +1,7 @@
 """
 Creates the YAGO 4 schema from schema.org and the hard-coded shapes
 
-(c) 2022 Fabian M. Suchanek
+CC-BY 2022 Fabian M. Suchanek
 
 Call:
   python3 01-make-schema.py

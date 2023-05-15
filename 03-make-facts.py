@@ -1,7 +1,7 @@
 """
 Creates the the YAGO facts from the Wikidata facts
 
-(c) 2022 Fabian M. Suchanek
+CC-BY 2022 Fabian M. Suchanek
 
 Call:
   python3 make-facts.py

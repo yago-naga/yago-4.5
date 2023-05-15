@@ -1,7 +1,7 @@
 """
 RDF namespace prefixes for YAGO
 
-(c) 2022 Fabian M. Suchanek
+CC-BY 2022 Fabian M. Suchanek
 """
 
 ##########################################################################
