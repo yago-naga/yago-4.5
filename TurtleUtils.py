@@ -540,6 +540,8 @@ def compareIds(wikidataFile, idFile):
     with open(idFile,'rt',encoding='utf-8') as idReader:
         with open(wikidataFile,"rb") as wikidataReader:        
             for graph in entitiesFromTriples(triplesFromTerms(termsAndSeparators(charGenerator(byteGenerator(wikidataReader))))):
+                if "wikibase:Item" not in graph.objects():
+                    continue
                 subjects=graph.subjects()
                 nextId=next(idReader,"EOF ").split(' ')[0]
                 if nextId not in subjects:
