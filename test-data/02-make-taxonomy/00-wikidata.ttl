@@ -51,8 +51,5012 @@ wd:Q_iphone wdt:P176 wd:Q_apple .
 wd:Q_deity a wd:item ;
   rdfs:label "Deity" ;
   wdt:P279 wd:Q_character .
-  
+                
 wd:Q_character a wd:item ;
   rdfs:label "Character" ;
   wdt:P1074 wd:Q5 ;
   wdt:P279 wd:Q95074 .  
+  
+############## Debugging landforms ##########
+
+wd:Q1306755 a wikibase:Item .
+
+<https://zh.wikipedia.org/wiki/%E8%A1%8C%E6%94%BF%E4%B8%AD%E5%BF%83> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "zh" ;
+	schema:isPartOf <https://zh.wikipedia.org/> ;
+	schema:name "行政中心"@zh .
+
+<https://nn.wikipedia.org/wiki/Administrasjonssenter> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "nn" ;
+	schema:isPartOf <https://nn.wikipedia.org/> ;
+	schema:name "Administrasjonssenter"@nn .
+
+<https://ja.wikipedia.org/wiki/%E8%A1%8C%E6%94%BF%E3%81%AE%E4%B8%AD%E5%BF%83> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "ja" ;
+	schema:isPartOf <https://ja.wikipedia.org/> ;
+	schema:name "行政の中心"@ja .
+
+<https://en.wikipedia.org/wiki/Administrative_centre> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "en" ;
+	schema:isPartOf <https://en.wikipedia.org/> ;
+	schema:name "Administrative centre"@en .
+
+<https://no.wikipedia.org/wiki/Administrasjonssenter> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "nb" ;
+	schema:isPartOf <https://no.wikipedia.org/> ;
+	schema:name "Administrasjonssenter"@nb .
+
+<https://sv.wikipedia.org/wiki/Huvudort> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "sv" ;
+	schema:isPartOf <https://sv.wikipedia.org/> ;
+	schema:name "Huvudort"@sv .
+
+<https://it.wikipedia.org/wiki/Centro_amministrativo> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "it" ;
+	schema:isPartOf <https://it.wikipedia.org/> ;
+	schema:name "Centro amministrativo"@it .
+
+<https://vi.wikipedia.org/wiki/Th%E1%BB%A7_ph%E1%BB%A7> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "vi" ;
+	schema:isPartOf <https://vi.wikipedia.org/> ;
+	schema:name "Thủ phủ"@vi .
+
+<https://de.wikipedia.org/wiki/Verwaltungssitz> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "de" ;
+	schema:isPartOf <https://de.wikipedia.org/> ;
+	schema:name "Verwaltungssitz"@de .
+
+<https://nl.wikipedia.org/wiki/Bestuurlijk_centrum> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "nl" ;
+	schema:isPartOf <https://nl.wikipedia.org/> ;
+	schema:name "Bestuurlijk centrum"@nl .
+
+<https://ar.wikipedia.org/wiki/%D9%85%D8%B1%D9%83%D8%B2_%D8%A5%D8%AF%D8%A7%D8%B1%D9%8A> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "ar" ;
+	schema:isPartOf <https://ar.wikipedia.org/> ;
+	schema:name "مركز إداري"@ar .
+
+<https://ru.wikipedia.org/wiki/%D0%90%D0%B4%D0%BC%D0%B8%D0%BD%D0%B8%D1%81%D1%82%D1%80%D0%B0%D1%82%D0%B8%D0%B2%D0%BD%D1%8B%D0%B9_%D1%86%D0%B5%D0%BD%D1%82%D1%80> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "ru" ;
+	schema:isPartOf <https://ru.wikipedia.org/> ;
+	schema:name "Административный центр"@ru .
+
+<https://be-tarask.wikipedia.org/wiki/%D0%90%D0%B4%D0%BC%D1%96%D0%BD%D1%96%D1%81%D1%82%D1%80%D0%B0%D1%86%D1%8B%D0%B9%D0%BD%D1%8B_%D1%86%D1%8D%D0%BD%D1%82%D0%B0%D1%80> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "be-tarask" ;
+	schema:isPartOf <https://be-tarask.wikipedia.org/> ;
+	schema:name "Адміністрацыйны цэнтар"@be-tarask .
+
+<https://be.wikipedia.org/wiki/%D0%90%D0%B4%D0%BC%D1%96%D0%BD%D1%96%D1%81%D1%82%D1%80%D0%B0%D1%86%D1%8B%D0%B9%D0%BD%D1%8B_%D1%86%D1%8D%D0%BD%D1%82%D1%80> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "be" ;
+	schema:isPartOf <https://be.wikipedia.org/> ;
+	schema:name "Адміністрацыйны цэнтр"@be .
+
+<https://bg.wikipedia.org/wiki/%D0%90%D0%B4%D0%BC%D0%B8%D0%BD%D0%B8%D1%81%D1%82%D1%80%D0%B0%D1%82%D0%B8%D0%B2%D0%B5%D0%BD_%D1%86%D0%B5%D0%BD%D1%82%D1%8A%D1%80> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "bg" ;
+	schema:isPartOf <https://bg.wikipedia.org/> ;
+	schema:name "Административен център"@bg .
+
+<https://cv.wikipedia.org/wiki/%D0%90%D0%B4%D0%BC%D0%B8%D0%BD%D0%B8%D1%81%D1%82%D1%80%D0%B0%D1%86%D0%B8_%D1%86%D0%B5%D0%BD%D1%82%D1%80%C4%95> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "cv" ;
+	schema:isPartOf <https://cv.wikipedia.org/> ;
+	schema:name "Администраци центрĕ"@cv .
+
+<https://pl.wikipedia.org/wiki/O%C5%9Brodek_administracyjny> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "pl" ;
+	schema:isPartOf <https://pl.wikipedia.org/> ;
+	schema:name "Ośrodek administracyjny"@pl .
+
+<https://uk.wikipedia.org/wiki/%D0%90%D0%B4%D0%BC%D1%96%D0%BD%D1%96%D1%81%D1%82%D1%80%D0%B0%D1%82%D0%B8%D0%B2%D0%BD%D0%B8%D0%B9_%D1%86%D0%B5%D0%BD%D1%82%D1%80> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "uk" ;
+	schema:isPartOf <https://uk.wikipedia.org/> ;
+	schema:name "Адміністративний центр"@uk .
+
+<https://tt.wikipedia.org/wiki/%D0%90%D0%B4%D0%BC%D0%B8%D0%BD%D0%B8%D1%81%D1%82%D1%80%D0%B0%D1%82%D0%B8%D0%B2_%D2%AF%D0%B7%D3%99%D0%BA> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "tt" ;
+	schema:isPartOf <https://tt.wikipedia.org/> ;
+	schema:name "Административ үзәк"@tt .
+
+<https://es.wikipedia.org/wiki/Centro_administrativo> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "es" ;
+	schema:isPartOf <https://es.wikipedia.org/> ;
+	schema:name "Centro administrativo"@es .
+
+<https://als.wikipedia.org/wiki/Verwaltungssitz> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "gsw" ;
+	schema:isPartOf <https://als.wikipedia.org/> ;
+	schema:name "Verwaltungssitz"@gsw .
+
+<https://et.wikipedia.org/wiki/Halduskeskus> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "et" ;
+	schema:isPartOf <https://et.wikipedia.org/> ;
+	schema:name "Halduskeskus"@et .
+
+<https://simple.wikipedia.org/wiki/Administrative_centre> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "en-simple" ;
+	schema:isPartOf <https://simple.wikipedia.org/> ;
+	schema:name "Administrative centre"@en-simple .
+
+<https://tg.wikipedia.org/wiki/%D0%9C%D0%B0%D1%80%D0%BA%D0%B0%D0%B7%D0%B8_%D0%BC%D0%B0%D1%8A%D0%BC%D1%83%D1%80%D3%A3> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "tg" ;
+	schema:isPartOf <https://tg.wikipedia.org/> ;
+	schema:name "Маркази маъмурӣ"@tg .
+
+<https://ur.wikipedia.org/wiki/%D8%A7%D9%86%D8%AA%D8%B8%D8%A7%D9%85%DB%8C_%D9%85%D8%B1%DA%A9%D8%B2> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "ur" ;
+	schema:isPartOf <https://ur.wikipedia.org/> ;
+	schema:name "انتظامی مرکز"@ur .
+
+<https://fr.wikipedia.org/wiki/Centre_administratif> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "fr" ;
+	schema:isPartOf <https://fr.wikipedia.org/> ;
+	schema:name "Centre administratif"@fr .
+
+<https://ce.wikipedia.org/wiki/%D0%90%D0%B4%D0%BC%D0%B8%D0%BD%D0%B8%D1%81%D1%82%D1%80%D0%B0%D1%82%D0%B8%D0%B2%D0%B0%D0%BD_%D1%86%D0%B5%D0%BD%D1%82%D1%80> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "ce" ;
+	schema:isPartOf <https://ce.wikipedia.org/> ;
+	schema:name "Административан центр"@ce .
+
+<https://ca.wikipedia.org/wiki/Centre_administratiu> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "ca" ;
+	schema:isPartOf <https://ca.wikipedia.org/> ;
+	schema:name "Centre administratiu"@ca .
+
+<https://ba.wikipedia.org/wiki/%D0%90%D0%B4%D0%BC%D0%B8%D0%BD%D0%B8%D1%81%D1%82%D1%80%D0%B0%D1%82%D0%B8%D0%B2_%D2%AF%D2%99%D3%99%D0%BA> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "ba" ;
+	schema:isPartOf <https://ba.wikipedia.org/> ;
+	schema:name "Административ үҙәк"@ba .
+
+<https://wuu.wikipedia.org/wiki/%E6%B2%BB%E6%89%80> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "wuu" ;
+	schema:isPartOf <https://wuu.wikipedia.org/> ;
+	schema:name "治所"@wuu .
+
+<https://pt.wikipedia.org/wiki/Centro_administrativo> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "pt" ;
+	schema:isPartOf <https://pt.wikipedia.org/> ;
+	schema:name "Centro administrativo"@pt .
+
+<https://tl.wikipedia.org/wiki/Sentrong_pampangasiwaan> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "tl" ;
+	schema:isPartOf <https://tl.wikipedia.org/> ;
+	schema:name "Sentrong pampangasiwaan"@tl .
+
+<https://tr.wikipedia.org/wiki/Y%C3%B6netim_merkezi> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "tr" ;
+	schema:isPartOf <https://tr.wikipedia.org/> ;
+	schema:name "Yönetim merkezi"@tr .
+
+<https://av.wikipedia.org/wiki/%D0%90%D0%B4%D0%BC%D0%B8%D0%BD%D0%B8%D1%81%D1%82%D1%80%D0%B0%D1%82%D0%B8%D0%B2%D0%B8%D1%8F%D0%B1_%D0%BC%D0%B0%D1%80%D0%BA%D0%B0%D0%B7> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "av" ;
+	schema:isPartOf <https://av.wikipedia.org/> ;
+	schema:name "Административияб марказ"@av .
+
+<https://se.wikipedia.org/wiki/H%C3%A1lddahusguovdd%C3%A1%C5%A1> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "se" ;
+	schema:isPartOf <https://se.wikipedia.org/> ;
+	schema:name "Hálddahusguovddáš"@se .
+
+<https://lv.wikipedia.org/wiki/P%C4%81rvaldes_centrs> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "lv" ;
+	schema:isPartOf <https://lv.wikipedia.org/> ;
+	schema:name "Pārvaldes centrs"@lv .
+
+<https://te.wikipedia.org/wiki/%E0%B0%AA%E0%B0%B0%E0%B0%BF%E0%B0%AA%E0%B0%BE%E0%B0%B2%E0%B0%A8%E0%B0%BE_%E0%B0%95%E0%B1%87%E0%B0%82%E0%B0%A6%E0%B1%8D%E0%B0%B0%E0%B0%82> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "te" ;
+	schema:isPartOf <https://te.wikipedia.org/> ;
+	schema:name "పరిపాలనా కేంద్రం"@te .
+
+<https://ku.wikipedia.org/wiki/Navenda_%C3%AEdar%C3%AE> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "ku" ;
+	schema:isPartOf <https://ku.wikipedia.org/> ;
+	schema:name "Navenda îdarî"@ku .
+
+<https://ro.wikipedia.org/wiki/Centru_administrativ> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "ro" ;
+	schema:isPartOf <https://ro.wikipedia.org/> ;
+	schema:name "Centru administrativ"@ro .
+
+<https://hi.wikipedia.org/wiki/%E0%A4%AA%E0%A5%8D%E0%A4%B0%E0%A4%B6%E0%A4%BE%E0%A4%B8%E0%A4%A8%E0%A4%BF%E0%A4%95_%E0%A4%95%E0%A5%87%E0%A4%82%E0%A4%A6%E0%A5%8D%E0%A4%B0> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "hi" ;
+	schema:isPartOf <https://hi.wikipedia.org/> ;
+	schema:name "प्रशासनिक केंद्र"@hi .
+
+<https://ps.wikipedia.org/wiki/%D8%A7%D8%AF%D8%A7%D8%B1%D9%8A_%D9%85%D8%B1%DA%A9%D8%B2> a schema:Article ;
+	schema:about wd:Q1306755 ;
+	schema:inLanguage "ps" ;
+	schema:isPartOf <https://ps.wikipedia.org/> ;
+	schema:name "اداري مرکز"@ps .
+
+wd:Q1306755 wdt:P279 wd:Q2221906 ;
+	wdt:P361 wd:Q5283295 ;
+	wdt:P1687 wd:P1376,
+		wd:P36 ;
+	wdt:P1014 "300387264" ;
+	wdtn:P1014 <http://vocab.getty.edu/aat/300387264> ;
+	wdt:P1014 "300008415" ;
+	wdtn:P1014 <http://vocab.getty.edu/aat/300008415> ;
+	wdt:P2670 wd:Q956214,
+		wd:Q543654,
+		wd:Q15303838,
+		wd:Q4580177 ;
+	wdt:P910 wd:Q31082934 ;
+	wdt:P227 "4181598-1" ;
+	wdtn:P227 <https://d-nb.info/gnd/4181598-1> ;
+	wdt:P8408 "AdministrativeCenter" ;
+	wdtn:P8408 <http://kbpedia.org/kko/rc/AdministrativeCenter> ;
+	wdt:P1282 "Role:admin_centre",
+		"Key:capital" ;
+	wdt:P646 "/m/06w8k5" ;
+	wdt:P1889 wd:Q5119 ;
+	wdt:P4980 "T96-197" ;
+	wdtn:P4980 <http://data.culture.fr/thesaurus/resource/ark:/67717/T96-T96-197> ;
+	p:P279 s:Q1306755-821aff5a-4a6a-4699-b780-b71c69334d29 .
+
+s:Q1306755-821aff5a-4a6a-4699-b780-b71c69334d29 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P279 wd:Q2221906 .
+
+wd:Q1306755 p:P361 s:Q1306755-3e969909-4d53-cae4-b87a-6fe0d57f604b .
+
+s:Q1306755-3e969909-4d53-cae4-b87a-6fe0d57f604b a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P361 wd:Q5283295 .
+
+wd:Q1306755 p:P1687 s:Q1306755-cff9974d-44a4-24b6-9ea5-52ff8f37aa77 .
+
+s:Q1306755-cff9974d-44a4-24b6-9ea5-52ff8f37aa77 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1687 wd:P1376 .
+
+wd:Q1306755 p:P1687 s:Q1306755-3735c663-4b97-a72a-58c7-5a7d9be52026 .
+
+s:Q1306755-3735c663-4b97-a72a-58c7-5a7d9be52026 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1687 wd:P36 .
+
+wd:Q1306755 p:P1014 s:Q1306755-0FE9936A-9E73-4CF3-BF9E-4BF13490EFDC .
+
+s:Q1306755-0FE9936A-9E73-4CF3-BF9E-4BF13490EFDC a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1014 "300387264" ;
+	psn:P1014 <http://vocab.getty.edu/aat/300387264> .
+
+wd:Q1306755 p:P1014 s:Q1306755-CDCCC95E-7DC1-469F-84F7-26864E20A886 .
+
+s:Q1306755-CDCCC95E-7DC1-469F-84F7-26864E20A886 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1014 "300008415" ;
+	psn:P1014 <http://vocab.getty.edu/aat/300008415> .
+
+wd:Q1306755 p:P2670 s:Q1306755-45730608-4e65-5b41-6ee9-df0850b840cb .
+
+s:Q1306755-45730608-4e65-5b41-6ee9-df0850b840cb a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P2670 wd:Q956214 .
+
+wd:Q1306755 p:P2670 s:Q1306755-1a6ba5b8-4c2d-6bed-c0d6-525476efac6e .
+
+s:Q1306755-1a6ba5b8-4c2d-6bed-c0d6-525476efac6e a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P2670 wd:Q543654 .
+
+wd:Q1306755 p:P2670 s:Q1306755-0b2b1193-4a58-c03e-4e13-ac5b02e2b1e3 .
+
+s:Q1306755-0b2b1193-4a58-c03e-4e13-ac5b02e2b1e3 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P2670 wd:Q15303838 .
+
+wd:Q1306755 p:P2670 s:Q1306755-4851dc11-4866-fb32-f011-5ddc0d35746c .
+
+s:Q1306755-4851dc11-4866-fb32-f011-5ddc0d35746c a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P2670 wd:Q4580177 .
+
+wd:Q1306755 p:P910 s:Q1306755-4F471877-3EC0-43AD-91E4-ECCBEB64EE78 .
+
+s:Q1306755-4F471877-3EC0-43AD-91E4-ECCBEB64EE78 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P910 wd:Q31082934 ;
+	prov:wasDerivedFrom ref:0ee3b3ba1c958f4c3dcba7ed8091fe4b57311348 .
+
+wd:Q1306755 p:P227 s:Q1306755-a87412aa-45d3-9643-fbc8-b05b22c074a9 .
+
+s:Q1306755-a87412aa-45d3-9643-fbc8-b05b22c074a9 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P227 "4181598-1" ;
+	psn:P227 <https://d-nb.info/gnd/4181598-1> .
+
+wd:Q1306755 p:P8408 s:Q1306755-3DAB3363-158A-440C-9856-76A8F3D400F3 .
+
+s:Q1306755-3DAB3363-158A-440C-9856-76A8F3D400F3 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P8408 "AdministrativeCenter" ;
+	psn:P8408 <http://kbpedia.org/kko/rc/AdministrativeCenter> ;
+	prov:wasDerivedFrom ref:9a681f9dd95c90224547c404e11295f4f7dcf54e .
+
+wd:Q1306755 p:P1282 s:Q1306755-4be0708f-4e26-a246-f4db-e74bcfa80935 .
+
+s:Q1306755-4be0708f-4e26-a246-f4db-e74bcfa80935 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1282 "Role:admin_centre" .
+
+wd:Q1306755 p:P1282 s:Q1306755-5bb5aaa3-400c-3e97-6d8c-2678ec89c644 .
+
+s:Q1306755-5bb5aaa3-400c-3e97-6d8c-2678ec89c644 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1282 "Key:capital" .
+
+wd:Q1306755 p:P646 s:Q1306755-7AE3FEA1-980D-4126-B649-AD13E4817784 .
+
+s:Q1306755-7AE3FEA1-980D-4126-B649-AD13E4817784 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P646 "/m/06w8k5" .
+
+wd:Q1306755 p:P1889 s:Q1306755-e49e262a-419c-b31d-438b-4b27e6c52f5a .
+
+s:Q1306755-e49e262a-419c-b31d-438b-4b27e6c52f5a a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1889 wd:Q5119 .
+
+wd:Q1306755 p:P4980 s:Q1306755-1834A543-1962-41B9-B8C4-17EE35C883A4 .
+
+s:Q1306755-1834A543-1962-41B9-B8C4-17EE35C883A4 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P4980 "T96-197" ;
+	psn:P4980 <http://data.culture.fr/thesaurus/resource/ark:/67717/T96-T96-197> .
+
+wd:Q1306755 rdfs:label "行政中心"@zh-hans ;
+	skos:prefLabel "行政中心"@zh-hans ;
+	schema:name "行政中心"@zh-hans ;
+	rdfs:label "行政中心"@zh-hant ;
+	skos:prefLabel "行政中心"@zh-hant ;
+	schema:name "行政中心"@zh-hant ;
+	rdfs:label "行政中心"@zh-hk ;
+	skos:prefLabel "行政中心"@zh-hk ;
+	schema:name "行政中心"@zh-hk ;
+	rdfs:label "Administrasjonssenter"@nn ;
+	skos:prefLabel "Administrasjonssenter"@nn ;
+	schema:name "Administrasjonssenter"@nn ;
+	rdfs:label "行政の中心"@ja ;
+	skos:prefLabel "行政の中心"@ja ;
+	schema:name "行政の中心"@ja ;
+	rdfs:label "administrative centre"@en ;
+	skos:prefLabel "administrative centre"@en ;
+	schema:name "administrative centre"@en ;
+	rdfs:label "huvudort"@sv ;
+	skos:prefLabel "huvudort"@sv ;
+	schema:name "huvudort"@sv ;
+	rdfs:label "centro amministrativo"@it ;
+	skos:prefLabel "centro amministrativo"@it ;
+	schema:name "centro amministrativo"@it ;
+	rdfs:label "административный центр"@ru ;
+	skos:prefLabel "административный центр"@ru ;
+	schema:name "административный центр"@ru ;
+	rdfs:label "administrasjonssenter"@nb ;
+	skos:prefLabel "administrasjonssenter"@nb ;
+	schema:name "administrasjonssenter"@nb ;
+	rdfs:label "thủ phủ"@vi ;
+	skos:prefLabel "thủ phủ"@vi ;
+	schema:name "thủ phủ"@vi ;
+	rdfs:label "Verwaltungssitz"@de ;
+	skos:prefLabel "Verwaltungssitz"@de ;
+	schema:name "Verwaltungssitz"@de ;
+	rdfs:label "centra administratiu"@oc ;
+	skos:prefLabel "centra administratiu"@oc ;
+	schema:name "centra administratiu"@oc ;
+	rdfs:label "bestuurlijk centrum"@nl ;
+	skos:prefLabel "bestuurlijk centrum"@nl ;
+	schema:name "bestuurlijk centrum"@nl ;
+	rdfs:label "адміністрацыйны цэнтр"@be ;
+	skos:prefLabel "адміністрацыйны цэнтр"@be ;
+	schema:name "адміністрацыйны цэнтр"@be ;
+	rdfs:label "centro administrativo"@pt ;
+	skos:prefLabel "centro administrativo"@pt ;
+	schema:name "centro administrativo"@pt ;
+	rdfs:label "administrativt center"@da ;
+	skos:prefLabel "administrativt center"@da ;
+	schema:name "administrativt center"@da ;
+	rdfs:label "Административен център"@bg ;
+	skos:prefLabel "Административен център"@bg ;
+	schema:name "Административен център"@bg ;
+	rdfs:label "行政中心"@zh ;
+	skos:prefLabel "行政中心"@zh ;
+	schema:name "行政中心"@zh ;
+	rdfs:label "административ үзәк"@tt ;
+	skos:prefLabel "административ үзәк"@tt ;
+	schema:name "административ үзәк"@tt ;
+	rdfs:label "مركز إداري"@ar ;
+	skos:prefLabel "مركز إداري"@ar ;
+	schema:name "مركز إداري"@ar ;
+	rdfs:label "адміністративний центр"@uk ;
+	skos:prefLabel "адміністративний центр"@uk ;
+	schema:name "адміністративний центр"@uk ;
+	rdfs:label "Администраци центрĕ"@cv ;
+	skos:prefLabel "Администраци центрĕ"@cv ;
+	schema:name "Администраци центрĕ"@cv ;
+	rdfs:label "ośrodek administracyjny"@pl ;
+	skos:prefLabel "ośrodek administracyjny"@pl ;
+	schema:name "ośrodek administracyjny"@pl ;
+	rdfs:label "διοικητικό κέντρο"@el ;
+	skos:prefLabel "διοικητικό κέντρο"@el ;
+	schema:name "διοικητικό κέντρο"@el ;
+	rdfs:label "administrativní centrum"@cs ;
+	skos:prefLabel "administrativní centrum"@cs ;
+	schema:name "administrativní centrum"@cs ;
+	rdfs:label "Verwaltigssitz"@gsw ;
+	skos:prefLabel "Verwaltigssitz"@gsw ;
+	schema:name "Verwaltigssitz"@gsw ;
+	rdfs:label "centre administratif"@fr ;
+	skos:prefLabel "centre administratif"@fr ;
+	schema:name "centre administratif"@fr ;
+	rdfs:label "Административни юкъ"@ce ;
+	skos:prefLabel "Административни юкъ"@ce ;
+	schema:name "Административни юкъ"@ce ;
+	rdfs:label "centro administrativo"@es ;
+	skos:prefLabel "centro administrativo"@es ;
+	schema:name "centro administrativo"@es ;
+	rdfs:label "адміністрацыйны цэнтар"@be-tarask ;
+	skos:prefLabel "адміністрацыйны цэнтар"@be-tarask ;
+	schema:name "адміністрацыйны цэнтар"@be-tarask ;
+	rdfs:label "admeenistrative centre"@sco ;
+	skos:prefLabel "admeenistrative centre"@sco ;
+	schema:name "admeenistrative centre"@sco ;
+	rdfs:label "halduskeskus"@et ;
+	skos:prefLabel "halduskeskus"@et ;
+	schema:name "halduskeskus"@et ;
+	rdfs:label "управни центар"@sr ;
+	skos:prefLabel "управни центар"@sr ;
+	schema:name "управни центар"@sr ;
+	rdfs:label "управни центар"@sr-ec ;
+	skos:prefLabel "управни центар"@sr-ec ;
+	schema:name "управни центар"@sr-ec ;
+	rdfs:label "upravni centar"@sr-el ;
+	skos:prefLabel "upravni centar"@sr-el ;
+	schema:name "upravni centar"@sr-el ;
+	rdfs:label "административен центар"@mk ;
+	skos:prefLabel "административен центар"@mk ;
+	schema:name "административен центар"@mk ;
+	rdfs:label "Маркази маъмурӣ"@tg ;
+	skos:prefLabel "Маркази маъмурӣ"@tg ;
+	schema:name "Маркази маъмурӣ"@tg ;
+	rdfs:label "әкімшілік орталық"@kk ;
+	skos:prefLabel "әкімшілік орталық"@kk ;
+	schema:name "әкімшілік орталық"@kk ;
+	rdfs:label "انتظامی مرکز"@ur ;
+	skos:prefLabel "انتظامی مرکز"@ur ;
+	schema:name "انتظامی مرکز"@ur ;
+	rdfs:label "(közigazgatási) székhely"@hu ;
+	skos:prefLabel "(közigazgatási) székhely"@hu ;
+	schema:name "(közigazgatási) székhely"@hu ;
+	rdfs:label "idari merkez"@tr ;
+	skos:prefLabel "idari merkez"@tr ;
+	schema:name "idari merkez"@tr ;
+	rdfs:label "centre administratiu"@ca ;
+	skos:prefLabel "centre administratiu"@ca ;
+	schema:name "centre administratiu"@ca ;
+	rdfs:label "centru administrativ"@ro ;
+	skos:prefLabel "centru administrativ"@ro ;
+	schema:name "centru administrativ"@ro ;
+	rdfs:label "hallintokeskus"@fi ;
+	skos:prefLabel "hallintokeskus"@fi ;
+	schema:name "hallintokeskus"@fi ;
+	rdfs:label "административ үҙәк"@ba ;
+	skos:prefLabel "административ үҙәк"@ba ;
+	schema:name "административ үҙәк"@ba ;
+	rdfs:label "מרכז מנהלתי"@he ;
+	skos:prefLabel "מרכז מנהלתי"@he ;
+	schema:name "מרכז מנהלתי"@he ;
+	rdfs:label "административ үзәк"@tt-cyrl ;
+	skos:prefLabel "административ үзәк"@tt-cyrl ;
+	schema:name "административ үзәк"@tt-cyrl ;
+	rdfs:label "administra centro"@eo ;
+	skos:prefLabel "administra centro"@eo ;
+	schema:name "administra centro"@eo ;
+	rdfs:label "ადმინისტრაციული ცენტრი"@ka ;
+	skos:prefLabel "ადმინისტრაციული ცენტრი"@ka ;
+	schema:name "ადმინისტრაციული ცენტრი"@ka ;
+	rdfs:label "治所"@wuu ;
+	skos:prefLabel "治所"@wuu ;
+	schema:name "治所"@wuu ;
+	rdfs:label "Sentrong pampangasiwaan"@tl ;
+	skos:prefLabel "Sentrong pampangasiwaan"@tl ;
+	schema:name "Sentrong pampangasiwaan"@tl ;
+	rdfs:label "Административияб марказ"@av ;
+	skos:prefLabel "Административияб марказ"@av ;
+	schema:name "Административияб марказ"@av ;
+	rdfs:label "canolfan weinyddol"@cy ;
+	skos:prefLabel "canolfan weinyddol"@cy ;
+	schema:name "canolfan weinyddol"@cy ;
+	rdfs:label "Merkezê idarey"@diq ;
+	skos:prefLabel "Merkezê idarey"@diq ;
+	schema:name "Merkezê idarey"@diq ;
+	rdfs:label "centru alministrativu"@ast ;
+	skos:prefLabel "centru alministrativu"@ast ;
+	schema:name "centru alministrativu"@ast ;
+	rdfs:label "pārvaldes centrs"@lv ;
+	skos:prefLabel "pārvaldes centrs"@lv ;
+	schema:name "pārvaldes centrs"@lv ;
+	rdfs:label "hálddahusguovddáš"@se ;
+	skos:prefLabel "hálddahusguovddáš"@se ;
+	schema:name "hálddahusguovddáš"@se ;
+	rdfs:label "పరిపాలనా కేంద్రం"@te ;
+	skos:prefLabel "పరిపాలనా కేంద్రం"@te ;
+	schema:name "పరిపాలనా కేంద్రం"@te ;
+	rdfs:label "oñesãmbyhyhápe"@gn ;
+	skos:prefLabel "oñesãmbyhyhápe"@gn ;
+	schema:name "oñesãmbyhyhápe"@gn ;
+	rdfs:label "sentro aministrativo"@vec ;
+	skos:prefLabel "sentro aministrativo"@vec ;
+	schema:name "sentro aministrativo"@vec ;
+	rdfs:label "Navenda îdarî"@ku ;
+	skos:prefLabel "Navenda îdarî"@ku ;
+	schema:name "Navenda îdarî"@ku ;
+	rdfs:label "ڤوست ڤنتدبيرن"@ms-arab ;
+	skos:prefLabel "ڤوست ڤنتدبيرن"@ms-arab ;
+	schema:name "ڤوست ڤنتدبيرن"@ms-arab ;
+	rdfs:label "pusat pentadbiran"@ms ;
+	skos:prefLabel "pusat pentadbiran"@ms ;
+	schema:name "pusat pentadbiran"@ms ;
+	rdfs:label "प्रशासनिक केंद्र"@hi ;
+	skos:prefLabel "प्रशासनिक केंद्र"@hi ;
+	schema:name "प्रशासनिक केंद्र"@hi ;
+	rdfs:label "প্রশাসনিক কেন্দ্র"@bn ;
+	skos:prefLabel "প্রশাসনিক কেন্দ্র"@bn ;
+	schema:name "প্রশাসনিক কেন্দ্র"@bn ;
+	rdfs:label "административдик борбор"@ky ;
+	skos:prefLabel "административдик борбор"@ky ;
+	schema:name "административдик борбор"@ky ;
+	rdfs:label "administrative centre"@en-ca ;
+	skos:prefLabel "administrative centre"@en-ca ;
+	schema:name "administrative centre"@en-ca ;
+	rdfs:label "administrative center"@en-us ;
+	skos:prefLabel "administrative center"@en-us ;
+	schema:name "administrative center"@en-us ;
+	rdfs:label "administrative centre"@en-gb ;
+	skos:prefLabel "administrative centre"@en-gb ;
+	schema:name "administrative centre"@en-gb ;
+	rdfs:label "اداري مرکز"@ps ;
+	skos:prefLabel "اداري مرکز"@ps ;
+	schema:name "اداري مرکز"@ps ;
+	schema:description "seat of regional administration or local government, or a county town, or the place where the central administration of a commune is located"@en,
+		"geografisk posisjon der regional administrasjon for en delstat, en kommune og lignende befinner seg"@nb,
+		"sæde for en regional eller lokal administration"@da,
+		"έδρα μιας περιφερειακής διοίκησης ή τοπικής κυβέρνησης"@el,
+		"Ort, von dem aus das zu verwaltende Gebiet (der sog. Verwaltungsbezirk) verwaltet wird"@de,
+		"официальный главный город любого административного образования первого, второго или третьего уровня (такого как область, край, автономная республика, провинция, штат, департамент)"@ru,
+		"кез-келген әкімшілік құрылымның ресми бас қаласы"@kk,
+		"地方政府駐地"@zh,
+		"sede de administración regional o local, o una ciudad condado, o el lugar donde se encuentra la administración central de un municipio"@es,
+		"административ берәмектең (өлкә, край, автономиялы республика, провинция, штат, департамент һәм башҡалар) рәсми төп ҡалаһы"@ba,
+		"miejscowość z siedzibą władz określonej jednostki podziału administracyjnego"@pl,
+		"helyi vagy területi önkormányzat, illetve közigazgatási egység székhelye"@hu,
+		"ప్రాంతీయ పరిపాలన లేదా స్థానిక ప్రభుత్వం, లేదా కౌంటీ పట్టణం లేదా కమ్యూన్ కేంద్ర పరిపాలన ఉన్న ప్రదేశం"@te,
+		"行政の中心となる場所"@ja,
+		"আঞ্চলিক প্রশাসনের আসন বা স্থানীয় সরকারের আসন, বা একটি কাউন্টি শহর, বা জায়গা যেখানে একটি কমিউনের কেন্দ্রীয় প্রশাসন অবস্থিত"@bn,
+		"centralort för lokal eller regional administration i till exempel kommun, län eller provins"@sv,
+		"seat of regional administration or local government, or a county town, or the place where the central administration of a commune is located"@en-ca,
+		"seat of regional administration or local government, or a county town, or the place where the central administration of a commune is located"@en-gb,
+		"seat of regional administration or local government, or a county town, or the place where the central administration of a commune is located"@en-us ;
+	skos:altLabel "政府所在地"@zh,
+		"行政驻地"@zh,
+		"國家政府所在地"@zh,
+		"县治"@zh,
+		"地方政府所在地"@zh,
+		"治所"@zh,
+		"縣治"@zh,
+		"县城"@zh,
+		"行政所在地"@zh,
+		"政府驻地"@zh,
+		"行政中心所在地"@zh,
+		"Heradsenter"@nn,
+		"Kommunesenter"@nn,
+		"Huvudort"@nn,
+		"Hovudort"@nn,
+		"行政の中心地"@ja,
+		"政庁所在地"@ja,
+		"administrative center"@en,
+		"kommunesenter"@nb,
+		"administrasjonssentrum"@nb,
+		"administrasjonsentrum"@nb,
+		"райцентр"@ru,
+		"halduslik keskus"@et,
+		"Административлă тĕпĕ"@cv,
+		"Административлă тĕп"@cv,
+		"Hauptverwaltung"@de,
+		"merkez"@tr,
+		"yönetimsel merkez"@tr,
+		"Yönetim merkezi"@tr,
+		"өлкә үҙәге"@ba,
+		"край үҙәге"@ba,
+		"автономиялы республиканың баш ҡалаһы"@ba,
+		"район үҙәге"@ba,
+		"administratīvais centrs"@lv,
+		"ప్రధానకేంద్రం"@te,
+		"administrative center"@en-ca,
+		"administrative center"@en-gb,
+		"administrative centre"@en-us .
+
+ref:9a681f9dd95c90224547c404e11295f4f7dcf54e a wikibase:Reference ;
+	pr:P248 wd:Q64139102 ;
+	pr:P813 "2020-07-09T00:00:00Z"^^xsd:dateTime ;
+	prv:P813 v:664bae4effccc18fd4ad1ae188fab025 .
+
+data:Q1306757 a schema:Dataset ;
+	schema:about wd:Q1306757 ;
+	schema:version "1831018288"^^xsd:integer ;
+	schema:dateModified "2023-02-10T14:06:21Z"^^xsd:dateTime ;
+	wikibase:statements "27"^^xsd:integer ;
+	wikibase:sitelinks "2"^^xsd:integer ;
+	wikibase:identifiers "13"^^xsd:integer .
+
+wd:Q1306757 a wikibase:Item .
+
+<https://de.wikipedia.org/wiki/Rudolf_Dietz_(Autor)> a schema:Article ;
+	schema:about wd:Q1306757 ;
+	schema:inLanguage "de" ;
+	schema:isPartOf <https://de.wikipedia.org/> ;
+	schema:name "Rudolf Dietz (Autor)"@de .
+
+<https://de.wikisource.org/wiki/Rudolf_Dietz> a schema:Article ;
+	schema:about wd:Q1306757 ;
+	schema:inLanguage "de" ;
+	schema:isPartOf <https://de.wikisource.org/> ;
+	schema:name "Rudolf Dietz"@de .
+
+wd:Q1306757 wdt:P214 "27813440" ;
+	wdtn:P214 <http://viaf.org/viaf/27813440> ;
+	wdt:P227 "11611682X" ;
+	wdtn:P227 <https://d-nb.info/gnd/11611682X> ;
+	wdt:P213 "0000 0000 7735 1993" ;
+	wdt:P19 wd:Q1721 ;
+	wdt:P20 wd:Q1721 ;
+	wdt:P27 wd:Q1206012 ;
+	wdt:P31 wd:Q5 ;
+	wdt:P102 wd:Q7320 ;
+	wdt:P569 "1863-02-22T00:00:00Z"^^xsd:dateTime ;
+	wdt:P570 "1942-12-14T00:00:00Z"^^xsd:dateTime ;
+	wdt:P735 wd:Q18028491 ;
+	wdt:P648 "OL1935135A" ;
+	wdtn:P648 <http://openlibrary.org/works/OL1935135A> ;
+	wdt:P106 wd:Q36180 ;
+	wdt:P21 wd:Q6581097 ;
+	wdt:P691 "hka2010563567" ;
+	wdt:P2298 "2367714" ;
+	wdt:P1871 "cnp01075936" ;
+	wdtn:P1871 <http://thesaurus.cerl.org/record/cnp01075936> ;
+	wdt:P7859 "viaf-27813440" ;
+	wdt:P7902 "11611682X" ;
+	wdt:P8234 "10458" ;
+	wdt:P742 "Lutz Diedorf",
+		"Dielitzdorf",
+		"R. von Doruan" ;
+	wdt:P8748 "pk00161" ;
+	wdt:P2671 "/g/123339r7" ;
+	wdtn:P2671 <http://g.co/kg/g/123339r7> ;
+	wdt:P9918 "PE00013680" ;
+	wdt:P734 wd:Q1224249 ;
+	p:P214 s:q1306757-656F198A-514F-4BFD-95EF-82E1D07C62B5 .
+
+s:q1306757-656F198A-514F-4BFD-95EF-82E1D07C62B5 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P214 "27813440" ;
+	psn:P214 <http://viaf.org/viaf/27813440> ;
+	prov:wasDerivedFrom ref:9a24f7c0208b05d6be97077d855671d1dfdbc0dd .
+
+wd:Q1306757 p:P227 s:q1306757-1E63479A-10BE-4E6F-AD2A-60FD6C42F14D .
+
+s:q1306757-1E63479A-10BE-4E6F-AD2A-60FD6C42F14D a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P227 "11611682X" ;
+	psn:P227 <https://d-nb.info/gnd/11611682X> ;
+	prov:wasDerivedFrom ref:9a24f7c0208b05d6be97077d855671d1dfdbc0dd .
+
+wd:Q1306757 p:P213 s:q1306757-36187573-6F9F-43A0-A83A-A9019D137330 .
+
+s:q1306757-36187573-6F9F-43A0-A83A-A9019D137330 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P213 "0000 0000 7735 1993" ;
+	prov:wasDerivedFrom ref:fbc824608bf047fcbfb803c1b0f98e66f4372207 .
+
+wd:Q1306757 p:P19 s:q1306757-33C5B55C-BD61-46A3-B9A1-7C9CAD69D1DC .
+
+s:q1306757-33C5B55C-BD61-46A3-B9A1-7C9CAD69D1DC a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P19 wd:Q1721 ;
+	prov:wasDerivedFrom ref:9a24f7c0208b05d6be97077d855671d1dfdbc0dd .
+
+wd:Q1306757 p:P20 s:q1306757-B0C6F749-14B5-4300-83E3-DD9F56ECA7CD .
+
+s:q1306757-B0C6F749-14B5-4300-83E3-DD9F56ECA7CD a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P20 wd:Q1721 ;
+	prov:wasDerivedFrom ref:23cf4c3e97b4fc2c4a68fa184a9ad7fe721210ba .
+
+wd:Q1306757 p:P27 s:Q1306757-F06AA4A1-0D41-44EB-9BA5-402A178974CE .
+
+s:Q1306757-F06AA4A1-0D41-44EB-9BA5-402A178974CE a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P27 wd:Q1206012 .
+
+wd:Q1306757 p:P31 s:Q1306757-EBDCD310-F5C7-4D91-A591-73F8F5AA15BC .
+
+s:Q1306757-EBDCD310-F5C7-4D91-A591-73F8F5AA15BC a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P31 wd:Q5 ;
+	prov:wasDerivedFrom ref:9a24f7c0208b05d6be97077d855671d1dfdbc0dd .
+
+wd:Q1306757 p:P102 s:Q1306757-2C75BBDE-8CA8-4983-AF81-41680DD940BD .
+
+s:Q1306757-2C75BBDE-8CA8-4983-AF81-41680DD940BD a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P102 wd:Q7320 .
+
+wd:Q1306757 p:P569 s:Q1306757-3D0AD11C-C952-42FB-8D39-342985D2BD73 .
+
+s:Q1306757-3D0AD11C-C952-42FB-8D39-342985D2BD73 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P569 "1863-02-22T00:00:00Z"^^xsd:dateTime ;
+	psv:P569 v:60a12867ab9c5a7a727d15f612283092 .
+
+wd:Q1306757 p:P570 s:Q1306757-B496C8B8-A551-493E-89BA-7BF0C3145D7C .
+
+s:Q1306757-B496C8B8-A551-493E-89BA-7BF0C3145D7C a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P570 "1942-12-14T00:00:00Z"^^xsd:dateTime ;
+	psv:P570 v:cdaed8dbe12dded86645b459eb18965f .
+
+wd:Q1306757 p:P735 s:Q1306757-A1AC8780-CA44-4C68-B3C0-10C349E8E391 .
+
+s:Q1306757-A1AC8780-CA44-4C68-B3C0-10C349E8E391 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P735 wd:Q18028491 .
+
+wd:Q1306757 p:P648 s:Q1306757-793514BF-113D-49C7-BCD7-0FC2B7E6C59A .
+
+s:Q1306757-793514BF-113D-49C7-BCD7-0FC2B7E6C59A a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P648 "OL1935135A" ;
+	psn:P648 <http://openlibrary.org/works/OL1935135A> .
+
+wd:Q1306757 p:P106 s:Q1306757-A072B23C-5A93-4D5F-893C-0F09565E801C .
+
+s:Q1306757-A072B23C-5A93-4D5F-893C-0F09565E801C a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P106 wd:Q36180 .
+
+wd:Q1306757 p:P21 s:Q1306757-8744EFEF-288F-4AD3-9649-D5FD1C744CB8 .
+
+s:Q1306757-8744EFEF-288F-4AD3-9649-D5FD1C744CB8 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P21 wd:Q6581097 ;
+	prov:wasDerivedFrom ref:280053e3010b283d06389de2c230078cf1810209,
+		ref:ffa6d327419643c0191d8cd12cdfb51bd6b3d3b4 .
+
+wd:Q1306757 p:P691 s:Q1306757-D7CB8055-90A8-4598-A632-E1AA4D523F27 .
+
+s:Q1306757-D7CB8055-90A8-4598-A632-E1AA4D523F27 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P691 "hka2010563567" ;
+	prov:wasDerivedFrom ref:43aa6e0dd83d808f1384c39b1aa2903c6c4ba6e3 .
+
+wd:Q1306757 p:P2298 s:Q1306757-06AE33DB-C934-41D7-AAAF-FD8FE93ED1EF .
+
+s:Q1306757-06AE33DB-C934-41D7-AAAF-FD8FE93ED1EF a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P2298 "2367714" .
+
+wd:Q1306757 p:P1871 s:Q1306757-633FECD6-8670-4372-AC91-2860827BB752 .
+
+s:Q1306757-633FECD6-8670-4372-AC91-2860827BB752 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1871 "cnp01075936" ;
+	psn:P1871 <http://thesaurus.cerl.org/record/cnp01075936> .
+
+wd:Q1306757 p:P7859 s:Q1306757-E45FCEB7-1DA7-443C-9257-0C63256A50B5 .
+
+s:Q1306757-E45FCEB7-1DA7-443C-9257-0C63256A50B5 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P7859 "viaf-27813440" ;
+	prov:wasDerivedFrom ref:d4e05c1abc72ab7b3acab2abfc6d55e1af9c6671 .
+
+wd:Q1306757 p:P7902 s:Q1306757-DA4D2E5B-3A3C-4E6D-AD41-F52C54D0BD28 .
+
+s:Q1306757-DA4D2E5B-3A3C-4E6D-AD41-F52C54D0BD28 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P7902 "11611682X" .
+
+wd:Q1306757 p:P8234 s:Q1306757-66BCE229-7399-4668-B452-6E18AE9A7678 .
+
+s:Q1306757-66BCE229-7399-4668-B452-6E18AE9A7678 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P8234 "10458" .
+
+wd:Q1306757 p:P742 s:Q1306757-7D8D6175-D854-4F83-A02D-6199F26D8C02 .
+
+s:Q1306757-7D8D6175-D854-4F83-A02D-6199F26D8C02 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P742 "Lutz Diedorf" ;
+	prov:wasDerivedFrom ref:2652bc56d9765d2661cd1b963b1c949ae797432a .
+
+wd:Q1306757 p:P742 s:Q1306757-77850CD7-3CA0-40CF-BD90-207D242CBD59 .
+
+s:Q1306757-77850CD7-3CA0-40CF-BD90-207D242CBD59 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P742 "Dielitzdorf" ;
+	prov:wasDerivedFrom ref:2652bc56d9765d2661cd1b963b1c949ae797432a .
+
+wd:Q1306757 p:P742 s:Q1306757-2C6D0F29-2D31-42B3-99BA-84A48E8A60DB .
+
+s:Q1306757-2C6D0F29-2D31-42B3-99BA-84A48E8A60DB a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P742 "R. von Doruan" ;
+	prov:wasDerivedFrom ref:2652bc56d9765d2661cd1b963b1c949ae797432a .
+
+wd:Q1306757 p:P8748 s:Q1306757-181C74F5-0680-4017-8642-CB18DB84FD48 .
+
+s:Q1306757-181C74F5-0680-4017-8642-CB18DB84FD48 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P8748 "pk00161" .
+
+wd:Q1306757 p:P2671 s:Q1306757-37F649A0-7B42-4A47-9484-B4F362B41E84 .
+
+s:Q1306757-37F649A0-7B42-4A47-9484-B4F362B41E84 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P2671 "/g/123339r7" ;
+	psn:P2671 <http://g.co/kg/g/123339r7> .
+
+wd:Q1306757 p:P9918 s:Q1306757-6FE8436D-C111-4F6F-BC47-A96EEFF77795 .
+
+s:Q1306757-6FE8436D-C111-4F6F-BC47-A96EEFF77795 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P9918 "PE00013680" .
+
+wd:Q1306757 p:P734 s:Q1306757-ad1492a4-43d2-e3ee-86b0-52cfeadc2d5d .
+
+s:Q1306757-ad1492a4-43d2-e3ee-86b0-52cfeadc2d5d a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P734 wd:Q1224249 .
+
+wd:Q1306757 rdfs:label "Rudolf Dietz"@de ;
+	skos:prefLabel "Rudolf Dietz"@de ;
+	schema:name "Rudolf Dietz"@de ;
+	rdfs:label "Rudolf Dietz"@nb ;
+	skos:prefLabel "Rudolf Dietz"@nb ;
+	schema:name "Rudolf Dietz"@nb ;
+	rdfs:label "Rudolf Dietz"@da ;
+	skos:prefLabel "Rudolf Dietz"@da ;
+	schema:name "Rudolf Dietz"@da ;
+	rdfs:label "Rudolf Dietz"@nn ;
+	skos:prefLabel "Rudolf Dietz"@nn ;
+	schema:name "Rudolf Dietz"@nn ;
+	rdfs:label "Rudolf Dietz"@sv ;
+	skos:prefLabel "Rudolf Dietz"@sv ;
+	schema:name "Rudolf Dietz"@sv ;
+	rdfs:label "Rudolf Dietz"@en ;
+	skos:prefLabel "Rudolf Dietz"@en ;
+	schema:name "Rudolf Dietz"@en ;
+	rdfs:label "Rudolf Dietz"@fr ;
+	skos:prefLabel "Rudolf Dietz"@fr ;
+	schema:name "Rudolf Dietz"@fr ;
+	rdfs:label "Rudolf Dietz"@es ;
+	skos:prefLabel "Rudolf Dietz"@es ;
+	schema:name "Rudolf Dietz"@es ;
+	rdfs:label "Rudolf Dietz"@nl ;
+	skos:prefLabel "Rudolf Dietz"@nl ;
+	schema:name "Rudolf Dietz"@nl ;
+	rdfs:label "Rudolf Dietz"@sl ;
+	skos:prefLabel "Rudolf Dietz"@sl ;
+	schema:name "Rudolf Dietz"@sl ;
+	rdfs:label "Rudolf Dietz"@ca ;
+	skos:prefLabel "Rudolf Dietz"@ca ;
+	schema:name "Rudolf Dietz"@ca ;
+	rdfs:label "Rudolf Dietz"@ast ;
+	skos:prefLabel "Rudolf Dietz"@ast ;
+	schema:name "Rudolf Dietz"@ast ;
+	schema:description "deutscher Heimatdichter"@de,
+		"نویسنده آلمانی"@fa,
+		"Duits schrijver (1863-1942)"@nl,
+		"German writer (1863-1942)"@en,
+		"كاتب ألماني"@ar,
+		"escritor alemán (1863–1942)"@ast,
+		"scríbhneoir Gearmánach (1863-1942)"@ga,
+		"escritor alemán"@es,
+		"escriptor alemany"@ca,
+		"escritor alemán"@gl,
+		"écrivain allemand"@fr,
+		"scrittore tedesco"@it,
+		"escritor alemão"@pt,
+		"idazle alemaniarra"@eu,
+		"ލިޔުންތެރިއެއް"@dv ;
+	skos:altLabel "Georg Christian Conrad Theodor Hermann Rudolf Otto Dietz"@de .
+
+v:60a12867ab9c5a7a727d15f612283092 a wikibase:TimeValue ;
+	wikibase:timeValue "1863-02-22T00:00:00Z"^^xsd:dateTime ;
+	wikibase:timePrecision "11"^^xsd:integer ;
+	wikibase:timeTimezone "0"^^xsd:integer ;
+	wikibase:timeCalendarModel <http://www.wikidata.org/entity/Q1985727> .
+
+v:cdaed8dbe12dded86645b459eb18965f a wikibase:TimeValue ;
+	wikibase:timeValue "1942-12-14T00:00:00Z"^^xsd:dateTime ;
+	wikibase:timePrecision "11"^^xsd:integer ;
+	wikibase:timeTimezone "0"^^xsd:integer ;
+	wikibase:timeCalendarModel <http://www.wikidata.org/entity/Q1985727> .
+
+ref:280053e3010b283d06389de2c230078cf1810209 a wikibase:Reference ;
+	pr:P248 wd:Q54919 ;
+	pr:P214 "27813440" ;
+	prn:P214 <http://viaf.org/viaf/27813440> ;
+	pr:P813 "2018-11-04T00:00:00Z"^^xsd:dateTime ;
+	prv:P813 v:1a501fae0250cace7eaa1b8582f2bfc2 .
+
+ref:43aa6e0dd83d808f1384c39b1aa2903c6c4ba6e3 a wikibase:Reference ;
+	pr:P214 "27813440" ;
+	prn:P214 <http://viaf.org/viaf/27813440> ;
+	pr:P248 wd:Q54919 ;
+	pr:P813 "2018-12-17T00:00:00Z"^^xsd:dateTime ;
+	prv:P813 v:47177f2ad2256fa0b6162bf3c6c695b7 .
+
+ref:d4e05c1abc72ab7b3acab2abfc6d55e1af9c6671 a wikibase:Reference ;
+	pr:P214 "27813440" ;
+	prn:P214 <http://viaf.org/viaf/27813440> .
+
+ref:2652bc56d9765d2661cd1b963b1c949ae797432a a wikibase:Reference ;
+	pr:P248 wd:Q13550863 ;
+	pr:P691 "hka2010563567" ;
+	pr:P813 "2020-08-30T00:00:00Z"^^xsd:dateTime ;
+	prv:P813 v:9712866d0f2ccfbc0cc98bc063ec00ce .
+
+data:Q1306769 a schema:Dataset ;
+	schema:about wd:Q1306769 ;
+	schema:version "1861191400"^^xsd:integer ;
+	schema:dateModified "2023-03-25T21:44:36Z"^^xsd:dateTime ;
+	wikibase:statements "41"^^xsd:integer ;
+	wikibase:sitelinks "4"^^xsd:integer ;
+	wikibase:identifiers "15"^^xsd:integer .
+
+wd:Q1306769 a wikibase:Item .
+
+<https://de.wikipedia.org/wiki/John_Lee,_Baron_Lee_of_Trafford> a schema:Article ;
+	schema:about wd:Q1306769 ;
+	schema:inLanguage "de" ;
+	schema:isPartOf <https://de.wikipedia.org/> ;
+	schema:name "John Lee, Baron Lee of Trafford"@de .
+
+<https://en.wikipedia.org/wiki/John_Lee,_Baron_Lee_of_Trafford> a schema:Article ;
+	schema:about wd:Q1306769 ;
+	schema:inLanguage "en" ;
+	schema:isPartOf <https://en.wikipedia.org/> ;
+	schema:name "John Lee, Baron Lee of Trafford"@en .
+
+<https://commons.wikimedia.org/wiki/Category:John_Lee,_Baron_Lee_of_Trafford> a schema:Article ;
+	schema:about wd:Q1306769 ;
+	schema:inLanguage "en" ;
+	schema:isPartOf <https://commons.wikimedia.org/> ;
+	schema:name "Category:John Lee, Baron Lee of Trafford"@en .
+
+<https://fr.wikipedia.org/wiki/John_Lee_(baron_Lee_de_Trafford)> a schema:Article ;
+	schema:about wd:Q1306769 ;
+	schema:inLanguage "fr" ;
+	schema:isPartOf <https://fr.wikipedia.org/> ;
+	schema:name "John Lee (baron Lee de Trafford)"@fr .
+
+wd:Q1306769 wdt:P21 wd:Q6581097 ;
+	wdt:P102 wd:Q9626,
+		wd:Q9624 ;
+	wdt:P569 "1942-06-21T00:00:00Z"^^xsd:dateTime ;
+	wdt:P31 wd:Q5 ;
+	wdt:P39 wd:Q41582624,
+		wd:Q41582621,
+		wd:Q41582619,
+		wd:Q18952564 ;
+	wdt:P106 wd:Q82955 ;
+	wdt:P735 wd:Q4925477 ;
+	wdt:P27 wd:Q145 ;
+	wdt:P1412 wd:Q1860 ;
+	wdt:P937 wd:Q84 ;
+	wdt:P1559 "John Lee, Baron Lee of Trafford"@en ;
+	wdt:P2015 "mr-john-lee-2" ;
+	wdt:P646 "/m/0dyzb_" ;
+	wdt:P19 wd:Q18125 ;
+	wdt:P4638 "p19844.htm#i198435" ;
+	wdt:P18 <http://commons.wikimedia.org/wiki/Special:FilePath/Official%20portrait%20of%20Lord%20Lee%20of%20Trafford%20crop%202.jpg> ;
+	wdt:P4471 "9321" ;
+	wdt:P69 wd:Q8012653 ;
+	wdt:P6213 "ZKkusgzB" ;
+	wdtn:P6213 <https://id.parliament.uk/ZKkusgzB> ;
+	wdt:P734 wd:Q13498051 ;
+	wdt:P22 wd:Q75532360 ;
+	wdt:P26 wd:Q75532373 ;
+	wdt:P3602 wd:Q918466,
+		wd:Q918472,
+		wd:Q918450 ;
+	wdt:P2163 "1628988" ;
+	wdtn:P2163 <http://id.worldcat.org/fast/1628988> ;
+	wdt:P5297 "JSnQ6U0i9fYHFmdfSMgF7mlviS4" ;
+	wdt:P4789 "U24125" ;
+	wdt:P5034 "KAC200802559" ;
+	wdtn:P5034 <http://lod.nl.go.kr/resource/KAC200802559> ;
+	wdt:P214 "46281297" ;
+	wdtn:P214 <http://viaf.org/viaf/46281297> ;
+	wdt:P10428 "1132" ;
+	wdt:P10632 "Q1306769" ;
+	wdt:P10849 "2805" ;
+	wdt:P373 "John Lee, Baron Lee of Trafford" ;
+	wdt:P269 "158468600" ;
+	wdtn:P269 <http://www.idref.fr/158468600/id> ;
+	wdt:P2171 "13724" ;
+	wdt:P1476 "Lord Lee of Trafford"@en ;
+	p:P21 s:q1306769-B571B719-DC45-4000-8EC1-83ED2542FEEB .
+
+s:q1306769-B571B719-DC45-4000-8EC1-83ED2542FEEB a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P21 wd:Q6581097 ;
+	prov:wasDerivedFrom ref:9a24f7c0208b05d6be97077d855671d1dfdbc0dd .
+
+wd:Q1306769 p:P102 s:q1306769-447AEBB6-5807-4817-A45F-77025B70A462 .
+
+s:q1306769-447AEBB6-5807-4817-A45F-77025B70A462 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P102 wd:Q9626 ;
+	prov:wasDerivedFrom ref:fa278ebfc458360e5aed63d5058cca83c46134f1 .
+
+wd:Q1306769 p:P102 s:Q1306769-07452791-3A62-4D00-861B-DD87140C0C64 .
+
+s:Q1306769-07452791-3A62-4D00-861B-DD87140C0C64 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P102 wd:Q9624 .
+
+wd:Q1306769 p:P569 s:Q1306769-20AE55C8-B651-40FF-8185-5CFA4190CB7C .
+
+s:Q1306769-20AE55C8-B651-40FF-8185-5CFA4190CB7C a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P569 "1942-06-21T00:00:00Z"^^xsd:dateTime ;
+	psv:P569 v:de852d16446a416f68d576be39f43ebd ;
+	prov:wasDerivedFrom ref:fa278ebfc458360e5aed63d5058cca83c46134f1,
+		ref:8c34ee0068b7a9259fa0b801d3f41dc1403b7819,
+		ref:735cba33921e156e1dbda9dfe5f1f7d557527cdd .
+
+wd:Q1306769 p:P31 s:Q1306769-55EC560E-74E4-4904-AEB8-D51CAF986901 .
+
+s:Q1306769-55EC560E-74E4-4904-AEB8-D51CAF986901 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P31 wd:Q5 ;
+	prov:wasDerivedFrom ref:fa278ebfc458360e5aed63d5058cca83c46134f1 .
+
+wd:Q1306769 p:P39 s:Q1306769-B4ED7AF1-9774-42E8-9520-9623CB92BCB0 .
+
+s:Q1306769-B4ED7AF1-9774-42E8-9520-9623CB92BCB0 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P39 wd:Q41582624 ;
+	pq:P768 wd:Q1050733 ;
+	pq:P580 "1987-06-11T00:00:00Z"^^xsd:dateTime ;
+	pqv:P580 v:4b6681869fd5d332a41cc12d76ccce88 ;
+	pq:P582 "1992-03-16T00:00:00Z"^^xsd:dateTime ;
+	pqv:P582 v:525363bf3218db26924642e9b42767f9 ;
+	pq:P2715 wd:Q918472 ;
+	pq:P1534 wd:Q741182 ;
+	pq:P2937 wd:Q21084467 ;
+	pq:P4100 wd:Q9626 ;
+	prov:wasDerivedFrom ref:5210246a01dc7755e7cd4dac27160862d55b7ae9,
+		ref:d496a2fdaccd92f261e65738859f50d717be4f61 .
+
+wd:Q1306769 p:P39 s:Q1306769-C6B39C75-DA1F-47AC-898E-EA7248FEA5BE .
+
+s:Q1306769-C6B39C75-DA1F-47AC-898E-EA7248FEA5BE a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P39 wd:Q41582621 ;
+	pq:P768 wd:Q1050733 ;
+	pq:P580 "1983-06-09T00:00:00Z"^^xsd:dateTime ;
+	pqv:P580 v:2a78c21801cb1ac02edd96557882bc5a ;
+	pq:P582 "1987-05-18T00:00:00Z"^^xsd:dateTime ;
+	pqv:P582 v:2f993c58e51c7101e2adfc6df21609ca ;
+	pq:P2715 wd:Q918466 ;
+	pq:P1534 wd:Q741182 ;
+	pq:P2937 wd:Q21084466 ;
+	pq:P4100 wd:Q9626 ;
+	prov:wasDerivedFrom ref:5210246a01dc7755e7cd4dac27160862d55b7ae9,
+		ref:bbb88dc761a403b567c97c03adb7794e79678462 .
+
+wd:Q1306769 p:P39 s:Q1306769-AAD7F915-0AD6-445F-A8F0-DB342360625B .
+
+s:Q1306769-AAD7F915-0AD6-445F-A8F0-DB342360625B a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P39 wd:Q41582619 ;
+	pq:P768 wd:Q6990791 ;
+	pq:P580 "1979-05-03T00:00:00Z"^^xsd:dateTime ;
+	pqv:P580 v:a9732aa2151251b36c30a1a988106e21 ;
+	pq:P582 "1983-05-13T00:00:00Z"^^xsd:dateTime ;
+	pqv:P582 v:c66e92ea1934c94617e24a9764732f04 ;
+	pq:P2715 wd:Q918450 ;
+	pq:P1534 wd:Q741182 ;
+	pq:P2937 wd:Q21084465 ;
+	pq:P4100 wd:Q9626 ;
+	prov:wasDerivedFrom ref:5210246a01dc7755e7cd4dac27160862d55b7ae9,
+		ref:2d631e0f2e44b228d9b2bb74ba01677e1faee93b .
+
+wd:Q1306769 p:P39 s:Q1306769-EB41957F-74F3-4CFF-AA00-63AB39EDF69D .
+
+s:Q1306769-EB41957F-74F3-4CFF-AA00-63AB39EDF69D a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P39 wd:Q18952564 ;
+	pq:P580 "2006-05-26T00:00:00Z"^^xsd:dateTime ;
+	pqv:P580 v:39ca94144040bc1b72bf296c8659cff2 ;
+	pq:P4100 wd:Q9624 .
+
+wd:Q1306769 p:P106 s:Q1306769-A4A2927D-D6BD-4B1E-A1AC-D0BB9D0086D7 .
+
+s:Q1306769-A4A2927D-D6BD-4B1E-A1AC-D0BB9D0086D7 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P106 wd:Q82955 ;
+	prov:wasDerivedFrom ref:0014cb1d947052cb22d6cb5e0c5b6428520f89f2 .
+
+wd:Q1306769 p:P735 s:Q1306769-44BD1280-0C68-4CF8-A8F4-ED7012BD1D60 .
+
+s:Q1306769-44BD1280-0C68-4CF8-A8F4-ED7012BD1D60 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P735 wd:Q4925477 .
+
+wd:Q1306769 p:P27 s:Q1306769-367130D9-CAF4-4BFB-AB29-CE4347778345 .
+
+s:Q1306769-367130D9-CAF4-4BFB-AB29-CE4347778345 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P27 wd:Q145 .
+
+wd:Q1306769 p:P1412 s:Q1306769-F8FD8B83-B77E-431D-A5D5-96200DE93E34 .
+
+s:Q1306769-F8FD8B83-B77E-431D-A5D5-96200DE93E34 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1412 wd:Q1860 ;
+	prov:wasDerivedFrom ref:fa278ebfc458360e5aed63d5058cca83c46134f1 .
+
+wd:Q1306769 p:P937 s:Q1306769-984CC055-11EC-48A2-9945-2FFA3F897C2B .
+
+s:Q1306769-984CC055-11EC-48A2-9945-2FFA3F897C2B a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P937 wd:Q84 ;
+	prov:wasDerivedFrom ref:fa278ebfc458360e5aed63d5058cca83c46134f1 .
+
+wd:Q1306769 p:P1559 s:Q1306769-0D639969-B74C-4149-AC70-CABACBC79362 .
+
+s:Q1306769-0D639969-B74C-4149-AC70-CABACBC79362 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1559 "John Lee, Baron Lee of Trafford"@en ;
+	prov:wasDerivedFrom ref:fa278ebfc458360e5aed63d5058cca83c46134f1 .
+
+wd:Q1306769 p:P2015 s:Q1306769-BA2CA40D-5872-497D-B135-28B851706590 .
+
+s:Q1306769-BA2CA40D-5872-497D-B135-28B851706590 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P2015 "mr-john-lee-2" .
+
+wd:Q1306769 p:P646 s:Q1306769-E9FB22B8-7EAF-4157-B36B-7B302BAD340B .
+
+s:Q1306769-E9FB22B8-7EAF-4157-B36B-7B302BAD340B a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P646 "/m/0dyzb_" ;
+	prov:wasDerivedFrom ref:98a9d3d4f77f78f7fd61df8552bd8698208ed0ef .
+
+wd:Q1306769 p:P19 s:Q1306769-E229CFF7-CD3E-42A3-9B17-70F2ED9BF7D4 .
+
+s:Q1306769-E229CFF7-CD3E-42A3-9B17-70F2ED9BF7D4 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P19 wd:Q18125 ;
+	prov:wasDerivedFrom ref:fa278ebfc458360e5aed63d5058cca83c46134f1 .
+
+wd:Q1306769 p:P4638 s:Q1306769-9DE49655-5DA9-4EEA-82D7-3B9925AF9F20 .
+
+s:Q1306769-9DE49655-5DA9-4EEA-82D7-3B9925AF9F20 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P4638 "p19844.htm#i198435" ;
+	pq:P1810 "John Robert Louis Lee, Baron Lee of Trafford" ;
+	prov:wasDerivedFrom ref:4c53287ffacf9ff03783715d51259928a67cba5a .
+
+wd:Q1306769 p:P18 s:Q1306769-7D52F59A-1B86-4770-BBED-6B11B7DB4C82 .
+
+s:Q1306769-7D52F59A-1B86-4770-BBED-6B11B7DB4C82 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P18 <http://commons.wikimedia.org/wiki/Special:FilePath/Official%20portrait%20of%20Lord%20Lee%20of%20Trafford%20crop%202.jpg> .
+
+wd:Q1306769 p:P4471 s:Q1306769-E6A99D9B-208C-4A89-9045-79C64187EC53 .
+
+s:Q1306769-E6A99D9B-208C-4A89-9045-79C64187EC53 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P4471 "9321" .
+
+wd:Q1306769 p:P69 s:Q1306769-fd50a8ac-e93e-42e9-96d8-fd6415ee6ff6 .
+
+s:Q1306769-fd50a8ac-e93e-42e9-96d8-fd6415ee6ff6 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P69 wd:Q8012653 ;
+	prov:wasDerivedFrom ref:fa278ebfc458360e5aed63d5058cca83c46134f1 .
+
+wd:Q1306769 p:P6213 s:Q1306769-097B601D-6ACB-451A-AC5E-7A0CBA3213F2 .
+
+s:Q1306769-097B601D-6ACB-451A-AC5E-7A0CBA3213F2 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P6213 "ZKkusgzB" ;
+	psn:P6213 <https://id.parliament.uk/ZKkusgzB> .
+
+wd:Q1306769 p:P734 s:Q1306769-24785ACF-DFD3-4C32-8D28-9F5B3706E815 .
+
+s:Q1306769-24785ACF-DFD3-4C32-8D28-9F5B3706E815 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P734 wd:Q13498051 .
+
+wd:Q1306769 p:P22 s:Q1306769-2F7BE130-146D-492A-96D1-F56DF919292A .
+
+s:Q1306769-2F7BE130-146D-492A-96D1-F56DF919292A a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P22 wd:Q75532360 ;
+	prov:wasDerivedFrom ref:3913844e06e055e8cd81608f22bad0e604d89d2d .
+
+wd:Q1306769 p:P26 s:Q1306769-5F5930C1-4A69-493F-B77D-B2A1DC442D75 .
+
+s:Q1306769-5F5930C1-4A69-493F-B77D-B2A1DC442D75 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P26 wd:Q75532373 ;
+	pq:P580 "1975-01-01T00:00:00Z"^^xsd:dateTime ;
+	pqv:P580 v:32ab3709506ccd214afed95ad91cfa87 ;
+	prov:wasDerivedFrom ref:a15bcc58b0510718a9a3bb04ee6f42c1156745d5 .
+
+wd:Q1306769 p:P3602 s:Q1306769-31936E0B-EC6F-46FC-B2EA-A1650FA6A2ED .
+
+s:Q1306769-31936E0B-EC6F-46FC-B2EA-A1650FA6A2ED a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P3602 wd:Q918466 ;
+	pq:P768 wd:Q1050733 ;
+	pq:P1268 wd:Q9626 ;
+	pq:P1111 "+22739"^^xsd:decimal ;
+	pqv:P1111 v:a40fd598479ff13f7ba73da7ac15844b ;
+	pq:P2501 wd:Q20826785 ;
+	pq:P1352 "+1"^^xsd:decimal ;
+	pqv:P1352 v:1c9e02c1631d3fd5ec9a9fe9aa1fde65 ;
+	prov:wasDerivedFrom ref:3557ed366ab86dfbf14201f5aa27ca006f2c97c8 .
+
+wd:Q1306769 p:P3602 s:Q1306769-0EA7E97D-3808-4819-886E-843FCEFCAFAF .
+
+s:Q1306769-0EA7E97D-3808-4819-886E-843FCEFCAFAF a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P3602 wd:Q918472 ;
+	pq:P768 wd:Q1050733 ;
+	pq:P1268 wd:Q9626 ;
+	pq:P1111 "+21009"^^xsd:decimal ;
+	pqv:P1111 v:c6cc941f05d4deb8e495f99b31dd26e7 ;
+	pq:P2501 wd:Q20826785 ;
+	pq:P1352 "+1"^^xsd:decimal ;
+	pqv:P1352 v:1c9e02c1631d3fd5ec9a9fe9aa1fde65 ;
+	prov:wasDerivedFrom ref:3557ed366ab86dfbf14201f5aa27ca006f2c97c8 .
+
+wd:Q1306769 p:P3602 s:Q1306769-F707B304-7794-4431-8A62-AD57431B33CA .
+
+s:Q1306769-F707B304-7794-4431-8A62-AD57431B33CA a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P3602 wd:Q918450 ;
+	pq:P768 wd:Q6990791 ;
+	pq:P1268 wd:Q9626 ;
+	pq:P1111 "+17522"^^xsd:decimal ;
+	pqv:P1111 v:09bac3857486953e134b8cb1335430bd ;
+	pq:P2501 wd:Q20826785 ;
+	prov:wasDerivedFrom ref:a167f320d3584bf97470d9033ec9c9daf14b29e1 .
+
+wd:Q1306769 p:P2163 s:Q1306769-A27E1174-9B56-4253-A199-478BE57894D7 .
+
+s:Q1306769-A27E1174-9B56-4253-A199-478BE57894D7 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P2163 "1628988" ;
+	psn:P2163 <http://id.worldcat.org/fast/1628988> .
+
+wd:Q1306769 p:P5297 s:Q1306769-DAE93770-90BE-45FF-91C6-D13E26AAFBB4 .
+
+s:Q1306769-DAE93770-90BE-45FF-91C6-D13E26AAFBB4 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P5297 "JSnQ6U0i9fYHFmdfSMgF7mlviS4" ;
+	pq:P1810 "John LORD LEE OF TRAFFORD" .
+
+wd:Q1306769 p:P4789 s:Q1306769-6453BD30-E91B-4373-AE87-8DC317513BB7 .
+
+s:Q1306769-6453BD30-E91B-4373-AE87-8DC317513BB7 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P4789 "U24125" .
+
+wd:Q1306769 p:P5034 s:Q1306769-A6498578-F8CD-4D86-90C1-90F2DAF71E4A .
+
+s:Q1306769-A6498578-F8CD-4D86-90C1-90F2DAF71E4A a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P5034 "KAC200802559" ;
+	psn:P5034 <http://lod.nl.go.kr/resource/KAC200802559> .
+
+wd:Q1306769 p:P214 s:Q1306769-AAB0D179-0FE2-4516-A3C0-BFE9F34C5E20 .
+
+s:Q1306769-AAB0D179-0FE2-4516-A3C0-BFE9F34C5E20 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P214 "46281297" ;
+	psn:P214 <http://viaf.org/viaf/46281297> ;
+	prov:wasDerivedFrom ref:13bcdfa45f9dd3d0acd40419231a4a8c298bab0e .
+
+wd:Q1306769 p:P10428 s:Q1306769-e941b10f-1ea2-49cf-b0e1-fd72e964c911 .
+
+s:Q1306769-e941b10f-1ea2-49cf-b0e1-fd72e964c911 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P10428 "1132" .
+
+wd:Q1306769 p:P10632 s:Q1306769-86D464B3-CDF6-471D-9BBF-21A6B814A8A2 .
+
+s:Q1306769-86D464B3-CDF6-471D-9BBF-21A6B814A8A2 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P10632 "Q1306769" .
+
+wd:Q1306769 p:P10849 s:Q1306769-EF8B5431-340B-4611-9105-E00F430C537F .
+
+s:Q1306769-EF8B5431-340B-4611-9105-E00F430C537F a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P10849 "2805" .
+
+wd:Q1306769 p:P373 s:Q1306769-8ed1242c-3ae4-4d4a-a3af-2cc15c66b9b7 .
+
+s:Q1306769-8ed1242c-3ae4-4d4a-a3af-2cc15c66b9b7 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P373 "John Lee, Baron Lee of Trafford" .
+
+wd:Q1306769 p:P269 s:Q1306769-619ee4bf-630f-484f-82c1-9d90e74cb3f1 .
+
+s:Q1306769-619ee4bf-630f-484f-82c1-9d90e74cb3f1 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P269 "158468600" ;
+	psn:P269 <http://www.idref.fr/158468600/id> .
+
+wd:Q1306769 p:P2171 s:Q1306769-5E1265D1-11F6-49B0-BA63-FE751A1A2907 .
+
+s:Q1306769-5E1265D1-11F6-49B0-BA63-FE751A1A2907 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P2171 "13724" ;
+	prov:wasDerivedFrom ref:d521bfcd5e69baa62ea11d3c385940ec8dde0e4b .
+
+wd:Q1306769 p:P1476 s:Q1306769-B814B02E-B7F4-462A-A591-231E157648DF .
+
+s:Q1306769-B814B02E-B7F4-462A-A591-231E157648DF a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1476 "Lord Lee of Trafford"@en ;
+	prov:wasDerivedFrom ref:d521bfcd5e69baa62ea11d3c385940ec8dde0e4b .
+
+wd:Q1306769 rdfs:label "John Lee, Baron Lee of Trafford"@de ;
+	skos:prefLabel "John Lee, Baron Lee of Trafford"@de ;
+	schema:name "John Lee, Baron Lee of Trafford"@de ;
+	rdfs:label "John Lee, Baron Lee of Trafford"@en ;
+	skos:prefLabel "John Lee, Baron Lee of Trafford"@en ;
+	schema:name "John Lee, Baron Lee of Trafford"@en ;
+	rdfs:label "John Lee, Baron Lee of Trafford"@nl ;
+	skos:prefLabel "John Lee, Baron Lee of Trafford"@nl ;
+	schema:name "John Lee, Baron Lee of Trafford"@nl ;
+	rdfs:label "John Lee, Baron Lee of Trafford"@es ;
+	skos:prefLabel "John Lee, Baron Lee of Trafford"@es ;
+	schema:name "John Lee, Baron Lee of Trafford"@es ;
+	rdfs:label "John Lee"@fr ;
+	skos:prefLabel "John Lee"@fr ;
+	schema:name "John Lee"@fr ;
+	rdfs:label "John Lee, Baron Lee of Trafford"@hu ;
+	skos:prefLabel "John Lee, Baron Lee of Trafford"@hu ;
+	schema:name "John Lee, Baron Lee of Trafford"@hu ;
+	rdfs:label "John Lee, Baron Lee of Trafford"@it ;
+	skos:prefLabel "John Lee, Baron Lee of Trafford"@it ;
+	schema:name "John Lee, Baron Lee of Trafford"@it ;
+	rdfs:label "John Lee, Baron Lee of Trafford"@sv ;
+	skos:prefLabel "John Lee, Baron Lee of Trafford"@sv ;
+	schema:name "John Lee, Baron Lee of Trafford"@sv ;
+	rdfs:label "John Lee"@sl ;
+	skos:prefLabel "John Lee"@sl ;
+	schema:name "John Lee"@sl ;
+	rdfs:label "John Lee"@ca ;
+	skos:prefLabel "John Lee"@ca ;
+	schema:name "John Lee"@ca ;
+	rdfs:label "約翰·李"@zh ;
+	skos:prefLabel "約翰·李"@zh ;
+	schema:name "約翰·李"@zh ;
+	rdfs:label "John Lee, Baron Lee of Trafford"@pt ;
+	skos:prefLabel "John Lee, Baron Lee of Trafford"@pt ;
+	schema:name "John Lee, Baron Lee of Trafford"@pt ;
+	rdfs:label "John Lee, Baron Lee of Trafford"@da ;
+	skos:prefLabel "John Lee, Baron Lee of Trafford"@da ;
+	schema:name "John Lee, Baron Lee of Trafford"@da ;
+	rdfs:label "John Lee, Baron Lee of Trafford"@fi ;
+	skos:prefLabel "John Lee, Baron Lee of Trafford"@fi ;
+	schema:name "John Lee, Baron Lee of Trafford"@fi ;
+	rdfs:label "John Lee, Baron Lee of Trafford"@cs ;
+	skos:prefLabel "John Lee, Baron Lee of Trafford"@cs ;
+	schema:name "John Lee, Baron Lee of Trafford"@cs ;
+	rdfs:label "John Lee, Baron Lee of Trafford"@pl ;
+	skos:prefLabel "John Lee, Baron Lee of Trafford"@pl ;
+	schema:name "John Lee, Baron Lee of Trafford"@pl ;
+	rdfs:label "John Lee, Baron Lee of Trafford"@nb ;
+	skos:prefLabel "John Lee, Baron Lee of Trafford"@nb ;
+	schema:name "John Lee, Baron Lee of Trafford"@nb ;
+	rdfs:label "John Lee, Baron Lee of Trafford"@pt-br ;
+	skos:prefLabel "John Lee, Baron Lee of Trafford"@pt-br ;
+	schema:name "John Lee, Baron Lee of Trafford"@pt-br ;
+	schema:description "سیاست‌مدار بریتانیایی"@fa,
+		"British politician (born 1942)"@en,
+		"politicien britannique"@fr,
+		"britischer liberaldemokratischer Politiker"@de,
+		"Brits politicus"@nl,
+		"polític britànic"@ca,
+		"פוליטיקאי בריטי"@he,
+		"político británico"@gl,
+		"político británico"@es,
+		"سياسي بريطاني"@ar,
+		"brittiläinen poliitikko"@fi,
+		"ব্রিটিশ রাজনীতিবিদ"@bn,
+		"politician britanic"@ro,
+		"British politician"@en-gb,
+		"Suurbritannia poliitik"@et,
+		"politikan britanik"@sq,
+		"British politician"@en-ca,
+		"políticu británicu"@ast,
+		"британський політик"@uk,
+		"politico britannico"@it,
+		"político britânico"@pt,
+		"politikari britainiarra"@eu,
+		"United Kingdom siyaasa nira ŋun nyɛ doo"@dag ;
+	skos:altLabel "John Lee"@en,
+		"Lord Lee of Trafford"@en .
+
+v:a40fd598479ff13f7ba73da7ac15844b a wikibase:QuantityValue ;
+	wikibase:quantityAmount "+22739"^^xsd:decimal ;
+	wikibase:quantityUnit <http://www.wikidata.org/entity/Q199> .
+
+v:09bac3857486953e134b8cb1335430bd a wikibase:QuantityValue ;
+	wikibase:quantityAmount "+17522"^^xsd:decimal ;
+	wikibase:quantityUnit <http://www.wikidata.org/entity/Q199> .
+
+v:f29236c5b3a789ca8328c2ede9e726dc a wikibase:TimeValue ;
+	wikibase:timeValue "2019-03-24T00:00:00Z"^^xsd:dateTime ;
+	wikibase:timePrecision "11"^^xsd:integer ;
+	wikibase:timeTimezone "0"^^xsd:integer ;
+	wikibase:timeCalendarModel <http://www.wikidata.org/entity/Q1985727> .
+
+ref:8c34ee0068b7a9259fa0b801d3f41dc1403b7819 a wikibase:Reference ;
+	pr:P248 wd:Q21401824 ;
+	pr:P4638 "p19844.htm#i198435" ;
+	pr:P1810 "John Robert Louis Lee, Baron Lee of Trafford" ;
+	pr:P813 "2017-10-09T00:00:00Z"^^xsd:dateTime ;
+	prv:P813 v:b3795d3425e0bbdd474f3138cad4a069 .
+
+ref:735cba33921e156e1dbda9dfe5f1f7d557527cdd a wikibase:Reference ;
+	pr:P6213 "ZKkusgzB" ;
+	prn:P6213 <https://id.parliament.uk/ZKkusgzB> .
+
+ref:d496a2fdaccd92f261e65738859f50d717be4f61 a wikibase:Reference ;
+	pr:P4656 <https://en.wikipedia.org/wiki/List_of_MPs_elected_in_the_1987_United_Kingdom_general_election> ;
+	pr:P813 "2019-03-20T00:00:00Z"^^xsd:dateTime ;
+	prv:P813 v:3b955e93480e09c114e2bbe6d93c4d71 .
+
+ref:bbb88dc761a403b567c97c03adb7794e79678462 a wikibase:Reference ;
+	pr:P4656 <https://en.wikipedia.org/wiki/List_of_MPs_elected_in_the_1983_United_Kingdom_general_election> ;
+	pr:P813 "2019-04-01T00:00:00Z"^^xsd:dateTime ;
+	prv:P813 v:08ad09bc12291e6e45cdbc553778cf70 .
+
+ref:2d631e0f2e44b228d9b2bb74ba01677e1faee93b a wikibase:Reference ;
+	pr:P4656 <https://en.wikipedia.org/wiki/List_of_MPs_elected_in_the_1979_United_Kingdom_general_election> ;
+	pr:P813 "2019-03-24T00:00:00Z"^^xsd:dateTime ;
+	prv:P813 v:f29236c5b3a789ca8328c2ede9e726dc .
+
+ref:0014cb1d947052cb22d6cb5e0c5b6428520f89f2 a wikibase:Reference ;
+	pr:P2015 "mr-john-lee-2" ;
+	pr:P248 wd:Q19204319 ;
+	pr:P813 "2022-04-22T00:00:00Z"^^xsd:dateTime ;
+	prv:P813 v:1592ab924fba289f68b650c275d5d3b6 .
+
+ref:a15bcc58b0510718a9a3bb04ee6f42c1156745d5 a wikibase:Reference ;
+	pr:P4638 "p19844.htm#i198435" ;
+	pr:P813 "2020-08-07T00:00:00Z"^^xsd:dateTime ;
+	prv:P813 v:5a166c540a59253c92144230db78cb8a .
+
+ref:3557ed366ab86dfbf14201f5aa27ca006f2c97c8 a wikibase:Reference ;
+	pr:P248 wd:Q115691306 ;
+	pr:P356 "10.7910/DVN/S83HOA" ;
+	prn:P356 <http://dx.doi.org/10.7910/DVN/S83HOA> ;
+	pr:P393 "5.0" ;
+	pr:P813 "2022-12-13T00:00:00Z"^^xsd:dateTime ;
+	prv:P813 v:e951c3bfbddab0f93cb56c3298e5784b ;
+	pr:P1810 "Lee, John - Conservative - Pendle" .
+
+ref:a167f320d3584bf97470d9033ec9c9daf14b29e1 a wikibase:Reference ;
+	pr:P248 wd:Q115691306 ;
+	pr:P356 "10.7910/DVN/S83HOA" ;
+	prn:P356 <http://dx.doi.org/10.7910/DVN/S83HOA> ;
+	pr:P393 "5.0" ;
+	pr:P813 "2022-12-13T00:00:00Z"^^xsd:dateTime ;
+	prv:P813 v:e951c3bfbddab0f93cb56c3298e5784b ;
+	pr:P1810 "Lee, John - Conservative - Nelson and Colne" .
+
+ref:13bcdfa45f9dd3d0acd40419231a4a8c298bab0e a wikibase:Reference ;
+	pr:P854 <https://experimental.worldcat.org/fast/1628988> .
+
+ref:d521bfcd5e69baa62ea11d3c385940ec8dde0e4b a wikibase:Reference ;
+	pr:P854 <https://www.theyworkforyou.com/peer/13724/lord_lee_of_trafford> ;
+	pr:P1476 "Lord Lee of Trafford - TheyWorkForYou"@en ;
+	pr:P813 "2023-03-25T00:00:00Z"^^xsd:dateTime ;
+	prv:P813 v:df351f4bdd3627657840faf1a7163eb3 .
+
+data:Q1306770 a schema:Dataset ;
+	schema:about wd:Q1306770 ;
+	schema:version "1857259100"^^xsd:integer ;
+	schema:dateModified "2023-03-21T08:54:25Z"^^xsd:dateTime ;
+	wikibase:statements "48"^^xsd:integer ;
+	wikibase:sitelinks "20"^^xsd:integer ;
+	wikibase:identifiers "15"^^xsd:integer .
+
+wd:Q1306770 a wikibase:Item .
+
+<https://species.wikimedia.org/wiki/Ploceus_angolensis> a schema:Article ;
+	schema:about wd:Q1306770 ;
+	schema:inLanguage "en" ;
+	schema:isPartOf <https://species.wikimedia.org/> ;
+	schema:name "Ploceus angolensis"@en .
+
+<https://commons.wikimedia.org/wiki/Category:Ploceus_angolensis> a schema:Article ;
+	schema:about wd:Q1306770 ;
+	schema:inLanguage "en" ;
+	schema:isPartOf <https://commons.wikimedia.org/> ;
+	schema:name "Category:Ploceus angolensis"@en .
+
+<https://en.wikipedia.org/wiki/Bar-winged_weaver> a schema:Article ;
+	schema:about wd:Q1306770 ;
+	schema:inLanguage "en" ;
+	schema:isPartOf <https://en.wikipedia.org/> ;
+	schema:name "Bar-winged weaver"@en .
+
+<https://fr.wikipedia.org/wiki/Tisserin_malimbe> a schema:Article ;
+	schema:about wd:Q1306770 ;
+	schema:inLanguage "fr" ;
+	schema:isPartOf <https://fr.wikipedia.org/> ;
+	schema:name "Tisserin malimbe"@fr .
+
+<https://nl.wikipedia.org/wiki/Miombowever> a schema:Article ;
+	schema:about wd:Q1306770 ;
+	schema:inLanguage "nl" ;
+	schema:isPartOf <https://nl.wikipedia.org/> ;
+	schema:name "Miombowever"@nl .
+
+<https://sv.wikipedia.org/wiki/Miombov%C3%A4vare> a schema:Article ;
+	schema:about wd:Q1306770 ;
+	schema:inLanguage "sv" ;
+	schema:isPartOf <https://sv.wikipedia.org/> ;
+	schema:name "Miombovävare"@sv .
+
+<https://fa.wikipedia.org/wiki/%D8%AC%D9%88%D9%84%D8%A7%DB%8C_%D8%A8%D8%A7%D9%84%E2%80%8C%D9%86%D9%88%D8%A7%D8%B1%DB%8C> a schema:Article ;
+	schema:about wd:Q1306770 ;
+	schema:inLanguage "fa" ;
+	schema:isPartOf <https://fa.wikipedia.org/> ;
+	schema:name "جولای بال‌نواری"@fa .
+
+<https://fi.wikipedia.org/wiki/Kirjosiipikutoja> a schema:Article ;
+	schema:about wd:Q1306770 ;
+	schema:inLanguage "fi" ;
+	schema:isPartOf <https://fi.wikipedia.org/> ;
+	schema:name "Kirjosiipikutoja"@fi .
+
+<https://ar.wikipedia.org/wiki/%D8%AD%D8%A8%D8%A7%D9%83_%D9%85%D8%AE%D8%B7%D8%B7_%D8%A7%D9%84%D8%AC%D9%86%D8%A7%D8%AD%D9%8A%D9%86> a schema:Article ;
+	schema:about wd:Q1306770 ;
+	schema:inLanguage "ar" ;
+	schema:isPartOf <https://ar.wikipedia.org/> ;
+	schema:name "حباك مخطط الجناحين"@ar .
+
+<https://vi.wikipedia.org/wiki/Ploceus_angolensis> a schema:Article ;
+	schema:about wd:Q1306770 ;
+	schema:inLanguage "vi" ;
+	schema:isPartOf <https://vi.wikipedia.org/> ;
+	schema:name "Ploceus angolensis"@vi .
+
+<https://ceb.wikipedia.org/wiki/Ploceus_angolensis> a schema:Article ;
+	schema:about wd:Q1306770 ;
+	schema:inLanguage "ceb" ;
+	schema:isPartOf <https://ceb.wikipedia.org/> ;
+	schema:name "Ploceus angolensis"@ceb .
+
+<https://cy.wikipedia.org/wiki/Gwehydd_adeinfrith> a schema:Article ;
+	schema:about wd:Q1306770 ;
+	schema:inLanguage "cy" ;
+	schema:isPartOf <https://cy.wikipedia.org/> ;
+	schema:name "Gwehydd adeinfrith"@cy .
+
+<https://eu.wikipedia.org/wiki/Ploceus_angolensis> a schema:Article ;
+	schema:about wd:Q1306770 ;
+	schema:inLanguage "eu" ;
+	schema:isPartOf <https://eu.wikipedia.org/> ;
+	schema:name "Ploceus angolensis"@eu .
+
+<https://mrj.wikipedia.org/wiki/%D0%90%D0%BD%D0%B3%D0%BE%D0%BB%D0%B0_%D0%BA%D0%BE%D1%88%D1%8B%D0%B3%D0%B5%D0%BA> a schema:Article ;
+	schema:about wd:Q1306770 ;
+	schema:inLanguage "mrj" ;
+	schema:isPartOf <https://mrj.wikipedia.org/> ;
+	schema:name "Ангола кошыгек"@mrj .
+
+<https://war.wikipedia.org/wiki/Ploceus_angolensis> a schema:Article ;
+	schema:about wd:Q1306770 ;
+	schema:inLanguage "war" ;
+	schema:isPartOf <https://war.wikipedia.org/> ;
+	schema:name "Ploceus angolensis"@war .
+
+<https://es.wikipedia.org/wiki/Ploceus_angolensis> a schema:Article ;
+	schema:about wd:Q1306770 ;
+	schema:inLanguage "es" ;
+	schema:isPartOf <https://es.wikipedia.org/> ;
+	schema:name "Ploceus angolensis"@es .
+
+<https://de.wikipedia.org/wiki/Miomboweber> a schema:Article ;
+	schema:about wd:Q1306770 ;
+	schema:inLanguage "de" ;
+	schema:isPartOf <https://de.wikipedia.org/> ;
+	schema:name "Miomboweber"@de .
+
+<https://arz.wikipedia.org/wiki/%D8%AD%D8%A8%D8%A7%D9%83_%D9%85%D8%AE%D8%B7%D8%B7_%D8%A7%D9%84%D8%AC%D9%86%D8%A7%D8%AD%D9%8A%D9%86> a schema:Article ;
+	schema:about wd:Q1306770 ;
+	schema:inLanguage "arz" ;
+	schema:isPartOf <https://arz.wikipedia.org/> ;
+	schema:name "حباك مخطط الجناحين"@arz .
+
+<https://ca.wikipedia.org/wiki/Teixidor_alabarrat> a schema:Article ;
+	schema:about wd:Q1306770 ;
+	schema:inLanguage "ca" ;
+	schema:isPartOf <https://ca.wikipedia.org/> ;
+	schema:name "Teixidor alabarrat"@ca .
+
+<https://uk.wikipedia.org/wiki/%D0%A2%D0%BA%D0%B0%D1%87%D0%B8%D0%BA_%D0%B0%D0%BD%D0%B3%D0%BE%D0%BB%D1%8C%D1%81%D1%8C%D0%BA%D0%B8%D0%B9> a schema:Article ;
+	schema:about wd:Q1306770 ;
+	schema:inLanguage "uk" ;
+	schema:isPartOf <https://uk.wikipedia.org/> ;
+	schema:name "Ткачик ангольський"@uk .
+
+wd:Q1306770 wdt:P105 wd:Q7432 ;
+	wdt:P141 wd:Q211005 ;
+	wdt:P373 "Ploceus angolensis" ;
+	wdt:P18 <http://commons.wikimedia.org/wiki/Special:FilePath/PloceusKeulemans.jpg> ;
+	wdt:P225 "Ploceus angolensis" ;
+	wdt:P171 wd:Q1093619 ;
+	wdt:P815 "562281" ;
+	wdt:P31 wd:Q16521 ;
+	wdt:P646 "/m/02w7sw0" ;
+	wdt:P685 "441739" ;
+	wdtn:P685 <http://purl.uniprot.org/taxonomy/441739> ;
+	wdt:P846 "2494037" ;
+	wdt:P1843 "gwehydd adeinfrith"@cy,
+		"Bar-winged Weaver"@en,
+		"Miomboweber"@de,
+		"Tejedor Alibarrado"@es,
+		"teixidor alabarrat"@ca,
+		"snovač angolský"@cs,
+		"Båndvingevever"@nb,
+		"Ангольский ткач"@ru,
+		"オビバネハタオリ"@ja,
+		"Angolavæver"@da,
+		"kirjosiipikutoja"@fi,
+		"angolai szövőmadár"@hu,
+		"wikłacz angolski"@pl,
+		"pletiarka pruhokrídla"@sk,
+		"miombovävare"@sv,
+		"Miombowever"@nl,
+		"Tisserin malimbe"@fr,
+		"Tessitore alibarrate"@it,
+		"tecelão-de-asas-listradas"@pt,
+		"Tisserin à nuque blanche"@fr,
+		"angolinis audėjas"@lt,
+		"Tejedor alibarrado"@es,
+		"ткачик ангольський"@uk,
+		"bjeloprsa pletilja"@hr ;
+	wdt:P627 "22719044" ;
+	wdt:P3151 "13814" ;
+	wdt:P4024 "Ploceus_angolensis" ;
+	wdt:P3444 "bawwea1" ;
+	wdt:P5055 "10801967" ;
+	wdtn:P5055 <urn:lsid:irmng.org:taxname:10801967> ;
+	wdt:P5257 "22719044" ;
+	wdt:P7725 "+2"^^xsd:decimal ;
+	wdt:P2067 "+2.52"^^xsd:decimal ;
+	wdt:P8072 "248265" ;
+	wdt:P2426 "Ploceus-angolensis" ;
+	wdt:P8707 "186138" ;
+	wdt:P4342 "båndvingevever" ;
+	wdt:P10585 "4KH7S" ;
+	p:P105 s:q1306770-BEFEEBC1-A65F-46EF-8C20-ADB7C21641FC .
+
+s:q1306770-BEFEEBC1-A65F-46EF-8C20-ADB7C21641FC a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P105 wd:Q7432 ;
+	prov:wasDerivedFrom ref:b15a7b6918e162e199acd46fb3c9e5c8afc5881a,
+		ref:444fcea78a52edce153996509c3d1b367e122d46,
+		ref:ec89bd22625a9362c370c1a204223cba1d386fbf,
+		ref:e4c47395790a1bb6ab36a074a94a36b303287d77,
+		ref:161ec9029205e2bd24ef7e395dcb8f42f22f4a6f,
+		ref:7543f9fced8a0699c7630fc8e04b3689a0bf9f22,
+		ref:2119aa22794cd8c9a0fe1c225d107fe4b4ebb200,
+		ref:7f7c1857dceb6839d7ef44468bf79b3e3df17e0d,
+		ref:2e3d31a96d0a924dfaedc6861acbeb1b50c59dda,
+		ref:65e1ea6b2b8d4ca7838f1e6c61d625cf86f56efc,
+		ref:85d125a6575d791c8b814f43559b6d2f3531d58e,
+		ref:5640a003a8c5e2167665beeb493bfcc832653fb0,
+		ref:dc56aef2a8861bf6b38424fe94940f9a2ff5ee69,
+		ref:30baccd68ba81eabfe03b410365b97cda1d79e07,
+		ref:2464e23b9f35eb83344f490bf5a67cc8d3441623,
+		ref:dbe3e93d92f132e92b4e8a465617ffe9e9d62063,
+		ref:4bebad807ee4888efe96acf58fed95d2299a3338,
+		ref:ab4601cb5a02646167f8d9fa14dd0ea5364e4543,
+		ref:70c0623b10c5f8f2c78f693c83761d37503ba624,
+		ref:36cca087601285eb0fa136a260f5d6169643b82e,
+		ref:1d7cf566ca0e7d0ff03cefe8bc90e373c9a6a1f1,
+		ref:1f1ac22e07bfbd4de040d07b0d02d19b5d93432e,
+		ref:5b88fb84e6747ae743c16da010d002612958ac1d,
+		ref:e68df7d662cd6c2d6b10d2d5a8e27e9d85a06d23,
+		ref:9c1756dafcd3c5ab7b4cb2872005ef9428f98014,
+		ref:5907faa88bc1e9df74a3e09a090e1085409a5e82 .
+
+wd:Q1306770 p:P141 s:q1306770-E443B0E7-8767-45CA-938F-47C017B5D7FF .
+
+s:q1306770-E443B0E7-8767-45CA-938F-47C017B5D7FF a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P141 wd:Q211005 ;
+	prov:wasDerivedFrom ref:8790b1e22f9e28c336d645376e6b8180a3f647f3 .
+
+wd:Q1306770 p:P373 s:q1306770-1869F45A-2346-40D4-BD72-8AEAD3163CC4 .
+
+s:q1306770-1869F45A-2346-40D4-BD72-8AEAD3163CC4 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P373 "Ploceus angolensis" .
+
+wd:Q1306770 p:P18 s:q1306770-3CD3BA61-0668-4D0C-80B4-D75D5AC1EEF6 .
+
+s:q1306770-3CD3BA61-0668-4D0C-80B4-D75D5AC1EEF6 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P18 <http://commons.wikimedia.org/wiki/Special:FilePath/PloceusKeulemans.jpg> .
+
+wd:Q1306770 p:P225 s:q1306770-C46B51AC-7E2B-4988-9C74-C8B5044A1CA2 .
+
+s:q1306770-C46B51AC-7E2B-4988-9C74-C8B5044A1CA2 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P225 "Ploceus angolensis" ;
+	pq:P405 wd:Q1709686 ;
+	pq:P574 "1878-01-01T00:00:00Z"^^xsd:dateTime ;
+	pqv:P574 v:4b6fcb2429083a7ef5021ca23059c45c ;
+	pq:P3831 wd:Q14594740 ;
+	prov:wasDerivedFrom ref:b15a7b6918e162e199acd46fb3c9e5c8afc5881a,
+		ref:444fcea78a52edce153996509c3d1b367e122d46,
+		ref:e4c47395790a1bb6ab36a074a94a36b303287d77,
+		ref:161ec9029205e2bd24ef7e395dcb8f42f22f4a6f,
+		ref:ec89bd22625a9362c370c1a204223cba1d386fbf,
+		ref:7543f9fced8a0699c7630fc8e04b3689a0bf9f22,
+		ref:2119aa22794cd8c9a0fe1c225d107fe4b4ebb200,
+		ref:7f7c1857dceb6839d7ef44468bf79b3e3df17e0d,
+		ref:2e3d31a96d0a924dfaedc6861acbeb1b50c59dda,
+		ref:65e1ea6b2b8d4ca7838f1e6c61d625cf86f56efc,
+		ref:85d125a6575d791c8b814f43559b6d2f3531d58e,
+		ref:5640a003a8c5e2167665beeb493bfcc832653fb0,
+		ref:dc56aef2a8861bf6b38424fe94940f9a2ff5ee69,
+		ref:30baccd68ba81eabfe03b410365b97cda1d79e07,
+		ref:2464e23b9f35eb83344f490bf5a67cc8d3441623,
+		ref:dbe3e93d92f132e92b4e8a465617ffe9e9d62063,
+		ref:4bebad807ee4888efe96acf58fed95d2299a3338,
+		ref:ab4601cb5a02646167f8d9fa14dd0ea5364e4543,
+		ref:70c0623b10c5f8f2c78f693c83761d37503ba624,
+		ref:36cca087601285eb0fa136a260f5d6169643b82e,
+		ref:1d7cf566ca0e7d0ff03cefe8bc90e373c9a6a1f1,
+		ref:1f1ac22e07bfbd4de040d07b0d02d19b5d93432e,
+		ref:5b88fb84e6747ae743c16da010d002612958ac1d,
+		ref:e68df7d662cd6c2d6b10d2d5a8e27e9d85a06d23,
+		ref:9c1756dafcd3c5ab7b4cb2872005ef9428f98014,
+		ref:5907faa88bc1e9df74a3e09a090e1085409a5e82 .
+
+wd:Q1306770 p:P171 s:Q1306770-81133F4C-4953-4C98-A86A-C7BB7C2076AF .
+
+s:Q1306770-81133F4C-4953-4C98-A86A-C7BB7C2076AF a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P171 wd:Q1093619 ;
+	prov:wasDerivedFrom ref:b15a7b6918e162e199acd46fb3c9e5c8afc5881a .
+
+wd:Q1306770 p:P815 s:Q1306770-4AD60B06-E209-4F33-BDE3-5194AB12D07C .
+
+s:Q1306770-4AD60B06-E209-4F33-BDE3-5194AB12D07C a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P815 "562281" ;
+	prov:wasDerivedFrom ref:f164c7bf784f194e54c8e22643e7b211f021532f .
+
+wd:Q1306770 p:P31 s:Q1306770-C3BC692A-60A2-4F1F-8042-741F1E0E0DC6 .
+
+s:Q1306770-C3BC692A-60A2-4F1F-8042-741F1E0E0DC6 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P31 wd:Q16521 .
+
+wd:Q1306770 p:P646 s:Q1306770-CB4ED5A2-247F-4A0D-9A30-FA7B8569B8F4 .
+
+s:Q1306770-CB4ED5A2-247F-4A0D-9A30-FA7B8569B8F4 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P646 "/m/02w7sw0" ;
+	prov:wasDerivedFrom ref:2b00cb481cddcac7623114367489b5c194901c4a .
+
+wd:Q1306770 p:P685 s:Q1306770-01ADA4CD-5A7B-4B2F-8F41-935201E353B6 .
+
+s:Q1306770-01ADA4CD-5A7B-4B2F-8F41-935201E353B6 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P685 "441739" ;
+	psn:P685 <http://purl.uniprot.org/taxonomy/441739> ;
+	prov:wasDerivedFrom ref:70d94501512f065d1b970970fcb99b39305df1b1 .
+
+wd:Q1306770 p:P846 s:Q1306770-088CD10A-C15D-4CFD-9468-3C4C341E6151 .
+
+s:Q1306770-088CD10A-C15D-4CFD-9468-3C4C341E6151 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P846 "2494037" ;
+	prov:wasDerivedFrom ref:b7243c8faff8677061c9ccc7ff09bb25863f992e .
+
+wd:Q1306770 p:P1843 s:Q1306770-21A7354D-D54D-46DC-B0E2-5735B4E632E7 .
+
+s:Q1306770-21A7354D-D54D-46DC-B0E2-5735B4E632E7 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1843 "gwehydd adeinfrith"@cy ;
+	prov:wasDerivedFrom ref:7479d742e4c3a7125fd8bb4d3ada812848cadcfd .
+
+wd:Q1306770 p:P1843 s:Q1306770-D4721B41-835D-4BA8-8D17-4181B117A47D .
+
+s:Q1306770-D4721B41-835D-4BA8-8D17-4181B117A47D a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1843 "Bar-winged Weaver"@en ;
+	prov:wasDerivedFrom ref:69f9037810fe048aecd86c658109046930daee57,
+		ref:eada84c58a38325085267509899037535799e978,
+		ref:7e2d2fc3607864f09797ccd08381a83775e83391,
+		ref:c4657d543aa82b52f4e9f198da360adbdbbff7d3,
+		ref:be1e4cd8bbaccabdcb5be2b6b6efef21ff4c1938 .
+
+wd:Q1306770 p:P1843 s:Q1306770-97C277F4-914E-4C86-9336-E44AE6F3B6EC .
+
+s:Q1306770-97C277F4-914E-4C86-9336-E44AE6F3B6EC a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1843 "Miomboweber"@de ;
+	prov:wasDerivedFrom ref:d26f5cc6c4e1acbeb000ef486688b7b47efd5262,
+		ref:7e2d2fc3607864f09797ccd08381a83775e83391,
+		ref:c4657d543aa82b52f4e9f198da360adbdbbff7d3,
+		ref:be1e4cd8bbaccabdcb5be2b6b6efef21ff4c1938 .
+
+wd:Q1306770 p:P1843 s:Q1306770-8763EC11-C2DE-46A7-81B5-A9EB51BDFF1C .
+
+s:Q1306770-8763EC11-C2DE-46A7-81B5-A9EB51BDFF1C a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1843 "Tejedor Alibarrado"@es ;
+	prov:wasDerivedFrom ref:d26f5cc6c4e1acbeb000ef486688b7b47efd5262,
+		ref:bb5cb10a4cda4179eece556c18ba46e2a1b3dd47 .
+
+wd:Q1306770 p:P1843 s:Q1306770-9D3AA40A-726C-4A4F-ADDD-C187553291A7 .
+
+s:Q1306770-9D3AA40A-726C-4A4F-ADDD-C187553291A7 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1843 "teixidor alabarrat"@ca ;
+	prov:wasDerivedFrom ref:d26f5cc6c4e1acbeb000ef486688b7b47efd5262,
+		ref:3c8d529e3610a9e8ee7a17304c4b575c39e0b357,
+		ref:2cc27f544c1ed00a0f62f9d4a832de11073d5c8e,
+		ref:c0ed6d6cbe19de115974bc8425564e3e99c10e0c .
+
+wd:Q1306770 p:P1843 s:Q1306770-7E6BB1EE-C203-468C-AC5A-0B64CB93771F .
+
+s:Q1306770-7E6BB1EE-C203-468C-AC5A-0B64CB93771F a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1843 "snovač angolský"@cs ;
+	prov:wasDerivedFrom ref:5f549f32ac44585338483f12b77632d3e894e6a8,
+		ref:3c8d529e3610a9e8ee7a17304c4b575c39e0b357,
+		ref:96fb0cc9668b837281f5e2541f587dd4e3ffd9a1,
+		ref:c0ed6d6cbe19de115974bc8425564e3e99c10e0c .
+
+wd:Q1306770 p:P1843 s:Q1306770-05589A8F-C24A-41C3-96B0-D1E9BF9F167A .
+
+s:Q1306770-05589A8F-C24A-41C3-96B0-D1E9BF9F167A a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1843 "Båndvingevever"@nb ;
+	prov:wasDerivedFrom ref:a052d23ae07e8cfca1461c8c8d52e3fe3a02bccf,
+		ref:bb5cb10a4cda4179eece556c18ba46e2a1b3dd47,
+		ref:96fb0cc9668b837281f5e2541f587dd4e3ffd9a1,
+		ref:6066bc5bffc90c6c9e622ad47b0444c3c7e6efbb .
+
+wd:Q1306770 p:P1843 s:Q1306770-F70C5188-1DAC-4FC6-BB1B-446C3BB33398 .
+
+s:Q1306770-F70C5188-1DAC-4FC6-BB1B-446C3BB33398 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1843 "Ангольский ткач"@ru ;
+	prov:wasDerivedFrom ref:a052d23ae07e8cfca1461c8c8d52e3fe3a02bccf,
+		ref:bb5cb10a4cda4179eece556c18ba46e2a1b3dd47,
+		ref:3a0f23dda7a5ad15c6a5cbaf59dac641848189e7,
+		ref:6066bc5bffc90c6c9e622ad47b0444c3c7e6efbb .
+
+wd:Q1306770 p:P1843 s:Q1306770-53F43D5C-A5DD-48F8-A6DB-FC934480A879 .
+
+s:Q1306770-53F43D5C-A5DD-48F8-A6DB-FC934480A879 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1843 "オビバネハタオリ"@ja ;
+	prov:wasDerivedFrom ref:603c6f1ea53ce2ded426a36950e67f7dc6cf20e8,
+		ref:a33be01eda65e199974c6b48fe38a5eff542a065,
+		ref:3a0f23dda7a5ad15c6a5cbaf59dac641848189e7,
+		ref:6066bc5bffc90c6c9e622ad47b0444c3c7e6efbb .
+
+wd:Q1306770 p:P1843 s:Q1306770-3D45144A-3B65-414C-8941-C8D8ED95A4CE .
+
+s:Q1306770-3D45144A-3B65-414C-8941-C8D8ED95A4CE a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1843 "Angolavæver"@da ;
+	prov:wasDerivedFrom ref:603c6f1ea53ce2ded426a36950e67f7dc6cf20e8,
+		ref:88d0c829e2306278eeb81191bc0a03d24d82619a,
+		ref:3a0f23dda7a5ad15c6a5cbaf59dac641848189e7,
+		ref:4796e8e610e36989c6cbbc12f972cedaf16a9bb6 .
+
+wd:Q1306770 p:P1843 s:Q1306770-FC326D0B-8634-42A7-B92E-B3E9EB5DE7CB .
+
+s:Q1306770-FC326D0B-8634-42A7-B92E-B3E9EB5DE7CB a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1843 "kirjosiipikutoja"@fi ;
+	prov:wasDerivedFrom ref:603c6f1ea53ce2ded426a36950e67f7dc6cf20e8,
+		ref:88d0c829e2306278eeb81191bc0a03d24d82619a,
+		ref:4efedb1625efd46df46d1f7b364da4b682112be6,
+		ref:e5b47d32b56feffb8ac12354f3fc8a07c59cb2f8 .
+
+wd:Q1306770 p:P1843 s:Q1306770-CAAFCAD5-40DE-4C6A-BEF2-B99492DBB5B0 .
+
+s:Q1306770-CAAFCAD5-40DE-4C6A-BEF2-B99492DBB5B0 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1843 "angolai szövőmadár"@hu ;
+	prov:wasDerivedFrom ref:603c6f1ea53ce2ded426a36950e67f7dc6cf20e8,
+		ref:88d0c829e2306278eeb81191bc0a03d24d82619a,
+		ref:4efedb1625efd46df46d1f7b364da4b682112be6,
+		ref:e5b47d32b56feffb8ac12354f3fc8a07c59cb2f8 .
+
+wd:Q1306770 p:P1843 s:Q1306770-243832E1-1147-410A-BC0F-ACBCF8204B87 .
+
+s:Q1306770-243832E1-1147-410A-BC0F-ACBCF8204B87 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1843 "wikłacz angolski"@pl ;
+	prov:wasDerivedFrom ref:9a681dbf31ebd5fd1d2006e0c492516e6c3d59d7,
+		ref:a5985e212e9ebdc0f5c099ef745227641ffe8058,
+		ref:4efedb1625efd46df46d1f7b364da4b682112be6,
+		ref:e5b47d32b56feffb8ac12354f3fc8a07c59cb2f8 .
+
+wd:Q1306770 p:P1843 s:Q1306770-E2EA5550-6DF0-4D45-89D4-F4D781409D0F .
+
+s:Q1306770-E2EA5550-6DF0-4D45-89D4-F4D781409D0F a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1843 "pletiarka pruhokrídla"@sk ;
+	prov:wasDerivedFrom ref:9a681dbf31ebd5fd1d2006e0c492516e6c3d59d7,
+		ref:8b62d4852f9922bf7deb1e3097da3fdaca662080,
+		ref:b59559b5fb94f484071effd2570a59e9848a1861,
+		ref:4bdff02c1331b29868f1b0519582f313ef66319f .
+
+wd:Q1306770 p:P1843 s:Q1306770-C5078756-B9BA-467A-BB0A-07B7B015F234 .
+
+s:Q1306770-C5078756-B9BA-467A-BB0A-07B7B015F234 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1843 "miombovävare"@sv ;
+	prov:wasDerivedFrom ref:9a681dbf31ebd5fd1d2006e0c492516e6c3d59d7,
+		ref:8b62d4852f9922bf7deb1e3097da3fdaca662080,
+		ref:b59559b5fb94f484071effd2570a59e9848a1861,
+		ref:4bdff02c1331b29868f1b0519582f313ef66319f .
+
+wd:Q1306770 p:P1843 s:Q1306770-5B75F3CE-F13B-45F4-B8F4-482B5E08ED4B .
+
+s:Q1306770-5B75F3CE-F13B-45F4-B8F4-482B5E08ED4B a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1843 "Miombowever"@nl ;
+	prov:wasDerivedFrom ref:9a681dbf31ebd5fd1d2006e0c492516e6c3d59d7,
+		ref:a3d4da30be30d4253fab831b5cd7dc99f23f99b6,
+		ref:c08ad1d35eef685a856f67fce57bb2a90817f532,
+		ref:4796e8e610e36989c6cbbc12f972cedaf16a9bb6 .
+
+wd:Q1306770 p:P1843 s:Q1306770-29432FFD-F697-42E5-9642-476831BD2C24 .
+
+s:Q1306770-29432FFD-F697-42E5-9642-476831BD2C24 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1843 "Tisserin malimbe"@fr ;
+	prov:wasDerivedFrom ref:cc8e684994d6535fc00aeeac3770fb7dd1061ec8,
+		ref:a3d4da30be30d4253fab831b5cd7dc99f23f99b6,
+		ref:c08ad1d35eef685a856f67fce57bb2a90817f532,
+		ref:c3f5789c86ebcc7a6786eb1239d681aaad57d156 .
+
+wd:Q1306770 p:P1843 s:Q1306770-39656B03-4AAB-4786-BD21-2DEE0223B835 .
+
+s:Q1306770-39656B03-4AAB-4786-BD21-2DEE0223B835 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1843 "Tessitore alibarrate"@it ;
+	prov:wasDerivedFrom ref:cc8e684994d6535fc00aeeac3770fb7dd1061ec8,
+		ref:a5985e212e9ebdc0f5c099ef745227641ffe8058,
+		ref:f2cd07071ec68df2c4733a3568a72faee31a4c17,
+		ref:c3f5789c86ebcc7a6786eb1239d681aaad57d156 .
+
+wd:Q1306770 p:P1843 s:Q1306770-3E1A3C47-F9DB-4BCD-91DC-79518A160009 .
+
+s:Q1306770-3E1A3C47-F9DB-4BCD-91DC-79518A160009 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1843 "tecelão-de-asas-listradas"@pt ;
+	prov:wasDerivedFrom ref:cc8e684994d6535fc00aeeac3770fb7dd1061ec8,
+		ref:a5985e212e9ebdc0f5c099ef745227641ffe8058,
+		ref:c30ff2b8e8ee7726c62e091bf3454a351c588d7e,
+		ref:c3f5789c86ebcc7a6786eb1239d681aaad57d156 .
+
+wd:Q1306770 p:P1843 s:Q1306770-46DC532E-FB60-4821-9AEC-F77C78006CD4 .
+
+s:Q1306770-46DC532E-FB60-4821-9AEC-F77C78006CD4 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1843 "Tisserin à nuque blanche"@fr ;
+	prov:wasDerivedFrom ref:362e3c5d6de1d193ef97205ba38834ba075191fc .
+
+wd:Q1306770 p:P1843 s:Q1306770-FB5A7938-AF77-49A1-9157-5D489BAFABCB .
+
+s:Q1306770-FB5A7938-AF77-49A1-9157-5D489BAFABCB a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1843 "angolinis audėjas"@lt ;
+	prov:wasDerivedFrom ref:f0803c677f9af87feaef2126e3009bfa8fb70813,
+		ref:a33be01eda65e199974c6b48fe38a5eff542a065,
+		ref:c30ff2b8e8ee7726c62e091bf3454a351c588d7e,
+		ref:7e9b9b134e1f2a9ff8b516edc1ce4fcdd881b81e .
+
+wd:Q1306770 p:P1843 s:Q1306770-4D2F72AE-CB91-4C3D-84A8-5C8730CCBF11 .
+
+s:Q1306770-4D2F72AE-CB91-4C3D-84A8-5C8730CCBF11 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1843 "Tejedor alibarrado"@es ;
+	prov:wasDerivedFrom ref:2cc27f544c1ed00a0f62f9d4a832de11073d5c8e,
+		ref:c0ed6d6cbe19de115974bc8425564e3e99c10e0c .
+
+wd:Q1306770 p:P1843 s:Q1306770-F17C3BBC-EE2E-458E-9009-86EB011492FB .
+
+s:Q1306770-F17C3BBC-EE2E-458E-9009-86EB011492FB a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1843 "ткачик ангольський"@uk ;
+	prov:wasDerivedFrom ref:52ba534da6c1c09cd04dce60581185ec9bed3f42,
+		ref:7e9b9b134e1f2a9ff8b516edc1ce4fcdd881b81e .
+
+wd:Q1306770 p:P1843 s:Q1306770-9091B8F0-4B51-4FBE-B898-8641038F6E14 .
+
+s:Q1306770-9091B8F0-4B51-4FBE-B898-8641038F6E14 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1843 "bjeloprsa pletilja"@hr ;
+	prov:wasDerivedFrom ref:b9b44a90df1b53e81c4ea550754bc380737163f4 .
+
+wd:Q1306770 p:P627 s:Q1306770-1F409E8E-8A7A-4C2A-AD74-7B9A688A9FFF .
+
+s:Q1306770-1F409E8E-8A7A-4C2A-AD74-7B9A688A9FFF a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P627 "22719044" ;
+	prov:wasDerivedFrom ref:182efbdb9110d036ca433f3b49bd3a1ae312858b .
+
+wd:Q1306770 p:P3151 s:Q1306770-ABD2B2AF-411A-4EB3-9D73-02976F18894A .
+
+s:Q1306770-ABD2B2AF-411A-4EB3-9D73-02976F18894A a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P3151 "13814" .
+
+wd:Q1306770 p:P4024 s:Q1306770-569096D4-4287-4E3B-B6F5-AED5FF03BC32 .
+
+s:Q1306770-569096D4-4287-4E3B-B6F5-AED5FF03BC32 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P4024 "Ploceus_angolensis" ;
+	prov:wasDerivedFrom ref:d4bd87b862b12d99d26e86472d44f26858dee639 .
+
+wd:Q1306770 p:P3444 s:Q1306770-9C810A99-99A1-4332-AA76-F4B99F455DCC .
+
+s:Q1306770-9C810A99-99A1-4332-AA76-F4B99F455DCC a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P3444 "bawwea1" ;
+	prov:wasDerivedFrom ref:69b72d4adb5936afee3981770a5f103a6b971733,
+		ref:ad5fa0d41e270a93ebab7d23cbeceeb71597a76f .
+
+wd:Q1306770 p:P5055 s:Q1306770-C3564352-53F7-4E4A-87D3-4E242A10BDF2 .
+
+s:Q1306770-C3564352-53F7-4E4A-87D3-4E242A10BDF2 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P5055 "10801967" ;
+	psn:P5055 <urn:lsid:irmng.org:taxname:10801967> ;
+	prov:wasDerivedFrom ref:13018bfd62c8c41a7eb67fff6842086e864e96e2 .
+
+wd:Q1306770 p:P5257 s:Q1306770-44259F68-5702-489F-AB9D-B9B85B9548BB .
+
+s:Q1306770-44259F68-5702-489F-AB9D-B9B85B9548BB a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P5257 "22719044" ;
+	prov:wasDerivedFrom ref:f910a21ad0feb0a0c62f245ede792e0b8f29b64e,
+		ref:899d471ee002c8e09a44db61ec4ac3947a55f8f1,
+		ref:541c1afeccf070e19064a390279e032c72f0ec8e,
+		ref:eb24c1fdd67cbdd6466ae3699da49097c38c3752,
+		ref:ca60eb881620a7bff02ff5bbbccd68f120210c52,
+		ref:eeb8ba299c92f691dae53be60a3775fd8f731cfb .
+
+wd:Q1306770 p:P7725 s:Q1306770-a849ed02-d673-4309-92aa-777ca8b9ea85 .
+
+s:Q1306770-a849ed02-d673-4309-92aa-777ca8b9ea85 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P7725 "+2"^^xsd:decimal ;
+	psv:P7725 v:45430454bd0f3bc0d9093c52b6acfc2b ;
+	prov:wasDerivedFrom ref:e279678510fb168af666a355fe7b0bfbd0b95cc1 .
+
+wd:Q1306770 p:P2067 s:Q1306770-6cff5f91-e50f-49b0-996b-945035808f4a .
+
+s:Q1306770-6cff5f91-e50f-49b0-996b-945035808f4a a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P2067 "+2.52"^^xsd:decimal ;
+	psv:P2067 v:df1a573b4fab7c54ad979598495ac309 ;
+	psn:P2067 v:67e8530c497a3e9de92489d4e008ee92 ;
+	pq:P642 wd:Q4128476 ;
+	prov:wasDerivedFrom ref:7cbc8801a705077a1ba7d44b6f6b22cba9b3426e .
+
+wd:Q1306770 p:P8072 s:Q1306770-953EA03D-553E-47D1-AB2F-BAC63CF4D771 .
+
+s:Q1306770-953EA03D-553E-47D1-AB2F-BAC63CF4D771 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P8072 "248265" .
+
+wd:Q1306770 p:P2426 s:Q1306770-893A3C97-CD52-434E-9EE7-EE4FDC0CF236 .
+
+s:Q1306770-893A3C97-CD52-434E-9EE7-EE4FDC0CF236 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P2426 "Ploceus-angolensis" .
+
+wd:Q1306770 p:P8707 s:Q1306770-272AF7F0-F0D1-4B20-8FD3-A3D00C2FF9F6 .
+
+s:Q1306770-272AF7F0-F0D1-4B20-8FD3-A3D00C2FF9F6 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P8707 "186138" .
+
+wd:Q1306770 p:P4342 s:Q1306770-5375f19d-da31-4815-b450-3dbadeec8065 .
+
+s:Q1306770-5375f19d-da31-4815-b450-3dbadeec8065 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P4342 "båndvingevever" .
+
+wd:Q1306770 p:P10585 s:Q1306770-0957C6A6-BECE-40ED-823D-617EB94685A4 .
+
+s:Q1306770-0957C6A6-BECE-40ED-823D-617EB94685A4 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P10585 "4KH7S" ;
+	prov:wasDerivedFrom ref:acbf110eddba88f3fafa211d8ab0d53db381eebc .
+
+wd:Q1306770 rdfs:label "Ploceus angolensis"@eu ;
+	skos:prefLabel "Ploceus angolensis"@eu ;
+	schema:name "Ploceus angolensis"@eu ;
+	rdfs:label "Ploceus angolensis"@vi ;
+	skos:prefLabel "Ploceus angolensis"@vi ;
+	schema:name "Ploceus angolensis"@vi ;
+	rdfs:label "Tisserin malimbe"@fr ;
+	skos:prefLabel "Tisserin malimbe"@fr ;
+	schema:name "Tisserin malimbe"@fr ;
+	rdfs:label "Bar-winged Weaver"@en ;
+	skos:prefLabel "Bar-winged Weaver"@en ;
+	schema:name "Bar-winged Weaver"@en ;
+	rdfs:label "Miombovävare"@sv ;
+	skos:prefLabel "Miombovävare"@sv ;
+	schema:name "Miombovävare"@sv ;
+	rdfs:label "Ploceus angolensis"@ceb ;
+	skos:prefLabel "Ploceus angolensis"@ceb ;
+	schema:name "Ploceus angolensis"@ceb ;
+	rdfs:label "Ploceus angolensis"@war ;
+	skos:prefLabel "Ploceus angolensis"@war ;
+	schema:name "Ploceus angolensis"@war ;
+	rdfs:label "Ploceus angolensis"@de ;
+	skos:prefLabel "Ploceus angolensis"@de ;
+	schema:name "Ploceus angolensis"@de ;
+	rdfs:label "Ploceus angolensis"@es ;
+	skos:prefLabel "Ploceus angolensis"@es ;
+	schema:name "Ploceus angolensis"@es ;
+	rdfs:label "Ploceus angolensis"@it ;
+	skos:prefLabel "Ploceus angolensis"@it ;
+	schema:name "Ploceus angolensis"@it ;
+	rdfs:label "Miombowever"@nl ;
+	skos:prefLabel "Miombowever"@nl ;
+	schema:name "Miombowever"@nl ;
+	rdfs:label "Kirjosiipikutoja"@fi ;
+	skos:prefLabel "Kirjosiipikutoja"@fi ;
+	schema:name "Kirjosiipikutoja"@fi ;
+	rdfs:label "حباك مخطط الجناحين"@ar ;
+	skos:prefLabel "حباك مخطط الجناحين"@ar ;
+	schema:name "حباك مخطط الجناحين"@ar ;
+	rdfs:label "анголски тъкач"@bg ;
+	skos:prefLabel "анголски тъкач"@bg ;
+	schema:name "анголски тъкач"@bg ;
+	rdfs:label "جولای بال‌نواری"@fa ;
+	skos:prefLabel "جولای بال‌نواری"@fa ;
+	schema:name "جولای بال‌نواری"@fa ;
+	rdfs:label "Ангола кошыгек"@mrj ;
+	skos:prefLabel "Ангола кошыгек"@mrj ;
+	schema:name "Ангола кошыгек"@mrj ;
+	rdfs:label "Ploceus angolensis"@ru ;
+	skos:prefLabel "Ploceus angolensis"@ru ;
+	schema:name "Ploceus angolensis"@ru ;
+	rdfs:label "Ploceus angolensis"@ia ;
+	skos:prefLabel "Ploceus angolensis"@ia ;
+	schema:name "Ploceus angolensis"@ia ;
+	rdfs:label "Gwehydd adeinfrith"@cy ;
+	skos:prefLabel "Gwehydd adeinfrith"@cy ;
+	schema:name "Gwehydd adeinfrith"@cy ;
+	rdfs:label "Ploceus angolensis"@la ;
+	skos:prefLabel "Ploceus angolensis"@la ;
+	schema:name "Ploceus angolensis"@la ;
+	rdfs:label "teixidor alabarrat"@ca ;
+	skos:prefLabel "teixidor alabarrat"@ca ;
+	schema:name "teixidor alabarrat"@ca ;
+	rdfs:label "snovač angolský"@cs ;
+	skos:prefLabel "snovač angolský"@cs ;
+	schema:name "snovač angolský"@cs ;
+	rdfs:label "Båndvingevever"@nb ;
+	skos:prefLabel "Båndvingevever"@nb ;
+	schema:name "Båndvingevever"@nb ;
+	rdfs:label "オビバネハタオリ"@ja ;
+	skos:prefLabel "オビバネハタオリ"@ja ;
+	schema:name "オビバネハタオリ"@ja ;
+	rdfs:label "Angolavæver"@da ;
+	skos:prefLabel "Angolavæver"@da ;
+	schema:name "Angolavæver"@da ;
+	rdfs:label "angolai szövőmadár"@hu ;
+	skos:prefLabel "angolai szövőmadár"@hu ;
+	schema:name "angolai szövőmadár"@hu ;
+	rdfs:label "wikłacz angolski"@pl ;
+	skos:prefLabel "wikłacz angolski"@pl ;
+	schema:name "wikłacz angolski"@pl ;
+	rdfs:label "pletiarka pruhokrídla"@sk ;
+	skos:prefLabel "pletiarka pruhokrídla"@sk ;
+	schema:name "pletiarka pruhokrídla"@sk ;
+	rdfs:label "tecelão-de-asas-listradas"@pt ;
+	skos:prefLabel "tecelão-de-asas-listradas"@pt ;
+	schema:name "tecelão-de-asas-listradas"@pt ;
+	rdfs:label "Ploceus angolensis"@uk ;
+	skos:prefLabel "Ploceus angolensis"@uk ;
+	schema:name "Ploceus angolensis"@uk ;
+	rdfs:label "Ploceus angolensis"@ast ;
+	skos:prefLabel "Ploceus angolensis"@ast ;
+	schema:name "Ploceus angolensis"@ast ;
+	rdfs:label "Ploceus angolensis"@ga ;
+	skos:prefLabel "Ploceus angolensis"@ga ;
+	schema:name "Ploceus angolensis"@ga ;
+	rdfs:label "Ploceus angolensis"@ro ;
+	skos:prefLabel "Ploceus angolensis"@ro ;
+	schema:name "Ploceus angolensis"@ro ;
+	rdfs:label "Ploceus angolensis"@sq ;
+	skos:prefLabel "Ploceus angolensis"@sq ;
+	schema:name "Ploceus angolensis"@sq ;
+	rdfs:label "حباك مخطط الجناحين"@arz ;
+	skos:prefLabel "حباك مخطط الجناحين"@arz ;
+	schema:name "حباك مخطط الجناحين"@arz ;
+	schema:description "Art der Gattung Ploceus"@de,
+		"specie di uccello"@it,
+		"espèce d'oiseaux"@fr,
+		"species of bird"@en,
+		"вид птица"@bg,
+		"soort uit het geslacht Ploceus"@nl,
+		"rhywogaeth o adar"@cy,
+		"نوع من الطيور"@ar,
+		"পাখির প্রজাতি"@bn,
+		"druh ptáka rodu Ploceus"@cs,
+		"вид птахів"@uk,
+		"especie de páxaru"@ast,
+		"afrikansk fågelart"@sv,
+		"speiceas éan"@ga,
+		"lintulaji"@fi,
+		"druh vtáka rodu Ploceus"@sk,
+		"art av spurvefugler"@nb,
+		"art av sporvefuglar"@nn,
+		"نوع من الطيور"@arz ;
+	skos:altLabel "Tisserin de l'angola"@fr,
+		"Ploceus angolensis"@fr,
+		"Tisserin à nuque blanche"@fr,
+		"Ploceus angolensis"@sv,
+		"Ploceus angolensis"@en,
+		"حباك أنغولي"@ar,
+		"Ploceus angolensis"@bg,
+		"Tessitore alibarrate"@it,
+		"Tejedor alibarrado"@es,
+		"Miomboweber"@de .
+
+v:df1a573b4fab7c54ad979598495ac309 a wikibase:QuantityValue ;
+	wikibase:quantityAmount "+2.52"^^xsd:decimal ;
+	wikibase:quantityUnit <http://www.wikidata.org/entity/Q41803> .
+
+v:67e8530c497a3e9de92489d4e008ee92 a wikibase:QuantityValue ;
+	wikibase:quantityAmount "+0.00252"^^xsd:decimal ;
+	wikibase:quantityUnit <http://www.wikidata.org/entity/Q11570> ;
+	wikibase:quantityNormalized v:67e8530c497a3e9de92489d4e008ee92 .
+
+v:df1a573b4fab7c54ad979598495ac309 wikibase:quantityNormalized v:67e8530c497a3e9de92489d4e008ee92 .
+
+ref:8790b1e22f9e28c336d645376e6b8180a3f647f3 a wikibase:Reference ;
+	pr:P248 wd:Q110235407 ;
+	pr:P627 "22719044" ;
+	pr:P813 "2021-12-27T00:00:00Z"^^xsd:dateTime ;
+	prv:P813 v:1c2bdb853d9fa69572ca1abf9b226afc .
+
+ref:9a681dbf31ebd5fd1d2006e0c492516e6c3d59d7 a wikibase:Reference ;
+	pr:P248 wd:Q27042747 ;
+	pr:P813 "2016-10-16T00:00:00Z"^^xsd:dateTime ;
+	prv:P813 v:055167878d6ea2b50690069f330bb773 .
+
+data:Q1306776 a schema:Dataset ;
+	schema:about wd:Q1306776 ;
+	schema:version "1801349665"^^xsd:integer ;
+	schema:dateModified "2023-01-02T23:28:42Z"^^xsd:dateTime ;
+	wikibase:statements "60"^^xsd:integer ;
+	wikibase:sitelinks "6"^^xsd:integer ;
+	wikibase:identifiers "28"^^xsd:integer .
+
+wd:Q1306776 a wikibase:Item .
+
+<https://en.wikipedia.org/wiki/Love%27s_Brother> a schema:Article ;
+	schema:about wd:Q1306776 ;
+	schema:inLanguage "en" ;
+	schema:isPartOf <https://en.wikipedia.org/> ;
+	schema:name "Love's Brother"@en .
+
+<https://de.wikipedia.org/wiki/Eine_italienische_Hochzeit> a schema:Article ;
+	schema:about wd:Q1306776 ;
+	schema:inLanguage "de" ;
+	schema:isPartOf <https://de.wikipedia.org/> ;
+	schema:name "Eine italienische Hochzeit"@de .
+
+<https://it.wikipedia.org/wiki/Corrispondenza_d%27amore> a schema:Article ;
+	schema:about wd:Q1306776 ;
+	schema:inLanguage "it" ;
+	schema:isPartOf <https://it.wikipedia.org/> ;
+	schema:name "Corrispondenza d'amore"@it .
+
+<https://ja.wikipedia.org/wiki/%E3%83%AA%E3%83%88%E3%83%AB%E3%83%BB%E3%82%A4%E3%82%BF%E3%83%AA%E3%83%BC%E3%81%AE%E6%81%8B> a schema:Article ;
+	schema:about wd:Q1306776 ;
+	schema:inLanguage "ja" ;
+	schema:isPartOf <https://ja.wikipedia.org/> ;
+	schema:name "リトル・イタリーの恋"@ja .
+
+<https://ru.wikipedia.org/wiki/%D0%91%D1%80%D0%B0%D1%82%D1%8C%D1%8F-%D1%81%D0%BE%D0%BF%D0%B5%D1%80%D0%BD%D0%B8%D0%BA%D0%B8_(%D1%84%D0%B8%D0%BB%D1%8C%D0%BC,_2004)> a schema:Article ;
+	schema:about wd:Q1306776 ;
+	schema:inLanguage "ru" ;
+	schema:isPartOf <https://ru.wikipedia.org/> ;
+	schema:name "Братья-соперники (фильм, 2004)"@ru .
+
+<https://cy.wikipedia.org/wiki/Love%27s_Brother> a schema:Article ;
+	schema:about wd:Q1306776 ;
+	schema:inLanguage "cy" ;
+	schema:isPartOf <https://cy.wikipedia.org/> ;
+	schema:name "Love's Brother"@cy .
+
+wd:Q1306776 wdt:P345 "tt0301563" ;
+	wdt:P31 wd:Q11424 ;
+	wdt:P57 wd:Q3161747 ;
+	wdt:P364 wd:Q1860 ;
+	wdt:P161 wd:Q224081,
+		wd:Q273484,
+		wd:Q349488,
+		wd:Q3960762,
+		wd:Q211831,
+		wd:Q468811,
+		wd:Q809080 ;
+	wdt:P495 wd:Q408,
+		wd:Q145 ;
+	wdt:P136 wd:Q1054574,
+		wd:Q130232,
+		wd:Q157443 ;
+	wdt:P646 "/m/05fggt" ;
+	wdt:P577 "2004-01-01T00:00:00Z"^^xsd:dateTime,
+		"2004-07-29T00:00:00Z"^^xsd:dateTime ;
+	wdt:P840 wd:Q408 ;
+	wdt:P1476 "Love's Brother"@en ;
+	wdt:P86 wd:Q1361541 ;
+	wdt:P344 wd:Q505940 ;
+	wdt:P2465 "324259" ;
+	wdt:P2047 "+99"^^xsd:decimal ;
+	wdt:P2603 "23065" ;
+	wdt:P3138 "35621" ;
+	wdt:P462 wd:Q22006653 ;
+	wdt:P905 "65724" ;
+	wdt:P3145 "tt144204" ;
+	wdt:P1970 "12831" ;
+	wdt:P2529 "15729" ;
+	wdt:P480 "765644" ;
+	wdt:P3143 "297296" ;
+	wdt:P1562 "v304696" ;
+	wdt:P2508 "37379" ;
+	wdt:P3077 "129521" ;
+	wdt:P3933 "1310901" ;
+	wdt:P3107 "522663" ;
+	wdt:P2509 "mv35522" ;
+	wdt:P2704 "10.5240/AA7E-2EA2-8D50-43BC-3C76-E" ;
+	wdt:P3844 "14813" ;
+	wdt:P1258 "m/343354600" ;
+	wdt:P3212 "0000-0002-3639-0000-8-0000-0000-D" ;
+	wdtn:P3212 <urn:isan:0000-0002-3639-0000-8-0000-0000-D> ;
+	wdt:P58 wd:Q3161747 ;
+	wdt:P5032 "104460" ;
+	wdt:P5786 "eine-italienische-hochzeit" ;
+	wdt:P1040 wd:Q6486430 ;
+	wdt:P4665 "5932" ;
+	wdt:P162 wd:Q2224483 ;
+	wdt:P6127 "loves-brother" ;
+	wdt:P4529 "1962118" ;
+	wdt:P4947 "56276" ;
+	wdt:P4282 "23139" ;
+	wdt:P1411 wd:Q3600406,
+		wd:Q4649799,
+		wd:Q4649801,
+		wd:Q4649807,
+		wd:Q4649818,
+		wd:Q4649821 ;
+	p:P345 s:q1306776-0922D2E8-C5FE-4E19-BE9D-747C9487AD04 .
+
+s:q1306776-0922D2E8-C5FE-4E19-BE9D-747C9487AD04 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P345 "tt0301563" ;
+	prov:wasDerivedFrom ref:fa278ebfc458360e5aed63d5058cca83c46134f1 .
+
+wd:Q1306776 p:P31 s:q1306776-3885E407-7CF8-4105-A69D-D252E862EEBD .
+
+s:q1306776-3885E407-7CF8-4105-A69D-D252E862EEBD a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P31 wd:Q11424 ;
+	prov:wasDerivedFrom ref:fa278ebfc458360e5aed63d5058cca83c46134f1 .
+
+wd:Q1306776 p:P57 s:q1306776-C5A6AA89-6819-41E9-9F62-39025F76A6A0 .
+
+s:q1306776-C5A6AA89-6819-41E9-9F62-39025F76A6A0 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P57 wd:Q3161747 ;
+	prov:wasDerivedFrom ref:fa278ebfc458360e5aed63d5058cca83c46134f1 .
+
+wd:Q1306776 p:P364 s:q1306776-F25E5577-69CD-4EAC-8856-338E4889E677 .
+
+s:q1306776-F25E5577-69CD-4EAC-8856-338E4889E677 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P364 wd:Q1860 ;
+	prov:wasDerivedFrom ref:fa278ebfc458360e5aed63d5058cca83c46134f1 .
+
+wd:Q1306776 p:P161 s:q1306776-563A8409-04CD-4C35-A35B-F6DAF4E88C70 .
+
+s:q1306776-563A8409-04CD-4C35-A35B-F6DAF4E88C70 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P161 wd:Q224081 ;
+	prov:wasDerivedFrom ref:d5847b9b6032aa8b13dae3c2dfd9ed5d114d21b3 .
+
+wd:Q1306776 p:P161 s:q1306776-D42C9E7A-31E6-40F5-A5A0-42B6B105ED93 .
+
+s:q1306776-D42C9E7A-31E6-40F5-A5A0-42B6B105ED93 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P161 wd:Q273484 ;
+	prov:wasDerivedFrom ref:d5847b9b6032aa8b13dae3c2dfd9ed5d114d21b3 .
+
+wd:Q1306776 p:P161 s:q1306776-92718E8F-F67E-4BB1-8399-6BF784FC1DD5 .
+
+s:q1306776-92718E8F-F67E-4BB1-8399-6BF784FC1DD5 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P161 wd:Q349488 ;
+	prov:wasDerivedFrom ref:d5847b9b6032aa8b13dae3c2dfd9ed5d114d21b3 .
+
+wd:Q1306776 p:P161 s:q1306776-FA983EFB-FC78-4E40-B9D1-FCF8A87F5A9D .
+
+s:q1306776-FA983EFB-FC78-4E40-B9D1-FCF8A87F5A9D a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P161 wd:Q3960762 ;
+	prov:wasDerivedFrom ref:d5847b9b6032aa8b13dae3c2dfd9ed5d114d21b3 .
+
+wd:Q1306776 p:P161 s:Q1306776-652AE2F2-D727-44D4-BCED-FF50861B75B8 .
+
+s:Q1306776-652AE2F2-D727-44D4-BCED-FF50861B75B8 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P161 wd:Q211831 ;
+	prov:wasDerivedFrom ref:697ebe753b838814bf6eb9bc6d52bbae34d1a790 .
+
+wd:Q1306776 p:P161 s:Q1306776-1A051972-E3FA-4C8E-9C57-9A14B6BE1389 .
+
+s:Q1306776-1A051972-E3FA-4C8E-9C57-9A14B6BE1389 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P161 wd:Q468811 ;
+	prov:wasDerivedFrom ref:697ebe753b838814bf6eb9bc6d52bbae34d1a790 .
+
+wd:Q1306776 p:P161 s:Q1306776-2A099E59-8883-4A06-80C1-11521DDA165B .
+
+s:Q1306776-2A099E59-8883-4A06-80C1-11521DDA165B a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P161 wd:Q809080 ;
+	prov:wasDerivedFrom ref:697ebe753b838814bf6eb9bc6d52bbae34d1a790 .
+
+wd:Q1306776 p:P495 s:Q1306776-52EB0CAD-2905-48D4-97B9-C868CE5B3C4B .
+
+s:Q1306776-52EB0CAD-2905-48D4-97B9-C868CE5B3C4B a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P495 wd:Q408 ;
+	prov:wasDerivedFrom ref:fa278ebfc458360e5aed63d5058cca83c46134f1 .
+
+wd:Q1306776 p:P495 s:Q1306776-251B1BB2-940A-452E-A40D-D693AB5C90DD .
+
+s:Q1306776-251B1BB2-940A-452E-A40D-D693AB5C90DD a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P495 wd:Q145 .
+
+wd:Q1306776 p:P136 s:Q1306776-5A7F5F5A-F7D2-4074-86CE-5B4C60E42478 .
+
+s:Q1306776-5A7F5F5A-F7D2-4074-86CE-5B4C60E42478 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P136 wd:Q1054574 ;
+	prov:wasDerivedFrom ref:fa278ebfc458360e5aed63d5058cca83c46134f1 .
+
+wd:Q1306776 p:P136 s:Q1306776-5E085842-A488-419C-8060-7149E56C55FF .
+
+s:Q1306776-5E085842-A488-419C-8060-7149E56C55FF a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P136 wd:Q130232 ;
+	prov:wasDerivedFrom ref:fa278ebfc458360e5aed63d5058cca83c46134f1 .
+
+wd:Q1306776 p:P136 s:Q1306776-CA89D41D-AFB4-44C9-BDEE-C802114104EA .
+
+s:Q1306776-CA89D41D-AFB4-44C9-BDEE-C802114104EA a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P136 wd:Q157443 .
+
+wd:Q1306776 p:P646 s:Q1306776-83751CA7-1B66-48C9-AB42-D6308D78BC89 .
+
+s:Q1306776-83751CA7-1B66-48C9-AB42-D6308D78BC89 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P646 "/m/05fggt" ;
+	prov:wasDerivedFrom ref:2b00cb481cddcac7623114367489b5c194901c4a .
+
+wd:Q1306776 p:P577 s:Q1306776-ABA3667C-5EDA-4D0A-8573-61E25B855C21 .
+
+s:Q1306776-ABA3667C-5EDA-4D0A-8573-61E25B855C21 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P577 "2004-01-01T00:00:00Z"^^xsd:dateTime ;
+	psv:P577 v:849f00455434dc418fb4287a4f2b7638 ;
+	prov:wasDerivedFrom ref:d5847b9b6032aa8b13dae3c2dfd9ed5d114d21b3 .
+
+wd:Q1306776 p:P577 s:Q1306776-1754ab6e-441f-f4b1-9013-dd77899995ae .
+
+s:Q1306776-1754ab6e-441f-f4b1-9013-dd77899995ae a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P577 "2004-07-29T00:00:00Z"^^xsd:dateTime ;
+	psv:P577 v:08f9203b5363690a8077f35a294ded90 ;
+	pq:P291 wd:Q183 ;
+	prov:wasDerivedFrom ref:3ea76f4fffdbeb5a66bb2d6a4bfb77387bfba8aa .
+
+wd:Q1306776 p:P840 s:Q1306776-A2874982-F857-4F98-B6AF-9F51535A87FE .
+
+s:Q1306776-A2874982-F857-4F98-B6AF-9F51535A87FE a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P840 wd:Q408 .
+
+wd:Q1306776 p:P1476 s:Q1306776-C2604958-1023-48BD-BBBE-D0BB0E15590F .
+
+s:Q1306776-C2604958-1023-48BD-BBBE-D0BB0E15590F a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1476 "Love's Brother"@en .
+
+wd:Q1306776 p:P86 s:Q1306776-872D9B2C-A128-4FA3-9CD5-61C66C08C0E9 .
+
+s:Q1306776-872D9B2C-A128-4FA3-9CD5-61C66C08C0E9 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P86 wd:Q1361541 ;
+	prov:wasDerivedFrom ref:9a24f7c0208b05d6be97077d855671d1dfdbc0dd .
+
+wd:Q1306776 p:P344 s:Q1306776-EBF19C14-7D2B-44BD-99A8-5E458835C0F4 .
+
+s:Q1306776-EBF19C14-7D2B-44BD-99A8-5E458835C0F4 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P344 wd:Q505940 ;
+	prov:wasDerivedFrom ref:9a24f7c0208b05d6be97077d855671d1dfdbc0dd .
+
+wd:Q1306776 p:P2465 s:Q1306776-3F09ED7D-9E64-475B-AA7B-1D35D86841BE .
+
+s:Q1306776-3F09ED7D-9E64-475B-AA7B-1D35D86841BE a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P2465 "324259" ;
+	prov:wasDerivedFrom ref:a29a646602abf65105ed0f39a44231c962ece9ee .
+
+wd:Q1306776 p:P2047 s:Q1306776-ECF425E3-B7A1-48F3-B1A6-B202A0542070 .
+
+s:Q1306776-ECF425E3-B7A1-48F3-B1A6-B202A0542070 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P2047 "+99"^^xsd:decimal ;
+	psv:P2047 v:38d25610820fa317690fbc18a131088e ;
+	psn:P2047 v:4867b51c925823f73aa474e2237d3797 ;
+	prov:wasDerivedFrom ref:9a24f7c0208b05d6be97077d855671d1dfdbc0dd .
+
+wd:Q1306776 p:P2603 s:Q1306776-DDAD55B0-A581-4700-9193-C18E06C3646A .
+
+s:Q1306776-DDAD55B0-A581-4700-9193-C18E06C3646A a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P2603 "23065" ;
+	prov:wasDerivedFrom ref:043ac99faf5875c1934a2fc7030edf88cca1c235 .
+
+wd:Q1306776 p:P3138 s:Q1306776-C5E292EB-B07B-4F3A-A5A1-A2B147AAE2F5 .
+
+s:Q1306776-C5E292EB-B07B-4F3A-A5A1-A2B147AAE2F5 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P3138 "35621" ;
+	prov:wasDerivedFrom ref:5595b1ec65ab3e7908ef612fe6bae0991cf6cc46 .
+
+wd:Q1306776 p:P462 s:Q1306776-0E341253-0A03-490E-B999-863BDCA3966D .
+
+s:Q1306776-0E341253-0A03-490E-B999-863BDCA3966D a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P462 wd:Q22006653 .
+
+wd:Q1306776 p:P905 s:Q1306776-421c11f7-4d87-790d-04fb-af6a6d09c988 .
+
+s:Q1306776-421c11f7-4d87-790d-04fb-af6a6d09c988 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P905 "65724" .
+
+wd:Q1306776 p:P3145 s:Q1306776-33ae7929-47ae-4b2d-202e-525eb96b0f68 .
+
+s:Q1306776-33ae7929-47ae-4b2d-202e-525eb96b0f68 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P3145 "tt144204" .
+
+wd:Q1306776 p:P1970 s:Q1306776-88bf91f7-4ff6-4ef9-48f5-990fafaefbbd .
+
+s:Q1306776-88bf91f7-4ff6-4ef9-48f5-990fafaefbbd a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1970 "12831" .
+
+wd:Q1306776 p:P2529 s:Q1306776-d8b9c0da-4101-f09b-5b35-b1d57bf13963 .
+
+s:Q1306776-d8b9c0da-4101-f09b-5b35-b1d57bf13963 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P2529 "15729" .
+
+wd:Q1306776 p:P480 s:Q1306776-d5c6e37b-45d6-cc97-d7ab-db85f42ffd3e .
+
+s:Q1306776-d5c6e37b-45d6-cc97-d7ab-db85f42ffd3e a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P480 "765644" .
+
+wd:Q1306776 p:P3143 s:Q1306776-b0c9c0de-4faf-9404-86fc-32e75f0cfbf0 .
+
+s:Q1306776-b0c9c0de-4faf-9404-86fc-32e75f0cfbf0 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P3143 "297296" .
+
+wd:Q1306776 p:P1562 s:Q1306776-92558614-417b-3418-0625-c0d81894a996 .
+
+s:Q1306776-92558614-417b-3418-0625-c0d81894a996 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1562 "v304696" .
+
+wd:Q1306776 p:P2508 s:Q1306776-eb6afd98-4970-8449-cf27-d29eb1aff668 .
+
+s:Q1306776-eb6afd98-4970-8449-cf27-d29eb1aff668 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P2508 "37379" .
+
+wd:Q1306776 p:P3077 s:Q1306776-593ec1f3-49f1-c3d8-bc6e-d70c9821378a .
+
+s:Q1306776-593ec1f3-49f1-c3d8-bc6e-d70c9821378a a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P3077 "129521" .
+
+wd:Q1306776 p:P3933 s:Q1306776-8c045f58-49e8-6a93-2089-98a426cb072d .
+
+s:Q1306776-8c045f58-49e8-6a93-2089-98a426cb072d a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P3933 "1310901" .
+
+wd:Q1306776 p:P3107 s:Q1306776-85df8547-4e7a-6370-2f6f-1918b9dae55b .
+
+s:Q1306776-85df8547-4e7a-6370-2f6f-1918b9dae55b a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P3107 "522663" .
+
+wd:Q1306776 p:P2509 s:Q1306776-378edb01-4024-be67-30cd-d9a15ad9633a .
+
+s:Q1306776-378edb01-4024-be67-30cd-d9a15ad9633a a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P2509 "mv35522" .
+
+wd:Q1306776 p:P2704 s:Q1306776-cf135307-4af3-8d2e-df57-49a177961133 .
+
+s:Q1306776-cf135307-4af3-8d2e-df57-49a177961133 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P2704 "10.5240/AA7E-2EA2-8D50-43BC-3C76-E" .
+
+wd:Q1306776 p:P3844 s:Q1306776-aa81578d-4806-e43d-a7cf-bd9870fb20d7 .
+
+s:Q1306776-aa81578d-4806-e43d-a7cf-bd9870fb20d7 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P3844 "14813" .
+
+wd:Q1306776 p:P1258 s:Q1306776-b8332707-4537-1f66-ebd3-105982601646 .
+
+s:Q1306776-b8332707-4537-1f66-ebd3-105982601646 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1258 "m/343354600" .
+
+wd:Q1306776 p:P3212 s:Q1306776-33860112-478d-3ecc-023b-a88687f6ca3e .
+
+s:Q1306776-33860112-478d-3ecc-023b-a88687f6ca3e a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P3212 "0000-0002-3639-0000-8-0000-0000-D" ;
+	psn:P3212 <urn:isan:0000-0002-3639-0000-8-0000-0000-D> .
+
+wd:Q1306776 p:P58 s:Q1306776-EDA50F81-047A-418C-AECE-11A46ED97EE0 .
+
+s:Q1306776-EDA50F81-047A-418C-AECE-11A46ED97EE0 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P58 wd:Q3161747 ;
+	prov:wasDerivedFrom ref:697ebe753b838814bf6eb9bc6d52bbae34d1a790 .
+
+wd:Q1306776 p:P5032 s:Q1306776-A8CD0B03-AC07-4B8D-A079-4E47C2F836A4 .
+
+s:Q1306776-A8CD0B03-AC07-4B8D-A079-4E47C2F836A4 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P5032 "104460" .
+
+wd:Q1306776 p:P5786 s:Q1306776-19966EA4-188C-4905-896E-4D50049AD4D0 .
+
+s:Q1306776-19966EA4-188C-4905-896E-4D50049AD4D0 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P5786 "eine-italienische-hochzeit" .
+
+wd:Q1306776 p:P1040 s:Q1306776-08270A72-40FD-480A-9F1A-DB7237D6BE04 .
+
+s:Q1306776-08270A72-40FD-480A-9F1A-DB7237D6BE04 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1040 wd:Q6486430 ;
+	prov:wasDerivedFrom ref:c907e6c29d8d6371f4132711fd0f6d05ce3994b8 .
+
+wd:Q1306776 p:P4665 s:Q1306776-81DD5989-FC9A-41E8-8A32-A3A3AB8C987C .
+
+s:Q1306776-81DD5989-FC9A-41E8-8A32-A3A3AB8C987C a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P4665 "5932" .
+
+wd:Q1306776 p:P162 s:Q1306776-41ea85b3-4d0b-ac84-97bb-e0005f854dcc .
+
+s:Q1306776-41ea85b3-4d0b-ac84-97bb-e0005f854dcc a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P162 wd:Q2224483 ;
+	prov:wasDerivedFrom ref:9a24f7c0208b05d6be97077d855671d1dfdbc0dd .
+
+wd:Q1306776 p:P6127 s:Q1306776-9C8986A2-2DEC-4284-A683-E38829A0FCF6 .
+
+s:Q1306776-9C8986A2-2DEC-4284-A683-E38829A0FCF6 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P6127 "loves-brother" .
+
+wd:Q1306776 p:P4529 s:Q1306776-51A05496-C56D-4BFB-A31D-21C1B9DDCB7F .
+
+s:Q1306776-51A05496-C56D-4BFB-A31D-21C1B9DDCB7F a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P4529 "1962118" .
+
+wd:Q1306776 p:P4947 s:Q1306776-96C85EAF-63DE-41FC-A2B9-518F3CE1B7F2 .
+
+s:Q1306776-96C85EAF-63DE-41FC-A2B9-518F3CE1B7F2 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P4947 "56276" .
+
+wd:Q1306776 p:P4282 s:Q1306776-CA0C6277-9666-4F7E-9688-4B179C902224 .
+
+s:Q1306776-CA0C6277-9666-4F7E-9688-4B179C902224 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P4282 "23139" ;
+	prov:wasDerivedFrom ref:5a0c2319e0ede13a5cfcabb346c864878b1deb22 .
+
+wd:Q1306776 p:P1411 s:Q1306776-CB943886-5296-494C-B2AC-3EC31C05F42E .
+
+s:Q1306776-CB943886-5296-494C-B2AC-3EC31C05F42E a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1411 wd:Q3600406 ;
+	pq:P585 "2004-01-01T00:00:00Z"^^xsd:dateTime ;
+	pqv:P585 v:849f00455434dc418fb4287a4f2b7638 ;
+	pq:P2453 wd:Q8462137 ;
+	prov:wasDerivedFrom ref:fb9355feb9a5a5d16f2e2d5dbe46a0cc40b719f6 .
+
+wd:Q1306776 p:P1411 s:Q1306776-24C3B951-13B3-4AB1-85C4-727296301CE8 .
+
+s:Q1306776-24C3B951-13B3-4AB1-85C4-727296301CE8 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1411 wd:Q4649799 ;
+	pq:P585 "2004-01-01T00:00:00Z"^^xsd:dateTime ;
+	pqv:P585 v:849f00455434dc418fb4287a4f2b7638 ;
+	pq:P2453 wd:Q505940 ;
+	prov:wasDerivedFrom ref:fb9355feb9a5a5d16f2e2d5dbe46a0cc40b719f6 .
+
+wd:Q1306776 p:P1411 s:Q1306776-8DF60871-C91F-4716-A291-75333C95F1BD .
+
+s:Q1306776-8DF60871-C91F-4716-A291-75333C95F1BD a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1411 wd:Q4649801 ;
+	pq:P585 "2004-01-01T00:00:00Z"^^xsd:dateTime ;
+	pqv:P585 v:849f00455434dc418fb4287a4f2b7638 ;
+	prov:wasDerivedFrom ref:fb9355feb9a5a5d16f2e2d5dbe46a0cc40b719f6 .
+
+wd:Q1306776 p:P1411 s:Q1306776-DDEABDF1-789A-418E-96DD-053D41427316 .
+
+s:Q1306776-DDEABDF1-789A-418E-96DD-053D41427316 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1411 wd:Q4649807 ;
+	pq:P585 "2004-01-01T00:00:00Z"^^xsd:dateTime ;
+	pqv:P585 v:849f00455434dc418fb4287a4f2b7638 ;
+	pq:P2453 wd:Q3161747 ;
+	prov:wasDerivedFrom ref:fb9355feb9a5a5d16f2e2d5dbe46a0cc40b719f6 .
+
+wd:Q1306776 p:P1411 s:Q1306776-ACB2741A-36E5-4EAF-8EC8-B53EBF6533D2 .
+
+s:Q1306776-ACB2741A-36E5-4EAF-8EC8-B53EBF6533D2 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1411 wd:Q4649818 ;
+	pq:P585 "2004-01-01T00:00:00Z"^^xsd:dateTime ;
+	pqv:P585 v:849f00455434dc418fb4287a4f2b7638 ;
+	pq:P2453 wd:Q3161747 ;
+	prov:wasDerivedFrom ref:fb9355feb9a5a5d16f2e2d5dbe46a0cc40b719f6 .
+
+wd:Q1306776 p:P1411 s:Q1306776-9845FFBF-B244-4404-8D84-2EDF69357808 .
+
+s:Q1306776-9845FFBF-B244-4404-8D84-2EDF69357808 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1411 wd:Q4649821 ;
+	pq:P585 "2004-01-01T00:00:00Z"^^xsd:dateTime ;
+	pqv:P585 v:849f00455434dc418fb4287a4f2b7638 ;
+	prov:wasDerivedFrom ref:fb9355feb9a5a5d16f2e2d5dbe46a0cc40b719f6 .
+
+wd:Q1306776 rdfs:label "Братья-соперники"@ru ;
+	skos:prefLabel "Братья-соперники"@ru ;
+	schema:name "Братья-соперники"@ru ;
+	rdfs:label "Eine italienische Hochzeit"@de ;
+	skos:prefLabel "Eine italienische Hochzeit"@de ;
+	schema:name "Eine italienische Hochzeit"@de ;
+	rdfs:label "Love's Brother"@en ;
+	skos:prefLabel "Love's Brother"@en ;
+	schema:name "Love's Brother"@en ;
+	rdfs:label "Corrispondenza d'amore"@it ;
+	skos:prefLabel "Corrispondenza d'amore"@it ;
+	schema:name "Corrispondenza d'amore"@it ;
+	rdfs:label "リトル・イタリーの恋"@ja ;
+	skos:prefLabel "リトル・イタリーの恋"@ja ;
+	schema:name "リトル・イタリーの恋"@ja ;
+	rdfs:label "Love's Brother"@nl ;
+	skos:prefLabel "Love's Brother"@nl ;
+	schema:name "Love's Brother"@nl ;
+	rdfs:label "愛之兄弟"@zh ;
+	skos:prefLabel "愛之兄弟"@zh ;
+	schema:name "愛之兄弟"@zh ;
+	rdfs:label "Love's Brother"@ast ;
+	skos:prefLabel "Love's Brother"@ast ;
+	schema:name "Love's Brother"@ast ;
+	rdfs:label "Love's Brother"@cy ;
+	skos:prefLabel "Love's Brother"@cy ;
+	schema:name "Love's Brother"@cy ;
+	schema:description "film del 2004 diretto da Jan Sardi"@it,
+		"Film von Jan Sardi (2004)"@de,
+		"2004 film by Jan Sardi"@en,
+		"film sorti en 2004"@fr,
+		"film uit 2004 van Jan Sardi"@nl,
+		"فيلم أنتج عام 2004"@ar,
+		"película de 2004 dirigida por Jan Sardi"@es,
+		"película de 2004 dirixida por Jan Sardi"@ast,
+		"2004. aasta film, lavastanud Jan Sardi"@et,
+		"film från 2004 regisserad av Jan Sardi"@sv,
+		"film din 2004 regizat de Jan Sardi"@ro,
+		"pel·lícula de 2004 dirigida per Jan Sardi"@ca,
+		"cinta de 2004 dirichita por Jan Sardi"@an,
+		"film út 2004 fan Jan Sardi"@fy,
+		"filme de 2004 dirixido por Jan Sardi"@gl,
+		"filme de 2004 dirigit per Jan Sardi"@oc,
+		"pinicla de 2004 dirigía por Jan Sardi"@ext,
+		"סרט משנת 2004"@he,
+		"filme de 2004 dirigido por Jan Sardi"@pt,
+		"film"@sq,
+		"ffilm ddrama a chomedi gan Jan Sardi a gyhoeddwyd yn 2004"@cy ;
+	skos:altLabel "Братья соперники"@ru,
+		"愛情兄弟"@zh .
+
+v:08f9203b5363690a8077f35a294ded90 a wikibase:TimeValue ;
+	wikibase:timeValue "2004-07-29T00:00:00Z"^^xsd:dateTime ;
+	wikibase:timePrecision "11"^^xsd:integer ;
+	wikibase:timeTimezone "0"^^xsd:integer ;
+	wikibase:timeCalendarModel <http://www.wikidata.org/entity/Q1985727> .
+
+ref:3ea76f4fffdbeb5a66bb2d6a4bfb77387bfba8aa a wikibase:Reference ;
+	pr:P854 <http://www.kinokalender.com/film4763_eine-italienische-hochzeit.html> ;
+	pr:P813 "2017-12-16T00:00:00Z"^^xsd:dateTime ;
+	prv:P813 v:d960eac0c40d78039da08fbe864ee147 .
+
+ref:c907e6c29d8d6371f4132711fd0f6d05ce3994b8 a wikibase:Reference ;
+	pr:P143 wd:Q48183 ;
+	pr:P4656 <https://de.wikipedia.org/w/index.php?title=Eine_italienische_Hochzeit&oldid=182973151> .
+
+ref:fb9355feb9a5a5d16f2e2d5dbe46a0cc40b719f6 a wikibase:Reference ;
+	pr:P854 <https://www.aacta.org/aacta-awards/awards-history/2004/loadwinners/feature-film> .
+
+data:Q1306784 a schema:Dataset ;
+	schema:about wd:Q1306784 ;
+	schema:version "1616207795"^^xsd:integer ;
+	schema:dateModified "2022-04-10T18:44:21Z"^^xsd:dateTime ;
+	wikibase:statements "20"^^xsd:integer ;
+	wikibase:sitelinks "1"^^xsd:integer ;
+	wikibase:identifiers "7"^^xsd:integer .
+
+wd:Q1306784 a wikibase:Item .
+
+<https://de.wikipedia.org/wiki/Werner_G%C3%B6ttsch> a schema:Article ;
+	schema:about wd:Q1306784 ;
+	schema:inLanguage "de" ;
+	schema:isPartOf <https://de.wikipedia.org/> ;
+	schema:name "Werner Göttsch"@de .
+
+wd:Q1306784 wdt:P21 wd:Q6581097 ;
+	wdt:P27 wd:Q183 ;
+	wdt:P31 wd:Q5 ;
+	wdt:P102 wd:Q7320 ;
+	wdt:P569 "1912-10-23T00:00:00Z"^^xsd:dateTime ;
+	wdt:P735 wd:Q676823 ;
+	wdt:P463 wd:Q44687 ;
+	wdt:P214 "313480885" ;
+	wdtn:P214 <http://viaf.org/viaf/313480885> ;
+	wdt:P570 "1983-05-02T00:00:00Z"^^xsd:dateTime,
+		"1974-01-01T00:00:00Z"^^xsd:dateTime ;
+	wdt:P19 wd:Q1707 ;
+	wdt:P20 wd:Q1707 ;
+	wdt:P2298 "459389" ;
+	wdt:P7859 "viaf-313480885" ;
+	wdt:P7902 "1066791775" ;
+	wdt:P227 "1066791775" ;
+	wdtn:P227 <https://d-nb.info/gnd/1066791775> ;
+	wdt:P2671 "/g/122g8hzj" ;
+	wdtn:P2671 <http://g.co/kg/g/122g8hzj> ;
+	wdt:P1412 wd:Q188 ;
+	wdt:P8238 "77130" ;
+	p:P21 s:q1306784-0DEC1AE7-9F55-4AC1-85D1-2175015BD132 .
+
+s:q1306784-0DEC1AE7-9F55-4AC1-85D1-2175015BD132 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P21 wd:Q6581097 ;
+	prov:wasDerivedFrom ref:9a24f7c0208b05d6be97077d855671d1dfdbc0dd .
+
+wd:Q1306784 p:P27 s:q1306784-3E6E5C41-32BE-4A22-9860-619D8DBF7FDD .
+
+s:q1306784-3E6E5C41-32BE-4A22-9860-619D8DBF7FDD a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P27 wd:Q183 ;
+	prov:wasDerivedFrom ref:9a24f7c0208b05d6be97077d855671d1dfdbc0dd .
+
+wd:Q1306784 p:P31 s:Q1306784-BB3DEAD7-BF60-4C46-9804-CC750ED82B18 .
+
+s:Q1306784-BB3DEAD7-BF60-4C46-9804-CC750ED82B18 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P31 wd:Q5 ;
+	prov:wasDerivedFrom ref:9a24f7c0208b05d6be97077d855671d1dfdbc0dd .
+
+wd:Q1306784 p:P102 s:Q1306784-F2817470-DA27-40D3-A962-00B9B91BE2D2 .
+
+s:Q1306784-F2817470-DA27-40D3-A962-00B9B91BE2D2 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P102 wd:Q7320 ;
+	prov:wasDerivedFrom ref:9bcd17742d9373bc1948336c064e295be7db32cf .
+
+wd:Q1306784 p:P569 s:Q1306784-FEC7C397-9590-449C-A55B-AA7C78DDDA9E .
+
+s:Q1306784-FEC7C397-9590-449C-A55B-AA7C78DDDA9E a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:PreferredRank ;
+	ps:P569 "1912-10-23T00:00:00Z"^^xsd:dateTime ;
+	psv:P569 v:0a845d58d8ee9897768c991a0c2ec688 ;
+	pq:P7452 wd:Q71536040 ;
+	prov:wasDerivedFrom ref:9bcd17742d9373bc1948336c064e295be7db32cf .
+
+wd:Q1306784 p:P569 s:Q1306784-CCCC6087-1B02-4A26-8E88-390DA7019B84 .
+
+s:Q1306784-CCCC6087-1B02-4A26-8E88-390DA7019B84 a wikibase:Statement ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P569 "1912-01-01T00:00:00Z"^^xsd:dateTime ;
+	psv:P569 v:54c2dc072bfa7408e73ed9d2d6ce1638 ;
+	prov:wasDerivedFrom ref:83cc6ae1d0e369c6d84f9804d79bb99198353ef7 .
+
+wd:Q1306784 p:P735 s:Q1306784-794F1973-42E5-429D-90A6-60A56E148F5D .
+
+s:Q1306784-794F1973-42E5-429D-90A6-60A56E148F5D a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P735 wd:Q676823 .
+
+wd:Q1306784 p:P463 s:Q1306784-8D343033-3F33-4945-BE98-2581AEB6BA9F .
+
+s:Q1306784-8D343033-3F33-4945-BE98-2581AEB6BA9F a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P463 wd:Q44687 ;
+	prov:wasDerivedFrom ref:9a24f7c0208b05d6be97077d855671d1dfdbc0dd,
+		ref:9bcd17742d9373bc1948336c064e295be7db32cf .
+
+wd:Q1306784 p:P214 s:Q1306784-E1B536E0-2FF9-4FA6-9839-7E193CF0F308 .
+
+s:Q1306784-E1B536E0-2FF9-4FA6-9839-7E193CF0F308 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P214 "313480885" ;
+	psn:P214 <http://viaf.org/viaf/313480885> ;
+	prov:wasDerivedFrom ref:43542bf5190be938de61dc716cc2e5e475ce7bd3,
+		ref:83cc6ae1d0e369c6d84f9804d79bb99198353ef7 .
+
+wd:Q1306784 p:P570 s:Q1306784-805B1876-2F92-46B2-A033-9159A5F5E10A .
+
+s:Q1306784-805B1876-2F92-46B2-A033-9159A5F5E10A a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P570 "1983-05-02T00:00:00Z"^^xsd:dateTime ;
+	psv:P570 v:00cf2e99af1c2d9df3aa36a12a3ad05a ;
+	prov:wasDerivedFrom ref:9a24f7c0208b05d6be97077d855671d1dfdbc0dd .
+
+wd:Q1306784 p:P570 s:Q1306784-D4B695B6-3FFE-4C98-B5CF-CA1BA4B1ED60 .
+
+s:Q1306784-D4B695B6-3FFE-4C98-B5CF-CA1BA4B1ED60 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P570 "1974-01-01T00:00:00Z"^^xsd:dateTime ;
+	psv:P570 v:b95be118151106aee9695534f063a319 ;
+	prov:wasDerivedFrom ref:83cc6ae1d0e369c6d84f9804d79bb99198353ef7 .
+
+wd:Q1306784 p:P19 s:Q1306784-E8588392-DDB1-4AB1-BDC7-45516181771A .
+
+s:Q1306784-E8588392-DDB1-4AB1-BDC7-45516181771A a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P19 wd:Q1707 ;
+	prov:wasDerivedFrom ref:9a24f7c0208b05d6be97077d855671d1dfdbc0dd,
+		ref:cd118704318eacb31a189d8a030845d04105e1a5 .
+
+wd:Q1306784 p:P20 s:Q1306784-EA71B2FF-6762-445E-AF05-D9977DE9137F .
+
+s:Q1306784-EA71B2FF-6762-445E-AF05-D9977DE9137F a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P20 wd:Q1707 ;
+	prov:wasDerivedFrom ref:9a24f7c0208b05d6be97077d855671d1dfdbc0dd .
+
+wd:Q1306784 p:P2298 s:Q1306784-2F5BBABD-C9F3-42A3-8C28-66FD1C2C5ADB .
+
+s:Q1306784-2F5BBABD-C9F3-42A3-8C28-66FD1C2C5ADB a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P2298 "459389" ;
+	prov:wasDerivedFrom ref:9bcd17742d9373bc1948336c064e295be7db32cf .
+
+wd:Q1306784 p:P7859 s:Q1306784-CAD50626-D13E-4DA7-B3A2-B6956480E536 .
+
+s:Q1306784-CAD50626-D13E-4DA7-B3A2-B6956480E536 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P7859 "viaf-313480885" ;
+	prov:wasDerivedFrom ref:34a522a8d3530cd71aca7176efb17a4dda81296a .
+
+wd:Q1306784 p:P7902 s:Q1306784-C4C53325-58BC-4AB4-9BB4-F8E7147DEA54 .
+
+s:Q1306784-C4C53325-58BC-4AB4-9BB4-F8E7147DEA54 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P7902 "1066791775" .
+
+wd:Q1306784 p:P227 s:Q1306784-F4F7C99D-4400-41F3-BF2F-5F911FF7005A .
+
+s:Q1306784-F4F7C99D-4400-41F3-BF2F-5F911FF7005A a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P227 "1066791775" ;
+	psn:P227 <https://d-nb.info/gnd/1066791775> .
+
+wd:Q1306784 p:P2671 s:Q1306784-1DE0EB9C-452B-4EBF-92E5-E7486A416103 .
+
+s:Q1306784-1DE0EB9C-452B-4EBF-92E5-E7486A416103 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P2671 "/g/122g8hzj" ;
+	psn:P2671 <http://g.co/kg/g/122g8hzj> .
+
+wd:Q1306784 p:P1412 s:Q1306784-46E888EC-AFF3-4A4D-90D7-0D8B3E912C0E .
+
+s:Q1306784-46E888EC-AFF3-4A4D-90D7-0D8B3E912C0E a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1412 wd:Q188 .
+
+wd:Q1306784 p:P8238 s:Q1306784-40DDC8E5-00E2-40FE-8D21-546402B8777F .
+
+s:Q1306784-40DDC8E5-00E2-40FE-8D21-546402B8777F a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P8238 "77130" .
+
+wd:Q1306784 rdfs:label "Werner Göttsch"@de ;
+	skos:prefLabel "Werner Göttsch"@de ;
+	schema:name "Werner Göttsch"@de ;
+	rdfs:label "Werner Göttsch"@nb ;
+	skos:prefLabel "Werner Göttsch"@nb ;
+	schema:name "Werner Göttsch"@nb ;
+	rdfs:label "Werner Göttsch"@da ;
+	skos:prefLabel "Werner Göttsch"@da ;
+	schema:name "Werner Göttsch"@da ;
+	rdfs:label "Werner Göttsch"@nn ;
+	skos:prefLabel "Werner Göttsch"@nn ;
+	schema:name "Werner Göttsch"@nn ;
+	rdfs:label "Werner Göttsch"@sv ;
+	skos:prefLabel "Werner Göttsch"@sv ;
+	schema:name "Werner Göttsch"@sv ;
+	rdfs:label "Werner Göttsch"@en ;
+	skos:prefLabel "Werner Göttsch"@en ;
+	schema:name "Werner Göttsch"@en ;
+	rdfs:label "Werner Göttsch"@fr ;
+	skos:prefLabel "Werner Göttsch"@fr ;
+	schema:name "Werner Göttsch"@fr ;
+	rdfs:label "Werner Göttsch"@nl ;
+	skos:prefLabel "Werner Göttsch"@nl ;
+	schema:name "Werner Göttsch"@nl ;
+	rdfs:label "Werner Göttsch"@sl ;
+	skos:prefLabel "Werner Göttsch"@sl ;
+	schema:name "Werner Göttsch"@sl ;
+	rdfs:label "Werner Göttsch"@ca ;
+	skos:prefLabel "Werner Göttsch"@ca ;
+	schema:name "Werner Göttsch"@ca ;
+	rdfs:label "Werner Göttsch"@ast ;
+	skos:prefLabel "Werner Göttsch"@ast ;
+	schema:name "Werner Göttsch"@ast ;
+	schema:description "deutscher SS-Führer"@de .
+
+v:0a845d58d8ee9897768c991a0c2ec688 a wikibase:TimeValue ;
+	wikibase:timeValue "1912-10-23T00:00:00Z"^^xsd:dateTime ;
+	wikibase:timePrecision "11"^^xsd:integer ;
+	wikibase:timeTimezone "0"^^xsd:integer ;
+	wikibase:timeCalendarModel <http://www.wikidata.org/entity/Q1985727> .
+
+v:00cf2e99af1c2d9df3aa36a12a3ad05a a wikibase:TimeValue ;
+	wikibase:timeValue "1983-05-02T00:00:00Z"^^xsd:dateTime ;
+	wikibase:timePrecision "11"^^xsd:integer ;
+	wikibase:timeTimezone "0"^^xsd:integer ;
+	wikibase:timeCalendarModel <http://www.wikidata.org/entity/Q1985727> .
+
+ref:9bcd17742d9373bc1948336c064e295be7db32cf a wikibase:Reference ;
+	pr:P248 wd:Q63098423 ;
+	pr:P1545 "1168" .
+
+ref:83cc6ae1d0e369c6d84f9804d79bb99198353ef7 a wikibase:Reference ;
+	pr:P227 "1066791775" ;
+	prn:P227 <https://d-nb.info/gnd/1066791775> ;
+	pr:P248 wd:Q23833686 ;
+	pr:P813 "2020-05-30T00:00:00Z"^^xsd:dateTime ;
+	prv:P813 v:b76134aadfbe83482ff114deac31a356 .
+
+ref:cd118704318eacb31a189d8a030845d04105e1a5 a wikibase:Reference ;
+	pr:P227 "1066791775" ;
+	prn:P227 <https://d-nb.info/gnd/1066791775> ;
+	pr:P248 wd:Q23833686 ;
+	pr:P813 "2020-06-10T00:00:00Z"^^xsd:dateTime ;
+	prv:P813 v:66dd28540b81698f5a0285c0dc0556b4 .
+
+ref:34a522a8d3530cd71aca7176efb17a4dda81296a a wikibase:Reference ;
+	pr:P214 "313480885" ;
+	prn:P214 <http://viaf.org/viaf/313480885> .
+
+data:Q1306793 a schema:Dataset ;
+	schema:about wd:Q1306793 ;
+	schema:version "1619512441"^^xsd:integer ;
+	schema:dateModified "2022-04-15T17:25:02Z"^^xsd:dateTime ;
+	wikibase:statements "16"^^xsd:integer ;
+	wikibase:sitelinks "5"^^xsd:integer ;
+	wikibase:identifiers "5"^^xsd:integer .
+
+wd:Q1306793 a wikibase:Item .
+
+<https://zh.wikipedia.org/wiki/%E6%9D%8E%E5%AD%A6%E5%8B%87> a schema:Article ;
+	schema:about wd:Q1306793 ;
+	schema:inLanguage "zh" ;
+	schema:isPartOf <https://zh.wikipedia.org/> ;
+	schema:name "李学勇"@zh .
+
+<https://de.wikipedia.org/wiki/Li_Xueyong> a schema:Article ;
+	schema:about wd:Q1306793 ;
+	schema:inLanguage "de" ;
+	schema:isPartOf <https://de.wikipedia.org/> ;
+	schema:name "Li Xueyong"@de .
+
+<https://en.wikipedia.org/wiki/Li_Xueyong> a schema:Article ;
+	schema:about wd:Q1306793 ;
+	schema:inLanguage "en" ;
+	schema:isPartOf <https://en.wikipedia.org/> ;
+	schema:name "Li Xueyong"@en .
+
+<https://ko.wikipedia.org/wiki/%EB%A6%AC%EC%89%90%EC%9C%B5> a schema:Article ;
+	schema:about wd:Q1306793 ;
+	schema:inLanguage "ko" ;
+	schema:isPartOf <https://ko.wikipedia.org/> ;
+	schema:name "리쉐융"@ko .
+
+<https://id.wikipedia.org/wiki/Li_Xueyong> a schema:Article ;
+	schema:about wd:Q1306793 ;
+	schema:inLanguage "id" ;
+	schema:isPartOf <https://id.wikipedia.org/> ;
+	schema:name "Li Xueyong"@id .
+
+wd:Q1306793 wdt:P21 wd:Q6581097 ;
+	wdt:P106 wd:Q82955 ;
+	wdt:P102 wd:Q17427 ;
+	wdt:P31 wd:Q5 ;
+	wdt:P646 "/m/043pr8j" ;
+	wdt:P569 "1950-01-01T00:00:00Z"^^xsd:dateTime ;
+	wdt:P18 <http://commons.wikimedia.org/wiki/Special:FilePath/Li%20Xueyong.jpg> ;
+	wdt:P734 wd:Q686223 ;
+	wdt:P1631 "1590" ;
+	wdt:P27 wd:Q148 ;
+	wdt:P19 wd:Q58401 ;
+	wdt:P69 wd:Q2496210 ;
+	wdt:P39 wd:Q10891456 ;
+	wdt:P5142 "1140611" ;
+	wdt:P8286 "1200944" ;
+	wdt:P10632 "Q1306793" ;
+	p:P21 s:q1306793-701F0D25-35D1-4E18-811F-A7B2EA27419F .
+
+s:q1306793-701F0D25-35D1-4E18-811F-A7B2EA27419F a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P21 wd:Q6581097 .
+
+wd:Q1306793 p:P106 s:q1306793-306171FC-5C96-4FD9-B2C3-CDBFEAA434B9 .
+
+s:q1306793-306171FC-5C96-4FD9-B2C3-CDBFEAA434B9 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P106 wd:Q82955 ;
+	prov:wasDerivedFrom ref:fa278ebfc458360e5aed63d5058cca83c46134f1 .
+
+wd:Q1306793 p:P102 s:q1306793-928051C1-EA7B-4A8C-AD3D-AD02CF25F877 .
+
+s:q1306793-928051C1-EA7B-4A8C-AD3D-AD02CF25F877 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P102 wd:Q17427 ;
+	prov:wasDerivedFrom ref:fa278ebfc458360e5aed63d5058cca83c46134f1 .
+
+wd:Q1306793 p:P31 s:Q1306793-A745943E-7464-4C67-8B60-784327CA9272 .
+
+s:Q1306793-A745943E-7464-4C67-8B60-784327CA9272 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P31 wd:Q5 ;
+	prov:wasDerivedFrom ref:0ee3b3ba1c958f4c3dcba7ed8091fe4b57311348 .
+
+wd:Q1306793 p:P646 s:Q1306793-1770CDF4-40D5-48BA-8F56-D829D7C59587 .
+
+s:Q1306793-1770CDF4-40D5-48BA-8F56-D829D7C59587 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P646 "/m/043pr8j" ;
+	prov:wasDerivedFrom ref:2b00cb481cddcac7623114367489b5c194901c4a .
+
+wd:Q1306793 p:P569 s:Q1306793-31B9F656-76FA-4627-A3D8-07AF830217E3 .
+
+s:Q1306793-31B9F656-76FA-4627-A3D8-07AF830217E3 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P569 "1950-01-01T00:00:00Z"^^xsd:dateTime ;
+	psv:P569 v:b4fa61f72799e8827abcd9f3598ae24f ;
+	prov:wasDerivedFrom ref:4223ff54d65e918dc0936ef6f13f1bd633cf3459 .
+
+wd:Q1306793 p:P18 s:Q1306793-023370BC-B701-438D-A447-2A8273E227C4 .
+
+s:Q1306793-023370BC-B701-438D-A447-2A8273E227C4 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P18 <http://commons.wikimedia.org/wiki/Special:FilePath/Li%20Xueyong.jpg> .
+
+wd:Q1306793 p:P734 s:Q1306793-A36BD394-0B05-4A15-9ED6-1AF788C92A83 .
+
+s:Q1306793-A36BD394-0B05-4A15-9ED6-1AF788C92A83 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P734 wd:Q686223 .
+
+wd:Q1306793 p:P1631 s:Q1306793-BE311359-09CF-4451-AF27-72944C283E75 .
+
+s:Q1306793-BE311359-09CF-4451-AF27-72944C283E75 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1631 "1590" .
+
+wd:Q1306793 p:P27 s:Q1306793-4952B8EF-EF29-4A59-BD46-3D43B1ACBCE4 .
+
+s:Q1306793-4952B8EF-EF29-4A59-BD46-3D43B1ACBCE4 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P27 wd:Q148 .
+
+wd:Q1306793 p:P19 s:Q1306793-C0C1A88D-608C-4477-9BCA-C66863C919EE .
+
+s:Q1306793-C0C1A88D-608C-4477-9BCA-C66863C919EE a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P19 wd:Q58401 ;
+	prov:wasDerivedFrom ref:fa278ebfc458360e5aed63d5058cca83c46134f1 .
+
+wd:Q1306793 p:P69 s:Q1306793-12182231-39BA-48F4-8F64-153AAF34D041 .
+
+s:Q1306793-12182231-39BA-48F4-8F64-153AAF34D041 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P69 wd:Q2496210 ;
+	prov:wasDerivedFrom ref:fa278ebfc458360e5aed63d5058cca83c46134f1 .
+
+wd:Q1306793 p:P39 s:Q1306793-88AE545B-A217-45DB-A14B-8B4C980DE037 .
+
+s:Q1306793-88AE545B-A217-45DB-A14B-8B4C980DE037 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P39 wd:Q10891456 ;
+	pq:P2937 wd:Q4547927 .
+
+wd:Q1306793 p:P5142 s:Q1306793-252A521A-1234-4572-8001-F7B8AC18B4AD .
+
+s:Q1306793-252A521A-1234-4572-8001-F7B8AC18B4AD a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P5142 "1140611" .
+
+wd:Q1306793 p:P8286 s:Q1306793-9d660155-40ee-cfac-ae02-bc28e5ea6ad9 .
+
+s:Q1306793-9d660155-40ee-cfac-ae02-bc28e5ea6ad9 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P8286 "1200944" .
+
+wd:Q1306793 p:P10632 s:Q1306793-C99DD72B-1EF2-4933-B77F-DF1D3248A4DC .
+
+s:Q1306793-C99DD72B-1EF2-4933-B77F-DF1D3248A4DC a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P10632 "Q1306793" .
+
+wd:Q1306793 rdfs:label "李学勇"@zh-hans ;
+	skos:prefLabel "李学勇"@zh-hans ;
+	schema:name "李学勇"@zh-hans ;
+	rdfs:label "李學勇"@zh-hant ;
+	skos:prefLabel "李學勇"@zh-hant ;
+	schema:name "李學勇"@zh-hant ;
+	rdfs:label "李學勇"@zh-hk ;
+	skos:prefLabel "李學勇"@zh-hk ;
+	schema:name "李學勇"@zh-hk ;
+	rdfs:label "Li Xueyong"@de ;
+	skos:prefLabel "Li Xueyong"@de ;
+	schema:name "Li Xueyong"@de ;
+	rdfs:label "Li Xueyong"@en ;
+	skos:prefLabel "Li Xueyong"@en ;
+	schema:name "Li Xueyong"@en ;
+	rdfs:label "Li Xueyong"@nl ;
+	skos:prefLabel "Li Xueyong"@nl ;
+	schema:name "Li Xueyong"@nl ;
+	rdfs:label "Li Xueyong"@es ;
+	skos:prefLabel "Li Xueyong"@es ;
+	schema:name "Li Xueyong"@es ;
+	rdfs:label "리쉐융"@ko ;
+	skos:prefLabel "리쉐융"@ko ;
+	schema:name "리쉐융"@ko ;
+	rdfs:label "李学勇"@zh ;
+	skos:prefLabel "李学勇"@zh ;
+	schema:name "李学勇"@zh ;
+	rdfs:label "Li Xueyong"@fr ;
+	skos:prefLabel "Li Xueyong"@fr ;
+	schema:name "Li Xueyong"@fr ;
+	rdfs:label "Li Xueyong"@hu ;
+	skos:prefLabel "Li Xueyong"@hu ;
+	schema:name "Li Xueyong"@hu ;
+	rdfs:label "Li Xueyong"@id ;
+	skos:prefLabel "Li Xueyong"@id ;
+	schema:name "Li Xueyong"@id ;
+	rdfs:label "Li Xueyong"@ast ;
+	skos:prefLabel "Li Xueyong"@ast ;
+	schema:name "Li Xueyong"@ast ;
+	rdfs:label "Li Xueyong"@cy ;
+	skos:prefLabel "Li Xueyong"@cy ;
+	schema:name "Li Xueyong"@cy ;
+	rdfs:label "Li Xueyong"@ga ;
+	skos:prefLabel "Li Xueyong"@ga ;
+	schema:name "Li Xueyong"@ga ;
+	rdfs:label "Li Xueyong"@pap ;
+	skos:prefLabel "Li Xueyong"@pap ;
+	schema:name "Li Xueyong"@pap ;
+	schema:description "Chinese politician"@en,
+		"chinesischer Politiker in der Volksrepublik China"@de,
+		"Chinees politicus"@nl,
+		"polític xinès"@ca,
+		"פוליטיקאי סיני"@he,
+		"político chino"@es,
+		"político chinés"@gl,
+		"سياسي صيني"@ar,
+		"চীনা রাজনীতিবিদ"@bn,
+		"homme politique chinois"@fr,
+		"politician chinez"@ro,
+		"Chinese politician"@en-gb,
+		"Hiina poliitik"@et,
+		"politikan kinez"@sq,
+		"Chinese politician"@en-ca,
+		"políticu chinu"@ast,
+		"китайський політик"@uk,
+		"polaiteoir Síneach"@ga,
+		"politico cinese"@it,
+		"político chinês"@pt,
+		"politikari txinatarra"@eu,
+		"chiński polityk"@pl,
+		"politiko chines"@pap,
+		"China siyaasa nira ŋun nyɛ doo"@dag,
+		"kinesisk politiker"@sv,
+		"سیاستمدار چینی"@fa,
+		"kinesisk politikar"@nn,
+		"kinesisk politiker"@da ;
+	skos:altLabel "李 学勇"@nl .
+
+ref:4223ff54d65e918dc0936ef6f13f1bd633cf3459 a wikibase:Reference ;
+	pr:P248 wd:Q29863107 ;
+	pr:P1631 "1590" ;
+	pr:P1810 "李学勇" ;
+	pr:P813 "2017-10-09T00:00:00Z"^^xsd:dateTime ;
+	prv:P813 v:b3795d3425e0bbdd474f3138cad4a069 .
+
+data:Q1306795 a schema:Dataset ;
+	schema:about wd:Q1306795 ;
+	schema:version "1827638301"^^xsd:integer ;
+	schema:dateModified "2023-02-06T10:54:15Z"^^xsd:dateTime ;
+	wikibase:statements "25"^^xsd:integer ;
+	wikibase:sitelinks "1"^^xsd:integer ;
+	wikibase:identifiers "16"^^xsd:integer .
+
+wd:Q1306795 a wikibase:Item .
+
+<https://de.wikipedia.org/wiki/Peter_B._Steiner> a schema:Article ;
+	schema:about wd:Q1306795 ;
+	schema:inLanguage "de" ;
+	schema:isPartOf <https://de.wikipedia.org/> ;
+	schema:name "Peter B. Steiner"@de .
+
+wd:Q1306795 wdt:P244 "n84067796" ;
+	wdtn:P244 <http://id.loc.gov/authorities/names/n84067796> ;
+	wdt:P214 "88133676" ;
+	wdtn:P214 <http://viaf.org/viaf/88133676> ;
+	wdt:P227 "132212552" ;
+	wdtn:P227 <https://d-nb.info/gnd/132212552> ;
+	wdt:P213 "0000 0001 1682 8863" ;
+	wdt:P31 wd:Q5 ;
+	wdt:P27 wd:Q183 ;
+	wdt:P106 wd:Q1792450 ;
+	wdt:P569 "1942-02-26T00:00:00Z"^^xsd:dateTime ;
+	wdt:P735 wd:Q2793400 ;
+	wdt:P1006 "07192938X" ;
+	wdtn:P1006 <http://data.bibliotheken.nl/id/thes/p07192938X> ;
+	wdt:P734 wd:Q1719303 ;
+	wdt:P19 wd:Q1726 ;
+	wdt:P5508 "23308" ;
+	wdt:P269 "095073914" ;
+	wdtn:P269 <http://www.idref.fr/095073914/id> ;
+	wdt:P268 "12674588h" ;
+	wdtn:P268 <http://data.bnf.fr/ark:/12148/cb12674588h#about> ;
+	wdt:P21 wd:Q6581097 ;
+	wdt:P3987 "450155" ;
+	wdt:P691 "jcu2011621702" ;
+	wdt:P7859 "lccn-n84067796" ;
+	wdt:P7902 "132212552" ;
+	wdt:P1207 "n00012292" ;
+	wdt:P2671 "/g/1224n8fr" ;
+	wdtn:P2671 <http://g.co/kg/g/1224n8fr> ;
+	wdt:P1412 wd:Q188 ;
+	wdt:P10553 "519238303" ;
+	wdt:P5739 "146854" ;
+	wdtn:P5739 <http://catalogo.pusc.it/auth/146854> ;
+	p:P244 s:q1306795-9ECA042D-EAEA-44F9-A311-F540DCB4398D .
+
+s:q1306795-9ECA042D-EAEA-44F9-A311-F540DCB4398D a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P244 "n84067796" ;
+	psn:P244 <http://id.loc.gov/authorities/names/n84067796> ;
+	prov:wasDerivedFrom ref:9a24f7c0208b05d6be97077d855671d1dfdbc0dd .
+
+wd:Q1306795 p:P214 s:q1306795-9AFAC3CF-D809-4B0E-B012-F41760167239 .
+
+s:q1306795-9AFAC3CF-D809-4B0E-B012-F41760167239 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P214 "88133676" ;
+	psn:P214 <http://viaf.org/viaf/88133676> ;
+	prov:wasDerivedFrom ref:9a24f7c0208b05d6be97077d855671d1dfdbc0dd .
+
+wd:Q1306795 p:P227 s:q1306795-ACF90947-0207-4A93-8A93-662C788A88AB .
+
+s:q1306795-ACF90947-0207-4A93-8A93-662C788A88AB a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P227 "132212552" ;
+	psn:P227 <https://d-nb.info/gnd/132212552> ;
+	prov:wasDerivedFrom ref:9a24f7c0208b05d6be97077d855671d1dfdbc0dd .
+
+wd:Q1306795 p:P213 s:q1306795-9E02A3DC-3A12-4FF0-B83C-671E23DBB107 .
+
+s:q1306795-9E02A3DC-3A12-4FF0-B83C-671E23DBB107 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P213 "0000 0001 1682 8863" ;
+	prov:wasDerivedFrom ref:fbc824608bf047fcbfb803c1b0f98e66f4372207 .
+
+wd:Q1306795 p:P31 s:Q1306795-B69E5A5E-9A23-40C0-9B84-F4BB860A58F0 .
+
+s:Q1306795-B69E5A5E-9A23-40C0-9B84-F4BB860A58F0 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P31 wd:Q5 ;
+	prov:wasDerivedFrom ref:9a24f7c0208b05d6be97077d855671d1dfdbc0dd .
+
+wd:Q1306795 p:P27 s:Q1306795-2CE13E3D-D833-45BE-A114-B9C4E81D8AD4 .
+
+s:Q1306795-2CE13E3D-D833-45BE-A114-B9C4E81D8AD4 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P27 wd:Q183 .
+
+wd:Q1306795 p:P106 s:Q1306795-96C493CF-E9EA-4920-8E15-907B7D9DE09A .
+
+s:Q1306795-96C493CF-E9EA-4920-8E15-907B7D9DE09A a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P106 wd:Q1792450 .
+
+wd:Q1306795 p:P569 s:Q1306795-9CD1782A-7FBB-430A-9473-779622A8BF52 .
+
+s:Q1306795-9CD1782A-7FBB-430A-9473-779622A8BF52 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P569 "1942-02-26T00:00:00Z"^^xsd:dateTime ;
+	psv:P569 v:aaa4874e9d73aaf8be49505645df1602 .
+
+wd:Q1306795 p:P735 s:Q1306795-CB1E98DA-6E54-43D7-AF7A-B355B6EA0362 .
+
+s:Q1306795-CB1E98DA-6E54-43D7-AF7A-B355B6EA0362 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P735 wd:Q2793400 ;
+	prov:wasDerivedFrom ref:0a343ec75b409d30c85882549597d0ad72e98b58 .
+
+wd:Q1306795 p:P1006 s:Q1306795-741994EE-8EDF-4F38-9E17-794481DE92F9 .
+
+s:Q1306795-741994EE-8EDF-4F38-9E17-794481DE92F9 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1006 "07192938X" ;
+	psn:P1006 <http://data.bibliotheken.nl/id/thes/p07192938X> ;
+	prov:wasDerivedFrom ref:fcc3ea2782c9f3a66fbd96a9e6109fc5bc0f7adb .
+
+wd:Q1306795 p:P734 s:Q1306795-44D79E9C-E52B-4E44-9217-4AF5198B0B53 .
+
+s:Q1306795-44D79E9C-E52B-4E44-9217-4AF5198B0B53 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P734 wd:Q1719303 ;
+	prov:wasDerivedFrom ref:0a343ec75b409d30c85882549597d0ad72e98b58 .
+
+wd:Q1306795 p:P19 s:Q1306795-FCB076B9-D640-475A-9067-6452F3E10A4E .
+
+s:Q1306795-FCB076B9-D640-475A-9067-6452F3E10A4E a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P19 wd:Q1726 ;
+	prov:wasDerivedFrom ref:9a24f7c0208b05d6be97077d855671d1dfdbc0dd .
+
+wd:Q1306795 p:P5508 s:Q1306795-12534E06-D24F-42B6-BEEC-DA05D6B93A8D .
+
+s:Q1306795-12534E06-D24F-42B6-BEEC-DA05D6B93A8D a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P5508 "23308" ;
+	prov:wasDerivedFrom ref:4eddccd7c0b739150d07157598921f2afa4b1bdd .
+
+wd:Q1306795 p:P269 s:Q1306795-FA0B2E5C-A8F3-4DE0-A655-636F9E2C2833 .
+
+s:Q1306795-FA0B2E5C-A8F3-4DE0-A655-636F9E2C2833 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P269 "095073914" ;
+	psn:P269 <http://www.idref.fr/095073914/id> ;
+	prov:wasDerivedFrom ref:3c2ed057e872d03bde30ac5f5ebe3e27870d06cd .
+
+wd:Q1306795 p:P268 s:Q1306795-497ACF23-55AA-43AC-AABD-4B83EE5EC219 .
+
+s:Q1306795-497ACF23-55AA-43AC-AABD-4B83EE5EC219 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P268 "12674588h" ;
+	psn:P268 <http://data.bnf.fr/ark:/12148/cb12674588h#about> ;
+	prov:wasDerivedFrom ref:3c2ed057e872d03bde30ac5f5ebe3e27870d06cd .
+
+wd:Q1306795 p:P21 s:Q1306795-1277FF60-B90A-4DFF-8951-AA0F065F1BD5 .
+
+s:Q1306795-1277FF60-B90A-4DFF-8951-AA0F065F1BD5 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P21 wd:Q6581097 ;
+	prov:wasDerivedFrom ref:607e1f3ce04281e6db22a15b31a5374f62b391f4,
+		ref:ffa6d327419643c0191d8cd12cdfb51bd6b3d3b4 .
+
+wd:Q1306795 p:P3987 s:Q1306795-E694D38F-F005-4638-B520-CD5B60D012A6 .
+
+s:Q1306795-E694D38F-F005-4638-B520-CD5B60D012A6 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P3987 "450155" .
+
+wd:Q1306795 p:P691 s:Q1306795-4E88FA03-89AA-4022-A89D-976A6169FB47 .
+
+s:Q1306795-4E88FA03-89AA-4022-A89D-976A6169FB47 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P691 "jcu2011621702" ;
+	prov:wasDerivedFrom ref:cb89cc1d12e38042292a020c9008f0eb7a2519c3 .
+
+wd:Q1306795 p:P7859 s:Q1306795-6A897600-0200-469B-8422-FF265D48B5FE .
+
+s:Q1306795-6A897600-0200-469B-8422-FF265D48B5FE a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P7859 "lccn-n84067796" ;
+	prov:wasDerivedFrom ref:ee170eea775404b88596121c110fa462fbb58fa8 .
+
+wd:Q1306795 p:P7902 s:Q1306795-8EBD065A-1B42-4DF4-8B93-11DEC5622841 .
+
+s:Q1306795-8EBD065A-1B42-4DF4-8B93-11DEC5622841 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P7902 "132212552" .
+
+wd:Q1306795 p:P1207 s:Q1306795-F7B14800-7583-45D6-91DA-CC5764827793 .
+
+s:Q1306795-F7B14800-7583-45D6-91DA-CC5764827793 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1207 "n00012292" ;
+	prov:wasDerivedFrom ref:d97e267e641f0946113f0610472251099d7a0c0d .
+
+wd:Q1306795 p:P2671 s:Q1306795-9E3B28EC-0BF7-4E0C-8A36-032F3484C4D8 .
+
+s:Q1306795-9E3B28EC-0BF7-4E0C-8A36-032F3484C4D8 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P2671 "/g/1224n8fr" ;
+	psn:P2671 <http://g.co/kg/g/1224n8fr> .
+
+wd:Q1306795 p:P1412 s:Q1306795-2CD8F55D-AD89-4EBE-8C2C-9C893740DAB1 .
+
+s:Q1306795-2CD8F55D-AD89-4EBE-8C2C-9C893740DAB1 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1412 wd:Q188 .
+
+wd:Q1306795 p:P10553 s:Q1306795-360811A3-2E81-4E9D-AA75-C430FDA4AAB8 .
+
+s:Q1306795-360811A3-2E81-4E9D-AA75-C430FDA4AAB8 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P10553 "519238303" .
+
+wd:Q1306795 p:P5739 s:Q1306795-b70eac10-44ce-6bc6-77e7-35a0236eb566 .
+
+s:Q1306795-b70eac10-44ce-6bc6-77e7-35a0236eb566 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P5739 "146854" ;
+	psn:P5739 <http://catalogo.pusc.it/auth/146854> .
+
+wd:Q1306795 rdfs:label "Peter B. Steiner"@de ;
+	skos:prefLabel "Peter B. Steiner"@de ;
+	schema:name "Peter B. Steiner"@de ;
+	rdfs:label "Peter B. Steiner"@nb ;
+	skos:prefLabel "Peter B. Steiner"@nb ;
+	schema:name "Peter B. Steiner"@nb ;
+	rdfs:label "Peter B. Steiner"@da ;
+	skos:prefLabel "Peter B. Steiner"@da ;
+	schema:name "Peter B. Steiner"@da ;
+	rdfs:label "Peter B. Steiner"@nn ;
+	skos:prefLabel "Peter B. Steiner"@nn ;
+	schema:name "Peter B. Steiner"@nn ;
+	rdfs:label "Peter B. Steiner"@sv ;
+	skos:prefLabel "Peter B. Steiner"@sv ;
+	schema:name "Peter B. Steiner"@sv ;
+	rdfs:label "Peter B. Steiner"@en ;
+	skos:prefLabel "Peter B. Steiner"@en ;
+	schema:name "Peter B. Steiner"@en ;
+	rdfs:label "Peter B. Steiner"@fr ;
+	skos:prefLabel "Peter B. Steiner"@fr ;
+	schema:name "Peter B. Steiner"@fr ;
+	rdfs:label "Peter B. Steiner"@nl ;
+	skos:prefLabel "Peter B. Steiner"@nl ;
+	schema:name "Peter B. Steiner"@nl ;
+	rdfs:label "بيتر شتاينر"@ar ;
+	skos:prefLabel "بيتر شتاينر"@ar ;
+	schema:name "بيتر شتاينر"@ar ;
+	rdfs:label "Peter B. Steiner"@sl ;
+	skos:prefLabel "Peter B. Steiner"@sl ;
+	schema:name "Peter B. Steiner"@sl ;
+	rdfs:label "Peter B. Steiner"@ast ;
+	skos:prefLabel "Peter B. Steiner"@ast ;
+	schema:name "Peter B. Steiner"@ast ;
+	rdfs:label "Peter B. Steiner"@ca ;
+	skos:prefLabel "Peter B. Steiner"@ca ;
+	schema:name "Peter B. Steiner"@ca ;
+	rdfs:label "Peter B. Steiner"@es ;
+	skos:prefLabel "Peter B. Steiner"@es ;
+	schema:name "Peter B. Steiner"@es ;
+	rdfs:label "Peter B. Steiner"@it ;
+	skos:prefLabel "Peter B. Steiner"@it ;
+	schema:name "Peter B. Steiner"@it ;
+	rdfs:label "Peter B. Steiner"@sq ;
+	skos:prefLabel "Peter B. Steiner"@sq ;
+	schema:name "Peter B. Steiner"@sq ;
+	schema:description "deutscher Kunsthistoriker und Museumsleiter"@de,
+		"German art historian"@en,
+		"Duits kunsthistoricus"@nl,
+		"historiador de l'art alemany"@ca,
+		"היסטוריון אמנות גרמני"@he,
+		"historiador del arte alemán"@es,
+		"historiador da arte alemán"@gl,
+		"historien de l'art allemand"@fr,
+		"مؤرخ فن ألماني"@ar,
+		"জার্মান শিল্প ইতিহাসবিদ"@bn,
+		"istoric al artei german"@ro,
+		"German art historian"@en-gb,
+		"Saksamaa kunstiajaloolane"@et,
+		"historian gjerman i artit"@sq,
+		"German art historian"@en-ca,
+		"historiador del arte alemán"@ast,
+		"staraí na healaíne Gearmánach"@ga,
+		"storico dell'arte tedesco"@it .
+
+v:aaa4874e9d73aaf8be49505645df1602 a wikibase:TimeValue ;
+	wikibase:timeValue "1942-02-26T00:00:00Z"^^xsd:dateTime ;
+	wikibase:timePrecision "11"^^xsd:integer ;
+	wikibase:timeTimezone "0"^^xsd:integer ;
+	wikibase:timeCalendarModel <http://www.wikidata.org/entity/Q1985727> .
+
+ref:0a343ec75b409d30c85882549597d0ad72e98b58 a wikibase:Reference ;
+	pr:P248 wd:Q36578 ;
+	pr:P227 "132212552" ;
+	prn:P227 <https://d-nb.info/gnd/132212552> ;
+	pr:P813 "2015-08-12T00:00:00Z"^^xsd:dateTime ;
+	prv:P813 v:0cb1fe029d07f2ceb93df16cd23d83a0 .
+
+ref:fcc3ea2782c9f3a66fbd96a9e6109fc5bc0f7adb a wikibase:Reference ;
+	pr:P248 wd:Q54919 ;
+	pr:P813 "2014-12-16T00:00:00Z"^^xsd:dateTime ;
+	prv:P813 v:76e897091f8a5423320262325216a9c2 ;
+	pr:P854 <http://viaf.org/viaf/88133676> .
+
+ref:3c2ed057e872d03bde30ac5f5ebe3e27870d06cd a wikibase:Reference ;
+	pr:P248 wd:Q54919 ;
+	pr:P214 "88133676" ;
+	prn:P214 <http://viaf.org/viaf/88133676> ;
+	pr:P813 "2018-10-07T00:00:00Z"^^xsd:dateTime ;
+	prv:P813 v:70d666aa88140f3d03060e8dc66c626a .
+
+ref:607e1f3ce04281e6db22a15b31a5374f62b391f4 a wikibase:Reference ;
+	pr:P248 wd:Q54919 ;
+	pr:P214 "88133676" ;
+	prn:P214 <http://viaf.org/viaf/88133676> ;
+	pr:P813 "2018-11-04T00:00:00Z"^^xsd:dateTime ;
+	prv:P813 v:1a501fae0250cace7eaa1b8582f2bfc2 .
+
+ref:cb89cc1d12e38042292a020c9008f0eb7a2519c3 a wikibase:Reference ;
+	pr:P214 "88133676" ;
+	prn:P214 <http://viaf.org/viaf/88133676> ;
+	pr:P248 wd:Q54919 ;
+	pr:P813 "2018-12-11T00:00:00Z"^^xsd:dateTime ;
+	prv:P813 v:491295672fbbf47166ba0b9ab1884de7 .
+
+ref:ee170eea775404b88596121c110fa462fbb58fa8 a wikibase:Reference ;
+	pr:P214 "88133676" ;
+	prn:P214 <http://viaf.org/viaf/88133676> .
+
+ref:d97e267e641f0946113f0610472251099d7a0c0d a wikibase:Reference ;
+	pr:P214 "88133676" ;
+	prn:P214 <http://viaf.org/viaf/88133676> ;
+	pr:P248 wd:Q54919 ;
+	pr:P813 "2020-08-04T00:00:00Z"^^xsd:dateTime ;
+	prv:P813 v:9bfd30844f03bb24fd14477a67af83a2 .
+
+data:Q1306802 a schema:Dataset ;
+	schema:about wd:Q1306802 ;
+	schema:version "1797311020"^^xsd:integer ;
+	schema:dateModified "2022-12-28T12:57:26Z"^^xsd:dateTime ;
+	wikibase:statements "30"^^xsd:integer ;
+	wikibase:sitelinks "16"^^xsd:integer ;
+	wikibase:identifiers "19"^^xsd:integer .
+
+wd:Q1306802 a wikibase:Item .
+
+<https://pt.wikipedia.org/wiki/Ceriagrion> a schema:Article ;
+	schema:about wd:Q1306802 ;
+	schema:inLanguage "pt" ;
+	schema:isPartOf <https://pt.wikipedia.org/> ;
+	schema:name "Ceriagrion"@pt .
+
+<https://pl.wikipedia.org/wiki/Ceriagrion> a schema:Article ;
+	schema:about wd:Q1306802 ;
+	schema:inLanguage "pl" ;
+	schema:isPartOf <https://pl.wikipedia.org/> ;
+	schema:name "Ceriagrion"@pl .
+
+<https://vi.wikipedia.org/wiki/Ceriagrion> a schema:Article ;
+	schema:about wd:Q1306802 ;
+	schema:inLanguage "vi" ;
+	schema:isPartOf <https://vi.wikipedia.org/> ;
+	schema:name "Ceriagrion"@vi .
+
+<https://en.wikipedia.org/wiki/Ceriagrion> a schema:Article ;
+	schema:about wd:Q1306802 ;
+	schema:inLanguage "en" ;
+	schema:isPartOf <https://en.wikipedia.org/> ;
+	schema:name "Ceriagrion"@en .
+
+<https://nl.wikipedia.org/wiki/Koraaljuffers> a schema:Article ;
+	schema:about wd:Q1306802 ;
+	schema:inLanguage "nl" ;
+	schema:isPartOf <https://nl.wikipedia.org/> ;
+	schema:name "Koraaljuffers"@nl .
+
+<https://zh.wikipedia.org/wiki/%E9%BB%84%E8%9F%8C%E5%B1%9E> a schema:Article ;
+	schema:about wd:Q1306802 ;
+	schema:inLanguage "zh" ;
+	schema:isPartOf <https://zh.wikipedia.org/> ;
+	schema:name "黄蟌属"@zh .
+
+<https://ceb.wikipedia.org/wiki/Ceriagrion> a schema:Article ;
+	schema:about wd:Q1306802 ;
+	schema:inLanguage "ceb" ;
+	schema:isPartOf <https://ceb.wikipedia.org/> ;
+	schema:name "Ceriagrion"@ceb .
+
+<https://sv.wikipedia.org/wiki/Ceriagrion> a schema:Article ;
+	schema:about wd:Q1306802 ;
+	schema:inLanguage "sv" ;
+	schema:isPartOf <https://sv.wikipedia.org/> ;
+	schema:name "Ceriagrion"@sv .
+
+<https://eu.wikipedia.org/wiki/Ceriagrion> a schema:Article ;
+	schema:about wd:Q1306802 ;
+	schema:inLanguage "eu" ;
+	schema:isPartOf <https://eu.wikipedia.org/> ;
+	schema:name "Ceriagrion"@eu .
+
+<https://war.wikipedia.org/wiki/Ceriagrion> a schema:Article ;
+	schema:about wd:Q1306802 ;
+	schema:inLanguage "war" ;
+	schema:isPartOf <https://war.wikipedia.org/> ;
+	schema:name "Ceriagrion"@war .
+
+<https://species.wikimedia.org/wiki/Ceriagrion> a schema:Article ;
+	schema:about wd:Q1306802 ;
+	schema:inLanguage "en" ;
+	schema:isPartOf <https://species.wikimedia.org/> ;
+	schema:name "Ceriagrion"@en .
+
+<https://ca.wikipedia.org/wiki/Ceriagrion> a schema:Article ;
+	schema:about wd:Q1306802 ;
+	schema:inLanguage "ca" ;
+	schema:isPartOf <https://ca.wikipedia.org/> ;
+	schema:name "Ceriagrion"@ca .
+
+<https://fr.wikipedia.org/wiki/Ceriagrion> a schema:Article ;
+	schema:about wd:Q1306802 ;
+	schema:inLanguage "fr" ;
+	schema:isPartOf <https://fr.wikipedia.org/> ;
+	schema:name "Ceriagrion"@fr .
+
+<https://hu.wikipedia.org/wiki/Ceriagrion> a schema:Article ;
+	schema:about wd:Q1306802 ;
+	schema:inLanguage "hu" ;
+	schema:isPartOf <https://hu.wikipedia.org/> ;
+	schema:name "Ceriagrion"@hu .
+
+<https://it.wikipedia.org/wiki/Ceriagrion> a schema:Article ;
+	schema:about wd:Q1306802 ;
+	schema:inLanguage "it" ;
+	schema:isPartOf <https://it.wikipedia.org/> ;
+	schema:name "Ceriagrion"@it .
+
+<https://arz.wikipedia.org/wiki/%D8%B3%D9%8A%D8%B1%D9%8A%D8%A7%D8%AC%D8%B1%D9%8A%D9%88%D9%86> a schema:Article ;
+	schema:about wd:Q1306802 ;
+	schema:inLanguage "arz" ;
+	schema:isPartOf <https://arz.wikipedia.org/> ;
+	schema:name "سيرياجريون"@arz .
+
+wd:Q1306802 wdt:P373 "Ceriagrion" ;
+	wdt:P18 <http://commons.wikimedia.org/wiki/Special:FilePath/Ceriagrion%20glabrum%20male%20panorama.jpg>,
+		<http://commons.wikimedia.org/wiki/Special:FilePath/Ceriagrion%20glabrum%20female.jpg>,
+		<http://commons.wikimedia.org/wiki/Special:FilePath/CeriagrionTenellum.jpg> ;
+	wdt:P225 "Ceriagrion" ;
+	wdt:P171 wd:Q502684 ;
+	wdt:P105 wd:Q34740 ;
+	wdt:P31 wd:Q16521 ;
+	wdt:P646 "/m/02x10r9" ;
+	wdt:P910 wd:Q9436392 ;
+	wdt:P830 "16182" ;
+	wdt:P1895 "214259" ;
+	wdt:P685 "257035" ;
+	wdtn:P685 <http://purl.uniprot.org/taxonomy/257035> ;
+	wdt:P1843 "黃蟌屬"@zh,
+		"Koraaljuffers"@nl ;
+	wdt:P3405 "169824" ;
+	wdt:P3240 "NBNSYS0000131423" ;
+	wdt:P4807 "9ffa94f1-9398-49e4-a279-477581399248" ;
+	wdt:P5055 "1195937" ;
+	wdtn:P5055 <urn:lsid:irmng.org:taxname:1195937> ;
+	wdt:P838 "1592" ;
+	wdt:P687 "34716957" ;
+	wdt:P3151 "87308" ;
+	wdt:P7202 "51419" ;
+	wdt:P6366 "2777768028" ;
+	wdtn:P6366 <http://ma-graph.org/entity/2777768028> ;
+	wdt:P3606 "397251" ;
+	wdt:P1992 "853387B3-FFD6-FFB3-DBE7-FB93FD752A2D" ;
+	wdtn:P1992 <https://treatment.plazi.org/id/853387B3-FFD6-FFB3-DBE7-FB93FD752A2D.rdf> ;
+	wdt:P846 "7950738" ;
+	wdt:P6039 "Ceriagrion" ;
+	wdt:P10585 "3L49" ;
+	wdt:P8189 "987007579093405171" ;
+	p:P373 s:q1306802-AA34B2C9-1042-4BF6-82B6-CE00A78FAB96 .
+
+s:q1306802-AA34B2C9-1042-4BF6-82B6-CE00A78FAB96 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P373 "Ceriagrion" .
+
+wd:Q1306802 p:P18 s:q1306802-2217AE64-7073-4AEE-8AB6-7467FDEB5550 .
+
+s:q1306802-2217AE64-7073-4AEE-8AB6-7467FDEB5550 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P18 <http://commons.wikimedia.org/wiki/Special:FilePath/Ceriagrion%20glabrum%20male%20panorama.jpg> ;
+	pq:P21 wd:Q44148 ;
+	pq:P180 wd:Q2550767 .
+
+wd:Q1306802 p:P18 s:Q1306802-2585141d-7b1d-4150-ac2a-a7f7661d4c36 .
+
+s:Q1306802-2585141d-7b1d-4150-ac2a-a7f7661d4c36 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P18 <http://commons.wikimedia.org/wiki/Special:FilePath/Ceriagrion%20glabrum%20female.jpg> ;
+	pq:P21 wd:Q43445 ;
+	pq:P180 wd:Q2550767 .
+
+wd:Q1306802 p:P18 s:Q1306802-BB5F51AD-0A32-4CD4-A14D-F803A68EEB23 .
+
+s:Q1306802-BB5F51AD-0A32-4CD4-A14D-F803A68EEB23 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P18 <http://commons.wikimedia.org/wiki/Special:FilePath/CeriagrionTenellum.jpg> ;
+	pq:P180 wd:Q1244678 .
+
+wd:Q1306802 p:P225 s:q1306802-2BAE4AC3-79F1-4847-8D4B-BF30D13849A4 .
+
+s:q1306802-2BAE4AC3-79F1-4847-8D4B-BF30D13849A4 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P225 "Ceriagrion" ;
+	pq:P405 wd:Q59638 ;
+	pq:P574 "1876-01-01T00:00:00Z"^^xsd:dateTime ;
+	pqv:P574 v:2ab9b8b9f2c74a530c05d4f8723ca35f ;
+	prov:wasDerivedFrom ref:b881cb3457c4b4366ec9c54f40d77b774c0077e9 .
+
+wd:Q1306802 p:P171 s:q1306802-CE76A489-4D63-4D48-8D8D-3FC5EA8F5514 .
+
+s:q1306802-CE76A489-4D63-4D48-8D8D-3FC5EA8F5514 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P171 wd:Q502684 ;
+	prov:wasDerivedFrom ref:b881cb3457c4b4366ec9c54f40d77b774c0077e9 .
+
+wd:Q1306802 p:P105 s:q1306802-6E48D39D-134D-49ED-9765-E74FEEBFDA54 .
+
+s:q1306802-6E48D39D-134D-49ED-9765-E74FEEBFDA54 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P105 wd:Q34740 ;
+	prov:wasDerivedFrom ref:b881cb3457c4b4366ec9c54f40d77b774c0077e9 .
+
+wd:Q1306802 p:P31 s:q1306802-A4EB002A-38AA-41A2-9BE8-39223DF3C256 .
+
+s:q1306802-A4EB002A-38AA-41A2-9BE8-39223DF3C256 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P31 wd:Q16521 ;
+	prov:wasDerivedFrom ref:9a00fc7b031c095de9d9fa64fb1697fd34b0b8e8 .
+
+wd:Q1306802 p:P646 s:Q1306802-BD442398-63AE-47DD-8D01-32C26BB8315C .
+
+s:Q1306802-BD442398-63AE-47DD-8D01-32C26BB8315C a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P646 "/m/02x10r9" ;
+	prov:wasDerivedFrom ref:2b00cb481cddcac7623114367489b5c194901c4a .
+
+wd:Q1306802 p:P910 s:Q1306802-351D45DE-23A0-4604-8D12-1EA7376967F1 .
+
+s:Q1306802-351D45DE-23A0-4604-8D12-1EA7376967F1 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P910 wd:Q9436392 ;
+	prov:wasDerivedFrom ref:bd49d3e4f67bc460ce7a06b6ac3027347cf5ee55 .
+
+wd:Q1306802 p:P830 s:Q1306802-3f7796e9-2ee5-4ba9-928c-71e6aebac816 .
+
+s:Q1306802-3f7796e9-2ee5-4ba9-928c-71e6aebac816 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P830 "16182" ;
+	prov:wasDerivedFrom ref:b4e25e4f1e7e7db583fb78655c4bf229bc15db0e .
+
+wd:Q1306802 p:P1895 s:Q1306802-36313EEC-A9F4-4735-BA16-2336A44BC504 .
+
+s:Q1306802-36313EEC-A9F4-4735-BA16-2336A44BC504 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1895 "214259" ;
+	prov:wasDerivedFrom ref:85e6946f7dfef1ffad4ad8f8b13b1418553313a8 .
+
+wd:Q1306802 p:P685 s:Q1306802-6ACF933C-88FF-4087-825F-B8FE0CC43532 .
+
+s:Q1306802-6ACF933C-88FF-4087-825F-B8FE0CC43532 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P685 "257035" ;
+	psn:P685 <http://purl.uniprot.org/taxonomy/257035> ;
+	prov:wasDerivedFrom ref:298a38389945af07a43992b35d856aec16722928 .
+
+wd:Q1306802 p:P1843 s:Q1306802-59374B51-A1EB-44D5-839C-245A4A0A109C .
+
+s:Q1306802-59374B51-A1EB-44D5-839C-245A4A0A109C a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1843 "黃蟌屬"@zh ;
+	prov:wasDerivedFrom ref:2e0c13df5b13edc9b3db9d8129e466c0894710ac .
+
+wd:Q1306802 p:P1843 s:Q1306802-080B732B-7F39-46D7-8428-01E6896A31E0 .
+
+s:Q1306802-080B732B-7F39-46D7-8428-01E6896A31E0 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1843 "Koraaljuffers"@nl ;
+	prov:wasDerivedFrom ref:ca730ca96ac2d77d5a6339403f9bae30792ccb39 .
+
+wd:Q1306802 p:P3405 s:Q1306802-6BC32EFA-9C02-47AE-9AF1-008AD88C18D3 .
+
+s:Q1306802-6BC32EFA-9C02-47AE-9AF1-008AD88C18D3 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P3405 "169824" ;
+	prov:wasDerivedFrom ref:2e164bfe7be311f804fcf231ac588871f5dbb532 .
+
+wd:Q1306802 p:P3240 s:Q1306802-AF7E4B1F-560A-4672-85CA-12F8F4D0072F .
+
+s:Q1306802-AF7E4B1F-560A-4672-85CA-12F8F4D0072F a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P3240 "NBNSYS0000131423" ;
+	prov:wasDerivedFrom ref:7483c54280ce0f876fc05446fae874ea9d29318e .
+
+wd:Q1306802 p:P4807 s:Q1306802-9BB85288-E3B7-4DD9-979D-734910E5FE63 .
+
+s:Q1306802-9BB85288-E3B7-4DD9-979D-734910E5FE63 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P4807 "9ffa94f1-9398-49e4-a279-477581399248" ;
+	prov:wasDerivedFrom ref:93fc39371ab7197e2e3c3fe086705eeecc703426 .
+
+wd:Q1306802 p:P5055 s:Q1306802-DD3AF1CA-B25D-42AA-9596-2E08355DE4AB .
+
+s:Q1306802-DD3AF1CA-B25D-42AA-9596-2E08355DE4AB a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P5055 "1195937" ;
+	psn:P5055 <urn:lsid:irmng.org:taxname:1195937> ;
+	prov:wasDerivedFrom ref:c674f76d17a72777a39a84feec9d46ea91c27143 .
+
+wd:Q1306802 p:P838 s:Q1306802-A71EED29-EF70-407D-98A0-9AD4FA89A3AF .
+
+s:Q1306802-A71EED29-EF70-407D-98A0-9AD4FA89A3AF a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P838 "1592" ;
+	prov:wasDerivedFrom ref:d4bd87b862b12d99d26e86472d44f26858dee639 .
+
+wd:Q1306802 p:P687 s:Q1306802-F703E875-69A1-49E4-90D3-5C7F5D8A272F .
+
+s:Q1306802-F703E875-69A1-49E4-90D3-5C7F5D8A272F a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P687 "34716957" ;
+	prov:wasDerivedFrom ref:fa278ebfc458360e5aed63d5058cca83c46134f1 .
+
+wd:Q1306802 p:P3151 s:Q1306802-1B62C5E9-8FEE-4183-990F-77E41457220E .
+
+s:Q1306802-1B62C5E9-8FEE-4183-990F-77E41457220E a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P3151 "87308" .
+
+wd:Q1306802 p:P7202 s:Q1306802-9114C557-7821-4251-93C8-724B87A4E92F .
+
+s:Q1306802-9114C557-7821-4251-93C8-724B87A4E92F a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P7202 "51419" ;
+	prov:wasDerivedFrom ref:1d3b14364cabecbdb80f4cca466d63b80a938fde .
+
+wd:Q1306802 p:P6366 s:Q1306802-13F340FD-A2C4-42E1-BE82-B2EC878932BC .
+
+s:Q1306802-13F340FD-A2C4-42E1-BE82-B2EC878932BC a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P6366 "2777768028" ;
+	psn:P6366 <http://ma-graph.org/entity/2777768028> .
+
+wd:Q1306802 p:P3606 s:Q1306802-18718C31-21B4-4C79-B355-3CD1AF64CC53 .
+
+s:Q1306802-18718C31-21B4-4C79-B355-3CD1AF64CC53 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P3606 "397251" ;
+	prov:wasDerivedFrom ref:8f9280f478c9a348491191c3e5ac4b81faef34e4 .
+
+wd:Q1306802 p:P1992 s:Q1306802-4D3BC31E-5224-4D78-B592-5EFE2324D287 .
+
+s:Q1306802-4D3BC31E-5224-4D78-B592-5EFE2324D287 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1992 "853387B3-FFD6-FFB3-DBE7-FB93FD752A2D" ;
+	psn:P1992 <https://treatment.plazi.org/id/853387B3-FFD6-FFB3-DBE7-FB93FD752A2D.rdf> ;
+	prov:wasDerivedFrom ref:058fd07e220e3d5951d7c564355bb3bfe356251b .
+
+wd:Q1306802 p:P846 s:Q1306802-6968E9FA-38FC-4028-91FA-90DE6BE6E08F .
+
+s:Q1306802-6968E9FA-38FC-4028-91FA-90DE6BE6E08F a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P846 "7950738" ;
+	prov:wasDerivedFrom ref:d3317a0fcaa9da353e97f3ed8a23056162722f14 .
+
+wd:Q1306802 p:P6039 s:Q1306802-BA5D83AD-3CFB-4B75-92EE-7BBE17CB7B61 .
+
+s:Q1306802-BA5D83AD-3CFB-4B75-92EE-7BBE17CB7B61 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P6039 "Ceriagrion" .
+
+wd:Q1306802 p:P10585 s:Q1306802-CF01CC99-4756-48FD-AC47-4DA17E5AE9E9 .
+
+s:Q1306802-CF01CC99-4756-48FD-AC47-4DA17E5AE9E9 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P10585 "3L49" ;
+	prov:wasDerivedFrom ref:acbf110eddba88f3fafa211d8ab0d53db381eebc .
+
+wd:Q1306802 p:P8189 s:Q1306802-D6E1353E-ED22-4F0B-B5DD-63A8E73C0559 .
+
+s:Q1306802-D6E1353E-ED22-4F0B-B5DD-63A8E73C0559 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P8189 "987007579093405171" ;
+	prov:wasDerivedFrom ref:ecb7a39cf436eb1fba419853af168ef9f2ba1dab .
+
+wd:Q1306802 rdfs:label "Ceriagrion"@pt ;
+	skos:prefLabel "Ceriagrion"@pt ;
+	schema:name "Ceriagrion"@pt ;
+	rdfs:label "Ceriagrion"@pl ;
+	skos:prefLabel "Ceriagrion"@pl ;
+	schema:name "Ceriagrion"@pl ;
+	rdfs:label "Ceriagrion"@vi ;
+	skos:prefLabel "Ceriagrion"@vi ;
+	schema:name "Ceriagrion"@vi ;
+	rdfs:label "Ceriagrion"@en ;
+	skos:prefLabel "Ceriagrion"@en ;
+	schema:name "Ceriagrion"@en ;
+	rdfs:label "koraaljuffers"@nl ;
+	skos:prefLabel "koraaljuffers"@nl ;
+	schema:name "koraaljuffers"@nl ;
+	rdfs:label "Ceriagrion"@ceb ;
+	skos:prefLabel "Ceriagrion"@ceb ;
+	schema:name "Ceriagrion"@ceb ;
+	rdfs:label "Ceriagrion"@sv ;
+	skos:prefLabel "Ceriagrion"@sv ;
+	schema:name "Ceriagrion"@sv ;
+	rdfs:label "Ceriagrion"@de ;
+	skos:prefLabel "Ceriagrion"@de ;
+	schema:name "Ceriagrion"@de ;
+	rdfs:label "Ceriagrion"@war ;
+	skos:prefLabel "Ceriagrion"@war ;
+	schema:name "Ceriagrion"@war ;
+	rdfs:label "Ceriagrion"@fr ;
+	skos:prefLabel "Ceriagrion"@fr ;
+	schema:name "Ceriagrion"@fr ;
+	rdfs:label "Ceriagrion"@es ;
+	skos:prefLabel "Ceriagrion"@es ;
+	schema:name "Ceriagrion"@es ;
+	rdfs:label "Ceriagrion"@it ;
+	skos:prefLabel "Ceriagrion"@it ;
+	schema:name "Ceriagrion"@it ;
+	rdfs:label "Ceriagrion"@eu ;
+	skos:prefLabel "Ceriagrion"@eu ;
+	schema:name "Ceriagrion"@eu ;
+	rdfs:label "黄蟌属"@zh ;
+	skos:prefLabel "黄蟌属"@zh ;
+	schema:name "黄蟌属"@zh ;
+	rdfs:label "Ceriagrion"@bg ;
+	skos:prefLabel "Ceriagrion"@bg ;
+	schema:name "Ceriagrion"@bg ;
+	rdfs:label "Ceriagrion"@ru ;
+	skos:prefLabel "Ceriagrion"@ru ;
+	schema:name "Ceriagrion"@ru ;
+	rdfs:label "Ceriagrion"@la ;
+	skos:prefLabel "Ceriagrion"@la ;
+	schema:name "Ceriagrion"@la ;
+	rdfs:label "Ceriagrion"@ca ;
+	skos:prefLabel "Ceriagrion"@ca ;
+	schema:name "Ceriagrion"@ca ;
+	rdfs:label "Ceriagrion"@hu ;
+	skos:prefLabel "Ceriagrion"@hu ;
+	schema:name "Ceriagrion"@hu ;
+	rdfs:label "Ceriagrion"@uk ;
+	skos:prefLabel "Ceriagrion"@uk ;
+	schema:name "Ceriagrion"@uk ;
+	rdfs:label "‎Ceriagrion‎"@ast ;
+	skos:prefLabel "‎Ceriagrion‎"@ast ;
+	schema:name "‎Ceriagrion‎"@ast ;
+	rdfs:label "Ceriagrion"@ga ;
+	skos:prefLabel "Ceriagrion"@ga ;
+	schema:name "Ceriagrion"@ga ;
+	rdfs:label "Ceriagrion"@ro ;
+	skos:prefLabel "Ceriagrion"@ro ;
+	schema:name "Ceriagrion"@ro ;
+	rdfs:label "Ceriagrion"@sq ;
+	skos:prefLabel "Ceriagrion"@sq ;
+	schema:name "Ceriagrion"@sq ;
+	rdfs:label "Ceriagrion"@fi ;
+	skos:prefLabel "Ceriagrion"@fi ;
+	schema:name "Ceriagrion"@fi ;
+	rdfs:label "Ceriagrion"@an ;
+	skos:prefLabel "Ceriagrion"@an ;
+	schema:name "Ceriagrion"@an ;
+	rdfs:label "Ceriagrion"@gl ;
+	skos:prefLabel "Ceriagrion"@gl ;
+	schema:name "Ceriagrion"@gl ;
+	rdfs:label "Ceriagrion"@io ;
+	skos:prefLabel "Ceriagrion"@io ;
+	schema:name "Ceriagrion"@io ;
+	rdfs:label "Ceriagrion"@vo ;
+	skos:prefLabel "Ceriagrion"@vo ;
+	schema:name "Ceriagrion"@vo ;
+	rdfs:label "Ceriagrion"@ia ;
+	skos:prefLabel "Ceriagrion"@ia ;
+	schema:name "Ceriagrion"@ia ;
+	rdfs:label "Ceriagrion"@oc ;
+	skos:prefLabel "Ceriagrion"@oc ;
+	schema:name "Ceriagrion"@oc ;
+	rdfs:label "Ceriagrion"@ext ;
+	skos:prefLabel "Ceriagrion"@ext ;
+	schema:name "Ceriagrion"@ext ;
+	rdfs:label "Ceriagrion"@pt-br ;
+	skos:prefLabel "Ceriagrion"@pt-br ;
+	schema:name "Ceriagrion"@pt-br ;
+	rdfs:label "Ceriagrion"@eo ;
+	skos:prefLabel "Ceriagrion"@eo ;
+	schema:name "Ceriagrion"@eo ;
+	rdfs:label "Ceriagrion"@ie ;
+	skos:prefLabel "Ceriagrion"@ie ;
+	schema:name "Ceriagrion"@ie ;
+	rdfs:label "سيرياجريون"@arz ;
+	skos:prefLabel "سيرياجريون"@arz ;
+	schema:name "سيرياجريون"@arz ;
+	schema:description "genre d'insectes"@fr,
+		"Gattung der Familie Schlanklibellen"@de,
+		"سرده‌ای از سنجاقک‌های برکه"@fa,
+		"genus of insects"@en,
+		"род насекоми"@bg,
+		"geslacht uit de familie waterjuffers"@nl,
+		"جنس من الحشرات"@ar,
+		"gênero de insetos"@pt-br,
+		"género de insetos"@pt,
+		"género de insectos"@es,
+		"סוג של חרק"@he,
+		"gènere d'insectes"@ca,
+		"genere di insetti"@it,
+		"hyönteissuku"@fi,
+		"միջատների դաս"@hy,
+		"gen de insecte"@ro,
+		"insektslekt"@nb,
+		"род насекомых"@ru,
+		"genus serangga"@id,
+		"কীটপতঙ্গের গণ"@bn,
+		"gjini e insekteve"@sq,
+		"insektslekt"@nn,
+		"rovarnem"@hu,
+		"rod hmyzu"@cs,
+		"genero di insekti"@io,
+		"рід комах"@uk,
+		"xéneru d'inseutos"@ast,
+		"géineas feithidí"@ga,
+		"جنس من الحشرات"@arz ;
+	skos:altLabel "Ceriagrion"@nl .
+
+data:Q1306835 a schema:Dataset ;
+	schema:about wd:Q1306835 ;
+	schema:version "1587173601"^^xsd:integer ;
+	schema:dateModified "2022-03-04T13:05:12Z"^^xsd:dateTime ;
+	wikibase:statements "5"^^xsd:integer ;
+	wikibase:sitelinks "4"^^xsd:integer ;
+	wikibase:identifiers "0"^^xsd:integer .
+
+wd:Q1306835 a wikibase:Item .
+
+<https://en.wikipedia.org/wiki/%E9%A6%AC%E5%A0%B4> a schema:Article ;
+	schema:about wd:Q1306835 ;
+	schema:inLanguage "en" ;
+	schema:isPartOf <https://en.wikipedia.org/> ;
+	schema:name "馬場"@en .
+
+<https://ja.wikipedia.org/wiki/%E9%A6%AC%E5%A0%B4_(%E6%9B%96%E6%98%A7%E3%81%95%E5%9B%9E%E9%81%BF)> a schema:Article ;
+	schema:about wd:Q1306835 ;
+	schema:inLanguage "ja" ;
+	schema:isPartOf <https://ja.wikipedia.org/> ;
+	schema:name "馬場 (曖昧さ回避)"@ja .
+
+<https://zh.wikipedia.org/wiki/%E9%A6%AC%E5%A0%B4_(%E6%B6%88%E6%AD%A7%E7%BE%A9)> a schema:Article ;
+	schema:about wd:Q1306835 ;
+	schema:inLanguage "zh" ;
+	schema:isPartOf <https://zh.wikipedia.org/> ;
+	schema:name "馬場 (消歧義)"@zh .
+
+<https://zh-yue.wikipedia.org/wiki/%E9%A6%AC%E5%A0%B4_(%E6%90%9E%E6%B8%85%E6%A5%9A)> a schema:Article ;
+	schema:about wd:Q1306835 ;
+	schema:inLanguage "yue" ;
+	schema:isPartOf <https://zh-yue.wikipedia.org/> ;
+	schema:name "馬場 (搞清楚)"@yue .
+
+wd:Q1306835 wdt:P31 wd:Q4167410 ;
+	wdt:P1889 wd:Q26000482,
+		wd:Q24090491,
+		wd:Q26000481,
+		wd:Q26000480 ;
+	p:P31 s:Q1306835-025A49FD-739B-4F2A-9707-1B8A624B385F .
+
+s:Q1306835-025A49FD-739B-4F2A-9707-1B8A624B385F a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P31 wd:Q4167410 ;
+	prov:wasDerivedFrom ref:fa278ebfc458360e5aed63d5058cca83c46134f1 .
+
+wd:Q1306835 p:P1889 s:Q1306835-8B14DE22-BADC-4355-B2B9-6BB9E5B17EC2 .
+
+s:Q1306835-8B14DE22-BADC-4355-B2B9-6BB9E5B17EC2 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1889 wd:Q26000482 ;
+	pq:P1013 wd:Q27924673 .
+
+wd:Q1306835 p:P1889 s:Q1306835-7447B4E4-29BA-4AB1-AF99-12633AFE3986 .
+
+s:Q1306835-7447B4E4-29BA-4AB1-AF99-12633AFE3986 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1889 wd:Q24090491 ;
+	pq:P1013 wd:Q27924673 .
+
+wd:Q1306835 p:P1889 s:Q1306835-5A2FEC90-443D-4426-BC23-5F87DBA3F444 .
+
+s:Q1306835-5A2FEC90-443D-4426-BC23-5F87DBA3F444 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1889 wd:Q26000481 ;
+	pq:P1013 wd:Q27924673 .
+
+wd:Q1306835 p:P1889 s:Q1306835-73A4501A-3D4C-4B8F-B633-BA3335A58FFB .
+
+s:Q1306835-73A4501A-3D4C-4B8F-B633-BA3335A58FFB a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1889 wd:Q26000480 ;
+	pq:P1013 wd:Q27924673 .
+
+wd:Q1306835 rdfs:label "马场"@zh-hans ;
+	skos:prefLabel "马场"@zh-hans ;
+	schema:name "马场"@zh-hans ;
+	rdfs:label "馬場"@zh-hk ;
+	skos:prefLabel "馬場"@zh-hk ;
+	schema:name "馬場"@zh-hk ;
+	rdfs:label "馬場"@en ;
+	skos:prefLabel "馬場"@en ;
+	schema:name "馬場"@en ;
+	rdfs:label "馬場"@ja ;
+	skos:prefLabel "馬場"@ja ;
+	schema:name "馬場"@ja ;
+	rdfs:label "馬場"@zh-hant ;
+	skos:prefLabel "馬場"@zh-hant ;
+	schema:name "馬場"@zh-hant ;
+	rdfs:label "馬場"@zh ;
+	skos:prefLabel "馬場"@zh ;
+	schema:name "馬場"@zh ;
+	rdfs:label "馬場"@yue ;
+	skos:prefLabel "馬場"@yue ;
+	schema:name "馬場"@yue ;
+	schema:description "страница значений в проекте Викимедиа"@ru,
+		"page d'homonymie de Wikimedia"@fr,
+		"Wikimedia disambiguation page"@en,
+		"página de desambiguação da Wikimedia"@pt,
+		"સ્પષ્ટતા પાનું"@gu,
+		"pàgina de desambiguació de Wikimedia"@ca,
+		"Wikimedia-Begriffsklärungsseite"@de,
+		"pagina di disambiguazione di un progetto Wikimedia"@it,
+		"Wikimedia-pekerside"@nb,
+		"صفحهٔ ابهام‌زدایی در ویکی‌مدیا"@fa,
+		"Laman nyahkekaburan"@ms,
+		"rozcestník na projektech Wikimedia"@cs,
+		"Wikimedia-täsmennyssivu"@fi,
+		"halaman disambiguasi Wikimedia"@id,
+		"página de desambiguación de Wikimedia"@es,
+		"página de desambiguação da Wikimedia"@pt-br,
+		"ウィキメディアの曖昧さ回避ページ"@ja,
+		"Wikimedia täpsustuslehekülg"@et,
+		"Уикимедия пояснителна страница"@bg,
+		"појаснителна страница на Викимедија"@mk,
+		"strona ujednoznaczniająca w projekcie Wikimedia"@pl,
+		"صفحة توضيح ويكيميديا"@ar,
+		"উইকিমিডিয়ার দ্ব্যর্থতা নিরসন পাতা"@bn,
+		"ڕوونکردنەوە"@ckb,
+		"Wikimedia-flertydigside"@da,
+		"σελίδα αποσαφήνισης εγχειρημάτων Wikimedia"@el,
+		"Wikimedia disambiguation page"@en-ca,
+		"Wikimedia disambiguation page"@en-gb,
+		"Vikimedia apartigilo"@eo,
+		"páxina de homónimos de Wikimedia"@gl,
+		"דף פירושונים"@he,
+		"बहुविकल्पी पृष्ठ"@hi,
+		"egyértelműsítő lap"@hu,
+		"aðgreiningarsíða á Wikipediu"@is,
+		"ვიკიპედიის მრავალმნიშვნელობის გვერდი"@ka,
+		"위키미디어 동음이의어 문서"@ko,
+		"Wikimedia projekta nozīmju atdalīšanas lapa"@lv,
+		"laman disambiguasi"@min,
+		"Sied för en mehrdüdig Begreep op Wikimedia"@nds,
+		"Wikimedia-doorverwijspagina"@nl,
+		"Wikimedia-fleirtydingsside"@nn,
+		"ବହୁବିକଳ୍ପ"@or,
+		"rozlišovacia stránka"@sk,
+		"trang định hướng Wikimedia"@vi,
+		"維基媒體消歧義頁"@zh,
+		"维基媒体消歧义页"@zh-hans,
+		"維基媒體消歧義頁"@zh-hant,
+		"čvor na Vikimediji"@bs,
+		"Wikimedia-Begriffsklärigssite"@gsw,
+		"razdvojba na Wikimediji"@hr,
+		"Wikimedia-Homonymiesäit"@lb,
+		"pagină de dezambiguizare Wikimedia"@ro,
+		"Wikimedia disambiguation page"@sco,
+		"вишезначна одредница на Викимедији"@sr,
+		"Vikimedya anlam ayrımı sayfası"@tr,
+		"Wikimedia-förgreningssida"@sv,
+		"Վիքիմեդիայի նախագծի բազմիմաստության փարատման էջ"@hy,
+		"сторінка значень у проєкті Вікімедіа"@uk,
+		"維基媒體搞清楚版"@yue,
+		"维基媒体消歧义页"@zh-cn,
+		"維基媒體消歧義頁"@zh-hk,
+		"維基媒體消歧義頁"@zh-mo,
+		"维基媒体消歧义页"@zh-my,
+		"维基媒体消歧义页"@zh-sg,
+		"維基媒體消歧義頁"@zh-tw,
+		"Wikimedia dubbelsinnigheidsblad"@af,
+		"пералік значэнняў у Вікіпедыі"@be,
+		"старонка-неадназначнасьць у Вікіпэдыі"@be-tarask,
+		"維基媒體釋義"@lzh,
+		"Vì-kî Mòi-thí seû-khì-ngi-ya̍p"@hak,
+		"Wikimedia khu-pia̍t-ia̍h"@nan,
+		"deurverwiesziede"@nds-nl,
+		"Wikimedia-betsjuttingsside"@fy,
+		"Muardüüdag artiikel"@frr,
+		"Wikimedia-Begriffsklärungsseite"@de-at,
+		"Wikimedia-Begriffsklärungsseite"@de-ch,
+		"ವಿಕಿಪೀಡಿಯ:ದ್ವಂದ್ವ ನಿವಾರಣೆ"@kn,
+		"វិគីភីឌា:អសង្ស័យកម្ម"@km,
+		"വിക്കിപീഡിയ വിവക്ഷ താൾ"@ml,
+		"ویکی پدیا:گجگجی بیتن"@mzn,
+		"pagina d'omonimia"@oc,
+		"د ويکيمېډيا نامبهم مخ"@ps,
+		"„Wat-eß-dat?“-Sigg en de Wikkipeidija"@ksh,
+		"вишезначна одредница на Викимедији"@sr-ec,
+		"višeznačna odrednica na Vikimediji"@sr-el,
+		"višeznačna odrednica na Vikimediji"@sh,
+		"pàggina di disambiguazzioni di Wikimedia"@scn,
+		"விக்கிமீடியப் பக்கவழி நெறிப்படுத்தல் பக்கம்"@ta,
+		"หน้าแก้ความกำกวมวิกิมีเดีย"@th,
+		"tudalen wahaniaethu Wikimedia"@cy,
+		"pachina de desambigación"@an,
+		"ৱিকিমিডিয়া দ্ব্যৰ্থতা দূৰীকৰণ পৃষ্ঠা"@as,
+		"Wikimediako argipen orri"@eu,
+		"Wikimedia-verdudelikingspazjena"@li,
+		"निःसंदिग्धीकरण पाने"@mr,
+		"ਵਿਕੀਮੀਡੀਆ ਗੁੰਝਲਖੋਲ੍ਹ ਸਫ਼ਾ"@pa,
+		"razločitvena stran Wikimedije"@sl,
+		"faqe kthjelluese e Wikimedias"@sq,
+		"వికీమీడియా అయోమయ నివృత్తి పేజీ"@te,
+		"саҳифаи маъноҳои Викимедиа"@tg,
+		"саҳифаи маъноҳои Викимедиа"@tg-cyrl,
+		"sahifai ma'nohoi Vikimedia"@tg-latn,
+		"Мәгънәләр бите Викимедиа проектында"@tt,
+		"Мәгънәләр бите Викимедиа проектында"@tt-cyrl,
+		"Mäğnälär bite Wikimedia proyektında"@tt-latn,
+		"ojúewé ìṣojútùú Wikimedia"@yo,
+		"Wikimedia-deurverwiespagina"@zea,
+		"páxina de dixebra de Wikimedia"@ast,
+		"pagina discretiva Vicimediorum"@la ;
+	skos:altLabel "馬場 (曖昧さ回避)"@ja .
+
+data:Q1306836 a schema:Dataset ;
+	schema:about wd:Q1306836 ;
+	schema:version "1726805811"^^xsd:integer ;
+	schema:dateModified "2022-09-12T10:05:31Z"^^xsd:dateTime ;
+	wikibase:statements "6"^^xsd:integer ;
+	wikibase:sitelinks "11"^^xsd:integer ;
+	wikibase:identifiers "1"^^xsd:integer .
+
+wd:Q1306836 a wikibase:Item .
+
+<https://en.wikipedia.org/wiki/2008_European_Weightlifting_Championships> a schema:Article ;
+	schema:about wd:Q1306836 ;
+	schema:inLanguage "en" ;
+	schema:isPartOf <https://en.wikipedia.org/> ;
+	schema:name "2008 European Weightlifting Championships"@en .
+
+<https://de.wikipedia.org/wiki/Europameisterschaften_im_Gewichtheben_2008> a schema:Article ;
+	schema:about wd:Q1306836 ;
+	schema:inLanguage "de" ;
+	schema:isPartOf <https://de.wikipedia.org/> ;
+	schema:name "Europameisterschaften im Gewichtheben 2008"@de .
+
+<https://es.wikipedia.org/wiki/Campeonato_Europeo_de_Halterofilia_de_2008> a schema:Article ;
+	schema:about wd:Q1306836 ;
+	schema:inLanguage "es" ;
+	schema:isPartOf <https://es.wikipedia.org/> ;
+	schema:name "Campeonato Europeo de Halterofilia de 2008"@es .
+
+<https://ru.wikipedia.org/wiki/%D0%A7%D0%B5%D0%BC%D0%BF%D0%B8%D0%BE%D0%BD%D0%B0%D1%82_%D0%95%D0%B2%D1%80%D0%BE%D0%BF%D1%8B_%D0%BF%D0%BE_%D1%82%D1%8F%D0%B6%D1%91%D0%BB%D0%BE%D0%B9_%D0%B0%D1%82%D0%BB%D0%B5%D1%82%D0%B8%D0%BA%D0%B5_2008> a schema:Article ;
+	schema:about wd:Q1306836 ;
+	schema:inLanguage "ru" ;
+	schema:isPartOf <https://ru.wikipedia.org/> ;
+	schema:name "Чемпионат Европы по тяжёлой атлетике 2008"@ru .
+
+<https://pl.wikipedia.org/wiki/Mistrzostwa_Europy_w_Podnoszeniu_Ci%C4%99%C5%BCar%C3%B3w_2008> a schema:Article ;
+	schema:about wd:Q1306836 ;
+	schema:inLanguage "pl" ;
+	schema:isPartOf <https://pl.wikipedia.org/> ;
+	schema:name "Mistrzostwa Europy w Podnoszeniu Ciężarów 2008"@pl .
+
+<https://tr.wikipedia.org/wiki/2008_Avrupa_Halter_%C5%9Eampiyonas%C4%B1> a schema:Article ;
+	schema:about wd:Q1306836 ;
+	schema:inLanguage "tr" ;
+	schema:isPartOf <https://tr.wikipedia.org/> ;
+	schema:name "2008 Avrupa Halter Şampiyonası"@tr .
+
+<https://no.wikipedia.org/wiki/EM_i_vektl%C3%B8fting_2008> a schema:Article ;
+	schema:about wd:Q1306836 ;
+	schema:inLanguage "nb" ;
+	schema:isPartOf <https://no.wikipedia.org/> ;
+	schema:name "EM i vektløfting 2008"@nb .
+
+<https://cs.wikipedia.org/wiki/Mistrovstv%C3%AD_Evropy_ve_vzp%C3%ADr%C3%A1n%C3%AD_2008> a schema:Article ;
+	schema:about wd:Q1306836 ;
+	schema:inLanguage "cs" ;
+	schema:isPartOf <https://cs.wikipedia.org/> ;
+	schema:name "Mistrovství Evropy ve vzpírání 2008"@cs .
+
+<https://arz.wikipedia.org/wiki/%D8%A8%D8%B7%D9%88%D9%84%D8%A9_%D8%A7%D9%88%D8%B1%D9%88%D8%A8%D8%A7_%D9%84%D8%B1%D9%81%D8%B9_%D8%A7%D9%84%D8%A7%D8%AB%D9%82%D8%A7%D9%84_2008> a schema:Article ;
+	schema:about wd:Q1306836 ;
+	schema:inLanguage "arz" ;
+	schema:isPartOf <https://arz.wikipedia.org/> ;
+	schema:name "بطولة اوروبا لرفع الاثقال 2008"@arz .
+
+<https://fa.wikipedia.org/wiki/%D9%85%D8%B3%D8%A7%D8%A8%D9%82%D8%A7%D8%AA_%D9%82%D9%87%D8%B1%D9%85%D8%A7%D9%86%DB%8C_%D9%88%D8%B2%D9%86%D9%87%E2%80%8C%D8%A8%D8%B1%D8%AF%D8%A7%D8%B1%DB%8C_%D8%A7%D8%B1%D9%88%D9%BE%D8%A7_(%DB%B2%DB%B0%DB%B0%DB%B8)> a schema:Article ;
+	schema:about wd:Q1306836 ;
+	schema:inLanguage "fa" ;
+	schema:isPartOf <https://fa.wikipedia.org/> ;
+	schema:name "مسابقات قهرمانی وزنه‌برداری اروپا (۲۰۰۸)"@fa .
+
+<https://pt.wikipedia.org/wiki/Campeonato_Europeu_de_Halterofilismo_de_2008> a schema:Article ;
+	schema:about wd:Q1306836 ;
+	schema:inLanguage "pt" ;
+	schema:isPartOf <https://pt.wikipedia.org/> ;
+	schema:name "Campeonato Europeu de Halterofilismo de 2008"@pt .
+
+wd:Q1306836 wdt:P646 "/m/0412v0p" ;
+	wdt:P31 wd:Q27020041 ;
+	wdt:P585 "2008-01-01T00:00:00Z"^^xsd:dateTime ;
+	wdt:P641 wd:Q83462 ;
+	wdt:P3450 wd:Q2447060 ;
+	wdt:P17 wd:Q38 ;
+	p:P646 s:Q1306836-4A42C27A-C06B-47C5-8A2D-A139EAAFCCC0 .
+
+s:Q1306836-4A42C27A-C06B-47C5-8A2D-A139EAAFCCC0 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P646 "/m/0412v0p" ;
+	prov:wasDerivedFrom ref:2b00cb481cddcac7623114367489b5c194901c4a .
+
+wd:Q1306836 p:P31 s:Q1306836-6A92C9B1-5D11-406D-A6F5-8491D35239BE .
+
+s:Q1306836-6A92C9B1-5D11-406D-A6F5-8491D35239BE a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P31 wd:Q27020041 .
+
+wd:Q1306836 p:P585 s:Q1306836-11101385-818C-46FD-A949-EDF8B8FC6A1F .
+
+s:Q1306836-11101385-818C-46FD-A949-EDF8B8FC6A1F a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P585 "2008-01-01T00:00:00Z"^^xsd:dateTime ;
+	psv:P585 v:ce90feaacda74eb7f8326b25fb625c6d .
+
+wd:Q1306836 p:P641 s:Q1306836-32FA72FC-20B0-4BD2-850A-6F6A54C0D942 .
+
+s:Q1306836-32FA72FC-20B0-4BD2-850A-6F6A54C0D942 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P641 wd:Q83462 .
+
+wd:Q1306836 p:P3450 s:Q1306836-4e58a22f-4285-c95f-7207-8d9f129b248e .
+
+s:Q1306836-4e58a22f-4285-c95f-7207-8d9f129b248e a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P3450 wd:Q2447060 ;
+	pq:P155 wd:Q1314932 .
+
+wd:Q1306836 p:P17 s:Q1306836-0107945F-0058-4F9C-A69E-3F843F6FDE29 .
+
+s:Q1306836-0107945F-0058-4F9C-A69E-3F843F6FDE29 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P17 wd:Q38 .
+
+wd:Q1306836 rdfs:label "Europameisterschaften im Gewichtheben 2008"@de ;
+	skos:prefLabel "Europameisterschaften im Gewichtheben 2008"@de ;
+	schema:name "Europameisterschaften im Gewichtheben 2008"@de ;
+	rdfs:label "Mistrovství Evropy ve vzpírání 2008"@cs ;
+	skos:prefLabel "Mistrovství Evropy ve vzpírání 2008"@cs ;
+	schema:name "Mistrovství Evropy ve vzpírání 2008"@cs ;
+	rdfs:label "2008 European Weightlifting Championships"@en ;
+	skos:prefLabel "2008 European Weightlifting Championships"@en ;
+	schema:name "2008 European Weightlifting Championships"@en ;
+	rdfs:label "Campeonato Europeo de Halterofilia de 2008"@es ;
+	skos:prefLabel "Campeonato Europeo de Halterofilia de 2008"@es ;
+	schema:name "Campeonato Europeo de Halterofilia de 2008"@es ;
+	rdfs:label "Mistrzostwa Europy w Podnoszeniu Ciężarów 2008"@pl ;
+	skos:prefLabel "Mistrzostwa Europy w Podnoszeniu Ciężarów 2008"@pl ;
+	schema:name "Mistrzostwa Europy w Podnoszeniu Ciężarów 2008"@pl ;
+	rdfs:label "Чемпионат Европы по тяжёлой атлетике 2008"@ru ;
+	skos:prefLabel "Чемпионат Европы по тяжёлой атлетике 2008"@ru ;
+	schema:name "Чемпионат Европы по тяжёлой атлетике 2008"@ru ;
+	rdfs:label "2008 Avrupa Halter Şampiyonası"@tr ;
+	skos:prefLabel "2008 Avrupa Halter Şampiyonası"@tr ;
+	schema:name "2008 Avrupa Halter Şampiyonası"@tr ;
+	rdfs:label "بطولة أوروبا لرفع الأثقال 2008"@ar ;
+	skos:prefLabel "بطولة أوروبا لرفع الأثقال 2008"@ar ;
+	schema:name "بطولة أوروبا لرفع الأثقال 2008"@ar ;
+	rdfs:label "بطولة اوروبا لرفع الاثقال 2008"@arz ;
+	skos:prefLabel "بطولة اوروبا لرفع الاثقال 2008"@arz ;
+	schema:name "بطولة اوروبا لرفع الاثقال 2008"@arz ;
+	rdfs:label "EM i vektløfting 2008"@nb ;
+	skos:prefLabel "EM i vektløfting 2008"@nb ;
+	schema:name "EM i vektløfting 2008"@nb ;
+	rdfs:label "مسابقات قهرمانی وزنه‌برداری اروپا (۲۰۰۸)"@fa ;
+	skos:prefLabel "مسابقات قهرمانی وزنه‌برداری اروپا (۲۰۰۸)"@fa ;
+	schema:name "مسابقات قهرمانی وزنه‌برداری اروپا (۲۰۰۸)"@fa ;
+	rdfs:label "Campeonato Europeu de Halterofilismo de 2008"@pt ;
+	skos:prefLabel "Campeonato Europeu de Halterofilismo de 2008"@pt ;
+	schema:name "Campeonato Europeu de Halterofilismo de 2008"@pt ;
+	schema:description "sportseizoen van een gewichtheffencompetitie"@nl,
+		"موسم من بطولة أوروبا لرفع الأثقال"@ar,
+		"موسم رياضى فى ايطاليا"@arz .
+
+data:Q1306841 a schema:Dataset ;
+	schema:about wd:Q1306841 ;
+	schema:version "1750653662"^^xsd:integer ;
+	schema:dateModified "2022-10-14T12:02:03Z"^^xsd:dateTime ;
+	wikibase:statements "11"^^xsd:integer ;
+	wikibase:sitelinks "2"^^xsd:integer ;
+	wikibase:identifiers "1"^^xsd:integer .
+
+wd:Q1306841 a wikibase:Item .
+
+<https://de.wikipedia.org/wiki/Hermann_Maute> a schema:Article ;
+	schema:about wd:Q1306841 ;
+	schema:inLanguage "de" ;
+	schema:isPartOf <https://de.wikipedia.org/> ;
+	schema:name "Hermann Maute"@de .
+
+<https://arz.wikipedia.org/wiki/%D9%87%D9%8A%D8%B1%D9%85%D8%A7%D9%86_%D9%85%D8%A7%D9%88%D8%AA> a schema:Article ;
+	schema:about wd:Q1306841 ;
+	schema:inLanguage "arz" ;
+	schema:isPartOf <https://arz.wikipedia.org/> ;
+	schema:name "هيرمان ماوت"@arz .
+
+wd:Q1306841 wdt:P21 wd:Q6581097 ;
+	wdt:P19 wd:Q1584 ;
+	wdt:P27 wd:Q183 ;
+	wdt:P31 wd:Q5 ;
+	wdt:P106 wd:Q42973 ;
+	wdt:P569 "1831-01-01T00:00:00Z"^^xsd:dateTime ;
+	wdt:P570 "1893-01-13T00:00:00Z"^^xsd:dateTime ;
+	wdt:P735 wd:Q1158570 ;
+	wdt:P734 wd:Q37201949 ;
+	wdt:P2671 "/g/121qm14t" ;
+	wdtn:P2671 <http://g.co/kg/g/121qm14t> ;
+	wdt:P1412 wd:Q188 ;
+	p:P21 s:q1306841-EFC44DDF-FAA6-4F56-85D3-EB25DC8305B4 .
+
+s:q1306841-EFC44DDF-FAA6-4F56-85D3-EB25DC8305B4 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P21 wd:Q6581097 ;
+	prov:wasDerivedFrom ref:9a24f7c0208b05d6be97077d855671d1dfdbc0dd .
+
+wd:Q1306841 p:P19 s:q1306841-38C2E379-5BCD-48F8-B313-5D2259B9736B .
+
+s:q1306841-38C2E379-5BCD-48F8-B313-5D2259B9736B a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P19 wd:Q1584 ;
+	prov:wasDerivedFrom ref:9a24f7c0208b05d6be97077d855671d1dfdbc0dd .
+
+wd:Q1306841 p:P27 s:q1306841-8B5662C7-C17E-49A9-8F93-A00BAE0ED46B .
+
+s:q1306841-8B5662C7-C17E-49A9-8F93-A00BAE0ED46B a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P27 wd:Q183 .
+
+wd:Q1306841 p:P31 s:Q1306841-B3566A8E-F607-4EEF-B8B3-568CE79F8E01 .
+
+s:Q1306841-B3566A8E-F607-4EEF-B8B3-568CE79F8E01 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P31 wd:Q5 ;
+	prov:wasDerivedFrom ref:9a24f7c0208b05d6be97077d855671d1dfdbc0dd .
+
+wd:Q1306841 p:P106 s:Q1306841-B18970EC-B941-4816-82DA-FF880896F40D .
+
+s:Q1306841-B18970EC-B941-4816-82DA-FF880896F40D a wikibase:Statement,
+		wikibase:BestRank .

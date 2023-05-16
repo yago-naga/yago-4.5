@@ -14,7 +14,7 @@ import Prefixes
 import TsvUtils
 from multiprocessing import Process, Pool, Queue, Manager
 
-TEST=False
+TEST=True
 
 ##########################################################################
 #             Parsing Turtle
@@ -443,6 +443,23 @@ def about(triple):
         return "wd:Q"+s[3:s.index('-')]
     return None
 
+def entitiesFromTriples(tripleIterator):
+    """ Yields graphs about entities from the triples """
+    graph=Graph()
+    currentSubject="Elvis"
+    for triple in tripleIterator:
+        newSubject=about(triple)
+        if not newSubject: 
+            continue
+        if newSubject!=currentSubject:
+            if len(graph):
+                yield graph
+                graph=Graph()
+            currentSubject=newSubject
+        graph.add(triple)
+    if len(graph):
+        yield graph
+
 # Buffer sizes  
 kilo=1024
 mega=1024*kilo
@@ -467,28 +484,11 @@ def visitWikidataEntities(args):
             if line.rstrip().endswith(b"a wikibase:Item ."):
                 break
         print("    Running Wikidata reader",portion+1,"at",wikidataReader.tell(),"with \"",line.rstrip().decode("utf-8"),'"', flush=True)        
-        graph=Graph()
-        currentSubject="Elvis"
-        # Collect triples about the same subject in a graph
-        # call the visitor on each such graph
-        for triple in triplesFromTerms(termsAndSeparators(charGenerator(byteGenerator(wikidataReader)))):
-            newSubject=about(triple)
-            if not newSubject: 
-                continue
-            if newSubject!=currentSubject:
-                if len(graph):
-                    while percentagePrinted<(wikidataReader.tell()-portion*size)//size*10:
-                        percentagePrinted+=1
-                        print("    Wikidata reader",portion+1,"is at",percentagePrinted*10,"%", flush=True)
-                    visitor.visit(graph)
-                    graph=Graph()
-                currentSubject=newSubject
-                if wikidataReader.tell()>portion*size+size:
-                    print("    Wikidata reader",portion+1,"finishes before",currentSubject, flush=True)
-                    break
-            graph.add(triple)
-    if len(graph):
-        visitor.visit(graph)     
+        for graph in entitiesFromTriples(triplesFromTerms(termsAndSeparators(charGenerator(byteGenerator(wikidataReader))))):
+            while percentagePrinted<(wikidataReader.tell()-portion*size)//size*10:
+                percentagePrinted+=1
+                print("    Wikidata reader",portion+1,"is at",percentagePrinted*10,"%", flush=True)
+            visitor.visit(graph)
     print("    Finished Wikidata reader",portion+1, flush=True)        
     return visitor.result()
 
@@ -534,8 +534,20 @@ def printWD(graph, out):
     out.write('#####################################\n')
     graph.printToWriter(out)
     out.lock.release()
-    
+
+def compareIds(wikidataFile, idFile):
+    """ Verifies that every id in idFile appears in the parsing of wikidataFile """
+    with open(idFile,'rt',encoding='utf-8') as idReader:
+        with open(wikidataFile,"rb") as wikidataReader:        
+            for graph in entitiesFromTriples(triplesFromTerms(termsAndSeparators(charGenerator(byteGenerator(wikidataReader))))):
+                subjects=graph.subjects()
+                if any(s.startswith("data:") for s in subjects):
+                    continue
+                nextId=next(idReader).split(' ')[0]
+                if nextId not in subjects:
+                    print("Next id is",nextId,"but subjects are",subjects)
+                    break
+                print(nextId, "OK")
+        
 if TEST and __name__ == '__main__':
-    with open('test-out.ttl','wt',encoding='utf-8') as out:
-        out.lock=threading.Lock()
-        visitWikidata('input-data/wikidata.ttl', printWD, out,None,2)            
+    compareIds('../wikidata.ttl','../ids.txt')

@@ -68,7 +68,7 @@ class wikidataVisitor(object):
             if p==Prefixes.wikidataSubClassOf or p==Prefixes.wikidataAnalogousClass:
                 if o not in self.wikidataTaxonomyDown:
                     self.wikidataTaxonomyDown[o]=set()
-                self.wikidataTaxonomyDown[o].add(s)                
+                self.wikidataTaxonomyDown[o].add(s)
     def result(self):
         return(self.wikidataTaxonomyDown)
 
@@ -216,8 +216,8 @@ if __name__ == '__main__':
                 if key not in wikidataTaxonomyDown:
                     wikidataTaxonomyDown[key]=set()
                 wikidataTaxonomyDown[key].update(result[key])
-        print("  Info: Total number of Wikidata classes and taxonomic links:", len(wikidataTaxonomyDown), " and ", sum(len(wikidataTaxonomyDown[s]) for s in wikidataTaxonomyDown))        
-        
+        print("  Info: Total number of Wikidata classes and taxonomic links:", len(wikidataTaxonomyDown), " and ", sum(len(wikidataTaxonomyDown[s]) for s in wikidataTaxonomyDown))
+                
         # Now we merge the Wikidata taxonomy into the YAGO taxonomy
         for s,p,o in yagoSchema.triplesWithPredicate(Prefixes.fromClass):
                 if s!=Prefixes.schemaThing:
