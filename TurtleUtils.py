@@ -541,6 +541,7 @@ def compareIds(wikidataFile, idFile):
         with open(wikidataFile,"rb") as wikidataReader:        
             for graph in entitiesFromTriples(triplesFromTerms(termsAndSeparators(charGenerator(byteGenerator(wikidataReader))))):
                 subjects=graph.subjects()
+                print("Read graph about",subjects)
                 if any(s.startswith("data:") for s in subjects):
                     continue
                 nextId=next(idReader).split(' ')[0]
