@@ -55,10 +55,10 @@ wd:Q312	schema:dateCreated	"1976-01-01T00:00:00Z"^^xsd:dateTime	.
 wd:Q312	rdf:type	schema:Corporation	.
 wd:Q_fictional	schema:birthPlace	wd:Q_birth_place_1	. # IF	schema:Place		
 wd:Q_fictional	yago:appearsIn	wd:Q_book	. # IF	schema:CreativeWork		
-wd:Q_fictional	rdf:type	wd:Q_rock_singer	.
 wd:Q_fictional	rdf:type	yago:FictionalEntity	.
-wd:Q_singer	rdfs:label	"chanteur"@fr	.
+wd:Q_fictional	rdf:type	wd:Q_rock_singer	.
 wd:Q_singer	rdfs:label	"singer"@en	.
+wd:Q_singer	rdfs:label	"chanteur"@fr	.
 wd:Q_singer	owl:sameAs	<https://freebase.com/id>	.
 wd:Q_singer	rdfs:comment	"this is a singer"@en	.
 wd:Q_singer	schema:alternateName	"this is a human singer"@en	.

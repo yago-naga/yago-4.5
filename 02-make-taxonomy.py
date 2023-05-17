@@ -89,6 +89,8 @@ badClasses = {
     "wd:Q24017414", # second-order class
     "wd:Q12335479", # templates
     "wd:Q12139612", # Lists
+    "wd:Q80096233", # Lists
+    "wd:Q13406463", # Lists
     "wd:Q88392887", # scholarly articles, tweets, etc.
     "wd:Q591041",   # same
     "wd:Q13442814", # same

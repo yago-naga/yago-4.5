@@ -103,4 +103,3 @@ wd:Q_singer  rdfs:label "singer"@en ;
 	schema:name "chanteur"@fr ;	
 	schema:description "this is a singer"@en;
 	skos:altLabel "this is a human singer"@en .
-

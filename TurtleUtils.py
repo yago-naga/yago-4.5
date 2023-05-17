@@ -299,7 +299,7 @@ class Graph(object):
         m=self.index[subject]
         if predicate not in m:
             return
-        m[predicate].remove(obj)
+        m[predicate].discard(obj)
         if len(m[predicate])==0:
             self.index[subject].pop(predicate)
             if len(self.index[subject])==0:
@@ -489,6 +489,8 @@ def visitWikidataEntities(args):
                 percentagePrinted+=1
                 print("    Wikidata reader",portion+1,"is at",percentagePrinted*10,"%", flush=True)
             visitor.visit(graph)
+            if wikidataReader.tell()>portion*size+size:
+                break            
     print("    Finished Wikidata reader",portion+1, flush=True)        
     return visitor.result()
 

@@ -67,6 +67,8 @@ rdfType='rdf:type'
 
 rdfsLabel='rdfs:label'
 
+rdfsComment='rdfs:comment'
+
 rdfsClass='rdfs:Class'
 
 rdfsSubClassOf = "rdfs:subClassOf"

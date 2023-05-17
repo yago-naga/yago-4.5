@@ -83,6 +83,15 @@ def checkIfClass(entityFacts, yagoSchema, yagoTaxonomyUp):
         newEntityFacts=Graph()
         for (s,p,o) in entityFacts:
             newEntityFacts.add((yagoClass if s==mainEntity else s, p, o))
+        # Remove labels and comments if we are not the first class of a class merger
+        # so as to avoid duplicate labels
+        wikidataClasses=yagoSchema.objects(yagoClass,Prefixes.fromClass)
+        wikidataClasses.sort()
+        if mainEntity!=wikidataClasses[0]:
+           for t in newEntityFacts.triplesWithPredicate(Prefixes.rdfsLabel) :
+                newEntityFacts.remove(t)
+           for t in newEntityFacts.triplesWithPredicate(Prefixes.rdfsComment) :
+                newEntityFacts.remove(t)        
         return newEntityFacts
     if mainEntity in yagoTaxonomyUp:
         entityFacts.add((mainEntity,Prefixes.rdfType,Prefixes.rdfsClass))
