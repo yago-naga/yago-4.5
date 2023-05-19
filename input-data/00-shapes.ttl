@@ -146,7 +146,7 @@ rdfs:Class a sh:NodeShape ;
 
 # Awards are needed as domain of schema:award
 yago:Award a sh:NodeShape ;
-    ys:fromClass wd:Q618779, Q38033430 ;
+    ys:fromClass wd:Q618779, wd:Q38033430 ;
     rdfs:subClassOf schema:Intangible ;
     sh:property [
         sh:path yago:conferredBy ; 

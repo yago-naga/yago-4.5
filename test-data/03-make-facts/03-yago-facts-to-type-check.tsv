@@ -64,3 +64,10 @@ wd:Q_singer	rdfs:comment	"this is a singer"@en	.
 wd:Q_singer	schema:alternateName	"this is a human singer"@en	.
 wd:Q_singer	schema:mainEntityOfPage	"https://de.wikipedia.org/wiki/Mensch"^^xsd:anyURI	.
 wd:Q_singer	rdf:type	rdfs:Class	.
+wd:Q402673	schema:author	wd:Q43718	. # IF	schema:Organization, schema:Person		
+wd:Q402673	owl:sameAs	"/m/086r0y"	.
+wd:Q402673	schema:inLanguage	wd:Q7737	. # IF	schema:Language		
+wd:Q402673	schema:dateCreated	"1841-01-01T00:00:00Z"^^xsd:dateTime	.
+wd:Q402673	schema:contentLocation	wd:Q656	. # IF	schema:Place		
+wd:Q402673	rdf:type	schema:Product	.
+wd:Q402673	rdf:type	schema:Book	.

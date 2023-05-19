@@ -103,3 +103,46 @@ wd:Q_singer  rdfs:label "singer"@en ;
 	schema:name "chanteur"@fr ;	
 	schema:description "this is a singer"@en;
 	skos:altLabel "this is a human singer"@en .
+
+
+wd:Q402673 wdt:P50 wd:Q43718 ;
+	wdt:P646 "/m/086r0y" ;
+	wdt:P268 "11962872n" ;
+	wdtn:P268 <http://data.bnf.fr/ark:/12148/cb11962872n#about> ;
+	wdt:P31 schema:Book, schema:Product, schema:CreativeWork ;
+	wdt:P1433 wd:Q289387 ;
+	wdt:P227 "4071936-4" ;
+	wdtn:P227 <https://d-nb.info/gnd/4071936-4> ;
+	wdt:P407 wd:Q7737 ;
+	wdt:P1476 "Шинель"@ru ;
+	wdt:P18 <http://commons.wikimedia.org/wiki/Special:FilePath/Gogol%20Palto.jpg> ;
+	wdt:P577 "1842-01-01T00:00:00Z"^^xsd:dateTime ;
+	wdt:P136 wd:Q49084 ;
+	wdt:P571 "1841-01-01T00:00:00Z"^^xsd:dateTime ;
+	wdt:P747 wd:Q29533906,
+		wd:Q29533921,
+		wd:Q19196052,
+		wd:Q108937643,
+		wd:Q108937677 ;
+	wdt:P1417 "topic/The-Overcoat" ;
+	wdt:P373 "The Overcoat (Nikolai Gogol)" ;
+	wdt:P4969 wd:Q1195707,
+		wd:Q4524056,
+		wd:Q7736600,
+		wd:Q7755736,
+		wd:Q20737045,
+		wd:Q42253403 ;
+	wdt:P1274 "1300185" ;
+	wdt:P6221 "82125" ;
+	wdt:P6216 wd:Q19652,
+		wd:Q19652 ;
+	wdt:P1242 "ace" ;
+	wdt:P840 wd:Q656 ;
+	wdt:P910 wd:Q20704392 ;
+	wdt:P691 "aun2012676373" ;
+	wdt:P244 "no2002003935" ;
+	wdtn:P244 <http://id.loc.gov/authorities/names/no2002003935> ;
+	wdt:P1922 "В департаменте... но лучше не называть, в каком департаменте."@ru ;
+	wdt:P7439 "43307" ;
+	wdt:P4342 "Kappen" ;
+	p:P50 s:q402673-1163939B-D41F-4EB4-8E59-536B639F4762 .
