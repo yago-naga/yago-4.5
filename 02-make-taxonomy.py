@@ -124,6 +124,7 @@ loopCounter=0
     
 def addSubClass(superClass, subClass):
     """Adds the Wikidata classes to the YAGO taxonomy, excluding bad classes"""
+    global loopCounter
     if subClass in badClasses:
         return
     if subClassesInclude(subClass, superClass):

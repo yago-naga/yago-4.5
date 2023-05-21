@@ -90,7 +90,7 @@ def checkIfClass(entityFacts, yagoSchema, yagoTaxonomyUp):
         if mainEntity!=wikidataClasses[0]:
            for t in newEntityFacts.triplesWithPredicate(Prefixes.rdfsLabel) :
                 newEntityFacts.remove(t)
-           for t in newEntityFacts.triplesWithPredicate(Prefixes.rdfsComment) :
+           for t in newEntityFacts.triplesWithPredicate(Prefixes.schemaDescription) :
                 newEntityFacts.remove(t)        
         return newEntityFacts
     if mainEntity in yagoTaxonomyUp:

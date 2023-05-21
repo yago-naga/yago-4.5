@@ -93,6 +93,8 @@ owlDisjointWith = "owl:disjointWith"
 
 schemaTaxon = "schema:Taxon"
 
+schemaDescription = "schema:description"
+
 schemaAbout = "schema:about"
 
 schemaPage = "schema:mainEntityOfPage"

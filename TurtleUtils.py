@@ -14,7 +14,7 @@ import Prefixes
 import TsvUtils
 from multiprocessing import Process, Pool, Queue, Manager
 
-TEST=True
+TEST=False
 
 ##########################################################################
 #             Parsing Turtle
@@ -475,7 +475,6 @@ def visitWikidataEntities(args):
     # So we unpack them.
     file, visitor, portion, size = args
     print("    Starting Wikidata reader",portion+1)
-    percentagePrinted=0
     with open(file,"rb", buffering=1*mega) as wikidataReader:
         wikidataReader.seek(portion*size)
         # Seek to next Wikidata item
@@ -485,9 +484,6 @@ def visitWikidataEntities(args):
                 break
         print("    Running Wikidata reader",portion+1,"at",wikidataReader.tell(),"with \"",line.rstrip().decode("utf-8"),'"', flush=True)        
         for graph in entitiesFromTriples(triplesFromTerms(termsAndSeparators(charGenerator(byteGenerator(wikidataReader))))):
-            while percentagePrinted<(wikidataReader.tell()-portion*size)//size*10:
-                percentagePrinted+=1
-                print("    Wikidata reader",portion+1,"is at",percentagePrinted*10,"%", flush=True)
             visitor.visit(graph)
             if wikidataReader.tell()>portion*size+size:
                 break            

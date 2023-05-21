@@ -284,7 +284,14 @@ schema:Book a sh:NodeShape ;
     sh:property [
         sh:path schema:publisher ;
 		sh:maxCount 1 ;
-        sh:node schema:Organization ;
+        sh:or (
+            [
+                sh:node schema:Organization
+            ]
+            [
+                sh:node schema:Person
+            ]
+        ) ;
         ys:fromProperty wdt:P123 ;
     ] ;	
     sh:property [
@@ -307,6 +314,7 @@ schema:Newspaper a sh:NodeShape ;
                 sh:node schema:Person
             ]
         ) ;
+		sh:maxCount 1;
         ys:fromProperty wdt:P123 ;
     ] ;
     sh:property [
