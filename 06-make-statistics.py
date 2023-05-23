@@ -24,7 +24,7 @@ Algorithm:
    
 """
 
-TEST=False
+TEST=True
 FOLDER="test-data/06-make-statistics/" if TEST else "yago-data/"
 
 ##########################################################################
@@ -46,23 +46,6 @@ from collections import defaultdict
 # Predicates that are excluded for fact counting
 excludePredicates=["rdfs:label", "rdfs:comment", "rdf:type", "schema:mainEntityOfPage", "owl:sameAs", "schema:alternateName"]
 
-##########################################################################
-#             Count facts on YAGO 4
-##########################################################################
-  
-def countYago4Facts(yago4file):
-    """ Counts the facts of YAGO 4, excluding the exclude predicates"""
-    count=0
-    predicate2facts=defaultdict(int)
-    for tuple in TsvUtils.tsvTuples(yago4file, "Counting YAGO 4 facts"):
-        if len(tuple)<3:
-            continue
-        predicate2facts[tuple[1]]+=1
-    with open(FOLDER+"06-yago-4-statistics.txt", "wt", encoding="UTF-8") as file:
-        file.write("YAGO 4 statistics\n\n")
-        for p in predicate2facts:
-            file.write(p+": "+str(predicate2facts[p])+"\n")
-    
 ##########################################################################
 #             Full Taxonomy as HTML
 ##########################################################################
@@ -111,24 +94,9 @@ def printTaxonomy(file):
         writer.write("</ul></body>\n</html>")
 
 ##########################################################################
-#             Top-level taxonomy as HTML and TEX
+#             Top-level taxonomy as HTML
 ##########################################################################
  
-def tree2tex(yagoSchema, file):
-    """ Visualizes the top-level taxonomy as a TEX document"""
-    with open(file, "wt", encoding="UTF-8") as file:
-        file.write("\\documentclass{article}\n\\usepackage{dirtree}\n\\begin{document}\n\n% Copy-paste the following into the paper\n\n\\dirtree{%\n")
-        def add_node(node, depth):
-            nodeName=node[node.find(":")+1:]+("*" if node.startswith("yago:") else "")
-            file.write("."+str(depth)+" "+nodeName)
-            if len(yagoSchema.objects(node, "ys:fromClass"))==0:
-                file.write("$\\dagger$")
-            file.write(".\n")
-            for child in yagoSchema.subjects("rdfs:subClassOf",node):
-                add_node(child, depth+1)
-        add_node("schema:Thing", 1)
-        file.write("}\n\n\\end{document}")
-
 def printUpperTaxonomy(file):
     """ Visualizes the top-level taxonomy as an HTML document"""
     with open(file, "wt", encoding="UTF-8") as writer:
@@ -139,10 +107,14 @@ def printUpperTaxonomy(file):
   <meta charset=utf-8>
   <meta name=viewport content="width=device-width, initial-scale=1.0">   
   <title>
-   Upper-Level Taxonomy if YAGO 4.5 
+   Upper-Level Taxonomy of YAGO 4.5 
   </title>
   <style>
+  * { font-family: 'Open Sans'; }
   ul {list-style-type:none}
+  details { margin-left: 2em; }
+  summary { margin-left: -2em; }
+  .yagoClass { font-weight: bold; }
   </style>  
  </head>
  <body>
@@ -152,18 +124,30 @@ def printUpperTaxonomy(file):
         def add_node(cls):
             if not yagoSchema.objects(cls):
                 return
-            writer.write(f"<li><details><summary>{cls}</summary>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Properties:<ul>\n")
-            for blank in yagoSchema.objects(cls,"sh:property"):
-                writer.write(f'<li>- {yagoSchema.objects(blank, "sh:path")[0]}\n')
-            writer.write("</ul>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Appears as object of:<ul>\n")
-            for blank in yagoSchema.subjects("sh:node", cls):
+            writer.write(f"<li><details><summary class='yagoClass'>{cls}</summary><details><summary>Outgoing properties</summary><ul>\n")
+            for blank in sorted(yagoSchema.objects(cls,"sh:property")):
+                writer.write(f'<li>- {yagoSchema.objects(blank, "sh:path")[0]}')
+                if yagoSchema.objects(blank, "sh:node"):
+                    ran=yagoSchema.objects(blank, "sh:node")[0]
+                elif yagoSchema.objects(blank, "sh:or"):
+                    ran=", ".join([target for el in yagoSchema.getList(yagoSchema.objects(blank, "sh:or")[0]) for target in yagoSchema.objects(el, "sh:node") + yagoSchema.objects(el, "sh:datatype")])                    
+                elif yagoSchema.objects(blank, "sh:datatype"):
+                    ran=yagoSchema.objects(blank, "sh:datatype")[0]
+                if ran:
+                    writer.write(" &rarr;")
+                    maxCount=yagoSchema.objects(blank, "sh:maxCount")
+                    if maxCount:
+                        writer.write("<sup>"+maxCount[0]+"</sup>")
+                    writer.write(" "+ran+"\n")    
+            writer.write("</ul></details>\n<details><summary>Incoming properties</summary><ul>\n")
+            for blank in sorted(yagoSchema.subjects("sh:node", cls)):
                 c=yagoSchema.objects(blank, "sh:path")
-                if len(c)>0:
-                    writer.write(f'<li>- {c[0]}\n')
-            writer.write("</ul>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subclasses:<ul>\n")
-            for subclass in yagoTaxonomyDown.get(cls, []):
+                if c:
+                    writer.write(f'<li>- {c[0]}')
+            writer.write("</ul></details><details><summary>Subclasses</summary><ul>\n")
+            for subclass in sorted(yagoTaxonomyDown.get(cls, [])):
                 add_node(subclass)
-            writer.write("</ul></details>\n")
+            writer.write("</ul></details></details>\n")
         add_node("schema:Thing")
         writer.write("</ul></body>\n</html>")
  
@@ -248,10 +232,6 @@ with TsvUtils.Timer("Step 06: Collecting YAGO statistics"):
     dumpSize=0
     for f in glob.glob(FOLDER+"*final*.tsv"):
         dumpSize+=os.path.getsize(f)
-    print("done")
-    
-    print("  Writing top-level taxonomy... ",end="",flush=True)
-    tree2tex(yagoSchema, FOLDER+"06-tree.tex")
     print("done")
     
     print("  Writing out statistics... ",end="",flush=True)    

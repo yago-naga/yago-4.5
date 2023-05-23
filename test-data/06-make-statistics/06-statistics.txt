@@ -1,6 +1,6 @@
 YAGO 4.5 statistics
 
-Dump size: 1.043267548084259e-05 GB
+Dump size: 1.0428950190544128e-05 GB
 
 Total number of entities: 1
 
