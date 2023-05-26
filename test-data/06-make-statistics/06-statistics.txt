@@ -22,7 +22,7 @@ Avg number of facts (excluding labels etc.) per entity: 3.0
 
 Total number of meta facts: 2
 
-Total number of predicates: 114
+Total number of predicates: 110
 
 Predicates:
   rdfs:label: 3
@@ -51,12 +51,11 @@ Predicates:
   schema:sponsor: 0
   schema:musicBy: 0
   schema:actor: 0
-  schema:countryOfOrigin: 0
+  schema:locationCreated: 0
   schema:director: 0
   schema:numberOfEpisodes: 0
   schema:numberOfSeasons: 0
   schema:productionCompany: 0
-  schema:composer: 0
   schema:iswcCode: 0
   schema:lyricist: 0
   schema:duration: 0
@@ -69,24 +68,24 @@ Predicates:
   yago:follows: 0
   yago:participant: 0
   schema:superEvent: 0
-  schema:locationCreated: 0
   schema:logo: 0
   schema:dissolutionDate: 0
   schema:duns: 0
   schema:founder: 0
   schema:leader: 0
   schema:motto: 0
-  schema:memberOf: 0
   schema:address: 0
   schema:leiCode: 0
+  schema:memberOf: 0
   schema:numberOfEmployees: 0
-  schema:parentOrganization: 0
+  schema:ownedBy: 0
   schema:iataCode: 0
   schema:icaoCode: 0
   yago:studentsCount: 0
   yago:director: 0
-  schema:influencedBy: 0
+  schema:knowsLanguage: 0
   yago:notableWork: 0
+  schema:influencedBy: 0
   schema:recordLabel: 0
   yago:beliefSystem: 0
   yago:academicDegree: 0
@@ -99,7 +98,6 @@ Predicates:
   schema:deathPlace: 0
   schema:gender: 0
   schema:homeLocation: 0
-  schema:knowsLanguage: 0
   schema:nationality: 0
   schema:owns: 0
   schema:spouse: 0
@@ -108,7 +106,6 @@ Predicates:
   yago:sportNumber: 0
   yago:playsIn: 0
   yago:candidateIn: 0
-  schema:containedInPlace: 0
   schema:area: 0
   schema:highestPoint: 0
   schema:lowestPoint: 0
@@ -117,7 +114,7 @@ Predicates:
   schema:geo: 0
   yago:parentBody: 0
   yago:mass: 0
-  yago:luminocity: 0
+  yago:luminosity: 0
   yago:parallax: 0
   yago:radialVelocity: 0
   yago:distanceFromEarth: 0
@@ -131,7 +128,6 @@ Predicates:
   schema:humanDevelopmentIndex: 0
   schema:unemploymentRate: 0
   yago:flowsInto: 0
-  schema:ownedBy: 0
   yago:terminus: 0
   yago:length: 0
   schema:material: 0

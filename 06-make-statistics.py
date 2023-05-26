@@ -132,7 +132,7 @@ This is the top-level taxonomy of classes of YAGO 4.5, together with their prope
                 if p and c:
                     writer.write(f'<li>- ({c[0]}) {p[0]}')
             writer.write("</ul></details><details style='margin-left: 2em'><summary style='margin-left: -2em'>Subclasses</summary><ul style='list-style-type: none'>\n")
-            for subclass in sorted(yagoTaxonomyDown.get(cls, [])):
+            for subclass in sorted(yagoSchema.subjects(Prefixes.rdfsSubClassOf, cls)):
                 add_node(subclass)
             writer.write("</ul></details></details>\n")
         add_node("schema:Thing")
