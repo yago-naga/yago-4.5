@@ -108,7 +108,6 @@ schema:Thing a sh:NodeShape ;
 	# We map to Wikidata, Freebase, Google knowledge graph, and IMDB.
     sh:property [
         sh:path schema:sameAs ;
-        sh:datatype xsd:anyType ; # Jules Soria 2023-03-27: correctly capitalized        
         ys:fromProperty wdt:P646, wdt:P345, wdt:P2671, wdt:P1053;
     ] .
 
@@ -132,8 +131,7 @@ rdfs:Class a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path schema:sameAs ;
-        sh:datatype xsd:anyType ; # Jules Soria 2023-03-27: correctly capitalized
-		ys:fromProperty wdt:P646, wdt:P345, wdt:P2671, wdt:P1053;
+        ys:fromProperty wdt:P646, wdt:P345, wdt:P2671, wdt:P1053;
     ] ;
     sh:property [
         sh:path schema:mainEntityOfPage ;

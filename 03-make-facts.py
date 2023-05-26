@@ -269,7 +269,7 @@ def checkDatatype(datatype, listOfObjects, yagoSchema):
     """True if the singleton object of listOfObjects conforms to the <datatype>. Modifies the object if necessary."""
     o=listOfObjects[0]
     if datatype==Prefixes.xsdAnytype:
-        return True
+        return o.startsWith('"')
     if datatype==Prefixes.xsdAnyURI and  o.startswith('<'):
         o='"'+o[1:-1]+'"^^xsd:anyURI'
         listOfObjects[0]=o
