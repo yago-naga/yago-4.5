@@ -109,9 +109,12 @@ for o in yagoShapes.objects(None, Prefixes.shaclMaxCount):
     if intMaxCount is None or intMaxCount<=0:
         print("  Warning: Maxcount has to be a positive int, not ",o)
         
-        
+# Add "rdf:type rdfs:Class" to define an implicit target class
+for s in yagoShapes.subjects(Prefixes.rdfType, Prefixes.shaclNodeShape):
+    yagoShapes.add((s, Prefixes.rdfType, Prefixes.rdfsClass))
+    
 ###########################################################################
-#           Write and test YAGO schema
+#           Write YAGO schema
 ###########################################################################
 
 # The schema is best in TTL

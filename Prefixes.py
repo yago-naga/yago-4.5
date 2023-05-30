@@ -11,9 +11,7 @@ CC-BY 2022 Fabian M. Suchanek
 # We need these prefixes just to print them into each file. We don't actually use them...
 
 prefixes = {
-"bioschema": "http://bioschemas.org/",
 "yago": "http://yago-knowledge.org/resource/",
-"yagov": "http://yago-knowledge.org/value/",
 "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
 "xsd": "http://www.w3.org/2001/XMLSchema#",
 "ontolex": "http://www.w3.org/ns/lemon/ontolex#",
@@ -124,3 +122,5 @@ shaclNodeKind="sh:nodeKind"
 shaclPattern="sh:pattern"
 
 shaclProperty="sh:property"
+
+shaclNodeShape="sh:NodeShape"
