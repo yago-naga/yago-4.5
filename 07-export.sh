@@ -6,7 +6,7 @@ echo "Creating tiny YAGO..."
 date +"  Current time: %F %T"
 cp 01-yago-final-schema.ttl yago-tiny.ttl
 grep -v -P '@prefix' 05-yago-final-taxonomy.tsv >> yago-tiny.ttl
-grep -P 'yago:A[^\t]+\t[^\t]+\t("|yago:A|schema:)' >> yago-tiny.ttl
+grep -P 'yago:A[^\t]+\t[^\t]+\t("|yago:A|schema:)' 05-yago-final-wikipedia.tsv >> yago-tiny.ttl
 rm yago-tiny.zip
 zip yago-tiny.zip yago-tiny.ttl
 echo "Done"
