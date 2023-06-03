@@ -426,7 +426,7 @@ def splitLiteral(term):
         intValue=int(match.group(1))
     except:
         intValue=None
-    return (match.group(1).replace("\\\\","\\"), intValue, match.group(3), match.group(5))
+    return (match.group(1), intValue, match.group(3), match.group(5))
     
 ##########################################################################
 #             Reading Wikidata entities
@@ -548,4 +548,6 @@ def compareIds(wikidataFile, idFile):
                 print(nextId, "OK")
         
 if TEST and __name__ == '__main__':
-    compareIds('../wikidata.ttl','../ids.txt')
+    with open("../test2.ttl", "tw") as f:
+        for triple in triplesFromTurtleFile("../test.ttl"):
+            f.write(triple[0]+" "+triple[1]+" "+triple[2]+".")

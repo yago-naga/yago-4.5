@@ -1,6 +1,4 @@
-@prefix bioschema: <http://bioschemas.org/> .
 @prefix yago: <http://yago-knowledge.org/resource/> .
-@prefix yagov: <http://yago-knowledge.org/value/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> .
@@ -43,7 +41,7 @@ wd:Q_Elvis	rdf:type	wd:Q_rock_singer	.
 wd:Q_tiger	schema:parentTaxon	wd:Q_cat	. # IF	schema:Taxon		
 wd:Q_tiger	yago:consumes	wd:Q_sheep	. # IF	schema:Taxon		
 wd:Q_tiger	rdf:type	schema:Taxon	.
-wd:Q_composition	schema:composer	wd:Q_person_or_band	. # IF	schema:Person, schema:MusicGroup		
+wd:Q_composition	schema:musicBy	wd:Q_person_or_band	. # IF	schema:MusicGroup, schema:Person		
 wd:Q_composition	rdf:type	schema:MusicComposition	.
 wd:Q_product	schema:gtin	"12345678"	.
 wd:Q_product	rdf:type	schema:Product	.
@@ -55,19 +53,14 @@ wd:Q312	schema:dateCreated	"1976-01-01T00:00:00Z"^^xsd:dateTime	.
 wd:Q312	rdf:type	schema:Corporation	.
 wd:Q_fictional	schema:birthPlace	wd:Q_birth_place_1	. # IF	schema:Place		
 wd:Q_fictional	yago:appearsIn	wd:Q_book	. # IF	schema:CreativeWork		
-wd:Q_fictional	rdf:type	yago:FictionalEntity	.
 wd:Q_fictional	rdf:type	wd:Q_rock_singer	.
+wd:Q_fictional	rdf:type	wd:Q2593744	.
 wd:Q_singer	rdfs:label	"singer"@en	.
 wd:Q_singer	rdfs:label	"chanteur"@fr	.
-wd:Q_singer	owl:sameAs	<https://freebase.com/id>	.
+wd:Q_singer	rdfs:label	"singer"@en	.
+wd:Q_singer	rdfs:label	"chanteur"@fr	.
+wd:Q_singer	schema:sameAs	"https://freebase.com/id"	.
 wd:Q_singer	rdfs:comment	"this is a singer"@en	.
 wd:Q_singer	schema:alternateName	"this is a human singer"@en	.
 wd:Q_singer	schema:mainEntityOfPage	"https://de.wikipedia.org/wiki/Mensch"^^xsd:anyURI	.
 wd:Q_singer	rdf:type	rdfs:Class	.
-wd:Q402673	schema:author	wd:Q43718	. # IF	schema:Organization, schema:Person		
-wd:Q402673	owl:sameAs	"/m/086r0y"	.
-wd:Q402673	schema:inLanguage	wd:Q7737	. # IF	schema:Language		
-wd:Q402673	schema:dateCreated	"1841-01-01T00:00:00Z"^^xsd:dateTime	.
-wd:Q402673	schema:contentLocation	wd:Q656	. # IF	schema:Place		
-wd:Q402673	rdf:type	schema:Product	.
-wd:Q402673	rdf:type	schema:Book	.

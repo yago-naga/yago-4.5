@@ -73,3 +73,4 @@ wd:Q_rock_singer	rdfs:subClassOf	wd:Q_singer	.
 
 
 wd:Q39614	rdfs:subClassOf	yago:HumanMadeGeographicalEntity	.
+wd:Q2593744	rdfs:subClassOf	yago:FictionalEntity	.

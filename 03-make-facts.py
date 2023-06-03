@@ -35,6 +35,7 @@ WIKIDATA_FILE= "test-data/03-make-facts/00-wikidata.ttl" if TEST else "../wikida
 def debug(*message):
     """ Prints a message if we're in TEST mode"""
     if TEST:
+        sys.stdout.buffer.write(b"  DEBUG: ")
         for m in message:
             # Using this instead of print to allow printing unicode chars to pipes
             sys.stdout.buffer.write(str(m).encode('utf8'))
@@ -269,11 +270,15 @@ def checkDatatype(datatype, listOfObjects, yagoSchema):
     """True if the singleton object of listOfObjects conforms to the <datatype>. Modifies the object if necessary."""
     o=listOfObjects[0]
     if datatype==Prefixes.xsdAnytype:
-        return o.startsWith('"')
+        return o.startswith('"')
     if datatype==Prefixes.xsdAnyURI and  o.startswith('<'):
         o='"'+o[1:-1]+'"^^xsd:anyURI'
         listOfObjects[0]=o
         return True
+    if datatype==Prefixes.xsdString and  o.startswith('<'):
+        o='"'+o[1:-1]+'"'
+        listOfObjects[0]=o
+        return True        
     literalValue, _, lang, literalDataType = TurtleUtils.splitLiteral(o)
     if literalValue is None:
         return False
@@ -305,6 +310,7 @@ def checkRangePropertyNode(propertyNode, listOfObjects, yagoSchema):
                continue
             resultList+=result
         if len(resultList)==0:
+            debug("No range of disjunction worked",possiblePropertyNodes)
             return False
         return resultList
         
@@ -314,16 +320,19 @@ def checkRangePropertyNode(propertyNode, listOfObjects, yagoSchema):
     if patternObject:
        objectValue=TurtleUtils.splitLiteral(o)[0]
        if objectValue is None:
+           debug("Object is not a literal",o)
            return False       
        patternString=TurtleUtils.splitLiteral(patternObject)[0]
        if patternString is None:
             raise Exception("SHACL pattern has to be a string: "+str(propertyNode)+" "+str(patternObject))
        try:
-           if not re.match(patternString, objectValue):
-               return False
+           regex=re.compile(patternString.replace("\\\\","\\"))
        except:
             # This should not happen
             print("     Warning: regex does not complile:",patternString)
+            return False
+       if not regex.match(objectValue):
+            debug("Object does not match regex:",regex, patternString)
             return False
             
     # Datatypes
@@ -437,13 +446,16 @@ class treatWikidataEntity():
             else:
                 yagoPredicate = wikidataPredicate2YagoPredicate(p, self.yagoSchema)
             if not yagoPredicate: 
+                debug("No YAGO predicate found for",p)
                 continue
             if not checkDomain(yagoPredicate, classes, self.yagoSchema):
+                debug("Domain check failed for",s,yagoPredicate, classes)
                 continue
             listOfObjects=[o]    
             rangeResult=checkRange(yagoPredicate, listOfObjects, self.yagoSchema)
             o=listOfObjects[0]
             if rangeResult is False:
+                debug("Range check failed for",o,yagoPredicate)
                 continue          
             (startDate, endDate) = getStartAndEndDate(s, p, o, entityFacts)
             if rangeResult is True:
