@@ -266,22 +266,32 @@ def checkDomain(p, classes, yagoSchema):
                 return True
     return False    
 
+def checkURI(s): 
+    """TRUE if s conforms to xsd:anyUri, as explained here:
+    https://stackoverflow.com/questions/14466585/is-this-regex-correct-for-xsdanyuri """
+    return not re.search("(%(?![0-9A-F]{2})|#.*#)", s)
+    
 def checkDatatype(datatype, listOfObjects, yagoSchema):
     """True if the singleton object of listOfObjects conforms to the <datatype>. Modifies the object if necessary."""
     o=listOfObjects[0]
     if datatype==Prefixes.xsdAnytype:
         return o.startswith('"')
-    if datatype==Prefixes.xsdAnyURI and  o.startswith('<'):
-        o='"'+o[1:-1]+'"^^xsd:anyURI'
+    if datatype==Prefixes.xsdAnyURI and o.startswith('<'):
+        o=o[1:-1]
+        if not checkURI(o):
+            return False
+        o='"'+o+'"^^xsd:anyURI'
         listOfObjects[0]=o
         return True
-    if datatype==Prefixes.xsdString and  o.startswith('<'):
+    if datatype==Prefixes.xsdString and o.startswith('<'):
         o='"'+o[1:-1]+'"'
         listOfObjects[0]=o
         return True        
     literalValue, _, lang, literalDataType = TurtleUtils.splitLiteral(o)
     if literalValue is None:
         return False
+    if datatype==Prefixes.xsdAnyURI:
+        return literalDataType==datatype and checkURI(literalValue)
     if datatype==Prefixes.xsdString:
         if literalDataType is not None:
             return False
@@ -464,6 +474,7 @@ class treatWikidataEntity():
                 else:
                     self.writer.write(s,yagoPredicate,o,".")
             else:
+                rangeResult.sort()
                 self.writer.write(s,yagoPredicate,o,". # IF",(", ".join(rangeResult)), startDate, endDate)
 
     def result(self):

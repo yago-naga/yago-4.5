@@ -35,6 +35,10 @@ wd:Q_Elvis wdt:P31 wd:Q_rock_singer;
 	wdt:P40 wd:Q_child;	
 	# Doctoral titles are OK
 	wdt:P512 wd:Q_doctoralDegree ;
+	# Good URIs should stay
+	wdt:P18 "http://good-image.com"^^xsd:anyURI ; 
+	# Bad URIs should go away
+	wdt:P18 "http://elibrary.unm.edu/sora/jrr/index.php#http://elibrary.unm.edu/sora/jrr/index.php#" ; 
 	# Literal range with invalid date should go away
 	wdt:P570 "0000-02-22T00:00:00Z"^^xsd:dateTime ;
 	# Literal range: should be OK
