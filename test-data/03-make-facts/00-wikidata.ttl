@@ -107,3 +107,11 @@ wd:Q_singer  rdfs:label "singer"@en ;
 	schema:name "chanteur"@fr ;	
 	schema:description "this is a singer"@en;
 	skos:altLabel "this is a human singer"@en .
+	
+# The labels of the second class should not survive
+wd:Q327055 rdfs:label "label that survives"@en ;
+    wdt:P646	<https://freebase.com/first-id-that-survives> .
+
+wd:Q702269 rdfs:label "label that does not survive"@en ;
+	wdt:P646	<https://freebase.com/second-id-that-survives> .
+

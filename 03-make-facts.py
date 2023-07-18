@@ -89,6 +89,7 @@ def checkIfClass(entityFacts, yagoSchema, yagoTaxonomyUp):
         wikidataClasses=yagoSchema.objects(yagoClass,Prefixes.fromClass)
         wikidataClasses.sort()
         if mainEntity!=wikidataClasses[0]:
+           debug("Removing labels of",mainEntity,"because it is not the first Wikidata class of",yagoClass)
            for t in newEntityFacts.triplesWithPredicate(Prefixes.rdfsLabel) :
                 newEntityFacts.remove(t)
            for t in newEntityFacts.triplesWithPredicate(Prefixes.schemaDescription) :
@@ -367,31 +368,16 @@ def checkRange(p, listOfObjects, yagoSchema):
     return checkRangePropertyNode(propertyNode, listOfObjects, yagoSchema)
 
 ###########################################################################
-#           Removing shortcuts
+#           Removing redundant superclasses
 ###########################################################################
 
-def removeShortcutsAmong(directClasses, currentClass, yagoTaxonomyUp):
-    """ Removes from direct classes all those that are equal to currentClass or its super-classes """
-    if currentClass in directClasses:
-        directClasses.remove(currentClass)
-        if len(directClasses)<=1:
-            return        
-    for s in yagoTaxonomyUp.get(currentClass,[]):
-        removeShortcutsAmong(directClasses, s, yagoTaxonomyUp)
-        
-def removeShortcuts(entityFacts, yagoTaxonomyUp):
-    """ Removes all shortcuts in the list """
-    directClasses=entityFacts.objects(None, Prefixes.rdfType)
-    if len(directClasses)<=1:
-        return
-    for s in directClasses:
-        for ss in yagoTaxonomyUp.get(s,[]):
-            removeShortcutsAmong(directClasses, ss, yagoTaxonomyUp)
+def removeRedundantDirectClasses(entityFacts, fullTransitiveClasses, yagoTaxonomyUp):
+    """ Removes all redundant classes among the entity facts """
     for t in entityFacts.triplesWithPredicate(Prefixes.rdfType):
-        subject=t[0]
-        entityFacts.remove(t)
-    for c in directClasses:
-        entityFacts.add((subject, Prefixes.rdfType, c))
+        if any(t[2] in yagoTaxonomyUp[c] for c in fullTransitiveClasses):
+            debug("Removing redundant class",t)
+            entityFacts.remove(t)
+
    
 ##########################################################################
 #             Main method
@@ -436,10 +422,11 @@ class treatWikidataEntity():
         
         if not cleanClasses(entityFacts, self.yagoSchema, self.yagoTaxonomyUp):
             return
-        
-        removeShortcuts(entityFacts, self.yagoTaxonomyUp)
-        
+
         classes = getClasses(entityFacts, self.yagoTaxonomyUp)        
+        
+        removeRedundantDirectClasses(entityFacts, classes, self.yagoTaxonomyUp)
+        
         if anyDisjoint(classes, self.disjointClasses):
             return
 
