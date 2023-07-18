@@ -353,12 +353,13 @@ class Graph(object):
             return self.inverseGraph.objects(subject=object, predicate=predicate)
         else:
             raise Exception("subjects() cannot be called on inverse graph")
-    def triplesWithPredicate(self, predicate):
+    def triplesWithPredicate(self, *predicates):
         result=[]
         for subject in self.index:
-            if predicate in self.index[subject]:
-                for object in self.index[subject][predicate]:
-                    result.append((subject, predicate, object))
+            for predicate in predicates:
+                if predicate in self.index[subject]:
+                    for object in self.index[subject][predicate]:
+                        result.append((subject, predicate, object))
         return result 
     def printToWriter(self, result):        
         for subject in self.index:

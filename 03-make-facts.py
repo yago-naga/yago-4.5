@@ -52,7 +52,6 @@ import TsvUtils
 import TurtleUtils
 from TurtleUtils import Graph
 import sys
-import itertools
 import re
 import os
 import evaluator
@@ -78,6 +77,9 @@ def checkIfClass(entityFacts, yagoSchema, yagoTaxonomyUp):
         return entityFacts
     mainEntity=entityFacts.subjects(Prefixes.rdfsLabel)[0]
     if any(yagoSchema.subjects(Prefixes.fromClass, mainEntity)):
+        # Remove any type assertions
+        for t in entityFacts.triplesWithPredicate(Prefixes.wikidataType, Prefixes.wikidataOccupation):
+            entityFacts.remove(t)    
         entityFacts.add((mainEntity,Prefixes.rdfType,Prefixes.rdfsClass))
         yagoClass=yagoSchema.subjects(Prefixes.fromClass, mainEntity)[0]
         # Replace all entities by the new one
@@ -90,20 +92,19 @@ def checkIfClass(entityFacts, yagoSchema, yagoTaxonomyUp):
         wikidataClasses.sort()
         if mainEntity!=wikidataClasses[0]:
            debug("Removing labels of",mainEntity,"because it is not the first Wikidata class of",yagoClass)
-           for t in newEntityFacts.triplesWithPredicate(Prefixes.rdfsLabel) :
-                newEntityFacts.remove(t)
-           for t in newEntityFacts.triplesWithPredicate(Prefixes.schemaDescription) :
+           for t in newEntityFacts.triplesWithPredicate(Prefixes.rdfsLabel, Prefixes.schemaDescription, Prefixes.schemaName) :
                 newEntityFacts.remove(t)        
         return newEntityFacts
     if mainEntity in yagoTaxonomyUp:
+        # Remove any type assertions
         entityFacts.add((mainEntity,Prefixes.rdfType,Prefixes.rdfsClass))
-        for t in entityFacts.triplesWithPredicate(Prefixes.wikidataType):
+        for t in entityFacts.triplesWithPredicate(Prefixes.wikidataType, Prefixes.wikidataOccupation):
             entityFacts.remove(t)
     return entityFacts
     
 def cleanClasses(entityFacts, yagoSchema, yagoTaxonomyUp):
     """Replace all facts <subject, wikidata:type, wikidataClass> by <subject, rdf:type, yagoClass>"""
-    for s,p,o in itertools.chain(entityFacts.triplesWithPredicate(Prefixes.wikidataType),entityFacts.triplesWithPredicate(Prefixes.wikidataOccupation)):
+    for s,p,o in entityFacts.triplesWithPredicate(Prefixes.wikidataType, Prefixes.wikidataOccupation):
         if o in yagoTaxonomyUp:
             entityFacts.add((s,Prefixes.rdfType,o))
         elif any(yagoSchema.subjects(Prefixes.fromClass, o)):
@@ -410,7 +411,7 @@ class treatWikidataEntity():
         if not self.writer:
             self.writer=TsvUtils.TsvFileWriter(FOLDER+"03-yago-facts-to-type-check-"+str(self.number)+".tmp")
             self.writer.__enter__()
-            
+        
         # Anything that is rdf:type in Wikidata is meta-statements, 
         # and should go away
         for t in entityFacts.triplesWithPredicate(Prefixes.rdfType):
@@ -443,7 +444,6 @@ class treatWikidataEntity():
             else:
                 yagoPredicate = wikidataPredicate2YagoPredicate(p, self.yagoSchema)
             if not yagoPredicate: 
-                debug("No YAGO predicate found for",p)
                 continue
             if not checkDomain(yagoPredicate, classes, self.yagoSchema):
                 debug("Domain check failed for",s,yagoPredicate, classes)

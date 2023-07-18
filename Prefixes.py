@@ -91,6 +91,8 @@ owlDisjointWith = "owl:disjointWith"
 
 schemaTaxon = "schema:Taxon"
 
+schemaName = "schema:name"
+
 schemaDescription = "schema:description"
 
 schemaAbout = "schema:about"
