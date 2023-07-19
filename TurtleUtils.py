@@ -124,16 +124,28 @@ def termsAndSeparators(generator):
             elif char=='@':
                 # Languages
                 language=""
+                sub_len=0 # track length of subtags to ensure <=8 chars
+                err_flag=False
                 while True:
                     char=next(generator, None)
                     if not char:
                         printError("Unexpected end of file in language of",literal)
                         break
-                    if char=='-' or (char>='A' and char<='Z') or (char>='a' and char<='z') or (char>='0' and char<='9'):
-                        language=language+char
+                    if char=='-':
+                        if sub_len==0: # preceding subtag is empty
+                            err_flag=True
+                        else: # subtag is over
+                            sub_len=0
+                            language+=char
+                            continue
+                    if (char>='A' and char<='Z') or (char>='a' and char<='z') or (char>='0' and char<='9'):
+                        if sub_len>=8:
+                            err_flag=True
+                        language+=char
+                        sub_len+=1
                         continue
                     break
-                if not language or len(language)>20 or len(language)<2:
+                if not language or len(language)>20 or len(language)<2 or err_flag:
                     printError("Invalid literal language:", language)
                 pushBack=char
                 yield('"'+literal+'"@'+language)
