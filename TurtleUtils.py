@@ -548,7 +548,7 @@ def compareIds(wikidataFile, idFile):
                     break
                 print(nextId, "OK")
         
-if TEST and __name__ == '__main__':
-    with open("../test2.ttl", "tw") as f:
-        for triple in triplesFromTurtleFile("../test.ttl"):
-            f.write(triple[0]+" "+triple[1]+" "+triple[2]+".")
+if __name__ == '__main__':
+    with open("../test.ttl", "tw", encoding="UTF-8") as f:
+        for triple in triplesFromTurtleFile("../eleanor-roosevelt.ttl"):
+            f.write(triple[0]+" "+triple[1]+" "+triple[2]+".\n")

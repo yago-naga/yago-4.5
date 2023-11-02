@@ -409,7 +409,7 @@ class treatWikidataEntity():
                     
         # We have to open the file here and not in init() to avoid pickling problems
         if not self.writer:
-            self.writer=TsvUtils.TsvFileWriter(FOLDER+"03-yago-facts-to-type-check-"+str(self.number)+".tmp")
+            self.writer=TsvUtils.TsvFileWriter(FOLDER+"03-yago-facts-to-type-check-"+(str(self.number).rjust(4,'0'))+".tmp")
             self.writer.__enter__()
         
         # Anything that is rdf:type in Wikidata is meta-statements, 
@@ -473,8 +473,10 @@ if __name__ == '__main__':
         TurtleUtils.visitWikidata(WIKIDATA_FILE, treatWikidataEntity) 
         print("  Collecting results...")
         count=0
+        tempFiles=list(glob.glob(FOLDER+"03-yago-facts-to-type-check-*.tmp"))
+        tempFiles.sort()
         with open(FOLDER+"03-yago-facts-to-type-check.tsv", "wb") as writer:
-            for file in glob.glob(FOLDER+"03-yago-facts-to-type-check-*.tmp"):
+            for file in tempFiles:
                 print("    Reading",file)
                 with open(file, "rb") as reader:
                     for line in reader:
@@ -484,7 +486,7 @@ if __name__ == '__main__':
         print("  Info: Number of facts:",count)
         
         print("  Deleting temporary files...", end="", flush=True)
-        for file in set(glob.glob(FOLDER+"03-yago-facts-to-type-check-*.tmp")):
+        for file in tempFiles:
             os.remove(file)
         print(" done")
     
