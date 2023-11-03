@@ -108,7 +108,11 @@ badClasses = {
     "wd:Q3241972",  # Characters
     "wd:Q29654788", # Unicode characters
     "wd:Q11953984", # Linguistic units, words etc
-    "wd:Q11563"     # Numbers
+    "wd:Q11563",    # Numbers,
+    "wd:Q192581",   # Job -> causes problem because instances of "lawyer" become instances of "job" and thus of "economic activity"
+    "wd:Q12737077", # Occupation (dito)
+    "wd:Q28640",    # Profession (dito)
+    "wd:Q4164871"   # Role (dito)
 }
 
 def subClassesInclude(superClass, potentialSubClass):
