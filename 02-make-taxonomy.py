@@ -215,7 +215,7 @@ if __name__ == '__main__':
             
         # Load Wikidata taxonomy
         results=TurtleUtils.visitWikidata(WIKIDATA_FILE, wikidataVisitor)
-        # <results> is a list taxonomies
+        # <results> is a list of taxonomies
         # We now merge them together in the global variable <wikidataTaxonomyDown>
         wikidataTaxonomyDown=dict()
         for result in results:

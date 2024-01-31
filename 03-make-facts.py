@@ -272,6 +272,12 @@ def checkURI(s):
     """TRUE if s conforms to xsd:anyUri, as explained here:
     https://stackoverflow.com/questions/14466585/is-this-regex-correct-for-xsdanyuri """
     return not re.search("(%(?![0-9A-F]{2})|#.*#)", s)
+
+def normalizeString(s):
+    """ Makes sure that a string does not contani invalid characters or languages"""
+    if not s.startswith('"'):
+        return s
+    return s.replace("\uFFFD","_").replace('"@zh-classical','"@zh')
     
 def checkDatatype(datatype, listOfObjects, yagoSchema):
     """True if the singleton object of listOfObjects conforms to the <datatype>. Modifies the object if necessary."""
@@ -307,7 +313,7 @@ def checkDatatype(datatype, listOfObjects, yagoSchema):
     return literalDataType==datatype        
         
 def checkRangePropertyNode(propertyNode, listOfObjects, yagoSchema):
-    """True if the singleton element of listOfObjects conforms to the range constraints given by the yago-shape-prop node <propertNode>. False if it does not. Otherwise, returns a list of permissible types. Modifies the object in the list if necessary."""
+    """True if the singleton element of listOfObjects conforms to the range constraints given by the yago-shape-prop node <propertyNode>. False if it does not. Otherwise, returns a list of permissible types. Modifies the object in the list if necessary."""
     # Disjunctions
     o=listOfObjects[0]
     disjunctObject = getFirst(yagoSchema.objects(propertyNode, Prefixes.shaclOr))
@@ -455,6 +461,7 @@ class treatWikidataEntity():
                 debug("Range check failed for",o,yagoPredicate)
                 continue          
             (startDate, endDate) = getStartAndEndDate(s, p, o, entityFacts)
+            o=normalizeString(o)
             if rangeResult is True:
                 if startDate or endDate:
                     self.writer.write(s,yagoPredicate,o, ". #", "", startDate, endDate)
