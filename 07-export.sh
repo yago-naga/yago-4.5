@@ -27,8 +27,8 @@ mv yago-taxonomy.ttl 05-yago-final-taxonomy.tsv
 echo "Done"
 
 echo "Copying YAGO file to Web server"
-scp yago.zip yago@yago.r2.enst.fr:/data/public/yago4.5/yago-4.5.0.1.zip
-scp yago-tiny.zip yago@yago.r2.enst.fr:/data/public/yago4.5/yago-4.5.0.1-tiny.zip
+scp yago.zip yago@yago.r2.enst.fr:/data/public/yago4.5/yago-4.5.0.2.zip
+scp yago-tiny.zip yago@yago.r2.enst.fr:/data/public/yago4.5/yago-4.5.0.2-tiny.zip
 scp 06-upper-taxonomy.html yago@yago.r2.enst.fr:~/website/content/schema.php
 echo "Done"
 date +"Current time: %F %T"

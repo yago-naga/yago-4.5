@@ -1,6 +1,4 @@
-@prefix bioschema: <http://bioschemas.org/> .
 @prefix yago: <http://yago-knowledge.org/resource/> .
-@prefix yagov: <http://yago-knowledge.org/value/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> .
@@ -41,7 +39,6 @@ yago:Elvis	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Elvis>	.
 yago:DoctoralDegree_generic_instance	rdf:type	yago:DoctoralDegree	.
 yago:DoctoralDegree_generic_instance	rdfs:label	"Generic instance"@en	.
 yago:Elvis	yago:academicTitle	yago:DoctoralDegree_generic_instance	.
-yago:Elvis	owl:sameAs	wd:Q_Elvis	.
 yago:Elvis	schema:child	yago:Elvis	.
 yago:Singer	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Singer>	.
 yago:Singer	owl:sameAs	wd:Q_singer	.

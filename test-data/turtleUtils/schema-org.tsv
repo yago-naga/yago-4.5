@@ -1,38 +1,3 @@
-@prefix bioschema: <http://bioschemas.org/> .
-@prefix yago: <http://yago-knowledge.org/resource/> .
-@prefix yagov: <http://yago-knowledge.org/value/> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> .
-@prefix dct: <http://purl.org/dc/terms/> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix wikibase: <http://wikiba.se/ontology#> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix schema: <http://schema.org/> .
-@prefix cc: <http://creativecommons.org/ns#> .
-@prefix geo: <http://www.opengis.net/ont/geosparql#> .
-@prefix prov: <http://www.w3.org/ns/prov#> .
-@prefix wd: <http://www.wikidata.org/entity/> .
-@prefix data: <https://www.wikidata.org/wiki/Special:EntityData/> .
-@prefix sh: <http://www.w3.org/ns/shacl#> .
-@prefix s: <http://www.wikidata.org/entity/statement/> .
-@prefix ref: <http://www.wikidata.org/reference/> .
-@prefix v: <http://www.wikidata.org/value/> .
-@prefix wdt: <http://www.wikidata.org/prop/direct/> .
-@prefix wdtn: <http://www.wikidata.org/prop/direct-normalized/> .
-@prefix p: <http://www.wikidata.org/prop/> .
-@prefix ps: <http://www.wikidata.org/prop/statement/> .
-@prefix psv: <http://www.wikidata.org/prop/statement/value/> .
-@prefix psn: <http://www.wikidata.org/prop/statement/value-normalized/> .
-@prefix pq: <http://www.wikidata.org/prop/qualifier/> .
-@prefix pqv: <http://www.wikidata.org/prop/qualifier/value/> .
-@prefix pqn: <http://www.wikidata.org/prop/qualifier/value-normalized/> .
-@prefix pr: <http://www.wikidata.org/prop/reference/> .
-@prefix prv: <http://www.wikidata.org/prop/reference/value/> .
-@prefix prn: <http://www.wikidata.org/prop/reference/value-normalized/> .
-@prefix wdno: <http://www.wikidata.org/prop/novalue/> .
-@prefix ys: <http://yago-knowledge.org/schema#> .
 schema:3DModel	rdf:type	rdfs:Class	.
 schema:3DModel	rdfs:label	"3DModel"	.
 schema:3DModel	rdfs:comment	"A 3D model represents some kind of 3D content, which may have [[encoding]]s in one or more [[MediaObject]]s. Many 3D formats are available (e.g. see [Wikipedia](https://en.wikipedia.org/wiki/Category:3D_graphics_file_formats)); specific encoding formats can be represented using the [[encodingFormat]] property applied to the relevant [[MediaObject]]. For the\ncase of a single file published after Zip compression, the convention of appending '+zip' to the [[encodingFormat]] can be used. Geospatial, AR/VR, artistic/animation, gaming, engineering and scientific content can all be represented using [[3DModel]]."	.
@@ -180,7 +145,7 @@ schema:Answer	rdfs:subClassOf	schema:Comment	.
 schema:Answer	schema:source	<http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_QAStackExchange>	.
 schema:Apartment	rdf:type	rdfs:Class	.
 schema:Apartment	rdfs:label	"Apartment"	.
-schema:Apartment	rdfs:comment	"An apartment (in American English) or flat (in British English) is a self-contained housing unit (a type of residential real estate) that occupies only part of a building (Source: Wikipedia, the free encyclopedia, see <a href=\"http://en.wikipedia.org/wiki/Apartment\">http://en.wikipedia.org/wiki/Apartment</a>)."	.
+schema:Apartment	rdfs:comment	"An apartment (in American English) or flat (in British English) is a self-contained housing unit (a type of residential real estate) that occupies only part of a building (Source: Wikipedia, the free encyclopedia, see <a href='http://en.wikipedia.org/wiki/Apartment'>http://en.wikipedia.org/wiki/Apartment</a>)."	.
 schema:Apartment	rdfs:subClassOf	schema:Accommodation	.
 schema:Apartment	schema:source	<https://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#STI_Accommodation_Ontology>	.
 schema:ApartmentComplex	rdf:type	rdfs:Class	.
@@ -324,7 +289,7 @@ schema:AutomotiveBusiness	rdfs:comment	"Car repair, sales, or parts."	.
 schema:AutomotiveBusiness	rdfs:subClassOf	schema:LocalBusiness	.
 schema:BackgroundNewsArticle	rdf:type	rdfs:Class	.
 schema:BackgroundNewsArticle	rdfs:label	"BackgroundNewsArticle"	.
-schema:BackgroundNewsArticle	rdfs:comment	"A [[NewsArticle]] providing historical context, definition and detail on a specific topic (aka \"explainer\" or \"backgrounder\"). For example, an in-depth article or frequently-asked-questions ([FAQ](https://en.wikipedia.org/wiki/FAQ)) document on topics such as Climate Change or the European Union. Other kinds of background material from a non-news setting are often described using [[Book]] or [[Article]], in particular [[ScholarlyArticle]]. See also [[NewsArticle]] for related vocabulary from a learning/education perspective."	.
+schema:BackgroundNewsArticle	rdfs:comment	"A [[NewsArticle]] providing historical context, definition and detail on a specific topic (aka 'explainer' or 'backgrounder'). For example, an in-depth article or frequently-asked-questions ([FAQ](https://en.wikipedia.org/wiki/FAQ)) document on topics such as Climate Change or the European Union. Other kinds of background material from a non-news setting are often described using [[Book]] or [[Article]], in particular [[ScholarlyArticle]]. See also [[NewsArticle]] for related vocabulary from a learning/education perspective."	.
 schema:BackgroundNewsArticle	rdfs:subClassOf	schema:NewsArticle	.
 schema:BackgroundNewsArticle	schema:isPartOf	<https://pending.schema.org>	.
 schema:BackgroundNewsArticle	schema:source	<https://github.com/schemaorg/schemaorg/issues/1525>	.
@@ -389,7 +354,7 @@ schema:BioChemEntity	rdfs:subClassOf	schema:Thing	.
 schema:BioChemEntity	schema:isPartOf	<https://pending.schema.org>	.
 schema:Blog	rdf:type	rdfs:Class	.
 schema:Blog	rdfs:label	"Blog"	.
-schema:Blog	rdfs:comment	"A [blog](https://en.wikipedia.org/wiki/Blog), sometimes known as a \"weblog\". Note that the individual posts ([[BlogPosting]]s) in a [[Blog]] are often colloqually referred to by the same term."	.
+schema:Blog	rdfs:comment	"A [blog](https://en.wikipedia.org/wiki/Blog), sometimes known as a 'weblog'. Note that the individual posts ([[BlogPosting]]s) in a [[Blog]] are often colloqually referred to by the same term."	.
 schema:Blog	rdfs:subClassOf	schema:CreativeWork	.
 schema:BlogPosting	rdf:type	rdfs:Class	.
 schema:BlogPosting	rdfs:label	"BlogPosting"	.
@@ -779,7 +744,7 @@ schema:CompleteDataFeed	schema:isPartOf	<https://pending.schema.org>	.
 schema:CompleteDataFeed	schema:source	<https://github.com/schemaorg/schemaorg/issues/1397>	.
 schema:CompoundPriceSpecification	rdf:type	rdfs:Class	.
 schema:CompoundPriceSpecification	rdfs:label	"CompoundPriceSpecification"	.
-schema:CompoundPriceSpecification	rdfs:comment	"A compound price specification is one that bundles multiple prices that all apply in combination for different dimensions of consumption. Use the name property of the attached unit price specification for indicating the dimension of a price component (e.g. \"electricity\" or \"final cleaning\")."	.
+schema:CompoundPriceSpecification	rdfs:comment	"A compound price specification is one that bundles multiple prices that all apply in combination for different dimensions of consumption. Use the name property of the attached unit price specification for indicating the dimension of a price component (e.g. 'electricity' or 'final cleaning')."	.
 schema:CompoundPriceSpecification	rdfs:subClassOf	schema:PriceSpecification	.
 schema:CompoundPriceSpecification	schema:source	<http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsClass>	.
 schema:ComputerLanguage	rdf:type	rdfs:Class	.
@@ -1308,7 +1273,7 @@ schema:EnergyConsumptionDetails	schema:isPartOf	<https://pending.schema.org>	.
 schema:EnergyConsumptionDetails	schema:source	<https://github.com/schemaorg/schemaorg/issues/2670>	.
 schema:EnergyEfficiencyEnumeration	rdf:type	rdfs:Class	.
 schema:EnergyEfficiencyEnumeration	rdfs:label	"EnergyEfficiencyEnumeration"	.
-schema:EnergyEfficiencyEnumeration	rdfs:comment	"Enumerates energy efficiency levels (also known as \"classes\" or \"ratings\") and certifications that are part of several international energy efficiency standards."	.
+schema:EnergyEfficiencyEnumeration	rdfs:comment	"Enumerates energy efficiency levels (also known as 'classes' or 'ratings') and certifications that are part of several international energy efficiency standards."	.
 schema:EnergyEfficiencyEnumeration	rdfs:subClassOf	schema:Enumeration	.
 schema:EnergyEfficiencyEnumeration	schema:isPartOf	<https://pending.schema.org>	.
 schema:EnergyEfficiencyEnumeration	schema:source	<https://github.com/schemaorg/schemaorg/issues/2670>	.
@@ -1397,7 +1362,7 @@ schema:ExhibitionEvent	rdfs:comment	"Event type: Exhibition event, e.g. at a mus
 schema:ExhibitionEvent	rdfs:subClassOf	schema:Event	.
 schema:FAQPage	rdf:type	rdfs:Class	.
 schema:FAQPage	rdfs:label	"FAQPage"	.
-schema:FAQPage	rdfs:comment	"A [[FAQPage]] is a [[WebPage]] presenting one or more \"[Frequently asked questions](https://en.wikipedia.org/wiki/FAQ)\" (see also [[QAPage]])."	.
+schema:FAQPage	rdfs:comment	"A [[FAQPage]] is a [[WebPage]] presenting one or more '[Frequently asked questions](https://en.wikipedia.org/wiki/FAQ)' (see also [[QAPage]])."	.
 schema:FAQPage	rdfs:subClassOf	schema:WebPage	.
 schema:FAQPage	schema:source	<https://github.com/schemaorg/schemaorg/issues/1723>	.
 schema:FMRadioChannel	rdf:type	rdfs:Class	.
@@ -1719,7 +1684,7 @@ schema:HotelRoom	rdfs:subClassOf	schema:Room	.
 schema:HotelRoom	schema:source	<https://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#STI_Accommodation_Ontology>	.
 schema:House	rdf:type	rdfs:Class	.
 schema:House	rdfs:label	"House"	.
-schema:House	rdfs:comment	"A house is a building or structure that has the ability to be occupied for habitation by humans or other creatures (Source: Wikipedia, the free encyclopedia, see <a href=\"http://en.wikipedia.org/wiki/House\">http://en.wikipedia.org/wiki/House</a>)."	.
+schema:House	rdfs:comment	"A house is a building or structure that has the ability to be occupied for habitation by humans or other creatures (Source: Wikipedia, the free encyclopedia, see <a href='http://en.wikipedia.org/wiki/House'>http://en.wikipedia.org/wiki/House</a>)."	.
 schema:House	rdfs:subClassOf	schema:Accommodation	.
 schema:House	schema:source	<https://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#STI_Accommodation_Ontology>	.
 schema:HousePainter	rdf:type	rdfs:Class	.
@@ -2102,7 +2067,7 @@ schema:MaximumDoseSchedule	rdfs:subClassOf	schema:DoseSchedule	.
 schema:MaximumDoseSchedule	schema:isPartOf	<https://health-lifesci.schema.org>	.
 schema:MeasurementTypeEnumeration	rdf:type	rdfs:Class	.
 schema:MeasurementTypeEnumeration	rdfs:label	"MeasurementTypeEnumeration"	.
-schema:MeasurementTypeEnumeration	rdfs:comment	"Enumeration of common measurement types (or dimensions), for example \"chest\" for a person, \"inseam\" for pants, \"gauge\" for screws, or \"wheel\" for bicycles."	.
+schema:MeasurementTypeEnumeration	rdfs:comment	"Enumeration of common measurement types (or dimensions), for example 'chest' for a person, 'inseam' for pants, 'gauge' for screws, or 'wheel' for bicycles."	.
 schema:MeasurementTypeEnumeration	rdfs:subClassOf	schema:Enumeration	.
 schema:MeasurementTypeEnumeration	schema:isPartOf	<https://pending.schema.org>	.
 schema:MeasurementTypeEnumeration	schema:source	<https://github.com/schemaorg/schemaorg/issues/2811>	.
@@ -3081,7 +3046,7 @@ schema:ProfilePage	rdfs:comment	"Web page type: Profile page."	.
 schema:ProfilePage	rdfs:subClassOf	schema:WebPage	.
 schema:ProgramMembership	rdf:type	rdfs:Class	.
 schema:ProgramMembership	rdfs:label	"ProgramMembership"	.
-schema:ProgramMembership	rdfs:comment	"Used to describe membership in a loyalty programs (e.g. \"StarAliance\"), traveler clubs (e.g. \"AAA\"), purchase clubs (\"Safeway Club\"), etc."	.
+schema:ProgramMembership	rdfs:comment	"Used to describe membership in a loyalty programs (e.g. 'StarAliance'), traveler clubs (e.g. 'AAA'), purchase clubs ('Safeway Club'), etc."	.
 schema:ProgramMembership	rdfs:subClassOf	schema:Intangible	.
 schema:Project	rdf:type	rdfs:Class	.
 schema:Project	rdfs:label	"Project"	.
@@ -3194,7 +3159,7 @@ schema:QuoteAction	rdfs:comment	"An agent quotes/estimates/appraises an object/p
 schema:QuoteAction	rdfs:subClassOf	schema:TradeAction	.
 schema:RVPark	rdf:type	rdfs:Class	.
 schema:RVPark	rdfs:label	"RVPark"	.
-schema:RVPark	rdfs:comment	"A place offering space for \"Recreational Vehicles\", Caravans, mobile homes and the like."	.
+schema:RVPark	rdfs:comment	"A place offering space for 'Recreational Vehicles', Caravans, mobile homes and the like."	.
 schema:RVPark	rdfs:subClassOf	schema:CivicStructure	.
 schema:RadiationTherapy	rdf:type	rdfs:Class	.
 schema:RadiationTherapy	rdfs:label	"RadiationTherapy"	.
@@ -3608,7 +3573,7 @@ schema:SizeSpecification	schema:isPartOf	<https://pending.schema.org>	.
 schema:SizeSpecification	schema:source	<https://github.com/schemaorg/schemaorg/issues/2811>	.
 schema:SizeSystemEnumeration	rdf:type	rdfs:Class	.
 schema:SizeSystemEnumeration	rdfs:label	"SizeSystemEnumeration"	.
-schema:SizeSystemEnumeration	rdfs:comment	"Enumerates common size systems for different categories of products, for example \"EN-13402\" or \"UK\" for wearables or \"Imperial\" for screws."	.
+schema:SizeSystemEnumeration	rdfs:comment	"Enumerates common size systems for different categories of products, for example 'EN-13402' or 'UK' for wearables or 'Imperial' for screws."	.
 schema:SizeSystemEnumeration	rdfs:subClassOf	schema:Enumeration	.
 schema:SizeSystemEnumeration	schema:isPartOf	<https://pending.schema.org>	.
 schema:SizeSystemEnumeration	schema:source	<https://github.com/schemaorg/schemaorg/issues/2811>	.
@@ -4180,7 +4145,7 @@ schema:WearableMeasurementTypeEnumeration	schema:isPartOf	<https://pending.schem
 schema:WearableMeasurementTypeEnumeration	schema:source	<https://github.com/schemaorg/schemaorg/issues/2811>	.
 schema:WearableSizeGroupEnumeration	rdf:type	rdfs:Class	.
 schema:WearableSizeGroupEnumeration	rdfs:label	"WearableSizeGroupEnumeration"	.
-schema:WearableSizeGroupEnumeration	rdfs:comment	"Enumerates common size groups (also known as \"size types\") for wearable products."	.
+schema:WearableSizeGroupEnumeration	rdfs:comment	"Enumerates common size groups (also known as 'size types') for wearable products."	.
 schema:WearableSizeGroupEnumeration	rdfs:subClassOf	schema:SizeGroupEnumeration	.
 schema:WearableSizeGroupEnumeration	schema:isPartOf	<https://pending.schema.org>	.
 schema:WearableSizeGroupEnumeration	schema:source	<https://github.com/schemaorg/schemaorg/issues/2811>	.
@@ -4315,7 +4280,7 @@ schema:AudiobookFormat	rdfs:label	"AudiobookFormat"	.
 schema:AudiobookFormat	rdfs:comment	"Book format: Audiobook. This is an enumerated value for use with the bookFormat property. There is also a type 'Audiobook' in the bib extension which includes Audiobook specific properties."	.
 schema:AuthoritativeLegalValue	rdf:type	schema:LegalValueLevel	.
 schema:AuthoritativeLegalValue	rdfs:label	"AuthoritativeLegalValue"	.
-schema:AuthoritativeLegalValue	rdfs:comment	"Indicates that the publisher gives some special status to the publication of the document. (\"The Queens Printer\" version of a UK Act of Parliament, or the PDF version of a Directive published by the EU Office of Publications). Something \"Authoritative\" is considered to be also [[OfficialLegalValue]]\"."	.
+schema:AuthoritativeLegalValue	rdfs:comment	"Indicates that the publisher gives some special status to the publication of the document. ('The Queens Printer' version of a UK Act of Parliament, or the PDF version of a Directive published by the EU Office of Publications). Something 'Authoritative' is considered to be also [[OfficialLegalValue]]'."	.
 schema:AuthoritativeLegalValue	skos:exactMatch	<http://data.europa.eu/eli/ontology#LegalValue-authoritative>	.
 schema:AuthoritativeLegalValue	schema:isPartOf	<https://pending.schema.org>	.
 schema:AuthoritativeLegalValue	schema:source	<http://publications.europa.eu/mdr/eli/index.html>	.
@@ -4998,7 +4963,7 @@ schema:MRI	rdfs:comment	"Magnetic resonance imaging."	.
 schema:MRI	schema:isPartOf	<https://health-lifesci.schema.org>	.
 schema:MSRP	rdf:type	schema:PriceTypeEnumeration	.
 schema:MSRP	rdfs:label	"MSRP"	.
-schema:MSRP	rdfs:comment	"Represents the manufacturer suggested retail price (\"MSRP\") of an offered product."	.
+schema:MSRP	rdfs:comment	"Represents the manufacturer suggested retail price ('MSRP') of an offered product."	.
 schema:MSRP	schema:isPartOf	<https://pending.schema.org>	.
 schema:MSRP	schema:source	<https://github.com/schemaorg/schemaorg/issues/2712>	.
 schema:Male	rdf:type	schema:GenderType	.
@@ -5040,7 +5005,7 @@ schema:Midwifery	rdfs:subClassOf	schema:MedicalBusiness	.
 schema:Midwifery	schema:isPartOf	<https://health-lifesci.schema.org>	.
 schema:MinimumAdvertisedPrice	rdf:type	schema:PriceTypeEnumeration	.
 schema:MinimumAdvertisedPrice	rdfs:label	"MinimumAdvertisedPrice"	.
-schema:MinimumAdvertisedPrice	rdfs:comment	"Represents the minimum advertised price (\"MAP\") (as dictated by the manufacturer) of an offered product."	.
+schema:MinimumAdvertisedPrice	rdfs:comment	"Represents the minimum advertised price ('MAP') (as dictated by the manufacturer) of an offered product."	.
 schema:MinimumAdvertisedPrice	schema:isPartOf	<https://pending.schema.org>	.
 schema:MinimumAdvertisedPrice	schema:source	<https://github.com/schemaorg/schemaorg/issues/2712>	.
 schema:MisconceptionsHealthAspect	rdf:type	schema:HealthAspectEnumeration	.
@@ -5338,7 +5303,7 @@ schema:OccupationalActivity	rdfs:comment	"Any physical activity engaged in for j
 schema:OccupationalActivity	schema:isPartOf	<https://health-lifesci.schema.org>	.
 schema:OfficialLegalValue	rdf:type	schema:LegalValueLevel	.
 schema:OfficialLegalValue	rdfs:label	"OfficialLegalValue"	.
-schema:OfficialLegalValue	rdfs:comment	"All the documents published by an official publisher should have at least the legal value level \"OfficialLegalValue\". This indicates that the document was published by an organisation with the public task of making it available (e.g. a consolidated version of a EU directive published by the EU Office of Publications)."	.
+schema:OfficialLegalValue	rdfs:comment	"All the documents published by an official publisher should have at least the legal value level 'OfficialLegalValue'. This indicates that the document was published by an organisation with the public task of making it available (e.g. a consolidated version of a EU directive published by the EU Office of Publications)."	.
 schema:OfficialLegalValue	skos:exactMatch	<http://data.europa.eu/eli/ontology#LegalValue-official>	.
 schema:OfficialLegalValue	schema:isPartOf	<https://pending.schema.org>	.
 schema:OfficialLegalValue	schema:source	<http://publications.europa.eu/mdr/eli/index.html>	.
@@ -5581,7 +5546,7 @@ schema:PublicHealth	rdfs:subClassOf	schema:MedicalBusiness	.
 schema:PublicHealth	schema:isPartOf	<https://health-lifesci.schema.org>	.
 schema:PublicHolidays	rdf:type	schema:DayOfWeek	.
 schema:PublicHolidays	rdfs:label	"PublicHolidays"	.
-schema:PublicHolidays	rdfs:comment	"This stands for any day that is a public holiday; it is a placeholder for all official public holidays in some particular location. While not technically a \"day of the week\", it can be used with [[OpeningHoursSpecification]]. In the context of an opening hours specification it can be used to indicate opening hours on public holidays, overriding general opening hours for the day of the week on which a public holiday occurs."	.
+schema:PublicHolidays	rdfs:comment	"This stands for any day that is a public holiday; it is a placeholder for all official public holidays in some particular location. While not technically a 'day of the week', it can be used with [[OpeningHoursSpecification]]. In the context of an opening hours specification it can be used to indicate opening hours on public holidays, overriding general opening hours for the day of the week on which a public holiday occurs."	.
 schema:PublicHolidays	schema:source	<http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsClass>	.
 schema:Pulmonary	rdf:type	schema:MedicalSpecialty	.
 schema:Pulmonary	rdfs:label	"Pulmonary"	.
@@ -5739,7 +5704,7 @@ schema:RsvpResponseYes	rdfs:label	"RsvpResponseYes"	.
 schema:RsvpResponseYes	rdfs:comment	"The invitee will attend."	.
 schema:SRP	rdf:type	schema:PriceTypeEnumeration	.
 schema:SRP	rdfs:label	"SRP"	.
-schema:SRP	rdfs:comment	"Represents the suggested retail price (\"SRP\") of an offered product."	.
+schema:SRP	rdfs:comment	"Represents the suggested retail price ('SRP') of an offered product."	.
 schema:SRP	schema:isPartOf	<https://pending.schema.org>	.
 schema:SRP	schema:source	<https://github.com/schemaorg/schemaorg/issues/2712>	.
 schema:SafetyHealthAspect	rdf:type	schema:HealthAspectEnumeration	.
@@ -5955,7 +5920,7 @@ schema:Ultrasound	rdfs:comment	"Ultrasound imaging."	.
 schema:Ultrasound	schema:isPartOf	<https://health-lifesci.schema.org>	.
 schema:UnclassifiedAdultConsideration	rdf:type	schema:AdultOrientedEnumeration	.
 schema:UnclassifiedAdultConsideration	rdfs:label	"UnclassifiedAdultConsideration"	.
-schema:UnclassifiedAdultConsideration	rdfs:comment	"The item is suitable only for adults, without indicating why. Due to widespread use of \"adult\" as a euphemism for \"sexual\", many such items are likely suited also for the SexualContentConsideration code."	.
+schema:UnclassifiedAdultConsideration	rdfs:comment	"The item is suitable only for adults, without indicating why. Due to widespread use of 'adult' as a euphemism for 'sexual', many such items are likely suited also for the SexualContentConsideration code."	.
 schema:UnclassifiedAdultConsideration	schema:isPartOf	<https://pending.schema.org>	.
 schema:UnclassifiedAdultConsideration	schema:source	<https://github.com/schemaorg/schemaorg/issues/2989>	.
 schema:UnemploymentSupport	rdf:type	schema:GovernmentBenefitsType	.
@@ -6076,87 +6041,87 @@ schema:WearableMeasurementWidth	schema:isPartOf	<https://pending.schema.org>	.
 schema:WearableMeasurementWidth	schema:source	<https://github.com/schemaorg/schemaorg/issues/2811>	.
 schema:WearableSizeGroupBig	rdf:type	schema:WearableSizeGroupEnumeration	.
 schema:WearableSizeGroupBig	rdfs:label	"WearableSizeGroupBig"	.
-schema:WearableSizeGroupBig	rdfs:comment	"Size group \"Big\" for wearables."	.
+schema:WearableSizeGroupBig	rdfs:comment	"Size group 'Big' for wearables."	.
 schema:WearableSizeGroupBig	schema:isPartOf	<https://pending.schema.org>	.
 schema:WearableSizeGroupBig	schema:source	<https://github.com/schemaorg/schemaorg/issues/2811>	.
 schema:WearableSizeGroupBoys	rdf:type	schema:WearableSizeGroupEnumeration	.
 schema:WearableSizeGroupBoys	rdfs:label	"WearableSizeGroupBoys"	.
-schema:WearableSizeGroupBoys	rdfs:comment	"Size group \"Boys\" for wearables."	.
+schema:WearableSizeGroupBoys	rdfs:comment	"Size group 'Boys' for wearables."	.
 schema:WearableSizeGroupBoys	schema:isPartOf	<https://pending.schema.org>	.
 schema:WearableSizeGroupBoys	schema:source	<https://github.com/schemaorg/schemaorg/issues/2811>	.
 schema:WearableSizeGroupExtraShort	rdf:type	schema:WearableSizeGroupEnumeration	.
 schema:WearableSizeGroupExtraShort	rdfs:label	"WearableSizeGroupExtraShort"	.
-schema:WearableSizeGroupExtraShort	rdfs:comment	"Size group \"Extra Short\" for wearables."	.
+schema:WearableSizeGroupExtraShort	rdfs:comment	"Size group 'Extra Short' for wearables."	.
 schema:WearableSizeGroupExtraShort	schema:isPartOf	<https://pending.schema.org>	.
 schema:WearableSizeGroupExtraShort	schema:source	<https://github.com/schemaorg/schemaorg/issues/2811>	.
 schema:WearableSizeGroupExtraTall	rdf:type	schema:WearableSizeGroupEnumeration	.
 schema:WearableSizeGroupExtraTall	rdfs:label	"WearableSizeGroupExtraTall"	.
-schema:WearableSizeGroupExtraTall	rdfs:comment	"Size group \"Extra Tall\" for wearables."	.
+schema:WearableSizeGroupExtraTall	rdfs:comment	"Size group 'Extra Tall' for wearables."	.
 schema:WearableSizeGroupExtraTall	schema:isPartOf	<https://pending.schema.org>	.
 schema:WearableSizeGroupExtraTall	schema:source	<https://github.com/schemaorg/schemaorg/issues/2811>	.
 schema:WearableSizeGroupGirls	rdf:type	schema:WearableSizeGroupEnumeration	.
 schema:WearableSizeGroupGirls	rdfs:label	"WearableSizeGroupGirls"	.
-schema:WearableSizeGroupGirls	rdfs:comment	"Size group \"Girls\" for wearables."	.
+schema:WearableSizeGroupGirls	rdfs:comment	"Size group 'Girls' for wearables."	.
 schema:WearableSizeGroupGirls	schema:isPartOf	<https://pending.schema.org>	.
 schema:WearableSizeGroupGirls	schema:source	<https://github.com/schemaorg/schemaorg/issues/2811>	.
 schema:WearableSizeGroupHusky	rdf:type	schema:WearableSizeGroupEnumeration	.
 schema:WearableSizeGroupHusky	rdfs:label	"WearableSizeGroupHusky"	.
-schema:WearableSizeGroupHusky	rdfs:comment	"Size group \"Husky\" (or \"Stocky\") for wearables."	.
+schema:WearableSizeGroupHusky	rdfs:comment	"Size group 'Husky' (or 'Stocky') for wearables."	.
 schema:WearableSizeGroupHusky	schema:isPartOf	<https://pending.schema.org>	.
 schema:WearableSizeGroupHusky	schema:source	<https://github.com/schemaorg/schemaorg/issues/2811>	.
 schema:WearableSizeGroupInfants	rdf:type	schema:WearableSizeGroupEnumeration	.
 schema:WearableSizeGroupInfants	rdfs:label	"WearableSizeGroupInfants"	.
-schema:WearableSizeGroupInfants	rdfs:comment	"Size group \"Infants\" for wearables."	.
+schema:WearableSizeGroupInfants	rdfs:comment	"Size group 'Infants' for wearables."	.
 schema:WearableSizeGroupInfants	schema:isPartOf	<https://pending.schema.org>	.
 schema:WearableSizeGroupInfants	schema:source	<https://github.com/schemaorg/schemaorg/issues/2811>	.
 schema:WearableSizeGroupJuniors	rdf:type	schema:WearableSizeGroupEnumeration	.
 schema:WearableSizeGroupJuniors	rdfs:label	"WearableSizeGroupJuniors"	.
-schema:WearableSizeGroupJuniors	rdfs:comment	"Size group \"Juniors\" for wearables."	.
+schema:WearableSizeGroupJuniors	rdfs:comment	"Size group 'Juniors' for wearables."	.
 schema:WearableSizeGroupJuniors	schema:isPartOf	<https://pending.schema.org>	.
 schema:WearableSizeGroupJuniors	schema:source	<https://github.com/schemaorg/schemaorg/issues/2811>	.
 schema:WearableSizeGroupMaternity	rdf:type	schema:WearableSizeGroupEnumeration	.
 schema:WearableSizeGroupMaternity	rdfs:label	"WearableSizeGroupMaternity"	.
-schema:WearableSizeGroupMaternity	rdfs:comment	"Size group \"Maternity\" for wearables."	.
+schema:WearableSizeGroupMaternity	rdfs:comment	"Size group 'Maternity' for wearables."	.
 schema:WearableSizeGroupMaternity	schema:isPartOf	<https://pending.schema.org>	.
 schema:WearableSizeGroupMaternity	schema:source	<https://github.com/schemaorg/schemaorg/issues/2811>	.
 schema:WearableSizeGroupMens	rdf:type	schema:WearableSizeGroupEnumeration	.
 schema:WearableSizeGroupMens	rdfs:label	"WearableSizeGroupMens"	.
-schema:WearableSizeGroupMens	rdfs:comment	"Size group \"Mens\" for wearables."	.
+schema:WearableSizeGroupMens	rdfs:comment	"Size group 'Mens' for wearables."	.
 schema:WearableSizeGroupMens	schema:isPartOf	<https://pending.schema.org>	.
 schema:WearableSizeGroupMens	schema:source	<https://github.com/schemaorg/schemaorg/issues/2811>	.
 schema:WearableSizeGroupMisses	rdf:type	schema:WearableSizeGroupEnumeration	.
 schema:WearableSizeGroupMisses	rdfs:label	"WearableSizeGroupMisses"	.
-schema:WearableSizeGroupMisses	rdfs:comment	"Size group \"Misses\" (also known as \"Missy\") for wearables."	.
+schema:WearableSizeGroupMisses	rdfs:comment	"Size group 'Misses' (also known as 'Missy') for wearables."	.
 schema:WearableSizeGroupMisses	schema:isPartOf	<https://pending.schema.org>	.
 schema:WearableSizeGroupMisses	schema:source	<https://github.com/schemaorg/schemaorg/issues/2811>	.
 schema:WearableSizeGroupPetite	rdf:type	schema:WearableSizeGroupEnumeration	.
 schema:WearableSizeGroupPetite	rdfs:label	"WearableSizeGroupPetite"	.
-schema:WearableSizeGroupPetite	rdfs:comment	"Size group \"Petite\" for wearables."	.
+schema:WearableSizeGroupPetite	rdfs:comment	"Size group 'Petite' for wearables."	.
 schema:WearableSizeGroupPetite	schema:isPartOf	<https://pending.schema.org>	.
 schema:WearableSizeGroupPetite	schema:source	<https://github.com/schemaorg/schemaorg/issues/2811>	.
 schema:WearableSizeGroupPlus	rdf:type	schema:WearableSizeGroupEnumeration	.
 schema:WearableSizeGroupPlus	rdfs:label	"WearableSizeGroupPlus"	.
-schema:WearableSizeGroupPlus	rdfs:comment	"Size group \"Plus\" for wearables."	.
+schema:WearableSizeGroupPlus	rdfs:comment	"Size group 'Plus' for wearables."	.
 schema:WearableSizeGroupPlus	schema:isPartOf	<https://pending.schema.org>	.
 schema:WearableSizeGroupPlus	schema:source	<https://github.com/schemaorg/schemaorg/issues/2811>	.
 schema:WearableSizeGroupRegular	rdf:type	schema:WearableSizeGroupEnumeration	.
 schema:WearableSizeGroupRegular	rdfs:label	"WearableSizeGroupRegular"	.
-schema:WearableSizeGroupRegular	rdfs:comment	"Size group \"Regular\" for wearables."	.
+schema:WearableSizeGroupRegular	rdfs:comment	"Size group 'Regular' for wearables."	.
 schema:WearableSizeGroupRegular	schema:isPartOf	<https://pending.schema.org>	.
 schema:WearableSizeGroupRegular	schema:source	<https://github.com/schemaorg/schemaorg/issues/2811>	.
 schema:WearableSizeGroupShort	rdf:type	schema:WearableSizeGroupEnumeration	.
 schema:WearableSizeGroupShort	rdfs:label	"WearableSizeGroupShort"	.
-schema:WearableSizeGroupShort	rdfs:comment	"Size group \"Short\" for wearables."	.
+schema:WearableSizeGroupShort	rdfs:comment	"Size group 'Short' for wearables."	.
 schema:WearableSizeGroupShort	schema:isPartOf	<https://pending.schema.org>	.
 schema:WearableSizeGroupShort	schema:source	<https://github.com/schemaorg/schemaorg/issues/2811>	.
 schema:WearableSizeGroupTall	rdf:type	schema:WearableSizeGroupEnumeration	.
 schema:WearableSizeGroupTall	rdfs:label	"WearableSizeGroupTall"	.
-schema:WearableSizeGroupTall	rdfs:comment	"Size group \"Tall\" for wearables."	.
+schema:WearableSizeGroupTall	rdfs:comment	"Size group 'Tall' for wearables."	.
 schema:WearableSizeGroupTall	schema:isPartOf	<https://pending.schema.org>	.
 schema:WearableSizeGroupTall	schema:source	<https://github.com/schemaorg/schemaorg/issues/2811>	.
 schema:WearableSizeGroupWomens	rdf:type	schema:WearableSizeGroupEnumeration	.
 schema:WearableSizeGroupWomens	rdfs:label	"WearableSizeGroupWomens"	.
-schema:WearableSizeGroupWomens	rdfs:comment	"Size group \"Womens\" for wearables."	.
+schema:WearableSizeGroupWomens	rdfs:comment	"Size group 'Womens' for wearables."	.
 schema:WearableSizeGroupWomens	schema:isPartOf	<https://pending.schema.org>	.
 schema:WearableSizeGroupWomens	schema:source	<https://github.com/schemaorg/schemaorg/issues/2811>	.
 schema:WearableSizeSystemAU	rdf:type	schema:WearableSizeSystemEnumeration	.
@@ -6270,7 +6235,7 @@ schema:abstract	schema:rangeIncludes	schema:Text	.
 schema:abstract	schema:source	<https://github.com/schemaorg/schemaorg/issues/276>	.
 schema:accelerationTime	rdf:type	rdf:Property	.
 schema:accelerationTime	rdfs:label	"accelerationTime"	.
-schema:accelerationTime	rdfs:comment	"The time needed to accelerate the vehicle from a given start velocity to a given target velocity.\\n\\nTypical unit code(s): SEC for seconds\\n\\n* Note: There are unfortunately no standard unit codes for seconds/0..100 km/h or seconds/0..60 mph. Simply use \"SEC\" for seconds and indicate the velocities in the [[name]] of the [[QuantitativeValue]], or use [[valueReference]] with a [[QuantitativeValue]] of 0..60 mph or 0..100 km/h to specify the reference speeds."	.
+schema:accelerationTime	rdfs:comment	"The time needed to accelerate the vehicle from a given start velocity to a given target velocity.\\n\\nTypical unit code(s): SEC for seconds\\n\\n* Note: There are unfortunately no standard unit codes for seconds/0..100 km/h or seconds/0..60 mph. Simply use 'SEC' for seconds and indicate the velocities in the [[name]] of the [[QuantitativeValue]], or use [[valueReference]] with a [[QuantitativeValue]] of 0..60 mph or 0..100 km/h to specify the reference speeds."	.
 schema:accelerationTime	schema:domainIncludes	schema:Vehicle	.
 schema:accelerationTime	schema:isPartOf	<https://auto.schema.org>	.
 schema:accelerationTime	schema:rangeIncludes	schema:QuantitativeValue	.
@@ -6341,7 +6306,7 @@ schema:accessibilityHazard	schema:domainIncludes	schema:CreativeWork	.
 schema:accessibilityHazard	schema:rangeIncludes	schema:Text	.
 schema:accessibilitySummary	rdf:type	rdf:Property	.
 schema:accessibilitySummary	rdfs:label	"accessibilitySummary"	.
-schema:accessibilitySummary	rdfs:comment	"A human-readable summary of specific accessibility features or deficiencies, consistent with the other accessibility metadata but expressing subtleties such as \"short descriptions are present but long descriptions will be needed for non-visual users\" or \"short descriptions are present and no long descriptions are needed.\""	.
+schema:accessibilitySummary	rdfs:comment	"A human-readable summary of specific accessibility features or deficiencies, consistent with the other accessibility metadata but expressing subtleties such as 'short descriptions are present but long descriptions will be needed for non-visual users' or 'short descriptions are present and no long descriptions are needed.'"	.
 schema:accessibilitySummary	schema:domainIncludes	schema:CreativeWork	.
 schema:accessibilitySummary	schema:rangeIncludes	schema:Text	.
 schema:accessibilitySummary	schema:source	<https://github.com/schemaorg/schemaorg/issues/1100>	.
@@ -6605,7 +6570,7 @@ schema:aggregateRating	schema:domainIncludes	schema:Service	.
 schema:aggregateRating	schema:rangeIncludes	schema:AggregateRating	.
 schema:aircraft	rdf:type	rdf:Property	.
 schema:aircraft	rdfs:label	"aircraft"	.
-schema:aircraft	rdfs:comment	"The kind of aircraft (e.g., \"Boeing 747\")."	.
+schema:aircraft	rdfs:comment	"The kind of aircraft (e.g., 'Boeing 747')."	.
 schema:aircraft	schema:domainIncludes	schema:Flight	.
 schema:aircraft	schema:rangeIncludes	schema:Text	.
 schema:aircraft	schema:rangeIncludes	schema:Vehicle	.
@@ -6870,7 +6835,7 @@ schema:arrivalTime	schema:rangeIncludes	schema:DateTime	.
 schema:arrivalTime	schema:rangeIncludes	schema:Time	.
 schema:artEdition	rdf:type	rdf:Property	.
 schema:artEdition	rdfs:label	"artEdition"	.
-schema:artEdition	rdfs:comment	"The number of copies when multiple copies of a piece of artwork are produced - e.g. for a limited edition of 20 prints, 'artEdition' refers to the total number of copies (in this example \"20\")."	.
+schema:artEdition	rdfs:comment	"The number of copies when multiple copies of a piece of artwork are produced - e.g. for a limited edition of 20 prints, 'artEdition' refers to the total number of copies (in this example '20')."	.
 schema:artEdition	schema:domainIncludes	schema:VisualArtwork	.
 schema:artEdition	schema:rangeIncludes	schema:Integer	.
 schema:artEdition	schema:rangeIncludes	schema:Text	.
@@ -7289,7 +7254,7 @@ schema:bitrate	schema:domainIncludes	schema:MediaObject	.
 schema:bitrate	schema:rangeIncludes	schema:Text	.
 schema:blogPosts	rdf:type	rdf:Property	.
 schema:blogPosts	rdfs:label	"blogPosts"	.
-schema:blogPosts	rdfs:comment	"Indicates a post that is part of a [[Blog]]. Note that historically, what we term a \"Blog\" was once known as a \"weblog\", and that what we term a \"BlogPosting\" is now often colloquially referred to as a \"blog\"."	.
+schema:blogPosts	rdfs:comment	"Indicates a post that is part of a [[Blog]]. Note that historically, what we term a 'Blog' was once known as a 'weblog', and that what we term a 'BlogPosting' is now often colloquially referred to as a 'blog'."	.
 schema:blogPosts	schema:domainIncludes	schema:Blog	.
 schema:blogPosts	schema:rangeIncludes	schema:BlogPosting	.
 schema:blogPosts	schema:supersededBy	schema:blogPost	.
@@ -7415,7 +7380,7 @@ schema:broadcastDisplayName	schema:domainIncludes	schema:BroadcastService	.
 schema:broadcastDisplayName	schema:rangeIncludes	schema:Text	.
 schema:broadcastFrequency	rdf:type	rdf:Property	.
 schema:broadcastFrequency	rdfs:label	"broadcastFrequency"	.
-schema:broadcastFrequency	rdfs:comment	"The frequency used for over-the-air broadcasts. Numeric values or simple ranges e.g. 87-99. In addition a shortcut idiom is supported for frequences of AM and FM radio channels, e.g. \"87 FM\"."	.
+schema:broadcastFrequency	rdfs:comment	"The frequency used for over-the-air broadcasts. Numeric values or simple ranges e.g. 87-99. In addition a shortcut idiom is supported for frequences of AM and FM radio channels, e.g. '87 FM'."	.
 schema:broadcastFrequency	schema:domainIncludes	schema:BroadcastChannel	.
 schema:broadcastFrequency	schema:domainIncludes	schema:BroadcastService	.
 schema:broadcastFrequency	schema:rangeIncludes	schema:BroadcastFrequencySpecification	.
@@ -7845,7 +7810,7 @@ schema:comprisedOf	schema:rangeIncludes	schema:AnatomicalStructure	.
 schema:comprisedOf	schema:rangeIncludes	schema:AnatomicalSystem	.
 schema:conditionsOfAccess	rdf:type	rdf:Property	.
 schema:conditionsOfAccess	rdfs:label	"conditionsOfAccess"	.
-schema:conditionsOfAccess	rdfs:comment	"Conditions that affect the availability of, or method(s) of access to, an item. Typically used for real world items such as an [[ArchiveComponent]] held by an [[ArchiveOrganization]]. This property is not suitable for use as a general Web access control mechanism. It is expressed only in natural language.\\n\\nFor example \"Available by appointment from the Reading Room\" or \"Accessible only from logged-in accounts \". "	.
+schema:conditionsOfAccess	rdfs:comment	"Conditions that affect the availability of, or method(s) of access to, an item. Typically used for real world items such as an [[ArchiveComponent]] held by an [[ArchiveOrganization]]. This property is not suitable for use as a general Web access control mechanism. It is expressed only in natural language.\\n\\nFor example 'Available by appointment from the Reading Room' or 'Accessible only from logged-in accounts '. "	.
 schema:conditionsOfAccess	schema:domainIncludes	schema:CreativeWork	.
 schema:conditionsOfAccess	schema:isPartOf	<https://pending.schema.org>	.
 schema:conditionsOfAccess	schema:rangeIncludes	schema:Text	.
@@ -8068,20 +8033,20 @@ schema:courseCode	schema:domainIncludes	schema:Course	.
 schema:courseCode	schema:rangeIncludes	schema:Text	.
 schema:courseMode	rdf:type	rdf:Property	.
 schema:courseMode	rdfs:label	"courseMode"	.
-schema:courseMode	rdfs:comment	"The medium or means of delivery of the course instance or the mode of study, either as a text label (e.g. \"online\", \"onsite\" or \"blended\"; \"synchronous\" or \"asynchronous\"; \"full-time\" or \"part-time\") or as a URL reference to a term from a controlled vocabulary (e.g. https://ceds.ed.gov/element/001311#Asynchronous )."	.
+schema:courseMode	rdfs:comment	"The medium or means of delivery of the course instance or the mode of study, either as a text label (e.g. 'online', 'onsite' or 'blended'; 'synchronous' or 'asynchronous'; 'full-time' or 'part-time') or as a URL reference to a term from a controlled vocabulary (e.g. https://ceds.ed.gov/element/001311#Asynchronous )."	.
 schema:courseMode	schema:domainIncludes	schema:CourseInstance	.
 schema:courseMode	schema:rangeIncludes	schema:Text	.
 schema:courseMode	schema:rangeIncludes	schema:URL	.
 schema:coursePrerequisites	rdf:type	rdf:Property	.
 schema:coursePrerequisites	rdfs:label	"coursePrerequisites"	.
-schema:coursePrerequisites	rdfs:comment	"Requirements for taking the Course. May be completion of another [[Course]] or a textual description like \"permission of instructor\". Requirements may be a pre-requisite competency, referenced using [[AlignmentObject]]."	.
+schema:coursePrerequisites	rdfs:comment	"Requirements for taking the Course. May be completion of another [[Course]] or a textual description like 'permission of instructor'. Requirements may be a pre-requisite competency, referenced using [[AlignmentObject]]."	.
 schema:coursePrerequisites	schema:domainIncludes	schema:Course	.
 schema:coursePrerequisites	schema:rangeIncludes	schema:AlignmentObject	.
 schema:coursePrerequisites	schema:rangeIncludes	schema:Course	.
 schema:coursePrerequisites	schema:rangeIncludes	schema:Text	.
 schema:courseWorkload	rdf:type	rdf:Property	.
 schema:courseWorkload	rdfs:label	"courseWorkload"	.
-schema:courseWorkload	rdfs:comment	"The amount of work expected of students taking the course, often provided as a figure per week or per month, and may be broken down by type. For example, \"2 hours of lectures, 1 hour of lab work and 3 hours of independent study per week\"."	.
+schema:courseWorkload	rdfs:comment	"The amount of work expected of students taking the course, often provided as a figure per week or per month, and may be broken down by type. For example, '2 hours of lectures, 1 hour of lab work and 3 hours of independent study per week'."	.
 schema:courseWorkload	schema:domainIncludes	schema:CourseInstance	.
 schema:courseWorkload	schema:isPartOf	<https://pending.schema.org>	.
 schema:courseWorkload	schema:rangeIncludes	schema:Text	.
@@ -8106,7 +8071,7 @@ schema:creativeWorkStatus	schema:rangeIncludes	schema:Text	.
 schema:creativeWorkStatus	schema:source	<https://github.com/schemaorg/schemaorg/issues/987>	.
 schema:credentialCategory	rdf:type	rdf:Property	.
 schema:credentialCategory	rdfs:label	"credentialCategory"	.
-schema:credentialCategory	rdfs:comment	"The category or type of credential being described, for example \"degree”, “certificate”, “badge”, or more specific term."	.
+schema:credentialCategory	rdfs:comment	"The category or type of credential being described, for example 'degree”, “certificate”, “badge”, or more specific term."	.
 schema:credentialCategory	schema:domainIncludes	schema:EducationalOccupationalCredential	.
 schema:credentialCategory	schema:isPartOf	<https://pending.schema.org>	.
 schema:credentialCategory	schema:rangeIncludes	schema:DefinedTerm	.
@@ -8122,26 +8087,26 @@ schema:creditText	schema:rangeIncludes	schema:Text	.
 schema:creditText	schema:source	<https://github.com/schemaorg/schemaorg/issues/2659>	.
 schema:creditedTo	rdf:type	rdf:Property	.
 schema:creditedTo	rdfs:label	"creditedTo"	.
-schema:creditedTo	rdfs:comment	"The group the release is credited to if different than the byArtist. For example, Red and Blue is credited to \"Stefani Germanotta Band\", but by Lady Gaga."	.
+schema:creditedTo	rdfs:comment	"The group the release is credited to if different than the byArtist. For example, Red and Blue is credited to 'Stefani Germanotta Band', but by Lady Gaga."	.
 schema:creditedTo	schema:domainIncludes	schema:MusicRelease	.
 schema:creditedTo	schema:rangeIncludes	schema:Organization	.
 schema:creditedTo	schema:rangeIncludes	schema:Person	.
 schema:creditedTo	schema:source	<http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#MBZ>	.
 schema:cssSelector	rdf:type	rdf:Property	.
 schema:cssSelector	rdfs:label	"cssSelector"	.
-schema:cssSelector	rdfs:comment	"A CSS selector, e.g. of a [[SpeakableSpecification]] or [[WebPageElement]]. In the latter case, multiple matches within a page can constitute a single conceptual \"Web page element\"."	.
+schema:cssSelector	rdfs:comment	"A CSS selector, e.g. of a [[SpeakableSpecification]] or [[WebPageElement]]. In the latter case, multiple matches within a page can constitute a single conceptual 'Web page element'."	.
 schema:cssSelector	schema:domainIncludes	schema:SpeakableSpecification	.
 schema:cssSelector	schema:domainIncludes	schema:WebPageElement	.
 schema:cssSelector	schema:rangeIncludes	schema:CssSelectorType	.
 schema:cssSelector	schema:source	<https://github.com/schemaorg/schemaorg/issues/1389>	.
 schema:currenciesAccepted	rdf:type	rdf:Property	.
 schema:currenciesAccepted	rdfs:label	"currenciesAccepted"	.
-schema:currenciesAccepted	rdfs:comment	"The currency accepted.\\n\\nUse standard formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217) e.g. \"USD\"; [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for cryptocurrencies e.g. \"BTC\"; well known names for [Local Exchange Tradings Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system) (LETS) and other currency types e.g. \"Ithaca HOUR\"."	.
+schema:currenciesAccepted	rdfs:comment	"The currency accepted.\\n\\nUse standard formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217) e.g. 'USD'; [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for cryptocurrencies e.g. 'BTC'; well known names for [Local Exchange Tradings Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system) (LETS) and other currency types e.g. 'Ithaca HOUR'."	.
 schema:currenciesAccepted	schema:domainIncludes	schema:LocalBusiness	.
 schema:currenciesAccepted	schema:rangeIncludes	schema:Text	.
 schema:currency	rdf:type	rdf:Property	.
 schema:currency	rdfs:label	"currency"	.
-schema:currency	rdfs:comment	"The currency in which the monetary amount is expressed.\\n\\nUse standard formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217) e.g. \"USD\"; [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for cryptocurrencies e.g. \"BTC\"; well known names for [Local Exchange Tradings Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system) (LETS) and other currency types e.g. \"Ithaca HOUR\"."	.
+schema:currency	rdfs:comment	"The currency in which the monetary amount is expressed.\\n\\nUse standard formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217) e.g. 'USD'; [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for cryptocurrencies e.g. 'BTC'; well known names for [Local Exchange Tradings Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system) (LETS) and other currency types e.g. 'Ithaca HOUR'."	.
 schema:currency	schema:domainIncludes	schema:DatedMoneySpecification	.
 schema:currency	schema:domainIncludes	schema:ExchangeRateSpecification	.
 schema:currency	schema:domainIncludes	schema:LoanOrCredit	.
@@ -8187,7 +8152,7 @@ schema:customerRemorseReturnShippingFeesAmount	schema:rangeIncludes	schema:Monet
 schema:customerRemorseReturnShippingFeesAmount	schema:source	<https://github.com/schemaorg/schemaorg/issues/2880>	.
 schema:cutoffTime	rdf:type	rdf:Property	.
 schema:cutoffTime	rdfs:label	"cutoffTime"	.
-schema:cutoffTime	rdfs:comment	"Order cutoff time allows merchants to describe the time after which they will no longer process orders received on that day. For orders processed after cutoff time, one day gets added to the delivery time estimate. This property is expected to be most typically used via the [[ShippingRateSettings]] publication pattern. The time is indicated using the ISO-8601 Time format, e.g. \"23:30:00-05:00\" would represent 6:30 pm Eastern Standard Time (EST) which is 5 hours behind Coordinated Universal Time (UTC)."	.
+schema:cutoffTime	rdfs:comment	"Order cutoff time allows merchants to describe the time after which they will no longer process orders received on that day. For orders processed after cutoff time, one day gets added to the delivery time estimate. This property is expected to be most typically used via the [[ShippingRateSettings]] publication pattern. The time is indicated using the ISO-8601 Time format, e.g. '23:30:00-05:00' would represent 6:30 pm Eastern Standard Time (EST) which is 5 hours behind Coordinated Universal Time (UTC)."	.
 schema:cutoffTime	schema:domainIncludes	schema:ShippingDeliveryTime	.
 schema:cutoffTime	schema:isPartOf	<https://pending.schema.org>	.
 schema:cutoffTime	schema:rangeIncludes	schema:Time	.
@@ -8578,7 +8543,7 @@ schema:discountCode	schema:domainIncludes	schema:Order	.
 schema:discountCode	schema:rangeIncludes	schema:Text	.
 schema:discountCurrency	rdf:type	rdf:Property	.
 schema:discountCurrency	rdfs:label	"discountCurrency"	.
-schema:discountCurrency	rdfs:comment	"The currency of the discount.\\n\\nUse standard formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217) e.g. \"USD\"; [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for cryptocurrencies e.g. \"BTC\"; well known names for [Local Exchange Tradings Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system) (LETS) and other currency types e.g. \"Ithaca HOUR\"."	.
+schema:discountCurrency	rdfs:comment	"The currency of the discount.\\n\\nUse standard formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217) e.g. 'USD'; [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for cryptocurrencies e.g. 'BTC'; well known names for [Local Exchange Tradings Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system) (LETS) and other currency types e.g. 'Ithaca HOUR'."	.
 schema:discountCurrency	schema:domainIncludes	schema:Order	.
 schema:discountCurrency	schema:rangeIncludes	schema:Text	.
 schema:discusses	rdf:type	rdf:Property	.
@@ -8828,7 +8793,7 @@ schema:editor	schema:domainIncludes	schema:CreativeWork	.
 schema:editor	schema:rangeIncludes	schema:Person	.
 schema:eduQuestionType	rdf:type	rdf:Property	.
 schema:eduQuestionType	rdfs:label	"eduQuestionType"	.
-schema:eduQuestionType	rdfs:comment	"For questions that are part of learning resources (e.g. Quiz), eduQuestionType indicates the format of question being given. Example: \"Multiple choice\", \"Open ended\", \"Flashcard\"."	.
+schema:eduQuestionType	rdfs:comment	"For questions that are part of learning resources (e.g. Quiz), eduQuestionType indicates the format of question being given. Example: 'Multiple choice', 'Open ended', 'Flashcard'."	.
 schema:eduQuestionType	schema:domainIncludes	schema:Question	.
 schema:eduQuestionType	schema:domainIncludes	schema:SolveMathAction	.
 schema:eduQuestionType	schema:isPartOf	<https://pending.schema.org>	.
@@ -8878,7 +8843,7 @@ schema:educationalLevel	schema:rangeIncludes	schema:URL	.
 schema:educationalLevel	schema:source	<https://github.com/schemaorg/schemaorg/issues/1779>	.
 schema:educationalProgramMode	rdf:type	rdf:Property	.
 schema:educationalProgramMode	rdfs:label	"educationalProgramMode"	.
-schema:educationalProgramMode	rdfs:comment	"Similar to courseMode, The medium or means of delivery of the program as a whole. The value may either be a text label (e.g. \"online\", \"onsite\" or \"blended\"; \"synchronous\" or \"asynchronous\"; \"full-time\" or \"part-time\") or a URL reference to a term from a controlled vocabulary (e.g. https://ceds.ed.gov/element/001311#Asynchronous )."	.
+schema:educationalProgramMode	rdfs:comment	"Similar to courseMode, The medium or means of delivery of the program as a whole. The value may either be a text label (e.g. 'online', 'onsite' or 'blended'; 'synchronous' or 'asynchronous'; 'full-time' or 'part-time') or a URL reference to a term from a controlled vocabulary (e.g. https://ceds.ed.gov/element/001311#Asynchronous )."	.
 schema:educationalProgramMode	schema:domainIncludes	schema:EducationalOccupationalProgram	.
 schema:educationalProgramMode	schema:isPartOf	<https://pending.schema.org>	.
 schema:educationalProgramMode	schema:rangeIncludes	schema:Text	.
@@ -8977,7 +8942,7 @@ schema:embeddedTextCaption	schema:rangeIncludes	schema:Text	.
 schema:embeddedTextCaption	schema:source	<https://github.com/schemaorg/schemaorg/issues/2450>	.
 schema:emissionsCO2	rdf:type	rdf:Property	.
 schema:emissionsCO2	rdfs:label	"emissionsCO2"	.
-schema:emissionsCO2	rdfs:comment	"The CO2 emissions in g/km. When used in combination with a QuantitativeValue, put \"g/km\" into the unitText property of that value, since there is no UN/CEFACT Common Code for \"g/km\"."	.
+schema:emissionsCO2	rdfs:comment	"The CO2 emissions in g/km. When used in combination with a QuantitativeValue, put 'g/km' into the unitText property of that value, since there is no UN/CEFACT Common Code for 'g/km'."	.
 schema:emissionsCO2	schema:domainIncludes	schema:Vehicle	.
 schema:emissionsCO2	schema:isPartOf	<https://auto.schema.org>	.
 schema:emissionsCO2	schema:rangeIncludes	schema:Number	.
@@ -9512,13 +9477,13 @@ schema:fuelCapacity	schema:rangeIncludes	schema:QuantitativeValue	.
 schema:fuelCapacity	schema:source	<http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#Automotive_Ontology_Working_Group>	.
 schema:fuelConsumption	rdf:type	rdf:Property	.
 schema:fuelConsumption	rdfs:label	"fuelConsumption"	.
-schema:fuelConsumption	rdfs:comment	"The amount of fuel consumed for traveling a particular distance or temporal duration with the given vehicle (e.g. liters per 100 km).\\n\\n* Note 1: There are unfortunately no standard unit codes for liters per 100 km.  Use [[unitText]] to indicate the unit of measurement, e.g. L/100 km.\\n* Note 2: There are two ways of indicating the fuel consumption, [[fuelConsumption]] (e.g. 8 liters per 100 km) and [[fuelEfficiency]] (e.g. 30 miles per gallon). They are reciprocal.\\n* Note 3: Often, the absolute value is useful only when related to driving speed (\"at 80 km/h\") or usage pattern (\"city traffic\"). You can use [[valueReference]] to link the value for the fuel consumption to another value."	.
+schema:fuelConsumption	rdfs:comment	"The amount of fuel consumed for traveling a particular distance or temporal duration with the given vehicle (e.g. liters per 100 km).\\n\\n* Note 1: There are unfortunately no standard unit codes for liters per 100 km.  Use [[unitText]] to indicate the unit of measurement, e.g. L/100 km.\\n* Note 2: There are two ways of indicating the fuel consumption, [[fuelConsumption]] (e.g. 8 liters per 100 km) and [[fuelEfficiency]] (e.g. 30 miles per gallon). They are reciprocal.\\n* Note 3: Often, the absolute value is useful only when related to driving speed ('at 80 km/h') or usage pattern ('city traffic'). You can use [[valueReference]] to link the value for the fuel consumption to another value."	.
 schema:fuelConsumption	schema:domainIncludes	schema:Vehicle	.
 schema:fuelConsumption	schema:rangeIncludes	schema:QuantitativeValue	.
 schema:fuelConsumption	schema:source	<http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#Automotive_Ontology_Working_Group>	.
 schema:fuelEfficiency	rdf:type	rdf:Property	.
 schema:fuelEfficiency	rdfs:label	"fuelEfficiency"	.
-schema:fuelEfficiency	rdfs:comment	"The distance traveled per unit of fuel used; most commonly miles per gallon (mpg) or kilometers per liter (km/L).\\n\\n* Note 1: There are unfortunately no standard unit codes for miles per gallon or kilometers per liter. Use [[unitText]] to indicate the unit of measurement, e.g. mpg or km/L.\\n* Note 2: There are two ways of indicating the fuel consumption, [[fuelConsumption]] (e.g. 8 liters per 100 km) and [[fuelEfficiency]] (e.g. 30 miles per gallon). They are reciprocal.\\n* Note 3: Often, the absolute value is useful only when related to driving speed (\"at 80 km/h\") or usage pattern (\"city traffic\"). You can use [[valueReference]] to link the value for the fuel economy to another value."	.
+schema:fuelEfficiency	rdfs:comment	"The distance traveled per unit of fuel used; most commonly miles per gallon (mpg) or kilometers per liter (km/L).\\n\\n* Note 1: There are unfortunately no standard unit codes for miles per gallon or kilometers per liter. Use [[unitText]] to indicate the unit of measurement, e.g. mpg or km/L.\\n* Note 2: There are two ways of indicating the fuel consumption, [[fuelConsumption]] (e.g. 8 liters per 100 km) and [[fuelEfficiency]] (e.g. 30 miles per gallon). They are reciprocal.\\n* Note 3: Often, the absolute value is useful only when related to driving speed ('at 80 km/h') or usage pattern ('city traffic'). You can use [[valueReference]] to link the value for the fuel economy to another value."	.
 schema:fuelEfficiency	schema:domainIncludes	schema:Vehicle	.
 schema:fuelEfficiency	schema:rangeIncludes	schema:QuantitativeValue	.
 schema:fuelEfficiency	schema:source	<http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#Automotive_Ontology_Working_Group>	.
@@ -9579,7 +9544,7 @@ schema:gameLocation	schema:rangeIncludes	schema:PostalAddress	.
 schema:gameLocation	schema:rangeIncludes	schema:URL	.
 schema:gamePlatform	rdf:type	rdf:Property	.
 schema:gamePlatform	rdfs:label	"gamePlatform"	.
-schema:gamePlatform	rdfs:comment	"The electronic systems used to play <a href=\"http://en.wikipedia.org/wiki/Category:Video_game_platforms\">video games</a>."	.
+schema:gamePlatform	rdfs:comment	"The electronic systems used to play <a href='http://en.wikipedia.org/wiki/Category:Video_game_platforms'>video games</a>."	.
 schema:gamePlatform	schema:domainIncludes	schema:VideoGame	.
 schema:gamePlatform	schema:domainIncludes	schema:VideoGameSeries	.
 schema:gamePlatform	schema:rangeIncludes	schema:Text	.
@@ -9592,7 +9557,7 @@ schema:gameTip	schema:domainIncludes	schema:VideoGame	.
 schema:gameTip	schema:rangeIncludes	schema:CreativeWork	.
 schema:gender	rdf:type	rdf:Property	.
 schema:gender	rdfs:label	"gender"	.
-schema:gender	rdfs:comment	"Gender of something, typically a [[Person]], but possibly also fictional characters, animals, etc. While http://schema.org/Male and http://schema.org/Female may be used, text strings are also acceptable for people who do not identify as a binary gender. The [[gender]] property can also be used in an extended sense to cover e.g. the gender of sports teams. As with the gender of individuals, we do not try to enumerate all possibilities. A mixed-gender [[SportsTeam]] can be indicated with a text value of \"Mixed\"."	.
+schema:gender	rdfs:comment	"Gender of something, typically a [[Person]], but possibly also fictional characters, animals, etc. While http://schema.org/Male and http://schema.org/Female may be used, text strings are also acceptable for people who do not identify as a binary gender. The [[gender]] property can also be used in an extended sense to cover e.g. the gender of sports teams. As with the gender of individuals, we do not try to enumerate all possibilities. A mixed-gender [[SportsTeam]] can be indicated with a text value of 'Mixed'."	.
 schema:gender	schema:domainIncludes	schema:Person	.
 schema:gender	schema:domainIncludes	schema:SportsTeam	.
 schema:gender	schema:isPartOf	<https://pending.schema.org>	.
@@ -9607,7 +9572,7 @@ schema:geo	schema:rangeIncludes	schema:GeoCoordinates	.
 schema:geo	schema:rangeIncludes	schema:GeoShape	.
 schema:geoContains	rdf:type	rdf:Property	.
 schema:geoContains	rdfs:label	"geoContains"	.
-schema:geoContains	rdfs:comment	"Represents a relationship between two geometries (or the places they represent), relating a containing geometry to a contained geometry. \"a contains b iff no points of b lie in the exterior of a, and at least one point of the interior of b lies in the interior of a\". As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM)."	.
+schema:geoContains	rdfs:comment	"Represents a relationship between two geometries (or the places they represent), relating a containing geometry to a contained geometry. 'a contains b iff no points of b lie in the exterior of a, and at least one point of the interior of b lies in the interior of a'. As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM)."	.
 schema:geoContains	schema:domainIncludes	schema:GeospatialGeometry	.
 schema:geoContains	schema:domainIncludes	schema:Place	.
 schema:geoContains	schema:rangeIncludes	schema:GeospatialGeometry	.
@@ -9621,28 +9586,28 @@ schema:geoCoveredBy	schema:rangeIncludes	schema:GeospatialGeometry	.
 schema:geoCoveredBy	schema:rangeIncludes	schema:Place	.
 schema:geoCovers	rdf:type	rdf:Property	.
 schema:geoCovers	rdfs:label	"geoCovers"	.
-schema:geoCovers	rdfs:comment	"Represents a relationship between two geometries (or the places they represent), relating a covering geometry to a covered geometry. \"Every point of b is a point of (the interior or boundary of) a\". As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM)."	.
+schema:geoCovers	rdfs:comment	"Represents a relationship between two geometries (or the places they represent), relating a covering geometry to a covered geometry. 'Every point of b is a point of (the interior or boundary of) a'. As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM)."	.
 schema:geoCovers	schema:domainIncludes	schema:GeospatialGeometry	.
 schema:geoCovers	schema:domainIncludes	schema:Place	.
 schema:geoCovers	schema:rangeIncludes	schema:GeospatialGeometry	.
 schema:geoCovers	schema:rangeIncludes	schema:Place	.
 schema:geoCrosses	rdf:type	rdf:Property	.
 schema:geoCrosses	rdfs:label	"geoCrosses"	.
-schema:geoCrosses	rdfs:comment	"Represents a relationship between two geometries (or the places they represent), relating a geometry to another that crosses it: \"a crosses b: they have some but not all interior points in common, and the dimension of the intersection is less than that of at least one of them\". As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM)."	.
+schema:geoCrosses	rdfs:comment	"Represents a relationship between two geometries (or the places they represent), relating a geometry to another that crosses it: 'a crosses b: they have some but not all interior points in common, and the dimension of the intersection is less than that of at least one of them'. As defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM)."	.
 schema:geoCrosses	schema:domainIncludes	schema:GeospatialGeometry	.
 schema:geoCrosses	schema:domainIncludes	schema:Place	.
 schema:geoCrosses	schema:rangeIncludes	schema:GeospatialGeometry	.
 schema:geoCrosses	schema:rangeIncludes	schema:Place	.
 schema:geoDisjoint	rdf:type	rdf:Property	.
 schema:geoDisjoint	rdfs:label	"geoDisjoint"	.
-schema:geoDisjoint	rdfs:comment	"Represents spatial relations in which two geometries (or the places they represent) are topologically disjoint: they have no point in common. They form a set of disconnected geometries.\" (a symmetric relationship, as defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM))"	.
+schema:geoDisjoint	rdfs:comment	"Represents spatial relations in which two geometries (or the places they represent) are topologically disjoint: they have no point in common. They form a set of disconnected geometries.' (a symmetric relationship, as defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM))"	.
 schema:geoDisjoint	schema:domainIncludes	schema:GeospatialGeometry	.
 schema:geoDisjoint	schema:domainIncludes	schema:Place	.
 schema:geoDisjoint	schema:rangeIncludes	schema:GeospatialGeometry	.
 schema:geoDisjoint	schema:rangeIncludes	schema:Place	.
 schema:geoEquals	rdf:type	rdf:Property	.
 schema:geoEquals	rdfs:label	"geoEquals"	.
-schema:geoEquals	rdfs:comment	"Represents spatial relations in which two geometries (or the places they represent) are topologically equal, as defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM). \"Two geometries are topologically equal if their interiors intersect and no part of the interior or boundary of one geometry intersects the exterior of the other\" (a symmetric relationship)"	.
+schema:geoEquals	rdfs:comment	"Represents spatial relations in which two geometries (or the places they represent) are topologically equal, as defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM). 'Two geometries are topologically equal if their interiors intersect and no part of the interior or boundary of one geometry intersects the exterior of the other' (a symmetric relationship)"	.
 schema:geoEquals	schema:domainIncludes	schema:GeospatialGeometry	.
 schema:geoEquals	schema:domainIncludes	schema:Place	.
 schema:geoEquals	schema:rangeIncludes	schema:GeospatialGeometry	.
@@ -9675,7 +9640,7 @@ schema:geoRadius	schema:rangeIncludes	schema:Number	.
 schema:geoRadius	schema:rangeIncludes	schema:Text	.
 schema:geoTouches	rdf:type	rdf:Property	.
 schema:geoTouches	rdfs:label	"geoTouches"	.
-schema:geoTouches	rdfs:comment	"Represents spatial relations in which two geometries (or the places they represent) touch: they have at least one boundary point in common, but no interior points.\" (a symmetric relationship, as defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM) )"	.
+schema:geoTouches	rdfs:comment	"Represents spatial relations in which two geometries (or the places they represent) touch: they have at least one boundary point in common, but no interior points.' (a symmetric relationship, as defined in [DE-9IM](https://en.wikipedia.org/wiki/DE-9IM) )"	.
 schema:geoTouches	schema:domainIncludes	schema:GeospatialGeometry	.
 schema:geoTouches	schema:domainIncludes	schema:Place	.
 schema:geoTouches	schema:rangeIncludes	schema:GeospatialGeometry	.
@@ -9808,7 +9773,7 @@ schema:guidelineSubject	schema:isPartOf	<https://health-lifesci.schema.org>	.
 schema:guidelineSubject	schema:rangeIncludes	schema:MedicalEntity	.
 schema:handlingTime	rdf:type	rdf:Property	.
 schema:handlingTime	rdfs:label	"handlingTime"	.
-schema:handlingTime	rdfs:comment	"The typical delay between the receipt of the order and the goods either leaving the warehouse or being prepared for pickup, in case the delivery method is on site pickup. Typical properties: minValue, maxValue, unitCode (d for DAY).  This is by common convention assumed to mean business days (if a unitCode is used, coded as \"d\"), i.e. only counting days when the business normally operates."	.
+schema:handlingTime	rdfs:comment	"The typical delay between the receipt of the order and the goods either leaving the warehouse or being prepared for pickup, in case the delivery method is on site pickup. Typical properties: minValue, maxValue, unitCode (d for DAY).  This is by common convention assumed to mean business days (if a unitCode is used, coded as 'd'), i.e. only counting days when the business normally operates."	.
 schema:handlingTime	schema:domainIncludes	schema:ShippingDeliveryTime	.
 schema:handlingTime	schema:isPartOf	<https://pending.schema.org>	.
 schema:handlingTime	schema:rangeIncludes	schema:QuantitativeValue	.
@@ -9866,7 +9831,7 @@ schema:hasDeliveryMethod	schema:domainIncludes	schema:ParcelDelivery	.
 schema:hasDeliveryMethod	schema:rangeIncludes	schema:DeliveryMethod	.
 schema:hasDigitalDocumentPermission	rdf:type	rdf:Property	.
 schema:hasDigitalDocumentPermission	rdfs:label	"hasDigitalDocumentPermission"	.
-schema:hasDigitalDocumentPermission	rdfs:comment	"A permission related to the access to this document (e.g. permission to read or write an electronic document). For a public document, specify a grantee with an Audience with audienceType equal to \"public\"."	.
+schema:hasDigitalDocumentPermission	rdfs:comment	"A permission related to the access to this document (e.g. permission to read or write an electronic document). For a public document, specify a grantee with an Audience with audienceType equal to 'public'."	.
 schema:hasDigitalDocumentPermission	schema:domainIncludes	schema:DigitalDocument	.
 schema:hasDigitalDocumentPermission	schema:rangeIncludes	schema:DigitalDocumentPermission	.
 schema:hasDriveThroughService	rdf:type	rdf:Property	.
@@ -9878,7 +9843,7 @@ schema:hasDriveThroughService	schema:rangeIncludes	schema:Boolean	.
 schema:hasDriveThroughService	schema:source	<https://github.com/schemaorg/schemaorg/issues/2490>	.
 schema:hasEnergyConsumptionDetails	rdf:type	rdf:Property	.
 schema:hasEnergyConsumptionDetails	rdfs:label	"hasEnergyConsumptionDetails"	.
-schema:hasEnergyConsumptionDetails	rdfs:comment	"Defines the energy efficiency Category (also known as \"class\" or \"rating\") for a product according to an international energy efficiency standard."	.
+schema:hasEnergyConsumptionDetails	rdfs:comment	"Defines the energy efficiency Category (also known as 'class' or 'rating') for a product according to an international energy efficiency standard."	.
 schema:hasEnergyConsumptionDetails	schema:domainIncludes	schema:Product	.
 schema:hasEnergyConsumptionDetails	schema:isPartOf	<https://pending.schema.org>	.
 schema:hasEnergyConsumptionDetails	schema:rangeIncludes	schema:EnergyConsumptionDetails	.
@@ -10578,7 +10543,7 @@ schema:issn	schema:rangeIncludes	schema:Text	.
 schema:issn	schema:source	<http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_bibex>	.
 schema:issueNumber	rdf:type	rdf:Property	.
 schema:issueNumber	rdfs:label	"issueNumber"	.
-schema:issueNumber	rdfs:comment	"Identifies the issue of publication; for example, \"iii\" or \"2\"."	.
+schema:issueNumber	rdfs:comment	"Identifies the issue of publication; for example, 'iii' or '2'."	.
 schema:issueNumber	rdfs:subPropertyOf	schema:position	.
 schema:issueNumber	owl:equivalentProperty	<http://purl.org/ontology/bibo/issue>	.
 schema:issueNumber	schema:domainIncludes	schema:PublicationIssue	.
@@ -10639,7 +10604,7 @@ schema:itemDefectReturnShippingFeesAmount	schema:rangeIncludes	schema:MonetaryAm
 schema:itemDefectReturnShippingFeesAmount	schema:source	<https://github.com/schemaorg/schemaorg/issues/2880>	.
 schema:itemListElement	rdf:type	rdf:Property	.
 schema:itemListElement	rdfs:label	"itemListElement"	.
-schema:itemListElement	rdfs:comment	"For itemListElement values, you can use simple strings (e.g. \"Peter\", \"Paul\", \"Mary\"), existing entities, or use ListItem.\\n\\nText values are best if the elements in the list are plain strings. Existing entities are best for a simple, unordered list of existing things in your data. ListItem is used with ordered lists when you want to provide additional context about the element in that list or when the same item might be in different places in different lists.\\n\\nNote: The order of elements in your mark-up is not sufficient for indicating the order or elements.  Use ListItem with a 'position' property in such cases."	.
+schema:itemListElement	rdfs:comment	"For itemListElement values, you can use simple strings (e.g. 'Peter', 'Paul', 'Mary'), existing entities, or use ListItem.\\n\\nText values are best if the elements in the list are plain strings. Existing entities are best for a simple, unordered list of existing things in your data. ListItem is used with ordered lists when you want to provide additional context about the element in that list or when the same item might be in different places in different lists.\\n\\nNote: The order of elements in your mark-up is not sufficient for indicating the order or elements.  Use ListItem with a 'position' property in such cases."	.
 schema:itemListElement	schema:domainIncludes	schema:ItemList	.
 schema:itemListElement	schema:rangeIncludes	schema:ListItem	.
 schema:itemListElement	schema:rangeIncludes	schema:Text	.
@@ -10842,7 +10807,7 @@ schema:legalStatus	schema:rangeIncludes	schema:MedicalEnumeration	.
 schema:legalStatus	schema:rangeIncludes	schema:Text	.
 schema:legislationChanges	rdf:type	rdf:Property	.
 schema:legislationChanges	rdfs:label	"legislationChanges"	.
-schema:legislationChanges	rdfs:comment	"Another legislation that this legislation changes. This encompasses the notions of amendment, replacement, correction, repeal, or other types of change. This may be a direct change (textual or non-textual amendment) or a consequential or indirect change. The property is to be used to express the existence of a change relationship between two acts rather than the existence of a consolidated version of the text that shows the result of the change. For consolidation relationships, use the <a href=\"/legislationConsolidates\">legislationConsolidates</a> property."	.
+schema:legislationChanges	rdfs:comment	"Another legislation that this legislation changes. This encompasses the notions of amendment, replacement, correction, repeal, or other types of change. This may be a direct change (textual or non-textual amendment) or a consequential or indirect change. The property is to be used to express the existence of a change relationship between two acts rather than the existence of a consolidated version of the text that shows the result of the change. For consolidation relationships, use the <a href='/legislationConsolidates'>legislationConsolidates</a> property."	.
 schema:legislationChanges	owl:equivalentProperty	<http://data.europa.eu/eli/ontology#changes>	.
 schema:legislationChanges	skos:exactMatch	<http://data.europa.eu/eli/ontology#changes>	.
 schema:legislationChanges	schema:domainIncludes	schema:Legislation	.
@@ -10873,7 +10838,7 @@ schema:legislationDate	schema:source	<http://publications.europa.eu/mdr/eli/inde
 schema:legislationDate	schema:source	<https://github.com/schemaorg/schemaorg/issues/1156>	.
 schema:legislationDateVersion	rdf:type	rdf:Property	.
 schema:legislationDateVersion	rdfs:label	"legislationDateVersion"	.
-schema:legislationDateVersion	rdfs:comment	"The point-in-time at which the provided description of the legislation is valid (e.g. : when looking at the law on the 2016-04-07 (= dateVersion), I get the consolidation of 2015-04-12 of the \"National Insurance Contributions Act 2015\")"	.
+schema:legislationDateVersion	rdfs:comment	"The point-in-time at which the provided description of the legislation is valid (e.g. : when looking at the law on the 2016-04-07 (= dateVersion), I get the consolidation of 2015-04-12 of the 'National Insurance Contributions Act 2015')"	.
 schema:legislationDateVersion	owl:equivalentProperty	<http://data.europa.eu/eli/ontology#version_date>	.
 schema:legislationDateVersion	skos:exactMatch	<http://data.europa.eu/eli/ontology#version_date>	.
 schema:legislationDateVersion	schema:domainIncludes	schema:Legislation	.
@@ -10917,7 +10882,7 @@ schema:legislationLegalForce	schema:source	<http://publications.europa.eu/mdr/el
 schema:legislationLegalForce	schema:source	<https://github.com/schemaorg/schemaorg/issues/1156>	.
 schema:legislationLegalValue	rdf:type	rdf:Property	.
 schema:legislationLegalValue	rdfs:label	"legislationLegalValue"	.
-schema:legislationLegalValue	rdfs:comment	"The legal value of this legislation file. The same legislation can be written in multiple files with different legal values. Typically a digitally signed PDF have a \"stronger\" legal value than the HTML file of the same act."	.
+schema:legislationLegalValue	rdfs:comment	"The legal value of this legislation file. The same legislation can be written in multiple files with different legal values. Typically a digitally signed PDF have a 'stronger' legal value than the HTML file of the same act."	.
 schema:legislationLegalValue	owl:equivalentProperty	<http://data.europa.eu/eli/ontology#legal_value>	.
 schema:legislationLegalValue	skos:exactMatch	<http://data.europa.eu/eli/ontology#legal_value>	.
 schema:legislationLegalValue	schema:domainIncludes	schema:LegislationObject	.
@@ -10927,7 +10892,7 @@ schema:legislationLegalValue	schema:source	<http://publications.europa.eu/mdr/el
 schema:legislationLegalValue	schema:source	<https://github.com/schemaorg/schemaorg/issues/1156>	.
 schema:legislationPassedBy	rdf:type	rdf:Property	.
 schema:legislationPassedBy	rdfs:label	"legislationPassedBy"	.
-schema:legislationPassedBy	rdfs:comment	"The person or organization that originally passed or made the law : typically parliament (for primary legislation) or government (for secondary legislation). This indicates the \"legal author\" of the law, as opposed to its physical author."	.
+schema:legislationPassedBy	rdfs:comment	"The person or organization that originally passed or made the law : typically parliament (for primary legislation) or government (for secondary legislation). This indicates the 'legal author' of the law, as opposed to its physical author."	.
 schema:legislationPassedBy	rdfs:subPropertyOf	schema:creator	.
 schema:legislationPassedBy	owl:equivalentProperty	<http://data.europa.eu/eli/ontology#passed_by>	.
 schema:legislationPassedBy	skos:exactMatch	<http://data.europa.eu/eli/ontology#passed_by>	.
@@ -10961,7 +10926,7 @@ schema:legislationTransposes	schema:source	<http://publications.europa.eu/mdr/el
 schema:legislationTransposes	schema:source	<https://github.com/schemaorg/schemaorg/issues/1156>	.
 schema:legislationType	rdf:type	rdf:Property	.
 schema:legislationType	rdfs:label	"legislationType"	.
-schema:legislationType	rdfs:comment	"The type of the legislation. Examples of values are \"law\", \"act\", \"directive\", \"decree\", \"regulation\", \"statutory instrument\", \"loi organique\", \"règlement grand-ducal\", etc., depending on the country."	.
+schema:legislationType	rdfs:comment	"The type of the legislation. Examples of values are 'law', 'act', 'directive', 'decree', 'regulation', 'statutory instrument', 'loi organique', 'règlement grand-ducal', etc., depending on the country."	.
 schema:legislationType	rdfs:subPropertyOf	schema:genre	.
 schema:legislationType	owl:equivalentProperty	<http://data.europa.eu/eli/ontology#type_document>	.
 schema:legislationType	skos:exactMatch	<http://data.europa.eu/eli/ontology#type_document>	.
@@ -11747,7 +11712,7 @@ schema:numberOfAxles	schema:rangeIncludes	schema:QuantitativeValue	.
 schema:numberOfAxles	schema:source	<http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#Automotive_Ontology_Working_Group>	.
 schema:numberOfBathroomsTotal	rdf:type	rdf:Property	.
 schema:numberOfBathroomsTotal	rdfs:label	"numberOfBathroomsTotal"	.
-schema:numberOfBathroomsTotal	rdfs:comment	"The total integer number of bathrooms in a some [[Accommodation]], following real estate conventions as [documented in RESO](https://ddwiki.reso.org/display/DDW17/BathroomsTotalInteger+Field): \"The simple sum of the number of bathrooms. For example for a property with two Full Bathrooms and one Half Bathroom, the Bathrooms Total Integer will be 3.\". See also [[numberOfRooms]]."	.
+schema:numberOfBathroomsTotal	rdfs:comment	"The total integer number of bathrooms in a some [[Accommodation]], following real estate conventions as [documented in RESO](https://ddwiki.reso.org/display/DDW17/BathroomsTotalInteger+Field): 'The simple sum of the number of bathrooms. For example for a property with two Full Bathrooms and one Half Bathroom, the Bathrooms Total Integer will be 3.'. See also [[numberOfRooms]]."	.
 schema:numberOfBathroomsTotal	schema:domainIncludes	schema:Accommodation	.
 schema:numberOfBathroomsTotal	schema:domainIncludes	schema:FloorPlan	.
 schema:numberOfBathroomsTotal	schema:isPartOf	<https://pending.schema.org>	.
@@ -11951,7 +11916,7 @@ schema:offersPrescriptionByMail	schema:rangeIncludes	schema:Boolean	.
 schema:offersPrescriptionByMail	schema:source	<https://github.com/schemaorg/schemaorg/issues/1062>	.
 schema:openingHours	rdf:type	rdf:Property	.
 schema:openingHours	rdfs:label	"openingHours"	.
-schema:openingHours	rdfs:comment	"The general opening hours for a business. Opening hours can be specified as a weekly time range, starting with days, then times per day. Multiple days can be listed with commas ',' separating each day. Day or time ranges are specified using a hyphen '-'.\\n\\n* Days are specified using the following two-letter combinations: ```Mo```, ```Tu```, ```We```, ```Th```, ```Fr```, ```Sa```, ```Su```.\\n* Times are specified using 24:00 format. For example, 3pm is specified as ```15:00```, 10am as ```10:00```. \\n* Here is an example: <code>&lt;time itemprop=\"openingHours\" datetime=&quot;Tu,Th 16:00-20:00&quot;&gt;Tuesdays and Thursdays 4-8pm&lt;/time&gt;</code>.\\n* If a business is open 7 days a week, then it can be specified as <code>&lt;time itemprop=&quot;openingHours&quot; datetime=&quot;Mo-Su&quot;&gt;Monday through Sunday, all day&lt;/time&gt;</code>."	.
+schema:openingHours	rdfs:comment	"The general opening hours for a business. Opening hours can be specified as a weekly time range, starting with days, then times per day. Multiple days can be listed with commas ',' separating each day. Day or time ranges are specified using a hyphen '-'.\\n\\n* Days are specified using the following two-letter combinations: ```Mo```, ```Tu```, ```We```, ```Th```, ```Fr```, ```Sa```, ```Su```.\\n* Times are specified using 24:00 format. For example, 3pm is specified as ```15:00```, 10am as ```10:00```. \\n* Here is an example: <code>&lt;time itemprop='openingHours' datetime=&quot;Tu,Th 16:00-20:00&quot;&gt;Tuesdays and Thursdays 4-8pm&lt;/time&gt;</code>.\\n* If a business is open 7 days a week, then it can be specified as <code>&lt;time itemprop=&quot;openingHours&quot; datetime=&quot;Mo-Su&quot;&gt;Monday through Sunday, all day&lt;/time&gt;</code>."	.
 schema:openingHours	schema:domainIncludes	schema:CivicStructure	.
 schema:openingHours	schema:domainIncludes	schema:LocalBusiness	.
 schema:openingHours	schema:rangeIncludes	schema:Text	.
@@ -12107,7 +12072,7 @@ schema:owns	schema:rangeIncludes	schema:Product	.
 schema:owns	schema:source	<http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsTerms>	.
 schema:pageEnd	rdf:type	rdf:Property	.
 schema:pageEnd	rdfs:label	"pageEnd"	.
-schema:pageEnd	rdfs:comment	"The page on which the work ends; for example \"138\" or \"xvi\"."	.
+schema:pageEnd	rdfs:comment	"The page on which the work ends; for example '138' or 'xvi'."	.
 schema:pageEnd	owl:equivalentProperty	<http://purl.org/ontology/bibo/pageEnd>	.
 schema:pageEnd	schema:domainIncludes	schema:Article	.
 schema:pageEnd	schema:domainIncludes	schema:Chapter	.
@@ -12118,7 +12083,7 @@ schema:pageEnd	schema:rangeIncludes	schema:Text	.
 schema:pageEnd	schema:source	<http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_bibex>	.
 schema:pageStart	rdf:type	rdf:Property	.
 schema:pageStart	rdfs:label	"pageStart"	.
-schema:pageStart	rdfs:comment	"The page on which the work starts; for example \"135\" or \"xiii\"."	.
+schema:pageStart	rdfs:comment	"The page on which the work starts; for example '135' or 'xiii'."	.
 schema:pageStart	owl:equivalentProperty	<http://purl.org/ontology/bibo/pageStart>	.
 schema:pageStart	schema:domainIncludes	schema:Article	.
 schema:pageStart	schema:domainIncludes	schema:Chapter	.
@@ -12129,7 +12094,7 @@ schema:pageStart	schema:rangeIncludes	schema:Text	.
 schema:pageStart	schema:source	<http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_bibex>	.
 schema:pagination	rdf:type	rdf:Property	.
 schema:pagination	rdfs:label	"pagination"	.
-schema:pagination	rdfs:comment	"Any description of pages that is not separated into pageStart and pageEnd; for example, \"1-6, 9, 55\" or \"10-12, 46-49\"."	.
+schema:pagination	rdfs:comment	"Any description of pages that is not separated into pageStart and pageEnd; for example, '1-6, 9, 55' or '10-12, 46-49'."	.
 schema:pagination	owl:equivalentProperty	<http://purl.org/ontology/bibo/pages>	.
 schema:pagination	schema:domainIncludes	schema:Article	.
 schema:pagination	schema:domainIncludes	schema:Chapter	.
@@ -12578,7 +12543,7 @@ schema:priceComponentType	schema:rangeIncludes	schema:PriceComponentTypeEnumerat
 schema:priceComponentType	schema:source	<https://github.com/schemaorg/schemaorg/issues/2689>	.
 schema:priceCurrency	rdf:type	rdf:Property	.
 schema:priceCurrency	rdfs:label	"priceCurrency"	.
-schema:priceCurrency	rdfs:comment	"The currency of the price, or a price component when attached to [[PriceSpecification]] and its subtypes.\\n\\nUse standard formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217) e.g. \"USD\"; [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for cryptocurrencies e.g. \"BTC\"; well known names for [Local Exchange Tradings Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system) (LETS) and other currency types e.g. \"Ithaca HOUR\"."	.
+schema:priceCurrency	rdfs:comment	"The currency of the price, or a price component when attached to [[PriceSpecification]] and its subtypes.\\n\\nUse standard formats: [ISO 4217 currency format](http://en.wikipedia.org/wiki/ISO_4217) e.g. 'USD'; [Ticker symbol](https://en.wikipedia.org/wiki/List_of_cryptocurrencies) for cryptocurrencies e.g. 'BTC'; well known names for [Local Exchange Tradings Systems](https://en.wikipedia.org/wiki/Local_exchange_trading_system) (LETS) and other currency types e.g. 'Ithaca HOUR'."	.
 schema:priceCurrency	schema:domainIncludes	schema:Offer	.
 schema:priceCurrency	schema:domainIncludes	schema:PriceSpecification	.
 schema:priceCurrency	schema:domainIncludes	schema:Reservation	.
@@ -12685,13 +12650,13 @@ schema:productGroupID	schema:rangeIncludes	schema:Text	.
 schema:productGroupID	schema:source	<https://github.com/schemaorg/schemaorg/issues/1797>	.
 schema:productID	rdf:type	rdf:Property	.
 schema:productID	rdfs:label	"productID"	.
-schema:productID	rdfs:comment	"The product identifier, such as ISBN. For example: ``` meta itemprop=\"productID\" content=\"isbn:123-456-789\" ```."	.
+schema:productID	rdfs:comment	"The product identifier, such as ISBN. For example: ``` meta itemprop='productID' content='isbn:123-456-789' ```."	.
 schema:productID	rdfs:subPropertyOf	schema:identifier	.
 schema:productID	schema:domainIncludes	schema:Product	.
 schema:productID	schema:rangeIncludes	schema:Text	.
 schema:productSupported	rdf:type	rdf:Property	.
 schema:productSupported	rdfs:label	"productSupported"	.
-schema:productSupported	rdfs:comment	"The product or service this support contact point is related to (such as product support for a particular product line). This can be a specific product or product line (e.g. \"iPhone\") or a general category of products or services (e.g. \"smartphones\")."	.
+schema:productSupported	rdfs:comment	"The product or service this support contact point is related to (such as product support for a particular product line). This can be a specific product or product line (e.g. 'iPhone') or a general category of products or services (e.g. 'smartphones')."	.
 schema:productSupported	schema:domainIncludes	schema:ContactPoint	.
 schema:productSupported	schema:rangeIncludes	schema:Product	.
 schema:productSupported	schema:rangeIncludes	schema:Text	.
@@ -12890,7 +12855,7 @@ schema:ratingCount	schema:domainIncludes	schema:AggregateRating	.
 schema:ratingCount	schema:rangeIncludes	schema:Integer	.
 schema:ratingExplanation	rdf:type	rdf:Property	.
 schema:ratingExplanation	rdfs:label	"ratingExplanation"	.
-schema:ratingExplanation	rdfs:comment	"A short explanation (e.g. one to two sentences) providing background context and other information that led to the conclusion expressed in the rating. This is particularly applicable to ratings associated with \"fact check\" markup using [[ClaimReview]]."	.
+schema:ratingExplanation	rdfs:comment	"A short explanation (e.g. one to two sentences) providing background context and other information that led to the conclusion expressed in the rating. This is particularly applicable to ratings associated with 'fact check' markup using [[ClaimReview]]."	.
 schema:ratingExplanation	schema:domainIncludes	schema:Rating	.
 schema:ratingExplanation	schema:isPartOf	<https://pending.schema.org>	.
 schema:ratingExplanation	schema:rangeIncludes	schema:Text	.
@@ -12910,7 +12875,7 @@ schema:readBy	schema:isPartOf	<https://bib.schema.org>	.
 schema:readBy	schema:rangeIncludes	schema:Person	.
 schema:readonlyValue	rdf:type	rdf:Property	.
 schema:readonlyValue	rdfs:label	"readonlyValue"	.
-schema:readonlyValue	rdfs:comment	"Whether or not a property is mutable.  Default is false. Specifying this for a property that also has a value makes it act similar to a \"hidden\" input in an HTML form."	.
+schema:readonlyValue	rdfs:comment	"Whether or not a property is mutable.  Default is false. Specifying this for a property that also has a value makes it act similar to a 'hidden' input in an HTML form."	.
 schema:readonlyValue	schema:domainIncludes	schema:PropertyValueSpecification	.
 schema:readonlyValue	schema:rangeIncludes	schema:Boolean	.
 schema:realEstateAgent	rdf:type	rdf:Property	.
@@ -13289,7 +13254,7 @@ schema:returnPolicyCategory	schema:rangeIncludes	schema:MerchantReturnEnumeratio
 schema:returnPolicyCategory	schema:source	<https://github.com/schemaorg/schemaorg/issues/2288>	.
 schema:returnPolicyCountry	rdf:type	rdf:Property	.
 schema:returnPolicyCountry	rdfs:label	"returnPolicyCountry"	.
-schema:returnPolicyCountry	rdfs:comment	"The country where the product has to be sent to for returns, for example \"Ireland\" using the [[name]] property of [[Country]]. You can also provide the two-letter [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1). Note that this can be different from the country where the product was originally shipped from or sent too."	.
+schema:returnPolicyCountry	rdfs:comment	"The country where the product has to be sent to for returns, for example 'Ireland' using the [[name]] property of [[Country]]. You can also provide the two-letter [ISO 3166-1 alpha-2 country code](http://en.wikipedia.org/wiki/ISO_3166-1). Note that this can be different from the country where the product was originally shipped from or sent too."	.
 schema:returnPolicyCountry	schema:domainIncludes	schema:MerchantReturnPolicy	.
 schema:returnPolicyCountry	schema:isPartOf	<https://pending.schema.org>	.
 schema:returnPolicyCountry	schema:rangeIncludes	schema:Country	.
@@ -13746,7 +13711,7 @@ schema:size	schema:rangeIncludes	schema:Text	.
 schema:size	schema:source	<https://github.com/schemaorg/schemaorg/issues/1797>	.
 schema:sizeGroup	rdf:type	rdf:Property	.
 schema:sizeGroup	rdfs:label	"sizeGroup"	.
-schema:sizeGroup	rdfs:comment	"The size group (also known as \"size type\") for a product's size. Size groups are common in the fashion industry to define size segments and suggested audiences for wearable products. Multiple values can be combined, for example \"men's big and tall\", \"petite maternity\" or \"regular\""	.
+schema:sizeGroup	rdfs:comment	"The size group (also known as 'size type') for a product's size. Size groups are common in the fashion industry to define size segments and suggested audiences for wearable products. Multiple values can be combined, for example 'men's big and tall', 'petite maternity' or 'regular'"	.
 schema:sizeGroup	schema:domainIncludes	schema:SizeSpecification	.
 schema:sizeGroup	schema:isPartOf	<https://pending.schema.org>	.
 schema:sizeGroup	schema:rangeIncludes	schema:SizeGroupEnumeration	.
@@ -13754,7 +13719,7 @@ schema:sizeGroup	schema:rangeIncludes	schema:Text	.
 schema:sizeGroup	schema:source	<https://github.com/schemaorg/schemaorg/issues/2811>	.
 schema:sizeSystem	rdf:type	rdf:Property	.
 schema:sizeSystem	rdfs:label	"sizeSystem"	.
-schema:sizeSystem	rdfs:comment	"The size system used to identify a product's size. Typically either a standard (for example, \"GS1\" or \"ISO-EN13402\"), country code (for example \"US\" or \"JP\"), or a measuring system (for example \"Metric\" or \"Imperial\")."	.
+schema:sizeSystem	rdfs:comment	"The size system used to identify a product's size. Typically either a standard (for example, 'GS1' or 'ISO-EN13402'), country code (for example 'US' or 'JP'), or a measuring system (for example 'Metric' or 'Imperial')."	.
 schema:sizeSystem	schema:domainIncludes	schema:SizeSpecification	.
 schema:sizeSystem	schema:isPartOf	<https://pending.schema.org>	.
 schema:sizeSystem	schema:rangeIncludes	schema:SizeSystemEnumeration	.
@@ -14112,7 +14077,7 @@ schema:suggestedAge	schema:rangeIncludes	schema:QuantitativeValue	.
 schema:suggestedAge	schema:source	<https://github.com/schemaorg/schemaorg/issues/2811>	.
 schema:suggestedGender	rdf:type	rdf:Property	.
 schema:suggestedGender	rdfs:label	"suggestedGender"	.
-schema:suggestedGender	rdfs:comment	"The suggested gender of the intended person or audience, for example \"male\", \"female\", or \"unisex\"."	.
+schema:suggestedGender	rdfs:comment	"The suggested gender of the intended person or audience, for example 'male', 'female', or 'unisex'."	.
 schema:suggestedGender	schema:domainIncludes	schema:PeopleAudience	.
 schema:suggestedGender	schema:domainIncludes	schema:SizeSpecification	.
 schema:suggestedGender	schema:rangeIncludes	schema:GenderType	.
@@ -14326,7 +14291,7 @@ schema:ticketedSeat	schema:domainIncludes	schema:Ticket	.
 schema:ticketedSeat	schema:rangeIncludes	schema:Seat	.
 schema:timeOfDay	rdf:type	rdf:Property	.
 schema:timeOfDay	rdfs:label	"timeOfDay"	.
-schema:timeOfDay	rdfs:comment	"The time of day the program normally runs. For example, \"evenings\"."	.
+schema:timeOfDay	rdfs:comment	"The time of day the program normally runs. For example, 'evenings'."	.
 schema:timeOfDay	schema:domainIncludes	schema:EducationalOccupationalProgram	.
 schema:timeOfDay	schema:isPartOf	<https://pending.schema.org>	.
 schema:timeOfDay	schema:rangeIncludes	schema:Text	.
@@ -14694,7 +14659,7 @@ schema:usesDevice	schema:isPartOf	<https://health-lifesci.schema.org>	.
 schema:usesDevice	schema:rangeIncludes	schema:MedicalDevice	.
 schema:usesHealthPlanIdStandard	rdf:type	rdf:Property	.
 schema:usesHealthPlanIdStandard	rdfs:label	"usesHealthPlanIdStandard"	.
-schema:usesHealthPlanIdStandard	rdfs:comment	"The standard for interpreting thePlan ID. The preferred is \"HIOS\". See the Centers for Medicare & Medicaid Services for more details."	.
+schema:usesHealthPlanIdStandard	rdfs:comment	"The standard for interpreting thePlan ID. The preferred is 'HIOS'. See the Centers for Medicare & Medicaid Services for more details."	.
 schema:usesHealthPlanIdStandard	schema:domainIncludes	schema:HealthInsurancePlan	.
 schema:usesHealthPlanIdStandard	schema:isPartOf	<https://pending.schema.org>	.
 schema:usesHealthPlanIdStandard	schema:rangeIncludes	schema:Text	.
@@ -14825,7 +14790,7 @@ schema:variantCover	schema:isPartOf	<https://bib.schema.org>	.
 schema:variantCover	schema:rangeIncludes	schema:Text	.
 schema:variesBy	rdf:type	rdf:Property	.
 schema:variesBy	rdfs:label	"variesBy"	.
-schema:variesBy	rdfs:comment	"Indicates the property or properties by which the variants in a [[ProductGroup]] vary, e.g. their size, color etc. Schema.org properties can be referenced by their short name e.g. \"color\"; terms defined elsewhere can be referenced with their URIs."	.
+schema:variesBy	rdfs:comment	"Indicates the property or properties by which the variants in a [[ProductGroup]] vary, e.g. their size, color etc. Schema.org properties can be referenced by their short name e.g. 'color'; terms defined elsewhere can be referenced with their URIs."	.
 schema:variesBy	schema:domainIncludes	schema:ProductGroup	.
 schema:variesBy	schema:isPartOf	<https://pending.schema.org>	.
 schema:variesBy	schema:rangeIncludes	schema:DefinedTerm	.
@@ -14892,7 +14857,7 @@ schema:vehicleSpecialUsage	schema:rangeIncludes	schema:Text	.
 schema:vehicleSpecialUsage	schema:source	<http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#Automotive_Ontology_Working_Group>	.
 schema:vehicleTransmission	rdf:type	rdf:Property	.
 schema:vehicleTransmission	rdfs:label	"vehicleTransmission"	.
-schema:vehicleTransmission	rdfs:comment	"The type of component used for transmitting the power from a rotating power source to the wheels or other relevant component(s) (\"gearbox\" for cars)."	.
+schema:vehicleTransmission	rdfs:comment	"The type of component used for transmitting the power from a rotating power source to the wheels or other relevant component(s) ('gearbox' for cars)."	.
 schema:vehicleTransmission	schema:domainIncludes	schema:Vehicle	.
 schema:vehicleTransmission	schema:rangeIncludes	schema:QualitativeValue	.
 schema:vehicleTransmission	schema:rangeIncludes	schema:Text	.
@@ -14947,7 +14912,7 @@ schema:videoQuality	schema:domainIncludes	schema:VideoObject	.
 schema:videoQuality	schema:rangeIncludes	schema:Text	.
 schema:volumeNumber	rdf:type	rdf:Property	.
 schema:volumeNumber	rdfs:label	"volumeNumber"	.
-schema:volumeNumber	rdfs:comment	"Identifies the volume of publication or multi-part work; for example, \"iii\" or \"2\"."	.
+schema:volumeNumber	rdfs:comment	"Identifies the volume of publication or multi-part work; for example, 'iii' or '2'."	.
 schema:volumeNumber	rdfs:subPropertyOf	schema:position	.
 schema:volumeNumber	owl:equivalentProperty	<http://purl.org/ontology/bibo/volume>	.
 schema:volumeNumber	schema:domainIncludes	schema:PublicationVolume	.
@@ -15072,7 +15037,7 @@ schema:worstRating	schema:rangeIncludes	schema:Number	.
 schema:worstRating	schema:rangeIncludes	schema:Text	.
 schema:xpath	rdf:type	rdf:Property	.
 schema:xpath	rdfs:label	"xpath"	.
-schema:xpath	rdfs:comment	"An XPath, e.g. of a [[SpeakableSpecification]] or [[WebPageElement]]. In the latter case, multiple matches within a page can constitute a single conceptual \"Web page element\"."	.
+schema:xpath	rdfs:comment	"An XPath, e.g. of a [[SpeakableSpecification]] or [[WebPageElement]]. In the latter case, multiple matches within a page can constitute a single conceptual 'Web page element'."	.
 schema:xpath	schema:domainIncludes	schema:SpeakableSpecification	.
 schema:xpath	schema:domainIncludes	schema:WebPageElement	.
 schema:xpath	schema:rangeIncludes	schema:XPathType	.
@@ -15604,7 +15569,7 @@ schema:jurisdiction	schema:rangeIncludes	schema:Text	.
 schema:jurisdiction	schema:source	<https://github.com/schemaorg/schemaorg/issues/2534>	.
 schema:legislationApplies	rdf:type	rdf:Property	.
 schema:legislationApplies	rdfs:label	"legislationApplies"	.
-schema:legislationApplies	rdfs:comment	"Indicates that this legislation (or part of a legislation) somehow transfers another legislation in a different legislative context. This is an informative link, and it has no legal value. For legally-binding links of transposition, use the <a href=\"/legislationTransposes\">legislationTransposes</a> property. For example an informative consolidated law of a European Union's member state \"applies\" the consolidated version of the European Directive implemented in it."	.
+schema:legislationApplies	rdfs:comment	"Indicates that this legislation (or part of a legislation) somehow transfers another legislation in a different legislative context. This is an informative link, and it has no legal value. For legally-binding links of transposition, use the <a href='/legislationTransposes'>legislationTransposes</a> property. For example an informative consolidated law of a European Union's member state 'applies' the consolidated version of the European Directive implemented in it."	.
 schema:legislationApplies	owl:equivalentProperty	<http://data.europa.eu/eli/ontology#implements>	.
 schema:legislationApplies	skos:exactMatch	<http://data.europa.eu/eli/ontology#implements>	.
 schema:legislationApplies	schema:domainIncludes	schema:Legislation	.

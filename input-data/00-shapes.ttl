@@ -106,11 +106,11 @@ schema:Thing a sh:NodeShape ;
         sh:datatype xsd:anyURI ;
         ys:fromProperty wdt:P856 ;
     ] ;
-	# We map to Wikidata, Freebase, Google knowledge graph, and IMDB.
+	# We map to Wikidata, Freebase, Google knowledge graph, WordNet, and IMDB.
     sh:property [
         sh:path schema:sameAs ;
 		sh:datatype xsd:string ;
-        ys:fromProperty wdt:P646, wdt:P345, wdt:P2671, wdt:P1053;
+        ys:fromProperty wdt:P646, wdt:P345, wdt:P2671, wdt:P1053, wdt:P8814;
     ] .
 
 # Class of all classes. Classes can have properties, too, but only annotation properties.
@@ -396,7 +396,7 @@ schema:MusicComposition a sh:NodeShape ;
         ys:fromProperty wdt:P86 ;
     ] ;
     sh:property [
-        sh:path schema:iswcCode ;
+        sh:path yago:iswcCode ; # Fabian: Changed from schema: to yago: 2024-04-03
         sh:datatype xsd:string ;
         sh:pattern "^T-[0-9]{3}\\.[0-9]{3}\\.[0-9]{3}-[0-9]$" ;
         sh:maxCount 1 ;
@@ -775,12 +775,12 @@ schema:Organization a sh:NodeShape ;
         ys:fromProperty wdt:P112 ;
     ] ;
     sh:property [
-        sh:path schema:leader ;
+        sh:path yago:leader ; # Fabian: changed from schema: to yago: 2024-04-03
         sh:class schema:Person ;
         ys:fromProperty wdt:P35, wdt:P6, wdt:P168, wdt:P169, wdt:P1075 ;
     ] ;
     sh:property [
-        sh:path schema:motto ;
+        sh:path schema:slogan ; # Fabian: changed from motto to slogan 2024-04-03
         sh:datatype xsd:string ;
         ys:fromProperty wdt:P1451 ;
     ] ;
@@ -838,7 +838,7 @@ schema:Organization a sh:NodeShape ;
     #     ys:fromProperty wdt:P355 ;
     # ] ;
     sh:property [
-        sh:path schema:ownedBy ;
+        sh:path yago:ownedBy ; # Fabian: changed from schema: to yago:, 2024-04-03
         sh:or (
             [
                 sh:class schema:Organization
@@ -920,7 +920,7 @@ schema:PerformingGroup rdf:type sh:NodeShape ;
 schema:MusicGroup a sh:NodeShape ;
     ys:fromClass wd:Q2088357 ;
     sh:property [
-        sh:path schema:influencedBy ;
+        sh:path yago:influencedBy ; # Fabian: changed from schema: to yago: 2024-04-03
         sh:class schema:Thing ;
         ys:fromProperty wdt:P737, wdt:P941 ;
     ];
@@ -1107,7 +1107,7 @@ yago:Creator a sh:NodeShape ;
     ys:fromClass wd:Q2500638 ;
     rdfs:subClassOf yago:Worker ;
 	sh:property [
-        sh:path schema:influencedBy ;
+        sh:path yago:influencedBy ; # Fabian: changed from schema: to yago: 2024-04-03
         sh:class schema:Thing ;
         ys:fromProperty wdt:P737, wdt:P941 ;
     ];	
@@ -1171,22 +1171,22 @@ schema:Place a sh:NodeShape ;
         ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17 ;
     ] ;
     sh:property [
-        sh:path schema:area ;
+        sh:path yago:area ; # Fabian: changed from schema: to yago: 2024-04-03
         sh:datatype xsd:decimal ;
         ys:fromProperty wdt:P2046 ;
     ] ;
     sh:property [
-        sh:path schema:highestPoint ;
+        sh:path yago:highestPoint ; # Fabian: changed from schema: to yago: 2024-04-03
         sh:class schema:Place ;
         ys:fromProperty wdt:P610 ;
     ] ;
     sh:property [
-        sh:path schema:lowestPoint ;
+        sh:path yago:lowestPoint ; # Fabian: changed from schema: to yago: 2024-04-03
         sh:class schema:Place ;
         ys:fromProperty wdt:P1589 ;
     ] ;
     sh:property [
-        sh:path schema:neighbors ;
+        sh:path yago:neighbors ; # Fabian: changed from schema: to yago: 2024-04-03
         sh:class schema:Place ;
         ys:fromProperty wdt:P47, wdt:P206 ;
     ] ;
@@ -1197,7 +1197,7 @@ schema:Place a sh:NodeShape ;
     #    ys:fromProperty wdt:P206 ;
     #] ;
     sh:property [
-        sh:path schema:elevation ;
+        sh:path yago:elevation ; # Fabian: changed from schema: to yago: 2024-04-03
         sh:datatype xsd:decimal ;
         ys:fromProperty wdt:P2044 ;
     ] ;
@@ -1259,12 +1259,12 @@ schema:AdministrativeArea a sh:NodeShape ;
 		sh:maxCount 1 ;
     ] ;
     sh:property [
-        sh:path schema:demonym ;
+        sh:path yago:demonym ; # Fabian: changed from schema:... 2024-04-03
         sh:datatype xsd:string ;
         ys:fromProperty wdt:P1549 ;
     ] ;
     sh:property [
-        sh:path schema:leader ;
+        sh:path yago:leader ; # Fabian: changed from schema:... 2024-04-03
         sh:class schema:Person ;
         ys:fromProperty wdt:P6, wdt:P35 ;
     ] ;
@@ -1274,7 +1274,7 @@ schema:AdministrativeArea a sh:NodeShape ;
         ys:fromProperty wdt:P1365 ;
     ] ;
     sh:property [
-        sh:path schema:populationNumber ;
+        sh:path yago:populationNumber ; # Fabian: changed from schema:... 2024-04-03
         sh:datatype xsd:decimal ;
         ys:fromProperty wdt:P1082 ;
     ] ;
@@ -1284,7 +1284,7 @@ schema:AdministrativeArea a sh:NodeShape ;
         ys:fromProperty wdt:P281 ;
     ] ;
     sh:property [
-        sh:path schema:motto ;
+        sh:path schema:slogan ; # Fabian: changed from motto to slogan 2024-04-03
         sh:datatype xsd:string ;
         ys:fromProperty wdt:P1451 ;
     ] ;
@@ -1293,12 +1293,12 @@ schema:AdministrativeArea a sh:NodeShape ;
         sh:class schema:Organization ;
         ys:fromProperty wdt:P463 ;
     ] ;
-    sh:property [
-	    # Fabian 2023-03-28: TODO, is this redundant with containedInPlace^- ?
-        sh:path schema:administrates ;
-        sh:class schema:Place ;
-        ys:fromProperty wdt:P150 ;
-    ] ;
+    #sh:property [
+	#    # Fabian 2024-04-03: this redundant with containedInPlace^-
+    #    sh:path schema:administrates ;
+    #    sh:class schema:Place ;
+    #    ys:fromProperty wdt:P150 ;
+    #] ;
     sh:property [
         sh:path yago:capital ;
         sh:class schema:City ;
@@ -1314,17 +1314,17 @@ schema:City a sh:NodeShape ;
 # Needed because of additional properties
 schema:Country a sh:NodeShape ;
 	sh:property [
-        sh:path schema:officialLanguage ;
+        sh:path yago:officialLanguage ; # Fabian: changed from schema:... 2024-04-03
         sh:class schema:Language ;
         ys:fromProperty wdt:P37 ;
     ] ;
     sh:property [
-        sh:path schema:humanDevelopmentIndex ;
+        sh:path yago:humanDevelopmentIndex ; # Fabian: changed from schema:humanDevelopmentIndex 2024-04-03
         sh:datatype xsd:decimal ;
         ys:fromProperty wdt:P1081 ;
     ] ;
     sh:property [
-        sh:path schema:unemploymentRate ;
+        sh:path yago:unemploymentRate ; # Fabian: changed from schema:... 2024-04-03
         sh:datatype xsd:decimal ;
         ys:fromProperty wdt:P1198 ;
     ] ;
@@ -1377,7 +1377,7 @@ yago:HumanMadeGeographicalEntity a sh:NodeShape ;
 	rdfs:label "Human-made geographical entity"@en ;
     ys:fromClass wd:Q811979, wd:Q811430, wd:Q811463, wd:Q35145743 ;
 	sh:property [
-        sh:path schema:ownedBy ;
+        sh:path yago:ownedBy ; # Fabian: changed from schema: to yago: 2024-04-03
         sh:or (
             [
                 sh:class schema:Organization

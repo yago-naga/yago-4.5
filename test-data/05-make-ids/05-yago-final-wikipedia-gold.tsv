@@ -1,6 +1,4 @@
-@prefix bioschema: <http://bioschemas.org/> .
 @prefix yago: <http://yago-knowledge.org/resource/> .
-@prefix yagov: <http://yago-knowledge.org/value/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> .
