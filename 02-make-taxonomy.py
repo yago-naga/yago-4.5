@@ -108,7 +108,11 @@ badClasses = {
     "wd:Q3241972",  # Characters
     "wd:Q29654788", # Unicode characters
     "wd:Q11953984", # Linguistic units, words etc
-    "wd:Q11563"     # Numbers
+    "wd:Q11563",    # Numbers,
+    "wd:Q192581",   # Job -> causes problem because instances of "lawyer" become instances of "job" and thus of "economic activity"
+    "wd:Q12737077", # Occupation (dito)
+    "wd:Q28640",    # Profession (dito)
+    "wd:Q4164871"   # Role (dito)
 }
 
 def subClassesInclude(superClass, potentialSubClass):
@@ -211,7 +215,7 @@ if __name__ == '__main__':
             
         # Load Wikidata taxonomy
         results=TurtleUtils.visitWikidata(WIKIDATA_FILE, wikidataVisitor)
-        # <results> is a list taxonomies
+        # <results> is a list of taxonomies
         # We now merge them together in the global variable <wikidataTaxonomyDown>
         wikidataTaxonomyDown=dict()
         for result in results:

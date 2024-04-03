@@ -256,7 +256,7 @@ def checkCardinalityConstraints(p, entityFacts, yagoSchema):
 # yago-shape-prop:schema-Person-schema-birthDate
 #   sh:path  schema:birthDate,
 #   sh:maxCount  "1"^^xsd:integer
-#   sh:node <targetClass> 
+#   sh:class <targetClass> 
 #   sh:datatype  xsd:string
 #   sh:pattern  <regex>
 
@@ -272,6 +272,12 @@ def checkURI(s):
     """TRUE if s conforms to xsd:anyUri, as explained here:
     https://stackoverflow.com/questions/14466585/is-this-regex-correct-for-xsdanyuri """
     return not re.search("(%(?![0-9A-F]{2})|#.*#)", s)
+
+def normalizeString(s):
+    """ Makes sure that a string does not contani invalid characters or languages"""
+    if not s.startswith('"'):
+        return s
+    return s.replace("\uFFFD","_").replace('"@zh-classical','"@zh')
     
 def checkDatatype(datatype, listOfObjects, yagoSchema):
     """True if the singleton object of listOfObjects conforms to the <datatype>. Modifies the object if necessary."""
@@ -307,7 +313,7 @@ def checkDatatype(datatype, listOfObjects, yagoSchema):
     return literalDataType==datatype        
         
 def checkRangePropertyNode(propertyNode, listOfObjects, yagoSchema):
-    """True if the singleton element of listOfObjects conforms to the range constraints given by the yago-shape-prop node <propertNode>. False if it does not. Otherwise, returns a list of permissible types. Modifies the object in the list if necessary."""
+    """True if the singleton element of listOfObjects conforms to the range constraints given by the yago-shape-prop node <propertyNode>. False if it does not. Otherwise, returns a list of permissible types. Modifies the object in the list if necessary."""
     # Disjunctions
     o=listOfObjects[0]
     disjunctObject = getFirst(yagoSchema.objects(propertyNode, Prefixes.shaclOr))
@@ -409,7 +415,7 @@ class treatWikidataEntity():
                     
         # We have to open the file here and not in init() to avoid pickling problems
         if not self.writer:
-            self.writer=TsvUtils.TsvFileWriter(FOLDER+"03-yago-facts-to-type-check-"+str(self.number)+".tmp")
+            self.writer=TsvUtils.TsvFileWriter(FOLDER+"03-yago-facts-to-type-check-"+(str(self.number).rjust(4,'0'))+".tmp")
             self.writer.__enter__()
         
         # Anything that is rdf:type in Wikidata is meta-statements, 
@@ -455,6 +461,7 @@ class treatWikidataEntity():
                 debug("Range check failed for",o,yagoPredicate)
                 continue          
             (startDate, endDate) = getStartAndEndDate(s, p, o, entityFacts)
+            o=normalizeString(o)
             if rangeResult is True:
                 if startDate or endDate:
                     self.writer.write(s,yagoPredicate,o, ". #", "", startDate, endDate)
@@ -473,8 +480,10 @@ if __name__ == '__main__':
         TurtleUtils.visitWikidata(WIKIDATA_FILE, treatWikidataEntity) 
         print("  Collecting results...")
         count=0
+        tempFiles=list(glob.glob(FOLDER+"03-yago-facts-to-type-check-*.tmp"))
+        tempFiles.sort()
         with open(FOLDER+"03-yago-facts-to-type-check.tsv", "wb") as writer:
-            for file in glob.glob(FOLDER+"03-yago-facts-to-type-check-*.tmp"):
+            for file in tempFiles:
                 print("    Reading",file)
                 with open(file, "rb") as reader:
                     for line in reader:
@@ -484,7 +493,7 @@ if __name__ == '__main__':
         print("  Info: Number of facts:",count)
         
         print("  Deleting temporary files...", end="", flush=True)
-        for file in set(glob.glob(FOLDER+"03-yago-facts-to-type-check-*.tmp")):
+        for file in tempFiles:
             os.remove(file)
         print(" done")
     
