@@ -56,10 +56,10 @@ wd:Q_fictional	schema:birthPlace	wd:Q_birth_place_1	. # IF	schema:Place
 wd:Q_fictional	yago:appearsIn	wd:Q_book	. # IF	schema:CreativeWork		
 wd:Q_fictional	rdf:type	wd:Q2593744	.
 wd:Q_fictional	rdf:type	wd:Q_rock_singer	.
-wd:Q_singer	rdfs:label	"chanteur"@fr	.
 wd:Q_singer	rdfs:label	"singer"@en	.
 wd:Q_singer	rdfs:label	"chanteur"@fr	.
 wd:Q_singer	rdfs:label	"singer"@en	.
+wd:Q_singer	rdfs:label	"chanteur"@fr	.
 wd:Q_singer	schema:sameAs	"https://freebase.com/id"	.
 wd:Q_singer	rdfs:comment	"this is a singer"@en	.
 wd:Q_singer	schema:alternateName	"this is a human singer"@en	.

@@ -107,7 +107,7 @@ fromProperty = "ys:fromProperty"
 
 shaclPath="sh:path"
 
-shaclNode="sh:node"
+shaclNode="sh:class" # Fabian: Changed from sh:node to sh:class on 2024-04-03
 
 shaclMaxCount="sh:maxCount"
 

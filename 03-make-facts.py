@@ -256,7 +256,7 @@ def checkCardinalityConstraints(p, entityFacts, yagoSchema):
 # yago-shape-prop:schema-Person-schema-birthDate
 #   sh:path  schema:birthDate,
 #   sh:maxCount  "1"^^xsd:integer
-#   sh:node <targetClass> 
+#   sh:class <targetClass> 
 #   sh:datatype  xsd:string
 #   sh:pattern  <regex>
 

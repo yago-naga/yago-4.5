@@ -144,12 +144,12 @@ ys:Award_property_13 sh:path yago:conferredBy ;
 ys:list_14 rdf:first ys:element_15 ;
 	rdf:rest ys:list_16 .
 
-ys:element_15 sh:node schema:Organization .
+ys:element_15 sh:class schema:Organization .
 
 ys:list_16 rdf:first ys:element_17 ;
 	rdf:rest rdf:nil .
 
-ys:element_17 sh:node schema:Person .
+ys:element_17 sh:class schema:Person .
 
 yago:BeliefSystem rdf:type sh:NodeShape ;
 	rdfs:subClassOf schema:Intangible ;
@@ -164,11 +164,11 @@ schema:Language rdf:type sh:NodeShape ;
 	rdfs:subClassOf schema:Intangible .
 
 ys:CreativeWork_property_19 sh:path schema:about ;
-	sh:node schema:Thing ;
+	sh:class schema:Thing ;
 	ys:fromProperty wdt:P921 .
 
 ys:CreativeWork_property_20 sh:path schema:award ;
-	sh:node yago:Award ;
+	sh:class yago:Award ;
 	ys:fromProperty wdt:P166 .
 
 ys:CreativeWork_property_21 sh:path schema:author ;
@@ -178,15 +178,15 @@ ys:CreativeWork_property_21 sh:path schema:author ;
 ys:list_22 rdf:first ys:element_23 ;
 	rdf:rest ys:list_24 .
 
-ys:element_23 sh:node schema:Organization .
+ys:element_23 sh:class schema:Organization .
 
 ys:list_24 rdf:first ys:element_25 ;
 	rdf:rest rdf:nil .
 
-ys:element_25 sh:node schema:Person .
+ys:element_25 sh:class schema:Person .
 
 ys:CreativeWork_property_27 sh:path schema:contentLocation ;
-	sh:node schema:Place ;
+	sh:class schema:Place ;
 	ys:fromProperty wdt:P840 .
 
 ys:CreativeWork_property_28 sh:path schema:dateCreated ;
@@ -215,7 +215,7 @@ ys:list_35 rdf:first ys:element_36 ;
 ys:element_36 sh:datatype xsd:gYear .
 
 ys:CreativeWork_property_38 sh:path schema:inLanguage ;
-	sh:node schema:Language ;
+	sh:class schema:Language ;
 	ys:fromProperty wdt:P407 .
 
 schema:Book rdf:type sh:NodeShape ;
@@ -230,11 +230,11 @@ ys:Book_property_39 sh:path schema:isbn ;
 	sh:pattern "^(97[89]-([0-57]-(\\d-\\d{7}|\\d\\d-\\d{6}|\\d\\d\\d-\\d{5}|\\d{4}-\\d{4}|\\d{5}-\\d\\d\\d|\\d{6}-\\d\\d|\\d{7}-\\d)|[89]\\d-(\\d-\\d{6}|\\d\\d-\\d{5}|\\d\\d\\d-\\d{4}|\\d{4}-\\d\\d\\d|\\d{5}-\\d\\d|\\d{6}-\\d)|[69]\\d\\d-(\\d-\\d{5}|\\d\\d-\\d{4}|\\d\\d\\d-\\d\\d\\d|\\d{4}-\\d\\d|\\d{5}-\\d)|99[0-8]\\d-\\d-\\d{4}|99[0-8]\\d-\\d\\d-\\d\\d\\d|99[0-8]\\d-\\d\\d\\d-\\d\\d|99[0-8]\\d-\\d{4}-\\d|999\\d\\d-\\d-\\d\\d\\d|999\\d\\d-\\d\\d-\\d\\d|999\\d\\d-\\d\\d\\d-\\d)-\\d|\\d{9}(\\d|X))|(\\d{1,5}-\\d{1,7}-\\d{1,6}-[0-9X])$" .
 
 ys:Book_property_40 sh:path schema:illustrator ;
-	sh:node schema:Person ;
+	sh:class schema:Person ;
 	ys:fromProperty wdt:P110 .
 
 ys:Book_property_41 sh:path schema:editor ;
-	sh:node schema:Person ;
+	sh:class schema:Person ;
 	ys:fromProperty wdt:P98 .
 
 ys:Book_property_42 sh:path schema:publisher ;
@@ -245,12 +245,12 @@ ys:Book_property_42 sh:path schema:publisher ;
 ys:list_43 rdf:first ys:element_44 ;
 	rdf:rest ys:list_45 .
 
-ys:element_44 sh:node schema:Organization .
+ys:element_44 sh:class schema:Organization .
 
 ys:list_45 rdf:first ys:element_46 ;
 	rdf:rest rdf:nil .
 
-ys:element_46 sh:node schema:Person .
+ys:element_46 sh:class schema:Person .
 
 ys:Book_property_48 sh:path schema:numberOfPages ;
 	sh:datatype xsd:decimal ;
@@ -270,12 +270,12 @@ ys:Newspaper_property_49 sh:path schema:publisher ;
 ys:list_50 rdf:first ys:element_51 ;
 	rdf:rest ys:list_52 .
 
-ys:element_51 sh:node schema:Organization .
+ys:element_51 sh:class schema:Organization .
 
 ys:list_52 rdf:first ys:element_53 ;
 	rdf:rest rdf:nil .
 
-ys:element_53 sh:node schema:Person .
+ys:element_53 sh:class schema:Person .
 
 ys:Newspaper_property_55 sh:path schema:sponsor ;
 	sh:or ys:list_56 ;
@@ -284,12 +284,12 @@ ys:Newspaper_property_55 sh:path schema:sponsor ;
 ys:list_56 rdf:first ys:element_57 ;
 	rdf:rest ys:list_58 .
 
-ys:element_57 sh:node schema:Organization .
+ys:element_57 sh:class schema:Organization .
 
 ys:list_58 rdf:first ys:element_59 ;
 	rdf:rest rdf:nil .
 
-ys:element_59 sh:node schema:Person .
+ys:element_59 sh:class schema:Person .
 
 schema:TVSeries rdf:type sh:NodeShape ;
 	rdfs:subClassOf schema:CreativeWork ;
@@ -303,23 +303,23 @@ ys:TVSeries_property_61 sh:path schema:musicBy ;
 ys:list_62 rdf:first ys:element_63 ;
 	rdf:rest ys:list_64 .
 
-ys:element_63 sh:node schema:MusicGroup .
+ys:element_63 sh:class schema:MusicGroup .
 
 ys:list_64 rdf:first ys:element_65 ;
 	rdf:rest rdf:nil .
 
-ys:element_65 sh:node schema:Person .
+ys:element_65 sh:class schema:Person .
 
 ys:TVSeries_property_67 sh:path schema:actor ;
-	sh:node schema:Person ;
+	sh:class schema:Person ;
 	ys:fromProperty wdt:P161 .
 
 ys:TVSeries_property_68 sh:path schema:locationCreated ;
-	sh:node schema:Place ;
+	sh:class schema:Place ;
 	ys:fromProperty wdt:P495 .
 
 ys:TVSeries_property_69 sh:path schema:director ;
-	sh:node schema:Person ;
+	sh:class schema:Person ;
 	ys:fromProperty wdt:P57 .
 
 ys:TVSeries_property_70 sh:path schema:numberOfEpisodes ;
@@ -333,7 +333,7 @@ ys:TVSeries_property_71 sh:path schema:numberOfSeasons ;
 	ys:fromProperty wdt:P2437 .
 
 ys:TVSeries_property_72 sh:path schema:productionCompany ;
-	sh:node schema:Organization ;
+	sh:class schema:Organization ;
 	ys:fromProperty wdt:P272 .
 
 schema:MusicComposition rdf:type sh:NodeShape ;
@@ -348,12 +348,12 @@ ys:MusicComposition_property_73 sh:path schema:musicBy ;
 ys:list_74 rdf:first ys:element_75 ;
 	rdf:rest ys:list_76 .
 
-ys:element_75 sh:node schema:Person .
+ys:element_75 sh:class schema:Person .
 
 ys:list_76 rdf:first ys:element_77 ;
 	rdf:rest rdf:nil .
 
-ys:element_77 sh:node schema:MusicGroup .
+ys:element_77 sh:class schema:MusicGroup .
 
 ys:MusicComposition_property_79 sh:path schema:iswcCode ;
 	sh:datatype xsd:string ;
@@ -368,12 +368,12 @@ ys:MusicComposition_property_80 sh:path schema:lyricist ;
 ys:list_81 rdf:first ys:element_82 ;
 	rdf:rest ys:list_83 .
 
-ys:element_82 sh:node schema:Person .
+ys:element_82 sh:class schema:Person .
 
 ys:list_83 rdf:first ys:element_84 ;
 	rdf:rest rdf:nil .
 
-ys:element_84 sh:node schema:MusicGroup .
+ys:element_84 sh:class schema:MusicGroup .
 
 schema:Movie rdf:type sh:NodeShape ;
 	ys:fromClass wd:Q11424 ;
@@ -381,11 +381,11 @@ schema:Movie rdf:type sh:NodeShape ;
 	rdfs:subClassOf schema:CreativeWork .
 
 ys:Movie_property_86 sh:path schema:actor ;
-	sh:node schema:Person ;
+	sh:class schema:Person ;
 	ys:fromProperty wdt:P161 .
 
 ys:Movie_property_87 sh:path schema:locationCreated ;
-	sh:node schema:Place ;
+	sh:class schema:Place ;
 	ys:fromProperty wdt:P495 .
 
 ys:Movie_property_88 sh:path schema:musicBy ;
@@ -395,15 +395,15 @@ ys:Movie_property_88 sh:path schema:musicBy ;
 ys:list_89 rdf:first ys:element_90 ;
 	rdf:rest ys:list_91 .
 
-ys:element_90 sh:node schema:MusicGroup .
+ys:element_90 sh:class schema:MusicGroup .
 
 ys:list_91 rdf:first ys:element_92 ;
 	rdf:rest rdf:nil .
 
-ys:element_92 sh:node schema:Person .
+ys:element_92 sh:class schema:Person .
 
 ys:Movie_property_94 sh:path schema:director ;
-	sh:node schema:Person ;
+	sh:class schema:Person ;
 	ys:fromProperty wdt:P57 .
 
 ys:Movie_property_95 sh:path schema:duration ;
@@ -412,7 +412,7 @@ ys:Movie_property_95 sh:path schema:duration ;
 	ys:fromProperty wdt:P2047 .
 
 ys:Movie_property_96 sh:path schema:productionCompany ;
-	sh:node schema:Organization ;
+	sh:class schema:Organization ;
 	ys:fromProperty wdt:P272 .
 
 yago:FictionalEntity rdf:type sh:NodeShape ;
@@ -422,11 +422,11 @@ yago:FictionalEntity rdf:type sh:NodeShape ;
 	ys:fromClass wd:Q115537581, wd:Q64728693, wd:Q21070598, wd:Q18706315, wd:Q14897293 .
 
 ys:FictionalEntity_property_97 sh:path yago:appearsIn ;
-	sh:node schema:CreativeWork ;
+	sh:class schema:CreativeWork ;
 	ys:fromProperty wdt:P4584, wdt:P1441, wdt:P1080 .
 
 ys:FictionalEntity_property_98 sh:path schema:performer ;
-	sh:node schema:Person ;
+	sh:class schema:Person ;
 	ys:fromProperty wdt:P175 .
 
 ys:FictionalEntity_property_99 sh:path schema:author ;
@@ -436,19 +436,19 @@ ys:FictionalEntity_property_99 sh:path schema:author ;
 ys:list_100 rdf:first ys:element_101 ;
 	rdf:rest ys:list_102 .
 
-ys:element_101 sh:node schema:Organization .
+ys:element_101 sh:class schema:Organization .
 
 ys:list_102 rdf:first ys:element_103 ;
 	rdf:rest rdf:nil .
 
-ys:element_103 sh:node schema:Person .
+ys:element_103 sh:class schema:Person .
 
 ys:Event_property_105 sh:path schema:about ;
-	sh:node schema:Thing ;
+	sh:class schema:Thing ;
 	ys:fromProperty wdt:P921 .
 
 ys:Event_property_106 sh:path schema:location ;
-	sh:node schema:Place ;
+	sh:class schema:Place ;
 	ys:fromProperty wdt:P131, wdt:P276, wdt:P4552, wdt:P706 .
 
 ys:Event_property_107 sh:path schema:organizer ;
@@ -458,12 +458,12 @@ ys:Event_property_107 sh:path schema:organizer ;
 ys:list_108 rdf:first ys:element_109 ;
 	rdf:rest ys:list_110 .
 
-ys:element_109 sh:node schema:Person .
+ys:element_109 sh:class schema:Person .
 
 ys:list_110 rdf:first ys:element_111 ;
 	rdf:rest rdf:nil .
 
-ys:element_111 sh:node schema:Organization .
+ys:element_111 sh:class schema:Organization .
 
 ys:Event_property_113 sh:path schema:startDate ;
 	sh:or ys:list_114 ;
@@ -522,15 +522,15 @@ ys:Event_property_133 sh:path schema:sponsor ;
 ys:list_134 rdf:first ys:element_135 ;
 	rdf:rest ys:list_136 .
 
-ys:element_135 sh:node schema:Organization .
+ys:element_135 sh:class schema:Organization .
 
 ys:list_136 rdf:first ys:element_137 ;
 	rdf:rest rdf:nil .
 
-ys:element_137 sh:node schema:Person .
+ys:element_137 sh:class schema:Person .
 
 ys:Event_property_139 sh:path yago:follows ;
-	sh:node schema:Event ;
+	sh:class schema:Event ;
 	ys:fromProperty wdt:P155 .
 
 ys:Event_property_140 sh:path yago:participant ;
@@ -540,15 +540,15 @@ ys:Event_property_140 sh:path yago:participant ;
 ys:list_141 rdf:first ys:element_142 ;
 	rdf:rest ys:list_143 .
 
-ys:element_142 sh:node schema:Organization .
+ys:element_142 sh:class schema:Organization .
 
 ys:list_143 rdf:first ys:element_144 ;
 	rdf:rest rdf:nil .
 
-ys:element_144 sh:node schema:Person .
+ys:element_144 sh:class schema:Person .
 
 ys:Event_property_146 sh:path schema:superEvent ;
-	sh:node schema:Event ;
+	sh:class schema:Event ;
 	ys:fromProperty wdt:P361 .
 
 yago:Election rdf:type sh:NodeShape ;
@@ -556,15 +556,15 @@ yago:Election rdf:type sh:NodeShape ;
 	ys:fromClass wd:Q40231 .
 
 ys:Organization_property_147 sh:path schema:award ;
-	sh:node yago:Award ;
+	sh:class yago:Award ;
 	ys:fromProperty wdt:P166 .
 
 ys:Organization_property_148 sh:path schema:locationCreated ;
-	sh:node schema:Place ;
+	sh:class schema:Place ;
 	ys:fromProperty wdt:P495, wdt:P740 .
 
 ys:Organization_property_149 sh:path schema:location ;
-	sh:node schema:Place ;
+	sh:class schema:Place ;
 	ys:fromProperty wdt:P131, wdt:P159, wdt:P17, wdt:P276, wdt:P4552, wdt:P706 .
 
 ys:Organization_property_150 sh:path schema:logo ;
@@ -603,11 +603,11 @@ ys:Organization_property_161 sh:path schema:duns ;
 	ys:fromProperty wdt:P2771 .
 
 ys:Organization_property_162 sh:path schema:founder ;
-	sh:node schema:Person ;
+	sh:class schema:Person ;
 	ys:fromProperty wdt:P112 .
 
 ys:Organization_property_163 sh:path schema:leader ;
-	sh:node schema:Person ;
+	sh:class schema:Person ;
 	ys:fromProperty wdt:P1075, wdt:P6, wdt:P168, wdt:P169, wdt:P35 .
 
 ys:Organization_property_164 sh:path schema:motto ;
@@ -650,7 +650,7 @@ ys:Organization_property_176 sh:path schema:leiCode ;
 	ys:fromProperty wdt:P1278 .
 
 ys:Organization_property_177 sh:path schema:memberOf ;
-	sh:node schema:Organization ;
+	sh:class schema:Organization ;
 	ys:fromProperty wdt:P114, wdt:P463 .
 
 ys:Organization_property_178 sh:path schema:numberOfEmployees ;
@@ -664,12 +664,12 @@ ys:Organization_property_179 sh:path schema:ownedBy ;
 ys:list_180 rdf:first ys:element_181 ;
 	rdf:rest ys:list_182 .
 
-ys:element_181 sh:node schema:Organization .
+ys:element_181 sh:class schema:Organization .
 
 ys:list_182 rdf:first ys:element_183 ;
 	rdf:rest rdf:nil .
 
-ys:element_183 sh:node schema:Person .
+ys:element_183 sh:class schema:Person .
 
 schema:Corporation rdf:type sh:NodeShape ;
 	ys:fromClass wd:Q4830453, wd:Q783794 ;
@@ -707,15 +707,15 @@ schema:PerformingGroup rdf:type sh:NodeShape ;
 	ys:fromClass wd:Q105815710 .
 
 ys:PerformingGroup_property_188 sh:path yago:director ;
-	sh:node schema:Person ;
+	sh:class schema:Person ;
 	ys:fromProperty wdt:P1875, wdt:P1037 .
 
 ys:PerformingGroup_property_189 sh:path schema:knowsLanguage ;
-	sh:node schema:Language ;
+	sh:class schema:Language ;
 	ys:fromProperty wdt:P1412 .
 
 ys:PerformingGroup_property_190 sh:path yago:notableWork ;
-	sh:node schema:CreativeWork ;
+	sh:class schema:CreativeWork ;
 	ys:fromProperty wdt:P800 .
 
 schema:MusicGroup rdf:type sh:NodeShape ;
@@ -724,35 +724,35 @@ schema:MusicGroup rdf:type sh:NodeShape ;
 	rdfs:subClassOf schema:PerformingGroup .
 
 ys:MusicGroup_property_191 sh:path schema:influencedBy ;
-	sh:node schema:Thing ;
+	sh:class schema:Thing ;
 	ys:fromProperty wdt:P737, wdt:P941 .
 
 ys:MusicGroup_property_192 sh:path schema:recordLabel ;
-	sh:node schema:Organization ;
+	sh:class schema:Organization ;
 	ys:fromProperty wdt:P264 .
 
 ys:Person_property_193 sh:path yago:beliefSystem ;
-	sh:node yago:BeliefSystem ;
+	sh:class yago:BeliefSystem ;
 	ys:fromProperty wdt:P1142, wdt:P140 .
 
 ys:Person_property_194 sh:path yago:academicDegree ;
-	sh:node yago:Award ;
+	sh:class yago:Award ;
 	ys:fromProperty wdt:P512 .
 
 ys:Person_property_195 sh:path schema:affiliation ;
-	sh:node schema:Organization ;
+	sh:class schema:Organization ;
 	ys:fromProperty wdt:P1416 .
 
 ys:Person_property_196 sh:path schema:worksFor ;
-	sh:node schema:Organization ;
+	sh:class schema:Organization ;
 	ys:fromProperty wdt:P108 .
 
 ys:Person_property_197 sh:path schema:alumniOf ;
-	sh:node schema:Organization ;
+	sh:class schema:Organization ;
 	ys:fromProperty wdt:P69 .
 
 ys:Person_property_198 sh:path schema:award ;
-	sh:node yago:Award ;
+	sh:class yago:Award ;
 	ys:fromProperty wdt:P166 .
 
 ys:Person_property_199 sh:path schema:birthDate ;
@@ -781,12 +781,12 @@ ys:list_206 rdf:first ys:element_207 ;
 ys:element_207 sh:datatype xsd:gYear .
 
 ys:Person_property_209 sh:path schema:birthPlace ;
-	sh:node schema:Place ;
+	sh:class schema:Place ;
 	sh:maxCount 1 ;
 	ys:fromProperty wdt:P19 .
 
 ys:Person_property_210 sh:path schema:children ;
-	sh:node schema:Person ;
+	sh:class schema:Person ;
 	ys:fromProperty wdt:P40 .
 
 ys:Person_property_211 sh:path schema:deathDate ;
@@ -815,37 +815,37 @@ ys:list_218 rdf:first ys:element_219 ;
 ys:element_219 sh:datatype xsd:gYear .
 
 ys:Person_property_221 sh:path schema:deathPlace ;
-	sh:node schema:Place ;
+	sh:class schema:Place ;
 	sh:maxCount 1 ;
 	ys:fromProperty wdt:P20 .
 
 ys:Person_property_222 sh:path schema:gender ;
-	sh:node yago:Gender ;
+	sh:class yago:Gender ;
 	sh:maxCount 1 ;
 	ys:fromProperty wdt:P21 .
 
 ys:Person_property_223 sh:path schema:homeLocation ;
-	sh:node schema:Place ;
+	sh:class schema:Place ;
 	ys:fromProperty wdt:P551 .
 
 ys:Person_property_224 sh:path schema:knowsLanguage ;
-	sh:node schema:Language ;
+	sh:class schema:Language ;
 	ys:fromProperty wdt:P1412 .
 
 ys:Person_property_225 sh:path schema:memberOf ;
-	sh:node schema:Organization ;
+	sh:class schema:Organization ;
 	ys:fromProperty wdt:P102, wdt:P54, wdt:P463 .
 
 ys:Person_property_226 sh:path schema:nationality ;
-	sh:node schema:Country ;
+	sh:class schema:Country ;
 	ys:fromProperty wdt:P27 .
 
 ys:Person_property_227 sh:path schema:owns ;
-	sh:node schema:Thing ;
+	sh:class schema:Thing ;
 	ys:fromProperty wdt:P1830 .
 
 ys:Person_property_228 sh:path schema:spouse ;
-	sh:node schema:Person ;
+	sh:class schema:Person ;
 	ys:fromProperty wdt:P26 .
 
 yago:Worker rdf:type sh:NodeShape ;
@@ -858,11 +858,11 @@ yago:Creator rdf:type sh:NodeShape ;
 	sh:property ys:Creator_property_230, ys:Creator_property_229 .
 
 ys:Creator_property_229 sh:path schema:influencedBy ;
-	sh:node schema:Thing ;
+	sh:class schema:Thing ;
 	ys:fromProperty wdt:P737, wdt:P941 .
 
 ys:Creator_property_230 sh:path yago:notableWork ;
-	sh:node schema:CreativeWork ;
+	sh:class schema:CreativeWork ;
 	ys:fromProperty wdt:P800 .
 
 yago:Academic rdf:type sh:NodeShape ;
@@ -871,11 +871,11 @@ yago:Academic rdf:type sh:NodeShape ;
 	sh:property ys:Academic_property_231, ys:Academic_property_232 .
 
 ys:Academic_property_231 sh:path yago:studentOf ;
-	sh:node schema:Person ;
+	sh:class schema:Person ;
 	ys:fromProperty wdt:P1066 .
 
 ys:Academic_property_232 sh:path yago:doctoralAdvisor ;
-	sh:node schema:Person ;
+	sh:class schema:Person ;
 	ys:fromProperty wdt:P184 .
 
 yago:SportsPerson rdf:type sh:NodeShape ;
@@ -888,7 +888,7 @@ ys:SportsPerson_property_233 sh:path yago:sportNumber ;
 	ys:fromProperty wdt:P1618 .
 
 ys:SportsPerson_property_234 sh:path yago:playsIn ;
-	sh:node schema:Event ;
+	sh:class schema:Event ;
 	ys:fromProperty wdt:P118 .
 
 yago:Politician rdf:type sh:NodeShape ;
@@ -897,11 +897,11 @@ yago:Politician rdf:type sh:NodeShape ;
 	sh:property ys:Politician_property_235 .
 
 ys:Politician_property_235 sh:path yago:candidateIn ;
-	sh:node schema:Event ;
+	sh:class schema:Event ;
 	ys:fromProperty wdt:P3602 .
 
 ys:Place_property_236 sh:path schema:location ;
-	sh:node schema:Place ;
+	sh:class schema:Place ;
 	ys:fromProperty wdt:P131, wdt:P17, wdt:P276, wdt:P4552, wdt:P706 .
 
 ys:Place_property_237 sh:path schema:area ;
@@ -909,15 +909,15 @@ ys:Place_property_237 sh:path schema:area ;
 	ys:fromProperty wdt:P2046 .
 
 ys:Place_property_238 sh:path schema:highestPoint ;
-	sh:node schema:Place ;
+	sh:class schema:Place ;
 	ys:fromProperty wdt:P610 .
 
 ys:Place_property_239 sh:path schema:lowestPoint ;
-	sh:node schema:Place ;
+	sh:class schema:Place ;
 	ys:fromProperty wdt:P1589 .
 
 ys:Place_property_240 sh:path schema:neighbors ;
-	sh:node schema:Place ;
+	sh:class schema:Place ;
 	ys:fromProperty wdt:P47, wdt:P206 .
 
 ys:Place_property_241 sh:path schema:elevation ;
@@ -935,7 +935,7 @@ yago:AstronomicalObject rdf:type sh:NodeShape ;
 	ys:fromClass wd:Q6999 .
 
 ys:AstronomicalObject_property_243 sh:path yago:parentBody ;
-	sh:node yago:AstronomicalObject ;
+	sh:class yago:AstronomicalObject ;
 	ys:fromProperty wdt:P397 .
 
 ys:AstronomicalObject_property_244 sh:path yago:mass ;
@@ -973,11 +973,11 @@ ys:AdministrativeArea_property_250 sh:path schema:demonym ;
 	ys:fromProperty wdt:P1549 .
 
 ys:AdministrativeArea_property_251 sh:path schema:leader ;
-	sh:node schema:Person ;
+	sh:class schema:Person ;
 	ys:fromProperty wdt:P6, wdt:P35 .
 
 ys:AdministrativeArea_property_252 sh:path yago:replaces ;
-	sh:node schema:AdministrativeArea ;
+	sh:class schema:AdministrativeArea ;
 	ys:fromProperty wdt:P1365 .
 
 ys:AdministrativeArea_property_253 sh:path schema:populationNumber ;
@@ -993,15 +993,15 @@ ys:AdministrativeArea_property_255 sh:path schema:motto ;
 	ys:fromProperty wdt:P1451 .
 
 ys:AdministrativeArea_property_256 sh:path schema:memberOf ;
-	sh:node schema:Organization ;
+	sh:class schema:Organization ;
 	ys:fromProperty wdt:P463 .
 
 ys:AdministrativeArea_property_257 sh:path schema:administrates ;
-	sh:node schema:Place ;
+	sh:class schema:Place ;
 	ys:fromProperty wdt:P150 .
 
 ys:AdministrativeArea_property_258 sh:path yago:capital ;
-	sh:node schema:City ;
+	sh:class schema:City ;
 	ys:fromProperty wdt:P36 .
 
 schema:City rdf:type sh:NodeShape ;
@@ -1014,7 +1014,7 @@ schema:Country rdf:type sh:NodeShape ;
 	rdfs:subClassOf schema:AdministrativeArea .
 
 ys:Country_property_259 sh:path schema:officialLanguage ;
-	sh:node schema:Language ;
+	sh:class schema:Language ;
 	ys:fromProperty wdt:P37 .
 
 ys:Country_property_260 sh:path schema:humanDevelopmentIndex ;
@@ -1035,7 +1035,7 @@ schema:BodyOfWater rdf:type sh:NodeShape ;
 	rdfs:subClassOf schema:Landform .
 
 ys:BodyOfWater_property_262 sh:path yago:flowsInto ;
-	sh:node schema:BodyOfWater ;
+	sh:class schema:BodyOfWater ;
 	ys:fromProperty wdt:P201, wdt:P403 .
 
 schema:Continent rdf:type sh:NodeShape ;
@@ -1055,12 +1055,12 @@ ys:HumanMadeGeographicalEntity_property_263 sh:path schema:ownedBy ;
 ys:list_264 rdf:first ys:element_265 ;
 	rdf:rest ys:list_266 .
 
-ys:element_265 sh:node schema:Organization .
+ys:element_265 sh:class schema:Organization .
 
 ys:list_266 rdf:first ys:element_267 ;
 	rdf:rest rdf:nil .
 
-ys:element_267 sh:node schema:Person .
+ys:element_267 sh:class schema:Person .
 
 ys:HumanMadeGeographicalEntity_property_269 sh:path schema:dateCreated ;
 	sh:datatype xsd:dateTime ;
@@ -1074,7 +1074,7 @@ yago:Way rdf:type sh:NodeShape ;
 	sh:property ys:Way_property_271, ys:Way_property_270 .
 
 ys:Way_property_270 sh:path yago:terminus ;
-	sh:node schema:Place ;
+	sh:class schema:Place ;
 	ys:fromProperty wdt:P609 .
 
 ys:Way_property_271 sh:path yago:length ;
@@ -1100,15 +1100,15 @@ ys:Airport_property_273 sh:path schema:icaoCode ;
 	ys:fromProperty wdt:P239 .
 
 ys:Product_property_274 sh:path schema:award ;
-	sh:node yago:Award ;
+	sh:class yago:Award ;
 	ys:fromProperty wdt:P166 .
 
 ys:Product_property_275 sh:path schema:material ;
-	sh:node schema:Product ;
+	sh:class schema:Product ;
 	ys:fromProperty wdt:P186 .
 
 ys:Product_property_276 sh:path schema:manufacturer ;
-	sh:node schema:Corporation ;
+	sh:class schema:Corporation ;
 	ys:fromProperty wdt:P176, wdt:P178 .
 
 ys:Product_property_277 sh:path schema:dateCreated ;
@@ -1142,11 +1142,11 @@ ys:Product_property_287 sh:path schema:gtin ;
 	ys:fromProperty wdt:P3962 .
 
 ys:Taxon_property_288 sh:path schema:parentTaxon ;
-	sh:node schema:Taxon ;
+	sh:class schema:Taxon ;
 	ys:fromProperty wdt:P171 .
 
 ys:Taxon_property_289 sh:path yago:consumes ;
-	sh:node schema:Taxon ;
+	sh:class schema:Taxon ;
 	ys:fromProperty wdt:P1034 .
 
 ys:AnnotationPropertyShape rdf:type rdfs:Property ;
