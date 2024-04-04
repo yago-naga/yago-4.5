@@ -135,7 +135,7 @@ rdfs:Class a sh:NodeShape ;
     sh:property [
         sh:path schema:sameAs ;
 		sh:datatype xsd:string ;
-        ys:fromProperty wdt:P646, wdt:P345, wdt:P2671, wdt:P1053;
+        ys:fromProperty wdt:P646, wdt:P345, wdt:P2671, wdt:P1053, wdt:P8814;
     ] ;
     sh:property [
         sh:path schema:mainEntityOfPage ;
