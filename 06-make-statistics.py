@@ -24,7 +24,7 @@ Algorithm:
    
 """
 
-TEST=True
+TEST=False
 FOLDER="test-data/06-make-statistics/" if TEST else "yago-data/"
 
 ##########################################################################
