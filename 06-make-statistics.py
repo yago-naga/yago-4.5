@@ -24,7 +24,7 @@ Algorithm:
    
 """
 
-TEST=False
+TEST=True
 FOLDER="test-data/06-make-statistics/" if TEST else "yago-data/"
 
 ##########################################################################
@@ -108,7 +108,7 @@ This is the top-level taxonomy of classes of YAGO 4.5, together with their prope
         def add_node(cls):
             if not yagoSchema.objects(cls):
                 return
-            writer.write(f"<li><details style='margin-left: 2em'><summary style='font-weight:bold; margin-left: -2em'>{cls}</summary><details style='margin-left: 2em'><summary style='margin-left: -2em'>Outgoing properties</summary><ul style='list-style-type: none'>\n")
+            writer.write(f"<li><details style='margin-left: 2em'{' open' if cls=='schema:Thing' else ''}><summary style='font-weight:bold; margin-left: -2em'>{cls}</summary><details style='margin-left: 2em'><summary style='margin-left: -2em'>Outgoing properties</summary><ul style='list-style-type: none'>\n")
             for blank in sorted(yagoSchema.objects(cls,Prefixes.shaclProperty), key=lambda b: yagoSchema.objects(b, Prefixes.shaclPath)):
                 writer.write(f'<li>- {yagoSchema.objects(blank, Prefixes.shaclPath)[0]}')
                 if yagoSchema.objects(blank, Prefixes.shaclNode):
@@ -131,7 +131,7 @@ This is the top-level taxonomy of classes of YAGO 4.5, together with their prope
                 c=yagoSchema.subjects(Prefixes.shaclProperty,blank)
                 if p and c:
                     writer.write(f'<li>- ({c[0]}) {p[0]}')
-            writer.write("</ul></details><details style='margin-left: 2em'><summary style='margin-left: -2em'>Subclasses</summary><ul style='list-style-type: none'>\n")
+            writer.write(f"</ul></details><details style='margin-left: 2em'{' open' if cls=='schema:Thing' else ''}><summary style='margin-left: -2em'>Subclasses</summary><ul style='list-style-type: none'>\n")
             for subclass in sorted(yagoSchema.subjects(Prefixes.rdfsSubClassOf, cls)):
                 add_node(subclass)
             writer.write("</ul></details></details>\n")
