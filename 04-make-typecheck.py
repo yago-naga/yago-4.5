@@ -129,7 +129,7 @@ def createGenericInstance(targetClass, outFile):
     if objectName not in yagoInstances:
         yagoInstances[objectName].add(targetClass)
         outFile.write(objectName, Prefixes.rdfType, targetClass, ".")
-        outFile.write(objectName, Prefixes.rdfsLabel, '"Generic instance"@en', ".")
+        outFile.write(objectName, Prefixes.rdfsLabel, f'"{targetClass[5:]}"@en', ".")
     return(objectName)
 
 # We store the global taxonomy here
