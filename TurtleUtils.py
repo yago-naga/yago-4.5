@@ -12,7 +12,7 @@ import sys
 from io import StringIO
 import Prefixes
 import TsvUtils
-from multiprocessing import Process, Pool, Queue, Manager
+import multiprocessing
 
 TEST=False
 
@@ -150,7 +150,7 @@ def termsAndSeparators(generator):
                 uri+=char
                 char=next(generator, None)
                 if not char:
-                    printError("Unexpected end of file in URL",uri)
+                    printError("Unexpected end of file in URL","".join(uri))
                     break
             uri+='>'
             yield "".join(uri)
@@ -282,9 +282,11 @@ class Graph(object):
     """ A graph of triples """
     def __init__(self, hasInverse=True):
         self.index={}
-        # We add an inverse graph to query more easily for subjects of a given predicate and object
-        self.inverseGraph=Graph(False) if hasInverse else None
+        # Wikidata graphs are often about a main entity
+        self.mainSubjectCache=None
         return
+    def clear(self):
+        self.index.clear()
     def add(self, triple):
         (subject, predicate, obj) = triple
         if subject not in self.index:
@@ -293,8 +295,6 @@ class Graph(object):
         if predicate not in m:
             m[predicate]=set()
         m[predicate].add(obj)
-        if self.inverseGraph!=None:
-            self.inverseGraph.add((obj,predicate,subject))
     def remove(self, triple):
         (subject, predicate, obj) = triple
         if subject not in self.index:
@@ -307,8 +307,6 @@ class Graph(object):
             self.index[subject].pop(predicate)
             if len(self.index[subject])==0:
                 self.index.pop(subject)
-        if self.inverseGraph!=None:
-            self.inverseGraph.remove((obj,predicate,subject))        
     def __contains__(self, triple):
         (subject, predicate, obj) = triple
         if subject not in self.index:
@@ -340,22 +338,14 @@ class Graph(object):
             for p in self.index[s]:
                 result.add(p)
         return result
-    def objects(self, subject=None, predicate=None):
-        # We create a copy here instead of using a generator
-        # because the user loop may want to change the graph
-        result=[]
-        if subject and subject not in self.index:
-            return result
-        for s in ([subject] if subject else self.index):
-            for p in ([predicate] if predicate else self.index[s]):
-                if p in self.index[s]:
-                    result.extend(self.index[s][p])
-        return result
-    def subjects(self, predicate=None, object=None):        
-        if self.inverseGraph!=None:
-            return self.inverseGraph.objects(subject=object, predicate=predicate)
-        else:
-            raise Exception("subjects() cannot be called on inverse graph")
+    def predicatesOf(self, subject):
+        return self.index.get(subject,{})
+    def objectsOf(self, subject, predicate):
+        return self.index.get(subject,{}).get(predicate,set())
+    def subjectsOf(self, predicate, obj):
+        return list(s for s in self.index if predicate in self.index[s] and obj in self.index[s][predicate])
+    def subjects(self):
+        return self.index.keys()
     def triplesWithPredicate(self, *predicates):
         result=[]
         for subject in self.index:
@@ -364,6 +354,10 @@ class Graph(object):
                     for object in self.index[subject][predicate]:
                         result.append((subject, predicate, object))
         return result 
+    def removeObjects(self, subject, predicate):
+        if subject in self.index:
+            if predicate in self.index[subject]:                    
+                    self.index[subject][predicate].clear()
     def printToWriter(self, result):        
         for subject in self.index:
             if subject.startswith("_:list_"):
@@ -392,7 +386,7 @@ class Graph(object):
             result.write(' .\n')
     def printToFile(self, file):
         with open(file, "wt", encoding="utf-8") as out:
-            for p in Prefixes.prefixes:
+            for p in Prefixes.yagoPrefixes:
                 out.write("@prefix "+p+": <"+Prefixes.prefixes[p]+"> .\n")
             self.printToWriter(out)
     def __str__(self):
@@ -400,9 +394,13 @@ class Graph(object):
         buffer.write("# RDF Graph\n")
         self.printToWriter(buffer)
         return buffer.getvalue()
-    def someSubject(self):
+    def mainSubject(self):
+        if self.mainSubjectCache:
+            return self.mainSubjectCache
         for key in self.index:
-            return key
+            if not key.startswith("s:"):
+                self.mainSubjectCache=key
+                return key
         return None
     def __len__(self):
         return len(self.index)
@@ -431,6 +429,33 @@ def splitLiteral(term):
     except:
         intValue=None
     return (match.group(1), intValue, match.group(3), match.group(5))
+
+def isEntity(term):
+    """ TRUE if the entity is of the form abc:def"""
+    return re.match("[a-z]+:.*",term)
+
+def isLiteral(term):
+    """ TRUE for literals"""
+    return term.startswith('"')
+    
+def isDate(obj):
+    """ TRUE if valid date object """
+    if obj is None:
+        return False
+    string, intValue, language, dataType=splitLiteral(obj)
+    return string and dataType and (dataType==Prefixes.xsdDateTime or dataType==Prefixes.xsdDate) 
+
+def isEntityWithPrefix(term, permitted_namespaces = ["geo:", "rdfs:", "yago:", "xsd:", "schema:", "rdf:", "wd:"]):
+    """ TRUE if the term is an entity of that namespace """
+    return any(term.startswith(s) for s in permitted_namespaces )
+
+def isRegex(pattern):
+    """ TRUE for regexes"""
+    try:
+        re.compile(pattern)
+        return True
+    except re.error:
+        return False
     
 ##########################################################################
 #             Reading Wikidata entities
@@ -457,6 +482,7 @@ def entitiesFromTriples(tripleIterator):
             continue
         if newSubject!=currentSubject:
             if len(graph):
+                graph.mainSubjectCache=currentSubject
                 yield graph
                 graph=Graph()
             currentSubject=newSubject
@@ -501,7 +527,7 @@ def visitWikidata(file, visitor, numThreads=90):
         numThreads=int(fileSize/10000000)+1
     print("  Running",numThreads,"Wikidata readers", flush=True)
     portionSize=int(fileSize/numThreads)
-    with Pool(processes=numThreads) as pool:
+    with multiprocessing.get_context("spawn").Pool(processes=numThreads) as pool:
         result=pool.map(visitWikidataEntities, ((file, visitor(i), i, portionSize,) for i in range(0,numThreads)), 1)
     print("  done", flush=True)
     return(result)

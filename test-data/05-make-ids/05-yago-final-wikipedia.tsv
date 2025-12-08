@@ -37,7 +37,7 @@ yago:Elvis	owl:sameAs	wd:Q_Elvis	.
 yago:Elvis	schema:deathDate	"1970-01-01"^^xsd:gYear	.
 yago:Elvis	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Elvis>	.
 yago:DoctoralDegree_generic_instance	rdf:type	yago:DoctoralDegree	.
-yago:DoctoralDegree_generic_instance	rdfs:label	"Generic instance"@en	.
+yago:DoctoralDegree_generic_instance	rdfs:label	"DoctoralDegree"@en	.
 yago:Elvis	yago:academicTitle	yago:DoctoralDegree_generic_instance	.
 yago:Elvis	schema:child	yago:Elvis	.
 yago:Singer	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Singer>	.

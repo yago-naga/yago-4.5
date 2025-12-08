@@ -13,7 +13,7 @@
 # Dummy item for the reader to start here
 wd:Elvis a wikibase:Item .
 
-# Disjoint classes should be removed
+# Only one disjoint class should survive
 
 wd:Q_Inconsistent wdt:P31 wd:Q_rock_singer, schema:Organization .
 
@@ -38,7 +38,9 @@ wd:Q_Elvis wdt:P31 wd:Q_rock_singer;
 	# Good URIs should stay
 	wdt:P18 "http://good-image.com"^^xsd:anyURI ; 
 	# Bad URIs should go away
-	wdt:P18 "http://elibrary.unm.edu/sora/jrr/index.php#http://elibrary.unm.edu/sora/jrr/index.php#" ; 
+	wdt:P18 "http://elibrary.unm.edu/sora/jrr/index.php#http://elibrary.unm.edu/sora/jrr/index.php#" ;
+    # Comments that shorter than others should go away
+    schema:description "Elvis Presley"@en, "Elvis Presley, the great singer"@en ;
 	# Literal range with invalid date should go away
 	wdt:P570 "0000-02-22T00:00:00Z"^^xsd:dateTime ;
 	# Literal range: should be OK
@@ -78,7 +80,7 @@ wd:Q_org wdt:P31 schema:Organization;
 wd:Q31  wdt:P31	schema:Country ;
 	schema:geo      "Point(4.6680555555556 50.641111111111)"^^geo:wktLiteral        .
 	
-# Test of foundation date. A single one should survive
+# A single date should survive
 wd:Q312 wdt:P31 schema:Corporation ;
     wdt:P571 "1976-04-01T00:00:00Z"^^xsd:dateTime,
              "1976-01-01T00:00:00Z"^^xsd:dateTime .
@@ -97,21 +99,23 @@ wd:Q_fictional wdt:P31 wd:Q2593744, wd:Q_rock_singer ;
 	schema:isPartOf <https://de.wikipedia.org/> ;
 	schema:name "Saenger"@de .
 	
-wd:Q_singer  rdfs:label "singer"@en ;
+wd:Q_singer  schema:name "singer"@en ;
 	skos:prefLabel "singer"@en ;
 	schema:name "singer"@en ;
 	wdt:P646	<https://freebase.com/id> ;
-	rdfs:label "chanteur"@fr ;
-	rdfs:label "other french label"@fr ;
-	skos:prefLabel "chanteur"@fr ;
+	schema:name "chanteur"@fr ;
+	schema:name "chanteur plus en détail"@fr ;
+	skos:prefLabel "chanteur pref"@fr ;
 	schema:name "chanteur"@fr ;	
 	schema:description "this is a singer"@en;
 	skos:altLabel "this is a human singer"@en .
 	
-# The labels of the second class should not survive
-wd:Q327055 rdfs:label "label that survives"@en ;
+# The labels of the second class should not survive, because both classes map to Worker
+wd:Q327055 schema:name "label that survives"@en ;
     wdt:P646	<https://freebase.com/first-id-that-survives> .
-
-wd:Q702269 rdfs:label "label that does not survive"@en ;
+wd:Q702269 schema:name "label that does not survive"@en ;
 	wdt:P646	<https://freebase.com/second-id-that-survives> .
+    
+# Properties survive
+wdt:P26 schema:name "spouse of person"@en .
 

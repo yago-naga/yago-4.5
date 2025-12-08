@@ -72,9 +72,10 @@ yago:HumanMadeGeographicalEntity	rdfs:subClassOf	schema:Place	.
 yago:Way	rdfs:subClassOf	yago:HumanMadeGeographicalEntity	.
 schema:Airport	rdfs:subClassOf	yago:HumanMadeGeographicalEntity	.
 wd:Q_European_event	rdfs:subClassOf	schema:Event	.
-wd:Q_book_and_event	rdfs:subClassOf	wd:Q_English_book	.
+wd:Q_book_and_event	rdfs:subClassOf	wd:Q_European_event	.
 wd:Q_character	rdfs:subClassOf	schema:Person	.
 wd:Q_deity	rdfs:subClassOf	wd:Q_character	.
 wd:Q_English_book	rdfs:subClassOf	wd:Q_European_book	.
-wd:Q_loop_book	rdfs:subClassOf	wd:Q_English_book	.
+wd:Q_French_book	rdfs:subClassOf	wd:Q_European_book	.
+wd:Q_loop_book	rdfs:subClassOf	wd:Q_French_book	.
 wd:Q_European_book	rdfs:subClassOf	schema:Book	.

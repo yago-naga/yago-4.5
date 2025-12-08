@@ -1,5 +1,6 @@
 # Exports YAGO into a ZIP file and to the Web server
-# CC-BY 2023 Fabian M. Suchanek
+# CC-BY 2023-2025 Fabian M. Suchanek
+
 cd yago-data
 
 echo "Creating tiny YAGO..."
@@ -9,26 +10,42 @@ grep -v -P '@prefix' 05-yago-final-taxonomy.tsv >> yago-tiny.ttl
 grep -P 'yago:A[^\t]+\t[^\t]+\t("|yago:A|schema:)' 05-yago-final-wikipedia.tsv >> yago-tiny.ttl
 rm yago-tiny.zip
 zip yago-tiny.zip yago-tiny.ttl
-echo "Done"
+echo "done"
+
+declare -A yagoFiles=( 
+    ["schema"]="01-yago-final-schema.ttl"
+    ["facts"]="05-yago-final-wikipedia.tsv"
+    ["beyond-wikipedia"]="05-yago-final-beyond-wikipedia.tsv" 
+    ["meta"]="05-yago-final-meta.tsv"
+    ["taxonomy"]="05-yago-final-taxonomy.tsv"
+)
+version="4.5.1.0"
 
 echo "Packing YAGO files..."
 rm yago.zip
-mv 01-yago-final-schema.ttl yago-schema.ttl
-mv 05-yago-final-wikipedia.tsv yago-facts.ttl
-mv 05-yago-final-beyond-wikipedia.tsv yago-beyond-wikipedia.ttl
-mv 05-yago-final-meta.tsv yago-meta-facts.ntx
-mv 05-yago-final-taxonomy.tsv yago-taxonomy.ttl
-zip yago.zip yago-schema.ttl yago-facts.ttl yago-beyond-wikipedia.ttl yago-meta-facts.ntx yago-taxonomy.ttl
-mv yago-schema.ttl 01-yago-final-schema.ttl
-mv yago-facts.ttl 05-yago-final-wikipedia.tsv
-mv yago-beyond-wikipedia.ttl 05-yago-final-beyond-wikipedia.tsv
-mv yago-meta-facts.ntx 05-yago-final-meta.tsv
-mv yago-taxonomy.ttl 05-yago-final-taxonomy.tsv
-echo "Done"
+for file in "${!yagoFiles[@]}"
+do
+    echo "  Packing $file..."
+    mv "${yagoFiles[$file]}" yago-$file.ttl
+    zip yago-$file.zip yago-$file.ttl
+    zip yago.zip yago-$file.ttl
+    mv yago-$file.ttl "${yagoFiles[$file]}"
+    echo "  done"
+done
+echo "done"
 
-echo "Copying YAGO file to Web server"
-scp yago.zip yago@yago.r2.enst.fr:/data/public/yago4.5/yago-4.5.0.2.zip
-scp yago-tiny.zip yago@yago.r2.enst.fr:/data/public/yago4.5/yago-4.5.0.2-tiny.zip
+echo "Copying individual YAGO files to Web server..."
+for file in "${!yagoFiles[@]}"
+do
+    echo "  Copying $file..."
+    scp yago-$file.zip yago@yago.r2.enst.fr:/data/public/yago4.5/yago-$version-$file.zip
+    echo "  done"
+done
+echo "done"
+
+echo "Copying collective YAGO files to Web server..."
+scp yago.zip yago@yago.r2.enst.fr:/data/public/yago4.5/yago-$version.zip
+scp yago-tiny.zip yago@yago.r2.enst.fr:/data/public/yago4.5/yago-$version-tiny.zip
 scp 06-upper-taxonomy.html yago@yago.r2.enst.fr:~/website/content/schema.php
-echo "Done"
+echo "done"
 date +"Current time: %F %T"

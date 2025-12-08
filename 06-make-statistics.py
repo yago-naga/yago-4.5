@@ -1,7 +1,7 @@
 """
 Produces statistics about YAGO entities and predicates, and extracts samples
 
-CC-BY 2022 Fabian M. Suchanek
+CC-BY 2022-2025 Fabian M. Suchanek
 
 Input:
 - 01-yago-final-schema.ttl
@@ -24,9 +24,6 @@ Algorithm:
    
 """
 
-TEST=False
-FOLDER="test-data/06-make-statistics/" if TEST else "yago-data/"
-
 ##########################################################################
 #             Booting
 ##########################################################################
@@ -34,17 +31,27 @@ FOLDER="test-data/06-make-statistics/" if TEST else "yago-data/"
 import sys
 import glob
 import re
-import evaluator
+import Evaluator
 import itertools
 import TurtleUtils
 import TsvUtils
 import random
 import os
 import Prefixes
+from Schema import YagoSchema
 from collections import defaultdict
+
+TEST=len(sys.argv)>1 and sys.argv[1]=="--test"
+FOLDER="test-data/06-make-statistics/" if TEST else "yago-data/"
 
 # Predicates that are excluded for fact counting
 excludePredicates=["rdfs:label", "rdfs:comment", "rdf:type", "schema:mainEntityOfPage", "owl:sameAs", "schema:alternateName"]
+
+def getFirst(myList):
+    """ Returns the first element of an iterable or none """    
+    for o in myList:
+        return o
+    return None
 
 ##########################################################################
 #             Full Taxonomy as HTML
@@ -61,14 +68,14 @@ def getSuperClasses(cls, classes, yagoTaxonomyUp, pathsToRoot):
         for sc in yagoTaxonomyUp[cls]:
             getSuperClasses(sc, classes, yagoTaxonomyUp, pathsToRoot)
 
-def printTaxonomy2(writer, cls=Prefixes.schemaThing):
+def _printTaxonomy(writer, cls=Prefixes.schemaThing):
     """ Prints the taxonomy to the writer. <cls> is the class to start with, i.e., the top-level class. """
     if cls not in yagoTaxonomyDown:
         writer.write(f"<li>{cls.replace('yago:','y:')}: {str(classStats.get(cls,0))}\n")
         return
     writer.write(f"<li><details style='margin-left: 2em'><summary style='margin-left: -2em'>{cls.replace('yago:','y:')}: {str(classStats.get(cls,0))}</summary><ul>\n")
     for subclass in yagoTaxonomyDown.get(cls, []):
-        printTaxonomy2(writer, subclass)
+        _printTaxonomy(writer, subclass)
     writer.write("</ul></details>\n")
 
 def printTaxonomy(file):
@@ -90,7 +97,7 @@ def printTaxonomy(file):
  <body>
  <h1>YAGO Taxonomy</h1>
  <ul>\n""")
-        printTaxonomy2(writer)
+        _printTaxonomy(writer)
         writer.write("</ul></body>\n</html>")
 
 ##########################################################################
@@ -105,37 +112,25 @@ def printUpperTaxonomy(file):
 This is the top-level taxonomy of classes of YAGO 4.5, together with their properties.
  <ul style='list-style-type: none'>
         """)
-        def add_node(cls):
-            if not yagoSchema.objects(cls):
-                return
-            writer.write(f"<li><details style='margin-left: 2em'{' open' if cls=='schema:Thing' else ''}><summary style='font-weight:bold; margin-left: -2em'>{cls}</summary><details style='margin-left: 2em'><summary style='margin-left: -2em'>Outgoing properties</summary><ul style='list-style-type: none'>\n")
-            for blank in sorted(yagoSchema.objects(cls,Prefixes.shaclProperty), key=lambda b: yagoSchema.objects(b, Prefixes.shaclPath)):
-                writer.write(f'<li>- {yagoSchema.objects(blank, Prefixes.shaclPath)[0]}')
-                if yagoSchema.objects(blank, Prefixes.shaclNode):
-                    ran=yagoSchema.objects(blank, Prefixes.shaclNode)[0]
-                elif yagoSchema.objects(blank, Prefixes.shaclOr):
-                    ran=", ".join([target for el in yagoSchema.getList(yagoSchema.objects(blank, Prefixes.shaclOr)[0]) for target in yagoSchema.objects(el, Prefixes.shaclNode) + yagoSchema.objects(el, Prefixes.shaclDatatype)])
-                elif yagoSchema.objects(blank, Prefixes.shaclDatatype):
-                    ran=yagoSchema.objects(blank, Prefixes.shaclDatatype)[0]
-                if ran:
-                    writer.write(" &rarr;")
-                    maxCount=yagoSchema.objects(blank, Prefixes.shaclMaxCount)
-                    if maxCount:
-                        writer.write("<sup>"+maxCount[0]+"</sup>")
-                    elif yagoSchema.objects(blank, Prefixes.shaclUniqueLang):
-                        writer.write("<sup>1 per language</sup>")
-                    writer.write(" "+ran+"\n")    
+        def add_node(yagoClass):
+            # Head
+            writer.write(f"<li><details style='margin-left: 2em'{' open' if yagoClass.identifier=='schema:Thing' else ''}><summary style='font-weight:bold; margin-left: -2em'>{yagoClass.identifier}</summary><details style='margin-left: 2em'><summary style='margin-left: -2em'>Outgoing properties</summary><ul style='list-style-type: none'>\n")
+            
+            # Outgoing properties
+            for yagoProperty in sorted(yagoClass.properties):
+                writer.write(f'<li>- {yagoProperty.identifier} &rarr;{'<sup>1</sup>' if yagoProperty.maxCount or yagoProperty.uniqueLang else ''} {", ".join(sorted(yagoProperty.objectTypes))}')
             writer.write("</ul></details>\n<details style='margin-left: 2em'><summary style='margin-left: -2em'>Incoming properties</summary><ul style='list-style-type: none'>\n")
-            for blank in sorted(yagoSchema.subjects(Prefixes.shaclNode, cls)):
-                p=yagoSchema.objects(blank, Prefixes.shaclPath)
-                c=yagoSchema.subjects(Prefixes.shaclProperty,blank)
-                if p and c:
-                    writer.write(f'<li>- ({c[0]}) {p[0]}')
-            writer.write(f"</ul></details><details style='margin-left: 2em'{' open' if cls=='schema:Thing' else ''}><summary style='margin-left: -2em'>Subclasses</summary><ul style='list-style-type: none'>\n")
-            for subclass in sorted(yagoSchema.subjects(Prefixes.rdfsSubClassOf, cls)):
+            
+            # Incoming properties
+            for yagoProperty in sorted(prop for prop in yagoSchema.properties.values() if yagoClass.identifier in prop.objectTypes):                
+                 writer.write(f'<li>- ({", ".join(sorted(yagoProperty.subjectTypes))}) {yagoProperty.identifier}')
+            writer.write(f"</ul></details><details style='margin-left: 2em'{' open' if yagoClass.identifier=='schema:Thing' else ''}><summary style='margin-left: -2em'>Subclasses</summary><ul style='list-style-type: none'>\n")
+            
+            # Subclasses
+            for subclass in sorted(cls for cls in yagoSchema.classes.values() if yagoClass in cls.superClasses):
                 add_node(subclass)
             writer.write("</ul></details></details>\n")
-        add_node("schema:Thing")
+        add_node(yagoSchema.classes["schema:Thing"])
         writer.write("</ul>")
  
 ##########################################################################
@@ -145,8 +140,7 @@ This is the top-level taxonomy of classes of YAGO 4.5, together with their prope
 with TsvUtils.Timer("Step 06: Collecting YAGO statistics"):
 
     # Load YAGO schema
-    yagoSchema = TurtleUtils.Graph()
-    yagoSchema.loadTurtleFile(FOLDER+"01-yago-final-schema.ttl", "  Loading YAGO schema")
+    yagoSchema = YagoSchema(FOLDER+"01-yago-final-schema.ttl")
 
     # Load YAGO taxonomy
     yagoTaxonomyDown=defaultdict(set)
@@ -166,32 +160,29 @@ with TsvUtils.Timer("Step 06: Collecting YAGO statistics"):
     humanReadableNames=0
 
     # Initialize predicateStats with predicates from schema, same for classes
-    for s, p, o in yagoSchema.triplesWithPredicate(Prefixes.shaclPath):
-        predicateStats[o]=0
-    for s, p, o in yagoSchema.triplesWithPredicate("rdfs:subClassOf"):
-        classStats[s]=0
+    for yagoProperty in yagoSchema.properties:
+        predicateStats[yagoProperty]=0
+    predicateStats[Prefixes.rdfType]=0    
+    for yagoClass in yagoSchema.classes:
+        classStats[yagoClass]=0
      
     genericInstancesCount=0
     
     # Run through the facts
     for entityFacts in itertools.chain(TurtleUtils.tsvEntities(FOLDER+"05-yago-final-wikipedia.tsv", "  Parsing YAGO Wikipedia"), TurtleUtils.tsvEntities(FOLDER+"05-yago-final-beyond-wikipedia.tsv", "  Parsing YAGO beyond Wikipedia")):
-        classes=set()
-        subject=None
-        for s, p, o in entityFacts:
-            predicateStats[p]+=1
-            if p=='rdf:type':
-                classes.add(o)
-                if s.endswith("_generic_instance"):
-                    genericInstancesCount+=1
-                subject=s
-        if subject is None or "rdfs:Class" in classes:
+        mainEntity=entityFacts.mainSubject()
+        if (mainEntity, Prefixes.rdfType, Prefixes.rdfsClass) in entityFacts:
             continue
+        for p in entityFacts.predicatesOf(mainEntity):
+            predicateStats[p]+=1
+        if mainEntity.endswith("_generic_instance"):
+            genericInstancesCount+=1                
         entities+=1
+        if not re.match(r"yago:Q[0-9]+", mainEntity):
+            humanReadableNames+=1
         superClasses=set()
         pathsToRoot=[0]
-        if not re.match(r"yago:Q[0-9]+", subject):
-            humanReadableNames+=1
-        for c in classes:
+        for c in entityFacts.objectsOf(mainEntity, Prefixes.rdfType):
             getSuperClasses(c, superClasses, yagoTaxonomyUp, pathsToRoot)
         for c in superClasses:
             classStats[c]+=1 
@@ -199,7 +190,7 @@ with TsvUtils.Timer("Step 06: Collecting YAGO statistics"):
         totalPathsToRoot+=pathsToRoot[0]      
         if (len(samples)<100 or (len(samples)==100 and random.random()<0.01)):
             for c in superClasses:
-                entityFacts.add((subject, 'rdf:type', c))
+                entityFacts.add((mainEntity, 'rdf:type', c))
             if len(samples)<100:
                 samples.append(entityFacts)
             else:    
@@ -228,7 +219,7 @@ with TsvUtils.Timer("Step 06: Collecting YAGO statistics"):
         writer.write("Total number of entities: "+str(entities)+"\n\n")
         writer.write("  ... of which generic: "+str(genericInstancesCount)+"\n\n")
         writer.write("Total number of classes: "+str(len(yagoTaxonomyUp))+"\n\n")
-        writer.write("Disjointness statements: "+str(len(yagoSchema.triplesWithPredicate(Prefixes.owlDisjointWith)))+"\n\n")
+        writer.write("Disjointness statements: "+str(sum(len(yagoClass.disjointWith) for yagoClass in yagoSchema.classes.values()))+"\n\n")
         writer.write("Avg number of paths to root: "+str(totalPathsToRoot/entities)+"\n\n")        
         writer.write("Avg number of classes per instance: "+str(totalClassesPerInstance/entities)+"\n\n")        
         writer.write("Human-readable names: "+str(humanReadableNames*100.0/entities)+"%\n\n")
@@ -247,6 +238,6 @@ with TsvUtils.Timer("Step 06: Collecting YAGO statistics"):
     print("done")
     
 if TEST:
-    evaluator.compare(FOLDER+"06-statistics.txt", FOLDER+"06-statistics-gold.txt")
-    evaluator.compare(FOLDER+"06-taxonomy.html", FOLDER+"06-taxonomy-gold.html")
-    evaluator.compare(FOLDER+"06-upper-taxonomy.html", FOLDER+"06-upper-taxonomy-gold.html")
+    Evaluator.compare(FOLDER+"06-statistics.txt", FOLDER+"06-statistics-gold.txt")
+    Evaluator.compare(FOLDER+"06-taxonomy.html", FOLDER+"06-taxonomy-gold.html")
+    Evaluator.compare(FOLDER+"06-upper-taxonomy.html", FOLDER+"06-upper-taxonomy-gold.html")

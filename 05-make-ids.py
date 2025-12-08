@@ -1,7 +1,7 @@
 """
 Replaces the ids of the facts by YAGO ids
 
-CC-BY 2022 Fabian M. Suchanek
+CC-BY 2022-2025 Fabian M. Suchanek
 
 Input:
 - 04-yago-facts-to-rename.tsv
@@ -22,16 +22,16 @@ Algorithm:
    
 """
 
-TEST=False
-FOLDER="test-data/05-make-ids/" if TEST else "yago-data/"
-
 ##########################################################################
 #             Booting
 ##########################################################################
 
 import sys
-import evaluator
+import Evaluator
 import TsvUtils
+
+TEST=len(sys.argv)>1 and sys.argv[1]=="--test"
+FOLDER="test-data/05-make-ids/" if TEST else "yago-data/"
 
 ##########################################################################
 #             Helper methods
@@ -40,10 +40,6 @@ import TsvUtils
 def isLiteral(entity):
     """ TRUE for literals and external URLs """
     return entity.startswith('"') or entity.startswith('<http://') or entity.startswith('<https://')
-
-def isGeneric(entity):
-    """ TRUE for generic instances """
-    return entity.startswith('_:')
 
 def toYagoEntity(entity):
     """ Translates an entity to a YAGO entity, passes through literals, returns NONE otherwise """
@@ -108,6 +104,8 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
                     # Write facts to Wikipedia version of YAGO
                     if goesToWikipediaVersion(subject) and (relation=="rdf:type" or goesToWikipediaVersion(object)):
                         wikipediaFacts.writeFact(subject, relation, object)
+                        if subject.endswith("_generic_instance"):
+                            wikipediaFacts.writeFact(subject, "rdfs:label", f'"{subject[5:-17]}"@en')
                         if subject!=previousEntity and split[0] in yagoIds:
                            wikipediaFacts.writeFact(subject, "owl:sameAs", split[0])
                     else:
@@ -116,8 +114,11 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
                            fullFacts.writeFact(subject, "owl:sameAs", split[0])                
                     # If there is a meta-fact, write it out as well
                     if len(split)>5:
-                        if split[4]: metaFacts.write("<<", subject, relation, object, ">>", "schema:startDate", split[4])
-                        if split[5]: metaFacts.write("<<", subject, relation, object, ">>", "schema:endDate", split[5])
+                        if split[4] and split[4]==split[5]:
+                            metaFacts.write("<<", subject, relation, object, ">>", "yago:onDate", split[4], ".")
+                        else:
+                            if split[4]: metaFacts.write("<<", subject, relation, object, ">>", "schema:startDate", split[4], ".")
+                            if split[5]: metaFacts.write("<<", subject, relation, object, ">>", "schema:endDate", split[5], ".")
                     if not subject.endswith("_generic_instance"):
                         previousEntity=subject
                     
@@ -138,7 +139,7 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
             taxFacts.writeFact(subject, relation, object)            
 
 if TEST:
-    evaluator.compare(FOLDER+"05-yago-final-wikipedia.tsv")
-    evaluator.compare(FOLDER+"05-yago-final-beyond-wikipedia.tsv")
-    evaluator.compare(FOLDER+"05-yago-final-meta.tsv")
-    evaluator.compare(FOLDER+"05-yago-final-taxonomy.tsv")
+    Evaluator.compare(FOLDER+"05-yago-final-wikipedia.tsv")
+    Evaluator.compare(FOLDER+"05-yago-final-beyond-wikipedia.tsv")
+    Evaluator.compare(FOLDER+"05-yago-final-meta.tsv")
+    Evaluator.compare(FOLDER+"05-yago-final-taxonomy.tsv")

@@ -47,6 +47,8 @@ prefixes = {
 "ys": "http://yago-knowledge.org/schema#" 
 }
 
+yagoPrefixes=["geo", "owl", "rdf", "rdfs", "schema", "sh", "skos", "wd", "wdt", "wpq", "xsd", "yago", "ys"]
+
 ##########################################################################
 #             Wikidata and schema.org URIs
 ##########################################################################
@@ -57,11 +59,21 @@ xsdAnytype='xsd:anyType'
 
 xsdDateTime='xsd:dateTime'
 
+xsdDate='xsd:date'
+
 xsdString='xsd:string'
 
 rdfLangString='rdf:langString'
 
+rdfFirst="rdf:first"
+
+rdfRest="rdf:rest"
+
+rdfNil="rdf:nil"
+
 rdfType='rdf:type'
+
+rdfProperty='rdf:Property'
 
 rdfsLabel='rdfs:label'
 
@@ -107,7 +119,7 @@ fromProperty = "ys:fromProperty"
 
 shaclPath="sh:path"
 
-shaclNode="sh:class" # Fabian: Changed from sh:node to sh:class on 2024-04-03
+shaclClass="sh:class" # Fabian: Changed from sh:node to sh:class on 2024-04-03
 
 shaclMaxCount="sh:maxCount"
 

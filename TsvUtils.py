@@ -8,7 +8,7 @@ import gzip
 import os
 import sys
 import datetime
-import evaluator
+import Evaluator
 import Prefixes
 
 TEST=False

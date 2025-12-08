@@ -32,5 +32,5 @@
 @prefix prn: <http://www.wikidata.org/prop/reference/value-normalized/> .
 @prefix wdno: <http://www.wikidata.org/prop/novalue/> .
 @prefix ys: <http://yago-knowledge.org/schema#> .
-<<	yago:Elvis	schema:child	yago:Elvis	>>	schema:startDate	"1977"^^xsd:gYear
-<<	yago:Elvis	schema:child	yago:Elvis	>>	schema:endDate	"1978"^^xsd:gYear
+<<	yago:Elvis	schema:child	yago:Elvis	>>	schema:startDate	"1977"^^xsd:gYear	.
+<<	yago:Elvis	schema:child	yago:Elvis	>>	schema:endDate	"1978"^^xsd:gYear	.

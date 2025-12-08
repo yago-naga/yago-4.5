@@ -1,7 +1,7 @@
 """
 Typechecks the facts of YAGO
 
-CC-BY 2022 Fabian M. Suchanek
+CC-BY 2022-2025 Fabian M. Suchanek
 
 Call:
   python3 make-typecheck.py
@@ -24,9 +24,6 @@ Algorithm:
    
 """
 
-TEST=False
-FOLDER="test-data/04-make-typecheck/" if TEST else "yago-data/"
-
 ##########################################################################
 #             Booting
 ##########################################################################
@@ -37,9 +34,12 @@ import TsvUtils
 import TurtleUtils
 import re
 import unicodedata
-import evaluator
+import Evaluator
 import Prefixes
 from collections import defaultdict
+
+TEST=len(sys.argv)>1 and sys.argv[1]=="--test"
+FOLDER="test-data/04-make-typecheck/" if TEST else "yago-data/"
         
 ##########################################################################
 #             YAGO ids
@@ -102,7 +102,7 @@ wikipediaPagesUsed=set()
 def writeYagoId(out, currentTopic, currentEnglishLabel, currentLabel, currentWikipediaPage):
     """ Writes wd:Q303 owl:sameAs yago:Elvis """ 
     # Don't print ids for built-in classes
-    if currentTopic.startswith("schema:"):
+    if currentTopic.startswith("schema:") or currentTopic.startswith("yago:"):
         return
     if currentWikipediaPage and currentWikipediaPage not in wikipediaPagesUsed and len(currentWikipediaPage)>2:
         out.write(currentTopic,"owl:sameAs","yago:"+yagoIdFromWikipediaPage(currentWikipediaPage),". #WIKI")
@@ -128,8 +128,7 @@ def createGenericInstance(targetClass, outFile):
     objectName="_:"+targetClass+"_generic_instance"
     if objectName not in yagoInstances:
         yagoInstances[objectName].add(targetClass)
-        outFile.write(objectName, Prefixes.rdfType, targetClass, ".")
-        outFile.write(objectName, Prefixes.rdfsLabel, f'"{targetClass[5:]}"@en', ".")
+        outFile.write(objectName, Prefixes.rdfType, targetClass, ".")        
     return(objectName)
 
 # We store the global taxonomy here
@@ -151,7 +150,7 @@ def instanceOf(obj, cls):
 def removeClass(c):
     """ Removes this class and all superclasses from the YAGO taxonomy """    
     # Happens for schema:Thing and rdfs:Class,
-    # and in case we already passd by
+    # and in case we already passed by
     if c not in yagoTaxonomyUp:
         return
     for superClass in yagoTaxonomyUp[c]:
@@ -164,16 +163,16 @@ def removeClass(c):
 
 with TsvUtils.Timer("Step 04: Type-checking YAGO"):
     # Load taxonomy
-    for tuple in TsvUtils.tsvTuples(FOLDER+"02-yago-taxonomy-to-rename.tsv", "  Loading YAGO taxonomy"):
-        if len(tuple)>3:
-            if tuple[0] not in yagoTaxonomyUp:
-                yagoTaxonomyUp[tuple[0]]=set()
-            yagoTaxonomyUp[tuple[0]].add(tuple[2])
+    for triple in TsvUtils.tsvTuples(FOLDER+"02-yago-taxonomy-to-rename.tsv", "  Loading YAGO taxonomy"):
+        if len(triple)>3:
+            if triple[0] not in yagoTaxonomyUp:
+                yagoTaxonomyUp[triple[0]]=set()
+            yagoTaxonomyUp[triple[0]].add(triple[2])
 
     # Load instances
-    for tuple in TsvUtils.tsvTuples(FOLDER+"03-yago-facts-to-type-check.tsv", "  Loading YAGO instances"):
-        if len(tuple)>2 and tuple[1]=="rdf:type":
-            yagoInstances[tuple[0]].add(tuple[2])
+    for triple in TsvUtils.tsvTuples(FOLDER+"03-yago-facts-to-type-check.tsv", "  Loading YAGO instances"):
+        if len(triple)>2 and triple[1]=="rdf:type":
+            yagoInstances[triple[0]].add(triple[2])
     
     count=0
     with TsvUtils.TsvFileWriter(FOLDER+"04-yago-facts-to-rename.tsv") as out:
@@ -236,6 +235,6 @@ with TsvUtils.Timer("Step 04: Type-checking YAGO"):
             badClassFile.write(c)
 
 if TEST:
-    evaluator.compare(FOLDER+"04-yago-facts-to-rename.tsv")
-    evaluator.compare(FOLDER+"04-yago-ids.tsv")
-    evaluator.compare(FOLDER+"04-yago-bad-classes.tsv")
+    Evaluator.compare(FOLDER+"04-yago-facts-to-rename.tsv")
+    Evaluator.compare(FOLDER+"04-yago-ids.tsv")
+    Evaluator.compare(FOLDER+"04-yago-bad-classes.tsv")
