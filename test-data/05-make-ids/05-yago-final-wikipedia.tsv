@@ -40,9 +40,9 @@ yago:DoctoralDegree_generic_instance	rdf:type	yago:DoctoralDegree	.
 yago:DoctoralDegree_generic_instance	rdfs:label	"DoctoralDegree"@en	.
 yago:Elvis	yago:academicTitle	yago:DoctoralDegree_generic_instance	.
 yago:Elvis	schema:child	yago:Elvis	.
+yago:Elvis	schema:spouse	yago:Elvis	.
 yago:Singer	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Singer>	.
 yago:Singer	owl:sameAs	wd:Q_singer	.
-yago:Singer	rdfs:label	"chanteur"@fr	.
 yago:Singer	schema:alternateName	"this is a human being"@en	.
 yago:Singer	rdfs:comment	"this is a singer"@en	.
 yago:Singer	rdf:type	rdfs:Class	.

@@ -14,10 +14,12 @@ echo "done"
 
 declare -A yagoFiles=( 
     ["schema"]="01-yago-final-schema.ttl"
+	["taxonomy"]="05-yago-final-taxonomy.tsv"
     ["facts"]="05-yago-final-wikipedia.tsv"
+	["labels"]="05-yago-final-wikipedia-labels.tsv" 
     ["beyond-wikipedia"]="05-yago-final-beyond-wikipedia.tsv" 
+	["beyond-wikipedia-labels"]="05-yago-final-beyond-wikipedia-labels.tsv" 
     ["meta"]="05-yago-final-meta.tsv"
-    ["taxonomy"]="05-yago-final-taxonomy.tsv"
 )
 version="4.5.1.0"
 
