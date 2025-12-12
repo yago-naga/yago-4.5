@@ -265,7 +265,7 @@ def cleanObject(obj, yagoProperty):
     if yagoProperty.pattern:
        objectValue=TurtleUtils.splitLiteral(obj)[0]
        if objectValue is None:
-           debug("Object is not a literal",o)
+           debug("Object is not a literal",obj)
            return None
        if not re.match(yagoProperty.pattern, objectValue):
             debug("Object does not match regex:",objectValue, yagoProperty.pattern)
