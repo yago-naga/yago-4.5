@@ -31,75 +31,75 @@ Predicates:
   schema:deathDate: 1
   rdf:type: 1
   schema:child: 1
-  schema:dateCreated: 0
+  schema:award: 0
+  schema:inLanguage: 0
   schema:contentLocation: 0
   schema:about: 0
-  schema:inLanguage: 0
   schema:author: 0
-  schema:award: 0
+  schema:dateCreated: 0
+  schema:url: 0
   schema:alternateName: 0
   schema:image: 0
-  schema:sameAs: 0
-  schema:url: 0
   rdfs:comment: 0
-  schema:startDate: 0
-  schema:endDate: 0
-  schema:superEvent: 0
+  schema:sameAs: 0
   yago:follows: 0
-  schema:location: 0
+  schema:startDate: 0
   yago:participant: 0
-  schema:sponsor: 0
+  schema:endDate: 0
   schema:organizer: 0
+  schema:superEvent: 0
+  schema:location: 0
+  schema:sponsor: 0
+  schema:numberOfEmployees: 0
   yago:ownedBy: 0
-  schema:leiCode: 0
-  schema:logo: 0
-  schema:locationCreated: 0
-  yago:leader: 0
   schema:dissolutionDate: 0
   schema:duns: 0
+  schema:logo: 0
+  yago:leader: 0
   schema:memberOf: 0
-  schema:slogan: 0
-  schema:address: 0
-  schema:numberOfEmployees: 0
   schema:founder: 0
+  schema:slogan: 0
+  schema:leiCode: 0
+  schema:locationCreated: 0
+  schema:address: 0
   schema:parentTaxon: 0
   yago:consumes: 0
   schema:knowsLanguage: 0
-  yago:beliefSystem: 0
-  schema:nationality: 0
-  schema:gender: 0
-  schema:alumniOf: 0
-  schema:birthPlace: 0
-  schema:owns: 0
-  schema:affiliation: 0
-  schema:homeLocation: 0
-  schema:children: 0
   schema:deathPlace: 0
+  schema:children: 0
+  schema:gender: 0
+  schema:spouse: 0
+  schema:birthPlace: 0
+  schema:nationality: 0
+  yago:academicDegree: 0
+  schema:affiliation: 0
+  schema:alumniOf: 0
   schema:worksFor: 0
   schema:birthDate: 0
-  schema:spouse: 0
-  yago:academicDegree: 0
-  schema:geo: 0
-  yago:lowestPoint: 0
-  yago:area: 0
+  schema:owns: 0
+  schema:homeLocation: 0
+  yago:beliefSystem: 0
   yago:neighbors: 0
-  yago:highestPoint: 0
   yago:elevation: 0
-  schema:material: 0
+  yago:area: 0
+  yago:lowestPoint: 0
+  yago:highestPoint: 0
+  schema:geo: 0
   schema:gtin: 0
   schema:manufacturer: 0
+  schema:material: 0
   yago:conferredBy: 0
-  schema:illustrator: 0
-  schema:numberOfPages: 0
-  schema:isbn: 0
-  schema:editor: 0
   schema:publisher: 0
-  schema:productionCompany: 0
-  schema:musicBy: 0
-  schema:numberOfSeasons: 0
-  schema:numberOfEpisodes: 0
+  schema:isbn: 0
+  schema:illustrator: 0
+  schema:editor: 0
+  schema:numberOfPages: 0
   schema:director: 0
+  schema:musicBy: 0
+  schema:productionCompany: 0
+  schema:numberOfSeasons: 0
   schema:actor: 0
+  schema:numberOfEpisodes: 0
   yago:iswcCode: 0
   schema:lyricist: 0
   schema:duration: 0
@@ -108,8 +108,8 @@ Predicates:
   schema:iataCode: 0
   schema:icaoCode: 0
   yago:studentsCount: 0
-  yago:director: 0
   yago:notableWork: 0
+  yago:director: 0
   schema:recordLabel: 0
   yago:influencedBy: 0
   yago:doctoralAdvisor: 0
@@ -117,20 +117,20 @@ Predicates:
   yago:playsIn: 0
   yago:sportNumber: 0
   yago:candidateIn: 0
+  yago:distanceFromEarth: 0
+  yago:mass: 0
   yago:parallax: 0
   yago:luminosity: 0
-  yago:mass: 0
   yago:radialVelocity: 0
-  yago:distanceFromEarth: 0
   yago:parentBody: 0
-  yago:replaces: 0
-  yago:demonym: 0
-  yago:capital: 0
-  yago:populationNumber: 0
   schema:postalCode: 0
+  yago:capital: 0
+  yago:demonym: 0
+  yago:populationNumber: 0
+  yago:replaces: 0
   yago:humanDevelopmentIndex: 0
-  yago:officialLanguage: 0
   yago:unemploymentRate: 0
+  yago:officialLanguage: 0
   yago:flowsInto: 0
   yago:terminus: 0
   yago:length: 0
