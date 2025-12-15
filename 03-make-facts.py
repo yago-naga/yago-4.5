@@ -136,7 +136,6 @@ def getStartAndEndDate(s, p, o, entityGraph):
     pStatement="p:"+p[4:]
     # Translate to the namespace PS
     pValue="ps:"+p[4:]
-    if pStatement=="p:P1082": print("Get start date", s, p, o, pStatement, pValue, entityGraph)
     # Find all meta statements about (s, p, _)
     for statement in entityGraph.objectsOf(s, pStatement):
         # If the meta-statement concerns indeed the object o...
@@ -372,7 +371,7 @@ class treatWikidataEntity():
         print("    Initializing Wikidata reader",i+1, flush=True)
         self.number=i
         print("    Wikidata reader",i+1, "loads YAGO schema", flush=True)
-        self.yagoSchema=YagoSchema(FOLDER+"01-yago-final-schema.ttl")
+        self.yagoSchema=YagoSchema(FOLDER+"01-yago-final-schema.ttl", False)
         print("    Wikidata reader",i+1, "loads YAGO taxonomy", flush=True)
         self.yagoTaxonomyUp=defaultdict(set)
         for triple in TsvUtils.tsvTuples(FOLDER+"02-yago-taxonomy-to-rename.tsv"):
@@ -397,9 +396,7 @@ class treatWikidataEntity():
         isSecondaryClass=isSecondaryWikidataClass(entityFacts, self.yagoSchema)
         
         entityFacts, dates=translatePropertiesAndClasses(entityFacts, self.yagoSchema)
-        
-        print(entityFacts, dates)
-        
+                
         handleTypeAssertions(entityFacts, self.yagoTaxonomyUp)        
                 
         types=handleAndReturnTypes(entityFacts, self.yagoSchema, self.yagoTaxonomyUp)

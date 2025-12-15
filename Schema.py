@@ -233,13 +233,13 @@ class YagoClass(YagoObject):
 class YagoSchema(object):
     """ The YAGO schema """
     
-    def __init__(self, file=None):        
+    def __init__(self, file=None, verbose=True):        
         self.properties={}
         self.wikidataProperties={}
         self.wikidataClasses={}
         self.classes={}
         if file:
-            self.addTurtleFile(file)
+            self.addTurtleFile(file, verbose)
     
     def getClass(self, classIdentifier):
         """ Returns a class of that name (creating it if needed)"""
@@ -270,11 +270,12 @@ class YagoSchema(object):
                 warning("Wikidata class", wikidataClass, "is mapped to both",yagoClass,"and",self.wikidataClasses[wikidataClass])
             self.wikidataClasses[wikidataClass]=yagoClass
             
-    def addTurtleFile(self, yagoSchemaFile):
+    def addTurtleFile(self, yagoSchemaFile, verbose=True):
         """ Loads a Turtle file """
         # Load schema file
-        print("  Loading YAGO Schema...")
-        print("    Input file:",yagoSchemaFile)
+        if verbose:
+            print("  Loading YAGO Schema...")
+            print("    Input file:",yagoSchemaFile)
 
         entityGraph=TurtleUtils.Graph()
         entityGraph.loadTurtleFile(yagoSchemaFile)
@@ -284,9 +285,10 @@ class YagoSchema(object):
         
         self.check()
         
-        print("    Info:", len(self.properties),"properties")
-        print("    Info:", len(self.classes),"classes")
-        print("  done")
+        if verbose:
+            print("    Info:", len(self.properties),"properties")
+            print("    Info:", len(self.classes),"classes")
+            print("  done")
         
     def __str__(self):
         return("\n".join(str(s) for s in self.properties.values()))        

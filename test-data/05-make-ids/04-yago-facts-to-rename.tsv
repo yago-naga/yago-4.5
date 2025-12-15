@@ -60,6 +60,7 @@ wd:Q_singer	rdfs:label	"singer"@en	.
 
 # This should go to yago-wikipedia-labels
 wd:Q_singer	rdfs:label	"chanteur"@fr	.
+wd:Q_singer	schema:mainEntityOfPage	"https://fr.wikipedia.org/wiki/Chanteur"^^xsd:anyUri	.
 
 # This class has no instances and should be removed
 wd:Q_empty	rdf:type	rdfs:Class	.

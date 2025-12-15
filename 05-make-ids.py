@@ -29,6 +29,7 @@ Algorithm:
 ##########################################################################
 
 import sys
+import re
 import Evaluator
 import TsvUtils
 import TurtleUtils
@@ -69,6 +70,18 @@ def toYagoEntity(entity):
 def goesToWikipediaVersion(entity):
     """ TRUE if the entity is a literal or has a Wikipedia page or is a generic instance"""
     return isLiteral(entity) or entity in entitiesWithWikipediaPage or entity.endswith("_generic_instance")
+
+wikipediaUrlPattern=re.compile("https://([a-z]+).wikipedia.org/.*")
+
+def isNonEnglishLabel(literal):
+    """ TRUE for non-English labels and Wikipedia pages"""
+    if literal[2] and literal[2]!='en':
+        return True
+    if literal[0]:
+        match=wikipediaUrlPattern.match(literal[0])
+        if match  and  match.group(1)!='en':
+                return True                
+    return False
     
 ##########################################################################
 #             Main
@@ -109,7 +122,7 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
                             literal=TurtleUtils.splitLiteral(object)
                             # Write facts to Wikipedia version of YAGO
                             if goesToWikipediaVersion(subject) and (relation=="rdf:type" or goesToWikipediaVersion(object)):
-                                if literal[2] and literal[2]!='en':
+                                if isNonEnglishLabel(literal):
                                     wikipediaLabelFacts.writeFact(subject, relation, object)
                                 else:
                                     wikipediaFacts.writeFact(subject, relation, object)
@@ -118,7 +131,7 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
                                 if subject!=previousEntity and split[0] in yagoIds:
                                    wikipediaFacts.writeFact(subject, "owl:sameAs", split[0])
                             else:
-                                if literal[2] and literal[2]!='en':
+                                if isNonEnglishLabel(literal):
                                     fullLabelFacts.writeFact(subject, relation, object)
                                 else:
                                     fullFacts.writeFact(subject, relation, object)
