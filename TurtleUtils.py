@@ -470,6 +470,8 @@ def about(triple):
         return s
     if s.startswith("s:Q") or s.startswith("s:q"):
         return "wd:Q"+s[3:s.index('-')]
+    if s.startswith("wds:Q"):
+        return "wd:Q"+s[5:s.index('-')]
     return None
 
 def entitiesFromTriples(tripleIterator):

@@ -51,6 +51,7 @@ wd:Q_product	rdf:type	schema:Product	.
 wd:Q_org	schema:slogan	"Blah blah"@en	.
 wd:Q_org	rdf:type	schema:Organization	.
 wd:Q31	schema:geo	"Point(4.6680555555556 50.641111111111)"^^geo:wktLiteral	.
+wd:Q31	yago:populationNumber	"+11825551"^^xsd:decimal	. #		"2014-01-01"^^xsd:date	"2014-01-01"^^xsd:date
 wd:Q31	rdf:type	schema:Country	.
 wd:Q312	schema:dateCreated	"1976-01-01"^^xsd:date	.
 wd:Q312	rdf:type	schema:Corporation	.

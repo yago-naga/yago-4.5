@@ -121,8 +121,8 @@ def handleTypeAssertions(entityFacts, yagoTaxonomyUp):
 # 
 # # This is true in the year 2014
 # 
-# wd:Q31 p:P1082 s:Q31-93ba9638-404b-66ac-2733-e6292666a326 .
-# s:Q31-93ba9638-404b-66ac-2733-e6292666a326 a wikibase:Statement ;
+# wd:Q31 p:P1082 wds:Q31-93ba9638-404b-66ac-2733-e6292666a326 .
+# wds:Q31-93ba9638-404b-66ac-2733-e6292666a326 a wikibase:Statement ;
 #	ps:P1082 "+11150516"^^xsd:decimal ;
 #	pq:P585 "2014-01-01T00:00:00Z"^^xsd:dateTime ;
     
@@ -136,6 +136,7 @@ def getStartAndEndDate(s, p, o, entityGraph):
     pStatement="p:"+p[4:]
     # Translate to the namespace PS
     pValue="ps:"+p[4:]
+    if pStatement=="p:P1082": print("Get start date", s, p, o, pStatement, pValue, entityGraph)
     # Find all meta statements about (s, p, _)
     for statement in entityGraph.objectsOf(s, pStatement):
         # If the meta-statement concerns indeed the object o...
@@ -396,6 +397,8 @@ class treatWikidataEntity():
         isSecondaryClass=isSecondaryWikidataClass(entityFacts, self.yagoSchema)
         
         entityFacts, dates=translatePropertiesAndClasses(entityFacts, self.yagoSchema)
+        
+        print(entityFacts, dates)
         
         handleTypeAssertions(entityFacts, self.yagoTaxonomyUp)        
                 
