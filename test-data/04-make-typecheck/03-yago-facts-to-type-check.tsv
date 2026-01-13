@@ -49,7 +49,7 @@ wd:Q_Elvis	yago:academicTitle	wd:Q_doctoralDegree	. # IF	yago:Award
 # Good child id should be yago:Q42, from the Wikidata ID (which will be something like wd:Q123, i.e., yago:Q123)
 wd:Q42	rdf:type	wd:Q_singer
 
-# Bad child id should be yago:Bad_chèld_Q43, which is the label plus the Wikidata id as disambiguation
+# Bad child id should be yago:Bad_chè-ld_Q43, which is the label plus the Wikidata id as disambiguation
 wd:Q43	rdf:type	wd:Q_european_book
 wd:Q43	rdfs:label	"Bad chè³ld"@en
 wd:Q43	rdfs:label	"Kind"@de

@@ -45,6 +45,9 @@ FOLDER="test-data/04-make-typecheck/" if TEST else "yago-data/"
 #             YAGO ids
 ##########################################################################
 
+# Keeps all YAGO ids to make sure we do not have duplicates
+yagoIds=set()
+
 def hexCode(char):    
     """ Hex-encodes the character """
     return "_u{0:04X}_".format(ord(char))
@@ -72,10 +75,18 @@ def yagoIdFromString(s):
     for c in s:
         if legal(c):
             result+=c
-        elif c==' ':
+        elif ord(c)<0x009F: # Punctuation becomes underscore
             result+='_'
-        else:
-            result+=hexCode(c)           
+        else: # Other letters become hyphen
+            result+="-"
+    # Compress subsequent underscores
+    result=re.sub("_+","_",result)
+    # Remove trailing underscore
+    if result.endswith("_"):
+        result=result[0:-1]
+    # Remove starting underscore
+    if result.startswith("_"):
+        result=result[1:]        
     # Special case that is disallowed
     if result.startswith("-"):
         result="Y"+result
@@ -95,24 +106,37 @@ def yagoIdFromWikidataId(wikidataEntity):
     """ Creates a YAGO id from a Wikidata entity """
     return wikidataEntity[3:]
 
-# We collect Wikipedia page titles that are already in use
-# because some Wikidata entities point to the same Wikipedia page
-wikipediaPagesUsed=set()
+def isGoodYagoId(identifier):
+    """ TRUE if the string is long enough"""
+    return identifier and len(identifier.replace("-","").replace("-",""))>3
 
+def registerYagoId(identifier):
+    """ Registers YAGO id, returns TRUE on success"""
+    if identifier in yagoIds:
+        return False
+    yagoIds.add(identifier)
+    return True
+
+def tryYagoId(out,currentTopic, yagoId, isWikipedia=False):
+    """ Registers and writes out YAGO id, returns TRUE on success"""
+    if not isGoodYagoId(yagoId):
+        return False
+    if registerYagoId(yagoId):
+        out.write(currentTopic,"owl:sameAs","yago:"+yagoId,". #WIKI" if isWikipedia else ". #OTHER")
+    else:
+        out.write(currentTopic,"owl:sameAs","yago:"+yagoId+"_"+currentTopic[3:], ". #WIKI" if isWikipedia else ". #OTHER")
+    return True
+    
 def writeYagoId(out, currentTopic, currentEnglishLabel, currentLabel, currentWikipediaPage):
     """ Writes wd:Q303 owl:sameAs yago:Elvis """ 
     # Don't print ids for built-in classes
     if currentTopic.startswith("schema:") or currentTopic.startswith("yago:"):
         return
-    if currentWikipediaPage and currentWikipediaPage not in wikipediaPagesUsed and len(currentWikipediaPage)>2:
-        out.write(currentTopic,"owl:sameAs","yago:"+yagoIdFromWikipediaPage(currentWikipediaPage),". #WIKI")
-        wikipediaPagesUsed.add(currentWikipediaPage)
+    if currentWikipediaPage and tryYagoId(out,currentTopic, yagoIdFromWikipediaPage(currentWikipediaPage), True):
         return
-    if currentEnglishLabel and len(currentEnglishLabel)>1:
-        out.write(currentTopic,"owl:sameAs","yago:"+yagoIdFromLabel(currentTopic,currentEnglishLabel),". #OTHER")
-        return
-    if currentLabel and len(currentLabel)>1:
-        out.write(currentTopic,"owl:sameAs","yago:"+yagoIdFromLabel(currentTopic,currentLabel),". #OTHER")
+    if currentEnglishLabel and tryYagoId(out,currentTopic, yagoIdFromLabel(currentTopic,currentEnglishLabel)):
+        return        
+    if currentLabel and tryYagoId(out,currentTopic, yagoIdFromLabel(currentTopic,currentLabel)):
         return        
     out.write(currentTopic,"owl:sameAs","yago:"+yagoIdFromWikidataId(currentTopic),". #OTHER")
 

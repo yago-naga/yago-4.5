@@ -56,6 +56,10 @@ class YagoObject:
         for s in itertools.chain(self.labels,self.comments):
             if not TurtleUtils.isLiteral(s):
                 warning("YAGO object",self,"has an invalid label or comment",s)
+        # If we do not have a label, invent one by splitting the identifier by Camel Case
+        if not self.labels:
+            self.labels.add('"'+re.sub("([a-z])([A-Z])","\\1 \\2",stripPrefix(self.identifier))+'"@en')
+                
 
 def stripPrefix(identifier):
     """ Removes the xyz: prefix"""
@@ -89,13 +93,13 @@ class YagoProperty(YagoObject):
     def __str__(self):
         return self.identifier
     
-    def blankNode(self, cls):
+    def schemaIdentifier(self):
         """ Returns a blank node name for this property """
-        return "ys:"+stripPrefix(cls)+"_"+stripPrefix(self.identifier)
+        return "ys:"+stripPrefix(self.identifier)+"_property"
         
-    def writeTo(self, out, cls):
+    def writeTo(self, out):
         """ Pretty prints property to output stream """
-        out.write(self.blankNode(cls)+"\n")
+        out.write(self.schemaIdentifier()+"\n")
         out.write("\t\tsh:path "+self.identifier+" ;\n")
         if self.labels:
             out.write("\t\trdfs:label "+", ".join(c for c in self.labels)+" ;\n")        
@@ -111,10 +115,14 @@ class YagoProperty(YagoObject):
         if len(self.objectTypes)>1:
             out.write("\t\tsh:or ([ ")            
             out.write(" ][ ".join("sh:datatype "+p if p.startswith("xsd:") else "sh:class "+p for p in self.objectTypes))
-            out.write("]).\n")
+            out.write("]).\n\n")
         else:
-            out.write("".join("\t\tsh:datatype "+p if p.startswith("xsd:") else "\t\tsh:class "+p for p in self.objectTypes)+" .\n")  
-    
+            out.write("".join("\t\tsh:datatype "+p if p.startswith("xsd:") else "\t\tsh:class "+p for p in self.objectTypes)+" .\n\n")  
+        if self.labels:
+            out.write(self.identifier+"\trdfs:label "+", ".join(c for c in self.labels)+" .\n\n")        
+        if self.comments:
+            out.write(self.identifier+"\trdfs:comment "+", ".join(c for c in self.comments)+" .\n\n")
+            
     def updateFromShacl(self, shaclProperty, entityGraph):
         """ Adds what the SHACL property says to this YAGO property """
         
@@ -190,11 +198,8 @@ class YagoClass(YagoObject):
         if self.fromClasses:
             out.write("\t"+Prefixes.fromClass+" "+", ".join(c for c in self.fromClasses)+" ;\n" )
         if self.properties:
-            out.write("\tsh:property "+", ".join(p.blankNode(self.identifier) for p in self.properties)+" ;\n")
+            out.write("\tsh:property "+", ".join(p.schemaIdentifier() for p in self.properties)+" ;\n")
         out.write("\ta rdfs:Class .\n\n")
-        for p in self.properties:
-            p.writeTo(out, self.identifier)
-        out.write("\n")    
         
     def updateFromShacl(self, entityGraph, yagoSchema):
         """ Adds the properties given by the SHACL property to this class."""
@@ -297,7 +302,9 @@ class YagoSchema(object):
         """ Writes the schema to the stream """
         for clss in self.classes.values():
             clss.writeTo(out)
-    
+        for prop in self.properties.values():
+            prop.writeTo(out)
+          
     def writeToFile(self,file):
         """ Writes the schema to a file"""
         with open(file, "wt", encoding="utf-8") as out:

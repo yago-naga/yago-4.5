@@ -80,6 +80,7 @@ schema:Thing a sh:NodeShape ;
         sh:path schema:image ;
         sh:datatype xsd:anyURI ;
         ys:fromProperty wdt:P18 ;
+		rdfs:label "an image for the thing"@en ;
     ] ;	
     sh:property [
         sh:path schema:alternateName ;
@@ -623,7 +624,7 @@ schema:Event a sh:NodeShape ;
     sh:property [
         sh:path schema:location ;
         sh:class schema:Place ;
-        ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552 ;
+        ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17 ;
     ] ;
     sh:property [
         sh:path schema:organizer ;
