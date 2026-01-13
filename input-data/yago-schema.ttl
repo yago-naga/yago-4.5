@@ -120,6 +120,12 @@ schema:Thing a sh:NodeShape ;
 # Class of all classes. Classes can have properties, too, but only annotation properties.
 rdfs:Class a sh:NodeShape ;
     sh:property [
+        sh:path schema:name ;
+        sh:datatype rdf:langString ;
+        ys:fromProperty wdt:P2561 ;
+	rdfs:comment "Name the subject is known by"
+    ] ;
+    sh:property [
         sh:path schema:alternateName ;
         sh:datatype rdf:langString ;
         ys:fromProperty skos:altLabel ;
