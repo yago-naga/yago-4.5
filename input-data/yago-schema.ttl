@@ -97,7 +97,7 @@ schema:Thing a sh:NodeShape ;
         sh:path rdfs:label ;
         sh:datatype rdf:langString ;
         sh:uniqueLang true ;
-		ys:fromProperty schema:name ;
+		ys:fromProperty schema:name, wdt:P2561 ;
     ] ;
     sh:property [
         sh:path schema:mainEntityOfPage ;
@@ -118,13 +118,7 @@ schema:Thing a sh:NodeShape ;
     ] .
 
 # Class of all classes. Classes can have properties, too, but only annotation properties.
-rdfs:Class a sh:NodeShape ;
-    sh:property [
-        sh:path schema:name ;
-        sh:datatype rdf:langString ;
-        ys:fromProperty wdt:P2561 ;
-	rdfs:comment "Name the subject is known by" ;
-    ] ;
+rdfs:Class a sh:NodeShape ;    
     sh:property [
         sh:path schema:alternateName ;
         sh:datatype rdf:langString ;
