@@ -123,7 +123,7 @@ rdfs:Class a sh:NodeShape ;
         sh:path schema:name ;
         sh:datatype rdf:langString ;
         ys:fromProperty wdt:P2561 ;
-	rdfs:comment "Name the subject is known by"
+	rdfs:comment "Name the subject is known by" ;
     ] ;
     sh:property [
         sh:path schema:alternateName ;
@@ -716,6 +716,12 @@ schema:Event a sh:NodeShape ;
         sh:path schema:superEvent ;
         sh:class schema:Event ;
         ys:fromProperty wdt:P361 ;
+    ] ;
+	sh:property [
+        sh:path schema:maximumAttendeeCapacity ;
+        sh:datatype xsd:decimal ;
+        ys:fromProperty wdt:P1083 ;
+	rdfs:comment "The total number of individuals that may attend an event or venue" ;	
     ] .
     # Fabian 2023-03-28: removed to avoid redundancy with superEvent
     #sh:property [
@@ -1448,6 +1454,12 @@ yago:HumanMadeGeographicalEntity a sh:NodeShape ;
         sh:datatype xsd:dateTime ;
         ys:fromProperty wdt:P571 ;
 		sh:maxCount 1 ;
+    ] ;
+	sh:property [
+        sh:path schema:maximumAttendeeCapacity ;
+        sh:datatype xsd:decimal ;
+        ys:fromProperty wdt:P1083 ;
+	rdfs:comment "The total number of individuals that can contain this place." ;	
     ] .
 
 # Transit routes such as roads and railways.
