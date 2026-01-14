@@ -134,7 +134,7 @@ rdfs:Class a sh:NodeShape ;
         sh:path rdfs:label ;
         sh:datatype rdf:langString ;
         sh:uniqueLang true ;
-		ys:fromProperty schema:name ;
+		ys:fromProperty schema:name, wdt:2561 ;
     ] ;
     sh:property [
         sh:path schema:sameAs ;
