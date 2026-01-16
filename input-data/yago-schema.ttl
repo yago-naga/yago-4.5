@@ -792,6 +792,12 @@ schema:Organization a sh:NodeShape ;
         ys:fromProperty wdt:P154 ;
     ] ;
     sh:property [
+        sh:path yago:flag ; # Thomas: added to yago: 2026-01-16
+        sh:class schema:CreativeWork ;
+        ys:fromProperty wdt:P163 ;
+	rdfs:comment "Flag of the place or organization." ;
+    ] ;
+    sh:property [
         sh:path schema:dissolutionDate ;
         sh:or (
             [
@@ -1258,6 +1264,12 @@ schema:Place a sh:NodeShape ;
         sh:datatype geo:wktLiteral ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P625 ;
+    ] ;
+    sh:property [
+        sh:path yago:flag ; # Thomas: added to yago: 2026-01-16
+        sh:class schema:CreativeWork ;
+        ys:fromProperty wdt:P163 ;
+	rdfs:comment "Flag of the place or organization." ;
     ] .
 
 
