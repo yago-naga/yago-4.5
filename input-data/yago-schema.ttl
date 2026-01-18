@@ -97,6 +97,7 @@ schema:Thing a sh:NodeShape ;
         sh:path rdfs:label ;
         sh:datatype rdf:langString ;
         sh:uniqueLang true ;
+		sh:minCount 1;
 		ys:fromProperty schema:name, wdt:P2561 ;
     ] ;
     sh:property [
@@ -950,7 +951,7 @@ schema:EducationalOrganization a sh:NodeShape ;
 schema:PerformingGroup rdf:type sh:NodeShape ;
     rdfs:subClassOf schema:Organization ; 
 	sh:property [
-        sh:path yago:director ;
+        sh:path schema:director ;
         sh:class schema:Person ;
         ys:fromProperty wdt:P1037, wdt:P1875;
     ] ;	

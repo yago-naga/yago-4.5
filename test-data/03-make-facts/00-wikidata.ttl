@@ -15,10 +15,16 @@ wd:Elvis a wikibase:Item .
 
 # Only one disjoint class should survive
 
-wd:Q_Inconsistent wdt:P31 wd:Q_rock_singer, schema:Organization .
+wd:Q_Inconsistent wdt:P31 wd:Q_rock_singer, schema:Organization ; schema:name "Inconsistent"@en .
+
+# Objects without label go away
+wd:Q_Has_no_label wdt:P31 wd:Q_rock_singer .
 
 # Web pages should become objects of schema:mainEntityOfPage
 <https://elvis.com> schema:about wd:Q_Elvis .
+
+# Wikipedia page should deliver the label
+<https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%B5%D1%81%D0%BB%D0%B8,_%D0%AD%D0%BB%D0%B2%D0%B8%D1%81> schema:about wd:Q_Elvis .
 
 wd:Q_Elvis wdt:P31 wd:Q_rock_singer;
     # These are shortcuts that should not appear
@@ -62,22 +68,27 @@ s:Q_Elvis-5b0fdcdf-4815-583c-4dd3-914e1c5d95c0 a wikibase:Statement,
 
 # Animals become instances of taxon
 wd:Q_tiger wdt:P171 wd:Q_cat ;
-    wdt:P1034 wd:Q_sheep .
+    wdt:P1034 wd:Q_sheep ; 
+	schema:name "tiger"@en .
     
 # Disjoint ranges
 wd:Q_composition  wdt:P31 wd:Q207628;
-	wdt:P86 wd:Q_person_or_band .
+	wdt:P86 wd:Q_person_or_band ; 
+	schema:name "composition"@en .
 
 # Patterns
 wd:Q_product wdt:P31 wd:Q2424752;
-		wdt:P3962 "12345678".
+		wdt:P3962 "12345678"; 
+	schema:name "product"@en .
 
 # Patterns
 wd:Q_org wdt:P31 schema:Organization;
-		wdt:P1451 "Blah blah"@en.
+		wdt:P1451 "Blah blah"@en ; 
+	schema:name "organization"@en .
 
 # Geo locations
 wd:Q31  wdt:P31	schema:Country ;
+	schema:name "Belgium"@en ;
 	schema:geo      "Point(4.6680555555556 50.641111111111)"^^geo:wktLiteral        .
 
 # Dates
@@ -93,12 +104,14 @@ wds:Q31-93ba9638-404b-66ac-2733-e6292666a326 a wikibase:Statement ;
 		
 # A single date should survive
 wd:Q312 wdt:P31 schema:Corporation ;
+	schema:name "corporation"@en ;
     wdt:P571 "1976-04-01T00:00:00Z"^^xsd:dateTime,
              "1976-01-01T00:00:00Z"^^xsd:dateTime .
 
 # Fictional entities
 wd:Q_fictional wdt:P31 wd:Q2593744, wd:Q_rock_singer ;	
 	schema:geo      "Point(4.6680555555556 50.641111111111)"^^geo:wktLiteral  ;
+	schema:name "fictional"@en ;
 	wdt:P19 wd:Q_birth_place_1 ;
 	wdt:P1080 wd:Q_book .
 	
