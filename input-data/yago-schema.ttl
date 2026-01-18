@@ -109,7 +109,7 @@ schema:Thing a sh:NodeShape ;
     sh:property [
         sh:path schema:url ;
         sh:datatype xsd:anyURI ;
-        ys:fromProperty wdt:P856 ;
+        ys:fromProperty wdt:P854, wdt:P856, wdt:P973, wdt:P2699 ; # Thomas: added other URL properties 2026-01-16
     ] ;
 	# We map to Wikidata, Freebase, Google knowledge graph, WordNet, and IMDB.
     sh:property [
@@ -793,6 +793,12 @@ schema:Organization a sh:NodeShape ;
         ys:fromProperty wdt:P154 ;
     ] ;
     sh:property [
+        sh:path yago:flag ; # Thomas: added to yago: 2026-01-16
+        sh:class schema:CreativeWork ;
+        ys:fromProperty wdt:P163 ;
+	rdfs:comment "Flag of the place or organization." ;
+    ] ;
+    sh:property [
         sh:path schema:dissolutionDate ;
         sh:or (
             [
@@ -1259,6 +1265,12 @@ schema:Place a sh:NodeShape ;
         sh:datatype geo:wktLiteral ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P625 ;
+    ] ;
+    sh:property [
+        sh:path yago:flag ; # Thomas: added to yago: 2026-01-16
+        sh:class schema:CreativeWork ;
+        ys:fromProperty wdt:P163 ;
+	rdfs:comment "Flag of the place or organization." ;
     ] .
 
 
