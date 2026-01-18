@@ -54,7 +54,7 @@ schema:Person owl:disjointWith
 	schema:Taxon,
     schema:Organization.
 schema:Place owl:disjointWith 
-    schema:CreativeWork,
+    # schema:CreativeWork, # Fabian: removed 2026-01-16 to cater to statues
     schema:Event,
 	schema:Person,
     schema:Taxon. 
@@ -1443,7 +1443,7 @@ schema:Continent a sh:NodeShape ;
 yago:HumanMadeGeographicalEntity a sh:NodeShape ;
 	rdfs:subClassOf schema:Place ;
 	rdfs:label "Human-made geographical entity"@en ;
-    ys:fromClass wd:Q811979, wd:Q811430, wd:Q811463, wd:Q35145743 ;
+    ys:fromClass wd:Q811979, wd:Q811430, wd:Q811463, wd:Q35145743, wd:Q811430 ;
 	sh:property [
         sh:path yago:ownedBy ; # Fabian: changed from schema: to yago: 2024-04-03
         sh:or (
