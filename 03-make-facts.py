@@ -36,6 +36,7 @@ from TurtleUtils import Graph
 import sys
 import re
 import os
+from urllib import parse
 import Evaluator
 from Schema import YagoSchema
 from collections import defaultdict
@@ -309,7 +310,7 @@ def handleRange(entityFacts, yagoSchema):
                 
 
 ##########################################################################
-#             Handling max counts
+#             Handling min and max counts
 ##########################################################################
 
 def isSecondaryWikidataClass(entityFacts, yagoSchema):
@@ -359,7 +360,40 @@ def handleMaxCounts(entityFacts, yagoSchema, isSecondaryClass=False):
                    else:
                         languages.add(lang)
 
+def checkMinCounts(entityFacts, yagoSchema, isSecondaryClass):
+    """ TRUE if the object passes the MinCount checks"""
+    mainEntity=entityFacts.mainSubject()            
+    for predicate in entityFacts.predicatesOf(mainEntity):        
+        yagoProperty=yagoSchema.properties.get(predicate, None)
+        if yagoProperty and yagoProperty.minCount and len(entityFacts.objectsOf(mainEntity, predicate))<yagoProperty.minCount and not (isSecondaryClass and predicate=="rdfs:label"):
+            debug("Min count", yagoProperty.minCount, "not satisfied for",mainEntity,predicate)
+            return False
+    return True
 
+def guessLabelIfNecessary(entityFacts):
+    """ Tries to guess a label for an entity from a Wikipedia URL"""
+    mainEntity=entityFacts.mainSubject()            
+    if entityFacts.objectsOf(mainEntity, Prefixes.rdfsLabel):
+        debug(mainEntity,"already has a label", entityFacts.objectsOf(mainEntity, Prefixes.rdfsLabel))
+        return True
+    wikipediaPages=entityFacts.objectsOf(mainEntity, Prefixes.schemaPage)
+    myName=None
+    myLanguage="en"
+    for wikipediaPage in wikipediaPages:
+        for (language,title) in re.findall("https://([a-z]+).wikipedia.org/wiki/([^^]*)", wikipediaPage):
+            if language=="en" or not myName:
+                myName=title            
+                myLanguage=language
+    if myName:        
+        myName=parse.unquote(myName)
+        myName=re.sub("[\"'\u0000-\u001f]","",myName)
+        if len(myName)>3:
+            debug("Found label for",mainEntity,": ",myName)
+            entityFacts.add((mainEntity,Prefixes.rdfsLabel,'"'+myName+'"@'+myLanguage))
+            return True
+    debug("Found no label for",mainEntity)
+    return False
+    
 ##########################################################################
 #             Main method
 ##########################################################################
@@ -392,11 +426,11 @@ class treatWikidataEntity():
         handleWebPages(entityFacts)               
 
         # Wikidata classes that are mapped to a YAGO class, but that are not the first
-        # among those mapped to the same YAG class
+        # among those mapped to the same YAGO class
         isSecondaryClass=isSecondaryWikidataClass(entityFacts, self.yagoSchema)
         
         entityFacts, dates=translatePropertiesAndClasses(entityFacts, self.yagoSchema)
-                
+                    
         handleTypeAssertions(entityFacts, self.yagoTaxonomyUp)        
                 
         types=handleAndReturnTypes(entityFacts, self.yagoSchema, self.yagoTaxonomyUp)
@@ -406,6 +440,14 @@ class treatWikidataEntity():
         handleRange(entityFacts, self.yagoSchema)
         
         handleMaxCounts(entityFacts, self.yagoSchema, isSecondaryClass)
+
+        if not isSecondaryClass and not guessLabelIfNecessary(entityFacts):
+            debug("Label failed",entityFacts.mainSubject())
+            return
+        
+        if not checkMinCounts(entityFacts, self.yagoSchema, isSecondaryClass):
+            debug("Mincount failed",entityFacts.mainSubject())
+            return
         
         s=entityFacts.mainSubject()
         for p in entityFacts.predicatesOf(s):

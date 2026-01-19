@@ -32,6 +32,7 @@
 @prefix prn: <http://www.wikidata.org/prop/reference/value-normalized/> .
 @prefix wdno: <http://www.wikidata.org/prop/novalue/> .
 @prefix ys: <http://yago-knowledge.org/schema#> .
+wd:Q_Inconsistent	rdfs:label	"Inconsistent"@en	.
 wd:Q_Inconsistent	rdf:type	schema:Organization	.
 wd:Q_Elvis	schema:birthPlace	wd:Q_birth_place_1	. # IF	schema:Place		
 wd:Q_Elvis	schema:children	wd:Q_child	. # IF	schema:Person	"2014-01-01"^^xsd:date	"2014-01-01"^^xsd:date
@@ -39,26 +40,35 @@ wd:Q_Elvis	yago:academicDegree	wd:Q_doctoralDegree	. # IF	yago:Award
 wd:Q_Elvis	schema:image	"http://good-image.com"^^xsd:anyURI	.
 wd:Q_Elvis	rdfs:comment	"Elvis Presley, the great singer"@en	.
 wd:Q_Elvis	schema:birthDate	"1935"^^xsd:gYear	.
-wd:Q_Elvis	rdf:type	wd:Q_rock_singer	.
 wd:Q_Elvis	schema:mainEntityOfPage	"https://elvis.com"^^xsd:anyURI	.
+wd:Q_Elvis	schema:mainEntityOfPage	"https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%B5%D1%81%D0%BB%D0%B8,_%D0%AD%D0%BB%D0%B2%D0%B8%D1%81"^^xsd:anyURI	.
+wd:Q_Elvis	rdf:type	wd:Q_rock_singer	.
+wd:Q_Elvis	rdfs:label	"Пресли,_Элвис"@ru	.
 wd:Q_tiger	schema:parentTaxon	wd:Q_cat	. # IF	schema:Taxon		
 wd:Q_tiger	yago:consumes	wd:Q_sheep	. # IF	schema:Taxon		
+wd:Q_tiger	rdfs:label	"tiger"@en	.
 wd:Q_tiger	rdf:type	schema:Taxon	.
 wd:Q_composition	schema:musicBy	wd:Q_person_or_band	. # IF	schema:MusicGroup, schema:Person		
+wd:Q_composition	rdfs:label	"composition"@en	.
 wd:Q_composition	rdf:type	schema:MusicComposition	.
 wd:Q_product	schema:gtin	"12345678"	.
+wd:Q_product	rdfs:label	"product"@en	.
 wd:Q_product	rdf:type	schema:Product	.
 wd:Q_org	schema:slogan	"Blah blah"@en	.
+wd:Q_org	rdfs:label	"organization"@en	.
 wd:Q_org	rdf:type	schema:Organization	.
+wd:Q31	rdfs:label	"Belgium"@en	.
 wd:Q31	schema:geo	"Point(4.6680555555556 50.641111111111)"^^geo:wktLiteral	.
 wd:Q31	yago:populationNumber	"+11825551"^^xsd:decimal	. #		"2014-01-01"^^xsd:date	"2014-01-01"^^xsd:date
 wd:Q31	rdf:type	schema:Country	.
+wd:Q312	rdfs:label	"corporation"@en	.
 wd:Q312	schema:dateCreated	"1976-01-01"^^xsd:date	.
 wd:Q312	rdf:type	schema:Corporation	.
+wd:Q_fictional	rdfs:label	"fictional"@en	.
 wd:Q_fictional	schema:birthPlace	wd:Q_birth_place_1	. # IF	schema:Place		
 wd:Q_fictional	yago:appearsIn	wd:Q_book	. # IF	schema:CreativeWork		
-wd:Q_fictional	rdf:type	wd:Q_rock_singer	.
 wd:Q_fictional	rdf:type	wd:Q2593744	.
+wd:Q_fictional	rdf:type	wd:Q_rock_singer	.
 wd:Q_singer	rdfs:label	"singer"@en	.
 wd:Q_singer	rdfs:label	"chanteur plus en détail"@fr	.
 wd:Q_singer	rdfs:comment	"this is a singer"@en	.

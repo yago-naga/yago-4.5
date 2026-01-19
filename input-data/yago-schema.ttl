@@ -54,7 +54,7 @@ schema:Person owl:disjointWith
 	schema:Taxon,
     schema:Organization.
 schema:Place owl:disjointWith 
-    schema:CreativeWork,
+    # schema:CreativeWork, # Fabian: removed 2026-01-16 to cater to statues
     schema:Event,
 	schema:Person,
     schema:Taxon. 
@@ -104,6 +104,7 @@ schema:Thing a sh:NodeShape ;
         sh:path rdfs:label ;
         sh:datatype rdf:langString ;
         sh:uniqueLang true ;
+		sh:minCount 1;
 		ys:fromProperty schema:name, wdt:P2561 ;
         rdfs:comment "Provides a human-readable label for an entity in a specific language" ;
     ] ;
@@ -1111,7 +1112,7 @@ schema:PerformingGroup rdf:type sh:NodeShape ;
     rdfs:subClassOf schema:Organization ; 
     #Margheirta 16/01/2026 added comment to director
 	sh:property [
-        sh:path yago:director ;
+        sh:path schema:director ;
         sh:class schema:Person ;
         ys:fromProperty wdt:P1037, wdt:P1875;
         rdfs:comment "The director of a PerformingGroup" ;
@@ -1696,7 +1697,7 @@ schema:Continent a sh:NodeShape ;
 yago:HumanMadeGeographicalEntity a sh:NodeShape ;
 	rdfs:subClassOf schema:Place ;
 	rdfs:label "Human-made geographical entity"@en ;
-    ys:fromClass wd:Q811979, wd:Q811430, wd:Q811463, wd:Q35145743 ;
+    ys:fromClass wd:Q811979, wd:Q811430, wd:Q811463, wd:Q35145743, wd:Q811430 ;
     #Margherita 16/01/2026 added comment to ownedBy
 	sh:property [
         sh:path yago:ownedBy ; # Fabian: changed from schema: to yago: 2024-04-03

@@ -27,6 +27,12 @@ def info(*mess):
     """ Prints an info """
     sys.stdout.buffer.write(b"    Info: ")
     message(*mess)
+
+def getFirst(myList):
+    """ Returns the first element of an iterable or none """    
+    for o in myList:
+        return o
+    return None
     
 class YagoObject:
     """ Common super class for YAGO properties and YAGO classes"""
@@ -56,28 +62,28 @@ class YagoObject:
         for s in itertools.chain(self.labels,self.comments):
             if not TurtleUtils.isLiteral(s):
                 warning("YAGO object",self,"has an invalid label or comment",s)
-        # If we do not have a label, invent one by splitting the identifier by Camel Case
-        if not self.labels:
-            self.labels.add('"'+re.sub("([a-z])([A-Z])","\\1 \\2",stripPrefix(self.identifier))+'"@en')
                 
-
 def stripPrefix(identifier):
     """ Removes the xyz: prefix"""
     return identifier[identifier.find(':')+1:]
     
 class YagoProperty(YagoObject):
-    """ Represents a YAGO property with its attibutes"""
+    """ Represents a YAGO property with its attributes"""
     def __init__(self, name):
         super().__init__(name)
         self.objectTypes=set()
         self.subjectTypes=set()
         self.wikidataProperties=set()
         self.maxCount=None
+        self.minCount=None
         self.uniqueLang=False
         self.pattern=None   
     
     def check(self):
         """ Performs simple checks """
+        # If we do not have a label, invent one by splitting the identifier by Camel Case
+        if not self.labels:
+            self.labels.add('"'+re.sub("([a-z])([A-Z])","\\1 \\2",stripPrefix(self.identifier))+'"@en')        
         super().check()
         if not self.objectTypes:
             warning("Property",self,"has no object types")
@@ -87,6 +93,8 @@ class YagoProperty(YagoObject):
             warning("Property",self,"has no Wikidata properties")
         if self.maxCount is not None and self.maxCount<1:
             warning("Property",self,"has an invalid max count of",self.maxCount)
+        if self.minCount is not None and self.minCount<1:
+            warning("Property",self,"has an invalid min count of",self.minCount)
         if self.pattern and not TurtleUtils.isRegex(self.pattern):
             warning("Property",self,"has an invalid pattern of",self.pattern)
             
@@ -104,11 +112,13 @@ class YagoProperty(YagoObject):
         if self.labels:
             out.write("\t\trdfs:label "+", ".join(c for c in self.labels)+" ;\n")        
         if self.comments:
-            out.write("\t\trdfs:comment "+", ".join(c for c in self.comments)+" ;\n")        
+            out.write("\t\trdfs:comment "+", ".join(c for c in self.comments)+" ;\n")      
         if self.uniqueLang:
             out.write("\t\tsh:uniqueLang true ;\n")
         if self.maxCount:
             out.write("\t\tsh:maxCount "+str(self.maxCount)+" ;\n")
+        if self.minCount:
+            out.write("\t\tsh:minCount "+str(self.minCount)+" ;\n")
         if self.pattern:
             out.write("\t\tsh:pattern \""+self.pattern.replace("\\","\\\\")+"\" ;\n")
         out.write("\t\tys:fromProperty "+", ".join(c for c in self.wikidataProperties)+" ;\n")
@@ -154,6 +164,18 @@ class YagoProperty(YagoObject):
                   self.maxCount=maxCount
            except:
                warning("Property",self,"has invalid maxCount",maxCounts[0])
+        minCounts=entityGraph.objectsOf(shaclProperty,Prefixes.shaclMinCount)
+        if len(minCounts)>1:
+           warning("Property",self,"has non-unique minCounts",minCounts)
+        if len(minCounts)>0:
+           try:
+               minCount=int(minCounts.pop())
+               if self.minCount and self.minCount!=minCount:
+                  warning("Property",self,"has non-unique minCounts",minCount,"and",self.minCount)
+               else:
+                  self.minCount=minCount
+           except:
+               warning("Property",self,"has invalid minCount",minCounts[0])
         
         # Patterns
         patterns=entityGraph.objectsOf(shaclProperty,Prefixes.shaclPattern)
@@ -178,6 +200,10 @@ class YagoClass(YagoObject):
     def check(self):
         """ Performs some simple checks"""
         super().check()
+        # If we do not have a label, and won't get one from Wikidata, invent one by splitting the identifier by Camel Case
+        if not self.labels and not self.fromClasses:
+            self.labels.add('"'+re.sub("([a-z])([A-Z])","\\1 \\2",stripPrefix(self.identifier))+'"@en')        
+
         if not self.superClasses and self.identifier!=Prefixes.schemaThing and not self.identifier.startswith("rdf:") and not self.identifier.startswith("rdfs:"):
             warning("Class",self,"does not have a super class")
             
@@ -225,11 +251,11 @@ class YagoClass(YagoObject):
             # Property name
             propertyNames=entityGraph.objectsOf(shaclProperty,Prefixes.shaclPath)
             if len(propertyNames)>1:
-                warning("Property",shaclProperty,"has non-unique names",names)
+                warning("Property",shaclProperty,"has non-unique path",propertyNames)
             elif len(propertyNames)==0:
-                warning("Property",shaclProperty,"has no name")
-                propertyNames=["NONAME"]
-            propertyName=propertyNames.pop() 
+                warning("Property",shaclProperty,"has no path")
+                propertyNames=["NOPATH"]
+            propertyName=getFirst(propertyNames) 
             yagoProperty=yagoSchema.getProperty(propertyName)
             yagoProperty.subjectTypes.add(self.identifier)
             yagoProperty.updateFromShacl(shaclProperty, entityGraph)

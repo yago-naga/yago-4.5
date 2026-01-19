@@ -82,6 +82,10 @@ class wikidataVisitor(object):
 # Classes that will not be added to YAGO, and whose children won't be added either
 badClasses = {
     "wd:Q17379835", # Wikimedia page outside the main knowledge tree
+    "wd:Q4167836",  # Wikimedia category
+    "wd:Q15138389", # Wikimedia article page
+    "wd:Q17362920", # Wikimedia duplicate page
+    "wd:Q21286738", # Wikimedia suplucate item
     "wd:Q17442446", # Wikimedia internal stuff
     "wd:Q15474042", # same
     "wd:Q111279923",# same 
