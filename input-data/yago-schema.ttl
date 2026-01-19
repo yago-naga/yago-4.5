@@ -82,7 +82,7 @@ schema:Thing a sh:NodeShape ;
         sh:datatype xsd:anyURI ;
         ys:fromProperty wdt:P18 ;
 		rdfs:label "an image for the thing"@en ;
-        rdfs:comment "An image of the entity"
+        rdfs:comment "An image of the entity" ;
     ] ;	
     #Margherita 16/01/2026: added rdfs:comment 4 schema:alternateName
     sh:property [
@@ -130,7 +130,22 @@ schema:Thing a sh:NodeShape ;
 		sh:datatype xsd:string ;
         ys:fromProperty wdt:P646, wdt:P345, wdt:P2671, wdt:P1053, wdt:P8814;
         rdfs:comment "A URL that identifies the same entity in another database" ;
-    ] .
+    ] ;
+    # Margherita 18/01/2026: added width property (P2049)
+    sh:property [
+        sh:path schema:width ;
+        sh:datatype xsd:decimal ;
+        ys:fromProperty wdt:P2049 ;
+        rdfs:comment "The width of an object."@en ;
+    ] ;
+    # Margherita 18/01/2026: added height property (P2049)
+    sh:property [
+        sh:path schema:height ;
+        sh:datatype xsd:decimal ;
+        ys:fromProperty wdt:P2048 ;
+        rdfs:comment "The height of an object."@en ;
+    ] ;
+    .
 
 # Class of all classes. Classes can have properties, too, but only annotation properties.
 rdfs:Class a sh:NodeShape ;  
@@ -154,7 +169,7 @@ rdfs:Class a sh:NodeShape ;
         sh:path rdfs:label ;
         sh:datatype rdf:langString ;
         sh:uniqueLang true ;
-		ys:fromProperty schema:name, wdt:2561 ;
+		ys:fromProperty schema:name, wdt:P2561 ;
         rdfs:comment "Provides a human-readable label for an entity in a specific language" ;
     ] ;
     #Margherita 17/01/2026 added comment to sameAs
@@ -348,7 +363,15 @@ schema:CreativeWork a sh:NodeShape ;
         sh:class schema:Language ;
         ys:fromProperty wdt:P407 ;
         rdfs:comment "The language of a CreativeWork" ;
-    ] .
+    ] ;
+
+    #Margherita 18/01/2026: added property of title for a creative work
+    sh:property [
+        sh:path schema:name ; #or yago:title?
+        sh:datatype rdf:langString ;
+        ys:fromProperty wdt:P1476 ;
+        rdfs:comment "The published title of a CreativeWork" ;
+    ] ;
     
 schema:Book a sh:NodeShape ;
 	rdfs:subClassOf schema:CreativeWork ;
@@ -367,7 +390,7 @@ schema:Book a sh:NodeShape ;
         sh:path schema:illustrator ;
         sh:class schema:Person ;
         ys:fromProperty wdt:P110 ;
-        rdfs:comment "The illustrator of a Book"
+        rdfs:comment "The illustrator of a Book" ;
     ] ;
     #Margherita 16/01/2026 added comment to editor
     sh:property [
@@ -495,6 +518,13 @@ schema:TVSeries a sh:NodeShape ;
         sh:class schema:Organization ;
         ys:fromProperty wdt:P272 ;
         rdfs:comment "The production company for a Movie or TV Series" ;
+    ] ;
+    #Margherita 18/01/2026 added new property
+    sh:property [
+        sh:path yago:directorOfPhotography ;
+        sh:class schema:Person ;
+        ys:fromProperty wdt:P344 ;
+        rdfs:comment "The director of photography for a Movie or TV Series" ;
     ] .
 
 
@@ -601,6 +631,13 @@ schema:Movie a sh:NodeShape ;
         sh:class schema:Organization ;
         ys:fromProperty wdt:P272 ;
         rdfs:comment "The production company for a Movie or TV Series" ;
+    ] ;
+    #Margherita 18/01/2026: added property 
+    sh:property [
+        sh:path yago:directorOfPhotography ;
+        sh:class schema:Person ;
+        ys:fromProperty wdt:P344 ;
+        rdfs:comment "The director of photography for a Movie or TV Series" ;
     ] .
 
 # Fictional entities are Things,
@@ -624,7 +661,7 @@ yago:FictionalEntity a sh:NodeShape ;
         ys:fromProperty wdt:P175  ;
         rdfs:comment "A Person who performs as a FictionalEntity" ;
     ] ;
-    #Margherita 16/01/2026: added rdfs:comment 4 schema:author
+    #Margherita 16/01/2026: added rdfs:comment 4 schema:author + added to possibility for the author to be just a string
 	sh:property [
         sh:path schema:author ;
         sh:or (
@@ -633,6 +670,9 @@ yago:FictionalEntity a sh:NodeShape ;
             ]
             [
                 sh:class schema:Person
+            ]
+            [
+            sh:datatype xsd:string
             ]
         ) ;
         ys:fromProperty wdt:P170, wdt:P50 ;
@@ -788,7 +828,7 @@ schema:Event a sh:NodeShape ;
         ) ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P582 ;
-        rdfs:comment "The end date of an Event"
+        rdfs:comment "The end date of an Event" ;
     ] ;
     #Margherita 17/01/2026 added comment to sponsor
     sh:property [
@@ -945,7 +985,7 @@ schema:Organization a sh:NodeShape ;
         ) ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P576 ;
-        rdfs:comment "The date when an Organization was dissolved"
+        rdfs:comment "The date when an Organization was dissolved" ;
     ] ;
     #Margherita 16/01/2026 added comment to duns
     sh:property [
@@ -1495,6 +1535,13 @@ schema:Place a sh:NodeShape ;
         sh:class schema:CreativeWork ;
         ys:fromProperty wdt:P163 ;
 	rdfs:comment "Flag of the place or organization." ;
+    ] ;
+    # Margherita 18/01/2026: added time zone property(P421)
+    sh:property [
+        sh:path schema:timeZone ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P421 ;
+        rdfs:comment "The time zone where a Place is located."@en ;
     ] .
 
 
@@ -1546,6 +1593,13 @@ yago:AstronomicalObject a sh:NodeShape ;
         ys:fromProperty wdt:P2583 ;
         rdfs:comment "The distance of an AstronomicalObject from Earth" ;
     ] ;    
+    #Margherita 18/01/2026: added epoch property (P2659)
+    sh:property [
+        sh:path yago:epoch ;
+        sh:datatype xsd:decimal ;  # or xsd:dateTime 
+        ys:fromProperty wdt:P2659 ;
+        rdfs:comment "The epoch of an astronomical object coordinate" ;
+    ] ;
 	ys:fromClass wd:Q6999.
 
 # ------------------ Administrative Areas ---------------
