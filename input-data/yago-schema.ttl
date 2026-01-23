@@ -873,12 +873,13 @@ schema:Organization a sh:NodeShape ;
         ys:fromProperty wdt:P154 ;
         rdfs:comment "The logo of an Organization" ;
     ] ;
-    sh:property [
-        sh:path yago:flag ; # Thomas: added to yago: 2026-01-16
-        sh:class schema:CreativeWork ;
-        ys:fromProperty wdt:P163 ;
-	rdfs:comment "Flag of the place or organization." ;
-    ] ;
+# Fabian: would need proper modeling of the target class	
+#    sh:property [
+#        sh:path yago:flag ; # Thomas: added to yago: 2026-01-16
+#        sh:class schema:CreativeWork ;
+#        ys:fromProperty wdt:P163 ;
+	#rdfs:comment "Flag of the place or organization." ;
+#    ] ;
     sh:property [
         sh:path schema:dissolutionDate ;
         sh:or (
@@ -1397,12 +1398,13 @@ schema:Place a sh:NodeShape ;
         ys:fromProperty wdt:P625 ;
         rdfs:comment "The geographic coordinates of a Place (in WKT literal format)" ;
     ] ;
-    sh:property [
-        sh:path yago:flag ; # Thomas: added to yago: 2026-01-16
-        sh:class schema:CreativeWork ;
-        ys:fromProperty wdt:P163 ;
-	rdfs:comment "Flag of the place or organization." ;
-    ] ;
+# Fabian: would need proper modeling of the target class	
+#    sh:property [
+#        sh:path yago:flag ; # Thomas: added to yago: 2026-01-16
+#        sh:class schema:CreativeWork ;
+#        ys:fromProperty wdt:P163 ;
+	#rdfs:comment "Flag of the place or organization." ;
+#    ] ;
     # Margherita 18/01/2026: added time zone property (P421)
 	# Fabian: TODO this would need proper modeling with timeZone as a new class (subclass of Place?)
     sh:property [
