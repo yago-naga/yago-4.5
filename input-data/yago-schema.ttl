@@ -105,7 +105,7 @@ schema:Thing a sh:NodeShape ;
         sh:datatype rdf:langString ;
         sh:uniqueLang true ;
 		sh:minCount 1;
-		ys:fromProperty schema:name, wdt:P2561 ;
+		ys:fromProperty schema:name, wdt:P2561, wdt:P1476 ;
         rdfs:comment "Provides a human-readable label for an entity in a specific language" ;
     ] ;
     #Margherita 16/01/2026 added comment to mainEntityOfPage
@@ -130,21 +130,7 @@ schema:Thing a sh:NodeShape ;
 		sh:datatype xsd:string ;
         ys:fromProperty wdt:P646, wdt:P345, wdt:P2671, wdt:P1053, wdt:P8814;
         rdfs:comment "A URL that identifies the same entity in another database" ;
-    ] ;
-    # Margherita 18/01/2026: added width property (P2049)
-    sh:property [
-        sh:path schema:width ;
-        sh:datatype xsd:decimal ;
-        ys:fromProperty wdt:P2049 ;
-        rdfs:comment "The width of an object."@en ;
-    ] ;
-    # Margherita 18/01/2026: added height property (P2049)
-    sh:property [
-        sh:path schema:height ;
-        sh:datatype xsd:decimal ;
-        ys:fromProperty wdt:P2048 ;
-        rdfs:comment "The height of an object."@en ;
-    ] ;
+   ] 
     .
 
 # Class of all classes. Classes can have properties, too, but only annotation properties.
@@ -363,15 +349,7 @@ schema:CreativeWork a sh:NodeShape ;
         sh:class schema:Language ;
         ys:fromProperty wdt:P407 ;
         rdfs:comment "The language of a CreativeWork" ;
-    ] ;
-
-    #Margherita 18/01/2026: added property of title for a creative work
-    sh:property [
-        sh:path schema:name ; #or yago:title?
-        sh:datatype rdf:langString ;
-        ys:fromProperty wdt:P1476 ;
-        rdfs:comment "The published title of a CreativeWork" ;
-    ] ;
+    ] .
     
 schema:Book a sh:NodeShape ;
 	rdfs:subClassOf schema:CreativeWork ;
@@ -662,6 +640,7 @@ yago:FictionalEntity a sh:NodeShape ;
         rdfs:comment "A Person who performs as a FictionalEntity" ;
     ] ;
     #Margherita 16/01/2026: added rdfs:comment 4 schema:author + added to possibility for the author to be just a string
+	# Fabian: 20/01/2026: removed possibility of author string to avoid breaking the schema
 	sh:property [
         sh:path schema:author ;
         sh:or (
@@ -670,9 +649,6 @@ yago:FictionalEntity a sh:NodeShape ;
             ]
             [
                 sh:class schema:Person
-            ]
-            [
-            sh:datatype xsd:string
             ]
         ) ;
         ys:fromProperty wdt:P170, wdt:P50 ;
@@ -1915,6 +1891,20 @@ schema:Product a sh:NodeShape ;
         ys:fromProperty wdt:P577 ;
         rdfs:comment "The date something was created (used for CreativeWorks, Organizations, Products, AdministrativeAreas, etc.)" ;
     ] ;	
+	# Margherita 18/01/2026: added width property (P2049)
+    sh:property [
+        sh:path schema:width ;
+        sh:datatype xsd:decimal ;
+        ys:fromProperty wdt:P2049 ;
+        rdfs:comment "The width of an object."@en ;
+    ] ;
+    # Margherita 18/01/2026: added height property (P2049)
+    sh:property [
+        sh:path schema:height ;
+        sh:datatype xsd:decimal ;
+        ys:fromProperty wdt:P2048 ;
+        rdfs:comment "The height of an object."@en ;
+    ] ;
     #Margherita 16/01/2026 added comment to gtin
     sh:property [
         sh:path schema:gtin ;

@@ -113,6 +113,10 @@ schemaPage = "schema:mainEntityOfPage"
 
 schemaThing = "schema:Thing"
 
+schemaAlumniOf = "schema:alumniOf"
+
+schemaDateCreated = "schema:dateCreated"
+
 fromClass = "ys:fromClass"
 
 fromProperty = "ys:fromProperty"
@@ -140,3 +144,16 @@ shaclPattern="sh:pattern"
 shaclProperty="sh:property"
 
 shaclNodeShape="sh:NodeShape"
+
+##########################################################################
+#             Constants for fact processing
+##########################################################################
+
+# Minimum length for entity labels
+MIN_LABEL_LENGTH = 3
+
+# Invalid date prefix (erroneous default dates in Wikidata)
+INVALID_DATE_PREFIX = '"0000'
+
+# Maximum length for date strings
+MAX_DATE_LENGTH = len('"+0000-01-01T00:00:00Z"^^xsd:dateTime')
