@@ -76,7 +76,6 @@ schema:Intangible  owl:disjointWith
 	
 schema:Thing a sh:NodeShape ;
     # ys:fromClass wd:Q35120 ; No mapping!
-    #Margherita 16/01/2026 added comment to image
 	sh:property [
         sh:path schema:image ;
         sh:datatype xsd:anyURI ;
@@ -84,14 +83,12 @@ schema:Thing a sh:NodeShape ;
 		rdfs:label "an image for the thing"@en ;
         rdfs:comment "An image of the entity" ;
     ] ;	
-    #Margherita 16/01/2026: added rdfs:comment 4 schema:alternateName
     sh:property [
         sh:path schema:alternateName ;
         sh:datatype rdf:langString ;
         ys:fromProperty skos:altLabel, wdt:P225, wdt:P1843 ;
         rdfs:comment "An alternative name for the entity" ;
     ] ;
-    #Margherita 17/01/2026 added comment to comment
     sh:property [
         sh:path rdfs:comment ;
         sh:datatype rdf:langString ;
@@ -99,7 +96,6 @@ schema:Thing a sh:NodeShape ;
         ys:fromProperty schema:description ;
         rdfs:comment "Provides a comment or description of an entity in a specific language" ;
     ] ;
-    #Margherita 16/01/2026 added comment to label
     sh:property [
         sh:path rdfs:label ;
         sh:datatype rdf:langString ;
@@ -108,7 +104,6 @@ schema:Thing a sh:NodeShape ;
 		ys:fromProperty schema:name, wdt:P2561, wdt:P1476 ;
         rdfs:comment "Provides a human-readable label for an entity in a specific language" ;
     ] ;
-    #Margherita 16/01/2026 added comment to mainEntityOfPage
     sh:property [
         sh:path schema:mainEntityOfPage ;
         sh:datatype xsd:anyURI ;
@@ -116,7 +111,6 @@ schema:Thing a sh:NodeShape ;
 		ys:fromProperty ys:willBeFilledFromSchemaAbout ; 		
         rdfs:comment "A URL of a page about the entity" ;
     ] ;
-    #Margherita 16/01/2026 added comment to url
     sh:property [
         sh:path schema:url ;
         sh:datatype xsd:anyURI ;
@@ -124,7 +118,6 @@ schema:Thing a sh:NodeShape ;
         rdfs:comment "A URL associated with the entity" ;
     ] ;
 	# We map to Wikidata, Freebase, Google knowledge graph, WordNet, and IMDB.
-    #Margherita 17/01/2026 added comment to sameAs
     sh:property [
         sh:path schema:sameAs ;
 		sh:datatype xsd:string ;
@@ -135,14 +128,12 @@ schema:Thing a sh:NodeShape ;
 
 # Class of all classes. Classes can have properties, too, but only annotation properties.
 rdfs:Class a sh:NodeShape ;  
-    #Margherita 16/01/2026: added rdfs:comment 4 schema:alternateName
     sh:property [
         sh:path schema:alternateName ;
         sh:datatype rdf:langString ;
         ys:fromProperty skos:altLabel ;
         rdfs:comment "An alternative name for the entity" ;
     ] ;
-    #Margherita 17/01/2026 added comment to comment
     sh:property [
         sh:path rdfs:comment ;
         sh:datatype rdf:langString ;
@@ -150,7 +141,6 @@ rdfs:Class a sh:NodeShape ;
         ys:fromProperty schema:description ;
         rdfs:comment "Provides a comment or description of an entity in a specific language" ;
     ] ;
-    #Margherita 16/01/2026 added comment to label
     sh:property [
         sh:path rdfs:label ;
         sh:datatype rdf:langString ;
@@ -158,14 +148,12 @@ rdfs:Class a sh:NodeShape ;
 		ys:fromProperty schema:name, wdt:P2561 ;
         rdfs:comment "Provides a human-readable label for an entity in a specific language" ;
     ] ;
-    #Margherita 17/01/2026 added comment to sameAs
     sh:property [
         sh:path schema:sameAs ;
 		sh:datatype xsd:string ;
         ys:fromProperty wdt:P646, wdt:P345, wdt:P2671, wdt:P1053, wdt:P8814;
         rdfs:comment "A URL that identifies the same entity in another database" ;
     ] ;
-    #Margherita 16/01/2026 added comment to mainEntityOfPage
     sh:property [
         sh:path schema:mainEntityOfPage ;
         sh:datatype xsd:anyURI ;
@@ -177,7 +165,6 @@ rdfs:Class a sh:NodeShape ;
 # Class of all properties. Properties can have only annotation properties.
 rdf:Property a sh:NodeShape ;
     ys:fromClass wd:Q18616576 ; 
-    #Margherita 16/01/2026: added rdfs:comment 4 schema:alternateName
     sh:property [
         sh:path schema:alternateName ;
         sh:datatype rdf:langString ;
@@ -185,7 +172,6 @@ rdf:Property a sh:NodeShape ;
         rdfs:comment "An alternative name for the entity" ;
 
     ] ;
-    #Margherita 17/01/2026 added comment to comment
     sh:property [
         sh:path rdfs:comment ;
         sh:datatype rdf:langString ;
@@ -193,7 +179,6 @@ rdf:Property a sh:NodeShape ;
         ys:fromProperty schema:description, rdfs:comment ;
         rdfs:comment "Provides a comment or description of an entity in a specific language" ;
     ] ;
-    #Margherita 16/01/2026 added comment to label
     sh:property [
         sh:path rdfs:label ;
         sh:datatype rdf:langString ;
@@ -201,7 +186,6 @@ rdf:Property a sh:NodeShape ;
 		ys:fromProperty schema:name, rdfs:label ;
         rdfs:comment "Provides a human-readable label for an entity in a specific language" ;
     ] ;
-    #Margherita 17/01/2026 added comment to sameAs
     sh:property [
         sh:path schema:sameAs ;
 		sh:datatype xsd:string ;
@@ -220,7 +204,6 @@ schema:Intangible a rdfs:Class, sh:NodeShape;
 yago:Award a sh:NodeShape ;
     ys:fromClass wd:Q618779, wd:Q38033430 ;
     rdfs:subClassOf schema:Intangible ;
-    #Margherita 17/01/2026 added comment to conferredBy
     sh:property [
         sh:path yago:conferredBy ; 
         sh:or (
@@ -280,22 +263,18 @@ schema:Language a sh:NodeShape ;
 schema:CreativeWork a sh:NodeShape ;
     ys:fromClass wd:Q17537576, wd:Q386724 ;
 	rdfs:subClassOf schema:Thing ;
-
-    # margherita 2026-01-17: added rdfs:comment for schema:about
     sh:property [
         sh:path schema:about ;
         sh:class schema:Thing ;
         ys:fromProperty wdt:P921 ;
         rdfs:comment "Indicates what a CreativeWork is about." ;
     ] ;
-    #Margherita 16/01/2026: added comment to award
     sh:property [
         sh:path schema:award ;
         sh:class yago:Award ;
         ys:fromProperty wdt:P166 ;
         rdfs:comment "An award won by a Person, Organization, CreativeWork, or Product" ;
     ] ;
-    #Margherita 16/01/2026: added rdfs:comment 4 schema:author
     sh:property [
         sh:path schema:author ;
         sh:or (
@@ -315,7 +294,6 @@ schema:CreativeWork a sh:NodeShape ;
     #    sh:class schema:Person ;
     #    ys:fromProperty wdt:P674 ;
     #] ;
-    #Margherita 16/01/2026 added comment to contentLocation
     sh:property [
         sh:path schema:contentLocation ;
         sh:class schema:Place ;
@@ -343,7 +321,6 @@ schema:CreativeWork a sh:NodeShape ;
         ys:fromProperty wdt:P571 ;
         rdfs:comment "The date something was created (used for CreativeWorks, Organizations, Products, AdministrativeAreas, etc.)" ;
     ] ;
-    #Margherita 16/01/2026 added comment to inLanguage
     sh:property [
         sh:path schema:inLanguage ;
         sh:class schema:Language ;
@@ -354,7 +331,6 @@ schema:CreativeWork a sh:NodeShape ;
 schema:Book a sh:NodeShape ;
 	rdfs:subClassOf schema:CreativeWork ;
     ys:fromClass wd:Q571 ;
-    #Margherita 16/01/2025 added comment to isbn
     sh:property [
         sh:path schema:isbn ;
         sh:datatype xsd:string ;
@@ -363,21 +339,18 @@ schema:Book a sh:NodeShape ;
         sh:pattern "^(97[89]-([0-57]-(\\d-\\d{7}|\\d\\d-\\d{6}|\\d\\d\\d-\\d{5}|\\d{4}-\\d{4}|\\d{5}-\\d\\d\\d|\\d{6}-\\d\\d|\\d{7}-\\d)|[89]\\d-(\\d-\\d{6}|\\d\\d-\\d{5}|\\d\\d\\d-\\d{4}|\\d{4}-\\d\\d\\d|\\d{5}-\\d\\d|\\d{6}-\\d)|[69]\\d\\d-(\\d-\\d{5}|\\d\\d-\\d{4}|\\d\\d\\d-\\d\\d\\d|\\d{4}-\\d\\d|\\d{5}-\\d)|99[0-8]\\d-\\d-\\d{4}|99[0-8]\\d-\\d\\d-\\d\\d\\d|99[0-8]\\d-\\d\\d\\d-\\d\\d|99[0-8]\\d-\\d{4}-\\d|999\\d\\d-\\d-\\d\\d\\d|999\\d\\d-\\d\\d-\\d\\d|999\\d\\d-\\d\\d\\d-\\d)-\\d|\\d{9}(\\d|X))|(\\d{1,5}-\\d{1,7}-\\d{1,6}-[0-9X])$" ;
         rdfs:comment "The ISBN (International Standard Book Number) of a Book" ;
     ] ;
-    #Margherita 16/01/2026 added comment to illustrator
 	sh:property [
         sh:path schema:illustrator ;
         sh:class schema:Person ;
         ys:fromProperty wdt:P110 ;
         rdfs:comment "The illustrator of a Book" ;
     ] ;
-    #Margherita 16/01/2026 added comment to editor
     sh:property [
         sh:path schema:editor ;
         sh:class schema:Person ;
         ys:fromProperty wdt:P98 ;
         rdfs:comment "An editor of a Book" ;
     ] ;	
-    #Margherita 16/01/2026 added comment to publisher
     sh:property [
         sh:path schema:publisher ;
 		sh:maxCount 1 ;
@@ -392,7 +365,6 @@ schema:Book a sh:NodeShape ;
         ys:fromProperty wdt:P123 ;
         rdfs:comment "The publisher of a Book or Newspaper" ;
     ] ;	
-    #Margherita 16/01/2026 added comment to numberOfPages
     sh:property [
         sh:path schema:numberOfPages ;
         sh:datatype xsd:decimal ;
@@ -404,7 +376,6 @@ schema:Book a sh:NodeShape ;
 schema:Newspaper a sh:NodeShape ;
 	rdfs:subClassOf schema:CreativeWork ; # instead of series
     ys:fromClass wd:Q11032 ;
-    #Margherita 16/01/2026 added comment to publisher
     sh:property [
         sh:path schema:publisher ;
         sh:or (
@@ -419,7 +390,6 @@ schema:Newspaper a sh:NodeShape ;
         ys:fromProperty wdt:P123 ;
         rdfs:comment "The publisher of a Book or Newspaper" ;
     ] ;
-    #Margherita 17/01/2026 added comment to sponsor
     sh:property [
         sh:path schema:sponsor ;
         sh:or (
@@ -437,7 +407,6 @@ schema:Newspaper a sh:NodeShape ;
 schema:TVSeries a sh:NodeShape ;
 	rdfs:subClassOf schema:CreativeWork ; # instead of series
     ys:fromClass wd:Q5398426 ;
-    #Margherita 16/01/2026 added comment to musicBy
     sh:property [
         sh:path schema:musicBy ; 
         sh:or (
@@ -452,14 +421,12 @@ schema:TVSeries a sh:NodeShape ;
         rdfs:comment "The composer or musician for a Movie, TV Series, or MusicComposition" ;
     ] ;		
 
-    # margherita 2026-01-17: added rdfs:comment for schema:actor
     sh:property [
         sh:path schema:actor ;
         sh:class schema:Person ;
         ys:fromProperty wdt:P161 ;
         rdfs:comment "Indicates an actor who appeared in a Movie or TV Series" ;
     ] ;
-    #Margherita 16/01/2026 added comment to locationCreated
     sh:property [
         sh:path schema:locationCreated ;
         sh:class schema:Place ;
@@ -467,14 +434,12 @@ schema:TVSeries a sh:NodeShape ;
         rdfs:comment "The location where a Movie, TV Series, Organization, or HumanMadeGeographicalEntity was created" ;
 
     ] ;
-    #Margherita 16/01/2026 added comment to director
     sh:property [
         sh:path schema:director ;
         sh:class schema:Person ;
 		ys:fromProperty wdt:P57 ;
         rdfs:comment "The director of a Movie, TV Series, or PerformingGroup" ;
     ] ;
-    #Margherita 16/01/2026 adde comment to numberOfEpisodes
     sh:property [
         sh:path schema:numberOfEpisodes ;
         sh:datatype xsd:decimal ;
@@ -482,7 +447,6 @@ schema:TVSeries a sh:NodeShape ;
         ys:fromProperty wdt:P1113 ;
         rdfs:comment "The number of episodes in a TV Series" ;
     ] ;
-    #Margherita 16/01/2026 added comment to numberOfSeasons
     sh:property [
         sh:path schema:numberOfSeasons ;
         sh:datatype xsd:decimal ;
@@ -490,7 +454,6 @@ schema:TVSeries a sh:NodeShape ;
         ys:fromProperty wdt:P2437 ;
         rdfs:comment "The number of seasons in a TV Series" ;
     ] ;   
-    #Margherita 16/01/2026 added comment to productionCompany
     sh:property [
         sh:path schema:productionCompany ;
         sh:class schema:Organization ;
@@ -509,7 +472,6 @@ schema:TVSeries a sh:NodeShape ;
 schema:MusicComposition a sh:NodeShape ;
 	rdfs:subClassOf schema:CreativeWork ;
     ys:fromClass wd:Q207628, wd:Q2188189 ;
-    #Margherita 16/01/2026 added comment to musicBy
     sh:property [
         sh:path schema:musicBy ; # Fabian: cannot map to "composer", because a Wikidata property always has to go to the same schema property
         sh:or (
@@ -530,7 +492,6 @@ schema:MusicComposition a sh:NodeShape ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P1827 ;
     ] ;
-    #Margherita 16/01/2026 added comment to lyricist
     sh:property [
         sh:path schema:lyricist ;
         sh:or (
@@ -558,8 +519,6 @@ schema:MusicComposition a sh:NodeShape ;
 schema:Movie a sh:NodeShape ;
 	rdfs:subClassOf schema:CreativeWork ;
     ys:fromClass wd:Q11424 ; 
-
-    # margherita 2026-01-17: added rdfs:comment for schema:actor
     sh:property [
         sh:path schema:actor ;
         sh:class schema:Person ;
@@ -567,14 +526,12 @@ schema:Movie a sh:NodeShape ;
         rdfs:comment "Indicates an actor who appeared in a Movie or TV Series" ;
 
     ] ;
-    #Margherita 16/01/2026 added comment to locationCreated
     sh:property [
         sh:path schema:locationCreated ;
         sh:class schema:Place ;
         ys:fromProperty wdt:P495 ;
         rdfs:comment "The location where a Movie, TV Series, Organization, or HumanMadeGeographicalEntity was created" ;
     ] ;
-    #Margherita 16/01/2026 added comment to musicBy
     sh:property [
         sh:path schema:musicBy ; 
         sh:or (
@@ -588,14 +545,12 @@ schema:Movie a sh:NodeShape ;
         ys:fromProperty wdt:P86 ;
         rdfs:comment "The composer or musician for a Movie, TV Series, or MusicComposition" ;
     ] ;	
-    #Margherita 16/01/2026 added comment to director
     sh:property [
         sh:path schema:director ;
         sh:class schema:Person ;
         ys:fromProperty wdt:P57 ;
         rdfs:comment "The director of a Movie, TV Series, or PerformingGroup" ;
     ] ;
-    #Margherita 16/01/2026 adde comment to duration
     sh:property [
         sh:path schema:duration ;
 		sh:maxCount 1 ;
@@ -603,7 +558,6 @@ schema:Movie a sh:NodeShape ;
         ys:fromProperty wdt:P2047 ;
         rdfs:comment "The duration of a Movie (typically in minutes)" ;
     ] ;
-    #Margherita 16/01/2026 added comment to productionCompany
     sh:property [
         sh:path schema:productionCompany ;
         sh:class schema:Organization ;
@@ -625,22 +579,18 @@ schema:Movie a sh:NodeShape ;
 yago:FictionalEntity a sh:NodeShape ;
 	rdfs:subClassOf schema:Thing ;
 	rdfs:label "Fictional entity"@en ;
-    #Margherita 16/01/2026 added comment to appearsIn
 	sh:property [
         sh:path yago:appearsIn ;
         sh:class schema:CreativeWork ;
         ys:fromProperty wdt:P1080, wdt:P1441, wdt:P4584 ;
         rdfs:comment "A CreativeWork in which a FictionalEntity appears" ;
     ] ;
-    #Margherita 16/01/2026 added comment to performer
 	sh:property [
         sh:path schema:performer ;
         sh:class schema:Person ;
         ys:fromProperty wdt:P175  ;
         rdfs:comment "A Person who performs as a FictionalEntity" ;
     ] ;
-    #Margherita 16/01/2026: added rdfs:comment 4 schema:author + added to possibility for the author to be just a string
-	# Fabian: 20/01/2026: removed possibility of author string to avoid breaking the schema
 	sh:property [
         sh:path schema:author ;
         sh:or (
@@ -716,7 +666,6 @@ schema:Event a sh:NodeShape ;
     # Merge "occurrence" and "event", also to avoid having "event" twice in YAGO
     ys:fromClass wd:Q1190554, wd:Q1656682 ;
 	rdfs:subClassOf schema:Thing ;
-    #Margherita 16/01/2026: added rdfs:comment for schema:about
     sh:property [
         sh:path schema:about ;
         sh:class schema:Thing ;
@@ -742,14 +691,12 @@ schema:Event a sh:NodeShape ;
     #    sh:datatype xsd:duration ;
     #    ys:fromProperty wdt:P2047 ;
     #] ;
-    #Margherita 16/01/2026 added comment to location
     sh:property [
         sh:path schema:location ;
         sh:class schema:Place ;
         ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17 ;
         rdfs:comment "The location of an Organization, Event, or Place" ;
     ] ;
-    #Margherita 16/01/2026 adde comment to organizer
     sh:property [
         sh:path schema:organizer ;
         sh:or (
@@ -764,7 +711,6 @@ schema:Event a sh:NodeShape ;
         ys:fromProperty wdt:P664 ;
         rdfs:comment "The organizer of an Event" ;
     ] ;
-    #Margherita 17/01/2026 added comment to startDate
     sh:property [
         sh:path schema:startDate ;
         sh:or (
@@ -785,7 +731,6 @@ schema:Event a sh:NodeShape ;
         ys:fromProperty wdt:P580 ;
         rdfs:comment "The start date of an Event" ;
     ] ;
-    #Margherita 16/01/2026 added comment to endDate
     sh:property [
         sh:path schema:endDate ;
         sh:or (
@@ -806,7 +751,6 @@ schema:Event a sh:NodeShape ;
         ys:fromProperty wdt:P582 ;
         rdfs:comment "The end date of an Event" ;
     ] ;
-    #Margherita 17/01/2026 added comment to sponsor
     sh:property [
         sh:path schema:sponsor ;
         sh:or (
@@ -820,14 +764,12 @@ schema:Event a sh:NodeShape ;
         ys:fromProperty wdt:P859 ;
         rdfs:comment "The sponsor of an Event or Newspaper" ;
     ] ;
-    #Margherita 16/01/2026 added comment to follows
 	sh:property [
         sh:path yago:follows ;
         sh:class schema:Event ;
         ys:fromProperty wdt:P155 ;
         rdfs:comment "An Event that follows another Event chronologically" ;
     ] ;
-    #Margherita 16/01/2026 added comment to participant
 	sh:property [
         sh:path yago:participant ;
         sh:or (
@@ -841,7 +783,6 @@ schema:Event a sh:NodeShape ;
         ys:fromProperty wdt:P710, wdt:P1923 ;
         rdfs:comment "A Person or Organization that participated in an Event" ;
     ] ;
-    #Margherita 17/01/2026 added comment to superEvent
 	sh:property [
         sh:path schema:superEvent ;
         sh:class schema:Event ;
@@ -908,28 +849,24 @@ yago:Election a sh:NodeShape ;
 schema:Organization a sh:NodeShape ;
     ys:fromClass wd:Q43229, wd:Q895526, wd:Q167037, wd:Q155076 ; # Fabian: we add corporations here (in the sense of legal entities), and juridical persons, and organs
 	rdfs:subClassOf schema:Thing ;
-    #Margherita 16/01/2026: added comment to award
     sh:property [
         sh:path schema:award ;
         sh:class yago:Award ;
         ys:fromProperty wdt:P166 ;
         rdfs:comment "An award won by a Person, Organization, CreativeWork, or Product" ;
     ] ;
-    #Margherita 16/01/2026 added comment to locationCreated
     sh:property [
         sh:path schema:locationCreated ;
         sh:class schema:Place ;
         ys:fromProperty wdt:P740, wdt:P495 ;
         rdfs:comment "The location where a Movie, TV Series, Organization, or HumanMadeGeographicalEntity was created" ;
     ] ;
-    #Margherita 16/01/2026 added comment to location
     sh:property [
         sh:path schema:location ;
         sh:class schema:Place ;
         ys:fromProperty wdt:P131 , wdt:P276 , wdt:P17, wdt:P706 , wdt:P4552, wdt:P159 ;
         rdfs:comment "The location of an Organization, Event, or Place" ;
     ] ;
-    #Margherita 16/01/2026 added comment to logo
     sh:property [
         sh:path schema:logo ;
         sh:datatype xsd:anyURI ;
@@ -942,7 +879,6 @@ schema:Organization a sh:NodeShape ;
         ys:fromProperty wdt:P163 ;
 	rdfs:comment "Flag of the place or organization." ;
     ] ;
-    #Margherita 16/01/2026 added comment to dissolutionDate
     sh:property [
         sh:path schema:dissolutionDate ;
         sh:or (
@@ -963,7 +899,6 @@ schema:Organization a sh:NodeShape ;
         ys:fromProperty wdt:P576 ;
         rdfs:comment "The date when an Organization was dissolved" ;
     ] ;
-    #Margherita 16/01/2026 added comment to duns
     sh:property [
         sh:path schema:duns ;
         sh:datatype xsd:string ;
@@ -972,14 +907,12 @@ schema:Organization a sh:NodeShape ;
         ys:fromProperty wdt:P2771 ;
         rdfs:comment "The Dun & Bradstreet DUNS number for identifying an Organization" ;
     ] ;
-    #Margherita 16/01/2026 added comment to founder
     sh:property [
         sh:path schema:founder ;
         sh:class schema:Person ;
         ys:fromProperty wdt:P112 ;
         rdfs:comment "The founder of an Organization" ;
     ] ;
-    #Margherita 16/01/2026 added comment to leader
     sh:property [
         sh:path yago:leader ; # Fabian: changed from schema: to yago: 2024-04-03
         sh:class schema:Person ;
@@ -991,14 +924,12 @@ schema:Organization a sh:NodeShape ;
         sh:datatype rdf:langString ;
         ys:fromProperty wdt:P1451 ;
     ] ;
-    #Margherita 16/01/2026: added rdfs:comment for schema:address
     sh:property [
         sh:path schema:address ;
         sh:datatype xsd:string ;
         ys:fromProperty wdt:P6375 ;
         rdfs:comment "The physical address of an Organization" ;
     ] ;
-    #Margherita 16/01/2026 added comment to dateCreated
     sh:property [
         sh:path schema:dateCreated ;
         sh:or (
@@ -1019,7 +950,6 @@ schema:Organization a sh:NodeShape ;
         ys:fromProperty wdt:P571 ;
         rdfs:comment "The date something was created (used for CreativeWorks, Organizations, Products, AdministrativeAreas, etc.)" ;
     ] ;
-    #Margherita 16/01/2026 added comment to leiCode
     sh:property [
         sh:path schema:leiCode ;
         sh:datatype xsd:string ;
@@ -1028,14 +958,12 @@ schema:Organization a sh:NodeShape ;
         ys:fromProperty wdt:P1278 ;
         rdfs:comment "The Legal Entity Identifier (LEI) code for an Organization" ;
     ] ;
-    #Margherita 16/01/2026 added comment to memberOf
     sh:property [
         sh:path schema:memberOf ;
         sh:class schema:Organization ;
         ys:fromProperty wdt:P463, wdt:P114 ;
         rdfs:comment "An Organization that a Person or another Organization is a member of" ;
     ] ;
-    #Margherita 16/01/2026 adde comment to numberOfEmployees
     sh:property [
         sh:path schema:numberOfEmployees ;
         sh:datatype xsd:decimal ;
@@ -1054,7 +982,6 @@ schema:Organization a sh:NodeShape ;
     #     sh:class schema:Organization ;
     #     ys:fromProperty wdt:P355 ;
     # ] ;
-    #Margherita 16/01/2026 added comment to ownedBy
     sh:property [
         sh:path yago:ownedBy ; # Fabian: changed from schema: to yago:, 2024-04-03
         sh:or (
@@ -1077,7 +1004,6 @@ schema:Corporation a sh:NodeShape ;
 schema:Airline a sh:NodeShape ;
     ys:fromClass wd:Q46970 ;
 	rdfs:subClassOf schema:Corporation ;
-    #Margherita 16/01/2026 added comment to iataCode
     sh:property [
         sh:path schema:iataCode ;
         sh:datatype xsd:string ;
@@ -1086,7 +1012,6 @@ schema:Airline a sh:NodeShape ;
         ys:fromProperty wdt:P229 ;
         rdfs:comment "The IATA code for an Airport or Airline"
     ] ;
-    #Margherita 16/01/2026 added comment to icaoCode
     sh:property [
         sh:path schema:icaoCode ;
         sh:datatype xsd:string ;
@@ -1133,14 +1058,12 @@ schema:PerformingGroup rdf:type sh:NodeShape ;
         ys:fromProperty wdt:P1037, wdt:P1875;
         rdfs:comment "The director of a PerformingGroup" ;
     ] ;	
-    #Margherita 16/01/2026 added comment to knowsLanguage
     sh:property [
         sh:path schema:knowsLanguage ;
         sh:class schema:Language ;
         ys:fromProperty wdt:P1412 ;
         rdfs:comment "A language known by a Person or PerformingGroup" ;
     ] ;
-    #Margherita 17/01/2026 added comment to notableWork	
     sh:property [
         sh:path yago:notableWork ;
         sh:class schema:CreativeWork ;
@@ -1152,14 +1075,12 @@ schema:PerformingGroup rdf:type sh:NodeShape ;
 schema:MusicGroup a sh:NodeShape ;
 	rdfs:subClassOf schema:PerformingGroup ;
     ys:fromClass wd:Q2088357 ;
-    #Margherita 16/01/2026 added comment to influencedBy
     sh:property [
         sh:path yago:influencedBy ; # Fabian: changed from schema: to yago: 2024-04-03
         sh:class schema:Thing ;
         ys:fromProperty wdt:P737, wdt:P941 ;
         rdfs:comment "An entity (Thing) that influenced a Creator or MusicGroup" ;
     ];
-    #Margherita 16/01/2026 addde comment to recordLabel 
     sh:property [
         sh:path schema:recordLabel ;
         sh:class schema:Organization ;
@@ -1207,56 +1128,48 @@ schema:MusicGroup a sh:NodeShape ;
 schema:Person a sh:NodeShape ;
     rdfs:subClassOf schema:Thing ;
     ys:fromClass wd:Q5, wd:Q215627 ;
-    #Margherita 16/01/2026 added comment to studentOf	
 	sh:property [   # Fabian: Vivaldi was a student as well 2025-12-09 :-)
     	sh:path yago:studentOf ;
     	sh:class schema:Person ;
     	ys:fromProperty wdt:P1066 ;
         rdfs:comment "A Person who was a student of an Academic" ;
 	] ;		
-    #Margherita 16/01/2026 added comment to beliefSystem
     sh:property [
         sh:path yago:beliefSystem ;
         sh:class yago:BeliefSystem ;
         ys:fromProperty wdt:P140, wdt:P1142 ;
         rdfs:comment "The belief system (e.g., religion) of a Person" ;
     ] ;
-    #Margherita 16/01/2026 added comment to academicDegree
     sh:property [
         sh:path yago:academicDegree ;
         sh:class yago:Award ;
         ys:fromProperty wdt:P512 ;
         rdfs:comment "An academic degree (Award) held by a Person" ;
     ] ;
-    #Margherita 16/01/2026: added rdfs:comment 4 schema:aff
     sh:property [
         sh:path schema:affiliation ;
         sh:class schema:Organization ;
         ys:fromProperty wdt:P1416 ;
         rdfs:comment "Indicates an Organization that a Person is affiliated with" ;
     ] ;
-    #Margherita 16/01/2026 adde comment to worksFor
     sh:property [
         sh:path schema:worksFor ;
         sh:class schema:Organization ;
         ys:fromProperty wdt:P108 ;
         rdfs:comment "An Organization that a Person works for" ;
     ] ;
-    #Margherita 16/01/2026: added rdfs:comment 4 schema:alumniOf
     sh:property [
         sh:path schema:alumniOf ;
         sh:class schema:Organization ;
         ys:fromProperty wdt:P69 ;
         rdfs:comment "An Organization that a Person is an alumnus of (typically an educational institution)"
     ] ;
-    #Margherita 16/01/2026: added comment to award
     sh:property [
         sh:path schema:award ;
         sh:class yago:Award ;
         ys:fromProperty wdt:P166 ;
         rdfs:comment "An award won by a Person, Organization, CreativeWork, or Product" ;
     ] ;
-    #Margherita 16/01/2026: added comment to birthdate
     sh:property [
         sh:path schema:birthDate ;
         sh:or (
@@ -1277,7 +1190,6 @@ schema:Person a sh:NodeShape ;
         ys:fromProperty wdt:P569 ;
         rdfs:comment "The date of birth of a Person" ;
     ] ;
-    #Margherita 16/01/2026: added comment to birtplace
     sh:property [
         sh:path schema:birthPlace ;
         sh:class schema:Place ;
@@ -1285,14 +1197,12 @@ schema:Person a sh:NodeShape ;
         ys:fromProperty wdt:P19 ;
         rdfs:comment "The place where a Person was born" ;
     ] ;
-    #Margherita 16/01/2026: added comment to children
     sh:property [
         sh:path schema:children ;
         sh:class schema:Person ;
        ys:fromProperty wdt:P40 ;
        rdfs:comment "A child of the Person"
     ] ;
-    #Margherita 16/01/2026 added comment to deathDate
     sh:property [
         sh:path schema:deathDate ;
         sh:or (
@@ -1313,7 +1223,6 @@ schema:Person a sh:NodeShape ;
         ys:fromProperty wdt:P570 ;
         rdfs:comment "The date of death of a Person" ;
     ] ;
-    #Margherita 16/01/2026: added comment to deathplace
     sh:property [
         sh:path schema:deathPlace ;
         sh:class schema:Place ;
@@ -1321,7 +1230,6 @@ schema:Person a sh:NodeShape ;
         ys:fromProperty wdt:P20 ;
         rdfs:comment "The place where a Person died" ;
     ] ;
-    #Margherita 16/01/2026 added comment to gender
     sh:property [
         sh:path schema:gender ;
         sh:class yago:Gender ;
@@ -1335,42 +1243,36 @@ schema:Person a sh:NodeShape ;
     #    sh:class schema:Occupation ;
     #    ys:fromProperty wdt:P106 ;
     #] ;
-    #Margherita 16/01/2026 added comment to homeLocation
     sh:property [
         sh:path schema:homeLocation ;
         sh:class schema:Place ;
         ys:fromProperty wdt:P551 ;
         rdfs:comment "A location associated with a Person's home" ;
     ] ;
-    #Margherita 16/01/2026 added comment to knowsLanguage
     sh:property [
         sh:path schema:knowsLanguage ;
         sh:class schema:Language ;
         ys:fromProperty wdt:P1412 ;
         rdfs:comment "A language known by a Person or PerformingGroup" ;
     ] ;
-    #Margherita 16/01/2026 added comment to memberOf
     sh:property [
         sh:path schema:memberOf ;
         sh:class schema:Organization ;
         ys:fromProperty wdt:P463 , wdt:P54 , wdt:P102 ;
         rdfs:comment "An Organization that a Person or another Organization is a member of" ;
     ] ;
-    #Margherita 16/01/2026 added comment to nationality
     sh:property [
         sh:path schema:nationality ;
         sh:class schema:Country ;
         ys:fromProperty wdt:P27 ;
         rdfs:comment "The nationality of a Person (links to a Country)" ;
     ] ;
-    #Margherita 16/01/2026 added comment to owns
     sh:property [
         sh:path schema:owns ;
         sh:class schema:Thing ; 
         ys:fromProperty wdt:P1830 ;
         rdfs:comment "Something owned by a Person" ;
     ] ;
-    #Margherita 16/01/2026 added comment to spous
     sh:property [
         sh:path schema:spouse ;
         sh:class schema:Person ;
@@ -1387,14 +1289,12 @@ yago:Worker a sh:NodeShape ;
 yago:Creator a sh:NodeShape ;
     ys:fromClass wd:Q2500638 ;
     rdfs:subClassOf yago:Worker ;
-    #Margherita 17/01/2026 added comment to influencedBy
 	sh:property [
         sh:path yago:influencedBy ; # Fabian: changed from schema: to yago: 2024-04-03
         sh:class schema:Thing ;
         ys:fromProperty wdt:P737, wdt:P941 ;
         rdfs:comment "An entity (Thing) that influenced a Creator or MusicGroup" ;
     ];	
-    #Margherita 16/01/2026 added comment to notableWork
     sh:property [
         sh:path yago:notableWork ;
         sh:class schema:CreativeWork ;
@@ -1405,7 +1305,6 @@ yago:Creator a sh:NodeShape ;
 yago:Academic a sh:NodeShape ;
     ys:fromClass wd:Q66666685 ;	
 	rdfs:subClassOf yago:Worker ;
-    #Margherita 16/01/2026 added comment to doctoralAdvisor
     sh:property [
         sh:path yago:doctoralAdvisor ;
         sh:class schema:Person ;
@@ -1416,14 +1315,12 @@ yago:Academic a sh:NodeShape ;
 yago:SportsPerson a sh:NodeShape ;
     ys:fromClass wd:Q50995749 ;	
 	rdfs:subClassOf yago:Worker ;
-    #Margherita 16/01/2026 addde comment to sportNumber
 	sh:property [
     	sh:path yago:sportNumber ;
     	sh:datatype xsd:string ;
     	ys:fromProperty wdt:P1618 ;
         rdfs:comment "The sport number (jersey number) of a SportsPerson" ;
 	] ;	
-    #Margherita 16/01/2026 added comment to playsIn
     sh:property [ 
         sh:path yago:playsIn ;
         sh:class schema:Event ;
@@ -1434,7 +1331,6 @@ yago:SportsPerson a sh:NodeShape ;
 yago:Politician a sh:NodeShape ;
     ys:fromClass wd:Q82955 ;	
 	rdfs:subClassOf yago:Worker ;
-    #Margherita 16/01/2026 added comment to candidateIn
     sh:property [
         sh:path yago:candidateIn ;
         sh:class schema:Event ;
@@ -1454,7 +1350,6 @@ schema:Place a sh:NodeShape ;
     # No mapping here, to avoid getting messy subclasses
     # ys:fromClass wd:Q17334923 ; 
 	rdfs:subClassOf schema:Thing ;
-    #Margherita 16/01/2026 added comment to location
     sh:property [
         sh:path schema:location ;
         sh:class schema:Place ;
@@ -1466,21 +1361,18 @@ schema:Place a sh:NodeShape ;
         sh:datatype xsd:decimal ;
         ys:fromProperty wdt:P2046 ;
     ] ;
-    #Margherita 17/01/2026 addded comment to highestPoint
     sh:property [
         sh:path yago:highestPoint ; # Fabian: changed from schema: to yago: 2024-04-03
         sh:class schema:Place ;
         ys:fromProperty wdt:P610 ;
         rdfs:comment "The highest point of a Place" ;
     ] ;
-    #Margherita 16/01/2026 added comment to lowestPoint
     sh:property [
         sh:path yago:lowestPoint ; # Fabian: changed from schema: to yago: 2024-04-03
         sh:class schema:Place ;
         ys:fromProperty wdt:P1589 ;
         rdfs:comment "The lowest point of a Place" ;
     ] ;
-    #Margherita 16/01/2026 added comment to neighbors
     sh:property [
         sh:path yago:neighbors ; # Fabian: changed from schema: to yago: 2024-04-03
         sh:class schema:Place ;
@@ -1498,7 +1390,6 @@ schema:Place a sh:NodeShape ;
         sh:datatype xsd:decimal ;
         ys:fromProperty wdt:P2044 ;
     ] ;
-    #Margherita 16/01/2026 added comment to geo
     sh:property [
         sh:path schema:geo ;
         sh:datatype geo:wktLiteral ;
@@ -1512,7 +1403,8 @@ schema:Place a sh:NodeShape ;
         ys:fromProperty wdt:P163 ;
 	rdfs:comment "Flag of the place or organization." ;
     ] ;
-    # Margherita 18/01/2026: added time zone property(P421)
+    # Margherita 18/01/2026: added time zone property (P421)
+	# Fabian: TODO this would need proper modeling with timeZone as a new class (subclass of Place?)
     sh:property [
         sh:path schema:timeZone ;
         sh:datatype xsd:string ;
@@ -1527,42 +1419,36 @@ schema:Place a sh:NodeShape ;
 # We import all subclasses from Wikidata
 yago:AstronomicalObject a sh:NodeShape ;
 	rdfs:subClassOf schema:Place ;
-    #Margherita 16/01/2026 added comment to parentBody
 	sh:property [
         sh:path yago:parentBody ;
         sh:class yago:AstronomicalObject ;
         ys:fromProperty wdt:P397 ;
         rdfs:comment "The parent celestial body of an AstronomicalObject" ;
     ] ;    
-    #Margherita 16/01/2026 added comment to mass
 	sh:property [
         sh:path yago:mass ;
         sh:datatype xsd:decimal ;
         ys:fromProperty wdt:P2067 ;
         rdfs:comment "The mass of an AstronomicalObject" ;
     ] ;    
-    #Margherita 16/01/2026 added comment to luminosity
 	sh:property [
         sh:path yago:luminosity ;
         sh:datatype xsd:decimal ;
         ys:fromProperty wdt:P2060 ;
         rdfs:comment "The luminosity of an AstronomicalObject" ;
     ] ;
-    #Margherita 16/01/2026 added comment to parallax
     sh:property [
         sh:path yago:parallax  ;
         sh:datatype xsd:decimal ;
         ys:fromProperty wdt:P2214 ;
         rdfs:comment "The parallax measurement of an AstronomicalObject" ;
     ] ;    
-    #Margherita 16/01/2026 added comment to radialVelocity
 	sh:property [
         sh:path yago:radialVelocity  ;
         sh:datatype xsd:decimal ;
         ys:fromProperty wdt:P2216 ;
         rdfs:comment "The radial velocity of an AstronomicalObject" ;
     ] ;    
-    #Margherita 16/01/2026 added comment to distanceFromEarth
 	sh:property [
         sh:path yago:distanceFromEarth ;
         sh:datatype xsd:decimal ;
@@ -1570,6 +1456,7 @@ yago:AstronomicalObject a sh:NodeShape ;
         rdfs:comment "The distance of an AstronomicalObject from Earth" ;
     ] ;    
     #Margherita 18/01/2026: added epoch property (P2659)
+	# Fabian: TODO: This is not the correct Wikidata property! Also, make sure that the target class (decimal) is correct
     sh:property [
         sh:path yago:epoch ;
         sh:datatype xsd:decimal ;  # or xsd:dateTime 
@@ -1584,7 +1471,6 @@ yago:AstronomicalObject a sh:NodeShape ;
 # We import all subclasses from Wikidata
 schema:AdministrativeArea a sh:NodeShape ;
 	rdfs:subClassOf schema:Place ;
-    #Margherita 16/01/2026 added comment to dateCreated
     sh:property [
         sh:path schema:dateCreated ;
         sh:datatype xsd:dateTime ;
@@ -1597,14 +1483,12 @@ schema:AdministrativeArea a sh:NodeShape ;
         sh:datatype rdf:langString ;
         ys:fromProperty wdt:P1549 ;
     ] ;
-    #Margherita 16/01/2026 added comment to leader
     sh:property [
         sh:path yago:leader ; # Fabian: changed from schema:... 2024-04-03
         sh:class schema:Person ;
         ys:fromProperty wdt:P6, wdt:P35 ;
         rdfs:comment "The leader of an Organization or AdministrativeArea" ;
     ] ;
-    #Margherita 16/01/2026 added comment to replaces
     sh:property [
         sh:path yago:replaces ;
         sh:class schema:AdministrativeArea ;
@@ -1616,7 +1500,6 @@ schema:AdministrativeArea a sh:NodeShape ;
         sh:datatype xsd:decimal ;
         ys:fromProperty wdt:P1082 ;
     ] ;
-    #Margherita 16/01/2026 added comment to postalCode
     sh:property [
         sh:path schema:postalCode ;
         sh:datatype xsd:string ;
@@ -1628,7 +1511,6 @@ schema:AdministrativeArea a sh:NodeShape ;
         sh:datatype rdf:langString ;
         ys:fromProperty wdt:P1451 ;
     ] ;
-    #Margherita 16/01/2026 added comment to memberOf
     sh:property [
         sh:path schema:memberOf ;
         sh:class schema:Organization ;
@@ -1641,7 +1523,6 @@ schema:AdministrativeArea a sh:NodeShape ;
     #    sh:class schema:Place ;
     #    ys:fromProperty wdt:P150 ;
     #] ;
-    #Margherita 17/01/2026 added comment to capital
     sh:property [
         sh:path yago:capital ;
         sh:class schema:City ;
@@ -1658,14 +1539,12 @@ schema:City a sh:NodeShape ;
 # Needed because of additional properties
 schema:Country a sh:NodeShape ;
 	rdfs:subClassOf schema:AdministrativeArea ;
-    #Margherita 16/01/2026 added comment to officialLanguage
 	sh:property [
         sh:path yago:officialLanguage ; # Fabian: changed from schema:... 2024-04-03
         sh:class schema:Language ;
         ys:fromProperty wdt:P37 ;
         rdfs:comment "An official Language of a Country" ;
     ] ;
-    #Margherita 16/01/2026 added comment to HDI
     sh:property [
         sh:path yago:humanDevelopmentIndex ; # Fabian: changed from schema:humanDevelopmentIndex 2024-04-03
         sh:datatype xsd:decimal ;
@@ -1703,7 +1582,6 @@ schema:Landform a sh:NodeShape ;
 # Linked to body of water and marine body of water
 schema:BodyOfWater a sh:NodeShape ;
 	rdfs:subClassOf schema:Landform ;
-    #Margherita 16/01/2026 added comment to flowsInto
 	sh:property [
         sh:path yago:flowsInto ;
         sh:class schema:BodyOfWater ;
@@ -1728,7 +1606,6 @@ yago:HumanMadeGeographicalEntity a sh:NodeShape ;
 	rdfs:subClassOf schema:Place ;
 	rdfs:label "Human-made geographical entity"@en ;
     ys:fromClass wd:Q811979, wd:Q811430, wd:Q811463, wd:Q35145743, wd:Q811430 ;
-    #Margherita 16/01/2026 added comment to ownedBy
 	sh:property [
         sh:path yago:ownedBy ; # Fabian: changed from schema: to yago: 2024-04-03
         sh:or (
@@ -1742,7 +1619,6 @@ yago:HumanMadeGeographicalEntity a sh:NodeShape ;
         ys:fromProperty wdt:P127, wdt:P749 ;
         rdfs:comment "The Organization or Person that owns an Organization or HumanMadeGeographicalEntity" ;
     ] ;	
-    #Margherita 16/01/2026 added comment to dateCreated
 	sh:property [
         sh:path schema:dateCreated ;
         sh:datatype xsd:dateTime ;
@@ -1764,14 +1640,12 @@ yago:Way a sh:NodeShape ;
 	rdfs:label "Way"@en ;	
 	rdfs:subClassOf yago:HumanMadeGeographicalEntity ;
     ys:fromClass wd:Q83620 ;
-    #Margherita 16/01/2026 added comment to terminus
 	sh:property [
         sh:path yago:terminus ;
         sh:class schema:Place ;
         ys:fromProperty wdt:P609 ;
         rdfs:comment "A Place where a Way terminates" ;
     ] ;
-    #Margherita 16/01/2026 added comment to length
 	sh:property [
         sh:path yago:length ;
         sh:datatype xsd:decimal ;
@@ -1784,7 +1658,6 @@ yago:Way a sh:NodeShape ;
 schema:Airport a sh:NodeShape ;
     rdfs:subClassOf yago:HumanMadeGeographicalEntity ;
     ys:fromClass wd:Q1248784 ;
-    #Margherita 16/01/2026 added comment to iataCode
     sh:property [
         sh:path schema:iataCode ;
         sh:datatype xsd:string ;
@@ -1849,28 +1722,24 @@ schema:Airport a sh:NodeShape ;
 schema:Product a sh:NodeShape ;
 	rdfs:subClassOf schema:Thing ;
     ys:fromClass wd:Q2424752, wd:Q2342494, wd:Q28877, wd:Q2184715 ;
-    #Margherita 16/01/2026: added comment to award
     sh:property [
         sh:path schema:award ;
         sh:class yago:Award ;
         ys:fromProperty wdt:P166 ;
         rdfs:comment "An award won by a Person, Organization, CreativeWork, or Product" ;
     ] ;
-    #Margherita 16/01/2026 added comment to material
     sh:property [
         sh:path schema:material ;
         sh:class schema:Product ;
         ys:fromProperty wdt:P186 ;
         rdfs:comment "The material a Product is made of" ;
     ] ;
-    #Margherita 16/01/2026 added comment to manufacturer
     sh:property [
         sh:path schema:manufacturer ;
         sh:class schema:Corporation ;
         ys:fromProperty wdt:P176, wdt:P178 ;
         rdfs:comment "The manufacturer of a Product" ;
     ] ;
-    #Margherita 16/01/2026 added comment to dateCreated
     sh:property [
         sh:path schema:dateCreated ;
         sh:or (
@@ -1892,6 +1761,7 @@ schema:Product a sh:NodeShape ;
         rdfs:comment "The date something was created (used for CreativeWorks, Organizations, Products, AdministrativeAreas, etc.)" ;
     ] ;	
 	# Margherita 18/01/2026: added width property (P2049)
+	# Fabian: TODO what is the unit? If always the same, add to comment.
     sh:property [
         sh:path schema:width ;
         sh:datatype xsd:decimal ;
@@ -1899,13 +1769,13 @@ schema:Product a sh:NodeShape ;
         rdfs:comment "The width of an object."@en ;
     ] ;
     # Margherita 18/01/2026: added height property (P2049)
+	# Fabian: TODO what is the unit? If always the same, add to comment.
     sh:property [
         sh:path schema:height ;
         sh:datatype xsd:decimal ;
         ys:fromProperty wdt:P2048 ;
         rdfs:comment "The height of an object."@en ;
     ] ;
-    #Margherita 16/01/2026 added comment to gtin
     sh:property [
         sh:path schema:gtin ;
         sh:datatype xsd:string ;
@@ -1933,14 +1803,12 @@ schema:Product a sh:NodeShape ;
 # This is the only way in which we can make assertions about taxons
 schema:Taxon a sh:NodeShape;
 	rdfs:subClassOf schema:Thing ;
-    #Margherita 16/01/2026 added comment to parentTaxon
 	sh:property [
         sh:path schema:parentTaxon ;
         sh:class schema:Taxon ;
         ys:fromProperty wdt:P171 ;
         rdfs:comment "The parent taxon of a Taxon in biological classification" ;
     ] ;
-    #Margherita 16/01/2026 added comment to consumes
 	sh:property [
         sh:path yago:consumes ;
         sh:class schema:Taxon ;
@@ -1974,10 +1842,8 @@ ys:startDateAnnotation a ys:AnnotationPropertyShape ;
     ) ;
     sh:maxCount 1 ;
     ys:fromProperty wpq:P580 ;
-    #Margherita 17/01/2026 added comment to startDate
     rdfs:comment "The start date of an Event" .
 
-#Margherita 16/01/2026 added comment to endDate
 ys:endDateAnnotation a ys:AnnotationPropertyShape ;
     sh:path schema:endDate ;
     sh:or (
