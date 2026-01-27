@@ -100,18 +100,19 @@ def handleTypeAssertions(entityFacts: Graph, yagoTaxonomyUp: Dict[str, Set[str]]
     # Given types are mostly meta stuff
     mainEntity: str = entityFacts.mainSubject()
     entityFacts.removeObjects(mainEntity, Prefixes.rdfType)
-    for predicate in list(entityFacts.predicatesOf(mainEntity)):
-        if predicate == Prefixes.wikidataType or predicate == Prefixes.wikidataOccupation:
-            for obj in entityFacts.objectsOf(mainEntity, predicate):
-                entityFacts.add((mainEntity, Prefixes.rdfType, obj))  
-        # Anything that has a parent taxon is an instance of taxon
-        if predicate == "schema:parentTaxon":
-            entityFacts.add((mainEntity, Prefixes.rdfType, Prefixes.schemaTaxon))
-    entityFacts.removeObjects(mainEntity, Prefixes.wikidataType)
-    entityFacts.removeObjects(mainEntity, Prefixes.wikidataOccupation)
     # If you're a class, say it
     if mainEntity in yagoTaxonomyUp:
         entityFacts.add((mainEntity, Prefixes.rdfType, Prefixes.rdfsClass))
+    else:
+        for predicate in list(entityFacts.predicatesOf(mainEntity)):
+            if predicate == Prefixes.wikidataType or predicate == Prefixes.wikidataOccupation:
+                for obj in entityFacts.objectsOf(mainEntity, predicate):
+                    entityFacts.add((mainEntity, Prefixes.rdfType, obj))  
+            # Anything that has a parent taxon is an instance of taxon
+            if predicate == "schema:parentTaxon":
+                entityFacts.add((mainEntity, Prefixes.rdfType, Prefixes.schemaTaxon))
+    entityFacts.removeObjects(mainEntity, Prefixes.wikidataType)
+    entityFacts.removeObjects(mainEntity, Prefixes.wikidataOccupation)
         
 ##########################################################################
 #             Start and end dates

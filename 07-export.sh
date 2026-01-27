@@ -36,6 +36,12 @@ do
 done
 echo "done"
 
+echo "Generating YAGO entity list..."
+  sed -n 's/^yago:\([^\t]\+\)\trdfs:comment\t"\([^"]\+\)"@en/{"id": "yago:\1", "title": "\1", "description": "\2", "clean_id": "\1"}/p' 05-yago-final-wikipedia.tsv > yago-entities.jsonl
+  rm 
+  zip -m yago-entities.jsonl.zip yago-entities.jsonl
+echo "done"
+  
 echo "Copying individual YAGO files to Web server..."
 for file in "${!yagoFiles[@]}"
 do
@@ -49,5 +55,6 @@ echo "Copying collective YAGO files to Web server..."
 scp yago.zip yago@yago.r2.enst.fr:/data/public/yago4.5/yago-$version.zip
 scp yago-tiny.zip yago@yago.r2.enst.fr:/data/public/yago4.5/yago-$version-tiny.zip
 scp 06-upper-taxonomy.html yago@yago.r2.enst.fr:~/website/content/schema.php
+scp yago-entities.jsonl.zip yago@yago.r2.enst.fr:/data/public/yago4.5/yago-entities.jsonl.zip
 echo "done"
 date +"Current time: %F %T"

@@ -117,6 +117,9 @@ badClasses = {
     "wd:Q29654788",   # Unicode characters
     "wd:Q11953984",   # Linguistic units, words etc
     "wd:Q11563",      # Numbers,
+    "wd:Q107467117",  # Type of award
+    "wd:Q19478619",   # Meta-class
+    "wd:Q5127848",    # Class
     "wd:Q192581",     # Job -> causes problem because instances of "lawyer" become instances of "job" and thus of "economic activity"
     "wd:Q12737077",   # Occupation (dito)
     "wd:Q28640",      # Profession (dito)
