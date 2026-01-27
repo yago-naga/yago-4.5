@@ -1027,7 +1027,6 @@ schema:Airline a sh:NodeShape ;
 schema:EducationalOrganization a sh:NodeShape ;
 	rdfs:subClassOf schema:Organization ;
     ys:fromClass wd:Q5341295 ;
-    #Margheirta 16/01/2026 addde comment to studentsCount
     sh:property [
         sh:path yago:studentsCount ;
         sh:datatype xsd:decimal ;
@@ -1052,7 +1051,6 @@ schema:EducationalOrganization a sh:NodeShape ;
 # We need this as a superclass of MusicGroup
 schema:PerformingGroup rdf:type sh:NodeShape ;
     rdfs:subClassOf schema:Organization ; 
-    #Margheirta 16/01/2026 added comment to director
 	sh:property [
         sh:path schema:director ;
         sh:class schema:Person ;
@@ -1141,6 +1139,55 @@ schema:Person a sh:NodeShape ;
         ys:fromProperty wdt:P140, wdt:P1142 ;
         rdfs:comment "The belief system (e.g., religion) of a Person" ;
     ] ;
+    
+    #Margherita 26/01/2026: added naming related properties
+    sh:property [
+        sh:path schema:birthName ;
+        sh:datatype rdf:langString ; #as in wikidata
+        ys:fromProperty wdt:P1477 ;
+        rdfs:comment "full name of a person at birth, if different from their current, generally used name."@en ;
+    ] ;
+
+    #Margherita added 
+    sh:property [
+        sh:path schema:officialName ;
+        sh:datatype rdf:langString ;
+        ys:fromProperty wdt:P1448 ;
+        rdfs:comment "official name of the subject in its official language(s)."@en ;
+    ] ;
+
+    #Margherita seems kind of redundant with official name
+    sh:property [
+        sh:path schema:nameInNativeLanguage ; #Margherita 26/01/2026: i didn't know how to name it...
+        sh:datatype rdf:langString ;
+        ys:fromProperty wdt:P1559 ;
+        rdfs:comment "Name in native language (Wikidata P1559, monolingual text)."@en ;
+    ] ;
+
+    #Margherita added 
+    sh:property [
+        sh:path schema:marriedName ;
+        sh:datatype rdf:langString ;
+        ys:fromProperty wdt:P2562 ;
+        rdfs:comment "Full name adopted by a person upon marriage."@en ;
+    ] ;
+
+    #Margherita added 
+    sh:property [
+        sh:path schema:familyName ;
+        sh:datatype rdf:langString ; #Margherita this is modeled as item in wikidata
+        ys:fromProperty wdt:P2562 ;
+        rdfs:comment "Part of full name of person, surname."@en ;
+    ] ;
+
+    #Margherita added 
+    sh:property [
+        sh:path schema:givenName ;
+        sh:datatype rdf:langString ; #Margherita this is modeled as item in wikidata
+        ys:fromProperty wdt:P2562 ;
+        rdfs:comment "First name or another given name of this person."@en ;
+    ] ;
+
     sh:property [
         sh:path yago:academicDegree ;
         sh:class yago:Award ;
@@ -1457,13 +1504,24 @@ yago:AstronomicalObject a sh:NodeShape ;
         ys:fromProperty wdt:P2583 ;
         rdfs:comment "The distance of an AstronomicalObject from Earth" ;
     ] ;    
-    #Margherita 18/01/2026: added epoch property (P2659)
-	# Fabian: TODO: This is not the correct Wikidata property! Also, make sure that the target class (decimal) is correct
+    # Margherita 25/01/2026: now the wikidata prop should be correct, 
+    # for the target class, this prop in wikidata is quit polysemic, it is used as a numeric astronomical reference epoch (e.g., J2000.0) for fixed celestial objects, and as a temporal reference date for orbital elements of moving objects
+    # here both cases are modeled, maybe too complicated?
+	# Fabian: TODO: Also, make sure that the target class (decimal) is correct
     sh:property [
         sh:path yago:epoch ;
-        sh:datatype xsd:decimal ;  # or xsd:dateTime 
-        ys:fromProperty wdt:P2659 ;
-        rdfs:comment "The epoch of an astronomical object coordinate" ;
+        sh:or (
+            [
+            sh:datatype xsd:string ;
+            sh:pattern "^[JB][0-9]{4}(\\.[0-9]+)?$" ;
+            rdfs:comment "Astronomical reference epoch (e.g., J2000.0)"
+            ]
+            [
+            sh:datatype xsd:date ;
+            rdfs:comment "Epoch as orbital elements reference date"
+            ]
+        ) ;
+        ys:fromProperty wdt:P6259 ;
     ] ;
 	ys:fromClass wd:Q6999.
 
@@ -1762,19 +1820,19 @@ schema:Product a sh:NodeShape ;
         ys:fromProperty wdt:P577 ;
         rdfs:comment "The date something was created (used for CreativeWorks, Organizations, Products, AdministrativeAreas, etc.)" ;
     ] ;	
-	# Margherita 18/01/2026: added width property (P2049)
+    # Margherita 26/01/2026: in wikidata there is the numerical amount followed by the unit ( 73 cm)
 	# Fabian: TODO what is the unit? If always the same, add to comment.
     sh:property [
         sh:path schema:width ;
-        sh:datatype xsd:decimal ;
+        sh:datatype xsd:string ;
         ys:fromProperty wdt:P2049 ;
         rdfs:comment "The width of an object."@en ;
     ] ;
-    # Margherita 18/01/2026: added height property (P2049)
+    # Margherita 26/01/2026: in wikidata there is the numerical amount followed by the unit ( 73 cm)
 	# Fabian: TODO what is the unit? If always the same, add to comment.
     sh:property [
         sh:path schema:height ;
-        sh:datatype xsd:decimal ;
+        sh:datatype xsd:string ;
         ys:fromProperty wdt:P2048 ;
         rdfs:comment "The height of an object."@en ;
     ] ;
