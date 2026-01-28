@@ -100,7 +100,7 @@ def yagoIdFromWikipediaPage(wikipediaPageTitle):
     
 def yagoIdFromLabel(wikidataEntity,label):
     """ Creates a YAGO id from a Wikidata entity and label """
-    return yagoIdFromString(label).title()+"_"+wikidataEntity[3:]
+    return yagoIdFromString(label).title()
 
 def yagoIdFromWikidataId(wikidataEntity):
     """ Creates a YAGO id from a Wikidata entity """
@@ -108,7 +108,7 @@ def yagoIdFromWikidataId(wikidataEntity):
 
 def isGoodYagoId(identifier):
     """ TRUE if the string is long enough"""
-    return identifier and len(identifier.replace("-","").replace("-",""))>3
+    return identifier and len(re.sub("-+","",identifier))>3
 
 def registerYagoId(identifier):
     """ Registers YAGO id, returns TRUE on success"""
@@ -124,7 +124,7 @@ def tryYagoId(out,currentTopic, yagoId, isWikipedia=False):
     if registerYagoId(yagoId):
         out.write(currentTopic,"owl:sameAs","yago:"+yagoId,". #WIKI" if isWikipedia else ". #OTHER")
     else:
-        out.write(currentTopic,"owl:sameAs","yago:"+yagoId+"_"+currentTopic[3:], ". #WIKI" if isWikipedia else ". #OTHER")
+        out.write(currentTopic,"owl:sameAs","yago:"+yagoId+"_"+currentTopic[3:], ". #OTHER")
     return True
     
 def writeYagoId(out, currentTopic, currentEnglishLabel, currentLabel, currentWikipediaPage):
@@ -169,6 +169,9 @@ def isSubclassOf(c1, c2):
     return False
     
 def instanceOf(obj, cls):
+    literalValue, _, _, datatype = TurtleUtils.splitLiteral(obj)
+    if datatype:
+        obj = datatype
     return any(isSubclassOf(c, cls) for c in yagoInstances[obj])
     
 def removeClass(c):
@@ -209,39 +212,42 @@ with TsvUtils.Timer("Step 04: Type-checking YAGO"):
             for split in TsvUtils.tsvTuples(FOLDER+"03-yago-facts-to-type-check.tsv", "  Type-checking facts"):
                 if len(split)<3:
                     continue
-                    
+                subject = split[0]    
+                predicate = split[1]
+                obj = split[2]
+                classes=split[4].split(", ") if len(split)>4 and len(split[4])>0 else None
+                startDate=split[5] if len(split)>5 else ""
+                endDate=split[6] if len(split)>6 else ""
+
                 # Next entity
-                if split[0]!=currentTopic:
+                if subject!=currentTopic:
                     if wroteFacts:
                         writeYagoId(idsFile, currentTopic, currentEnglishLabel, currentLabel, currentWikipediaPage)
-                    currentTopic=split[0]
+                    currentTopic=subject
                     currentEnglishLabel=""
                     currentLabel=""
                     currentWikipediaPage=""
                     wroteFacts=False
                     
                 # Gather information for the entity id
-                if split[1]=="rdfs:label":
-                    if split[2].endswith('"@en'):
-                        currentEnglishLabel=split[2][1:-4]
+                if predicate==Prefixes.rdfsLabel:
+                    if obj.endswith('"@en'):
+                        currentEnglishLabel=obj[1:-4]
                     elif not currentEnglishLabel and not currentLabel:
-                        label=TurtleUtils.splitLiteral(split[2])[0]
+                        label=TurtleUtils.splitLiteral(obj)[0]
                         if allLegal(label):
                             currentLabel=label    
-                elif split[1]=="schema:mainEntityOfPage" and split[2].startswith('"https://en.wikipedia.org/wiki/'):
-                    currentWikipediaPage=split[2][31:-13]
+                elif predicate==Prefixes.schemaUrl and obj.startswith('"https://en.wikipedia.org/wiki/'):
+                    currentWikipediaPage=obj[31:-13]
                 
                 # Write out the fact
-                startDate=split[5] if len(split)>5 else ""
-                endDate=split[6] if len(split)>6 else ""
-                classes=split[4].split(", ") if len(split)>4 and len(split[4])>0 else None
-                if classes is None or any(instanceOf(split[2],c) for c in classes):
-                    out.write(split[0], split[1], split[2], ". #", startDate, endDate)
+                if classes is None or any(instanceOf(obj,c) for c in classes):
+                    out.write(subject, predicate, obj, ". #", startDate, endDate)
                     wroteFacts=True
                     count+=1
-                elif any(isSubclassOf(split[2],c) for c in classes):
-                    newObject=createGenericInstance(split[2], out)
-                    out.write(split[0], split[1], newObject, ". #", startDate, endDate)
+                elif any(isSubclassOf(obj,c) for c in classes):
+                    newObject=createGenericInstance(obj, out)
+                    out.write(subject, predicate, newObject, ". #", startDate, endDate)
                     count+=1
                     wroteFacts=True
                     

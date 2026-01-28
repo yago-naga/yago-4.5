@@ -45,7 +45,7 @@ TEST=len(sys.argv)>1 and sys.argv[1]=="--test"
 FOLDER="test-data/06-make-statistics/" if TEST else "yago-data/"
 
 # Predicates that are excluded for fact counting
-excludePredicates=["rdfs:label", "rdfs:comment", "rdf:type", "schema:mainEntityOfPage", "owl:sameAs", "schema:alternateName"]
+excludePredicates=["rdfs:label", "rdfs:comment", "rdf:type", "schema:url", "owl:sameAs", "schema:alternateName"]
 
 def getFirst(myList):
     """ Returns the first element of an iterable or none """    

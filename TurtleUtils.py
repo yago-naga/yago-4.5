@@ -461,8 +461,8 @@ def isRegex(pattern):
 #             Reading Wikidata entities
 ##########################################################################
 
-def about(triple):
-    """ Returns the Wikidata subject of the triple"""
+def about(triple, currentSubject):
+    """ Returns the Wikidata subject of the triple. attached wdv-facts to the current subject"""
     s,p,o=triple
     if p=="schema:about":
         s=o
@@ -472,6 +472,8 @@ def about(triple):
         return "wd:Q"+s[3:s.index('-')]
     if s.startswith("wds:Q"):
         return "wd:Q"+s[5:s.index('-')]
+    if s.startswith("wdv:"):
+        return currentSubject
     return None
 
 def entitiesFromTriples(tripleIterator):
@@ -479,7 +481,7 @@ def entitiesFromTriples(tripleIterator):
     graph=Graph()
     currentSubject="Elvis"
     for triple in tripleIterator:
-        newSubject=about(triple)
+        newSubject=about(triple, currentSubject)
         if not newSubject: 
             continue
         if newSubject!=currentSubject:

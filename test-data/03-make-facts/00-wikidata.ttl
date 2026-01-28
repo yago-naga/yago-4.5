@@ -41,6 +41,8 @@ wd:Q_Elvis wdt:P31 wd:Q_rock_singer;
 	wdt:P40 wd:Q_child;	
 	# Doctoral titles are OK
 	wdt:P512 wd:Q_doctoralDegree ;
+	# height
+	wdt:P2048 "200"^^xsd:decimal ;
 	# Good URIs should stay
 	wdt:P18 "http://good-image.com"^^xsd:anyURI ; 
 	# Bad URIs should go away
@@ -65,7 +67,20 @@ s:Q_Elvis-5b0fdcdf-4815-583c-4dd3-914e1c5d95c0 a wikibase:Statement,
 	pqv:P585 v:c91277cf69500270615dc91eeba92a40 ;
 	prov:wasDerivedFrom ref:da8b01072f4a5eb69892a71023670b9a528a0b97 .
 
+# Units should get attached
+wd:Q_Elvis p:P2048 wds:Q_Elvis-f59c2424-4d7b-9af6-e603-10f97367f37d .
 
+wds:Q_Elvis-f59c2424-4d7b-9af6-e603-10f97367f37d a wikibase:Statement,
+                wikibase:BestRank ;
+        wikibase:rank wikibase:NormalRank ;
+        ps:P2048 "200"^^xsd:decimal ;
+        psv:P2048 wdv:c2a949c9af32533b2e84ae206053067e ;
+        psn:P2048 wdv:88e207abb1dddead10d13825d203acfa .
+		
+wdv:c2a949c9af32533b2e84ae206053067e a wikibase:QuantityValue ;
+        wikibase:quantityAmount "200"^^xsd:decimal ;
+        wikibase:quantityUnit <http://www.wikidata.org/entity/Q174789> .
+		
 # Animals become instances of taxon
 wd:Q_tiger wdt:P171 wd:Q_cat ;
     wdt:P1034 wd:Q_sheep ; 

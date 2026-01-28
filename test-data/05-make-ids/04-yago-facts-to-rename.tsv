@@ -38,7 +38,8 @@ wd:Q_Elvis	rdf:type	wd:Q_singer	.
 wd:Q_Elvis	schema:deathDate	"1970-01-01"^^xsd:gYear	.
 wd:Q_Elvis	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Elvis>	.
 _:wd:Q_doctoralDegree_generic_instance	rdf:type	wd:Q_doctoralDegree	.
-wd:Q_Elvis	yago:academicTitle	_:wd:Q_doctoralDegree_generic_instance	. #		
+wd:Q_Elvis	yago:academicTitle	_:wd:Q_doctoralDegree_generic_instance	. #	
+wd:Q_Elvis	schema:height	"200"^^wd:Q174789	.	
 
 # The following should go to yago-wikipedia and yago-meta
 wd:Q_Elvis	schema:child	wd:Q_Elvis	.	"1977"^^xsd:gYear	"1978"^^xsd:gYear

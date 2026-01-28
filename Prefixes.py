@@ -59,6 +59,8 @@ xsdAnytype='xsd:anyType'
 
 xsdDateTime='xsd:dateTime'
 
+xsdDecimal='xsd:decimal'
+
 xsdDate='xsd:date'
 
 xsdString='xsd:string'
@@ -109,7 +111,7 @@ schemaDescription = "schema:description"
 
 schemaAbout = "schema:about"
 
-schemaPage = "schema:mainEntityOfPage"
+schemaUrl = "schema:url"
 
 schemaThing = "schema:Thing"
 
@@ -144,6 +146,10 @@ shaclPattern="sh:pattern"
 shaclProperty="sh:property"
 
 shaclNodeShape="sh:NodeShape"
+
+yagoUnitOfMeasurement="yago:UnitOfMeasurement"
+
+wikibaseQuantityUnit="wikibase:quantityUnit"
 
 ##########################################################################
 #             Constants for fact processing

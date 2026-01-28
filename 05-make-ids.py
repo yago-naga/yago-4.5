@@ -47,11 +47,14 @@ def isLiteral(entity):
 
 def toYagoEntity(entity):
     """ Translates an entity to a YAGO entity, passes through literals, returns NONE otherwise """
-    if entity.startswith('"'):
+    literalValue, _, _, datatype = TurtleUtils.splitLiteral(entity)
+    if datatype:
+        return '"'+literalValue+'"^^'+toYagoEntity(datatype)
+    if literalValue:
         return entity
     if entity.startswith('<http://') or entity.startswith('<https://'):
         return entity
-    if entity.startswith("yago:") or entity.startswith("schema:") or entity.startswith("rdfs:") :
+    if entity.startswith("yago:") or entity.startswith("schema:") or entity.startswith("rdfs:") or entity.startswith("xsd:"):
         return entity
     if entity.startswith("_:"):
         # Anonymous members of lists etc.

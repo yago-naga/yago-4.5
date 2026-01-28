@@ -72,11 +72,13 @@ def getFirst(iterable: Iterator[Any]) -> Optional[Any]:
 ##########################################################################
 
 def translatePropertiesAndClasses(entityFacts: Graph, yagoSchema: YagoSchema) -> Tuple[Graph, Dict[Tuple[str, str, str], Tuple[Optional[str], Optional[str]]]]:
-    """ Replaces properties by their YAGO properties, and classes by their YAGO equivalents, returns new graph and fact dates """
+    """ Replaces properties by their YAGO properties, and classes by their YAGO equivalents, returns new graph and fact dates and fact units"""
     newGraph: Graph = Graph()
     dates: Dict[Tuple[str, str, str], Tuple[Optional[str], Optional[str]]] = {}
+    unitsOfMeasurement = {}
     for (subject, predicate, obj) in entityFacts:
         startDate, endDate = getStartAndEndDate(subject, predicate, obj, entityFacts)
+        unit=getUnitOfMeasurement(subject, predicate, obj, entityFacts)
         subject = yagoSchema.wikidataProperties[subject].identifier if subject in yagoSchema.wikidataProperties else subject
         predicate = yagoSchema.wikidataProperties[predicate].identifier if predicate in yagoSchema.wikidataProperties else predicate
         obj = yagoSchema.wikidataProperties[obj].identifier if obj in yagoSchema.wikidataProperties else obj
@@ -86,14 +88,16 @@ def translatePropertiesAndClasses(entityFacts: Graph, yagoSchema: YagoSchema) ->
         newGraph.add((subject, predicate, obj))
         if startDate or endDate:
             dates[(subject, predicate, obj)] = (startDate, endDate)
-    return (newGraph, dates)
+        if unit:
+            unitsOfMeasurement[(subject, predicate, obj)] = unit
+    return (newGraph, dates, unitsOfMeasurement)
    
 def handleWebPages(entityFacts: Graph) -> None:
-    """ Changes <page, schema:about, entity> to <entity, mainEntityOfPage, page> """
+    """ Changes <page, schema:about, entity> to <entity, url, page> """
     for page, predicate, entity in entityFacts.triplesWithPredicate(Prefixes.schemaAbout):
         entityFacts.remove((page, Prefixes.schemaAbout, entity))
-        entityFacts.add((entity, Prefixes.schemaPage, page))
-        debug("Fixed", entity, Prefixes.schemaPage, page)
+        entityFacts.add((entity, Prefixes.schemaUrl, page))
+        debug("Fixed", entity, Prefixes.schemaUrl, page)
     
 def handleTypeAssertions(entityFacts: Graph, yagoTaxonomyUp: Dict[str, Set[str]]) -> None:
     """Replace all facts <subject, wikidata:type, class> by <subject, rdf:type, class>"""
@@ -158,6 +162,36 @@ def getStartAndEndDate(subject: str, predicate: str, obj: str, entityGraph: Grap
             return (start, end)
     return (None, None)
 
+##########################################################################
+#             Measurement Units
+##########################################################################
+
+# Measurememt Units are encoded as follows in Wikidata:
+
+# The subject has width 229
+# wd:Q412 wdt:P2049 "+229"^^xsd:decimal ;
+# wd:Q412 p:P2049 wds:Q412-f59c2424-4d7b-9af6-e603-10f97367f37d .
+# wds:Q412-f59c2424-4d7b-9af6-e603-10f97367f37d a wikibase:Statement,
+#        ps:P2049 "+229"^^xsd:decimal ;
+#        psv:P2049 wdv:c2a949c9af32533b2e84ae206053067e ;
+# wdv:c2a949c9af32533b2e84ae206053067e a wikibase:QuantityValue ;
+#        wikibase:quantityAmount "+229"^^xsd:decimal ;
+#        wikibase:quantityUnit <http://www.wikidata.org/entity/Q174789> .
+
+def getUnitOfMeasurement(subject, predicate, obj, entityGraph):
+    """ Returns the unit of measurement of this fact as a Wikidata entity """
+    # Get wds-object
+    if not predicate.startswith("wdt:"):
+        return None
+    for wdsObject in entityGraph.objectsOf(subject, "p:"+predicate[4:]):
+        if obj in entityGraph.objectsOf(wdsObject, "ps:"+predicate[4:]):
+            # get wdv object
+            for wdvObject in entityGraph.objectsOf(wdsObject, "psv:"+predicate[4:]):
+                for unit in entityGraph.objectsOf(wdvObject, Prefixes.wikibaseQuantityUnit):
+                    debug("Found unit", subject, predicate, obj, unit)
+                    return "wd:"+unit[unit.rfind('/')+1:-1]
+    return None
+    
 ##########################################################################
 #             Taxonomy checks
 ##########################################################################
@@ -267,6 +301,11 @@ def cleanLiteralObject(obj: str, datatype: str) -> Optional[str]:
         if len(obj) > Prefixes.MAX_DATE_LENGTH:
            return None
         # Fall through
+    # Any decimals are OK for units of measurement
+    if datatype==Prefixes.yagoUnitOfMeasurement:
+        if literalDataType is None or literalDataType!=Prefixes.xsdDecimal:
+            return None
+        return obj
     return obj if literalDataType == datatype else None
         
 def cleanObject(obj: str, yagoProperty: Any) -> Optional[str]:
@@ -287,7 +326,7 @@ def cleanObject(obj: str, yagoProperty: Any) -> Optional[str]:
     couldBeEntity: bool = False
     
     for objectType in yagoProperty.objectTypes:
-        if objectType.startswith("xsd:") or objectType.startswith("rdf:") or objectType.startswith("geo:"):
+        if objectType.startswith("xsd:") or objectType.startswith("rdf:") or objectType.startswith("geo:") or objectType==Prefixes.yagoUnitOfMeasurement:
             cleanedObj = cleanLiteralObject(obj, objectType)
             if cleanedObj:
                 # Normalize string and date - this is the only place normalization happens
@@ -389,7 +428,7 @@ def guessLabelIfNecessary(entityFacts: Graph) -> bool:
     if entityFacts.objectsOf(mainEntity, Prefixes.rdfsLabel):
         debug(mainEntity, "already has a label", entityFacts.objectsOf(mainEntity, Prefixes.rdfsLabel))
         return True
-    wikipediaPages = entityFacts.objectsOf(mainEntity, Prefixes.schemaPage)
+    wikipediaPages = entityFacts.objectsOf(mainEntity, Prefixes.schemaUrl)
     labelName: Optional[str] = None
     labelLanguage: str = "en"
     for wikipediaPage in wikipediaPages:
@@ -442,8 +481,8 @@ class treatWikidataEntity():
         # among those mapped to the same YAGO class
         isSecondaryClass: bool = isSecondaryWikidataClass(entityFacts, self.yagoSchema)
         
-        entityFacts, dates = translatePropertiesAndClasses(entityFacts, self.yagoSchema)
-                    
+        entityFacts, dates, unitsOfMeasurement = translatePropertiesAndClasses(entityFacts, self.yagoSchema)
+                        
         handleTypeAssertions(entityFacts, self.yagoTaxonomyUp)        
                 
         types: Set[str] = handleAndReturnTypes(entityFacts, self.yagoSchema, self.yagoTaxonomyUp)
@@ -479,9 +518,12 @@ class treatWikidataEntity():
                     endDate = None
                 if predicate == Prefixes.schemaDateCreated:
                     endDate = None
-                    startDate = None
+                    startDate = None                              
                 if TurtleUtils.isLiteral(obj):
-                    if startDate or endDate:
+                    unit=unitsOfMeasurement.get((subject, predicate, obj), None)
+                    if unit:
+                       self.writer.write(subject, yagoProperty.identifier, obj.replace(Prefixes.xsdDecimal, unit), ". # IF", Prefixes.yagoUnitOfMeasurement, normalizeDate(startDate), normalizeDate(endDate))
+                    elif startDate or endDate:
                         self.writer.write(subject, yagoProperty.identifier, obj, ". #", "", normalizeDate(startDate), normalizeDate(endDate))                
                     else:
                         self.writer.write(subject, yagoProperty.identifier, obj, ".")                
