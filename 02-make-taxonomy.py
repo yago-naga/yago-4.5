@@ -54,9 +54,10 @@ instanceIndicators = {
 class WikidataVisitor:
     """ Will be called in parallel on each Wikidata entity graph, creates a downward pointing Wikidata taxonomy. """
     def __init__(self, workerId):
-        self.wikidataTaxonomyDown = {}
-    
+        self.wikidataTaxonomyDown = {}        
+        
     def visit(self, graph): 
+                
         predicates = graph.predicates()
 
         # Ignore classes without labels
@@ -140,7 +141,7 @@ def ancestors(class_, taxonomyUp):
     for superClass in taxonomyUp.get(class_, []):
         yield from ancestors(superClass, taxonomyUp)
     
-def addSubClass(superClass, subClass, yagoSchema, yagoTaxonomyUp, wikidataTaxonomyDown, stats):
+def addSubClass(superClass, subClass, yagoSchema, yagoTaxonomyUp, wikidataTaxonomyDown, stats, logWriter):
     """Adds the subClass (and all its subclasses in wikidataTaxonomyDown) to the superClass in yagoTaxonomyUp, excluding bad classes, loops, and disjoint classes"""
     
     # Exclude bad classes
@@ -153,10 +154,12 @@ def addSubClass(superClass, subClass, yagoSchema, yagoTaxonomyUp, wikidataTaxono
     # Exclude loops
     if subClass in superAncestors:
         stats['loops'] += 1
+        logWriter.write(f"{subClass} is ancestor of {superClass}, not added to {superClass}\n")
         return
     
     # Exclude classes that are already mapped to YAGO
     if subClass in yagoSchema.wikidataClasses:
+        logWriter.write(f"{subClass} is mapped to YAGO, not added to {superClass}\n")
         return
     
     # Treat classes that appear already in the taxonomy
@@ -177,17 +180,17 @@ def addSubClass(superClass, subClass, yagoSchema, yagoTaxonomyUp, wikidataTaxono
                 yagoTaxonomyUp[subClass].discard(existingSuperClass)
         
         # Otherwise we have true multiple inheritance
-        # Use set intersection for efficient disjoint check
-        subDisjointSet = set(disjointClasses(subClass, yagoTaxonomyUp, yagoSchema))
-        superDisjointSet = set(disjointClasses(superClass, yagoTaxonomyUp, yagoSchema))
-        if subDisjointSet & superDisjointSet:
-            stats['disjoint'] += 1
-            return
+        subDisjointSet = set(a.identifier for a in disjointClasses(subClass, yagoTaxonomyUp, yagoSchema))
+        for a in ancestors(superClass, yagoTaxonomyUp):
+            if a in subDisjointSet:
+                stats['disjoint'] += 1
+                logWriter.write(f"{subClass} disjoint from {superClass} on {a}\n")
+                return
     
     yagoTaxonomyUp[subClass].add(superClass)
     # Sort the classes to have a deterministic algorithm
     for subSubClass in sorted(wikidataTaxonomyDown.get(subClass, [])):    
-        addSubClass(subClass, subSubClass, yagoSchema, yagoTaxonomyUp, wikidataTaxonomyDown, stats)        
+        addSubClass(subClass, subSubClass, yagoSchema, yagoTaxonomyUp, wikidataTaxonomyDown, stats, logWriter)        
         
 ###########################################################################
 #           Main
@@ -218,19 +221,22 @@ def main():
         print("  Info: Total number of Wikidata classes:", len(wikidataTaxonomyDown))
         print("  Info: Total number of Wikidata links:", sum(len(wikidataTaxonomyDown[class_]) for class_ in wikidataTaxonomyDown))        
         
-        # Initialize statistics counter
-        stats = {'loops': 0, 'shortcuts': 0, 'disjoint': 0}
+        print("  Merging taxonomy...", end="", flush=True)
+        with open(OUTPUT_FOLDER+"/02-make-taxonomy.log", "wt", encoding="utf-8") as logWriter:
+            # Initialize statistics counter
+            stats = {'loops': 0, 'shortcuts': 0, 'disjoint': 0}
+            
+            # Now we merge the Wikidata taxonomy into the YAGO taxonomy
+            for yagoClass in yagoSchema.classes.values():
+                for wikidataClass in yagoClass.fromClasses:            
+                    for wikidataSubclass in wikidataTaxonomyDown.get(wikidataClass, []):
+                        addSubClass(yagoClass.identifier, wikidataSubclass, yagoSchema, yagoTaxonomyUp, wikidataTaxonomyDown, stats, logWriter)
+        print("done")   
         
-        # Now we merge the Wikidata taxonomy into the YAGO taxonomy
-        for yagoClass in yagoSchema.classes.values():
-            for wikidataClass in yagoClass.fromClasses:            
-                for wikidataSubclass in wikidataTaxonomyDown.get(wikidataClass, []):
-                    addSubClass(yagoClass.identifier, wikidataSubclass, yagoSchema, yagoTaxonomyUp, wikidataTaxonomyDown, stats)
-
         print("  Info: Loops removed:", stats['loops'])
         print("  Info: Shortcuts removed:", stats['shortcuts'])
         print("  Info: Disjoint links removed:", stats['disjoint'])
-
+        
         # Write resulting taxonomy
         print("  Writing taxonomy...", end="", flush=True)
         with TsvUtils.TsvFileWriter(OUTPUT_FOLDER+"02-yago-taxonomy-to-rename.tsv") as taxonomyWriter:
