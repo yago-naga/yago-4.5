@@ -146,6 +146,7 @@ def addSubClass(superClass, subClass, yagoSchema, yagoTaxonomyUp, wikidataTaxono
     
     # Exclude bad classes
     if subClass in badClasses:
+        logWriter.write(f"{subClass} is bad class, not added to {superClass}\n")
         return
     
     # Convert ancestors generator to set for efficient membership checks
@@ -184,7 +185,7 @@ def addSubClass(superClass, subClass, yagoSchema, yagoTaxonomyUp, wikidataTaxono
         for a in ancestors(superClass, yagoTaxonomyUp):
             if a in subDisjointSet:
                 stats['disjoint'] += 1
-                logWriter.write(f"{subClass} disjoint from {superClass} on {a}\n")
+                logWriter.write(f"{subClass} is disjoint from ancestor {a} of {superClass}, not added to {superClass}\n")
                 return
     
     yagoTaxonomyUp[subClass].add(superClass)
