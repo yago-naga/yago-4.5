@@ -120,6 +120,7 @@ badClasses = {
     "wd:Q107467117",  # Type of award
     "wd:Q19478619",   # Meta-class
     "wd:Q5127848",    # Class
+    "wd:Q15621286",   # Reviews
     "wd:Q192581",     # Job -> causes problem because instances of "lawyer" become instances of "job" and thus of "economic activity"
     "wd:Q12737077",   # Occupation (dito)
     "wd:Q28640",      # Profession (dito)

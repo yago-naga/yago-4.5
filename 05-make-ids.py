@@ -49,7 +49,8 @@ def toYagoEntity(entity):
     """ Translates an entity to a YAGO entity, passes through literals, returns NONE otherwise """
     literalValue, _, _, datatype = TurtleUtils.splitLiteral(entity)
     if datatype:
-        return '"'+literalValue+'"^^'+toYagoEntity(datatype)
+        yagoDataType=toYagoEntity(datatype)
+        return '"'+literalValue+'"^^'+yagoDataType if yagoDataType else None
     if literalValue:
         return entity
     if entity.startswith('<http://') or entity.startswith('<https://'):
