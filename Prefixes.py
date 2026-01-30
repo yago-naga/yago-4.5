@@ -149,6 +149,8 @@ shaclNodeShape="sh:NodeShape"
 
 yagoUnitOfMeasurement="yago:UnitOfMeasurement"
 
+yagoUnit="yago:UnitOf"
+
 wikibaseQuantityUnit="wikibase:quantityUnit"
 
 ##########################################################################

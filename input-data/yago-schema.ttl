@@ -240,6 +240,30 @@ schema:Language a sh:NodeShape ;
 yago:UnitOfMeasurement a sh:NodeShape ;
 	rdfs:subClassOf schema:Intangible ;
     ys:fromClass wd:Q47574 .
+
+yago:UnitOfLength a sh:NodeShape ;
+	rdfs:subClassOf yago:UnitOfMeasurement ;
+	ys:fromClass wd:Q1978718 .
+
+yago:UnitOfArea a sh:NodeShape ;
+	rdfs:subClassOf yago:UnitOfMeasurement ;
+	ys:fromClass wd:Q1371562 .
+	
+yago:UnitOfTime a sh:NodeShape ;
+	rdfs:subClassOf yago:UnitOfMeasurement ;
+	ys:fromClass wd:Q1790144 .
+	
+yago:UnitOfMass a sh:NodeShape ;
+	rdfs:subClassOf yago:UnitOfMeasurement ;
+	ys:fromClass wd:Q3647172 .
+	
+yago:UnitOfMoney a sh:NodeShape ;
+	rdfs:subClassOf yago:UnitOfMeasurement ;
+	ys:fromClass wd:Q8142 .
+
+yago:UnitOfSpeed a sh:NodeShape ;
+	rdfs:subClassOf yago:UnitOfMeasurement ;
+	ys:fromClass wd:Q15222637 .
 	
 ################################################################
 #                Media
@@ -521,7 +545,7 @@ schema:Movie a sh:NodeShape ;
     sh:property [
         sh:path schema:duration ;
 		sh:maxCount 1 ;
-        sh:datatype yago:UnitOfMeasurement ;
+        sh:datatype yago:UnitOfTime ;
         ys:fromProperty wdt:P2047 ;
         rdfs:comment "The duration of a Movie"@en ;
     ] ;
@@ -937,7 +961,7 @@ schema:Person a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path schema:height ;
-        sh:datatype yago:UnitOfMeasurement ;
+        sh:datatype yago:UnitOfLength ;
         ys:fromProperty wdt:P2048 ;
         rdfs:comment "The height of an object."@en ;
     ] ;
@@ -1188,7 +1212,7 @@ schema:Place a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path yago:area ; # Fabian: changed from schema: to yago: 2024-04-03
-        sh:datatype yago:UnitOfMeasurement ;
+        sh:datatype yago:UnitOfArea ;
         ys:fromProperty wdt:P2046 ;
     ] ;
     sh:property [
@@ -1211,7 +1235,7 @@ schema:Place a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path yago:elevation ; # Fabian: changed from schema: to yago: 2024-04-03
-        sh:datatype yago:UnitOfMeasurement ;
+        sh:datatype yago:UnitOfLength ;
         ys:fromProperty wdt:P2044 ;
     ] ;
     sh:property [
@@ -1252,7 +1276,7 @@ yago:AstronomicalObject a sh:NodeShape ;
     ] ;    
 	sh:property [
         sh:path yago:mass ;
-        sh:datatype yago:UnitOfMeasurement ;
+        sh:datatype yago:UnitOfMass ;
         ys:fromProperty wdt:P2067 ;
         rdfs:comment "The mass of an AstronomicalObject"@en ;
     ] ;    
@@ -1264,19 +1288,19 @@ yago:AstronomicalObject a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path yago:parallax  ;
-        sh:datatype yago:UnitOfMeasurement ;
+        sh:datatype xsd:decimal ;
         ys:fromProperty wdt:P2214 ;
         rdfs:comment "The parallax measurement of an AstronomicalObject"@en ;
     ] ;    
 	sh:property [
         sh:path yago:radialVelocity  ;
-        sh:datatype yago:UnitOfMeasurement ;
+        sh:datatype yago:UnitOfSpeed ;
         ys:fromProperty wdt:P2216 ;
         rdfs:comment "The radial velocity of an AstronomicalObject"@en ;
     ] ;    
 	sh:property [
         sh:path yago:distanceFromEarth ;
-        sh:datatype yago:UnitOfMeasurement ;
+        sh:datatype yago:UnitOfLength ;
         ys:fromProperty wdt:P2583 ;
         rdfs:comment "The distance of an AstronomicalObject from Earth"@en ;
     ] ;    
@@ -1471,7 +1495,7 @@ yago:Way a sh:NodeShape ;
     ] ;
 	sh:property [
         sh:path yago:length ;
-        sh:datatype yago:UnitOfMeasurement ;
+        sh:datatype yago:UnitOfLength ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P2043 ;
         rdfs:comment "The length of a Way (e.g., road, river)"@en ;
@@ -1540,14 +1564,14 @@ schema:Product a sh:NodeShape ;
     # Margherita 26/01/2026: in wikidata there is the numerical amount followed by the unit ( 73 cm)
 	sh:property [
         sh:path schema:width ;
-        sh:datatype yago:UnitOfMeasurement ;
+        sh:datatype yago:UnitOfLength ;
         ys:fromProperty wdt:P2049 ;
         rdfs:comment "The width of an object."@en ;
     ] ;
     # Margherita 26/01/2026: in wikidata there is the numerical amount followed by the unit ( 73 cm)
     sh:property [
         sh:path schema:height ;
-        sh:datatype yago:UnitOfMeasurement ;
+        sh:datatype yago:UnitOfLength ;
         ys:fromProperty wdt:P2048 ;
         rdfs:comment "The height of an object."@en ;
     ] ;

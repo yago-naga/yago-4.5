@@ -37,7 +37,7 @@ wd:Q_Inconsistent	rdf:type	schema:Organization	.
 wd:Q_Elvis	schema:birthPlace	wd:Q_birth_place_1	. # IF	schema:Place		
 wd:Q_Elvis	schema:children	wd:Q_child	. # IF	schema:Person	"2014-01-02"^^xsd:date	"2014-01-02"^^xsd:date
 wd:Q_Elvis	yago:academicDegree	wd:Q_doctoralDegree	. # IF	yago:Award		
-wd:Q_Elvis	schema:height	"200"^^wd:Q174789	. # IF	yago:UnitOfMeasurement		
+wd:Q_Elvis	schema:height	"200"^^wd:Q174789	. # IF	yago:UnitOfLength		
 wd:Q_Elvis	schema:image	"http://good-image.com"^^xsd:anyURI	.
 wd:Q_Elvis	rdfs:comment	"Elvis Presley, the great singer"@en	.
 wd:Q_Elvis	schema:birthDate	"1935"^^xsd:gYear	.

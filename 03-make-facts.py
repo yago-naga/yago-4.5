@@ -312,7 +312,7 @@ def cleanLiteralObject(obj: str, datatype: str) -> Optional[str]:
            return None
         # Fall through
     # Any decimals are OK for units of measurement
-    if datatype==Prefixes.yagoUnitOfMeasurement:
+    if datatype.startswith(Prefixes.yagoUnit):
         if literalDataType is None or literalDataType!=Prefixes.xsdDecimal:
             return None
         return obj
@@ -337,7 +337,7 @@ def cleanObject(subject, obj: str, yagoProperty: Any, writer) -> Optional[str]:
     couldBeEntity: bool = False
     
     for objectType in yagoProperty.objectTypes:
-        if objectType.startswith("xsd:") or objectType.startswith("rdf:") or objectType.startswith("geo:") or objectType==Prefixes.yagoUnitOfMeasurement:
+        if objectType.startswith("xsd:") or objectType.startswith("rdf:") or objectType.startswith("geo:") or objectType.startswith(Prefixes.yagoUnit):
             cleanedObj = cleanLiteralObject(obj, objectType)
             if cleanedObj:
                 # Normalize string and date - this is the only place normalization happens
@@ -541,7 +541,7 @@ class treatWikidataEntity():
                 if TurtleUtils.isLiteral(obj):
                     unit=unitsOfMeasurement.get((subject, predicate, obj), None)
                     if unit:
-                       self.writer.write(subject, yagoProperty.identifier, obj.replace(Prefixes.xsdDecimal, unit), ". # IF", Prefixes.yagoUnitOfMeasurement, normalizeDate(startDate), normalizeDate(endDate))
+                       self.writer.write(subject, yagoProperty.identifier, obj.replace(Prefixes.xsdDecimal, unit), ". # IF", (", ".join(sorted(yagoProperty.objectTypes))), normalizeDate(startDate), normalizeDate(endDate))
                     elif startDate or endDate:
                         self.writer.write(subject, yagoProperty.identifier, obj, ". #", "", normalizeDate(startDate), normalizeDate(endDate))                
                     else:
