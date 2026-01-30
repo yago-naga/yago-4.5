@@ -273,7 +273,15 @@ def normalizeString(s: Optional[str]) -> Optional[str]:
 
 def normalizeDate(literal: Optional[str]) -> Optional[str]:
     """ Converts midnight dates to dates"""
-    return re.sub('T00:00:00Z"\\^\\^xsd:dateTime$', '"^^xsd:date', literal) if literal else None
+    if not literal:
+        return None
+    # Remove zero date    
+    literal = re.sub('T00:00:00Z"\\^\\^xsd:dateTime$', '"^^xsd:date', literal)
+    # Remove first of January, because this often means just any date in the year.
+    # Wikidata does model the time precision, but the wdv-object is not co-located with
+    # the facts itself, making it hard to recover.
+    literal = re.sub('-01-01"\\^\\^xsd:date$', '"^^xsd:gYear', literal)
+    return literal
     
 def cleanLiteralObject(obj: str, datatype: str) -> Optional[str]:
     """ Returns a version of obj that corresponds to the datatype -- or None"""
@@ -480,19 +488,21 @@ class treatWikidataEntity():
                     
         handleWebPages(entityFacts)               
 
+        oldTypes = entityFacts.objectsOf(entityFacts.mainSubject(), Prefixes.wikidataType)
+
         # Wikidata classes that are mapped to a YAGO class, but that are not the first
         # among those mapped to the same YAGO class
         isSecondaryClass: bool = isSecondaryWikidataClass(entityFacts, self.yagoSchema)
         
         entityFacts, dates, unitsOfMeasurement = translatePropertiesAndClasses(entityFacts, self.yagoSchema)
-        
+                
         translateTypeAssertions(entityFacts, self.yagoTaxonomyUp)        
                 
         types = cleanAndReturnTypes(entityFacts, self.yagoSchema, self.yagoTaxonomyUp)
         
         if not types:
             debug("No types left for",entityFacts.mainSubject())
-            self.writer.write(f"# {entityFacts.mainSubject()} has no valid type, removed\n")
+            self.writer.write(f"# {entityFacts.mainSubject()} has no valid type among {", ".join(str(s) for s in oldTypes)}, removed\n")
             return
         
         handleDomain(entityFacts, self.yagoSchema, types, self.writer)

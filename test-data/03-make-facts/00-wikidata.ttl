@@ -20,6 +20,9 @@ wd:Q_Inconsistent wdt:P31 wd:Q_rock_singer, schema:Organization ; schema:name "I
 # Objects without label go away
 wd:Q_Has_no_label wdt:P31 wd:Q_rock_singer .
 
+# Things with invalid types should disappear
+wd:Q_has_no_type wdt:P31 wd:invalid .
+
 # Web pages should become objects of schema:mainEntityOfPage
 <https://elvis.com> schema:about wd:Q_Elvis .
 
@@ -51,8 +54,8 @@ wd:Q_Elvis wdt:P31 wd:Q_rock_singer;
     schema:description "Elvis Presley"@en, "Elvis Presley, the great singer"@en ;
 	# Literal range with invalid date should go away
 	wdt:P570 "0000-02-22T00:00:00Z"^^xsd:dateTime ;
-	# Literal range: should be OK
-	wdt:P569 "1935"^^xsd:gYear .
+	# Literal range should be normalized to year
+	wdt:P569 "1935-01-01"^^xsd:date .
 	
 # Start and end dates should survive
 wd:Q_Elvis p:P40 s:Q_Elvis-5b0fdcdf-4815-583c-4dd3-914e1c5d95c0 .
@@ -63,7 +66,7 @@ s:Q_Elvis-5b0fdcdf-4815-583c-4dd3-914e1c5d95c0 a wikibase:Statement,
 	ps:P40 wd:Q_child ;
 	psv:P1198 v:6c2312ad7ae86b184ccc35589ceaa308 ;
 	psn:P1198 v:ec871d8e6899d8d51a57e73ba5ef6cd7 ;
-	pq:P585 "2014-01-01T00:00:00Z"^^xsd:dateTime ;
+	pq:P585 "2014-01-02T00:00:00Z"^^xsd:dateTime ;
 	pqv:P585 v:c91277cf69500270615dc91eeba92a40 ;
 	prov:wasDerivedFrom ref:da8b01072f4a5eb69892a71023670b9a528a0b97 .
 
@@ -113,7 +116,7 @@ wds:Q31-93ba9638-404b-66ac-2733-e6292666a326 a wikibase:Statement ;
         wikibase:rank wikibase:NormalRank ;
         ps:P1082 "+11825551"^^xsd:decimal ;
         psv:P1082 wdv:61c224825d1bb84ae41079562dbf1d8d ;
-        pq:P585 "2014-01-01T00:00:00Z"^^xsd:dateTime ;
+        pq:P585 "2014-01-02T00:00:00Z"^^xsd:dateTime ;
         pqv:P585 wdv:867dd64466aae4fb2a651732ec5a1744 ;
         prov:wasDerivedFrom wdref:9b216970abe8fb8f730ebadbbfecc1b19d17c900 .
 		
@@ -121,7 +124,7 @@ wds:Q31-93ba9638-404b-66ac-2733-e6292666a326 a wikibase:Statement ;
 wd:Q312 wdt:P31 schema:Corporation ;
 	schema:name "corporation"@en ;
     wdt:P571 "1976-04-01T00:00:00Z"^^xsd:dateTime,
-             "1976-01-01T00:00:00Z"^^xsd:dateTime .
+             "1976-01-02T00:00:00Z"^^xsd:dateTime .
 
 # Fictional entities
 wd:Q_fictional wdt:P31 wd:Q2593744, wd:Q_rock_singer ;	
