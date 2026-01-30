@@ -119,35 +119,35 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
                                 # Should not happen
                                 continue
                             relation=split[1]
-                            object=toYagoEntity(split[2])
-                            if not object:
+                            obj=toYagoEntity(split[2])
+                            if not obj:
                                 # Should not happen
                                 continue
-                            literal=TurtleUtils.splitLiteral(object)
+                            literal=TurtleUtils.splitLiteral(obj)
                             # Write facts to Wikipedia version of YAGO
-                            if goesToWikipediaVersion(subject) and (relation=="rdf:type" or goesToWikipediaVersion(object)):
+                            if goesToWikipediaVersion(subject) and (relation=="rdf:type" or goesToWikipediaVersion(obj)):
                                 if isNonEnglishLabel(literal):
-                                    wikipediaLabelFacts.writeFact(subject, relation, object)
+                                    wikipediaLabelFacts.writeFact(subject, relation, obj)
                                 else:
-                                    wikipediaFacts.writeFact(subject, relation, object)
+                                    wikipediaFacts.writeFact(subject, relation, obj)
                                 if subject.endswith("_generic_instance"):
                                     wikipediaFacts.writeFact(subject, "rdfs:label", f'"{subject[5:-17]}"@en')
                                 if subject!=previousEntity and split[0] in yagoIds:
                                    wikipediaFacts.writeFact(subject, "owl:sameAs", split[0])
                             else:
                                 if isNonEnglishLabel(literal):
-                                    fullLabelFacts.writeFact(subject, relation, object)
+                                    fullLabelFacts.writeFact(subject, relation, obj)
                                 else:
-                                    fullFacts.writeFact(subject, relation, object)
+                                    fullFacts.writeFact(subject, relation, obj)
                                 if subject!=previousEntity and split[0] in yagoIds:
                                    fullFacts.writeFact(subject, "owl:sameAs", split[0])                
                             # If there is a meta-fact, write it out as well
                             if len(split)>5:
                                 if split[4] and split[4]==split[5]:
-                                    metaFacts.write("<<", subject, relation, object, ">>", "yago:onDate", split[4], ".")
+                                    metaFacts.write("<<", subject, relation, obj, ">>", "yago:onDate", split[4], ".")
                                 else:
-                                    if split[4]: metaFacts.write("<<", subject, relation, object, ">>", "schema:startDate", split[4], ".")
-                                    if split[5]: metaFacts.write("<<", subject, relation, object, ">>", "schema:endDate", split[5], ".")
+                                    if split[4]: metaFacts.write("<<", subject, relation, obj, ">>", "schema:startDate", split[4], ".")
+                                    if split[5]: metaFacts.write("<<", subject, relation, obj, ">>", "schema:endDate", split[5], ".")
                             if not subject.endswith("_generic_instance"):
                                 previousEntity=subject
                     
@@ -160,12 +160,12 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
                 # Happens if a class has no label or no instances
                 continue
             relation=split[1]
-            object=split[2] if relation=="rdf:type" else toYagoEntity(split[2])
-            if not object:
+            obj=split[2] if relation=="rdf:type" else toYagoEntity(split[2])
+            if not obj:
                 # Happens if a class has no label or no instances
                 continue
             # Write taxonomic fact
-            taxFacts.writeFact(subject, relation, object)            
+            taxFacts.writeFact(subject, relation, obj)            
 
 if TEST:
     Evaluator.compare(FOLDER+"05-yago-final-wikipedia.tsv")

@@ -99,7 +99,7 @@ def handleWebPages(entityFacts: Graph) -> None:
         entityFacts.add((entity, Prefixes.schemaUrl, page))
         debug("Fixed", entity, Prefixes.schemaUrl, page)
     
-def handleTypeAssertions(entityFacts: Graph, yagoTaxonomyUp: Dict[str, Set[str]]) -> None:
+def translateTypeAssertions(entityFacts: Graph, yagoTaxonomyUp: Dict[str, Set[str]]) -> None:
     """Replace all facts <subject, wikidata:type, class> by <subject, rdf:type, class>"""
     # Given types are mostly meta stuff
     mainEntity: str = entityFacts.mainSubject()
@@ -111,7 +111,8 @@ def handleTypeAssertions(entityFacts: Graph, yagoTaxonomyUp: Dict[str, Set[str]]
         for predicate in list(entityFacts.predicatesOf(mainEntity)):
             if predicate == Prefixes.wikidataType or predicate == Prefixes.wikidataOccupation:
                 for obj in entityFacts.objectsOf(mainEntity, predicate):
-                    entityFacts.add((mainEntity, Prefixes.rdfType, obj))  
+                    if obj in yagoTaxonomyUp:
+                        entityFacts.add((mainEntity, Prefixes.rdfType, obj))  
             # Anything that has a parent taxon is an instance of taxon
             if predicate == "schema:parentTaxon":
                 entityFacts.add((mainEntity, Prefixes.rdfType, Prefixes.schemaTaxon))
@@ -196,7 +197,7 @@ def getUnitOfMeasurement(subject, predicate, obj, entityGraph):
 #             Taxonomy checks
 ##########################################################################
 
-def handleAndReturnTypes(entityFacts: Graph, yagoSchema: YagoSchema, yagoTaxonomyUp: Dict[str, Set[str]]) -> Set[str]:
+def cleanAndReturnTypes(entityFacts: Graph, yagoSchema: YagoSchema, yagoTaxonomyUp: Dict[str, Set[str]]) -> Set[str]:
     """Removes disjoint classes and shortcuts, returns types"""
     mainEntity: str = entityFacts.mainSubject()
     superTypes: Set[str] = set()
@@ -239,7 +240,7 @@ def getSuperClasses(class_: str, yagoTaxonomyUp: Dict[str, Set[str]], classes: S
 #             Handling domains and range
 ##########################################################################
 
-def handleDomain(entityFacts: Graph, yagoSchema: YagoSchema, fullTransitiveClasses: Set[str]) -> None:
+def handleDomain(entityFacts: Graph, yagoSchema: YagoSchema, fullTransitiveClasses: Set[str], writer) -> None:
     """ Performs a domain check, removes offending facts"""
     mainEntity: str = entityFacts.mainSubject()
     for predicate in list(entityFacts.predicatesOf(mainEntity)):
@@ -255,6 +256,7 @@ def handleDomain(entityFacts: Graph, yagoSchema: YagoSchema, fullTransitiveClass
         if not (fullTransitiveClasses & subjectTypesSet):
             # Remove all objects for this predicate if domain check fails
             debug("Domain check failed for", mainEntity, yagoProperty, fullTransitiveClasses)
+            writer.write(f"# Domain check failed for {mainEntity} {yagoProperty}\n")
             for obj in list(entityFacts.objectsOf(mainEntity, predicate)):
                 entityFacts.remove((mainEntity, predicate, obj))
                      
@@ -308,19 +310,20 @@ def cleanLiteralObject(obj: str, datatype: str) -> Optional[str]:
         return obj
     return obj if literalDataType == datatype else None
         
-def cleanObject(obj: str, yagoProperty: Any) -> Optional[str]:
-    """Returns an object that conforms to the range of the yagoProperty -- or None in case of failure.
-    Returns normalized object (normalized string and date) ready for use."""
+def cleanObject(subject, obj: str, yagoProperty: Any, writer) -> Optional[str]:
+    """Returns an object that conforms to the range of the yagoProperty -- or None in case of failure. Returns normalized object (normalized string and date) ready for use."""
     # Patterns are verified in a fall-through fashion,
     # because verifying a pattern is a necessary but not sufficient condition
     if yagoProperty.pattern:
        objectValue = TurtleUtils.splitLiteral(obj)[0]
        if objectValue is None:
            debug("Object is not a literal", obj)
+           writer.write(f"# Pattern needs literal for {subject} {yagoProperty} {obj}\n")
            return None
        if not re.match(yagoProperty.pattern, objectValue):
-            debug("Object does not match regex:", objectValue, yagoProperty.pattern)
-            return None
+           debug("Object does not match regex:", objectValue, yagoProperty.pattern)
+           writer.write(f"# Pattern check failed for {subject} {yagoProperty} {obj}\n")
+           return None
     
     # TRUE if this type admits entity objects (as opposed to literals)
     couldBeEntity: bool = False
@@ -337,12 +340,13 @@ def cleanObject(obj: str, yagoProperty: Any) -> Optional[str]:
     # If the object is a literal, there is no chance we can make it fit the range
     if TurtleUtils.isLiteral(obj):
         debug("Could not match any object type for", obj, yagoProperty.objectTypes)
+        writer.write(f"# Invalid or uncastable literal in {subject} {yagoProperty} {obj}\n")
         return None
     
     # If the object is not a literal, it can still work if we allow entities
     return obj if couldBeEntity else None
 
-def handleRange(entityFacts: Graph, yagoSchema: YagoSchema) -> None:
+def handleRange(entityFacts: Graph, yagoSchema: YagoSchema, writer) -> None:
     """ Performs a range check, removes offending facts"""
     mainEntity: str = entityFacts.mainSubject()
     for predicate in list(entityFacts.predicatesOf(mainEntity)):
@@ -351,10 +355,9 @@ def handleRange(entityFacts: Graph, yagoSchema: YagoSchema) -> None:
            continue 
         for obj in list(entityFacts.objectsOf(mainEntity, predicate)):
             # cleanObject already returns normalized object, no need to normalize again
-            cleanObj = cleanObject(obj, yagoProperty)
+            cleanObj = cleanObject(mainEntity, obj, yagoProperty, writer)
             if cleanObj is None:
                 entityFacts.remove((mainEntity, predicate, obj))
-                debug("Range check failed for", obj, yagoProperty, yagoProperty.objectTypes)
             elif cleanObj != obj:
                 debug("Cleaned object", obj, cleanObj)
                 entityFacts.remove((mainEntity, predicate, obj))         
@@ -482,19 +485,25 @@ class treatWikidataEntity():
         isSecondaryClass: bool = isSecondaryWikidataClass(entityFacts, self.yagoSchema)
         
         entityFacts, dates, unitsOfMeasurement = translatePropertiesAndClasses(entityFacts, self.yagoSchema)
-                        
-        handleTypeAssertions(entityFacts, self.yagoTaxonomyUp)        
+        
+        translateTypeAssertions(entityFacts, self.yagoTaxonomyUp)        
                 
-        types: Set[str] = handleAndReturnTypes(entityFacts, self.yagoSchema, self.yagoTaxonomyUp)
+        types = cleanAndReturnTypes(entityFacts, self.yagoSchema, self.yagoTaxonomyUp)
         
-        handleDomain(entityFacts, self.yagoSchema, types)
+        if not types:
+            debug("No types left for",entityFacts.mainSubject())
+            self.writer.write(f"# {entityFacts.mainSubject()} has no valid type, removed\n")
+            return
         
-        handleRange(entityFacts, self.yagoSchema)
+        handleDomain(entityFacts, self.yagoSchema, types, self.writer)
+        
+        handleRange(entityFacts, self.yagoSchema, self.writer)
         
         handleMaxCounts(entityFacts, self.yagoSchema, isSecondaryClass)
 
         if not isSecondaryClass and not guessLabelIfNecessary(entityFacts):
             debug("Label failed", entityFacts.mainSubject())
+            self.writer.write(f"# {entityFacts.mainSubject()} has no label\n")
             return
         
         if not checkMinCounts(entityFacts, self.yagoSchema, isSecondaryClass):
@@ -526,7 +535,7 @@ class treatWikidataEntity():
                     elif startDate or endDate:
                         self.writer.write(subject, yagoProperty.identifier, obj, ". #", "", normalizeDate(startDate), normalizeDate(endDate))                
                     else:
-                        self.writer.write(subject, yagoProperty.identifier, obj, ".")                
+                        self.writer.write(subject, yagoProperty.identifier, obj, ".")
                 else:
                     self.writer.write(subject, yagoProperty.identifier, obj, ". # IF", (", ".join(sorted(yagoProperty.objectTypes))), normalizeDate(startDate), normalizeDate(endDate))
 
@@ -542,14 +551,18 @@ if __name__ == '__main__':
         count=0
         tempFiles=list(glob.glob(FOLDER+"03-yago-facts-to-type-check-*.tmp"))
         tempFiles.sort()
-        with open(FOLDER+"03-yago-facts-to-type-check.tsv", "wb") as writer:
-            for file in tempFiles:
-                print("    Reading",file)
-                with open(file, "rb") as reader:
-                    for line in reader:
-                        writer.write(line)
-                        if not line.startswith(b"@"):
-                            count+=1
+        with open(FOLDER+"03-yago-facts-to-type-check.log", "wb") as logWriter:        
+            with open(FOLDER+"03-yago-facts-to-type-check.tsv", "wb") as writer:
+                for file in tempFiles:
+                    print("    Reading",file)
+                    with open(file, "rb") as reader:
+                        for line in reader:
+                            if line.startswith(b"# "):
+                                logWriter.write(line[2:])
+                            elif line.strip():
+                                writer.write(line)
+                                if not line.startswith(b"@"):
+                                    count+=1
         print("  done")
         print("  Info: Number of facts:",count)
         

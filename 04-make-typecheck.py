@@ -204,56 +204,59 @@ with TsvUtils.Timer("Step 04: Type-checking YAGO"):
     count=0
     with TsvUtils.TsvFileWriter(FOLDER+"04-yago-facts-to-rename.tsv") as out:
         with TsvUtils.TsvFileWriter(FOLDER+"04-yago-ids.tsv") as idsFile:
-            currentTopic=""
-            currentEnglishLabel=""
-            currentLabel=""
-            currentWikipediaPage=""
-            wroteFacts=False # True if the entity had any valid facts
-            for split in TsvUtils.tsvTuples(FOLDER+"03-yago-facts-to-type-check.tsv", "  Type-checking facts"):
-                if len(split)<3:
-                    continue
-                subject = split[0]    
-                predicate = split[1]
-                obj = split[2]
-                classes=split[4].split(", ") if len(split)>4 and len(split[4])>0 else None
-                startDate=split[5] if len(split)>5 else ""
-                endDate=split[6] if len(split)>6 else ""
+            with open(FOLDER+"04-make-type-check.log","wt",encoding="utf-8") as logFile:
+                currentTopic=""
+                currentEnglishLabel=""
+                currentLabel=""
+                currentWikipediaPage=""
+                wroteFacts=False # True if the entity had any valid facts
+                for split in TsvUtils.tsvTuples(FOLDER+"03-yago-facts-to-type-check.tsv", "  Type-checking facts"):
+                    if len(split)<3:
+                        continue
+                    subject = split[0]    
+                    predicate = split[1]
+                    obj = split[2]
+                    classes=split[4].split(", ") if len(split)>4 and len(split[4])>0 else None
+                    startDate=split[5] if len(split)>5 else ""
+                    endDate=split[6] if len(split)>6 else ""
 
-                # Next entity
-                if subject!=currentTopic:
-                    if wroteFacts:
-                        writeYagoId(idsFile, currentTopic, currentEnglishLabel, currentLabel, currentWikipediaPage)
-                    currentTopic=subject
-                    currentEnglishLabel=""
-                    currentLabel=""
-                    currentWikipediaPage=""
-                    wroteFacts=False
+                    # Next entity
+                    if subject!=currentTopic:
+                        if wroteFacts:
+                            writeYagoId(idsFile, currentTopic, currentEnglishLabel, currentLabel, currentWikipediaPage)
+                        currentTopic=subject
+                        currentEnglishLabel=""
+                        currentLabel=""
+                        currentWikipediaPage=""
+                        wroteFacts=False
+                        
+                    # Gather information for the entity id
+                    if predicate==Prefixes.rdfsLabel:
+                        if obj.endswith('"@en'):
+                            currentEnglishLabel=obj[1:-4]
+                        elif not currentEnglishLabel and not currentLabel:
+                            label=TurtleUtils.splitLiteral(obj)[0]
+                            if allLegal(label):
+                                currentLabel=label    
+                    elif predicate==Prefixes.schemaUrl and obj.startswith('"https://en.wikipedia.org/wiki/'):
+                        currentWikipediaPage=obj[31:-13]
                     
-                # Gather information for the entity id
-                if predicate==Prefixes.rdfsLabel:
-                    if obj.endswith('"@en'):
-                        currentEnglishLabel=obj[1:-4]
-                    elif not currentEnglishLabel and not currentLabel:
-                        label=TurtleUtils.splitLiteral(obj)[0]
-                        if allLegal(label):
-                            currentLabel=label    
-                elif predicate==Prefixes.schemaUrl and obj.startswith('"https://en.wikipedia.org/wiki/'):
-                    currentWikipediaPage=obj[31:-13]
-                
-                # Write out the fact
-                if classes is None or any(instanceOf(obj,c) for c in classes):
-                    out.write(subject, predicate, obj, ". #", startDate, endDate)
-                    wroteFacts=True
-                    count+=1
-                elif any(isSubclassOf(obj,c) for c in classes):
-                    newObject=createGenericInstance(obj, out)
-                    out.write(subject, predicate, newObject, ". #", startDate, endDate)
-                    count+=1
-                    wroteFacts=True
-                    
-            # Also flush the ids of the last entity...
-            if wroteFacts:
-                writeYagoId(idsFile, currentTopic, currentEnglishLabel, currentLabel, currentWikipediaPage)
+                    # Write out the fact
+                    if classes is None or any(instanceOf(obj,c) for c in classes):
+                        out.write(subject, predicate, obj, ". #", startDate, endDate)
+                        wroteFacts=True
+                        count+=1
+                    elif any(isSubclassOf(obj,c) for c in classes):
+                        newObject=createGenericInstance(obj, out)
+                        out.write(subject, predicate, newObject, ". #", startDate, endDate)
+                        count+=1
+                        wroteFacts=True
+                    else:
+                        logFile.write(f"Range check failed for {subject} {predicate} {obj}\n")
+                        
+                # Also flush the ids of the last entity...
+                if wroteFacts:
+                    writeYagoId(idsFile, currentTopic, currentEnglishLabel, currentLabel, currentWikipediaPage)
 
     print("  Info: Number of facts:",count)    
     # Write out classes that did not get any instances    
