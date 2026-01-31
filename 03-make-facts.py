@@ -282,7 +282,10 @@ def normalizeDate(literal: Optional[str]) -> Optional[str]:
     # the facts itself, making it hard to recover.
     literal = re.sub('-01-01"\\^\\^xsd:date$', '"^^xsd:gYear', literal)
     return literal
-    
+
+# Special tag that is appended to a literal to signal that its unit has to be replaced by the unit given in Wikidata. The UNIT_TAG is always preceded by Prefix.xsdDecimal
+UNIT_TAG="^^UNIT"
+   
 def cleanLiteralObject(obj: str, datatype: str) -> Optional[str]:
     """ Returns a version of obj that corresponds to the datatype -- or None"""
     if datatype == Prefixes.xsdAnytype:
@@ -315,7 +318,7 @@ def cleanLiteralObject(obj: str, datatype: str) -> Optional[str]:
     if datatype.startswith(Prefixes.yagoUnit):
         if literalDataType is None or literalDataType!=Prefixes.xsdDecimal:
             return None
-        return obj
+        return obj+UNIT_TAG
     return obj if literalDataType == datatype else None
         
 def cleanObject(subject, obj: str, yagoProperty: Any, writer) -> Optional[str]:
@@ -539,9 +542,14 @@ class treatWikidataEntity():
                     endDate = None
                     startDate = None                              
                 if TurtleUtils.isLiteral(obj):
-                    unit=unitsOfMeasurement.get((subject, predicate, obj), None)
-                    if unit:
-                       self.writer.write(subject, yagoProperty.identifier, obj.replace(Prefixes.xsdDecimal, unit), ". # IF", (", ".join(sorted(yagoProperty.objectTypes))), normalizeDate(startDate), normalizeDate(endDate))
+                    # UNIT_TAG means that we have to replace the unit xsd:decimal
+                    # by the one from Wikidata
+                    if obj.endswith(UNIT_TAG):
+                        obj=obj[0:-len(UNIT_TAG)]
+                        unit=unitsOfMeasurement.get((subject, predicate, obj), None)
+                        if unit:
+                            obj = obj.replace(Prefixes.xsdDecimal, unit)
+                            self.writer.write(subject, yagoProperty.identifier, obj, ". # IF", (", ".join(sorted(yagoProperty.objectTypes))), normalizeDate(startDate), normalizeDate(endDate))
                     elif startDate or endDate:
                         self.writer.write(subject, yagoProperty.identifier, obj, ". #", "", normalizeDate(startDate), normalizeDate(endDate))                
                     else:
