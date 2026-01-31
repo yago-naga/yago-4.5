@@ -518,9 +518,15 @@ class treatWikidataEntity():
         
         if not checkMinCounts(entityFacts, self.yagoSchema, isSecondaryClass):
             debug("Mincount failed", entityFacts.mainSubject())
+            self.writer.write(f"# Mincount failed on {entityFacts.mainSubject()}\n")
             return
         
-        subject: str = entityFacts.mainSubject()
+        subject: str = entityFacts.mainSubject()        
+        if Prefixes.rdfType not in entityFacts.predicatesOf(subject):
+            debug("No type left for",subject)
+            self.writer.write(f"# No type left for {subject} among {", ".join(str(s) for s in oldTypes)}\n")
+            return
+            
         for predicate in entityFacts.predicatesOf(subject):
             for obj in entityFacts.objectsOf(subject, predicate):
                 if subject == obj:
