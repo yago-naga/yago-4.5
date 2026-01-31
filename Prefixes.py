@@ -157,9 +157,6 @@ wikibaseQuantityUnit="wikibase:quantityUnit"
 #             Constants for fact processing
 ##########################################################################
 
-# Minimum length for entity labels
-MIN_LABEL_LENGTH = 3
-
 # Invalid date prefix (erroneous default dates in Wikidata)
 INVALID_DATE_PREFIX = '"0000'
 

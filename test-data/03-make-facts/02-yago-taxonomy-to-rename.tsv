@@ -74,3 +74,10 @@ yago:Way	rdfs:subClassOf	yago:HumanMadeGeographicalEntity	.
 wd:Q_rock_singer	rdfs:subClassOf	wd:Q_singer	.
 wd:Q_singer	rdfs:subClassOf	yago:Worker	.
 wd:Q2593744	rdfs:subClassOf	yago:FictionalEntity	.
+yago:UnitOfMeasurement	rdfs:subClassOf	schema:Intangible	.
+yago:UnitOfLength	rdfs:subClassOf	yago:UnitOfMeasurement	.
+yago:UnitOfArea	rdfs:subClassOf	yago:UnitOfMeasurement	.
+yago:UnitOfTime	rdfs:subClassOf	yago:UnitOfMeasurement	.
+yago:UnitOfMass	rdfs:subClassOf	yago:UnitOfMeasurement	.
+yago:UnitOfMoney	rdfs:subClassOf	yago:UnitOfMeasurement	.
+yago:UnitOfSpeed	rdfs:subClassOf	yago:UnitOfMeasurement	.

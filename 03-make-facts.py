@@ -86,6 +86,7 @@ def translatePropertiesAndClasses(entityFacts: Graph, yagoSchema: YagoSchema) ->
         predicate = yagoSchema.wikidataClasses[predicate].identifier if predicate in yagoSchema.wikidataClasses else predicate
         obj = yagoSchema.wikidataClasses[obj].identifier if obj in yagoSchema.wikidataClasses else obj
         newGraph.add((subject, predicate, obj))
+        debug(subject, predicate, obj)
         if startDate or endDate:
             dates[(subject, predicate, obj)] = (startDate, endDate)
         if unit:
@@ -108,11 +109,13 @@ def translateTypeAssertions(entityFacts: Graph, yagoTaxonomyUp: Dict[str, Set[st
     if mainEntity in yagoTaxonomyUp:
         entityFacts.add((mainEntity, Prefixes.rdfType, Prefixes.rdfsClass))
     else:
+        debug("FactCheck",mainEntity,", ".join(str(s) for s in entityFacts.objectsOf(mainEntity,Prefixes.wikidataType)))
         for predicate in list(entityFacts.predicatesOf(mainEntity)):
             if predicate == Prefixes.wikidataType or predicate == Prefixes.wikidataOccupation:
                 for obj in entityFacts.objectsOf(mainEntity, predicate):
+                    debug("  Fact",mainEntity,predicate,obj)
                     if obj in yagoTaxonomyUp:
-                        entityFacts.add((mainEntity, Prefixes.rdfType, obj))  
+                        entityFacts.add((mainEntity, Prefixes.rdfType, obj))
             # Anything that has a parent taxon is an instance of taxon
             if predicate == "schema:parentTaxon":
                 entityFacts.add((mainEntity, Prefixes.rdfType, Prefixes.schemaTaxon))
@@ -450,7 +453,7 @@ def guessLabelIfNecessary(entityFacts: Graph) -> bool:
     if labelName:        
         labelName = parse.unquote(labelName)
         labelName = re.sub("[\"'\u0000-\u001f]", "", labelName)
-        if len(labelName) > Prefixes.MIN_LABEL_LENGTH:
+        if len(labelName) > 3:
             debug("Found label for", mainEntity, ": ", labelName)
             entityFacts.add((mainEntity, Prefixes.rdfsLabel, '"' + labelName + '"@' + labelLanguage))
             return True
