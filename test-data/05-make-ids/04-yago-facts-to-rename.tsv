@@ -66,3 +66,10 @@ wd:Q_singer	schema:mainEntityOfPage	"https://fr.wikipedia.org/wiki/Chanteur"^^xs
 # This class has no instances and should be removed
 wd:Q_empty	rdf:type	rdfs:Class	.
 wd:Q_empty	rdfs:label	"empty class"@en	.
+
+wd:Q31	rdf:type	schema:Place	.
+wd:Q31	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Belgium>	.
+wd:Q31	rdfs:label	"Belgium"@en	.
+wd:Q31	schema:geo	"Point(4.6680555555556 50.641111111111)"^^geo:wktLiteral	.
+
+wd:Q_end	rdf:type	schema:Nonsense	.

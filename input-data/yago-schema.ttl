@@ -870,7 +870,7 @@ schema:Airline a sh:NodeShape ;
     sh:property [
         sh:path schema:iataCode ;
         sh:datatype xsd:string ;
-        sh:pattern "^[A-Z0-9]{3}$" ;
+        sh:pattern "^[A-Z0-9]{2,3}$" ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P229 ;
         rdfs:comment "The IATA code for an Airport or Airline"
