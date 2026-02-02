@@ -160,7 +160,7 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
                 # Happens if a class has no label or no instances
                 continue
             relation=split[1]
-            obj=split[2] if relation=="rdf:type" else toYagoEntity(split[2])
+            obj=split[2] if relation==Prefies.rdfType else toYagoEntity(split[2])
             if not obj:
                 # Happens if a class has no label or no instances
                 continue
