@@ -37,8 +37,7 @@ done
 echo "done"
 
 echo "Generating YAGO entity list..."
-  sed -n 's/^yago:\([^\t]\+\)\trdfs:comment\t"\([^"]\+\)"@en/{"id": "yago:\1", "title": "\1", "description": "\2", "clean_id": "\1"}/p' 05-yago-final-wikipedia.tsv > yago-entities.jsonl
-  rm 
+  sed -n 's/^yago:\([^\t]\+\)\trdfs:comment\t"\([^"]\+\)"@en.*/{"id": "yago:\1", "title": "\1", "description": "\2"}/p' 05-yago-final-wikipedia.tsv > yago-entities.jsonl
   zip -m yago-entities.jsonl.zip yago-entities.jsonl
 echo "done"
   

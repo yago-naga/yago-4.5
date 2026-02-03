@@ -185,7 +185,7 @@ def addSubClass(superClass, subClass, yagoSchema, yagoTaxonomyUp, wikidataTaxono
         for a in ancestors(superClass, yagoTaxonomyUp):
             if a in subDisjointSet:
                 stats['disjoint'] += 1
-                logWriter.write(f"{subClass} is disjoint from ancestor {a} of {superClass}, not added to {superClass}\n")
+                logWriter.write(f"{subClass} ({", ".join(str(s) for s in ancestors(subClass, yagoTaxonomyUp) if not s.startswith("wd:"))}) is disjoint from ancestor {a} of {superClass}, not added to {superClass}\n")
                 return
     
     yagoTaxonomyUp[subClass].add(superClass)

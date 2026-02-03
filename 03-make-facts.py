@@ -259,7 +259,7 @@ def handleDomain(entityFacts: Graph, yagoSchema: YagoSchema, fullTransitiveClass
         if not (fullTransitiveClasses & subjectTypesSet):
             # Remove all objects for this predicate if domain check fails
             debug("Domain check failed for", mainEntity, yagoProperty, fullTransitiveClasses)
-            writer.write(f"# Domain check failed: {mainEntity} ({", ".join(s for s in fullTransitiveClasses if (s.startswith("schema:") or s.startswith("yago:")) and s!=Prefixes.schemaThing)}) {yagoProperty}\n")
+            writer.write(f"# Domain check failed: {mainEntity} ({", ".join(s for s in fullTransitiveClasses if not s.startswith("wd:") and s!=Prefixes.schemaThing)}) {yagoProperty}\n")
             for obj in list(entityFacts.objectsOf(mainEntity, predicate)):
                 entityFacts.remove((mainEntity, predicate, obj))
                      
