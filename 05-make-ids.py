@@ -33,6 +33,7 @@ import re
 import Evaluator
 import TsvUtils
 import TurtleUtils
+import Prefixes
 
 TEST=len(sys.argv)>1 and sys.argv[1]=="--test"
 FOLDER="test-data/05-make-ids/" if TEST else "yago-data/"
@@ -55,7 +56,7 @@ def toYagoEntity(entity):
         return entity
     if entity.startswith('<http://') or entity.startswith('<https://'):
         return entity
-    if entity.startswith("yago:") or entity.startswith("schema:") or entity.startswith("rdfs:") or entity.startswith("xsd:"):
+    if entity.startswith("yago:") or entity.startswith("schema:") or entity.startswith("rdfs:") or entity.startswith("xsd:") or entity.startswith("geo:"):
         return entity
     if entity.startswith("_:"):
         # Anonymous members of lists etc.
@@ -75,7 +76,7 @@ def goesToWikipediaVersion(entity):
     """ TRUE if the entity is a literal or has a Wikipedia page or is a generic instance"""
     return isLiteral(entity) or entity in entitiesWithWikipediaPage or entity.endswith("_generic_instance")
 
-wikipediaUrlPattern=re.compile("https://([a-z]+)\\.wiki.*")
+wikipediaUrlPattern=re.compile("https://([a-z-]+)\\.wiki.*")
 
 def isNonEnglishLabel(literal):
     """ TRUE for non-English labels and Wiki-pages"""
@@ -125,7 +126,7 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
                                 continue
                             literal=TurtleUtils.splitLiteral(obj)
                             # Write facts to Wikipedia version of YAGO
-                            if goesToWikipediaVersion(subject) and (relation=="rdf:type" or goesToWikipediaVersion(obj)):
+                            if goesToWikipediaVersion(subject) and (relation==Prefixes.rdfType or goesToWikipediaVersion(obj)):
                                 if isNonEnglishLabel(literal):
                                     wikipediaLabelFacts.writeFact(subject, relation, obj)
                                 else:
@@ -160,7 +161,7 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
                 # Happens if a class has no label or no instances
                 continue
             relation=split[1]
-            obj=split[2] if relation==Prefies.rdfType else toYagoEntity(split[2])
+            obj=split[2] if relation==Prefixes.rdfType else toYagoEntity(split[2])
             if not obj:
                 # Happens if a class has no label or no instances
                 continue

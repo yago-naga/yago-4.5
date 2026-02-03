@@ -48,3 +48,8 @@ yago:Singer	schema:alternateName	"this is a human being"@en	.
 yago:Singer	rdfs:comment	"this is a singer"@en	.
 yago:Singer	rdf:type	rdfs:Class	.
 yago:Singer	rdfs:label	"singer"@en	.
+yago:Belgium	rdf:type	schema:Place	.
+yago:Belgium	owl:sameAs	wd:Q31	.
+yago:Belgium	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Belgium>	.
+yago:Belgium	rdfs:label	"Belgium"@en	.
+yago:Belgium	schema:geo	"Point(4.6680555555556 50.641111111111)"^^geo:wktLiteral	.
