@@ -146,7 +146,7 @@ def addSubClass(superClass, subClass, yagoSchema, yagoTaxonomyUp, wikidataTaxono
     
     # Exclude bad classes
     if subClass in badClasses:
-        logWriter.write(f"{subClass} is bad class, not added to {superClass}\n")
+        logWriter.writeMetaFact(subClass, Prefixes.rdfsSubclassOf, superClass, Prefixes.ysReason, '"Bad class"')
         return
     
     # Convert ancestors generator to set for efficient membership checks
@@ -155,12 +155,12 @@ def addSubClass(superClass, subClass, yagoSchema, yagoTaxonomyUp, wikidataTaxono
     # Exclude loops
     if subClass in superAncestors:
         stats['loops'] += 1
-        logWriter.write(f"{subClass} is ancestor of {superClass}, not added to {superClass}\n")
+        logWriter.writeMetaFact(subClass, Prefixes.rdfsSubclassOf, superClass, Prefixes.ysReason, '"is ancestor"')
         return
     
     # Exclude classes that are already mapped to YAGO
     if subClass in yagoSchema.wikidataClasses:
-        logWriter.write(f"{subClass} is mapped to YAGO, not added to {superClass}\n")
+        logWriter.writeMetaFact(subClass, Prefixes.rdfsSubclassOf, superClass, Prefixes.ysReason, '"is mapped to YAGO class"')
         return
     
     # Treat classes that appear already in the taxonomy
@@ -185,7 +185,7 @@ def addSubClass(superClass, subClass, yagoSchema, yagoTaxonomyUp, wikidataTaxono
         for a in ancestors(superClass, yagoTaxonomyUp):
             if a in subDisjointSet:
                 stats['disjoint'] += 1
-                logWriter.write(f"{subClass} ({", ".join(str(s) for s in ancestors(subClass, yagoTaxonomyUp) if not s.startswith("wd:"))}) is disjoint from ancestor {a} of {superClass}, not added to {superClass}\n")
+                logWriter.writeMetaFact(subClass, Prefixes.rdfsSubclassOf, superClass, Prefixes.ysReason, f'"Subclass ({", ".join(str(s) for s in ancestors(subClass, yagoTaxonomyUp) if not s.startswith("wd:"))}) is disjoint from ancestor {a} of superclass"')
                 return
     
     yagoTaxonomyUp[subClass].add(superClass)
@@ -223,7 +223,7 @@ def main():
         print("  Info: Total number of Wikidata links:", sum(len(wikidataTaxonomyDown[class_]) for class_ in wikidataTaxonomyDown))        
         
         print("  Merging taxonomy...", end="", flush=True)
-        with open(OUTPUT_FOLDER+"/02-make-taxonomy.log", "wt", encoding="utf-8") as logWriter:
+        with TsvUtils.TsvFileWriter(OUTPUT_FOLDER+"/02-make-taxonomy.log") as logWriter:
             # Initialize statistics counter
             stats = {'loops': 0, 'shortcuts': 0, 'disjoint': 0}
             

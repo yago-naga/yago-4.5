@@ -87,6 +87,10 @@ rdfsClass='rdfs:Class'
 
 rdfsSubClassOf = "rdfs:subClassOf"
 
+rdfsSubclassOf = "rdfs:subClassOf"
+
+ysReason = "ys:excludedFor"
+
 wikidataType = "wdt:P31"
 
 wikidataSubClassOf = "wdt:P279"

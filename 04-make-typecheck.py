@@ -203,7 +203,7 @@ with TsvUtils.Timer("Step 04: Type-checking YAGO"):
     count=0
     with TsvUtils.TsvFileWriter(FOLDER+"04-yago-facts-to-rename.tsv") as out:
         with TsvUtils.TsvFileWriter(FOLDER+"04-yago-ids.tsv") as idsFile:
-            with open(FOLDER+"04-make-type-check.log","wt",encoding="utf-8") as logFile:
+            with TsvUtils.TsvFileWriter(FOLDER+"04-make-type-check.log") as logFile:
                 currentTopic=""
                 currentEnglishLabel=""
                 currentLabel=""
@@ -251,7 +251,7 @@ with TsvUtils.Timer("Step 04: Type-checking YAGO"):
                         count+=1
                         wroteFacts=True
                     else:
-                        logFile.write(f"Range check failed for {subject} {predicate} {obj}\n")
+                        logFile.writeMetaFact(subject, predicate, obj, Prefixes.ysReason, f'"object is not in {", ".join(str(s) for s in classes)}"')
                         
                 # Also flush the ids of the last entity...
                 if wroteFacts:

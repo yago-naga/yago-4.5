@@ -259,7 +259,7 @@ def handleDomain(entityFacts: Graph, yagoSchema: YagoSchema, fullTransitiveClass
         if not (fullTransitiveClasses & subjectTypesSet):
             # Remove all objects for this predicate if domain check fails
             debug("Domain check failed for", mainEntity, yagoProperty, fullTransitiveClasses)
-            writer.write(f"# Domain check failed: {mainEntity} ({", ".join(s for s in fullTransitiveClasses if not s.startswith("wd:") and s!=Prefixes.schemaThing)}) {yagoProperty}\n")
+            writer.writeMetaFact(mainEntity, yagoProperty.identifier, Prefixes.schemaThing, Prefixes.ysReason, f'"Domain check failed ({", ".join(s for s in fullTransitiveClasses if not s.startswith("wd:") and s!=Prefixes.schemaThing)})"')
             for obj in list(entityFacts.objectsOf(mainEntity, predicate)):
                 entityFacts.remove((mainEntity, predicate, obj))
                      
@@ -334,11 +334,11 @@ def cleanObject(subject, obj: str, yagoProperty: Any, writer) -> Optional[str]:
        objectValue = TurtleUtils.splitLiteral(obj)[0]
        if objectValue is None:
            debug("Object is not a literal", obj)
-           writer.write(f"# Pattern needs literal for {subject} {yagoProperty} {obj}\n")
+           writer.writeMetaFact(subject, yagoProperty.identifier, obj, Prefixes.ysReason, '"not a literal"')
            return None
        if not re.match(yagoProperty.pattern, objectValue):
            debug("Object does not match regex:", objectValue, yagoProperty.pattern)
-           writer.write(f"# Pattern check failed for {subject} {yagoProperty} {obj}\n")
+           writer.writeMetaFact(subject, yagoProperty.identifier, obj, Prefixes.ysReason, '"pattern check failed"')
            return None
     
     # TRUE if this type admits entity objects (as opposed to literals)
@@ -356,7 +356,7 @@ def cleanObject(subject, obj: str, yagoProperty: Any, writer) -> Optional[str]:
     # If the object is a literal, there is no chance we can make it fit the range
     if TurtleUtils.isLiteral(obj):
         debug("Could not match any object type for", obj, yagoProperty.objectTypes)
-        writer.write(f"# Invalid or uncastable literal in {subject} {yagoProperty} {obj}\n")
+        writer.writeMetaFact(subject, yagoProperty.identifier, obj, Prefixes.ysReason, '"uncastable literal"')
         return None
     
     # If the object is not a literal, it can still work if we allow entities
@@ -509,8 +509,8 @@ class treatWikidataEntity():
         types = cleanAndReturnTypes(entityFacts, self.yagoSchema, self.yagoTaxonomyUp)
         
         if not types:
-            debug("No types left for",entityFacts.mainSubject())
-            self.writer.write(f"# {entityFacts.mainSubject()} has no valid type among {", ".join(str(s) for s in oldTypes)}, removed\n")
+            debug("No types left for",entityFacts.mainSubject())            
+            self.writer.writeMetaFact(entityFacts.mainSubject(), Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, f'"no valid type among {", ".join(str(s) for s in oldTypes)}"')
             return
         
         handleDomain(entityFacts, self.yagoSchema, types, self.writer)
@@ -521,18 +521,18 @@ class treatWikidataEntity():
 
         if not isSecondaryClass and not guessLabelIfNecessary(entityFacts):
             debug("Label failed", entityFacts.mainSubject())
-            self.writer.write(f"# {entityFacts.mainSubject()} has no label\n")
+            self.writer.writeMetaFact(entityFacts.mainSubject(), Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, '"no label"')
             return
         
         if not checkMinCounts(entityFacts, self.yagoSchema, isSecondaryClass):
             debug("Mincount failed", entityFacts.mainSubject())
-            self.writer.write(f"# Mincount failed on {entityFacts.mainSubject()}\n")
+            self.writer.writeMetaFact(entityFacts.mainSubject(), Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, '"mincount failed"')
             return
         
         subject: str = entityFacts.mainSubject()        
         if Prefixes.rdfType not in entityFacts.predicatesOf(subject):
             debug("No type left for",subject)
-            self.writer.write(f"# No type left for {subject} among {", ".join(str(s) for s in oldTypes)}\n")
+            self.writer.writeMetaFact(entityFacts.mainSubject(), Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, f'"no type left among {", ".join(str(s) for s in oldTypes)}"')
             return
             
         for predicate in entityFacts.predicatesOf(subject):
@@ -584,8 +584,8 @@ if __name__ == '__main__':
                     print("    Reading",file)
                     with open(file, "rb") as reader:
                         for line in reader:
-                            if line.startswith(b"# "):
-                                logWriter.write(line[2:])
+                            if line.startswith(b"<<"):
+                                logWriter.write(line)
                             elif line.strip():
                                 writer.write(line)
                                 if not line.startswith(b"@"):

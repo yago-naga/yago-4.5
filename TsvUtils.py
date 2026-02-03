@@ -82,6 +82,9 @@ class TsvFileWriter(object):
     def writeFact(self, subject, predicate, object):
         self.write(subject, predicate, object, ".")
         
+    def writeMetaFact(self, subject, predicate, object, metaPred, metaObj):
+        self.write("<<",subject, predicate, object, ">>", metaPred, metaObj, ".")
+        
     def __exit__(self, *exceptions):
         self.file.close()
 

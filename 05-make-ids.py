@@ -145,10 +145,10 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
                             # If there is a meta-fact, write it out as well
                             if len(split)>5:
                                 if split[4] and split[4]==split[5]:
-                                    metaFacts.write("<<", subject, relation, obj, ">>", "yago:onDate", split[4], ".")
+                                    metaFacts.writeMetaFact(subject, relation, obj, "yago:onDate", split[4])
                                 else:
-                                    if split[4]: metaFacts.write("<<", subject, relation, obj, ">>", "schema:startDate", split[4], ".")
-                                    if split[5]: metaFacts.write("<<", subject, relation, obj, ">>", "schema:endDate", split[5], ".")
+                                    if split[4]: metaFacts.writeMetaFact(subject, relation, obj, "schema:startDate", split[4])
+                                    if split[5]: metaFacts.writeMetaFact(subject, relation, obj, "schema:endDate", split[5])
                             if not subject.endswith("_generic_instance"):
                                 previousEntity=subject
                     
