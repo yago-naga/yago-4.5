@@ -306,6 +306,11 @@ def cleanLiteralObject(obj: str, datatype: str) -> Optional[str]:
         return '"' + literalValue + '"'
     if datatype == Prefixes.rdfLangString:
         return obj if literalDataType is None and lang is not None else None
+    if datatype == Prefixes.xsdInteger:
+        match=re.fullmatch("\\+?(-?[0-9]+)(\\.[0-9]+)?",literalValue)
+        if match:
+            return f'"{match.group(1)}"^^{Prefixes.xsdInteger}'
+        return None
     if datatype == Prefixes.xsdDateTime:
         # Erroneous default dates in Wikidata
         if obj.startswith(Prefixes.INVALID_DATE_PREFIX):

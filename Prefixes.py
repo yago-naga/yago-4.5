@@ -61,6 +61,8 @@ xsdDateTime='xsd:dateTime'
 
 xsdDecimal='xsd:decimal'
 
+xsdInteger='xsd:integer'
+
 xsdDate='xsd:date'
 
 xsdString='xsd:string'

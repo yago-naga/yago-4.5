@@ -86,7 +86,7 @@ schema:Thing a sh:NodeShape ;
     sh:property [
         sh:path schema:alternateName ;
         sh:datatype rdf:langString ;
-        ys:fromProperty skos:altLabel, wdt:P225, wdt:P1843, wdt:P1448, wdt:P1559, wdt:P1477 ;
+        ys:fromProperty skos:altLabel, wdt:P2521, wdt:P225, wdt:P1843, wdt:P1448, wdt:P1559, wdt:P1477, wdt:P2521 ;
         rdfs:comment "An alternative name for the entity"@en ;
     ] ;
     sh:property [
@@ -105,34 +105,27 @@ schema:Thing a sh:NodeShape ;
         rdfs:comment "Provides a human-readable label for an entity in a specific language"@en ;
     ] ;
 
-    #Margherita 1/2/26 added property 
-    sh:property [
-        sh:path yago:femaleFormOfLabel ;
-        sh:datatype rdf:langString ;
-        ys:fromProperty wdt:P2521 ;
-        rdfs:comment "Female form of given label."@en ;
-    ] ;
+    #Margherita 1/2/26 added property # Fabian: moved to alternateLabel
+    #sh:property [
+    #    sh:path yago:femaleFormOfLabel ;
+    #    sh:datatype rdf:langString ;
+    #    ys:fromProperty wdt:P2521 ;
+    #    rdfs:comment "Female form of given label."@en ;
+    #] ;
 
-    #Margherita 1/2/26 added property 
-    sh:property [
-        sh:path yago:maleFormOfLabel ;
-        sh:datatype rdf:langString ;
-        ys:fromProperty wdt:P2521 ;
-        rdfs:comment "Male form of given label."@en ;
-    ] ;
+    #Margherita 1/2/26 added property  # Fabian: moved to alternate label
+    #sh:property [
+    #    sh:path yago:maleFormOfLabel ;
+    #    sh:datatype rdf:langString ;
+    #    ys:fromProperty wdt:P2521 ;
+    #    rdfs:comment "Male form of given label."@en ;
+    #] ;
 
     sh:property [
         sh:path schema:url ;
         sh:datatype xsd:anyURI ;
         ys:fromProperty wdt:P854, wdt:P856, wdt:P973, wdt:P2699 ; # Thomas: added other URL properties 2026-01-16
         rdfs:comment "A URL associated with the entity"@en ;
-    ] ;
-
-    #Margherita 28/01/26 added property 
-    sh:property [
-        sh:path schema:color ;
-        ys:fromProperty wdt:P462 ;  
-        sh:class yago:Color ;       
     ] ;
 
 	# We map to Wikidata, Freebase, Google knowledge graph, WordNet, and IMDB.
@@ -360,7 +353,7 @@ schema:CreativeWork a sh:NodeShape ;
         sh:datatype xsd:integer ;
         sh:minInclusive 0 ;
         ys:fromProperty wdt:P2899 ;
-        rdfs:comment "Minimum required age in years."@en ;
+        rdfs:comment "Minimum required age in years"@en ;
     ] ;
 
     #Margherita 29/01/26 added property,unit normalized to years
@@ -765,7 +758,7 @@ schema:Event a sh:NodeShape ;
         sh:datatype xsd:integer ;
         sh:minInclusive 0 ;
         ys:fromProperty wdt:P2899 ;
-        rdfs:comment "Minimum required age in years."@en ;
+        rdfs:comment "Minimum required age in years"@en ;
     ] ;
     
     #Margherita 29/01/26 added property,unit normalized to years
@@ -782,7 +775,7 @@ schema:Event a sh:NodeShape ;
         sh:path yago:hasCause ;
         ys:fromProperty wdt:P828 ;
         sh:class schema:Thing ;
-        rdfs:comment "Cause of the event."@en ;
+        rdfs:comment "Cause of the event"@en ;
     ] ;
 
 	sh:property [
@@ -928,7 +921,7 @@ schema:Organization a sh:NodeShape ;
         sh:datatype xsd:integer ;
         sh:minInclusive 0 ;
         ys:fromProperty wdt:P2998 ;
-        rdfs:comment "Minimum age in years to be a candidate in this organization."@en ;
+        rdfs:comment "Minimum age in years to be a candidate in this organization"@en ;
     ] ;
 
 	sh:property [
@@ -1185,7 +1178,7 @@ schema:Person a sh:NodeShape ;
             [ sh:class schema:Person ]
             [ sh:class schema:Organization ]
         ) ;
-        rdfs:comment "Killed by, can either be a Person or an Organization."@en ;
+        rdfs:comment "Killed by, can either be a Person or an Organization"@en ;
     ] ;
 
     sh:property [
@@ -1625,7 +1618,7 @@ schema:Airport a sh:NodeShape ;
     sh:property [
         sh:path schema:iataCode ;
         sh:datatype xsd:string ;
-		sh:pattern "^[A-Z0-9]{3}$" ;
+		sh:pattern "^[A-Z0-9]{2,3}$" ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P238 ;
         rdfs:comment "The IATA code for an Airport or Airline"@en ;
@@ -1640,6 +1633,14 @@ schema:Airport a sh:NodeShape ;
 schema:Product a sh:NodeShape ;
 	rdfs:subClassOf schema:Thing ;
     ys:fromClass wd:Q2424752, wd:Q2342494, wd:Q28877, wd:Q2184715 ;
+	
+    #Margherita 28/01/26 added property 
+    sh:property [
+        sh:path schema:color ;
+        ys:fromProperty wdt:P462 ;  
+        sh:class yago:Color ;       
+    ] ;	
+	
     sh:property [
         sh:path schema:award ;
         sh:class yago:Award ;

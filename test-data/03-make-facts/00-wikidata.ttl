@@ -108,6 +108,8 @@ wd:Q_org wdt:P31 schema:Organization;
 wd:Q31  wdt:P31	schema:Country ;
 	schema:name "Belgium"@en ;
 	wdt:P1082	"10"^^xsd:decimal ;
+	# Integers get normalized and cast to integer
+	wdt:P3000	"+20.0"^^xsd:decimal ;
 	schema:geo      "Point(4.6680555555556 50.641111111111)"^^geo:wktLiteral        .
 
 # Dates
