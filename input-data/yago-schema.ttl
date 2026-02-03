@@ -104,12 +104,37 @@ schema:Thing a sh:NodeShape ;
 		ys:fromProperty schema:name, wdt:P2561, wdt:P1476, wdt:P5061 ;
         rdfs:comment "Provides a human-readable label for an entity in a specific language"@en ;
     ] ;
+
+    #Margherita 1/2/26 added property 
+    sh:property [
+        sh:path yago:femaleFormOfLabel ;
+        sh:datatype rdf:langString ;
+        ys:fromProperty wdt:P2521 ;
+        rdfs:comment "Female form of given label."@en ;
+    ] ;
+
+    #Margherita 1/2/26 added property 
+    sh:property [
+        sh:path yago:maleFormOfLabel ;
+        sh:datatype rdf:langString ;
+        ys:fromProperty wdt:P2521 ;
+        rdfs:comment "Male form of given label."@en ;
+    ] ;
+
     sh:property [
         sh:path schema:url ;
         sh:datatype xsd:anyURI ;
         ys:fromProperty wdt:P854, wdt:P856, wdt:P973, wdt:P2699 ; # Thomas: added other URL properties 2026-01-16
         rdfs:comment "A URL associated with the entity"@en ;
     ] ;
+
+    #Margherita 28/01/26 added property 
+    sh:property [
+        sh:path schema:color ;
+        ys:fromProperty wdt:P462 ;  
+        sh:class yago:Color ;       
+    ] ;
+
 	# We map to Wikidata, Freebase, Google knowledge graph, WordNet, and IMDB.
     sh:property [
         sh:path schema:sameAs ;
@@ -231,6 +256,11 @@ yago:Gender a sh:NodeShape ;
     ys:fromClass wd:Q48264 ;
     rdfs:subClassOf schema:Intangible .
 
+# Margherita 28/01/26 added class
+yago:Color a sh:NodeShape ;
+    ys:fromClass wd:Q1075 ;         
+    rdfs:subClassOf schema:Intangible .
+
 # Needed as range of the property schema:inLanguage
 schema:Language a sh:NodeShape ;
 	rdfs:subClassOf schema:Intangible ;
@@ -323,6 +353,25 @@ schema:CreativeWork a sh:NodeShape ;
         ys:fromProperty wdt:P571 ;
         rdfs:comment "The date something was created (used for CreativeWorks, Organizations, Products, AdministrativeAreas, etc.)"@en ;
     ] ;
+
+    #Margherita 29/01/26 added property, unit normalized to years
+    sh:property [
+        sh:path schema:requiredMinAge ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 0 ;
+        ys:fromProperty wdt:P2899 ;
+        rdfs:comment "Minimum required age in years."@en ;
+    ] ;
+
+    #Margherita 29/01/26 added property,unit normalized to years
+    sh:property [
+        sh:path schema:requiredMaxAge ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 0 ;
+        ys:fromProperty wdt:P4135 ;
+        rdfs:comment "Maximum required age in years."@en ;
+    ] ;
+
     sh:property [
         sh:path schema:inLanguage ;
         sh:class schema:Language ;
@@ -709,6 +758,33 @@ schema:Event a sh:NodeShape ;
         ys:fromProperty wdt:P361 ;
         rdfs:comment "A larger Event that contains this Event"@en ;
     ] ;
+
+    #Margherita 29/01/26 added property, unit normalized to years
+    sh:property [
+        sh:path schema:requiredMinAge ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 0 ;
+        ys:fromProperty wdt:P2899 ;
+        rdfs:comment "Minimum required age in years."@en ;
+    ] ;
+    
+    #Margherita 29/01/26 added property,unit normalized to years
+    sh:property [
+        sh:path schema:requiredMaxAge ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 0 ;
+        ys:fromProperty wdt:P4135 ;
+        rdfs:comment "Maximum required age in years."@en ;
+    ] ;
+
+    #Margherita 30/01/26 added property, 
+    sh:property [
+        sh:path yago:hasCause ;
+        ys:fromProperty wdt:P828 ;
+        sh:class schema:Thing ;
+        rdfs:comment "Cause of the event."@en ;
+    ] ;
+
 	sh:property [
         sh:path schema:maximumAttendeeCapacity ;
         sh:datatype xsd:decimal ;
@@ -845,6 +921,16 @@ schema:Organization a sh:NodeShape ;
         ys:fromProperty wdt:P1128 ;
         rdfs:comment "The number of employees in an Organization"@en ;
     ] ;
+
+    #Margherita 30/01/26 added property, unit normalized to years
+    sh:property [
+        sh:path yago:ageOfCandidacy ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 0 ;
+        ys:fromProperty wdt:P2998 ;
+        rdfs:comment "Minimum age in years to be a candidate in this organization."@en ;
+    ] ;
+
 	sh:property [
         sh:path yago:ownedBy ; # Fabian: changed from schema: to yago:, 2024-04-03
         sh:or (
@@ -1090,6 +1176,18 @@ schema:Person a sh:NodeShape ;
         ys:fromProperty wdt:P20 ;
         rdfs:comment "The place where a Person died"@en ;
     ] ;
+
+    #Margherita 30/01/26 added property, limited the constraints to Person e Oragnization
+    sh:property [
+        sh:path yago:killedBy ;
+        ys:fromProperty wdt:P157 ;
+        sh:or (
+            [ sh:class schema:Person ]
+            [ sh:class schema:Organization ]
+        ) ;
+        rdfs:comment "Killed by, can either be a Person or an Organization."@en ;
+    ] ;
+
     sh:property [
         sh:path schema:gender ;
         sh:class yago:Gender ;
@@ -1407,6 +1505,25 @@ schema:Country a sh:NodeShape ;
         sh:datatype xsd:decimal ;
         ys:fromProperty wdt:P1198 ;
     ] ;
+
+    #Margherita 29/01/26 added property, unit normalized to years
+    sh:property [
+        sh:path yago:marriageableAge ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 0 ;
+        ys:fromProperty wdt:P3000 ;
+        rdfs:comment "Age of consent in years."@en ;
+    ] ;
+
+    #Margherita 29/01/26 added property, unit normalized to years
+    sh:property [
+        sh:path yago:ageOfMajority ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 0 ;
+        ys:fromProperty wdt:P2997 ;
+        rdfs:comment "Age of majority in years."@en ;
+    ] ;
+
 	# Fabian: 2023-04-12 don't know how to handle the currency...
     #sh:property [
     #    sh:path schema:medianIncome ;
