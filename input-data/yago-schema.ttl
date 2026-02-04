@@ -86,7 +86,7 @@ schema:Thing a sh:NodeShape ;
     sh:property [
         sh:path schema:alternateName ;
         sh:datatype rdf:langString ;
-        ys:fromProperty skos:altLabel, wdt:P2521, wdt:P225, wdt:P1843, wdt:P1448, wdt:P1559, wdt:P1477, wdt:P2521 ;
+        ys:fromProperty skos:altLabel, wdt:P2521, wdt:P225, wdt:P1843, wdt:P1448, wdt:P1559, wdt:P1477, wdt:P2521, wdt:P2562 ;
         rdfs:comment "An alternative name for the entity"@en ;
     ] ;
     sh:property [
@@ -1081,7 +1081,16 @@ schema:Person a sh:NodeShape ;
     sh:property [
         sh:path schema:givenName ;
         sh:datatype rdf:langString ; #Margherita this is modeled as item in wikidata
-        ys:fromProperty wdt:P2562 ;
+        ys:fromProperty wdt:P735 ;
+        rdfs:comment "First name or another given name of this person."@en ;
+    ] ;
+	
+    #Margherita added 
+	# Fabian TODO: This is modeled as an entity, we can't get the string from here
+    sh:property [
+        sh:path schema:familyName ;
+        sh:datatype rdf:langString ; #Margherita this is modeled as item in wikidata
+        ys:fromProperty wdt:P734 ;
         rdfs:comment "First name or another given name of this person."@en ;
     ] ;
 
