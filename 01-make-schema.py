@@ -29,7 +29,7 @@ import Prefixes
 import re
 import Schema
 
-OUTPUT_FOLDER="yago-data/"
+OUTPUT_FOLDER="yago-data"
 INPUT_FOLDER= "input-data"
 
 print("Step 01: Creating YAGO schema...")
@@ -43,7 +43,7 @@ yagoSchema=Schema.YagoSchema(INPUT_FOLDER+"/yago-schema.ttl")
 
 # Write out the schema
 print("  Writing schema to",OUTPUT_FOLDER,"...", end="", flush=True)
-yagoSchema.writeToFile(OUTPUT_FOLDER+"01-yago-final-schema.ttl")
+yagoSchema.writeToFile(OUTPUT_FOLDER+"/01-yago-final-schema.ttl")
 print("done")
 
 print("done")

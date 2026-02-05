@@ -44,7 +44,7 @@ from typing import Optional, Dict, Set, Tuple, Any, Iterator, List
 
 TEST=len(sys.argv)>1 and sys.argv[1]=="--test"
 FOLDER="test-data/03-make-facts/" if TEST else "yago-data/"
-WIKIDATA_FILE= "test-data/03-make-facts/00-wikidata.ttl" if TEST else "../wikidata.ttl"
+WIKIDATA_FILE= "test-data/03-make-facts/00-wikidata.ttl" if TEST else "input-data/wikidata.ttl"
 
 ##########################################################################
 #             Debugging

@@ -7,7 +7,7 @@ Call:
   python 02-make-taxonomy.py
 
 Input:
-- 00-wikidata.ttl(.gz), the Wikidata file
+- wikidata.ttl, the Wikidata file, in the input-data folder
 - 01-yago-final-schema.ttl, the YAGO schema
 
 Output:
@@ -36,7 +36,7 @@ import Evaluator
 TEST=len(sys.argv)>1 and sys.argv[1]=="--test"     
 
 OUTPUT_FOLDER="test-data/02-make-taxonomy/" if TEST else "yago-data/"
-WIKIDATA_FILE= "test-data/02-make-taxonomy/00-wikidata.ttl" if TEST else "../wikidata.ttl"
+WIKIDATA_FILE= "test-data/02-make-taxonomy/00-wikidata.ttl" if TEST else "input-data/wikidata.ttl"
 SCHEMA_FILE = "yago-data/01-yago-final-schema.ttl"
 
 ###########################################################################
