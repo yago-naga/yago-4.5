@@ -157,14 +157,16 @@ yagoUnitOfMeasurement="yago:UnitOfMeasurement"
 
 yagoUnit="yago:UnitOf"
 
+yagoPersonName="yago:PersonName"
+
 wikibaseQuantityUnit="wikibase:quantityUnit"
 
 ##########################################################################
 #             Constants for fact processing
 ##########################################################################
 
-# Invalid date prefix (erroneous default dates in Wikidata)
-INVALID_DATE_PREFIX = '"0000'
-
 # Maximum length for date strings
 MAX_DATE_LENGTH = len('"+0000-01-01T00:00:00Z"^^xsd:dateTime')
+
+# Special flag to have Wikidata entities in strings replaced
+REPLACE_QID_FLAG = 'YAGO-REPLACE '

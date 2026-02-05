@@ -33,6 +33,8 @@ wd:Q_Elvis wdt:P31 wd:Q_rock_singer;
     # These are shortcuts that should not appear
     wdt:P31 schema:Person ;
     wdt:P31 wd:Q_singer ;
+	# Given name should be decoded
+	wdt:P735 wd:Q493293 ;
 	# Test cardinality constraint: Only one birth place should stay
 	wdt:P19 wd:Q_birth_place_1;
 	wdt:P19 wd:Q_birth_place_2;
@@ -164,4 +166,7 @@ wd:Q702269 schema:name "label that does not survive"@en ;
 # Properties survive
 wdt:P26 schema:name "spouse of person"@en .
 
-
+# Proper name survives
+wd:Q493293 
+        wdt:P1705 "Andrea"@mul ;
+        wdt:P31 wd:Q3409032 .

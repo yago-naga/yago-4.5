@@ -35,3 +35,6 @@
 @prefix wdno: <http://www.wikidata.org/prop/novalue/> .
 @prefix ys: <http://yago-knowledge.org/schema#> .
 wd:Q_empty
+wd:Q3409032
+yago:PersonName
+yago:Intangible

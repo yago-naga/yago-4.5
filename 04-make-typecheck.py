@@ -50,7 +50,7 @@ yagoIds=set()
 
 def hexCode(char):    
     """ Hex-encodes the character """
-    return "_u{0:04X}_".format(ord(char))
+    return "_U{0:04X}_".format(ord(char))
 
 def inRange(char,start,end):
     """ TRUE if the ordinal of the character is in the range of numbers"""
@@ -68,6 +68,16 @@ def legal(char):
 def allLegal(s):
     """ True if all characters are legal characters """
     return all(c==' ' or legal(c) for c in s)
+
+def yagoIdFromName(s):
+    """ Creates a YAGO id from a name, mirroring every character """
+    result=""
+    for c in s:
+        if legal(c):
+            result+=c
+        else:
+            result+=hexCode(c)
+    return result
     
 def yagoIdFromString(s):
     """ Creates a YAGO id from a string """
@@ -126,11 +136,15 @@ def tryYagoId(out,currentTopic, yagoId, isWikipedia=False):
         return True
     return False
     
-def writeYagoId(out, currentTopic, currentEnglishLabel, currentLabel, currentWikipediaPage):
+def writeYagoId(out, currentTopic, currentEnglishLabel, currentLabel, currentWikipediaPage, isName):
     """ Writes wd:Q303 owl:sameAs yago:Elvis """ 
     # Don't print ids for built-in classes
     if currentTopic.startswith("schema:") or currentTopic.startswith("yago:"):
         return
+    # Names get an id that mirrors its label
+    if isName:
+       out.write(currentTopic,"owl:sameAs","yago:"+yagoIdFromName(currentLabel),". #OTHER") 
+       return
     if currentWikipediaPage and tryYagoId(out,currentTopic, yagoIdFromWikipediaPage(currentWikipediaPage), True):
         return
     if currentEnglishLabel and tryYagoId(out,currentTopic, yagoIdFromLabel(currentTopic,currentEnglishLabel)):
@@ -197,7 +211,7 @@ with TsvUtils.Timer("Step 04: Type-checking YAGO"):
 
     # Load instances
     for triple in TsvUtils.tsvTuples(FOLDER+"03-yago-facts-to-type-check.tsv", "  Loading YAGO instances"):
-        if len(triple)>2 and triple[1]=="rdf:type":
+        if len(triple)>2 and triple[1]==Prefixes.rdfType:
             yagoInstances[triple[0]].add(triple[2])
     
     count=0
@@ -209,6 +223,8 @@ with TsvUtils.Timer("Step 04: Type-checking YAGO"):
                 currentLabel=""
                 currentWikipediaPage=""
                 wroteFacts=False # True if the entity had any valid facts
+                isName = False # True for person names
+                
                 for split in TsvUtils.tsvTuples(FOLDER+"03-yago-facts-to-type-check.tsv", "  Type-checking facts"):
                     if len(split)<3:
                         continue
@@ -217,29 +233,37 @@ with TsvUtils.Timer("Step 04: Type-checking YAGO"):
                     obj = split[2]
                     classes=split[4].split(", ") if len(split)>4 and len(split[4])>0 else None
                     startDate=split[5] if len(split)>5 else ""
-                    endDate=split[6] if len(split)>6 else ""
+                    endDate=split[6] if len(split)>6 else ""                    
 
                     # Next entity
                     if subject!=currentTopic:
                         if wroteFacts:
-                            writeYagoId(idsFile, currentTopic, currentEnglishLabel, currentLabel, currentWikipediaPage)
+                            writeYagoId(idsFile, currentTopic, currentEnglishLabel, currentLabel, currentWikipediaPage, isName)
                         currentTopic=subject
                         currentEnglishLabel=""
                         currentLabel=""
                         currentWikipediaPage=""
                         wroteFacts=False
+                        isName=instanceOf(subject,Prefixes.yagoPersonName)
+                        if isName:
+                            # We remove ourselves from the type hierarchy, 
+                            # so that the class yago:PersonName will be empty and will be removed
+                            yagoInstances.pop(subject, None)
                         
                     # Gather information for the entity id
                     if predicate==Prefixes.rdfsLabel:
                         if obj.endswith('"@en'):
                             currentEnglishLabel=obj[1:-4]
-                        elif not currentEnglishLabel and not currentLabel:
-                            label=TurtleUtils.splitLiteral(obj)[0]
-                            if allLegal(label):
-                                currentLabel=label    
+                        elif not currentLabel or not allLegal(currentLabel):
+                            currentLabel=TurtleUtils.splitLiteral(obj)[0]                            
                     elif predicate==Prefixes.schemaUrl and obj.startswith('"https://en.wikipedia.org/wiki/'):
                         currentWikipediaPage=obj[31:-13]
                     
+                    # We do not write out anything about names, just collect their label
+                    if isName:
+                        wroteFacts=True
+                        continue
+                        
                     # Write out the fact
                     if classes is None or any(instanceOf(obj,c) for c in classes):
                         out.write(subject, predicate, obj, ". #", startDate, endDate)
@@ -255,12 +279,12 @@ with TsvUtils.Timer("Step 04: Type-checking YAGO"):
                         
                 # Also flush the ids of the last entity...
                 if wroteFacts:
-                    writeYagoId(idsFile, currentTopic, currentEnglishLabel, currentLabel, currentWikipediaPage)
+                    writeYagoId(idsFile, currentTopic, currentEnglishLabel, currentLabel, currentWikipediaPage, isName)
 
     print("  Info: Number of facts:",count)    
     # Write out classes that did not get any instances    
     for c in set([k for s in yagoInstances.values() for k in s]):
-        removeClass(c)        
+        removeClass(c)     
     print("  Info: Number of classes that don't have instances:",len(yagoTaxonomyUp))
     with TsvUtils.TsvFileWriter(FOLDER+"04-yago-bad-classes.tsv") as badClassFile:
         for c in yagoTaxonomyUp:

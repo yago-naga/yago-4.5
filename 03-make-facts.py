@@ -295,8 +295,14 @@ def cleanLiteralObject(obj: str, datatype: str) -> Optional[str]:
         if not isURI(obj):
             return None
         return '"' + obj + '"^^xsd:anyURI'
-    if datatype == Prefixes.xsdString and obj.startswith('<'):
-        return '"' + obj[1:-1] + '"'       
+    # See if we can cast this to a string
+    if datatype == Prefixes.xsdString:
+        if obj.startswith('<'):
+            return '"' + obj[1:-1] + '"'   
+        if obj.startswith('yago:'):
+            return '"' + obj[5:] + '"'   
+        if obj.startswith('wd:'):
+            return '"' + Prefixes.REPLACE_QID_FLAG + obj + '"'   
     literalValue, _, lang, literalDataType = TurtleUtils.splitLiteral(obj)
     if literalValue is None:
         return None
@@ -313,7 +319,7 @@ def cleanLiteralObject(obj: str, datatype: str) -> Optional[str]:
         return None
     if datatype == Prefixes.xsdDateTime:
         # Erroneous default dates in Wikidata
-        if obj.startswith(Prefixes.INVALID_DATE_PREFIX):
+        if obj.startswith('"0000'):
            return None
         # Strings that are longer than any possible date   
         if len(obj) > Prefixes.MAX_DATE_LENGTH:
@@ -496,6 +502,7 @@ class treatWikidataEntity():
                     
         handleWebPages(entityFacts)               
 
+        # We backup the existing Wikidata types for the log messages
         oldTypes = entityFacts.objectsOf(entityFacts.mainSubject(), Prefixes.wikidataType)
 
         # Wikidata classes that are mapped to a YAGO class, but that are not the first

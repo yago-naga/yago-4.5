@@ -40,6 +40,7 @@ yago:DoctoralDegree_generic_instance	rdf:type	yago:DoctoralDegree	.
 yago:DoctoralDegree_generic_instance	rdfs:label	"DoctoralDegree"@en	.
 yago:Elvis	yago:academicTitle	yago:DoctoralDegree_generic_instance	.
 yago:Elvis	schema:height	"200"^^yago:Meter	.
+yago:Elvis	schema:givenName	"Andr ea"	.
 yago:Elvis	schema:child	yago:Elvis	.
 yago:Elvis	schema:spouse	yago:Elvis	.
 yago:Singer	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Singer>	.

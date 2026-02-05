@@ -75,3 +75,6 @@ wd:Q570948	rdfs:subClassOf	wd:Q5185279	.
 wd:Q570948	rdfs:subClassOf	wd:Q207804	.
 wd:Q6550961	rdfs:subClassOf	wd:Q570948	.
 wd:Q250090	rdfs:subClassOf	wd:Q570948	.
+wd:Q3409032	rdfs:subClassOf	yago:PersonName	.
+yago:PersonName	rdfs:subClassOf	yago:Intangible	.
+yago:Intangible	rdfs:subClassOf	schema:Thing	.

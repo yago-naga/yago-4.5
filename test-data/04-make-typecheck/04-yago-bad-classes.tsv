@@ -123,3 +123,6 @@ schema:MusicPlaylist
 schema:CivicStructure
 schema:PerformingGroup
 wd:Q_prof
+wd:Q3409032
+yago:PersonName
+yago:Intangible

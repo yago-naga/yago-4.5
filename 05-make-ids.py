@@ -46,6 +46,13 @@ def isLiteral(entity):
     """ TRUE for literals and external URLs """
     return entity.startswith('"') or entity.startswith('<http://') or entity.startswith('<https://')
 
+def yagoIdToString(yagoId):
+    """ Decodes Unicode character escapes in a YAGO ID and returns a string."""
+    if not yagoId:
+        return yagoId
+    yagoId=yagoId[yagoId.find(':')+1:]
+    return re.sub(r'_U([0-9a-fA-F]{4})_', lambda m: chr(int(m.group(1), 16)), yagoId)
+    
 def toYagoEntity(entity):
     """ Translates an entity to a YAGO entity, passes through literals, returns NONE otherwise """
     literalValue, _, _, datatype = TurtleUtils.splitLiteral(entity)
@@ -53,6 +60,9 @@ def toYagoEntity(entity):
         yagoDataType=toYagoEntity(datatype)
         return '"'+literalValue+'"^^'+yagoDataType if yagoDataType else None
     if literalValue:
+        if literalValue.startswith(Prefixes.REPLACE_QID_FLAG):
+            name=yagoIdToString(toYagoEntity(literalValue[len(Prefixes.REPLACE_QID_FLAG):]))
+            return '"'+name+'"' if name else None           
         return entity
     if entity.startswith('<http://') or entity.startswith('<https://'):
         return entity
@@ -105,7 +115,7 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
     
     for split in TsvUtils.tsvTuples(FOLDER+"04-yago-bad-classes.tsv", "  Removing bad YAGO classes"):
         yagoIds.pop(split[0], None)
-
+    
     with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-meta.tsv") as metaFacts:
         with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-beyond-wikipedia.tsv") as fullFacts:
             with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-wikipedia.tsv") as wikipediaFacts:
@@ -117,7 +127,7 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
                                 continue
                             subject=toYagoEntity(split[0])
                             if not subject:
-                                # Should not happen
+                                # Happens for empty classes
                                 continue
                             relation=split[1]
                             obj=toYagoEntity(split[2])
@@ -157,7 +167,7 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
             if len(split)<3:
                 continue
             subject=toYagoEntity(split[0])
-            if not subject:
+            if not subject  or subject==Prefixes.yagoPersonName:
                 # Happens if a class has no label or no instances
                 continue
             relation=split[1]

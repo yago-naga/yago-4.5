@@ -101,7 +101,7 @@ schema:Thing a sh:NodeShape ;
         sh:datatype rdf:langString ;
         sh:uniqueLang true ;
 		sh:minCount 1;
-		ys:fromProperty schema:name, wdt:P2561, wdt:P1476, wdt:P5061 ;
+		ys:fromProperty schema:name, wdt:P2561, wdt:P1476, wdt:P5061, wdt:P1705 ;
         rdfs:comment "Provides a human-readable label for an entity in a specific language"@en ;
     ] ;
 
@@ -259,6 +259,12 @@ schema:Language a sh:NodeShape ;
 	rdfs:subClassOf schema:Intangible ;
     ys:fromClass wd:Q34770 .
 
+# Needed for treatment of person names. Used ony internally,
+# as names are replaced by strings. 
+yago:PersonName a sh:NodeShape ;
+	rdfs:subClassOf schema:Intangible ;
+    ys:fromClass wd:Q10856962 .
+	
 # For units of measurement for quantified properties such as "width"
 yago:UnitOfMeasurement a sh:NodeShape ;
 	rdfs:subClassOf schema:Intangible ;
@@ -1077,21 +1083,19 @@ schema:Person a sh:NodeShape ;
     #] ;
 
     #Margherita added 
-	# Fabian TODO: This is modeled as an entity, we can't get the string from here
     sh:property [
         sh:path schema:givenName ;
-        sh:datatype rdf:langString ; #Margherita this is modeled as item in wikidata
+        sh:datatype xsd:string ; #Margherita this is modeled as item in wikidata
         ys:fromProperty wdt:P735 ;
-        rdfs:comment "First name or another given name of this person."@en ;
+        rdfs:comment "First name or another given name of this person"@en ;
     ] ;
 	
-    #Margherita added 
-	# Fabian TODO: This is modeled as an entity, we can't get the string from here
+    #Margherita added 	
     sh:property [
         sh:path schema:familyName ;
-        sh:datatype rdf:langString ; #Margherita this is modeled as item in wikidata
+        sh:datatype xsd:string ; #Margherita this is modeled as item in wikidata
         ys:fromProperty wdt:P734 ;
-        rdfs:comment "First name or another given name of this person."@en ;
+        rdfs:comment "Family name of this person"@en ;
     ] ;
 
     sh:property [
