@@ -7,7 +7,7 @@ Call:
   python 02-make-taxonomy.py
 
 Input:
-- wikidata.ttl, the Wikidata file, in the input-data folder
+- the Wikidata file, in input-data/wikidata.ttl
 - 01-yago-final-schema.ttl, the YAGO schema
 
 Output:

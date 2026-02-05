@@ -9,7 +9,7 @@ Call:
 Input:
 - 01-yago-final-schema.ttl
 - 02-yago-taxonomy-to-rename.tsv
-- Wikidata file
+- Wikidata file in input-data/wikidata.ttl
 
 Output:
 - 03-yago-facts-to-type-check.tsv
