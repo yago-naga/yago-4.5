@@ -170,3 +170,28 @@ wdt:P26 schema:name "spouse of person"@en .
 wd:Q493293 
         wdt:P1705 "Andrea"@mul ;
         wdt:P31 wd:Q3409032 .
+		
+
+# Units of measurement with conversion factor
+wd:Q100995 wdt:P31 wd:Q3647172,
+                wd:Q82047057 ;
+        wdt:P487 "℔" ;
+        wdt:P646 "/m/05t56" ;
+        wdt:P2370 "+0.45359237"^^xsd:decimal ;
+		 wdt:P5061 "lb"@en,
+                "رطل"@ar .
+				
+wd:Q100995 p:P2370 wds:Q100995-803040d7-4380-6559-d4e0-59b8b7a039d8 .
+
+wds:Q100995-803040d7-4380-6559-d4e0-59b8b7a039d8 a wikibase:Statement,
+                wikibase:BestRank ;
+        wikibase:rank wikibase:NormalRank ;
+        ps:P2370 "+0.45359237"^^xsd:decimal ;
+        psv:P2370 wdv:dc804715c6c498c4d7015e949d348eec ;
+        psn:P2370 wdv:dc804715c6c498c4d7015e949d348eec ;
+        prov:wasDerivedFrom wdref:5d24975c8a0c94fe20b5d4da731d8cf3514b67e7 .
+
+wdv:dc804715c6c498c4d7015e949d348eec a wikibase:QuantityValue ;
+        wikibase:quantityAmount "+0.45359237"^^xsd:decimal ;
+        wikibase:quantityUnit <http://www.wikidata.org/entity/Q11570> ;
+        wikibase:quantityNormalized wdv:dc804715c6c498c4d7015e949d348eec .		

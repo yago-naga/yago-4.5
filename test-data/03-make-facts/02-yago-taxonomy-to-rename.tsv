@@ -81,6 +81,7 @@ yago:UnitOfTime	rdfs:subClassOf	yago:UnitOfMeasurement	.
 yago:UnitOfMass	rdfs:subClassOf	yago:UnitOfMeasurement	.
 yago:UnitOfMoney	rdfs:subClassOf	yago:UnitOfMeasurement	.
 yago:UnitOfSpeed	rdfs:subClassOf	yago:UnitOfMeasurement	.
+wd:Q3647172	rdfs:subClassOf	yago:UnitOfMass .
 wd:Q3409032	rdfs:subClassOf	yago:PersonName	.
 yago:PersonName	rdfs:subClassOf	yago:Intangible	.
 yago:Intangible	rdfs:subClassOf	schema:Thing	.
