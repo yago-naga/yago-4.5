@@ -104,6 +104,11 @@ badClasses = {
     "wd:Q591041",     # same
     "wd:Q13442814",   # same
     "wd:Q3523102",    # same
+    "wd:Q5707594",    # same
+    "wd:Q191067",     # same
+    "wd:Q13442814",   # same
+    "wd:Q43099500",   # Performing arts prod
+    "wd:Q52721362",   # same
     "wd:Q115668308",  # Release    
     "wd:Q618123",     # geographical feature
     "wd:Q13226383",   # facility

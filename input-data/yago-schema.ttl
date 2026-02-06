@@ -54,7 +54,7 @@ schema:Person owl:disjointWith
 	schema:Taxon,
     schema:Organization.
 schema:Place owl:disjointWith 
-    # schema:CreativeWork, # Fabian: removed 2026-01-16 to cater to monuments
+    schema:CreativeWork, 
     schema:Event,
 	schema:Person,
     schema:Taxon. 
