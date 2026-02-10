@@ -1361,14 +1361,14 @@ schema:Place a sh:NodeShape ;
 #        ys:fromProperty wdt:P163 ;
 	#rdfs:comment "Flag of the place or organization."@en ;
 #    ] ;
-    # Margherita 18/01/2026: added time zone property (P421)
+    # Margherita 10/02/26 removed property
 	# Fabian: TODO this would need proper modeling with timeZone as a new class (subclass of Place?)
-    sh:property [
-        sh:path schema:timeZone ;
-        sh:datatype xsd:string ;
-        ys:fromProperty wdt:P421 ;
-        rdfs:comment "The time zone where a Place is located."@en ;
-    ] .
+    # sh:property [
+        # sh:path schema:timeZone ;
+        # sh:datatype xsd:string ;
+        # ys:fromProperty wdt:P421 ;
+        # rdfs:comment "The time zone where a Place is located."@en ;
+    # ] .
 
 
 # ------------------ Planets ---------------
@@ -1413,23 +1413,23 @@ yago:AstronomicalObject a sh:NodeShape ;
         ys:fromProperty wdt:P2583 ;
         rdfs:comment "The distance of an AstronomicalObject from Earth"@en ;
     ] ;    
-    # Margherita 25/01/2026: now the wikidata prop should be correct, 
+    # Margherita 8/02/26 removed , 
     # for the target class, this prop in wikidata is quit polysemic, it is used as a numeric astronomical reference epoch (e.g., J2000.0) for fixed celestial objects, and as a temporal reference date for orbital elements of moving objects
-    sh:property [
-        sh:path yago:epoch ;
-        sh:or (
-            [
-            sh:datatype xsd:string ;
-            #sh:pattern "^[JB][0-9]{4}(\\.[0-9]+)?$" ; # Fabian: We can't check patterns in a disjunction :-(
-            ]
-            [
-            sh:datatype xsd:date ;
-            ]
-        ) ;
-		rdfs:comment "Astronomical reference epoch (e.g., J2000.0)" ;
-        ys:fromProperty wdt:P6259 ;
-    ] ;
-	ys:fromClass wd:Q6999.
+#    sh:property [
+#        sh:path yago:epoch ;
+#        sh:or (
+#            [
+#            sh:datatype xsd:string ;
+#            #sh:pattern "^[JB][0-9]{4}(\\.[0-9]+)?$" ; # Fabian: We can't check patterns in a disjunction :-(
+#            ]
+#            [
+#            sh:datatype xsd:date ;
+#            ]
+#        ) ;
+#		rdfs:comment "Astronomical reference epoch (e.g., J2000.0)" ;
+#        ys:fromProperty wdt:P6259 ;
+#    ] ;
+#	ys:fromClass wd:Q6999.
 
 # ------------------ Administrative Areas ---------------
 
@@ -1439,7 +1439,21 @@ schema:AdministrativeArea a sh:NodeShape ;
 	rdfs:subClassOf schema:Place ;
     sh:property [
         sh:path schema:dateCreated ;
-        sh:datatype xsd:dateTime ;
+        #Margherita 9/2/26 modified the datatype
+        sh:or (
+            [
+                sh:datatype xsd:dateTime
+            ]
+            [
+                sh:datatype xsd:date
+            ]
+            [
+                sh:datatype xsd:gYearMonth
+            ]
+            [
+                sh:datatype xsd:gYear
+            ]
+        ) ;
         ys:fromProperty wdt:P571 ;
 		sh:maxCount 1 ;
         rdfs:comment "The date something was created (used for CreativeWorks, Organizations, Products, AdministrativeAreas, etc.)"@en ;
@@ -1461,11 +1475,33 @@ schema:AdministrativeArea a sh:NodeShape ;
         ys:fromProperty wdt:P1365 ;
         rdfs:comment "An AdministrativeArea that another area replaces (historical succession)"@en ;
     ] ;
+
     sh:property [
         sh:path yago:populationNumber ; # Fabian: changed from schema:... 2024-04-03
         sh:datatype xsd:decimal ;
+        sh:minInclusive 0 ; #Margherita added constraint 7/03/26
         ys:fromProperty wdt:P1082 ;
+        rdfs:comment "Population count."@en ;
     ] ;
+
+    #Margherita 7/02/26: added property
+    sh:property [
+        sh:path yago:femalePopulation ;
+        sh:datatype xsd:deciaml ;
+        sh:minInclusive 0 ;
+        ys:fromProperty wdt:P1539 ;
+        rdfs:comment "Female population count."@en ;
+    ] ;
+
+    #Margherita 7/02/26: added property
+    sh:property [
+        sh:path yago:malePopulation ;
+        sh:datatype xsd:decimal ;
+        sh:minInclusive 0 ;
+        ys:fromProperty wdt:P1540 ;
+        rdfs:comment "Male population count."@en ;
+    ] ;
+    
     sh:property [
         sh:path schema:postalCode ;
         sh:datatype xsd:string ;
@@ -1525,6 +1561,69 @@ schema:Country a sh:NodeShape ;
         ys:fromProperty wdt:P3000 ;
         rdfs:comment "Age of consent in years."@en ;
     ] ;
+
+    #Margherita 7/2/26 added property, unit normalized to years, loosing info about uncertnanty
+    sh:property [
+        sh:path yago:lifeExpectancy ;
+        sh:datatype xsd:decimal ;    
+        sh:minInclusive 0 ;
+        ys:fromProperty wdt:P2250 ;
+        rdfs:comment "Life expectancy in years."@en ;
+    ] ;
+
+    #Margherita 7/2/26 added property
+    sh:property [
+        sh:path yago:literacyRate ;
+        sh:datatype xsd:decimal ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ; 
+        ys:fromProperty wdt:P6897 ;
+        rdfs:comment "Literacy rate as percentage (0–100)."@en ;
+    ] ;
+
+    #Margherita 7/2/26 added property
+    sh:property [
+        sh:path yago:birthRate ;
+        sh:datatype xsd:decimal ;
+        sh:minInclusive 0 ;
+        ys:fromProperty wdt:P8763 ;
+        rdfs:comment "Birth rate (live births per 1,000 inhabitants per year)."@en ;
+    ] ;
+
+    #Margherita 7/2/26 added property
+    sh:property [
+        sh:path yago:deathRate ;
+        sh:datatype xsd:decimal ;
+        sh:minInclusive 0 ;
+        ys:fromProperty wdt:P10091 ;
+        rdfs:comment "Death rate (deaths per 1,000 inhabitants per year)."@en ;
+    ] ;
+
+    #Margherita 7/2/26 added property
+    sh:property [
+        sh:path yago:telephoneCountryCode ;
+        sh:datatype xsd:string ;
+        sh:pattern "^\\+\\d+$" ;
+        ys:fromProperty wdt:P474 ;
+        rdfs:comment "Telephone country calling code, format: +<digits>."@en ;
+    ] ;
+
+    #Margherita 7/2/26 added property
+    sh:property [
+        sh:path yago:headOfState ;
+        ys:fromProperty wdt:P35 ;
+        sh:class schema:Person ;
+        rdfs:comment "Head of state of the country."@en ;
+    ] ;
+
+    #Margherita 29/01/26 added property
+        sh:property [
+            sh:path yago:totalFertilityRate ;
+            sh:datatype xsd:decimal ;
+            sh:minInclusive 0 ;
+            ys:fromProperty wdt:P4841 ;
+            rdfs:comment "Total fertility rate (children per woman)."@en ;
+        ] ;
 
     #Margherita 29/01/26 added property, unit normalized to years
     sh:property [
@@ -1596,7 +1695,21 @@ yago:HumanMadeGeographicalEntity a sh:NodeShape ;
     ] ;	
 	sh:property [
         sh:path schema:dateCreated ;
-        sh:datatype xsd:dateTime ;
+        #Margherita 9/2/26 modified the datatype
+        sh:or (
+            [
+                sh:datatype xsd:dateTime
+            ]
+            [
+                sh:datatype xsd:date
+            ]
+            [
+                sh:datatype xsd:gYearMonth
+            ]
+            [
+                sh:datatype xsd:gYear
+            ]
+        ) ;
         ys:fromProperty wdt:P571 ;
 		sh:maxCount 1 ;
         rdfs:comment "The date something was created (used for CreativeWorks, Organizations, Products, AdministrativeAreas, etc.)"@en ;
