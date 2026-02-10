@@ -298,6 +298,11 @@ yago:UnitOfMoney a sh:NodeShape ;
 yago:UnitOfSpeed a sh:NodeShape ;
 	rdfs:subClassOf yago:UnitOfMeasurement ;
 	ys:fromClass wd:Q15222637 .
+
+#Margherita 10/03/26 added class
+yago:UnitOfTemperature a sh:NodeShape ;
+	rdfs:subClassOf yago:UnitOfMeasurement ;
+	ys:fromClass wd:Q68723978 .
 	
 ################################################################
 #                Media
@@ -374,6 +379,14 @@ schema:CreativeWork a sh:NodeShape ;
         sh:minInclusive 0 ;
         ys:fromProperty wdt:P4135 ;
         rdfs:comment "Maximum required age in years."@en ;
+    ] ;
+
+    #Margherita 10/03/26 addede property
+    sh:property [
+        sh:path schema:artDirector ;
+        sh:datatype schema:Person ;
+        ys:fromProperty wdt:P3174 ;
+        rdfs:comment "Person credited as the art director/artistic director of this Creative Work"@en ;
     ] ;
 
     sh:property [
@@ -789,6 +802,14 @@ schema:Event a sh:NodeShape ;
         rdfs:comment "Cause of the event"@en ;
     ] ;
 
+    #Margherita 10/03/26 addede property
+    sh:property [
+        sh:path schema:artDirector ;
+        sh:datatype schema:Person ;
+        ys:fromProperty wdt:P3174 ;
+        rdfs:comment "Person credited as the art director/artistic director of this Creative Work"@en ;
+    ] ;
+
 	sh:property [
         sh:path schema:maximumAttendeeCapacity ;
         sh:datatype xsd:decimal ;
@@ -1055,6 +1076,15 @@ schema:Person a sh:NodeShape ;
         ys:fromProperty wdt:P2048 ;
         rdfs:comment "The height of an object."@en ;
     ] ;
+
+    #Margherita 10/02/26: added property
+    sh:property [
+        sh:path yago:hairColor ;
+        sh:datatype yago:Color ;
+        ys:fromProperty wdt:P1884 ;
+        rdfs:comment "The height of an object."@en ;
+    ] ;
+
     #Margherita 26/01/2026: added naming related properties # Fabian: moved to Thing
     #sh:property [
     #    sh:path schema:birthName ;
@@ -1090,7 +1120,7 @@ schema:Person a sh:NodeShape ;
     #Margherita added 
     sh:property [
         sh:path schema:givenName ;
-        sh:datatype xsd:string ; #Margherita this is modeled as item in wikidata
+        sh:datatype xsd:string ;
         ys:fromProperty wdt:P735 ;
         rdfs:comment "First name or another given name of this person"@en ;
     ] ;
@@ -1098,7 +1128,7 @@ schema:Person a sh:NodeShape ;
     #Margherita added 	
     sh:property [
         sh:path schema:familyName ;
-        sh:datatype xsd:string ; #Margherita this is modeled as item in wikidata
+        sh:datatype xsd:string ; 
         ys:fromProperty wdt:P734 ;
         rdfs:comment "Family name of this person"@en ;
     ] ;
@@ -1353,7 +1383,7 @@ schema:Place a sh:NodeShape ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P625 ;
         rdfs:comment "The geographic coordinates of a Place (in WKT literal format)"@en ;
-    ] ;
+    ] .
 # Fabian: would need proper modeling of the target class	
 #    sh:property [
 #        sh:path yago:flag ; # Thomas: added to yago: 2026-01-16
@@ -1413,8 +1443,17 @@ yago:AstronomicalObject a sh:NodeShape ;
         ys:fromProperty wdt:P2583 ;
         rdfs:comment "The distance of an AstronomicalObject from Earth"@en ;
     ] ;    
+
+    #Margherita 10/03/26 adedde property
+    sh:property [
+        sh:path yago:temperature ;
+        sh:datatype yago:UnitOfTemperature ;
+        ys:fromProperty wdt:P2076 ;
+        rdfs:comment "Temperature of an Astronomical Object"@en ;
+    ] .
+
     # Margherita 8/02/26 removed , 
-    # for the target class, this prop in wikidata is quit polysemic, it is used as a numeric astronomical reference epoch (e.g., J2000.0) for fixed celestial objects, and as a temporal reference date for orbital elements of moving objects
+    # for the target class, this prop in wikidata is quite polysemic, it is used as a numeric astronomical reference epoch (e.g., J2000.0) for fixed celestial objects, and as a temporal reference date for orbital elements of moving objects
 #    sh:property [
 #        sh:path yago:epoch ;
 #        sh:or (
@@ -1531,6 +1570,16 @@ schema:AdministrativeArea a sh:NodeShape ;
         ys:fromProperty wdt:P36 ;
         rdfs:comment "The capital City of an AdministrativeArea"@en ;
     ] ;
+
+    #Fabian: 2023-04-12 don't know how to handle the currency...
+    #Margherita 20/02/26 reintegrated property thanks to UnitOfMoney, moved to AdministrativeArea, maybe should be in Country?
+    sh:property [
+        sh:path schema:medianIncome ;
+        sh:datatype yago:UnitOfMoney ;
+        ys:fromProperty wdt:P3529 ;
+        rdfs:comment "Median household income in a place."@en ;
+    ] ;
+
     ys:fromClass wd:Q56061, wd:Q486972 . # Fabian: also from human settlement, to avoid having it under land forms
 
 # Needed for capitals, mapped to "City or Town" in Wikidata, and to City.
@@ -1553,10 +1602,59 @@ schema:Country a sh:NodeShape ;
         ys:fromProperty wdt:P1081 ;
         rdfs:comment "The Human Development Index value for a Country"@en ;
     ] ;
+
+    #Margherita 10/03/26, added property 
+    sh:property [
+        sh:path yago:inequalityAdjustedHumanDevelopmentIndex ; 
+        sh:datatype xsd:decimal ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 1 ;
+        ys:fromProperty wdt:P11593 ;
+        rdfs:comment "The Inequality-adjusted Human Development Index value for a Country"@en ;
+    ] ;
+
+    #Margherita 10/02/26, added property
+    sh:property [
+        sh:path yago:BTIndex ; #Margherita 10/03/26: or bertelsmannTransformationIndex ?
+        sh:datatype xsd:decimal ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 10 ;
+        ys:fromProperty wdt:P8477, wdt:P8476 ; #Margherita 10/02/26: I think they are the same, not sure
+        rdfs:comment "The Bertelsmann Transformation Index (BTI) value for a Country"@en ;
+    ] ;
+
+    #Margherita 10/02/26, added property
+    sh:property [
+        sh:path yago:democracyIndex ; 
+        sh:datatype xsd:decimal ;
+        ys:fromProperty wdt:P8328 ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 10 ;
+        rdfs:comment "Democracy Index rating of a country"@en ;
+    ] ;
+
+    #Margherita 10/02/26, added property
+    sh:property [
+        sh:path yago:happyPlanetIndex ; 
+        sh:datatype xsd:decimal ;
+        ys:fromProperty wdt:P11547 ;
+        rdfs:comment "The Happy Planet Index rating of a country"@en ;
+    ] ;
+
+    #Margherita 10/02/26 added property
+    sh:property [
+        sh:path yago:suicideRate ; 
+        sh:datatype xsd:decimal ;
+        ys:fromProperty wdt:P3864 ;
+        sh:minInclusive 0 ;
+        rdfs:comment "Amount of suicides per 100,000 people and year in the Country"@en ;
+    ] ;
+
     sh:property [
         sh:path yago:unemploymentRate ; # Fabian: changed from schema:... 2024-04-03
         sh:datatype xsd:decimal ;
         ys:fromProperty wdt:P1198 ;
+        rdfs:comment "Portion of a workforce population that is not employed"@en ;
     ] ;
 
     #Margherita 29/01/26 added property, unit normalized to years
@@ -1605,6 +1703,15 @@ schema:Country a sh:NodeShape ;
         rdfs:comment "Death rate (deaths per 1,000 inhabitants per year)."@en ;
     ] ;
 
+    #Margherita 10/03/26 added property
+    sh:property [
+        sh:path yago:vehicleOwnershipRate ;
+        sh:datatype xsd:decimal ;
+        sh:minInclusive 0 ;
+        ys:fromProperty wdt:P5167 ;
+        rdfs:comment "Number of vehicles per 1000 people."@en ;
+    ] ;
+
     #Margherita 7/2/26 added property
     sh:property [
         sh:path yago:telephoneCountryCode ;
@@ -1612,6 +1719,14 @@ schema:Country a sh:NodeShape ;
         sh:pattern "^\\+\\d+$" ;
         ys:fromProperty wdt:P474 ;
         rdfs:comment "Telephone country calling code, format: +<digits>."@en ;
+    ] ;
+
+    #Margherita 10/2/26 added property
+    sh:property [
+        sh:path yago:currency ;
+        ys:fromProperty wdt:P38 ;
+        sh:class xsd:string ;
+        rdfs:comment "Official currency of the country."@en ;
     ] ;
 
     #Margherita 7/2/26 added property
@@ -1640,12 +1755,6 @@ schema:Country a sh:NodeShape ;
         rdfs:comment "Age of majority in years."@en ;
     ] ;
 
-	# Fabian: 2023-04-12 don't know how to handle the currency...
-    #sh:property [
-    #    sh:path schema:medianIncome ;
-    #    sh:datatype xsd:decimal ;
-    #    ys:fromProperty wdt:P3529 ;
-    #] ;
     ys:fromClass wd:Q6256 .
 
 
@@ -1816,20 +1925,29 @@ schema:Product a sh:NodeShape ;
         ys:fromProperty wdt:P577 ;
         rdfs:comment "The date something was created (used for CreativeWorks, Organizations, Products, AdministrativeAreas, etc.)"@en ;
     ] ;	
-    # Margherita 26/01/2026: in wikidata there is the numerical amount followed by the unit ( 73 cm)
+    # Margherita 26/01/2026
 	sh:property [
         sh:path schema:width ;
         sh:datatype yago:UnitOfLength ;
         ys:fromProperty wdt:P2049 ;
         rdfs:comment "The width of an object."@en ;
     ] ;
-    # Margherita 26/01/2026: in wikidata there is the numerical amount followed by the unit ( 73 cm)
+    # Margherita 26/01/2026
     sh:property [
         sh:path schema:height ;
         sh:datatype yago:UnitOfLength ;
         ys:fromProperty wdt:P2048 ;
         rdfs:comment "The height of an object."@en ;
     ] ;
+
+    #Margherita 10/03/26 added property 
+    sh:property [
+        sh:path schema:price ;
+        sh:datatype yago:UnitOfMoney ;
+        ys:fromProperty wdt:P2284 ;
+        rdfs:comment "The published price listed or paid for a product (with unit of currency)."@en ;
+    ] ;
+
     sh:property [
         sh:path schema:gtin ;
         sh:datatype xsd:string ;
