@@ -668,7 +668,7 @@ schema:Event a sh:NodeShape ;
 	sh:property [
         sh:path schema:location ;
         sh:class schema:Place ;
-        ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17 ;
+        ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17, wdt:P30 ;
         rdfs:comment "The location of an Organization, Event, or Place"@en ;
     ] ;
     sh:property [
@@ -864,9 +864,9 @@ schema:Organization a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path schema:founder ;
-        sh:class schema:Person ;
+        sh:or ([ sh:class schema:Person ] [sh:class schema:Organization]);
         ys:fromProperty wdt:P112 ;
-        rdfs:comment "The founder of an Organization"@en ;
+        rdfs:comment "The founder of an Organization or Administrative Area"@en ;
     ] ;
     sh:property [
         sh:path yago:leader ; # Fabian: changed from schema: to yago: 2024-04-03
@@ -1458,6 +1458,12 @@ schema:AdministrativeArea a sh:NodeShape ;
 		sh:maxCount 1 ;
         rdfs:comment "The date something was created (used for CreativeWorks, Organizations, Products, AdministrativeAreas, etc.)"@en ;
     ] ;
+	sh:property [
+        sh:path schema:founder ;
+        sh:or ([ sh:class schema:Person ] [sh:class schema:Organization]);
+        ys:fromProperty wdt:P112 ;
+        rdfs:comment "The founder of an Organization or Administrative Area"@en ;
+    ] ;
     sh:property [
         sh:path yago:demonym ; # Fabian: changed from schema:... 2024-04-03
         sh:datatype rdf:langString ;
@@ -1609,12 +1615,12 @@ schema:Country a sh:NodeShape ;
     ] ;
 
     #Margherita 7/2/26 added property
-    sh:property [
-        sh:path yago:headOfState ;
-        ys:fromProperty wdt:P35 ;
-        sh:class schema:Person ;
-        rdfs:comment "Head of state of the country."@en ;
-    ] ;
+    #sh:property [
+    #    sh:path yago:headOfState ;
+    #    ys:fromProperty wdt:P35 ;
+    #    sh:class schema:Person ;
+    #    rdfs:comment "Head of state of the country."@en ;
+    #] ;
 
     #Margherita 29/01/26 added property
         sh:property [
