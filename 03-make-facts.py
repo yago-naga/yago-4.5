@@ -86,7 +86,6 @@ def translatePropertiesAndClasses(entityFacts: Graph, yagoSchema: YagoSchema) ->
         predicate = yagoSchema.wikidataClasses[predicate].identifier if predicate in yagoSchema.wikidataClasses else predicate
         obj = yagoSchema.wikidataClasses[obj].identifier if obj in yagoSchema.wikidataClasses else obj
         newGraph.add((subject, predicate, obj))
-        debug(subject, predicate, obj)
         if startDate or endDate:
             dates[(subject, predicate, obj)] = (startDate, endDate)
         if unit:
@@ -109,11 +108,10 @@ def translateTypeAssertions(entityFacts: Graph, yagoTaxonomyUp: Dict[str, Set[st
     if mainEntity in yagoTaxonomyUp:
         entityFacts.add((mainEntity, Prefixes.rdfType, Prefixes.rdfsClass))
     else:
-        debug("FactCheck",mainEntity,", ".join(str(s) for s in entityFacts.objectsOf(mainEntity,Prefixes.wikidataType)))
+        debug("Type check",mainEntity,", ".join(str(s) for s in entityFacts.objectsOf(mainEntity,Prefixes.wikidataType)))
         for predicate in list(entityFacts.predicatesOf(mainEntity)):
             if predicate == Prefixes.wikidataType or predicate == Prefixes.wikidataOccupation:
                 for obj in entityFacts.objectsOf(mainEntity, predicate):
-                    debug("  Fact",mainEntity,predicate,obj)
                     if obj in yagoTaxonomyUp:
                         entityFacts.add((mainEntity, Prefixes.rdfType, obj))
             # Anything that has a parent taxon is an instance of taxon
@@ -312,6 +310,8 @@ def cleanLiteralObject(obj: str, datatype: str) -> Optional[str]:
         return '"' + literalValue + '"'
     if datatype == Prefixes.rdfLangString:
         return obj if literalDataType is None and lang is not None else None
+    if datatype == Prefixes.xsdDecimal and literalDataType == Prefixes.xsdInteger:
+        return '"'+literalValue+'"^^'+Prefixes.xsdDecimal
     if datatype == Prefixes.xsdInteger:
         match=re.fullmatch("\\+?(-?[0-9]+)(\\.[0-9]+)?",literalValue)
         if match:
@@ -499,7 +499,7 @@ class treatWikidataEntity():
         if not self.writer:
             self.writer = TsvUtils.TsvFileWriter(FOLDER+"03-yago-facts-to-type-check-"+(str(self.number).rjust(4,'0'))+".tmp")
             self.writer.__enter__()
-                    
+        
         handleWebPages(entityFacts)               
 
         # We backup the existing Wikidata types for the log messages

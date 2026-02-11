@@ -481,6 +481,8 @@ def entitiesFromTriples(tripleIterator):
     graph=Graph()
     currentSubject="Elvis"
     for triple in tripleIterator:
+        if triple[0].startswith("data:Q"):
+            triple=("wd:"+triple[0][5:], triple[1], triple[2])
         newSubject=about(triple, currentSubject)
         if not newSubject: 
             continue
@@ -514,7 +516,7 @@ def visitWikidataEntities(args):
         # Seek to next Wikidata item
         line=b"NONE"
         for line in wikidataReader:
-            if line.rstrip().endswith(b"a wikibase:Item ."):
+            if line.rstrip().endswith(b"a wikibase:Item .") or line.rstrip().endswith(b"a schema:Dataset ;"):
                 break
         print("    Running Wikidata reader",portion+1,"at",wikidataReader.tell(),"with \"",line.rstrip().decode("utf-8"),'"', flush=True)        
         for graph in entitiesFromTriples(triplesFromTerms(termsAndSeparators(charGenerator(byteGenerator(wikidataReader))))):

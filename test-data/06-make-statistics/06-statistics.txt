@@ -16,120 +16,154 @@ Avg number of classes per instance: 1.5
 
 Human-readable names: 100.0%
 
-Total number of facts (excluding labels etc.): 2
+Total number of facts (excluding labels etc.): 3
 
-Avg number of facts (excluding labels etc.) per entity: 1.0
+Avg number of facts (excluding labels etc.) per entity: 1.5
 
 Total number of meta facts: 2
 
-Total number of predicates: 109
+Total number of predicates: 143
 
 Predicates:
   owl:sameAs: 2
-  schema:mainEntityOfPage: 1
   rdfs:label: 1
   schema:deathDate: 1
   rdf:type: 1
+  schema:mainEntityOfPage: 1
   schema:child: 1
-  schema:award: 0
-  schema:inLanguage: 0
-  schema:contentLocation: 0
-  schema:about: 0
   schema:author: 0
+  schema:requiredMaxAge: 0
+  schema:requiredMinAge: 0
+  schema:inLanguage: 0
+  schema:award: 0
   schema:dateCreated: 0
-  schema:url: 0
-  schema:alternateName: 0
+  schema:contentLocation: 0
+  schema:artDirector: 0
+  schema:about: 0
+  yago:siteLinks: 0
   schema:image: 0
   rdfs:comment: 0
+  schema:alternateName: 0
   schema:sameAs: 0
-  yago:follows: 0
-  schema:startDate: 0
-  yago:participant: 0
-  schema:endDate: 0
-  schema:organizer: 0
-  schema:superEvent: 0
+  schema:url: 0
   schema:location: 0
   schema:sponsor: 0
+  yago:hasCause: 0
+  schema:startDate: 0
+  schema:superEvent: 0
+  yago:follows: 0
+  schema:endDate: 0
+  yago:participant: 0
+  schema:maximumAttendeeCapacity: 0
+  schema:organizer: 0
+  yago:ageOfCandidacy: 0
   schema:numberOfEmployees: 0
-  yago:ownedBy: 0
-  schema:dissolutionDate: 0
+  schema:slogan: 0
   schema:duns: 0
-  schema:logo: 0
-  yago:leader: 0
   schema:memberOf: 0
   schema:founder: 0
-  schema:slogan: 0
-  schema:leiCode: 0
+  schema:dissolutionDate: 0
   schema:locationCreated: 0
+  schema:logo: 0
+  schema:leiCode: 0
+  yago:ownedBy: 0
+  yago:leader: 0
   schema:address: 0
-  schema:parentTaxon: 0
   yago:consumes: 0
-  schema:knowsLanguage: 0
-  schema:deathPlace: 0
-  schema:children: 0
-  schema:gender: 0
-  schema:spouse: 0
+  schema:parentTaxon: 0
+  schema:height: 0
   schema:birthPlace: 0
-  schema:nationality: 0
-  yago:academicDegree: 0
-  schema:affiliation: 0
-  schema:alumniOf: 0
+  schema:owns: 0
   schema:worksFor: 0
   schema:birthDate: 0
-  schema:owns: 0
+  schema:spouse: 0
+  schema:alumniOf: 0
+  schema:knowsLanguage: 0
+  yago:studentOf: 0
   schema:homeLocation: 0
+  schema:deathPlace: 0
+  schema:givenName: 0
+  schema:gender: 0
+  schema:children: 0
   yago:beliefSystem: 0
-  yago:neighbors: 0
-  yago:elevation: 0
-  yago:area: 0
-  yago:lowestPoint: 0
+  yago:killedBy: 0
+  schema:nationality: 0
+  yago:academicDegree: 0
+  yago:hairColor: 0
+  schema:familyName: 0
   yago:highestPoint: 0
   schema:geo: 0
-  schema:gtin: 0
+  yago:lowestPoint: 0
+  yago:elevation: 0
+  yago:area: 0
+  yago:neighbors: 0
+  schema:color: 0
+  schema:price: 0
   schema:manufacturer: 0
   schema:material: 0
+  schema:width: 0
+  schema:gtin: 0
   yago:conferredBy: 0
-  schema:publisher: 0
-  schema:isbn: 0
-  schema:illustrator: 0
+  yago:siConversion: 0
   schema:editor: 0
+  schema:isbn: 0
   schema:numberOfPages: 0
-  schema:director: 0
-  schema:musicBy: 0
-  schema:productionCompany: 0
-  schema:numberOfSeasons: 0
+  schema:publisher: 0
+  schema:illustrator: 0
   schema:actor: 0
   schema:numberOfEpisodes: 0
+  schema:productionCompany: 0
+  yago:directorOfPhotography: 0
+  schema:director: 0
+  schema:numberOfSeasons: 0
+  schema:musicBy: 0
   yago:iswcCode: 0
   schema:lyricist: 0
   schema:duration: 0
-  yago:appearsIn: 0
   schema:performer: 0
+  yago:appearsIn: 0
   schema:iataCode: 0
   schema:icaoCode: 0
   yago:studentsCount: 0
   yago:notableWork: 0
-  yago:director: 0
   schema:recordLabel: 0
   yago:influencedBy: 0
   yago:doctoralAdvisor: 0
-  yago:studentOf: 0
   yago:playsIn: 0
   yago:sportNumber: 0
   yago:candidateIn: 0
+  yago:parallax: 0
   yago:distanceFromEarth: 0
   yago:mass: 0
-  yago:parallax: 0
-  yago:luminosity: 0
-  yago:radialVelocity: 0
+  yago:temperature: 0
   yago:parentBody: 0
-  schema:postalCode: 0
-  yago:capital: 0
+  yago:radialVelocity: 0
+  yago:luminosity: 0
   yago:demonym: 0
-  yago:populationNumber: 0
+  schema:postalCode: 0
+  schema:medianIncome: 0
+  yago:femalePopulation: 0
+  yago:capital: 0
+  yago:malePopulation: 0
   yago:replaces: 0
+  yago:populationNumber: 0
+  yago:suicideRate: 0
+  yago:marriageableAge: 0
+  yago:happyPlanetIndex: 0
+  yago:deathRate: 0
+  yago:BTIndex: 0
+  yago:telephoneCountryCode: 0
+  yago:lifeExpectancy: 0
   yago:humanDevelopmentIndex: 0
+  yago:inequalityAdjustedHumanDevelopmentIndex: 0
   yago:unemploymentRate: 0
+  yago:totalFertilityRate: 0
+  yago:vehicleOwnershipRate: 0
+  yago:ageOfMajority: 0
+  yago:UnitOfMoney: 0
+  yago:literacyRate: 0
+  yago:birthRate: 0
+  yago:democracyIndex: 0
   yago:officialLanguage: 0
   yago:flowsInto: 0
   yago:terminus: 0

@@ -27,9 +27,6 @@
 # (1) a link to Wikidata and
 # (2) properties in which they appear as domain or range 
 
-# TODO: Add more Wikidata properties from https://w.wiki/GW5U
-# and from https://www.wikidata.org/wiki/Wikidata:Database_reports/List_of_properties/1-1000
-
 ################################################################
 #                Top level classes
 ################################################################
@@ -77,10 +74,15 @@ schema:Intangible  owl:disjointWith
 schema:Thing a sh:NodeShape ;
     # ys:fromClass wd:Q35120 ; No mapping!
 	sh:property [
+        sh:path yago:siteLinks ;
+        sh:datatype xsd:integer ;
+        ys:fromProperty wikibase:sitelinks ;
+        rdfs:comment "The number of Wikipedia links to this entity, as a proxy measure for importance"@en ;
+    ] ;	
+	sh:property [
         sh:path schema:image ;
         sh:datatype xsd:anyURI ;
         ys:fromProperty wdt:P18 ;
-		rdfs:label "an image for the thing"@en ;
         rdfs:comment "An image of the entity"@en ;
     ] ;	
     sh:property [
@@ -110,7 +112,7 @@ schema:Thing a sh:NodeShape ;
     #    sh:path yago:femaleFormOfLabel ;
     #    sh:datatype rdf:langString ;
     #    ys:fromProperty wdt:P2521 ;
-    #    rdfs:comment "Female form of given label."@en ;
+    #    rdfs:comment "Female form of given label"@en ;
     #] ;
 
     #Margherita 1/2/26 added property  # Fabian: moved to alternate label
@@ -118,7 +120,7 @@ schema:Thing a sh:NodeShape ;
     #    sh:path yago:maleFormOfLabel ;
     #    sh:datatype rdf:langString ;
     #    ys:fromProperty wdt:P2521 ;
-    #    rdfs:comment "Male form of given label."@en ;
+    #    rdfs:comment "Male form of given label"@en ;
     #] ;
 
     sh:property [
@@ -180,7 +182,6 @@ rdf:Property a sh:NodeShape ;
         sh:datatype rdf:langString ;
         ys:fromProperty skos:altLabel, schema:alternateName ;
         rdfs:comment "An alternative name for the entity"@en ;
-
     ] ;
     sh:property [
         sh:path rdfs:comment ;
@@ -259,8 +260,8 @@ schema:Language a sh:NodeShape ;
 	rdfs:subClassOf schema:Intangible ;
     ys:fromClass wd:Q34770 .
 
-# Needed for treatment of person names. Used ony internally,
-# as names are replaced by strings. 
+# Needed for treatment of person names. Used only internally,
+# as names are replaced by strings. Is automatically removed from final taxonomy.
 yago:PersonName a sh:NodeShape ;
 	rdfs:subClassOf schema:Intangible ;
     ys:fromClass wd:Q10856962 .
@@ -293,6 +294,27 @@ yago:UnitOfMass a sh:NodeShape ;
 	
 yago:UnitOfMoney a sh:NodeShape ;
 	rdfs:subClassOf yago:UnitOfMeasurement ;
+	# Date when the currency started being used. Not necessarily the date when it was created, which is a different property in YAGO.
+	sh:property [
+        sh:path schema:startDate ;
+        sh:or (
+            [
+                sh:datatype xsd:dateTime
+            ]
+            [
+                sh:datatype xsd:date
+            ]
+            [
+                sh:datatype xsd:gYearMonth
+            ]
+            [
+                sh:datatype xsd:gYear
+            ]
+        ) ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P580 ;
+        rdfs:comment "The start date of an Event"@en ;
+    ] ;
 	ys:fromClass wd:Q8142 .
 
 yago:UnitOfSpeed a sh:NodeShape ;
@@ -372,13 +394,13 @@ schema:CreativeWork a sh:NodeShape ;
         rdfs:comment "Minimum required age in years"@en ;
     ] ;
 
-    #Margherita 29/01/26 added property,unit normalized to years
+    #Margherita 29/01/26 added property, unit normalized to years
     sh:property [
         sh:path schema:requiredMaxAge ;
         sh:datatype xsd:integer ;
         sh:minInclusive 0 ;
         ys:fromProperty wdt:P4135 ;
-        rdfs:comment "Maximum required age in years."@en ;
+        rdfs:comment "Maximum required age in years"@en ;
     ] ;
 
     #Margherita 10/03/26 addede property
@@ -667,7 +689,6 @@ yago:FictionalEntity a sh:NodeShape ;
 #                Events
 ################################################################
 
-
 schema:Event a sh:NodeShape ;
     # Merge "occurrence" and "event", also to avoid having "event" twice in YAGO
     ys:fromClass wd:Q1190554, wd:Q1656682 ;
@@ -791,7 +812,7 @@ schema:Event a sh:NodeShape ;
         sh:datatype xsd:integer ;
         sh:minInclusive 0 ;
         ys:fromProperty wdt:P4135 ;
-        rdfs:comment "Maximum required age in years."@en ;
+        rdfs:comment "Maximum required age in years"@en ;
     ] ;
 
     #Margherita 30/01/26 added property, 
@@ -1074,7 +1095,7 @@ schema:Person a sh:NodeShape ;
         sh:path schema:height ;
         sh:datatype yago:UnitOfLength ;
         ys:fromProperty wdt:P2048 ;
-        rdfs:comment "The height of an object."@en ;
+        rdfs:comment "The height of an object"@en ;
     ] ;
 
     #Margherita 10/02/26: added property
@@ -1082,7 +1103,7 @@ schema:Person a sh:NodeShape ;
         sh:path yago:hairColor ;
         sh:datatype yago:Color ;
         ys:fromProperty wdt:P1884 ;
-        rdfs:comment "The height of an object."@en ;
+        rdfs:comment "The hair color of a a person"@en ;
     ] ;
 
     #Margherita 26/01/2026: added naming related properties # Fabian: moved to Thing
@@ -1090,7 +1111,7 @@ schema:Person a sh:NodeShape ;
     #    sh:path schema:birthName ;
     #    sh:datatype rdf:langString ; #as in wikidata
     #    ys:fromProperty wdt:P1477 ;
-    #    rdfs:comment "full name of a person at birth, if different from their current, generally used name."@en ;
+    #    rdfs:comment "full name of a person at birth, if different from their current, generally used name"@en ;
     #] ;
 
     #Margherita added . Fabian: moved to Thing
@@ -1098,7 +1119,7 @@ schema:Person a sh:NodeShape ;
     #    sh:path schema:officialName ;
     #    sh:datatype rdf:langString ;
     #    ys:fromProperty wdt:P1448 ;
-    #    rdfs:comment "official name of the subject in its official language(s)."@en ;
+    #    rdfs:comment "official name of the subject in its official language(s)"@en ;
     #] ;
 
     #Margherita seems kind of redundant with official name. Fabian: moved to Thing
@@ -1106,7 +1127,7 @@ schema:Person a sh:NodeShape ;
     #    sh:path schema:nameInNativeLanguage ; #Margherita 26/01/2026: i didn't know how to name it...
     #    sh:datatype rdf:langString ;
     #    ys:fromProperty wdt:P1559 ;
-    #    rdfs:comment "Name in native language (Wikidata P1559, monolingual text)."@en ;
+    #    rdfs:comment "Name in native language (Wikidata P1559, monolingual text)"@en ;
     #] ;
 
     #Margherita added. Fabian: moved to Thing 
@@ -1114,7 +1135,7 @@ schema:Person a sh:NodeShape ;
     #    sh:path schema:marriedName ;
     #    sh:datatype rdf:langString ;
     #    ys:fromProperty wdt:P2562 ;
-    #    rdfs:comment "Full name adopted by a person upon marriage."@en ;
+    #    rdfs:comment "Full name adopted by a person upon marriage"@en ;
     #] ;
 
     #Margherita added 
@@ -1326,7 +1347,7 @@ yago:Politician a sh:NodeShape ;
 	rdfs:subClassOf yago:Worker ;
     sh:property [
         sh:path yago:candidateIn ;
-        sh:class schema:Event ;
+        sh:class yago:Election ;
         ys:fromProperty wdt:P3602 ;
         rdfs:comment "An Election that a Politician was a candidate in"@en ;
     ] .
@@ -1389,7 +1410,7 @@ schema:Place a sh:NodeShape ;
 #        sh:path yago:flag ; # Thomas: added to yago: 2026-01-16
 #        sh:class schema:CreativeWork ;
 #        ys:fromProperty wdt:P163 ;
-	#rdfs:comment "Flag of the place or organization."@en ;
+	#rdfs:comment "Flag of the place or organization"@en ;
 #    ] ;
     # Margherita 10/02/26 removed property
 	# Fabian: TODO this would need proper modeling with timeZone as a new class (subclass of Place?)
@@ -1397,7 +1418,7 @@ schema:Place a sh:NodeShape ;
         # sh:path schema:timeZone ;
         # sh:datatype xsd:string ;
         # ys:fromProperty wdt:P421 ;
-        # rdfs:comment "The time zone where a Place is located."@en ;
+        # rdfs:comment "The time zone where a Place is located"@en ;
     # ] .
 
 
@@ -1526,16 +1547,16 @@ schema:AdministrativeArea a sh:NodeShape ;
         sh:datatype xsd:decimal ;
         sh:minInclusive 0 ; #Margherita added constraint 7/03/26
         ys:fromProperty wdt:P1082 ;
-        rdfs:comment "Population count."@en ;
+        rdfs:comment "Population count"@en ;
     ] ;
 
     #Margherita 7/02/26: added property
     sh:property [
         sh:path yago:femalePopulation ;
-        sh:datatype xsd:deciaml ;
+        sh:datatype xsd:decimal ;
         sh:minInclusive 0 ;
         ys:fromProperty wdt:P1539 ;
-        rdfs:comment "Female population count."@en ;
+        rdfs:comment "Female population count"@en ;
     ] ;
 
     #Margherita 7/02/26: added property
@@ -1544,7 +1565,7 @@ schema:AdministrativeArea a sh:NodeShape ;
         sh:datatype xsd:decimal ;
         sh:minInclusive 0 ;
         ys:fromProperty wdt:P1540 ;
-        rdfs:comment "Male population count."@en ;
+        rdfs:comment "Male population count"@en ;
     ] ;
     
     sh:property [
@@ -1577,7 +1598,7 @@ schema:AdministrativeArea a sh:NodeShape ;
         sh:path schema:medianIncome ;
         sh:datatype yago:UnitOfMoney ;
         ys:fromProperty wdt:P3529 ;
-        rdfs:comment "Median household income in a place."@en ;
+        rdfs:comment "Median household income in a place"@en ;
     ] ;
 
     ys:fromClass wd:Q56061, wd:Q486972 . # Fabian: also from human settlement, to avoid having it under land forms
@@ -1602,8 +1623,7 @@ schema:Country a sh:NodeShape ;
         ys:fromProperty wdt:P1081 ;
         rdfs:comment "The Human Development Index value for a Country"@en ;
     ] ;
-
-    #Margherita 10/03/26, added property 
+	 #Margherita 10/03/26, added property 
     sh:property [
         sh:path yago:inequalityAdjustedHumanDevelopmentIndex ; 
         sh:datatype xsd:decimal ;
@@ -1663,7 +1683,7 @@ schema:Country a sh:NodeShape ;
         sh:datatype xsd:integer ;
         sh:minInclusive 0 ;
         ys:fromProperty wdt:P3000 ;
-        rdfs:comment "Age of consent in years."@en ;
+        rdfs:comment "Age of consent in years"@en ;
     ] ;
 
     #Margherita 7/2/26 added property, unit normalized to years, loosing info about uncertnanty
@@ -1672,7 +1692,7 @@ schema:Country a sh:NodeShape ;
         sh:datatype xsd:decimal ;    
         sh:minInclusive 0 ;
         ys:fromProperty wdt:P2250 ;
-        rdfs:comment "Life expectancy in years."@en ;
+        rdfs:comment "Life expectancy in years"@en ;
     ] ;
 
     #Margherita 7/2/26 added property
@@ -1682,7 +1702,7 @@ schema:Country a sh:NodeShape ;
         sh:minInclusive 0 ;
         sh:maxInclusive 100 ; 
         ys:fromProperty wdt:P6897 ;
-        rdfs:comment "Literacy rate as percentage (0–100)."@en ;
+        rdfs:comment "Literacy rate as percentage (0–100)"@en ;
     ] ;
 
     #Margherita 7/2/26 added property
@@ -1691,7 +1711,7 @@ schema:Country a sh:NodeShape ;
         sh:datatype xsd:decimal ;
         sh:minInclusive 0 ;
         ys:fromProperty wdt:P8763 ;
-        rdfs:comment "Birth rate (live births per 1,000 inhabitants per year)."@en ;
+        rdfs:comment "Birth rate (live births per 1,000 inhabitants per year)"@en ;
     ] ;
 
     #Margherita 7/2/26 added property
@@ -1700,7 +1720,7 @@ schema:Country a sh:NodeShape ;
         sh:datatype xsd:decimal ;
         sh:minInclusive 0 ;
         ys:fromProperty wdt:P10091 ;
-        rdfs:comment "Death rate (deaths per 1,000 inhabitants per year)."@en ;
+        rdfs:comment "Death rate (deaths per 1,000 inhabitants per year)"@en ;
     ] ;
 
     #Margherita 10/03/26 added property
@@ -1709,7 +1729,7 @@ schema:Country a sh:NodeShape ;
         sh:datatype xsd:decimal ;
         sh:minInclusive 0 ;
         ys:fromProperty wdt:P5167 ;
-        rdfs:comment "Number of vehicles per 1000 people."@en ;
+        rdfs:comment "Number of vehicles per 1000 people"@en ;
     ] ;
 
     #Margherita 7/2/26 added property
@@ -1718,15 +1738,15 @@ schema:Country a sh:NodeShape ;
         sh:datatype xsd:string ;
         sh:pattern "^\\+\\d+$" ;
         ys:fromProperty wdt:P474 ;
-        rdfs:comment "Telephone country calling code, format: +<digits>."@en ;
+        rdfs:comment "Telephone country calling code, format: +<digits>"@en ;
     ] ;
 
     #Margherita 10/2/26 added property
     sh:property [
-        sh:path yago:currency ;
+        sh:path yago:UnitOfMoney ;
         ys:fromProperty wdt:P38 ;
         sh:class xsd:string ;
-        rdfs:comment "Official currency of the country."@en ;
+        rdfs:comment "Official currency of the country"@en ;
     ] ;
 
     #Margherita 7/2/26 added property
@@ -1734,7 +1754,7 @@ schema:Country a sh:NodeShape ;
     #    sh:path yago:headOfState ;
     #    ys:fromProperty wdt:P35 ;
     #    sh:class schema:Person ;
-    #    rdfs:comment "Head of state of the country."@en ;
+    #    rdfs:comment "Head of state of the country"@en ;
     #] ;
 
     #Margherita 29/01/26 added property
@@ -1743,7 +1763,7 @@ schema:Country a sh:NodeShape ;
             sh:datatype xsd:decimal ;
             sh:minInclusive 0 ;
             ys:fromProperty wdt:P4841 ;
-            rdfs:comment "Total fertility rate (children per woman)."@en ;
+            rdfs:comment "Total fertility rate (children per woman)"@en ;
         ] ;
 
     #Margherita 29/01/26 added property, unit normalized to years
@@ -1752,7 +1772,7 @@ schema:Country a sh:NodeShape ;
         sh:datatype xsd:integer ;
         sh:minInclusive 0 ;
         ys:fromProperty wdt:P2997 ;
-        rdfs:comment "Age of majority in years."@en ;
+        rdfs:comment "Age of majority in years"@en ;
     ] ;
 
     ys:fromClass wd:Q6256 .
@@ -1833,7 +1853,7 @@ yago:HumanMadeGeographicalEntity a sh:NodeShape ;
         sh:path schema:maximumAttendeeCapacity ;
         sh:datatype xsd:decimal ;
         ys:fromProperty wdt:P1083 ;
-	rdfs:comment "The total number of individuals that can contain this place."@en ;	
+	rdfs:comment "The total number of individuals that this place can contain"@en ;	
     ] .
 
 # Transit routes such as roads and railways.
@@ -1930,14 +1950,14 @@ schema:Product a sh:NodeShape ;
         sh:path schema:width ;
         sh:datatype yago:UnitOfLength ;
         ys:fromProperty wdt:P2049 ;
-        rdfs:comment "The width of an object."@en ;
+        rdfs:comment "The width of an object"@en ;
     ] ;
     # Margherita 26/01/2026
     sh:property [
         sh:path schema:height ;
         sh:datatype yago:UnitOfLength ;
         ys:fromProperty wdt:P2048 ;
-        rdfs:comment "The height of an object."@en ;
+        rdfs:comment "The height of an object"@en ;
     ] ;
 
     #Margherita 10/03/26 added property 
@@ -1945,7 +1965,7 @@ schema:Product a sh:NodeShape ;
         sh:path schema:price ;
         sh:datatype yago:UnitOfMoney ;
         ys:fromProperty wdt:P2284 ;
-        rdfs:comment "The published price listed or paid for a product (with unit of currency)."@en ;
+        rdfs:comment "The published price listed or paid for a product (with unit of currency)"@en ;
     ] ;
 
     sh:property [
