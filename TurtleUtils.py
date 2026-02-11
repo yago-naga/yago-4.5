@@ -14,7 +14,7 @@ import Prefixes
 import TsvUtils
 import multiprocessing
 
-TEST=False
+TEST=len(sys.argv)>1 and sys.argv[1]=="--test"
 
 ##########################################################################
 #             Parsing Turtle
@@ -517,6 +517,7 @@ def visitWikidataEntities(args):
         line=b"NONE"
         for line in wikidataReader:
             if line.rstrip().endswith(b"a wikibase:Item .") or line.rstrip().endswith(b"a schema:Dataset ;"):
+                wikidataReader.seek(-len(line),1)
                 break
         print("    Running Wikidata reader",portion+1,"at",wikidataReader.tell(),"with \"",line.rstrip().decode("utf-8"),'"', flush=True)        
         for graph in entitiesFromTriples(triplesFromTerms(termsAndSeparators(charGenerator(byteGenerator(wikidataReader))))):
@@ -584,6 +585,6 @@ def compareIds(wikidataFile, idFile):
                 print(nextId, "OK")
         
 if TEST and __name__ == '__main__':
-    with open("test-data/turtleUtils/schema-org.tsv", "tw", encoding="UTF-8") as f:
-        for triple in triplesFromTurtleFile("test-data/turtleUtils/schema-org.ttl"):
-            f.write(triple[0]+"\t"+triple[1]+"\t"+triple[2]+"\t.\n")
+    with open("test-data/turtleUtils/wikidata-parsed.ttl", "tw", encoding="UTF-8") as f:
+        for graph in entitiesFromTriples(triplesFromTurtleFile("test-data/turtleUtils/wikidata.ttl")):
+            f.write(str(graph))
