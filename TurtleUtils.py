@@ -544,6 +544,9 @@ def tsvEntities(file, message=None):
     previousEntity="Elvis"
     graph=Graph()
     for split in TsvUtils.tsvTuples(file, message):
+        # Facts about generic instances are intersperced with the others
+        if split[0].endswith("generic_instance"):
+            continue
         if split[0]!=previousEntity:
             if graph:
                 yield graph
