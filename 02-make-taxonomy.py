@@ -48,7 +48,8 @@ SCHEMA_FILE = "yago-data/01-yago-final-schema.ttl"
 instanceIndicators = {
     "wdt:P171",  # parent taxon -> instance of taxon
     "wdt:P176",  # manufacturer -> instance of Product
-    "wdt:P178"   # developer -> instance of Product
+    "wdt:P178",  # developer -> instance of Product
+    "wdt:P580"   # start time -> instance of Event
 }
 
 class WikidataVisitor:
@@ -101,6 +102,8 @@ badClasses = {
     "wd:Q12139612",   # Lists
     "wd:Q80096233",   # Lists
     "wd:Q88392887",   # scholarly articles, tweets, etc.
+    "wd:Q55915575",   # scholarly article
+    "wd:Q2352616",    # catalogue
     "wd:Q591041",     # same
     "wd:Q13442814",   # same
     "wd:Q3523102",    # same
@@ -168,8 +171,10 @@ def addSubClass(superClass, subClass, yagoSchema, yagoTaxonomyUp, wikidataTaxono
         logWriter.writeMetaFact(subClass, Prefixes.rdfsSubclassOf, superClass, Prefixes.ysReason, '"is mapped to YAGO class"')
         return
     
+        
     # Treat classes that appear already in the taxonomy
     if subClass in yagoTaxonomyUp:
+        
         # Convert ancestors to set for efficient membership check
         subAncestors = set(ancestors(subClass, yagoTaxonomyUp))
         
@@ -186,12 +191,20 @@ def addSubClass(superClass, subClass, yagoSchema, yagoTaxonomyUp, wikidataTaxono
                 yagoTaxonomyUp[subClass].discard(existingSuperClass)
         
         # Otherwise we have true multiple inheritance
-        subDisjointSet = set(a.identifier for a in disjointClasses(subClass, yagoTaxonomyUp, yagoSchema))
-        for a in ancestors(superClass, yagoTaxonomyUp):
-            if a in subDisjointSet:
-                stats['disjoint'] += 1
-                logWriter.writeMetaFact(subClass, Prefixes.rdfsSubclassOf, superClass, Prefixes.ysReason, f'"Subclass ({", ".join(str(s) for s in ancestors(subClass, yagoTaxonomyUp) if not s.startswith("wd:"))}) is disjoint from ancestor {a} of superclass"')
-                return
+        
+        # If the superAncestors contain "Award",
+        # give preference to that superclass
+        if Prefixes.yagoAward in superAncestors:
+            yagoTaxonomyUp[subClass].clear()
+        else:
+            # Make a set of all classes with which the current class is disjoint
+            subDisjointSet = set(a.identifier for a in disjointClasses(subClass, yagoTaxonomyUp, yagoSchema))
+            # Check if the new superClass is disjoint with any in subDisjointSet
+            for a in superAncestors:
+                if a in subDisjointSet:
+                    stats['disjoint'] += 1
+                    logWriter.writeMetaFact(subClass, Prefixes.rdfsSubclassOf, superClass, Prefixes.ysReason, f'"Subclass ({", ".join(str(s) for s in ancestors(subClass, yagoTaxonomyUp) if not s.startswith("wd:"))}) is disjoint from ancestor {a} of superclass"')
+                    return
     
     yagoTaxonomyUp[subClass].add(superClass)
     # Sort the classes to have a deterministic algorithm

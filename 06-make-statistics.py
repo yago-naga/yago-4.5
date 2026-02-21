@@ -137,6 +137,9 @@ This is the top-level taxonomy of classes of YAGO 4.5, together with their prope
 #             Main
 ##########################################################################
 
+# Number of example entities
+NUM_SAMPLES=200
+
 with TsvUtils.Timer("Step 06: Collecting YAGO statistics"):
 
     # Load YAGO schema
@@ -188,13 +191,16 @@ with TsvUtils.Timer("Step 06: Collecting YAGO statistics"):
             classStats[c]+=1 
         totalClassesPerInstance+=len(superClasses)   
         totalPathsToRoot+=pathsToRoot[0]      
-        if (len(samples)<100 or (len(samples)==100 and random.random()<0.01)):
+        if len(samples)<NUM_SAMPLES:
             for c in superClasses:
                 entityFacts.add((mainEntity, 'rdf:type', c))
-            if len(samples)<100:
-                samples.append(entityFacts)
-            else:    
-                samples[int(random.random()*99)]=entityFacts        
+            samples.append(entityFacts)
+        else:
+            randomNumber=int(random.random()*entities)
+            if randomNumber<NUM_SAMPLES:    
+                for c in superClasses:
+                    entityFacts.add((mainEntity, 'rdf:type', c))
+                samples[randomNumber]=entityFacts        
             
     print("  Writing out sample entities... ",end="",flush=True)    
     with open(FOLDER+"06-sample-entities.ttl", "wt", encoding="UTF-8") as sampleFile:

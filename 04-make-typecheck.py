@@ -121,7 +121,7 @@ def yagoIdFromWikidataId(wikidataEntity):
 
 def isGoodYagoId(identifier):
     """ TRUE if the string is long enough"""
-    return identifier and len(re.sub("-+","",identifier))>3
+    return identifier and len(re.sub("[_-]+","",identifier))>3
 
 def registerYagoId(identifier):
     """ Registers YAGO id, returns TRUE on success"""

@@ -107,6 +107,8 @@ wikidataEnd = "pq:P582"
 
 wikidataOccupation = "wdt:P106"
 
+yagoAward = "yago:Award"
+
 owlDisjointWith = "owl:disjointWith"
 
 schemaTaxon = "schema:Taxon"
@@ -114,6 +116,8 @@ schemaTaxon = "schema:Taxon"
 schemaName = "schema:name"
 
 schemaDescription = "schema:description"
+
+schemaStartDate = "schema:startDate"
 
 schemaAbout = "schema:about"
 
