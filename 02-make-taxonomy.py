@@ -39,6 +39,13 @@ OUTPUT_FOLDER="test-data/02-make-taxonomy/" if TEST else "yago-data/"
 WIKIDATA_FILE= "test-data/02-make-taxonomy/00-wikidata.ttl" if TEST else "input-data/wikidata.ttl"
 SCHEMA_FILE = "yago-data/01-yago-final-schema.ttl"
 
+def getFirst(iterable):
+    """ Returns the first element of an iterable or None"""
+    try:
+        return next(iter(iterable))
+    except StopIteration:
+        return None
+
 ###########################################################################
 #           Loading the Wikidata taxonomy
 ###########################################################################
@@ -194,7 +201,8 @@ def addSubClass(superClass, subClass, yagoSchema, yagoTaxonomyUp, wikidataTaxono
         # If the superAncestors contain "Award",
         # give preference to that superclass
         if Prefixes.yagoAward in superAncestors:
-            yagoTaxonomyUp[subClass].clear()
+            logWriter.writeMetaFact(subClass, Prefixes.rdfsSubclassOf, getFirst(yagoTaxonomyUp[subClass]), Prefixes.ysReason, f'"Subclass is already a {superClass}, which is a subclass of award"')
+            yagoTaxonomyUp[subClass].clear()            
         else:
             # Make a set of all classes with which the current class is disjoint
             subDisjointSet = set(a.identifier for a in disjointClasses(subClass, yagoTaxonomyUp, yagoSchema))
