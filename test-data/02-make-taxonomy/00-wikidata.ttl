@@ -65,4 +65,4 @@ wd:Q_character a wd:item ;
 # If something is an award and something else, it should be principally an award
 wd:Q_award a wd:item ;
   rdfs:label "My award" ;
-  wdt:P279 schema:Event, wd:Q_European_event .
+  wdt:P279 wd:Q618779, wd:Q_European_event .

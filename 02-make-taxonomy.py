@@ -170,7 +170,6 @@ def addSubClass(superClass, subClass, yagoSchema, yagoTaxonomyUp, wikidataTaxono
     if subClass in yagoSchema.wikidataClasses:
         logWriter.writeMetaFact(subClass, Prefixes.rdfsSubclassOf, superClass, Prefixes.ysReason, '"is mapped to YAGO class"')
         return
-    
         
     # Treat classes that appear already in the taxonomy
     if subClass in yagoTaxonomyUp:
