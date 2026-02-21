@@ -718,6 +718,19 @@ schema:Event a sh:NodeShape ;
         ys:fromProperty wdt:P664 ;
         rdfs:comment "The organizer of an Event"@en ;
     ] ;
+
+    #Margherita 12/02/26
+    sh:property [
+        sh:path yago:winner ;
+        ys:fromProperty wdt:P1346 ;
+        sh:or (
+            [ sh:class schema:Person ]
+            [ sh:class schema:Organization ]
+            [ sh:class schema:CreativeWork ]
+        ) ;
+        rdfs:comment "Winner of the event."@en ;
+    ] ;
+
     sh:property [
         sh:path schema:startDate ;
         sh:or (
@@ -1106,6 +1119,14 @@ schema:Person a sh:NodeShape ;
         rdfs:comment "The hair color of a a person"@en ;
     ] ;
 
+    #Margherita 12/02/26: added property
+    sh:property [
+        sh:path yago:eyeColor ;
+        sh:datatype yago:Color ;
+        ys:fromProperty wdt:P1340 ;
+        rdfs:comment "The eye color of a a person"@en ;
+    ] ;
+
     #Margherita 26/01/2026: added naming related properties # Fabian: moved to Thing
     #sh:property [
     #    sh:path schema:birthName ;
@@ -1152,6 +1173,22 @@ schema:Person a sh:NodeShape ;
         sh:datatype xsd:string ; 
         ys:fromProperty wdt:P734 ;
         rdfs:comment "Family name of this person"@en ;
+    ] ;
+
+    #Margherita 12/02/26
+    sh:property [
+        sh:path yago:nickname ;
+        sh:datatype xsd:string ; 
+        ys:fromProperty wdt:P1449 ;
+        rdfs:comment "Nickname of this person"@en ;
+    ] ;
+
+    #Margherita 12/02/26
+    sh:property [
+        sh:path yago:pseudonym ;
+        sh:datatype xsd:string ; 
+        ys:fromProperty wdt:P742 ;
+        rdfs:comment "Pseudonym of this person"@en ;
     ] ;
 
     sh:property [
@@ -1287,6 +1324,8 @@ schema:Person a sh:NodeShape ;
         ys:fromProperty wdt:P1830 ;
         rdfs:comment "Something owned by a Person"@en ;
     ] ;
+
+    
     sh:property [
         sh:path schema:spouse ;
         sh:class schema:Person ;
