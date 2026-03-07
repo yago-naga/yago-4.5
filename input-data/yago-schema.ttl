@@ -123,6 +123,14 @@ schema:Thing a sh:NodeShape ;
     #    rdfs:comment "Male form of given label"@en ;
     #] ;
 
+    #Margherita 20/02/2026 added property
+    sh:property [
+        sh:path schema:namedAfter ;
+        sh:class schema:Thing ;
+        ys:fromProperty wdt:P138 ;
+        rdfs:comment "Entity after which this item is named."@en ;
+    ] ;
+
     sh:property [
         sh:path schema:url ;
         sh:datatype xsd:anyURI ;
@@ -410,6 +418,30 @@ schema:CreativeWork a sh:NodeShape ;
         ys:fromProperty wdt:P3174 ;
         rdfs:comment "Person credited as the art director/artistic director of this Creative Work"@en ;
     ] ;
+
+    #Margherita 20/02/26 added property 
+    sh:property [
+        sh:path schema:genre ;
+        sh:class yago:Thing ;
+        ys:fromProperty wdt:P136 ;
+        rdfs:comment "The genre of the Creative Work" ;
+    ] ;
+
+    #Margherita 20/02/26 added property 
+    sh:property [
+        sh:path schema:publishedOn ;
+        sh:class schema:Organization ;
+        ys:fromProperty wdt:P449 ;
+        rdfs:comment "Original broadcaster of a creative work."@en ;
+    ] ;
+
+    #Margherita 20/02/26 added property 
+    sh:property [
+        sh:path yago:originalLanguage ;
+        sh:class schema:Language ;
+        ys:fromProperty wdt:P364 ;
+        rdfs:comment "The original language of a CreativeWork"@en ;
+    ]
 
     sh:property [
         sh:path schema:inLanguage ;
@@ -990,6 +1022,22 @@ schema:Organization a sh:NodeShape ;
         rdfs:comment "Minimum age in years to be a candidate in this organization"@en ;
     ] ;
 
+    #Margherita 20/02/2026 added property
+    sh:property [
+        sh:path yago:fieldOfWork ;
+        sh:class yago:Thing ;
+        ys:fromProperty wdt:P101 ;
+        rdfs:comment "The Field of Work of the Organization"@en ;
+    ] ;
+
+    #Margherita 20/02/2026 added property
+    sh:property [
+        sh:path yago:beliefSystem ;
+        sh:class yago:BeliefSystem ;
+        ys:fromProperty wdt:P140, wdt:P1142 ;
+        rdfs:comment "The belief system (e.g., religion) of an Organization"@en ;
+    ] ;
+
 	sh:property [
         sh:path yago:ownedBy ; # Fabian: changed from schema: to yago:, 2024-04-03
         sh:or (
@@ -1203,6 +1251,47 @@ schema:Person a sh:NodeShape ;
         ys:fromProperty wdt:P108 ;
         rdfs:comment "An Organization that a Person works for"@en ;
     ] ;
+
+    #Margherita 20/02/2026 added prop
+    sh:property [
+        sh:path yago:fieldOfWork ;
+        sh:class schema:Thing ;
+        ys:fromProperty wdt:P101 ;
+        rdfs:comment "The field of work of the Person"@en ;
+    ] ;
+
+    #Margherita 20/02/2026 added prop
+    sh:property [
+        sh:path schema:knowsAbout ; #or could be yago:interestedIn
+        sh:class schema:Thing ; 
+        ys:fromProperty wdt:P2650;
+        rdfs:comment "The field of work of the Person"@en ;
+    ] ;
+
+    #Margherita 20/02/2026 added prop
+    sh:property [
+        sh:path yago:workPosition ;
+        sh:class schema:Thing ; #or Intangible?
+        ys:fromProperty wdt:P39 ;
+        rdfs:comment "Position held by the Person."@en ;
+    ] ;
+
+    #Margherita 20/02/2026 added prop
+    sh:property [
+        sh:path yago:sportsPosition ;
+        sh:class schema:Thing ; #or Intangible?
+        ys:fromProperty wdt:P413 ;
+        rdfs:comment "Playing position of the Person in a sport's team."@en ;
+    ] .
+
+    #Margherita 20/02/2026 added prop
+    sh:property [
+        sh:path schema:instrument ;
+        sh:class schema:Thing ;
+        ys:fromProperty wdt:P1303 ;
+        rdfs:comment "Musical instrument played by the Person."@en ;
+    ] ;
+
     sh:property [
         sh:path schema:alumniOf ;
         sh:class schema:Organization ;
@@ -1248,6 +1337,22 @@ schema:Person a sh:NodeShape ;
        ys:fromProperty wdt:P40 ;
        rdfs:comment "A child of the Person"
     ] ;
+
+    sh:property [
+        sh:path schema:mother ;
+        sh:class schema:Person ;
+       ys:fromProperty wdt:P25 ;
+       rdfs:comment "A mother of the Person"
+    ] ;
+
+    #Margherita 20/02/2026 added prop 
+    sh:property [
+        sh:path schema:father ;
+        sh:class schema:Person ;
+       ys:fromProperty wdt:P25 ;
+       rdfs:comment "A father of the Person"
+    ] ;
+
     sh:property [
         sh:path schema:deathDate ;
         sh:or (
@@ -1268,12 +1373,26 @@ schema:Person a sh:NodeShape ;
         ys:fromProperty wdt:P570 ;
         rdfs:comment "The date of death of a Person"@en ;
     ] ;
+
     sh:property [
         sh:path schema:deathPlace ;
         sh:class schema:Place ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P20 ;
         rdfs:comment "The place where a Person died"@en ;
+    ] ;
+
+    #Margherita 20/02/2026 added prop 
+    sh:property [
+        sh:path yago:floruit ;
+        sh:or (
+            [ sh:datatype xsd:dateTime ]
+            [ sh:datatype xsd:date ]
+            [ sh:datatype xsd:gYearMonth ]
+            [ sh:datatype xsd:gYear ]
+        ) ;
+        ys:fromProperty wdt:P1317 ;
+        rdfs:comment "Date when the person was known to be active."@en ;
     ] ;
 
     #Margherita 30/01/26 added property, limited the constraints to Person e Oragnization
@@ -1300,12 +1419,30 @@ schema:Person a sh:NodeShape ;
         ys:fromProperty wdt:P551 ;
         rdfs:comment "A location associated with a Person's home"@en ;
     ] ;
+
+    #Margherita 20/03/2026 added property 
+    sh:property [
+        sh:path schema:workLocation ;
+        sh:class schema:Place ;
+        ys:fromProperty wdt:P937 ;
+        rdfs:comment "Place where a person works or worked"@en ;
+    ] ;
+
     sh:property [
         sh:path schema:knowsLanguage ;
         sh:class schema:Language ;
         ys:fromProperty wdt:P1412 ;
         rdfs:comment "A language known by a Person or PerformingGroup"@en ;
     ] ;
+
+    #Margherita 20/03/2026 added property 
+    sh:property [
+        sh:path yago:nativeLanguage ;
+        sh:class schema:Language ;
+        ys:fromProperty wdt:P103 ;
+        rdfs:comment "Native language of a Person."@en ;
+    ] ;
+
     sh:property [
         sh:path schema:memberOf ;
         sh:class schema:Organization ;
@@ -1403,12 +1540,13 @@ schema:Place a sh:NodeShape ;
     # No mapping here, to avoid getting messy subclasses
     # ys:fromClass wd:Q17334923 ; 
 	# Fabian 2026-02-21: Added from Wikidata class region
+    #Margherita 20/03/2026 added P30
 	ys:fromClass wd:Q82794 ;
 	rdfs:subClassOf schema:Thing ;
     sh:property [
         sh:path schema:location ;
         sh:class schema:Place ;
-        ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17 ;
+        ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17, wdt:P30 ;
         rdfs:comment "The location of an Organization, Event, or Place"@en ;
     ] ;
     sh:property [
@@ -1439,6 +1577,32 @@ schema:Place a sh:NodeShape ;
         sh:datatype yago:UnitOfLength ;
         ys:fromProperty wdt:P2044 ;
     ] ;
+
+    #Margherita 20/02/2026 added prop
+    sh:property [
+        sh:path yago:twinnedWith ;
+        sh:class schema:Place ;
+        ys:fromProperty wdt:P190 ;
+        rdfs:comment "Twin place relationship (twinned administrative body)"@en ;
+    ] ;
+
+    # Margherita 20/02/2026 added prop
+	sh:property [
+        sh:path schema:width ;
+        sh:datatype yago:UnitOfLength ;
+        ys:fromProperty wdt:P2049 ;
+        rdfs:comment "The width of an object"@en ;
+    ] ;
+
+    #Margherita 20/02/2026 added prop
+    sh:property [
+        sh:path yago:length ;
+        sh:datatype yago:UnitOfLength ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P2043 ;
+        rdfs:comment "The length of a Way (e.g., road, river)"@en ;
+    ] ;
+
     sh:property [
         sh:path schema:geo ;
         sh:datatype geo:wktLiteral ;
@@ -1633,6 +1797,85 @@ schema:AdministrativeArea a sh:NodeShape ;
         rdfs:comment "The capital City of an AdministrativeArea"@en ;
     ] ;
 
+    #Margherita 29/01/26 added property, unit normalized to years
+    #Margherita 2/03/2026 moved from country
+    sh:property [
+        sh:path yago:marriageableAge ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 0 ;
+        ys:fromProperty wdt:P3000 ;
+        rdfs:comment "Age of consent in years"@en ;
+    ] ;
+
+    #Margherita 2/03/2026 moved from country
+    #Margherita 7/2/26 added property, unit normalized to years, loosing info about uncertnanty
+    sh:property [
+        sh:path yago:lifeExpectancy ;
+        sh:datatype xsd:decimal ;    
+        sh:minInclusive 0 ;
+        ys:fromProperty wdt:P2250 ;
+        rdfs:comment "Life expectancy in years"@en ;
+    ] ;
+
+    #Margherita 2/03/2026 moved from country
+    #Margherita 7/2/26 added property
+    sh:property [
+        sh:path yago:birthRate ;
+        sh:datatype xsd:decimal ;
+        sh:minInclusive 0 ;
+        ys:fromProperty wdt:P8763 ;
+        rdfs:comment "Birth rate (live births per 1,000 inhabitants per year)"@en ;
+    ] ;
+
+    #Margherita 2/03/2026 moved from country
+    #Margherita 7/2/26 added property
+    sh:property [
+        sh:path yago:deathRate ;
+        sh:datatype xsd:decimal ;
+        sh:minInclusive 0 ;
+        ys:fromProperty wdt:P10091 ;
+        rdfs:comment "Death rate (deaths per 1,000 inhabitants per year)"@en ;
+    ] ;
+
+    #Margherita 2/03/2026 moved from country
+    #Margherita 10/02/26 added property
+    sh:property [
+        sh:path yago:suicideRate ; 
+        sh:datatype xsd:decimal ;
+        ys:fromProperty wdt:P3864 ;
+        sh:minInclusive 0 ;
+        rdfs:comment "Amount of suicides per 100,000 people and year in the Country"@en ;
+    ] ;
+
+    #Margherita 2/03/2026 moved from country
+    sh:property [
+        sh:path yago:unemploymentRate ; # Fabian: changed from schema:... 2024-04-03
+        sh:datatype xsd:decimal ;
+        ys:fromProperty wdt:P1198 ;
+        rdfs:comment "Portion of a workforce population that is not employed"@en ;
+    ] ;
+
+    #Margherita 2/03/2026 moved from country
+    #Margherita 7/2/26 added property
+    sh:property [
+        sh:path yago:literacyRate ;
+        sh:datatype xsd:decimal ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ; 
+        ys:fromProperty wdt:P6897 ;
+        rdfs:comment "Literacy rate as percentage (0–100)"@en ;
+    ] ;
+
+    #Margherita 2/03/2026 moved from country
+    #Margherita 10/03/26 added property
+    sh:property [
+        sh:path yago:vehicleOwnershipRate ;
+        sh:datatype xsd:decimal ;
+        sh:minInclusive 0 ;
+        ys:fromProperty wdt:P5167 ;
+        rdfs:comment "Number of vehicles per 1000 people"@en ;
+    ] ;
+
     #Fabian: 2023-04-12 don't know how to handle the currency...
     #Margherita 20/02/26 reintegrated property thanks to UnitOfMoney, moved to AdministrativeArea, maybe should be in Country?
     sh:property [
@@ -1700,77 +1943,6 @@ schema:Country a sh:NodeShape ;
         sh:datatype xsd:decimal ;
         ys:fromProperty wdt:P11547 ;
         rdfs:comment "The Happy Planet Index rating of a country"@en ;
-    ] ;
-
-    #Margherita 10/02/26 added property
-    sh:property [
-        sh:path yago:suicideRate ; 
-        sh:datatype xsd:decimal ;
-        ys:fromProperty wdt:P3864 ;
-        sh:minInclusive 0 ;
-        rdfs:comment "Amount of suicides per 100,000 people and year in the Country"@en ;
-    ] ;
-
-    sh:property [
-        sh:path yago:unemploymentRate ; # Fabian: changed from schema:... 2024-04-03
-        sh:datatype xsd:decimal ;
-        ys:fromProperty wdt:P1198 ;
-        rdfs:comment "Portion of a workforce population that is not employed"@en ;
-    ] ;
-
-    #Margherita 29/01/26 added property, unit normalized to years
-    sh:property [
-        sh:path yago:marriageableAge ;
-        sh:datatype xsd:integer ;
-        sh:minInclusive 0 ;
-        ys:fromProperty wdt:P3000 ;
-        rdfs:comment "Age of consent in years"@en ;
-    ] ;
-
-    #Margherita 7/2/26 added property, unit normalized to years, loosing info about uncertnanty
-    sh:property [
-        sh:path yago:lifeExpectancy ;
-        sh:datatype xsd:decimal ;    
-        sh:minInclusive 0 ;
-        ys:fromProperty wdt:P2250 ;
-        rdfs:comment "Life expectancy in years"@en ;
-    ] ;
-
-    #Margherita 7/2/26 added property
-    sh:property [
-        sh:path yago:literacyRate ;
-        sh:datatype xsd:decimal ;
-        sh:minInclusive 0 ;
-        sh:maxInclusive 100 ; 
-        ys:fromProperty wdt:P6897 ;
-        rdfs:comment "Literacy rate as percentage (0–100)"@en ;
-    ] ;
-
-    #Margherita 7/2/26 added property
-    sh:property [
-        sh:path yago:birthRate ;
-        sh:datatype xsd:decimal ;
-        sh:minInclusive 0 ;
-        ys:fromProperty wdt:P8763 ;
-        rdfs:comment "Birth rate (live births per 1,000 inhabitants per year)"@en ;
-    ] ;
-
-    #Margherita 7/2/26 added property
-    sh:property [
-        sh:path yago:deathRate ;
-        sh:datatype xsd:decimal ;
-        sh:minInclusive 0 ;
-        ys:fromProperty wdt:P10091 ;
-        rdfs:comment "Death rate (deaths per 1,000 inhabitants per year)"@en ;
-    ] ;
-
-    #Margherita 10/03/26 added property
-    sh:property [
-        sh:path yago:vehicleOwnershipRate ;
-        sh:datatype xsd:decimal ;
-        sh:minInclusive 0 ;
-        ys:fromProperty wdt:P5167 ;
-        rdfs:comment "Number of vehicles per 1000 people"@en ;
     ] ;
 
     #Margherita 7/2/26 added property
@@ -1909,13 +2081,6 @@ yago:Way a sh:NodeShape ;
         sh:class schema:Place ;
         ys:fromProperty wdt:P609 ;
         rdfs:comment "A Place where a Way terminates"@en ;
-    ] ;
-	sh:property [
-        sh:path yago:length ;
-        sh:datatype yago:UnitOfLength ;
-        sh:maxCount 1 ;
-        ys:fromProperty wdt:P2043 ;
-        rdfs:comment "The length of a Way (e.g., road, river)"@en ;
     ] .
 
 # Listed here to add properties, and attached to yago:HumanMadeGeographicalEntity to avoid schema:CivicStructure
