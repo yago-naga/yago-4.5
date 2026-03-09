@@ -454,7 +454,7 @@ schema:CreativeWork a sh:NodeShape ;
         sh:class schema:Language ;
         ys:fromProperty wdt:P364 ;
         rdfs:comment "The original language of a CreativeWork"@en ;
-    ]
+    ] ;
 
     sh:property [
         sh:path schema:inLanguage ;
@@ -1291,7 +1291,7 @@ schema:Person a sh:NodeShape ;
         sh:class schema:Thing ; #or Intangible?
         ys:fromProperty wdt:P413 ;
         rdfs:comment "Playing position of the Person in a sport's team."@en ;
-    ] .
+    ] ;
 
     #Margherita 20/02/2026 added prop
     sh:property [
@@ -1455,7 +1455,7 @@ schema:Person a sh:NodeShape ;
     sh:property [
         sh:path schema:memberOf ;
         sh:class schema:Organization ;
-        ys:fromProperty wdt:P463 , wdt:P54 , wdt:P102, wdt:P1416 ;
+        ys:fromPropertyt wdt:P463 , wdt:P54 , wdt:P102, wdt:P1416 ;
         rdfs:comment "An Organization that a Person or another Organization is a member of"@en ;
     ] ;
     sh:property [
