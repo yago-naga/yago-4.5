@@ -131,6 +131,14 @@ schema:Thing a sh:NodeShape ;
         rdfs:comment "Entity after which this item is named."@en ;
     ] ;
 
+    #Margherita 07/03/26 moved from Event
+    sh:property [
+        sh:path yago:follows ;
+        sh:class schema:Event ;
+        ys:fromProperty wdt:P155 ;
+        rdfs:comment "An Thing that follows another Thing chronologically or conceptually"@en ;
+    ] ;
+
     sh:property [
         sh:path schema:url ;
         sh:datatype xsd:anyURI ;
@@ -262,6 +270,11 @@ yago:Gender a sh:NodeShape ;
 yago:Color a sh:NodeShape ;
     ys:fromClass wd:Q1075 ;         
     rdfs:subClassOf schema:Intangible .
+
+#Margherita 7/3/26 created class
+yago:HairColor a sh:NodeShape ;
+    ys:fromClass wd:Q1048314 ;         
+    rdfs:subClassOf schema:Color .
 
 # Needed as range of the property schema:inLanguage
 schema:Language a sh:NodeShape ;
@@ -816,12 +829,7 @@ schema:Event a sh:NodeShape ;
         ys:fromProperty wdt:P859 ;
         rdfs:comment "The sponsor of an Event or Newspaper"@en ;
     ] ;
-	sh:property [
-        sh:path yago:follows ;
-        sh:class schema:Event ;
-        ys:fromProperty wdt:P155 ;
-        rdfs:comment "An Event that follows another Event chronologically"@en ;
-    ] ;
+	
 	sh:property [
         sh:path yago:participant ;
         sh:or (
@@ -1160,9 +1168,10 @@ schema:Person a sh:NodeShape ;
     ] ;
 
     #Margherita 10/02/26: added property
+    #Margherita 7/3/26 made the range hair color
     sh:property [
         sh:path yago:hairColor ;
-        sh:datatype yago:Color ;
+        sh:datatype yago:HairColor ;
         ys:fromProperty wdt:P1884 ;
         rdfs:comment "The hair color of a a person"@en ;
     ] ;
