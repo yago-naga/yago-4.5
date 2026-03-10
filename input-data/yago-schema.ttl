@@ -432,7 +432,7 @@ schema:CreativeWork a sh:NodeShape ;
         rdfs:comment "Person credited as the art director/artistic director of this Creative Work"@en ;
     ] ;
 
-    #Margherita 20/02/26 added property # Fabian: the range would have to be better defined
+    #Margherita 20/02/26 added property # Fabian: becomes a type
     #sh:property [
     #    sh:path schema:genre ;
     #    sh:class yago:Thing ;
@@ -443,7 +443,7 @@ schema:CreativeWork a sh:NodeShape ;
     #Margherita 20/02/26 added property 
     sh:property [
         sh:path yago:publishedOn ;
-        sh:class schema:Organization ; # Fabian: better define range?
+        sh:class schema:Organization ;
         ys:fromProperty wdt:P449 ;
         rdfs:comment "Original broadcaster of a creative work"@en ;
     ] ;
@@ -452,14 +452,7 @@ schema:CreativeWork a sh:NodeShape ;
     sh:property [
         sh:path schema:inLanguage ;
         sh:class yago:Language ;
-        ys:fromProperty wdt:P364 ;
-        rdfs:comment "The original language of a CreativeWork"@en ;
-    ] ;
-
-    sh:property [
-        sh:path schema:inLanguage ;
-        sh:class schema:Language ;
-        ys:fromProperty wdt:P407 ;
+        ys:fromProperty wdt:P364, wdt:P407 ;
         rdfs:comment "The language of a CreativeWork"@en ;
     ] .
     
@@ -1033,9 +1026,9 @@ schema:Organization a sh:NodeShape ;
     #Margherita 20/02/2026 added property
     sh:property [
         sh:path yago:fieldOfWork ;
-        sh:class yago:Thing ; # Fabian: better range definition? Also allow property for people?
+        sh:class yago:Thing ; 
         ys:fromProperty wdt:P101 ;
-        rdfs:comment "The Field of Work of the Organization"@en ;
+        rdfs:comment "The field of work of the Person or Organization"@en ;
     ] ;
 
     #Margherita 20/02/2026 added property
@@ -1043,7 +1036,7 @@ schema:Organization a sh:NodeShape ;
         sh:path yago:beliefSystem ;
         sh:class yago:BeliefSystem ; # Fabian: merge with belief system for people?
         ys:fromProperty wdt:P140, wdt:P1142 ;
-        rdfs:comment "The belief system (e.g., religion) of an Organization"@en ;
+        rdfs:comment "The belief system (e.g., religion) of a Person or Organization"@en ;
     ] ;
 
 	sh:property [
@@ -1158,7 +1151,7 @@ schema:Person a sh:NodeShape ;
         sh:path yago:beliefSystem ;
         sh:class yago:BeliefSystem ;
         ys:fromProperty wdt:P140, wdt:P1142 ;
-        rdfs:comment "The belief system (e.g., religion) of a Person"@en ;
+        rdfs:comment "The belief system (e.g., religion) of a Person or Organization"@en ;
     ] ;
     sh:property [
         sh:path schema:height ;
@@ -1264,9 +1257,9 @@ schema:Person a sh:NodeShape ;
     #Margherita 20/02/2026 added prop
     sh:property [
         sh:path yago:fieldOfWork ;
-        sh:class schema:Thing ; # Fabian: better definition of range? Merge with relation for organizations?
+        sh:class schema:Thing ; 
         ys:fromProperty wdt:P101 ;
-        rdfs:comment "The field of work of the Person"@en ;
+        rdfs:comment "The field of work of the Person or Organization"@en ;
     ] ;
 
     #Margherita 20/02/2026 added prop
@@ -1277,26 +1270,26 @@ schema:Person a sh:NodeShape ;
         rdfs:comment "The field of work of the Person"@en ;
     ] ;
 
-    #Margherita 20/02/2026 added prop
-    sh:property [
-        sh:path yago:workPosition ;
-        sh:class schema:Thing ; #or Intangible? # Fabian: range might be ill-defined
-        ys:fromProperty wdt:P39 ;
-        rdfs:comment "Position held by the Person"@en ;
-    ] ;
+    #Margherita 20/02/2026 added prop # Fabian: becomes type
+    #sh:property [
+    #    sh:path yago:workPosition ;
+    #    sh:class schema:Thing ; #or Intangible? # Fabian: range might be ill-defined
+    #    ys:fromProperty wdt:P39 ;
+    #    rdfs:comment "Position held by the Person"@en ;
+    #] ;
 
-    #Margherita 20/02/2026 added prop
-    sh:property [
-        sh:path yago:sportsPosition ;
-        sh:class schema:Thing ; #or Intangible? # Fabian: range might be ill-defined
-        ys:fromProperty wdt:P413 ;
-        rdfs:comment "Playing position of the Person in a sport's team"@en ;
-    ] ;
+    #Margherita 20/02/2026 added prop # Fabian: removed
+    #sh:property [
+    #    sh:path yago:sportsPosition ;
+    #    sh:class schema:Thing ; #or Intangible? # Fabian: range might be ill-defined
+    #    ys:fromProperty wdt:P413 ;
+    #    rdfs:comment "Playing position of the Person in a sport's team"@en ;
+    #] ;
 
     #Margherita 20/02/2026 added prop
     sh:property [
         sh:path schema:instrument ;
-        sh:class schema:Thing ; # Fabian: better range?
+        sh:class schema:Thing ; # Fabian: could you add a class?
         ys:fromProperty wdt:P1303 ;
         rdfs:comment "Musical instrument played by the Person"@en ;
     ] ;
@@ -1340,26 +1333,20 @@ schema:Person a sh:NodeShape ;
         ys:fromProperty wdt:P19 ;
         rdfs:comment "The place where a Person was born"@en ;
     ] ;
-    sh:property [
-        sh:path schema:children ;
-        sh:class schema:Person ;
-       ys:fromProperty wdt:P40 ;
-       rdfs:comment "A child of the Person"
-    ] ;
 
     sh:property [
-        sh:path schema:mother ;
+        sh:path yago:hasMother ;
         sh:class schema:Person ;
-       ys:fromProperty wdt:P25 ; # Fabian: redundant with hasChild? Also, duplicate property mapping for P25...
-       rdfs:comment "A mother of the Person"
+        ys:fromProperty wdt:P25 ; 
+        rdfs:comment "A mother of the Person"
     ] ;
 
     #Margherita 20/02/2026 added prop 
     sh:property [
-        sh:path schema:father ;
-        sh:class schema:Person ; # Fabian: redundant with hasChild?
-       ys:fromProperty wdt:P25 ;
-       rdfs:comment "A father of the Person"
+        sh:path yago:hasFather ;
+        sh:class schema:Person ; 
+        ys:fromProperty wdt:P22 ;
+        rdfs:comment "A father of the Person"
     ] ;
 
     sh:property [
@@ -1609,7 +1596,7 @@ schema:Place a sh:NodeShape ;
         sh:datatype yago:UnitOfLength ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P2043 ;
-        rdfs:comment "The length of a Way (e.g., road, river)"@en ;
+        rdfs:comment "The length of an object"@en ;
     ] ;
 
     sh:property [
