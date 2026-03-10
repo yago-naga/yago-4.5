@@ -125,10 +125,10 @@ schema:Thing a sh:NodeShape ;
 
     #Margherita 20/02/2026 added property
     sh:property [
-        sh:path schema:namedAfter ;
+        sh:path yago:namedAfter ;
         sh:class schema:Thing ;
         ys:fromProperty wdt:P138 ;
-        rdfs:comment "Entity after which this item is named."@en ;
+        rdfs:comment "Entity after which this item is named"@en ;
     ] ;
 
     #Margherita 07/03/26 moved from Event
@@ -274,7 +274,7 @@ yago:Color a sh:NodeShape ;
 #Margherita 7/3/26 created class
 yago:HairColor a sh:NodeShape ;
     ys:fromClass wd:Q1048314 ;         
-    rdfs:subClassOf schema:Color .
+    rdfs:subClassOf yago:Color .
 
 # Needed as range of the property schema:inLanguage
 schema:Language a sh:NodeShape ;
@@ -424,34 +424,34 @@ schema:CreativeWork a sh:NodeShape ;
         rdfs:comment "Maximum required age in years"@en ;
     ] ;
 
-    #Margherita 10/03/26 addede property
+    #Margherita 10/03/26 added property
     sh:property [
-        sh:path schema:artDirector ;
+        sh:path yago:artDirector ;
         sh:datatype schema:Person ;
         ys:fromProperty wdt:P3174 ;
         rdfs:comment "Person credited as the art director/artistic director of this Creative Work"@en ;
     ] ;
 
-    #Margherita 20/02/26 added property 
-    sh:property [
-        sh:path schema:genre ;
-        sh:class yago:Thing ;
-        ys:fromProperty wdt:P136 ;
-        rdfs:comment "The genre of the Creative Work" ;
-    ] ;
+    #Margherita 20/02/26 added property # Fabian: the range would have to be better defined
+    #sh:property [
+    #    sh:path schema:genre ;
+    #    sh:class yago:Thing ;
+    #    ys:fromProperty wdt:P136 ;
+    #    rdfs:comment "The genre of the Creative Work" ;
+    #] ;
 
     #Margherita 20/02/26 added property 
     sh:property [
-        sh:path schema:publishedOn ;
-        sh:class schema:Organization ;
+        sh:path yago:publishedOn ;
+        sh:class schema:Organization ; # Fabian: better define range?
         ys:fromProperty wdt:P449 ;
-        rdfs:comment "Original broadcaster of a creative work."@en ;
+        rdfs:comment "Original broadcaster of a creative work"@en ;
     ] ;
 
     #Margherita 20/02/26 added property 
     sh:property [
-        sh:path yago:originalLanguage ;
-        sh:class schema:Language ;
+        sh:path schema:inLanguage ;
+        sh:class yago:Language ;
         ys:fromProperty wdt:P364 ;
         rdfs:comment "The original language of a CreativeWork"@en ;
     ] ;
@@ -773,7 +773,7 @@ schema:Event a sh:NodeShape ;
             [ sh:class schema:Organization ]
             [ sh:class schema:CreativeWork ]
         ) ;
-        rdfs:comment "Winner of the event."@en ;
+        rdfs:comment "Winner of the event"@en ;
     ] ;
 
     sh:property [
@@ -876,9 +876,9 @@ schema:Event a sh:NodeShape ;
         rdfs:comment "Cause of the event"@en ;
     ] ;
 
-    #Margherita 10/03/26 addede property
+    #Margherita 10/03/26 added property
     sh:property [
-        sh:path schema:artDirector ;
+        sh:path yago:artDirector ;
         sh:datatype schema:Person ;
         ys:fromProperty wdt:P3174 ;
         rdfs:comment "Person credited as the art director/artistic director of this Creative Work"@en ;
@@ -1033,7 +1033,7 @@ schema:Organization a sh:NodeShape ;
     #Margherita 20/02/2026 added property
     sh:property [
         sh:path yago:fieldOfWork ;
-        sh:class yago:Thing ;
+        sh:class yago:Thing ; # Fabian: better range definition? Also allow property for people?
         ys:fromProperty wdt:P101 ;
         rdfs:comment "The Field of Work of the Organization"@en ;
     ] ;
@@ -1041,7 +1041,7 @@ schema:Organization a sh:NodeShape ;
     #Margherita 20/02/2026 added property
     sh:property [
         sh:path yago:beliefSystem ;
-        sh:class yago:BeliefSystem ;
+        sh:class yago:BeliefSystem ; # Fabian: merge with belief system for people?
         ys:fromProperty wdt:P140, wdt:P1142 ;
         rdfs:comment "The belief system (e.g., religion) of an Organization"@en ;
     ] ;
@@ -1234,7 +1234,7 @@ schema:Person a sh:NodeShape ;
 
     #Margherita 12/02/26
     sh:property [
-        sh:path yago:nickname ;
+        sh:path yago:nickname ; # Fabian: mapto alternate name?
         sh:datatype xsd:string ; 
         ys:fromProperty wdt:P1449 ;
         rdfs:comment "Nickname of this person"@en ;
@@ -1242,7 +1242,7 @@ schema:Person a sh:NodeShape ;
 
     #Margherita 12/02/26
     sh:property [
-        sh:path yago:pseudonym ;
+        sh:path yago:pseudonym ; # Fabian: mapto alternate name?
         sh:datatype xsd:string ; 
         ys:fromProperty wdt:P742 ;
         rdfs:comment "Pseudonym of this person"@en ;
@@ -1264,14 +1264,14 @@ schema:Person a sh:NodeShape ;
     #Margherita 20/02/2026 added prop
     sh:property [
         sh:path yago:fieldOfWork ;
-        sh:class schema:Thing ;
+        sh:class schema:Thing ; # Fabian: better definition of range? Merge with relation for organizations?
         ys:fromProperty wdt:P101 ;
         rdfs:comment "The field of work of the Person"@en ;
     ] ;
 
     #Margherita 20/02/2026 added prop
     sh:property [
-        sh:path schema:knowsAbout ; #or could be yago:interestedIn
+        sh:path schema:knowsAbout ; #or could be yago:interestedIn, # Fabian: to watch
         sh:class schema:Thing ; 
         ys:fromProperty wdt:P2650;
         rdfs:comment "The field of work of the Person"@en ;
@@ -1280,25 +1280,25 @@ schema:Person a sh:NodeShape ;
     #Margherita 20/02/2026 added prop
     sh:property [
         sh:path yago:workPosition ;
-        sh:class schema:Thing ; #or Intangible?
+        sh:class schema:Thing ; #or Intangible? # Fabian: range might be ill-defined
         ys:fromProperty wdt:P39 ;
-        rdfs:comment "Position held by the Person."@en ;
+        rdfs:comment "Position held by the Person"@en ;
     ] ;
 
     #Margherita 20/02/2026 added prop
     sh:property [
         sh:path yago:sportsPosition ;
-        sh:class schema:Thing ; #or Intangible?
+        sh:class schema:Thing ; #or Intangible? # Fabian: range might be ill-defined
         ys:fromProperty wdt:P413 ;
-        rdfs:comment "Playing position of the Person in a sport's team."@en ;
+        rdfs:comment "Playing position of the Person in a sport's team"@en ;
     ] ;
 
     #Margherita 20/02/2026 added prop
     sh:property [
         sh:path schema:instrument ;
-        sh:class schema:Thing ;
+        sh:class schema:Thing ; # Fabian: better range?
         ys:fromProperty wdt:P1303 ;
-        rdfs:comment "Musical instrument played by the Person."@en ;
+        rdfs:comment "Musical instrument played by the Person"@en ;
     ] ;
 
     sh:property [
@@ -1350,14 +1350,14 @@ schema:Person a sh:NodeShape ;
     sh:property [
         sh:path schema:mother ;
         sh:class schema:Person ;
-       ys:fromProperty wdt:P25 ;
+       ys:fromProperty wdt:P25 ; # Fabian: redundant with hasChild? Also, duplicate property mapping for P25...
        rdfs:comment "A mother of the Person"
     ] ;
 
     #Margherita 20/02/2026 added prop 
     sh:property [
         sh:path schema:father ;
-        sh:class schema:Person ;
+        sh:class schema:Person ; # Fabian: redundant with hasChild?
        ys:fromProperty wdt:P25 ;
        rdfs:comment "A father of the Person"
     ] ;
@@ -1401,7 +1401,7 @@ schema:Person a sh:NodeShape ;
             [ sh:datatype xsd:gYear ]
         ) ;
         ys:fromProperty wdt:P1317 ;
-        rdfs:comment "Date when the person was known to be active."@en ;
+        rdfs:comment "Date when the person was known to be active"@en ;
     ] ;
 
     #Margherita 30/01/26 added property, limited the constraints to Person e Oragnization
@@ -1449,7 +1449,7 @@ schema:Person a sh:NodeShape ;
         sh:path yago:nativeLanguage ;
         sh:class schema:Language ;
         ys:fromProperty wdt:P103 ;
-        rdfs:comment "Native language of a Person."@en ;
+        rdfs:comment "Native language of a Person"@en ;
     ] ;
 
     sh:property [
@@ -1679,7 +1679,7 @@ yago:AstronomicalObject a sh:NodeShape ;
         rdfs:comment "The distance of an AstronomicalObject from Earth"@en ;
     ] ;    
 
-    #Margherita 10/03/26 adedde property
+    #Margherita 10/03/26 added property
     sh:property [
         sh:path yago:temperature ;
         sh:datatype yago:UnitOfTemperature ;
