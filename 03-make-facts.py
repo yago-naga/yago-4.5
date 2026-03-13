@@ -98,6 +98,9 @@ def handleWebPages(entityFacts: Graph) -> None:
         entityFacts.remove((page, Prefixes.schemaAbout, entity))
         entityFacts.add((entity, Prefixes.schemaUrl, page))
         debug("Fixed", entity, Prefixes.schemaUrl, page)
+
+# Predicates that generate a class membership
+TYPE_PREDICATES=[Prefixes.wikidataType, Prefixes.wikidataOccupation, Prefixes.wikidataGenre, Prefixes.wikidataPosition]
     
 def translateTypeAssertions(entityFacts: Graph, yagoTaxonomyUp: Dict[str, Set[str]]) -> None:
     """Replace all facts <subject, wikidata:type, class> by <subject, rdf:type, class>"""
@@ -110,7 +113,7 @@ def translateTypeAssertions(entityFacts: Graph, yagoTaxonomyUp: Dict[str, Set[st
     else:
         debug("Type check",mainEntity,", ".join(str(s) for s in entityFacts.objectsOf(mainEntity,Prefixes.wikidataType)))
         for predicate in list(entityFacts.predicatesOf(mainEntity)):
-            if predicate == Prefixes.wikidataType or predicate == Prefixes.wikidataOccupation:
+            if predicate in TYPE_PREDICATES:
                 for obj in entityFacts.objectsOf(mainEntity, predicate):
                     if obj in yagoTaxonomyUp:
                         entityFacts.add((mainEntity, Prefixes.rdfType, obj))

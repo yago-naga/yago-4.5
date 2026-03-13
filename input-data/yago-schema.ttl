@@ -88,7 +88,7 @@ schema:Thing a sh:NodeShape ;
     sh:property [
         sh:path schema:alternateName ;
         sh:datatype rdf:langString ;
-        ys:fromProperty skos:altLabel, wdt:P2521, wdt:P225, wdt:P1843, wdt:P1448, wdt:P1559, wdt:P1477, wdt:P2521, wdt:P2562 ;
+        ys:fromProperty skos:altLabel, wdt:P2521, wdt:P225, wdt:P1843, wdt:P1448, wdt:P1559, wdt:P1477, wdt:P2521, wdt:P2562, wdt:P742, wdt:P1449 ;
         rdfs:comment "An alternative name for the entity"@en ;
     ] ;
     sh:property [
@@ -135,7 +135,7 @@ schema:Thing a sh:NodeShape ;
     sh:property [
         sh:path yago:follows ;
         sh:class schema:Event ;
-        ys:fromProperty wdt:P155 ;
+        ys:fromProperty wdt:P155, wdt:P1365 ;
         rdfs:comment "An Thing that follows another Thing chronologically or conceptually"@en ;
     ] ;
 
@@ -852,7 +852,7 @@ schema:Event a sh:NodeShape ;
         rdfs:comment "Minimum required age in years"@en ;
     ] ;
     
-    #Margherita 29/01/26 added property,unit normalized to years
+    #Margherita 29/01/26 added property, unit normalized to years
     sh:property [
         sh:path schema:requiredMaxAge ;
         sh:datatype xsd:integer ;
@@ -881,7 +881,7 @@ schema:Event a sh:NodeShape ;
         sh:path schema:maximumAttendeeCapacity ;
         sh:datatype xsd:decimal ;
         ys:fromProperty wdt:P1083 ;
-	rdfs:comment "The total number of individuals that may attend an event or venue"@en ;	
+	    rdfs:comment "The total number of individuals that may attend an event or venue"@en ;	
     ] .
 
 # Fabian 2023-05-04: In Wikidata, elections are subclasses of two disjoint classes, so we attach it under Event here
@@ -1036,7 +1036,7 @@ schema:Organization a sh:NodeShape ;
         sh:path yago:beliefSystem ;
         sh:class yago:BeliefSystem ; # Fabian: merge with belief system for people?
         ys:fromProperty wdt:P140, wdt:P1142 ;
-        rdfs:comment "The belief system (e.g., religion) of a Person or Organization"@en ;
+        rdfs:comment "The belief system (e.g., religion) of a Person or Organization or Administrative Area"@en ;
     ] ;
 
 	sh:property [
@@ -1225,22 +1225,6 @@ schema:Person a sh:NodeShape ;
         rdfs:comment "Family name of this person"@en ;
     ] ;
 
-    #Margherita 12/02/26
-    sh:property [
-        sh:path yago:nickname ; # Fabian: mapto alternate name?
-        sh:datatype xsd:string ; 
-        ys:fromProperty wdt:P1449 ;
-        rdfs:comment "Nickname of this person"@en ;
-    ] ;
-
-    #Margherita 12/02/26
-    sh:property [
-        sh:path yago:pseudonym ; # Fabian: mapto alternate name?
-        sh:datatype xsd:string ; 
-        ys:fromProperty wdt:P742 ;
-        rdfs:comment "Pseudonym of this person"@en ;
-    ] ;
-
     sh:property [
         sh:path yago:academicDegree ;
         sh:class yago:Award ;
@@ -1264,27 +1248,11 @@ schema:Person a sh:NodeShape ;
 
     #Margherita 20/02/2026 added prop
     sh:property [
-        sh:path schema:knowsAbout ; #or could be yago:interestedIn, # Fabian: to watch
+        sh:path yago:interestedIn ; 
         sh:class schema:Thing ; 
         ys:fromProperty wdt:P2650;
-        rdfs:comment "The field of work of the Person"@en ;
-    ] ;
-
-    #Margherita 20/02/2026 added prop # Fabian: becomes type
-    #sh:property [
-    #    sh:path yago:workPosition ;
-    #    sh:class schema:Thing ; #or Intangible? # Fabian: range might be ill-defined
-    #    ys:fromProperty wdt:P39 ;
-    #    rdfs:comment "Position held by the Person"@en ;
-    #] ;
-
-    #Margherita 20/02/2026 added prop # Fabian: removed
-    #sh:property [
-    #    sh:path yago:sportsPosition ;
-    #    sh:class schema:Thing ; #or Intangible? # Fabian: range might be ill-defined
-    #    ys:fromProperty wdt:P413 ;
-    #    rdfs:comment "Playing position of the Person in a sport's team"@en ;
-    #] ;
+        rdfs:comment "The field of interest of the Person"@en ;
+    ] ;  
 
     #Margherita 20/02/2026 added prop
     sh:property [
@@ -1391,7 +1359,7 @@ schema:Person a sh:NodeShape ;
         rdfs:comment "Date when the person was known to be active"@en ;
     ] ;
 
-    #Margherita 30/01/26 added property, limited the constraints to Person e Oragnization
+    #Margherita 30/01/26 added property, limited the constraints to Person e Organization
     sh:property [
         sh:path yago:killedBy ;
         ys:fromProperty wdt:P157 ;
@@ -1416,13 +1384,13 @@ schema:Person a sh:NodeShape ;
         rdfs:comment "A location associated with a Person's home"@en ;
     ] ;
 
-    #Margherita 20/03/2026 added property 
-    sh:property [
-        sh:path schema:workLocation ;
-        sh:class schema:Place ;
-        ys:fromProperty wdt:P937 ;
-        rdfs:comment "Place where a person works or worked"@en ;
-    ] ;
+    #Margherita 20/03/2026 added property # Fabian: This seems redundant with work place
+    #sh:property [
+    #    sh:path schema:workLocation ;
+    #    sh:class schema:Place ;
+    #    ys:fromProperty wdt:P937 ;
+    #    rdfs:comment "Place where a person works or worked"@en ;
+    #] ;
 
     sh:property [
         sh:path schema:knowsLanguage ;
@@ -1451,12 +1419,13 @@ schema:Person a sh:NodeShape ;
         ys:fromProperty wdt:P27 ;
         rdfs:comment "The nationality of a Person (links to a Country)"@en ;
     ] ;
-    sh:property [
-        sh:path schema:owns ;
-        sh:class schema:Thing ; 
-        ys:fromProperty wdt:P1830 ;
-        rdfs:comment "Something owned by a Person"@en ;
-    ] ;
+	# Fabian: redundant with ownedby
+    #sh:property [
+    #    sh:path schema:owns ;
+    #    sh:class schema:Thing ; 
+    #    ys:fromProperty wdt:P1830 ;
+    #    rdfs:comment "Something owned by a Person"@en ;
+    #] ;
 
     
     sh:property [
@@ -1563,7 +1532,7 @@ schema:Place a sh:NodeShape ;
         rdfs:comment "The lowest point of a Place"@en ;
     ] ;
     sh:property [
-        sh:path yago:neighbors ; # Fabian: changed from schema: to yago: 2024-04-03
+        sh:path yago:neighbor ; # Fabian: changed from schema: to yago: 2024-04-03
         sh:class schema:Place ;
         ys:fromProperty wdt:P47, wdt:P206 ;
         rdfs:comment "A neighboring Place"@en ;
@@ -1719,6 +1688,12 @@ schema:AdministrativeArea a sh:NodeShape ;
 		sh:maxCount 1 ;
         rdfs:comment "The date something was created (used for CreativeWorks, Organizations, Products, AdministrativeAreas, etc.)"@en ;
     ] ;
+    sh:property [
+        sh:path yago:beliefSystem ;
+        sh:class yago:BeliefSystem ; # Fabian: merge with belief system for people?
+        ys:fromProperty wdt:P140, wdt:P1142 ;
+        rdfs:comment "The belief system (e.g., religion) of a Person or Organization or Administrative Area"@en ;
+    ] ;	
 	sh:property [
         sh:path schema:founder ;
         sh:or ([ sh:class schema:Person ] [sh:class schema:Organization]);
@@ -1736,12 +1711,13 @@ schema:AdministrativeArea a sh:NodeShape ;
         ys:fromProperty wdt:P6, wdt:P35 ;
         rdfs:comment "The leader of an Organization or AdministrativeArea"@en ;
     ] ;
-    sh:property [
-        sh:path yago:replaces ;
-        sh:class schema:AdministrativeArea ;
-        ys:fromProperty wdt:P1365 ;
-        rdfs:comment "An AdministrativeArea that another area replaces (historical succession)"@en ;
-    ] ;
+	# Fabian: added to yago:follows
+    #sh:property [
+    #    sh:path yago:replaces ;
+    #    sh:class schema:AdministrativeArea ;
+    #    ys:fromProperty wdt:P1365 ;
+    #    rdfs:comment "An AdministrativeArea that another area replaces (historical succession)"@en ;
+    #] ;
 
     sh:property [
         sh:path yago:populationNumber ; # Fabian: changed from schema:... 2024-04-03
@@ -1954,7 +1930,7 @@ schema:Country a sh:NodeShape ;
     sh:property [
         sh:path yago:UnitOfMoney ;
         ys:fromProperty wdt:P38 ;
-        sh:class xsd:string ;
+        sh:datatype xsd:string ;
         rdfs:comment "Official currency of the country"@en ;
     ] ;
 

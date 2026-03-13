@@ -107,6 +107,10 @@ wikidataEnd = "pq:P582"
 
 wikidataOccupation = "wdt:P106"
 
+wikidataPosition="wdt:P39"
+
+wikidataGenre="wdt:P136"
+
 yagoAward = "yago:Award"
 
 owlDisjointWith = "owl:disjointWith"
