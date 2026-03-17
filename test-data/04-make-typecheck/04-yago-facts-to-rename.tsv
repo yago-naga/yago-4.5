@@ -43,6 +43,8 @@ wd:Q_Elvis	yago:academicTitle	_:wd:Q_doctoralDegree_generic_instance	. #
 wd:Q_Elvis	schema:givenName	"YAGO-REPLACE wd:Q493293"	. #		
 wd:Q42	rdf:type	wd:Q_singer	. #		
 wd:Q43	rdf:type	wd:Q_european_book	. #		
+_:wd:Q1860_generic_instance	rdf:type	wd:Q1860	.
+wd:Q43	schema:inLanguage	_:wd:Q1860_generic_instance	. #		
 wd:Q43	rdfs:label	"Bad chè³ld"@en	. #		
 wd:Q43	rdfs:label	"Kind"@de	. #		
 wd:Q45	rdf:type	wd:Q_european_book	. #		

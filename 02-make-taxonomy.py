@@ -110,6 +110,7 @@ badClasses = {
     "wd:Q80096233",   # Lists
     "wd:Q88392887",   # scholarly articles, tweets, etc.
     "wd:Q55915575",   # scholarly article
+    "wd:Q10383930",   # academic work
     "wd:Q2352616",    # catalogue
     "wd:Q591041",     # same
     "wd:Q13442814",   # same

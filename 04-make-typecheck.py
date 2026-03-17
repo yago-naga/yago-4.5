@@ -178,7 +178,7 @@ def isSubclassOf(c1, c2):
     if c1==c2:
         return True
     if c1 not in yagoTaxonomyUp:
-        return
+        return False
     for superclass in yagoTaxonomyUp[c1]:
         if isSubclassOf(superclass, c2):
             return True
@@ -207,7 +207,7 @@ def removeClass(c):
 with TsvUtils.Timer("Step 04: Type-checking YAGO"):
     # Load taxonomy
     for triple in TsvUtils.tsvTuples(FOLDER+"02-yago-taxonomy-to-rename.tsv", "  Loading YAGO taxonomy"):
-        if len(triple)>3:
+        if len(triple)>2:
             if triple[0] not in yagoTaxonomyUp:
                 yagoTaxonomyUp[triple[0]]=set()
             yagoTaxonomyUp[triple[0]].add(triple[2])
@@ -268,7 +268,7 @@ with TsvUtils.Timer("Step 04: Type-checking YAGO"):
                         continue
                         
                     # Write out the fact
-                    if classes is None or any(instanceOf(obj,c) for c in classes):
+                    if classes is None or any(instanceOf(obj,c) for c in classes):                        
                         out.write(subject, predicate, obj, ". #", startDate, endDate)
                         wroteFacts=True
                         count+=1
