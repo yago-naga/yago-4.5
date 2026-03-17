@@ -279,7 +279,7 @@ yago:HairColor a sh:NodeShape ;
 #Margherita 17/03/2026 added class 
 yago:MusicalInstrument a sh:NodeShape ;
     ys:fromClass wd:Q34379 ;
-    rdfs:subClassOf schema:Thing .
+    rdfs:subClassOf schema:Product .
 
 # Needed as range of the property schema:inLanguage
 schema:Language a sh:NodeShape ;
@@ -1262,7 +1262,7 @@ schema:Person a sh:NodeShape ;
     #Margherita 20/02/2026 added prop
     sh:property [
         sh:path schema:instrument ;
-        sh:class schema:MusicalInstrument ;
+        sh:class yago:MusicalInstrument ;
         ys:fromProperty wdt:P1303 ;
         rdfs:comment "Musical instrument played by the Person"@en ;
     ] ;
