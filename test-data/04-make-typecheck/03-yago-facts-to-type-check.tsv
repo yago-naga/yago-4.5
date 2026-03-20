@@ -70,6 +70,11 @@ wd:Q_other_elvis	rdf:type	wd:Q_singer
 wd:Q_other_elvis	rdfs:label	"Eehlvis"@en
 wd:Q_other_elvis	schema:url	"https://en.wikipedia.org/wiki/Elvis"^^xsd:anyURI
 
+# This Elvis should get still a different ID than Elvis
+wd:Q_other_other_elvis	rdf:type	wd:Q_singer
+wd:Q_other_other_elvis	rdfs:label	"Eehlvis"@en
+wd:Q_other_other_elvis	schema:url	"https://en.wikipedia.org/wiki/Elvis"^^xsd:anyURI
+
 # Classes should survive
 wd:Q_singer	schema:url	"https://en.wikipedia.org/wiki/S%74nger%C3%A8"^^xsd:anyURI	. # Should remain encoded and get one more encoded at the end
 wd:Q_singer	rdfs:label	"chanteur"@fr	.
