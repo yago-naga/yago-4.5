@@ -145,6 +145,10 @@ shaclMaxCount="sh:maxCount"
 
 shaclMinCount="sh:minCount"
 
+shaclMaxInclusive="sh:maxInclusive"
+
+shaclMinInclusive="sh:minInclusive"
+
 shaclUniqueLang="sh:uniqueLang"
 
 shaclDisjoint="sh:disjoint"

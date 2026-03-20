@@ -383,12 +383,23 @@ def handleRange(entityFacts: Graph, yagoSchema: YagoSchema, writer) -> None:
             cleanObj = cleanObject(mainEntity, obj, yagoProperty, writer)
             if cleanObj is None:
                 entityFacts.remove((mainEntity, predicate, obj))
-            elif cleanObj != obj:
+                continue
+            if yagoProperty.minInclusive is not None or yagoProperty.maxInclusive is not None:
+                splitObj=TurtleUtils.splitLiteral(cleanObj)
+                if splitObj[0] is None or not re.match(r"[-+]?[0-9.]", splitObj[0]):
+                    writer.writeMetaFact(mainEntity, yagoProperty.identifier, cleanObj, Prefixes.ysReason, '"not a number"')
+                    entityFacts.remove((mainEntity, predicate, obj))
+                    continue
+                objValue=float(splitObj[0])
+                if yagoProperty.minInclusive is not None and objValue<yagoProperty.minInclusive or yagoProperty.maxInclusive is not None and objValue>yagoProperty.maxInclusive:
+                    writer.writeMetaFact(mainEntity, yagoProperty.identifier, cleanObj, Prefixes.ysReason, '"not in min-max range"')
+                    entityFacts.remove((mainEntity, predicate, obj))
+                    continue
+            if cleanObj != obj:
                 debug("Cleaned object", obj, cleanObj)
                 entityFacts.remove((mainEntity, predicate, obj))         
                 entityFacts.add((mainEntity, predicate, cleanObj))
                 
-
 ##########################################################################
 #             Handling min and max counts
 ##########################################################################
@@ -539,6 +550,7 @@ class treatWikidataEntity():
             self.writer.writeMetaFact(entityFacts.mainSubject(), Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, '"mincount failed"')
             return
         
+        # Kick out entities without a type
         subject: str = entityFacts.mainSubject()        
         if Prefixes.rdfType not in entityFacts.predicatesOf(subject):
             debug("No type left for",subject)

@@ -66,6 +66,32 @@ class YagoObject:
 def stripPrefix(identifier):
     """ Removes the xyz: prefix"""
     return identifier[identifier.find(':')+1:]
+
+def maxValue(val, values):
+    """ Returns the maximum value of the given ones or None"""
+    for v in values:
+        if v is None:
+            continue
+        try:
+            v=int(v)
+            if val==None or v>val:
+                val=v
+        except:
+            warning("Invalid numerical value:",v)
+    return val
+
+def minValue(val, values):
+    """ Returns the minimum value of the given ones or None"""
+    for v in values:
+        if v is None:
+            continue
+        try:
+            v=int(v)
+            if val==None or v<val:
+                val=v
+        except:
+            warning("Invalid numerical value:",v)            
+    return val
     
 class YagoProperty(YagoObject):
     """ Represents a YAGO property with its attributes"""
@@ -76,6 +102,8 @@ class YagoProperty(YagoObject):
         self.wikidataProperties=set()
         self.maxCount=None
         self.minCount=None
+        self.minInclusive=None
+        self.maxInclusive=None        
         self.uniqueLang=False
         self.pattern=None   
     
@@ -95,6 +123,8 @@ class YagoProperty(YagoObject):
             warning("Property",self,"has an invalid max count of",self.maxCount)
         if self.minCount is not None and self.minCount<1:
             warning("Property",self,"has an invalid min count of",self.minCount)
+        if self.maxInclusive is not None and self.minInclusive is not None and self.minInclusive>=self.maxInclusive:
+            warning("Property",self,"has large min inclusive than max inclusive",self.minInclusive, self.maxInclusive)
         if self.pattern and not TurtleUtils.isRegex(self.pattern):
             warning("Property",self,"has an invalid pattern of",self.pattern)
             
@@ -115,10 +145,14 @@ class YagoProperty(YagoObject):
             out.write("\t\trdfs:comment "+", ".join(c for c in self.comments)+" ;\n")      
         if self.uniqueLang:
             out.write("\t\tsh:uniqueLang true ;\n")
-        if self.maxCount:
+        if self.maxCount is not None:
             out.write("\t\tsh:maxCount "+str(self.maxCount)+" ;\n")
-        if self.minCount:
+        if self.minCount is not None:
             out.write("\t\tsh:minCount "+str(self.minCount)+" ;\n")
+        if self.maxInclusive is not None:
+            out.write("\t\tsh:maxInclusive "+str(self.maxInclusive)+" ;\n")
+        if self.minInclusive is not None:
+            out.write("\t\tsh:minInclusive "+str(self.minInclusive)+" ;\n")
         if self.pattern:
             out.write("\t\tsh:pattern \""+self.pattern.replace("\\","\\\\")+"\" ;\n")
         out.write("\t\tys:fromProperty "+", ".join(c for c in self.wikidataProperties)+" ;\n")
@@ -152,31 +186,11 @@ class YagoProperty(YagoObject):
         
         # Unique language and maxCounts
         self.uniqueLang=self.uniqueLang or (shaclProperty,Prefixes.shaclUniqueLang,"true") in entityGraph
-        maxCounts=entityGraph.objectsOf(shaclProperty,Prefixes.shaclMaxCount)
-        if len(maxCounts)>1:
-           warning("Property",self,"has non-unique maxCounts",maxCounts)
-        if len(maxCounts)>0:
-           try:
-               maxCount=int(maxCounts.pop())
-               if self.maxCount and self.maxCount!=maxCount:
-                  warning("Property",self,"has non-unique maxCounts",maxCount,"and",self.maxCount)
-               else:
-                  self.maxCount=maxCount
-           except:
-               warning("Property",self,"has invalid maxCount",maxCounts[0])
-        minCounts=entityGraph.objectsOf(shaclProperty,Prefixes.shaclMinCount)
-        if len(minCounts)>1:
-           warning("Property",self,"has non-unique minCounts",minCounts)
-        if len(minCounts)>0:
-           try:
-               minCount=int(minCounts.pop())
-               if self.minCount and self.minCount!=minCount:
-                  warning("Property",self,"has non-unique minCounts",minCount,"and",self.minCount)
-               else:
-                  self.minCount=minCount
-           except:
-               warning("Property",self,"has invalid minCount",minCounts[0])
-        
+        self.maxCount=maxValue(self.maxCount,entityGraph.objectsOf(shaclProperty,Prefixes.shaclMaxCount))
+        self.minCount=minValue(self.minCount,entityGraph.objectsOf(shaclProperty,Prefixes.shaclMinCount))
+        self.maxInclusive=maxValue(self.maxInclusive,entityGraph.objectsOf(shaclProperty,Prefixes.shaclMaxInclusive))
+        self.minInclusive=minValue(self.minInclusive,entityGraph.objectsOf(shaclProperty,Prefixes.shaclMinInclusive))
+                
         # Patterns
         patterns=entityGraph.objectsOf(shaclProperty,Prefixes.shaclPattern)
         if len(patterns)>1:

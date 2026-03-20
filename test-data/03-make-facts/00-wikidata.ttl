@@ -52,7 +52,7 @@ wd:Q_Elvis wdt:P31 wd:Q_rock_singer;
 	# Check bad property: fact should be removed
 	wdt:P10000000 wd:Q_bad_object;
 	# Normal range: fact should survive
-	wdt:P40 wd:Q_child;	
+	wdt:P22 wd:Q_child;	
 	# Doctoral titles are OK
 	wdt:P512 wd:Q_doctoralDegree ;
 	# height
@@ -69,12 +69,12 @@ wd:Q_Elvis wdt:P31 wd:Q_rock_singer;
 	wdt:P569 "1935-01-01"^^xsd:date .
 	
 # Start and end dates should survive
-wd:Q_Elvis p:P40 s:Q_Elvis-5b0fdcdf-4815-583c-4dd3-914e1c5d95c0 .
+wd:Q_Elvis p:P22 s:Q_Elvis-5b0fdcdf-4815-583c-4dd3-914e1c5d95c0 .
 
 s:Q_Elvis-5b0fdcdf-4815-583c-4dd3-914e1c5d95c0 a wikibase:Statement,
 		wikibase:BestRank ;
 	wikibase:rank wikibase:NormalRank ;
-	ps:P40 wd:Q_child ;
+	ps:P22 wd:Q_child ;
 	psv:P1198 v:6c2312ad7ae86b184ccc35589ceaa308 ;
 	psn:P1198 v:ec871d8e6899d8d51a57e73ba5ef6cd7 ;
 	pq:P585 "2014-01-02T00:00:00Z"^^xsd:dateTime ;
@@ -119,6 +119,9 @@ wd:Q_org wdt:P31 schema:Organization;
 wd:Q31  wdt:P31	schema:Country ;
 	schema:name "Belgium"@en ;
 	wdt:P1082	"10"^^xsd:decimal ;
+	# Max value bypassed
+	wdt:P6897	"lkblblhbl"^^xsd:decimal ;
+	wdt:P6897	"500"^^xsd:decimal ;
 	# Integers get normalized and cast to integer
 	wdt:P3000	"+20.0"^^xsd:decimal ;
 	schema:geo      "Point(4.6680555555556 50.641111111111)"^^geo:wktLiteral        .

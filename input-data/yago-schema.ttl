@@ -75,6 +75,7 @@ schema:Thing a sh:NodeShape ;
     # ys:fromClass wd:Q35120 ; No mapping!
 	sh:property [
         sh:path yago:siteLinks ;
+		sh:minInclusive 1 ;
         sh:datatype xsd:integer ;
         ys:fromProperty wikibase:sitelinks ;
         rdfs:comment "The number of Wikipedia links to this entity, as a proxy measure for importance"@en ;
@@ -131,6 +132,13 @@ schema:Thing a sh:NodeShape ;
         rdfs:comment "Entity after which this item is named"@en ;
     ] ;
 
+	sh:property [
+        sh:path yago:partOf ;
+        sh:class schema:Thing ;
+        ys:fromProperty wdt:P361 ;
+        rdfs:comment "A larger Thing that contains this Thing"@en ;
+    ] ;
+
     #Margherita 07/03/26 moved from Event
     sh:property [
         sh:path yago:follows ;
@@ -157,7 +165,34 @@ schema:Thing a sh:NodeShape ;
 
 # Class of all classes. Classes can have properties, too, but only annotation properties.
 rdfs:Class a sh:NodeShape ;  
+    #Margherita 20/02/2026 added property
     sh:property [
+        sh:path yago:namedAfter ;
+        sh:class schema:Thing ;
+        ys:fromProperty wdt:P138 ;
+        rdfs:comment "Entity after which this item is named"@en ;
+    ] ;
+
+    #Margherita 07/03/26 moved from Event
+    sh:property [
+        sh:path yago:follows ;
+        sh:class schema:Event ;
+        ys:fromProperty wdt:P155, wdt:P1365 ;
+        rdfs:comment "An Thing that follows another Thing chronologically or conceptually"@en ;
+    ] ;
+	sh:property [
+        sh:path yago:siteLinks ;
+        sh:datatype xsd:integer ;
+        ys:fromProperty wikibase:sitelinks ;
+        rdfs:comment "The number of Wikipedia links to this entity, as a proxy measure for importance"@en ;
+    ] ;	
+	sh:property [
+        sh:path schema:image ;
+        sh:datatype xsd:anyURI ;
+        ys:fromProperty wdt:P18 ;
+        rdfs:comment "An image of the entity"@en ;
+    ] ;	
+	sh:property [
         sh:path schema:alternateName ;
         sh:datatype rdf:langString ;
         ys:fromProperty skos:altLabel ;
@@ -385,7 +420,7 @@ schema:CreativeWork a sh:NodeShape ;
         rdfs:comment "The author of a CreativeWork or FictionalEntity"@en ;
     ] ;
     sh:property [
-        sh:path schema:contentLocation ;
+        sh:path schema:location ;
         sh:class schema:Place ;
         ys:fromProperty wdt:P840 ;
         rdfs:comment "The location depicted or described in the CreativeWork"@en ;
@@ -841,12 +876,6 @@ schema:Event a sh:NodeShape ;
         ys:fromProperty wdt:P710, wdt:P1923 ;
         rdfs:comment "A Person or Organization that participated in an Event"@en ;
     ] ;
-	sh:property [
-        sh:path schema:superEvent ;
-        sh:class schema:Event ;
-        ys:fromProperty wdt:P361 ;
-        rdfs:comment "A larger Event that contains this Event"@en ;
-    ] ;
 
     #Margherita 29/01/26 added property, unit normalized to years
     sh:property [
@@ -1019,14 +1048,14 @@ schema:Organization a sh:NodeShape ;
         rdfs:comment "The number of employees in an Organization"@en ;
     ] ;
 
-    #Margherita 30/01/26 added property, unit normalized to years
-    sh:property [
-        sh:path yago:ageOfCandidacy ;
-        sh:datatype xsd:integer ;
-        sh:minInclusive 0 ;
-        ys:fromProperty wdt:P2998 ;
-        rdfs:comment "Minimum age in years to be a candidate in this organization"@en ;
-    ] ;
+    #Margherita 30/01/26 added property, unit normalized to years # Fabian: just 10 facts
+    #sh:property [
+    #    sh:path yago:ageOfCandidacy ;
+    #    sh:datatype xsd:integer ;
+    #    sh:minInclusive 0 ;
+    #    ys:fromProperty wdt:P2998 ;
+    #    rdfs:comment "Minimum age in years to be a candidate in this organization"@en ;
+    #] ;
 
     #Margherita 20/02/2026 added property
     sh:property [
@@ -1383,7 +1412,7 @@ schema:Person a sh:NodeShape ;
         rdfs:comment "The gender of a Person"@en ;
     ] ;
     sh:property [
-        sh:path schema:homeLocation ;
+        sh:path schema:location ;
         sh:class schema:Place ;
         ys:fromProperty wdt:P551 ;
         rdfs:comment "A location associated with a Person's home"@en ;
@@ -2167,6 +2196,12 @@ schema:Product a sh:NodeShape ;
 # This is the only way in which we can make assertions about taxons
 schema:Taxon a sh:NodeShape;
 	rdfs:subClassOf schema:Thing ;
+	sh:property [
+        sh:path yago:mass ;
+        sh:datatype yago:UnitOfMass ;
+        ys:fromProperty wdt:P2067 ;
+        rdfs:comment "The mass of an AstronomicalObject"@en ;
+    ] ;    
 	sh:property [
         sh:path schema:parentTaxon ;
         sh:class schema:Taxon ;
