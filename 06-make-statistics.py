@@ -172,35 +172,39 @@ with TsvUtils.Timer("Step 06: Collecting YAGO statistics"):
     genericInstancesCount=0
     
     # Run through the facts
-    for entityFacts in itertools.chain(TurtleUtils.tsvEntities(FOLDER+"05-yago-final-wikipedia.tsv", "  Parsing YAGO Wikipedia"), TurtleUtils.tsvEntities(FOLDER+"05-yago-final-beyond-wikipedia.tsv", "  Parsing YAGO beyond Wikipedia")):
-        mainEntity=entityFacts.mainSubject()
-        if (mainEntity, Prefixes.rdfType, Prefixes.rdfsClass) in entityFacts:
-            continue
-        for p in entityFacts.predicatesOf(mainEntity):
-            predicateStats[p]+=1
-        if mainEntity.endswith("_generic_instance"):
-            genericInstancesCount+=1                
-        entities+=1
-        if not re.match(r"yago:Q[0-9]+", mainEntity):
-            humanReadableNames+=1
-        superClasses=set()
-        pathsToRoot=[0]
-        for c in entityFacts.objectsOf(mainEntity, Prefixes.rdfType):
-            getSuperClasses(c, superClasses, yagoTaxonomyUp, pathsToRoot)
-        for c in superClasses:
-            classStats[c]+=1 
-        totalClassesPerInstance+=len(superClasses)   
-        totalPathsToRoot+=pathsToRoot[0]      
-        if len(samples)<NUM_SAMPLES:
+    for fileName in ["05-yago-final-wikipedia.tsv", "05-yago-final-beyond-wikipedia.tsv"]:
+        for entityFacts in TurtleUtils.tsvEntities(FOLDER+fileName, "  Parsing "+fileName):
+            mainEntity=entityFacts.mainSubject()
+            if (mainEntity, Prefixes.rdfType, Prefixes.rdfsClass) in entityFacts:
+                continue
+            for p in entityFacts.predicatesOf(mainEntity):
+                predicateStats[p]+=1
+            if mainEntity.endswith("_generic_instance"):
+                genericInstancesCount+=1 
+            if fileName=="05-yago-final-beyond-wikipedia.tsv" and re.match(r".*_(Q[0-9]+)?",mainEntity):
+                # Facts about a Wikipedia entity, with a Wikidata object
+                continue
+            entities+=1
+            if not re.match(r"yago:Q[0-9]+", mainEntity):
+                humanReadableNames+=1
+            superClasses=set()
+            pathsToRoot=[0]
+            for c in entityFacts.objectsOf(mainEntity, Prefixes.rdfType):
+                getSuperClasses(c, superClasses, yagoTaxonomyUp, pathsToRoot)
             for c in superClasses:
-                entityFacts.add((mainEntity, 'rdf:type', c))
-            samples.append(entityFacts)
-        else:
-            randomNumber=int(random.random()*entities)
-            if randomNumber<NUM_SAMPLES:    
+                classStats[c]+=1 
+            totalClassesPerInstance+=len(superClasses)   
+            totalPathsToRoot+=pathsToRoot[0]      
+            if len(samples)<NUM_SAMPLES:
                 for c in superClasses:
                     entityFacts.add((mainEntity, 'rdf:type', c))
-                samples[randomNumber]=entityFacts        
+                samples.append(entityFacts)
+            else:
+                randomNumber=int(random.random()*entities)
+                if randomNumber<NUM_SAMPLES:    
+                    for c in superClasses:
+                        entityFacts.add((mainEntity, 'rdf:type', c))
+                    samples[randomNumber]=entityFacts        
             
     print("  Writing out sample entities... ",end="",flush=True)    
     with open(FOLDER+"06-sample-entities.ttl", "wt", encoding="UTF-8") as sampleFile:
