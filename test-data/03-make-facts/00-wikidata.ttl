@@ -99,7 +99,11 @@ wdv:c2a949c9af32533b2e84ae206053067e a wikibase:QuantityValue ;
 wd:Q_tiger wdt:P171 wd:Q_cat ;
     wdt:P1034 wd:Q_sheep ; 
 	schema:name "tiger"@en .
-    
+
+# People should become people    
+wd:Q_Barack_Obama wdt:P31 wd:Q5 ;
+    schema:name "Barack Obama"@en .
+	
 # Disjoint ranges
 wd:Q_composition  wdt:P31 wd:Q207628;
 	wdt:P86 wd:Q_person_or_band ; 

@@ -70,19 +70,20 @@ class WikidataVisitor:
 
         # Ignore classes without labels
         if Prefixes.rdfsLabel not in predicates:
-            return
+            return True
         # Ignore non-classes
         if Prefixes.wikidataSubClassOf not in predicates and Prefixes.wikidataAnalogousClass not in predicates:
-            return        
+            return True   
         # If we're handling an instance, quit (use set intersection for efficiency)
         if predicates & instanceIndicators:
-            return
+            return True
         for subject, predicate, obj in graph:            
             if predicate == Prefixes.wikidataSubClassOf or predicate == Prefixes.wikidataAnalogousClass:
                 if obj not in self.wikidataTaxonomyDown:
                     self.wikidataTaxonomyDown[obj] = set()
                 self.wikidataTaxonomyDown[obj].add(subject)
-    
+        return True
+        
     def result(self):
         return self.wikidataTaxonomyDown
 

@@ -521,7 +521,8 @@ def visitWikidataEntities(args):
                 break
         print("    Running Wikidata reader",portion+1,"at",wikidataReader.tell(),"with \"",line.rstrip().decode("utf-8"),'"', flush=True)        
         for graph in entitiesFromTriples(triplesFromTerms(termsAndSeparators(charGenerator(byteGenerator(wikidataReader))))):
-            visitor.visit(graph)
+            if not visitor.visit(graph):
+                break
             if wikidataReader.tell()>portion*size+size:
                 break            
     print("    Finished Wikidata reader",portion+1, flush=True)        

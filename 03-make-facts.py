@@ -497,6 +497,7 @@ class treatWikidataEntity():
         self.number: int = workerId
         print("    Wikidata reader", workerId+1, "loads YAGO schema", flush=True)
         self.yagoSchema: YagoSchema = YagoSchema(FOLDER+"01-yago-final-schema.ttl", False)
+        print(self.yagoSchema.wikidataClasses["wd:Q5"])
         print("    Wikidata reader", workerId+1, "loads YAGO taxonomy", flush=True)
         self.yagoTaxonomyUp: Dict[str, Set[str]] = defaultdict(set)
         for triple in TsvUtils.tsvTuples(FOLDER+"02-yago-taxonomy-to-rename.tsv"):
@@ -532,7 +533,7 @@ class treatWikidataEntity():
         if not types:
             debug("No types left for",entityFacts.mainSubject())            
             self.writer.writeMetaFact(entityFacts.mainSubject(), Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, f'"no valid type among {", ".join(str(s) for s in oldTypes)}"')
-            return
+            return True
         
         handleDomain(entityFacts, self.yagoSchema, types, self.writer)
         
@@ -543,20 +544,23 @@ class treatWikidataEntity():
         if not isSecondaryClass and not guessLabelIfNecessary(entityFacts):
             debug("Label failed", entityFacts.mainSubject())
             self.writer.writeMetaFact(entityFacts.mainSubject(), Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, '"no label"')
-            return
+            return True
         
         if not checkMinCounts(entityFacts, self.yagoSchema, isSecondaryClass):
             debug("Mincount failed", entityFacts.mainSubject())
             self.writer.writeMetaFact(entityFacts.mainSubject(), Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, '"mincount failed"')
-            return
+            return True
         
         # Kick out entities without a type
         subject: str = entityFacts.mainSubject()        
         if Prefixes.rdfType not in entityFacts.predicatesOf(subject):
             debug("No type left for",subject)
             self.writer.writeMetaFact(entityFacts.mainSubject(), Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, f'"no type left among {", ".join(str(s) for s in oldTypes)}"')
-            return
-            
+            return True
+        
+        print("Q5 is mapped to",self.yagoSchema.wikidataClasses["wd:Q5"])        
+        return False
+        
         for predicate in entityFacts.predicatesOf(subject):
             for obj in entityFacts.objectsOf(subject, predicate):
                 if subject == obj:
@@ -587,7 +591,8 @@ class treatWikidataEntity():
                         self.writer.write(subject, yagoProperty.identifier, obj, ".")
                 else:
                     self.writer.write(subject, yagoProperty.identifier, obj, ". # IF", (", ".join(sorted(yagoProperty.objectTypes))), normalizeDate(startDate), normalizeDate(endDate))
-
+        return True
+        
     def result(self) -> None:
         if self.writer:
             self.writer.__exit__()
@@ -595,7 +600,7 @@ class treatWikidataEntity():
         
 if __name__ == '__main__':
     with TsvUtils.Timer("Step 03: Creating YAGO facts"):
-        TurtleUtils.visitWikidata(WIKIDATA_FILE, treatWikidataEntity) 
+        TurtleUtils.visitWikidata(WIKIDATA_FILE, treatWikidataEntity,1) 
         print("  Collecting results...")
         count=0
         tempFiles=list(glob.glob(FOLDER+"03-yago-facts-to-type-check-*.tmp"))
