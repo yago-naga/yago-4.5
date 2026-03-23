@@ -127,11 +127,10 @@ def translateTypeAssertions(entityFacts: Graph, yagoTaxonomyUp: Dict[str, Set[st
                 for obj in entityFacts.objectsOf(mainEntity, predicate):
                     if obj in yagoTaxonomyUp:
                         entityFacts.add((mainEntity, Prefixes.rdfType, obj))
+                entityFacts.removeObjects(mainEntity, predicate)
             # Anything that has a parent taxon is an instance of taxon
             if predicate == "schema:parentTaxon":
                 entityFacts.add((mainEntity, Prefixes.rdfType, Prefixes.schemaTaxon))
-    entityFacts.removeObjects(mainEntity, Prefixes.wikidataType)
-    entityFacts.removeObjects(mainEntity, Prefixes.wikidataOccupation)
         
 ##########################################################################
 #             Start and end dates
@@ -211,7 +210,7 @@ def getUnitOfMeasurement(subject, predicate, obj, entityGraph):
 #             Taxonomy checks
 ##########################################################################
 
-def cleanAndReturnTypes(entityFacts: Graph, yagoSchema: YagoSchema, yagoTaxonomyUp: Dict[str, Set[str]]) -> Set[str]:
+def cleanAndReturnTypes(entityFacts: Graph, yagoSchema: YagoSchema, yagoTaxonomyUp: Dict[str, Set[str]], writer) -> Set[str]:
     """Removes disjoint classes and shortcuts, returns types"""
     mainEntity: str = entityFacts.mainSubject()
     superTypes: Set[str] = set()
@@ -226,7 +225,7 @@ def cleanAndReturnTypes(entityFacts: Graph, yagoSchema: YagoSchema, yagoTaxonomy
                     disjointId = disjointYagoClass.identifier
                     if disjointId in superTypes or disjointId in directTypesSet: 
                         entityFacts.remove((mainEntity, Prefixes.rdfType, type_))
-                        debug("Removed disjoint type", type_, "from", mainEntity, "since disjoint with", disjointYagoClass)
+                        writer.writeMetaFact(mainEntity, Prefixes.rdfType, type_, Prefixes.ysReason, f'"disjoint with {disjointYagoClass}"')
                         break
         else:
             superClasses.remove(type_)
@@ -236,7 +235,7 @@ def cleanAndReturnTypes(entityFacts: Graph, yagoSchema: YagoSchema, yagoTaxonomy
     for type_ in directTypes:
         if type_ in superTypes:
             entityFacts.remove((mainEntity, Prefixes.rdfType, type_))
-            debug("Removed shortcut type", type_, "from", mainEntity, superTypes)
+            writer.writeMetaFact(mainEntity, Prefixes.rdfType, type_, Prefixes.ysReason, f'"is shortcut"')
     superTypes.update(directTypes)
     return superTypes    
     
@@ -271,8 +270,7 @@ def handleDomain(entityFacts: Graph, yagoSchema: YagoSchema, fullTransitiveClass
             # Remove all objects for this predicate if domain check fails
             debug("Domain check failed for", mainEntity, yagoProperty, fullTransitiveClasses)
             writer.writeMetaFact(mainEntity, yagoProperty.identifier, Prefixes.schemaThing, Prefixes.ysReason, f'"Domain check failed ({", ".join(s for s in fullTransitiveClasses if not s.startswith("wd:") and s!=Prefixes.schemaThing)})"')
-            for obj in list(entityFacts.objectsOf(mainEntity, predicate)):
-                entityFacts.remove((mainEntity, predicate, obj))
+            entityFacts.removeObjects(mainEntity, predicate)
                      
 def isURI(s: str) -> bool: 
     """TRUE if s conforms to xsd:anyUri, as explained here:
@@ -392,6 +390,7 @@ def handleRange(entityFacts: Graph, yagoSchema: YagoSchema, writer) -> None:
             # cleanObject already returns normalized object, no need to normalize again
             cleanObj = cleanObject(mainEntity, obj, yagoProperty, writer)
             if cleanObj is None:
+                # Reason was already written to the writer
                 entityFacts.remove((mainEntity, predicate, obj))
                 continue
             if yagoProperty.minInclusive is not None or yagoProperty.maxInclusive is not None:
@@ -424,7 +423,7 @@ def isSecondaryWikidataClass(entityFacts: Graph, yagoSchema: YagoSchema) -> bool
         return mainEntity != candidates[0]
     return False
 
-def handleMaxCounts(entityFacts: Graph, yagoSchema: YagoSchema, isSecondaryClass: bool = False) -> None:
+def handleMaxCounts(entityFacts: Graph, yagoSchema: YagoSchema, writer, isSecondaryClass: bool = False) -> None:
     """ Performs uniqueLang and maxCount checks, removes offending facts """
     mainEntity: str = entityFacts.mainSubject()            
     for predicate in list(entityFacts.predicatesOf(mainEntity)):        
@@ -441,6 +440,7 @@ def handleMaxCounts(entityFacts: Graph, yagoSchema: YagoSchema, isSecondaryClass
             objects: List[str] = list(entityFacts.objectsOf(mainEntity, predicate))
             objects.sort()
             for i in range(yagoProperty.maxCount, len(objects)):
+                writer.writeMetaFact(mainEntity, predicate, objects[i], Prefixes.ysReason, '"maxcount overflow"')
                 entityFacts.remove((mainEntity, predicate, objects[i]))
         # Check unique languages
         if yagoProperty.uniqueLang:
@@ -457,6 +457,7 @@ def handleMaxCounts(entityFacts: Graph, yagoSchema: YagoSchema, isSecondaryClass
                 if lang:
                    if lang in languages:
                         debug("Duplicate language:", mainEntity, predicate, lang)
+                        writer.writeMetaFact(mainEntity, predicate, obj, Prefixes.ysReason, f'"duplicate language: {lang}"')                                       
                         entityFacts.remove((mainEntity, predicate, obj))
                    else:
                         languages.add(lang)
@@ -541,7 +542,6 @@ class treatWikidataEntity():
         types = cleanAndReturnTypes(entityFacts, self.yagoSchema, self.yagoTaxonomyUp)
         
         if not types:
-            debug("No types left for",entityFacts.mainSubject())            
             self.writer.writeMetaFact(entityFacts.mainSubject(), Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, f'"no valid type among {", ".join(str(s) for s in oldTypes)}"')
             return True
         
@@ -564,8 +564,9 @@ class treatWikidataEntity():
         # Kick out entities without a type
         subject: str = entityFacts.mainSubject()        
         if Prefixes.rdfType not in entityFacts.predicatesOf(subject):
-            debug("No type left for",subject)
-            self.writer.writeMetaFact(entityFacts.mainSubject(), Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, f'"no type left among {", ".join(str(s) for s in oldTypes)}"')
+            self.writer.writeMetaFact(entityFacts.mainSubject(), Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, f'"no type left among {", ".join(str(s) for s in oldTypes)} and {", ".join(str(s) for s in types)}"')
+            if subject=="wd:Q42":
+                return False
             return True
                 
         for predicate in entityFacts.predicatesOf(subject):
@@ -607,7 +608,7 @@ class treatWikidataEntity():
         
 if __name__ == '__main__':
     with TsvUtils.Timer("Step 03: Creating YAGO facts"):
-        TurtleUtils.visitWikidata(WIKIDATA_FILE, treatWikidataEntity) 
+        TurtleUtils.visitWikidata(WIKIDATA_FILE, treatWikidataEntity, 1) 
         print("  Collecting results...")
         count=0
         tempFiles=list(glob.glob(FOLDER+"03-yago-facts-to-type-check-*.tmp"))
