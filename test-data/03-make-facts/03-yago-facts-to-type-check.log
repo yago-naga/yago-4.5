@@ -1,0 +1,9 @@
+<<	wd:Q_Has_no_label	rdf:type	schema:Thing	>>	ys:excludedFor	"no label"	.
+<<	wd:Q_has_no_type	rdf:type	schema:Thing	>>	ys:excludedFor	"no valid type among wd:invalid"	.
+<<	wd:Q_Elvis	rdf:type	schema:Thing	>>	ys:excludedFor	"no valid type among "	.
+<<	wd:Q31	rdf:type	schema:Thing	>>	ys:excludedFor	"no valid type among "	.
+<<	wd:Q_Elvis	schema:image	"http://elibrary.unm.edu/sora/jrr/index.php#http://elibrary.unm.edu/sora/jrr/index.php#"	>>	ys:excludedFor	"uncastable literal"	.
+<<	wd:Q_Elvis	schema:deathDate	"0000-02-22T00:00:00Z"^^xsd:dateTime	>>	ys:excludedFor	"uncastable literal"	.
+<<	wd:Q31	yago:literacyRate	"lkblblhbl"^^xsd:decimal	>>	ys:excludedFor	"not a number"	.
+<<	wd:Q31	yago:literacyRate	"500"^^xsd:decimal	>>	ys:excludedFor	"not in min-max range"	.
+<<	wd:Q_fictional	schema:geo	schema:Thing	>>	ys:excludedFor	"Domain check failed (yago:Worker, schema:Person, yago:FictionalEntity)"	.

@@ -123,6 +123,8 @@ wd:Q_org wdt:P31 schema:Organization;
 wd:Q31  wdt:P31	schema:Country ;
 	schema:name "Belgium"@en ;
 	wdt:P1082	"10"^^xsd:decimal ;
+	# Memberof should go to locatedIn
+	wdt:P463 wd:Schengen ;
 	# Max value bypassed
 	wdt:P6897	"lkblblhbl"^^xsd:decimal ;
 	wdt:P6897	"500"^^xsd:decimal ;

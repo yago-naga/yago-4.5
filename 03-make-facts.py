@@ -77,19 +77,29 @@ def translatePropertiesAndClasses(entityFacts: Graph, yagoSchema: YagoSchema) ->
     dates: Dict[Tuple[str, str, str], Tuple[Optional[str], Optional[str]]] = {}
     unitsOfMeasurement = {}
     for (subject, predicate, obj) in entityFacts:
+        # Get meta properties
         startDate, endDate = getStartAndEndDate(subject, predicate, obj, entityFacts)
         unit=getUnitOfMeasurement(subject, predicate, obj, entityFacts)
-        subject = yagoSchema.wikidataProperties[subject].identifier if subject in yagoSchema.wikidataProperties else subject
-        predicate = yagoSchema.wikidataProperties[predicate].identifier if predicate in yagoSchema.wikidataProperties else predicate
-        obj = yagoSchema.wikidataProperties[obj].identifier if obj in yagoSchema.wikidataProperties else obj
-        subject = yagoSchema.wikidataClasses[subject].identifier if subject in yagoSchema.wikidataClasses else subject
-        predicate = yagoSchema.wikidataClasses[predicate].identifier if predicate in yagoSchema.wikidataClasses else predicate
-        obj = yagoSchema.wikidataClasses[obj].identifier if obj in yagoSchema.wikidataClasses else obj
-        newGraph.add((subject, predicate, obj))
-        if startDate or endDate:
-            dates[(subject, predicate, obj)] = (startDate, endDate)
-        if unit:
-            unitsOfMeasurement[(subject, predicate, obj)] = unit
+        
+        # Translate subject and object
+        if subject in yagoSchema.wikidataProperties:
+            subject = getFirst(yagoSchema.wikidataProperties[subject]).identifier
+        if subject in yagoSchema.wikidataClasses:
+            subject = yagoSchema.wikidataClasses[subject].identifier
+        if obj in yagoSchema.wikidataProperties:
+            obj = getFirst(yagoSchema.wikidataProperties[obj]).identifier
+        if obj in yagoSchema.wikidataClasses:
+            obj = yagoSchema.wikidataClasses[obj].identifier
+        
+        # Translate predicate
+        # One Wikidata property can map to several YAGO properties
+        predicateList=[p.identifier for p in yagoSchema.wikidataProperties[predicate]] if predicate in yagoSchema.wikidataProperties else [predicate]
+        for p in predicateList:
+            newGraph.add((subject, p, obj))
+            if startDate or endDate:
+                dates[(subject, p, obj)] = (startDate, endDate)
+            if unit:
+                unitsOfMeasurement[(subject, p, obj)] = unit
     return (newGraph, dates, unitsOfMeasurement)
    
 def handleWebPages(entityFacts: Graph) -> None:
@@ -497,7 +507,7 @@ class treatWikidataEntity():
         self.number: int = workerId
         print("    Wikidata reader", workerId+1, "loads YAGO schema", flush=True)
         self.yagoSchema: YagoSchema = YagoSchema(FOLDER+"01-yago-final-schema.ttl", False)
-        print(self.yagoSchema.wikidataClasses["wd:Q5"])
+        print("wd:Q5 is mapped to ",self.yagoSchema.wikidataClasses["wd:Q5"])
         print("    Wikidata reader", workerId+1, "loads YAGO taxonomy", flush=True)
         self.yagoTaxonomyUp: Dict[str, Set[str]] = defaultdict(set)
         for triple in TsvUtils.tsvTuples(FOLDER+"02-yago-taxonomy-to-rename.tsv"):

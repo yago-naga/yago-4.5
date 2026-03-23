@@ -142,7 +142,7 @@ schema:Thing a sh:NodeShape ;
     #Margherita 07/03/26 moved from Event
     sh:property [
         sh:path yago:follows ;
-        sh:class schema:Event ;
+        sh:class schema:Thing ;
         ys:fromProperty wdt:P155, wdt:P1365 ;
         rdfs:comment "An Thing that follows another Thing chronologically or conceptually"@en ;
     ] ;
@@ -154,6 +154,15 @@ schema:Thing a sh:NodeShape ;
         rdfs:comment "A URL associated with the entity"@en ;
     ] ;
 
+	sh:property [
+        sh:path schema:location ;
+        sh:class schema:Place ;
+		# Fabian: wdt:P361 is overloaded with partOf, to make countries part of continents etc.
+		# Fabian: wdt:P463 is overloaded with memberOf
+        ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17, wdt:P30, wdt:P551, wdt:P361, wdt:P463 ;
+        rdfs:comment "The location of a Thing"@en ;
+    ] ;
+	
 	# We map to Wikidata, Freebase, Google knowledge graph, WordNet, and IMDB.
     sh:property [
         sh:path schema:sameAs ;
@@ -319,7 +328,7 @@ yago:MusicalInstrument a sh:NodeShape ;
 # Needed as range of the property schema:inLanguage
 schema:Language a sh:NodeShape ;
 	rdfs:subClassOf schema:Intangible ;
-    ys:fromClass wd:Q34770 .
+    ys:fromClass wd:Q34770, wd:Q17376908 .
 
 # Needed for treatment of person names. Used only internally,
 # as names are replaced by strings. Is automatically removed from final taxonomy.
@@ -420,7 +429,7 @@ schema:CreativeWork a sh:NodeShape ;
         rdfs:comment "The author of a CreativeWork or FictionalEntity"@en ;
     ] ;
     sh:property [
-        sh:path schema:location ;
+        sh:path schema:contentLocation ;
         sh:class schema:Place ;
         ys:fromProperty wdt:P840 ;
         rdfs:comment "The location depicted or described in the CreativeWork"@en ;
@@ -569,7 +578,7 @@ schema:Newspaper a sh:NodeShape ;
             ]
         ) ;
         ys:fromProperty wdt:P859 ;
-        rdfs:comment "The sponsor of an Event or Newspaper"@en ;
+        rdfs:comment "The sponsor of an Event or Newspaper or Person"@en ;
     ] .
 
 schema:TVSeries a sh:NodeShape ;
@@ -777,12 +786,6 @@ schema:Event a sh:NodeShape ;
         ys:fromProperty wdt:P921 ;
         rdfs:comment "Indicates what a CreativeWork or Event is about"@en ;
     ] ;
-	sh:property [
-        sh:path schema:location ;
-        sh:class schema:Place ;
-        ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17, wdt:P30 ;
-        rdfs:comment "The location of an Organization, Event, or Place"@en ;
-    ] ;
     sh:property [
         sh:path schema:organizer ;
         sh:or (
@@ -860,7 +863,7 @@ schema:Event a sh:NodeShape ;
             ]
         ) ;
         ys:fromProperty wdt:P859 ;
-        rdfs:comment "The sponsor of an Event or Newspaper"@en ;
+        rdfs:comment "The sponsor of an Event or Newspaper or Person"@en ;
     ] ;
 	
 	sh:property [
@@ -943,12 +946,6 @@ schema:Organization a sh:NodeShape ;
         sh:class schema:Place ;
         ys:fromProperty wdt:P740, wdt:P495 ;
         rdfs:comment "The location where a Movie, TV Series, Organization, or HumanMadeGeographicalEntity was created"@en ;
-    ] ;
-    sh:property [
-        sh:path schema:location ;
-        sh:class schema:Place ;
-        ys:fromProperty wdt:P131 , wdt:P276 , wdt:P17, wdt:P706 , wdt:P4552, wdt:P159 ;
-        rdfs:comment "The location of an Organization, Event, or Place"@en ;
     ] ;
     sh:property [
         sh:path schema:logo ;
@@ -1181,6 +1178,19 @@ schema:Person a sh:NodeShape ;
     	ys:fromProperty wdt:P1066 ;
         rdfs:comment "A Person who was a student of an Academic"@en ;
 	] ;		
+	sh:property [
+        sh:path schema:sponsor ;
+        sh:or (
+            [
+                sh:class schema:Organization
+            ]
+            [
+                sh:class schema:Person
+            ]
+        ) ;
+        ys:fromProperty wdt:P859 ;
+        rdfs:comment "The sponsor of an Event or Newspaper or Person"@en ;
+    ] ;	
     sh:property [
         sh:path yago:beliefSystem ;
         sh:class yago:BeliefSystem ;
@@ -1411,12 +1421,6 @@ schema:Person a sh:NodeShape ;
         ys:fromProperty wdt:P21 ;
         rdfs:comment "The gender of a Person"@en ;
     ] ;
-    sh:property [
-        sh:path schema:location ;
-        sh:class schema:Place ;
-        ys:fromProperty wdt:P551 ;
-        rdfs:comment "A location associated with a Person's home"@en ;
-    ] ;
 
     #Margherita 20/03/2026 added property # Fabian: This seems redundant with work place
     #sh:property [
@@ -1542,12 +1546,6 @@ schema:Place a sh:NodeShape ;
     #Margherita 20/03/2026 added P30
 	ys:fromClass wd:Q82794 ;
 	rdfs:subClassOf schema:Thing ;
-    sh:property [
-        sh:path schema:location ;
-        sh:class schema:Place ;
-        ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17, wdt:P30 ;
-        rdfs:comment "The location of an Organization, Event, or Place"@en ;
-    ] ;
     sh:property [
         sh:path yago:area ; # Fabian: changed from schema: to yago: 2024-04-03
         sh:datatype yago:UnitOfArea ;
@@ -1796,7 +1794,7 @@ schema:AdministrativeArea a sh:NodeShape ;
         ys:fromProperty wdt:P463 ;
         rdfs:comment "An Organization that a Person or another Organization is a member of"@en ;
     ] ;
-    sh:property [
+	sh:property [
         sh:path yago:capital ;
         sh:class schema:City ;
         ys:fromProperty wdt:P36 ;
@@ -2033,7 +2031,7 @@ schema:Continent a sh:NodeShape ;
 yago:HumanMadeGeographicalEntity a sh:NodeShape ;
 	rdfs:subClassOf schema:Place ;
 	rdfs:label "Human-made geographical entity"@en ;
-    ys:fromClass wd:Q811979, wd:Q811430, wd:Q811463, wd:Q35145743, wd:Q811430, wd:Q18247357 ;
+    ys:fromClass wd:Q811979, wd:Q811430, wd:Q811463, wd:Q35145743, wd:Q811430, wd:Q18247357, wdt:Q699405, wdt:Q684740, wdt:Q699405 ;
 	sh:property [
         sh:path yago:ownedBy ; # Fabian: changed from schema: to yago: 2024-04-03
         sh:or (

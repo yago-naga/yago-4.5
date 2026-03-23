@@ -307,9 +307,9 @@ class YagoSchema(object):
         # Update Wikidata property mapping
         for yagoProperty in yagoClass.properties:
             for w in yagoProperty.wikidataProperties:
-                if w in self.wikidataProperties and self.wikidataProperties[w]!=yagoProperty:
-                    warning("Wikidata property",w,"is mapped to two YAGO properties:",id(self.wikidataProperties[w]), "and",id(yagoProperty))
-                self.wikidataProperties[w]=yagoProperty
+                if w not in self.wikidataProperties:
+                    self.wikidataProperties[w]=set()
+                self.wikidataProperties[w].add(yagoProperty)
         for wikidataClass in yagoClass.fromClasses:
             if wikidataClass in self.wikidataClasses:
                 warning("Wikidata class", wikidataClass, "is mapped to both",yagoClass,"and",self.wikidataClasses[wikidataClass])
