@@ -539,7 +539,7 @@ class treatWikidataEntity():
                 
         translateTypeAssertions(entityFacts, self.yagoTaxonomyUp)        
                 
-        types = cleanAndReturnTypes(entityFacts, self.yagoSchema, self.yagoTaxonomyUp)
+        types = cleanAndReturnTypes(entityFacts, self.yagoSchema, self.yagoTaxonomyUp, self.writer)
         
         if not types:
             self.writer.writeMetaFact(entityFacts.mainSubject(), Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, f'"no valid type among {", ".join(str(s) for s in oldTypes)}"')
@@ -549,7 +549,7 @@ class treatWikidataEntity():
         
         handleRange(entityFacts, self.yagoSchema, self.writer)
         
-        handleMaxCounts(entityFacts, self.yagoSchema, isSecondaryClass)
+        handleMaxCounts(entityFacts, self.yagoSchema, self.writer, isSecondaryClass)
 
         if not isSecondaryClass and not guessLabelIfNecessary(entityFacts):
             debug("Label failed", entityFacts.mainSubject())
