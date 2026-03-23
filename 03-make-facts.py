@@ -557,10 +557,7 @@ class treatWikidataEntity():
             debug("No type left for",subject)
             self.writer.writeMetaFact(entityFacts.mainSubject(), Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, f'"no type left among {", ".join(str(s) for s in oldTypes)}"')
             return True
-        
-        print("Q5 is mapped to",self.yagoSchema.wikidataClasses["wd:Q5"])        
-        return False
-        
+                
         for predicate in entityFacts.predicatesOf(subject):
             for obj in entityFacts.objectsOf(subject, predicate):
                 if subject == obj:
@@ -600,7 +597,7 @@ class treatWikidataEntity():
         
 if __name__ == '__main__':
     with TsvUtils.Timer("Step 03: Creating YAGO facts"):
-        TurtleUtils.visitWikidata(WIKIDATA_FILE, treatWikidataEntity,1) 
+        TurtleUtils.visitWikidata(WIKIDATA_FILE, treatWikidataEntity) 
         print("  Collecting results...")
         count=0
         tempFiles=list(glob.glob(FOLDER+"03-yago-facts-to-type-check-*.tmp"))
