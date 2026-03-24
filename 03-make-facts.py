@@ -561,8 +561,6 @@ class treatWikidataEntity():
         subject: str = entityFacts.mainSubject()        
         if Prefixes.rdfType not in entityFacts.predicatesOf(subject):
             self.writer.writeMetaFact(entityFacts.mainSubject(), Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, f'"no type left among {", ".join(str(s) for s in oldTypes)} and {", ".join(str(s) for s in types)}"')
-            if subject=="wd:Q42":
-                return False
             return True
                 
         for predicate in entityFacts.predicatesOf(subject):
@@ -595,6 +593,9 @@ class treatWikidataEntity():
                         self.writer.write(subject, yagoProperty.identifier, obj, ".")
                 else:
                     self.writer.write(subject, yagoProperty.identifier, obj, ". # IF", (", ".join(sorted(yagoProperty.objectTypes))), normalizeDate(startDate), normalizeDate(endDate))
+        if subject=="wd:Q42":
+            return False
+                    
         return True
         
     def result(self) -> None:
