@@ -592,10 +592,7 @@ class treatWikidataEntity():
                     else:
                         self.writer.write(subject, yagoProperty.identifier, obj, ".")
                 else:
-                    self.writer.write(subject, yagoProperty.identifier, obj, ". # IF", (", ".join(sorted(yagoProperty.objectTypes))), normalizeDate(startDate), normalizeDate(endDate))
-        if subject=="wd:Q42":
-            return False
-                    
+                    self.writer.write(subject, yagoProperty.identifier, obj, ". # IF", (", ".join(sorted(yagoProperty.objectTypes))), normalizeDate(startDate), normalizeDate(endDate))                    
         return True
         
     def result(self) -> None:
@@ -605,7 +602,7 @@ class treatWikidataEntity():
         
 if __name__ == '__main__':
     with TsvUtils.Timer("Step 03: Creating YAGO facts"):
-        TurtleUtils.visitWikidata(WIKIDATA_FILE, treatWikidataEntity, 1) 
+        TurtleUtils.visitWikidata(WIKIDATA_FILE, treatWikidataEntity) 
         print("  Collecting results...")
         count=0
         tempFiles=list(glob.glob(FOLDER+"03-yago-facts-to-type-check-*.tmp"))
