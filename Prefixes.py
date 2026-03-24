@@ -97,6 +97,8 @@ wikidataSubClassOf = "wdt:P279"
 
 wikidataParentTaxon = "wdt:P171"
 
+schemaParentTaxon = "schema:parentTaxon"
+
 wikidataAnalogousClass = "wdt:P1074"
 
 wikidataDuring = "pq:P585"

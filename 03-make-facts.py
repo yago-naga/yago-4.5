@@ -60,12 +60,9 @@ def debug(*message: Any) -> None:
             sys.stdout.buffer.write(b" ")
         print("")
     
-def getFirst(iterable: Iterator[Any]) -> Optional[Any]:
+def getFirst(iterable: Iterator[Any], default=None) -> Optional[Any]:
     """ Returns the first element of an iterable or None"""
-    try:
-        return next(iter(iterable))
-    except StopIteration:
-        return None
+    return next(iter(iterable), default)
     
 ##########################################################################
 #             Cleaning of entities
@@ -120,17 +117,17 @@ def translateTypeAssertions(entityFacts: Graph, yagoTaxonomyUp: Dict[str, Set[st
     # If you're a class, say it
     if mainEntity in yagoTaxonomyUp:
         entityFacts.add((mainEntity, Prefixes.rdfType, Prefixes.rdfsClass))
-    else:
-        debug("Type check",mainEntity,", ".join(str(s) for s in entityFacts.objectsOf(mainEntity,Prefixes.wikidataType)))
-        for predicate in list(entityFacts.predicatesOf(mainEntity)):
-            if predicate in TYPE_PREDICATES:
-                for obj in entityFacts.objectsOf(mainEntity, predicate):
-                    if obj in yagoTaxonomyUp:
-                        entityFacts.add((mainEntity, Prefixes.rdfType, obj))
-                entityFacts.removeObjects(mainEntity, predicate)
-            # Anything that has a parent taxon is an instance of taxon
-            if predicate == "schema:parentTaxon":
-                entityFacts.add((mainEntity, Prefixes.rdfType, Prefixes.schemaTaxon))
+        return
+    # Translate all type-generating predicates to an rdf:type fact    
+    for predicate in TYPE_PREDICATES:
+        if predicate in entityFacts.predicatesOf(mainEntity):
+            for obj in entityFacts.objectsOf(mainEntity, predicate):
+                if obj in yagoTaxonomyUp:
+                    entityFacts.add((mainEntity, Prefixes.rdfType, obj))
+            entityFacts.removeObjects(mainEntity, predicate)
+    # Anything that has a parent taxon is an instance of taxon
+    if Prefixes.schemaParentTaxon in entityFacts.predicatesOf(mainEntity):
+        entityFacts.add((mainEntity, Prefixes.rdfType, Prefixes.schemaTaxon))
         
 ##########################################################################
 #             Start and end dates
@@ -211,33 +208,41 @@ def getUnitOfMeasurement(subject, predicate, obj, entityGraph):
 ##########################################################################
 
 def cleanAndReturnTypes(entityFacts: Graph, yagoSchema: YagoSchema, yagoTaxonomyUp: Dict[str, Set[str]], writer) -> Set[str]:
-    """Removes disjoint classes and shortcuts, returns types"""
+    """Removes disjoint classes and shortcuts, returns super types"""
     mainEntity: str = entityFacts.mainSubject()
-    superTypes: Set[str] = set()
+    myTypesAndSuperTypes: Set[str] = set()
     # Sort the list to make this deterministic
     directTypes: List[str] = sorted(entityFacts.objectsOf(mainEntity, Prefixes.rdfType))
-    directTypesSet: Set[str] = set(directTypes)
-    for type_ in directTypes:
-        superClasses: Set[str] = getSuperClasses(type_, yagoTaxonomyUp, set())
+    for i in range(0,len(directTypes)):
+        directType=directTypes[i]
+        # Remove type if I am a shortcut
+        if directType in myTypesAndSuperTypes:
+            entityFacts.remove((mainEntity, Prefixes.rdfType, directType))
+            writer.writeMetaFact(mainEntity, Prefixes.rdfType, directType, Prefixes.ysReason, f'"is shortcut"')
+            continue               
+        # Remove disjoint types
+        superClasses: Set[str] = getSuperClasses(directType, yagoTaxonomyUp, set())
+        gotRemoved=False
         for superClass in superClasses:
             if superClass in yagoSchema.classes:
-                for disjointYagoClass in yagoSchema.classes[superClass].disjointWith:
-                    disjointId = disjointYagoClass.identifier
-                    if disjointId in superTypes or disjointId in directTypesSet: 
-                        entityFacts.remove((mainEntity, Prefixes.rdfType, type_))
-                        writer.writeMetaFact(mainEntity, Prefixes.rdfType, type_, Prefixes.ysReason, f'"disjoint with {disjointYagoClass}"')
+                for disjointClass in yagoSchema.classes[superClass].disjointWith:
+                    if disjointClass.identifier in myTypesAndSuperTypes:
+                        entityFacts.remove((mainEntity, Prefixes.rdfType, directType))
+                        writer.writeMetaFact(mainEntity, Prefixes.rdfType, directType, Prefixes.ysReason, f'"disjoint with {disjointClass}"')
+                        gotRemoved=True
                         break
-        else:
-            superClasses.remove(type_)
-            superTypes.update(superClasses)
-            
-    # Remove shortcuts        
-    for type_ in directTypes:
-        if type_ in superTypes:
-            entityFacts.remove((mainEntity, Prefixes.rdfType, type_))
-            writer.writeMetaFact(mainEntity, Prefixes.rdfType, type_, Prefixes.ysReason, f'"is shortcut"')
-    superTypes.update(directTypes)
-    return superTypes    
+                if gotRemoved:
+                    break
+        if gotRemoved:
+            continue
+        # Remove other type if the other one is a shortcut
+        for j in range(0,i):
+            if directTypes[j] in superClasses: 
+                entityFacts.remove((mainEntity, Prefixes.rdfType, directTypes[j]))
+                writer.writeMetaFact(mainEntity, Prefixes.rdfType, directTypes[j], Prefixes.ysReason, f'"is shortcut"')                
+        # The class is OK
+        myTypesAndSuperTypes.update(superClasses)
+    return myTypesAndSuperTypes
     
 def getSuperClasses(class_: str, yagoTaxonomyUp: Dict[str, Set[str]], classes: Set[str]) -> Set[str]:
     """Adds all superclasses of a class <class_> (including <class_>) to the set <classes>, returns it; start with empty classes set"""
@@ -264,11 +269,8 @@ def handleDomain(entityFacts: Graph, yagoSchema: YagoSchema, fullTransitiveClass
            entityFacts.removeObjects(mainEntity, predicate)
            debug("Removed unknown predicate", mainEntity, predicate)
            continue
-        # Use set intersection for efficient membership check
-        subjectTypesSet: Set[str] = set(yagoProperty.subjectTypes)
-        if not (fullTransitiveClasses & subjectTypesSet):
+        if fullTransitiveClasses.isdisjoint(yagoProperty.subjectTypes):
             # Remove all objects for this predicate if domain check fails
-            debug("Domain check failed for", mainEntity, yagoProperty, fullTransitiveClasses)
             writer.writeMetaFact(mainEntity, yagoProperty.identifier, Prefixes.schemaThing, Prefixes.ysReason, f'"Domain check failed ({", ".join(s for s in fullTransitiveClasses if not s.startswith("wd:") and s!=Prefixes.schemaThing)})"')
             entityFacts.removeObjects(mainEntity, predicate)
                      
@@ -350,11 +352,9 @@ def cleanObject(subject, obj: str, yagoProperty: Any, writer) -> Optional[str]:
     if yagoProperty.pattern:
        objectValue = TurtleUtils.splitLiteral(obj)[0]
        if objectValue is None:
-           debug("Object is not a literal", obj)
            writer.writeMetaFact(subject, yagoProperty.identifier, obj, Prefixes.ysReason, '"not a literal"')
            return None
        if not re.match(yagoProperty.pattern, objectValue):
-           debug("Object does not match regex:", objectValue, yagoProperty.pattern)
            writer.writeMetaFact(subject, yagoProperty.identifier, obj, Prefixes.ysReason, '"pattern check failed"')
            return None
     
@@ -372,7 +372,6 @@ def cleanObject(subject, obj: str, yagoProperty: Any, writer) -> Optional[str]:
             
     # If the object is a literal, there is no chance we can make it fit the range
     if TurtleUtils.isLiteral(obj):
-        debug("Could not match any object type for", obj, yagoProperty.objectTypes)
         writer.writeMetaFact(subject, yagoProperty.identifier, obj, Prefixes.ysReason, '"uncastable literal"')
         return None
     
@@ -457,7 +456,8 @@ def handleMaxCounts(entityFacts: Graph, yagoSchema: YagoSchema, writer, isSecond
                 if lang:
                    if lang in languages:
                         debug("Duplicate language:", mainEntity, predicate, lang)
-                        writer.writeMetaFact(mainEntity, predicate, obj, Prefixes.ysReason, f'"duplicate language: {lang}"')                                       
+                        # Generates too many exclusions that come from synonymous predicates 
+                        # writer.writeMetaFact(mainEntity, predicate, obj, Prefixes.ysReason, f'"duplicate language: {lang}"')                                       
                         entityFacts.remove((mainEntity, predicate, obj))
                    else:
                         languages.add(lang)
@@ -508,13 +508,11 @@ class treatWikidataEntity():
         self.number: int = workerId
         print("    Wikidata reader", workerId+1, "loads YAGO schema", flush=True)
         self.yagoSchema: YagoSchema = YagoSchema(FOLDER+"01-yago-final-schema.ttl", False)
-        print("wd:Q5 is mapped to ",self.yagoSchema.wikidataClasses["wd:Q5"])
         print("    Wikidata reader", workerId+1, "loads YAGO taxonomy", flush=True)
         self.yagoTaxonomyUp: Dict[str, Set[str]] = defaultdict(set)
         for triple in TsvUtils.tsvTuples(FOLDER+"02-yago-taxonomy-to-rename.tsv"):
             if len(triple) > 3:
-                self.yagoTaxonomyUp[triple[0]].add(triple[2])
-                
+                self.yagoTaxonomyUp[triple[0]].add(triple[2])                
         print("    Done initializing Wikidata reader", workerId+1, flush=True)
         self.writer: Optional[TsvUtils.TsvFileWriter] = None
                 
@@ -552,12 +550,10 @@ class treatWikidataEntity():
         handleMaxCounts(entityFacts, self.yagoSchema, self.writer, isSecondaryClass)
 
         if not isSecondaryClass and not guessLabelIfNecessary(entityFacts):
-            debug("Label failed", entityFacts.mainSubject())
             self.writer.writeMetaFact(entityFacts.mainSubject(), Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, '"no label"')
             return True
         
         if not checkMinCounts(entityFacts, self.yagoSchema, isSecondaryClass):
-            debug("Mincount failed", entityFacts.mainSubject())
             self.writer.writeMetaFact(entityFacts.mainSubject(), Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, '"mincount failed"')
             return True
         
