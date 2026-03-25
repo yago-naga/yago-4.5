@@ -512,7 +512,7 @@ def visitWikidataEntities(args):
     # so that we can call Pool.map() with this function.
     # So we unpack them.
     file, visitor, portion, size, numThreads = args
-    toPrint=(portion+1)*50.0/numThreads
+    toPrint=50.0/numThreads
     toPrint=math.floor(toPrint)+ (1 if random.random()<(toPrint-math.floor(toPrint)) else 0)
     print("."*int(toPrint), end='',flush=True)
     if portion==numThreads-1:

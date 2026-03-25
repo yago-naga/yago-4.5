@@ -128,7 +128,32 @@ def translateTypeAssertions(entityFacts: Graph, yagoTaxonomyUp: Dict[str, Set[st
     # Anything that has a parent taxon is an instance of taxon
     if Prefixes.schemaParentTaxon in entityFacts.predicatesOf(mainEntity):
         entityFacts.add((mainEntity, Prefixes.rdfType, Prefixes.schemaTaxon))
+
+##########################################################################
+#             Ranks
+##########################################################################
+
+# Ranks are encoded as follows in Wikidata:
+#
+# # Belgium has 11m inhabitants
+# wd:Q31 wdt:P1082 "+11431406"^^xsd:decimal .
+# wd:Q31 p:P1082 wds:Q31-a01a7f7f-41c6-f3b6-1782-64db48331257 .
+# wds:Q31-a01a7f7f-41c6-f3b6-1782-64db48331257 a wikibase:Statement,
+#                wikibase:BestRank ;
+#        wikibase:rank wikibase:PreferredRank ;
+#        ps:P1082 "+11825551"^^xsd:decimal ;
         
+def removeNonBestRank(entityFacts):
+    """ Removes all facts that are not best rank"""
+    subject=entityFacts.mainSubject()
+    for statement in entityFacts.subjectsOf(Prefixes.rdfType, "wikibase:Statement"):
+        if (statement, Prefixes.rdfType, "wikibase:BestRank") not in entityFacts:
+            for predicate in entityFacts.predicatesOf(statement):
+                if predicate.startswith("ps:"):
+                    for obj in entityFacts.objectsOf(statement, predicate):
+                        debug("Removing non-best fact",subject, "wdt:"+predicate[3:], obj, statement)
+                        entityFacts.remove((subject, "wdt:"+predicate[3:], obj))
+
 ##########################################################################
 #             Start and end dates
 ##########################################################################
@@ -522,6 +547,8 @@ class treatWikidataEntity():
         
         handleWebPages(entityFacts)               
 
+        removeNonBestRank(entityFacts)
+        
         # We backup the existing Wikidata types for the log messages
         oldTypes = entityFacts.objectsOf(entityFacts.mainSubject(), Prefixes.wikidataType)
 
