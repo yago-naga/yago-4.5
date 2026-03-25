@@ -117,6 +117,8 @@ yagoAward = "yago:Award"
 
 owlDisjointWith = "owl:disjointWith"
 
+geoPoint = "geo:wktLiteral"
+
 schemaTaxon = "schema:Taxon"
 
 schemaName = "schema:name"

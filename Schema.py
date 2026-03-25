@@ -359,4 +359,15 @@ class YagoSchema(object):
             c.check()
         for p in self.properties.values():
             p.check()
-            
+        for c in self.classes.values():
+            for c2 in c.disjointWith:
+                if c2.identifier not in self.classes:
+                    print("  Warning: Undeclared disjoint class",c2,"of",c)
+            for c2 in c.superClasses:
+                if c2.identifier not in self.classes:
+                    print("  Warning: Undeclared superclass",c2,"of",c)
+            for p in c.properties:
+                for o in p.objectTypes:
+                    if not o.startswith("xsd:") and o!=Prefixes.rdfLangString and o!=Prefixes.geoPoint and o not in self.classes:
+                        print("  Warning: Undeclared range",o,"of property",p,"in class",c)                
+                

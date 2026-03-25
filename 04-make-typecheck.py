@@ -268,7 +268,7 @@ with TsvUtils.Timer("Step 04: Type-checking YAGO"):
                         continue
                         
                     # Write out the fact
-                    if classes is None or any(instanceOf(obj,c) for c in classes):                        
+                    if classes is None or any(instanceOf(obj,c) for c in classes):
                         out.write(subject, predicate, obj, ". #", startDate, endDate)
                         wroteFacts=True
                         count+=1

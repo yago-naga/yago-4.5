@@ -481,14 +481,6 @@ schema:CreativeWork a sh:NodeShape ;
         rdfs:comment "Person credited as the art director/artistic director of this Creative Work"@en ;
     ] ;
 
-    #Margherita 20/02/26 added property # Fabian: becomes a type
-    #sh:property [
-    #    sh:path schema:genre ;
-    #    sh:class yago:Thing ;
-    #    ys:fromProperty wdt:P136 ;
-    #    rdfs:comment "The genre of the Creative Work" ;
-    #] ;
-
     #Margherita 20/02/26 added property 
     sh:property [
         sh:path yago:publishedOn ;
@@ -500,7 +492,7 @@ schema:CreativeWork a sh:NodeShape ;
     #Margherita 20/02/26 added property 
     sh:property [
         sh:path schema:inLanguage ;
-        sh:class yago:Language ;
+        sh:class schema:Language ;
         ys:fromProperty wdt:P364, wdt:P407 ;
         rdfs:comment "The language of a CreativeWork"@en ;
     ] .
@@ -1057,7 +1049,7 @@ schema:Organization a sh:NodeShape ;
     #Margherita 20/02/2026 added property
     sh:property [
         sh:path yago:fieldOfWork ;
-        sh:class yago:Thing ; 
+        sh:class schema:Thing ; 
         ys:fromProperty wdt:P101 ;
         rdfs:comment "The field of work of the Person or Organization"@en ;
     ] ;
