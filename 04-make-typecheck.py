@@ -45,8 +45,8 @@ FOLDER="test-data/04-make-typecheck/" if TEST else "yago-data/"
 #             YAGO ids
 ##########################################################################
 
-# Keeps all YAGO ids to make sure we do not have duplicates
-yagoIds=set()
+# Keeps all YAGO titles (= id minus the prefix) to make sure we do not have duplicates
+yagoTitles=set()
 
 def hexCode(char):    
     """ Hex-encodes the character """
@@ -69,8 +69,8 @@ def allLegal(s):
     """ True if all characters are legal characters """
     return all(c==' ' or legal(c) for c in s)
 
-def yagoIdFromName(s):
-    """ Creates a YAGO id from a name, mirroring every character """
+def titleFromName(s):
+    """ Creates a YAGO title from a name, mirroring every character """
     result=""
     for c in s:
         if legal(c):
@@ -79,8 +79,8 @@ def yagoIdFromName(s):
             result+=hexCode(c)
     return result
     
-def yagoIdFromString(s):
-    """ Creates a YAGO id from a string """
+def titleFromString(s):
+    """ Creates a YAGO title from a string """
     result=""
     for c in s:
         if legal(c):
@@ -104,38 +104,38 @@ def yagoIdFromString(s):
     result=result.replace("genid","gen_id")
     return result
  
-def yagoIdFromWikipediaPage(wikipediaPageTitle):
+def titleFromWikipediaPage(wikipediaPageTitle):
     """ Creates a YAGO id from a Wikipedia page title"""
-    return yagoIdFromString(parse.unquote(wikipediaPageTitle))
+    return titleFromString(parse.unquote(wikipediaPageTitle))
     
-def yagoIdFromLabelWd(wikidataEntity,label):
+def titleFromLabel(wikidataEntity,label):
     """ Creates a YAGO id from label -- attaching the Wikidata id to avoid ambiguity"""
-    yid=yagoIdFromString(label).title()
-    if isGoodYagoId(yid):
+    yid=titleFromString(label).title()
+    if isGoodYagoTitle(yid):
         return yid+"_"+wikidataEntity[3:]
     return None
-    
-def yagoIdFromWikidataId(wikidataEntity):
+
+def titleFromWikidataId(wikidataEntity):
     """ Creates a YAGO id from a Wikidata entity """
     return wikidataEntity[3:]
 
-def isGoodYagoId(identifier):
+def isGoodYagoTitle(identifier):
     """ TRUE if the string is long enough"""
     return identifier and len(re.sub("[_-]+","",identifier))>1
 
-def registerYagoId(identifier):
+def registerTitle(identifier):
     """ Registers YAGO id, returns TRUE on success"""
-    if identifier in yagoIds:
+    if identifier in yagoTitles:
         return False
-    yagoIds.add(identifier)
+    yagoTitles.add(identifier)
     return True
 
-def tryYagoId(out,currentTopic, yagoId, isWikipedia=False):
+def tryYagoId(out,currentTopic, title, isWikipedia=False):
     """ Registers and writes out YAGO id, returns TRUE on success"""
-    if not isGoodYagoId(yagoId):
+    if not isGoodYagoTitle(title):
         return False
-    if registerYagoId(yagoId):
-        out.write(currentTopic,"owl:sameAs","yago:"+yagoId,". #WIKI" if isWikipedia else ". #OTHER")    
+    if registerTitle(title):
+        out.write(currentTopic,"owl:sameAs","yago:"+title,". #WIKI" if isWikipedia else ". #OTHER")    
         return True
     return False
     
@@ -146,15 +146,15 @@ def writeYagoId(out, currentTopic, currentEnglishLabel, currentLabel, currentWik
         return
     # Names get an id that mirrors its label
     if isName:
-       out.write(currentTopic,"owl:sameAs","yago:"+yagoIdFromName(currentLabel),". #OTHER") 
+       out.write(currentTopic,"owl:sameAs", "yago:"+titleFromName(currentLabel),". #OTHER") 
        return
-    if currentWikipediaPage and tryYagoId(out,currentTopic, yagoIdFromWikipediaPage(currentWikipediaPage), True):
+    if currentWikipediaPage and tryYagoId(out,currentTopic, titleFromWikipediaPage(currentWikipediaPage), True):
         return
-    if currentEnglishLabel and tryYagoId(out,currentTopic, yagoIdFromLabelWd(currentTopic,currentEnglishLabel)):
+    if currentEnglishLabel and tryYagoId(out,currentTopic, titleFromLabel(currentTopic,currentEnglishLabel)):
         return        
-    if currentLabel and tryYagoId(out,currentTopic, yagoIdFromLabelWd(currentTopic,currentLabel)):
+    if currentLabel and tryYagoId(out,currentTopic, titleFromLabel(currentTopic,currentLabel)):
         return        
-    out.write(currentTopic,"owl:sameAs","yago:"+yagoIdFromWikidataId(currentTopic),". #OTHER")
+    out.write(currentTopic,"owl:sameAs","yago:"+titleFromWikidataId(currentTopic),". #OTHER")
 
 ##########################################################################
 #             Class operations

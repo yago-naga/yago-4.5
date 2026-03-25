@@ -74,8 +74,8 @@ class WikidataVisitor:
         # Ignore non-classes
         if Prefixes.wikidataSubClassOf not in predicates and Prefixes.wikidataAnalogousClass not in predicates:
             return True   
-        # If we're handling an instance, quit (use set intersection for efficiency)
-        if predicates & instanceIndicators:
+        # If we're handling an instance, quit
+        if not predicates.isdisjoint(instanceIndicators):
             return True
         for subject, predicate, obj in graph:            
             if predicate == Prefixes.wikidataSubClassOf or predicate == Prefixes.wikidataAnalogousClass:
