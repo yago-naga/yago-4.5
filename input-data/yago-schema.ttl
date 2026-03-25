@@ -1607,22 +1607,6 @@ schema:Place a sh:NodeShape ;
         ys:fromProperty wdt:P625 ;
         rdfs:comment "The geographic coordinates of a Place (in WKT literal format)"@en ;
     ] .
-# Fabian: would need proper modeling of the target class	
-#    sh:property [
-#        sh:path yago:flag ; # Thomas: added to yago: 2026-01-16
-#        sh:class schema:CreativeWork ;
-#        ys:fromProperty wdt:P163 ;
-	#rdfs:comment "Flag of the place or organization"@en ;
-#    ] ;
-    # Margherita 10/02/26 removed property
-	# Fabian: TODO this would need proper modeling with timeZone as a new class (subclass of Place?)
-    # sh:property [
-        # sh:path schema:timeZone ;
-        # sh:datatype xsd:string ;
-        # ys:fromProperty wdt:P421 ;
-        # rdfs:comment "The time zone where a Place is located"@en ;
-    # ] .
-
 
 # ------------------ Planets ---------------
 
@@ -2169,6 +2153,15 @@ schema:Product a sh:NodeShape ;
         ys:fromProperty wdt:P2048 ;
         rdfs:comment "The height of an object"@en ;
     ] ;
+	#Margherita 20/02/2026 added prop
+    sh:property [
+        sh:path yago:length ;
+        sh:datatype yago:UnitOfLength ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P2043 ;
+        rdfs:comment "The length of an object"@en ;
+    ] ;
+
 
     #Margherita 10/03/26 added property 
     sh:property [

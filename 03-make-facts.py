@@ -504,16 +504,12 @@ class treatWikidataEntity():
     """ Visitor that will handle every Wikidata entity """
     def __init__(self, workerId: int) -> None:
         """ We load everything once per process (!) in order to avoid problems with shared memory """
-        print("    Initializing Wikidata reader", workerId+1, flush=True)
         self.number: int = workerId
-        print("    Wikidata reader", workerId+1, "loads YAGO schema", flush=True)
         self.yagoSchema: YagoSchema = YagoSchema(FOLDER+"01-yago-final-schema.ttl", False)
-        print("    Wikidata reader", workerId+1, "loads YAGO taxonomy", flush=True)
         self.yagoTaxonomyUp: Dict[str, Set[str]] = defaultdict(set)
         for triple in TsvUtils.tsvTuples(FOLDER+"02-yago-taxonomy-to-rename.tsv"):
             if len(triple) > 3:
                 self.yagoTaxonomyUp[triple[0]].add(triple[2])                
-        print("    Done initializing Wikidata reader", workerId+1, flush=True)
         self.writer: Optional[TsvUtils.TsvFileWriter] = None
                 
     def visit(self, entityFacts: Graph) -> None:
@@ -603,14 +599,13 @@ class treatWikidataEntity():
 if __name__ == '__main__':
     with TsvUtils.Timer("Step 03: Creating YAGO facts"):
         TurtleUtils.visitWikidata(WIKIDATA_FILE, treatWikidataEntity) 
-        print("  Collecting results...")
-        count=0
+        print("  Collecting results...", end='', flush=True)
+        factCount=0
         tempFiles=list(glob.glob(FOLDER+"03-yago-facts-to-type-check-*.tmp"))
         tempFiles.sort()
         with open(FOLDER+"03-yago-facts-to-type-check.log", "wb") as logWriter:        
             with open(FOLDER+"03-yago-facts-to-type-check.tsv", "wb") as writer:
                 for file in tempFiles:
-                    print("    Reading",file)
                     with open(file, "rb") as reader:
                         for line in reader:
                             if line.startswith(b"<<"):
@@ -618,9 +613,9 @@ if __name__ == '__main__':
                             elif line.strip():
                                 writer.write(line)
                                 if not line.startswith(b"@"):
-                                    count+=1
+                                    factCount+=1
         print("  done")
-        print("  Info: Number of facts:",count)
+        print("  Info: Number of facts:",factCount)
         
         print("  Deleting temporary files...", end="", flush=True)
         for file in tempFiles:

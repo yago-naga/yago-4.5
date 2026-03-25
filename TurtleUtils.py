@@ -13,6 +13,8 @@ from io import StringIO
 import Prefixes
 import TsvUtils
 import multiprocessing
+import random
+import math
 
 TEST=len(sys.argv)>1 and sys.argv[1]=="--test"
 
@@ -509,8 +511,13 @@ def visitWikidataEntities(args):
     # The arguments are packed in a single argument
     # so that we can call Pool.map() with this function.
     # So we unpack them.
-    file, visitor, portion, size = args
-    print("    Starting Wikidata reader",portion+1)
+    file, visitor, portion, size, numThreads = args
+    toPrint=(portion+1)*50.0/numThreads
+    toPrint=math.floor(toPrint)+ (1 if random.random()<(toPrint-math.floor(toPrint)) else 0)
+    print("."*int(toPrint), end='',flush=True)
+    if portion==numThreads-1:
+        print(" done")
+        print("    Terminating...", end='', flush=True)    
     with open(file,"rb", buffering=1*mega) as wikidataReader:
         wikidataReader.seek(portion*size)
         # Seek to next Wikidata item
@@ -519,13 +526,12 @@ def visitWikidataEntities(args):
             if line.rstrip().endswith(b"a wikibase:Item .") or line.rstrip().endswith(b"a schema:Dataset ;"):
                 wikidataReader.seek(-len(line),1)
                 break
-        print("    Running Wikidata reader",portion+1,"at",wikidataReader.tell(),"with \"",line.rstrip().decode("utf-8"),'"', flush=True)        
         for graph in entitiesFromTriples(triplesFromTerms(termsAndSeparators(charGenerator(byteGenerator(wikidataReader))))):
             if not visitor.visit(graph):
                 break
             if wikidataReader.tell()>portion*size+size:
-                break            
-    print("    Finished Wikidata reader",portion+1, flush=True)        
+                break   
+    print("."*toPrint, end='', flush=True)
     return visitor.result()
 
 def visitWikidata(file, visitor, numThreads=90):
@@ -534,9 +540,11 @@ def visitWikidata(file, visitor, numThreads=90):
     if numThreads>fileSize/10000000:
         numThreads=int(fileSize/10000000)+1
     print("  Running",numThreads,"Wikidata readers", flush=True)
+    print("    Starting", end='', flush=True)
     portionSize=int(fileSize/numThreads)
     with multiprocessing.get_context("spawn").Pool(processes=numThreads) as pool:
-        result=pool.map(visitWikidataEntities, ((file, visitor(i), i, portionSize,) for i in range(0,numThreads)), 1)
+        result=pool.map(visitWikidataEntities, ((file, visitor(i), i, portionSize,numThreads,) for i in range(0,numThreads)), 1)
+    print(" done", flush=True)
     print("  done", flush=True)
     return(result)
 
