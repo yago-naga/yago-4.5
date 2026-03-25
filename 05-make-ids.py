@@ -105,17 +105,30 @@ def isNonEnglishLabel(literal):
 with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
 
     yagoIds={}
-    entitiesWithWikipediaPage=set()
+    entitiesWithWikipediaPage=set()    
     for split in TsvUtils.tsvTuples(FOLDER+"04-yago-ids.tsv", "  Loading YAGO ids"):
         if len(split)<4:
             continue
         yagoIds[split[0]]=split[2]
         if split[3]==". #WIKI":
             entitiesWithWikipediaPage.add(split[2])
-    
+        
     for split in TsvUtils.tsvTuples(FOLDER+"04-yago-bad-classes.tsv", "  Removing bad YAGO classes"):
         yagoIds.pop(split[0], None)
-    
+
+    print("  Simplifying ids... ", flush=True, end='')
+    simplifiedIds=set()
+    for entity in yagoIds:
+        entityId=yagoIds[entity]
+        if entityId not in entitiesWithWikipediaPage:
+            pos=entityId.rfind("_Q")
+            if pos!=-1:
+                entityId=entityId[0:pos]
+                if entityId not in simplifiedIds and entityId not in entitiesWithWikipediaPage:
+                    yagoIds[entity]=entityId
+                    simplifiedIds.add(entityId)
+    print("done")
+
     with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-meta.tsv") as metaFacts:
         with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-beyond-wikipedia.tsv") as fullFacts:
             with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-wikipedia.tsv") as wikipediaFacts:

@@ -47,3 +47,11 @@ wd:Q_doctoralDegree	owl:sameAs	yago:DoctoralDegree	. #WIKI
 wd:Q174789	owl:sameAs	yago:Meter	. #OTHER
 wd:Q31	owl:sameAs	yago:Belgium	. #WIKI
 wd:Q493293	owl:sameAs	yago:Andr_U0020_ea	. #OTHER
+
+
+wd:Q42	owl:sameAs	yago:Douglas_Adams	. #WIKI
+wd:Q43	owl:sameAs	yago:Douglas_Adams_Q43	. #OTHER
+
+wd:Q44	owl:sameAs	yago:Fabian_Q44	. #OTHER
+wd:Q45	owl:sameAs	yago:Fabian_Q45	. #OTHER
+

@@ -75,3 +75,14 @@ wd:Q31	rdfs:label	"Belgium"@en	.
 wd:Q31	schema:geo	"Point(4.6680555555556 50.641111111111)"^^geo:wktLiteral	.
 
 wd:Q_end	rdf:type	schema:Nonsense	.
+
+# Non-wikipedia entities should receive simple names
+wd:Q42	rdfs:label	"Douglas Adams"@en	.
+wd:Q42	rdf:type	schema:Person	.
+wd:Q42	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Douglas_Adams>	.
+wd:Q43	rdfs:label	"Douglas Adams"@en	.
+wd:Q43	rdf:type	schema:Person	.
+
+wd:Q44	rdfs:label	"Fabian"@en	.
+wd:Q45	rdfs:label	"Fabian"@en	.
+

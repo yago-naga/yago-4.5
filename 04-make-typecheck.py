@@ -114,14 +114,7 @@ def yagoIdFromLabelWd(wikidataEntity,label):
     if isGoodYagoId(yid):
         return yid+"_"+wikidataEntity[3:]
     return None
-
-def yagoIdFromLabel(wikidataEntity,label):
-    """ Creates a YAGO id from label -- attaching a '_' to avoid mapping to Wikipedia pages"""
-    yid=yagoIdFromString(label).title()
-    if isGoodYagoId(yid):
-        return yid+"_"
-    return None
-
+    
 def yagoIdFromWikidataId(wikidataEntity):
     """ Creates a YAGO id from a Wikidata entity """
     return wikidataEntity[3:]
@@ -157,11 +150,9 @@ def writeYagoId(out, currentTopic, currentEnglishLabel, currentLabel, currentWik
        return
     if currentWikipediaPage and tryYagoId(out,currentTopic, yagoIdFromWikipediaPage(currentWikipediaPage), True):
         return
-    if currentEnglishLabel and tryYagoId(out,currentTopic, yagoIdFromLabel(currentTopic,currentEnglishLabel)):
-        return        
     if currentEnglishLabel and tryYagoId(out,currentTopic, yagoIdFromLabelWd(currentTopic,currentEnglishLabel)):
         return        
-    if currentLabel and tryYagoId(out,currentTopic, yagoIdFromLabel(currentTopic,currentLabel)):
+    if currentLabel and tryYagoId(out,currentTopic, yagoIdFromLabelWd(currentTopic,currentLabel)):
         return        
     out.write(currentTopic,"owl:sameAs","yago:"+yagoIdFromWikidataId(currentTopic),". #OTHER")
 

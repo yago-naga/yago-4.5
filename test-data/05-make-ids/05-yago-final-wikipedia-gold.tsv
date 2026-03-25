@@ -54,3 +54,7 @@ yago:Belgium	owl:sameAs	wd:Q31	.
 yago:Belgium	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Belgium>	.
 yago:Belgium	rdfs:label	"Belgium"@en	.
 yago:Belgium	schema:geo	"Point(4.6680555555556 50.641111111111)"^^geo:wktLiteral	.
+yago:Douglas_Adams	rdfs:label	"Douglas Adams"@en	.
+yago:Douglas_Adams	owl:sameAs	wd:Q42	.
+yago:Douglas_Adams	rdf:type	schema:Person	.
+yago:Douglas_Adams	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Douglas_Adams>	.
