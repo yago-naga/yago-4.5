@@ -463,9 +463,16 @@ schema:CreativeWork a sh:NodeShape ;
     #Margherita 10/03/26 added property
     sh:property [
         sh:path yago:artDirector ;
-        sh:datatype schema:Person ;
+        sh:class schema:Person ;
         ys:fromProperty wdt:P3174 ;
         rdfs:comment "Person credited as the art director/artistic director of this Creative Work"@en ;
+    ] ;
+   # Thomas 26/03/26 added property
+   sh:property [
+        sh:path schema:performer ;
+        sh:class schema:Person ;
+        ys:fromProperty wdt:P175  ;
+        rdfs:comment "A Person who performs in this Creative Work"@en ;
     ] ;
 
     #Margherita 20/02/26 added property 
@@ -789,6 +796,14 @@ schema:Event a sh:NodeShape ;
             [ sh:class schema:CreativeWork ]
         ) ;
         rdfs:comment "Winner of the event"@en ;
+    ] ;
+
+   # Thomas 26/03/26 added property
+   sh:property [
+        sh:path schema:performer ;
+        sh:class schema:Person ;
+        ys:fromProperty wdt:P175  ;
+        rdfs:comment "A Person who performs in this event"@en ;
     ] ;
 
     sh:property [
