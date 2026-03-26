@@ -109,26 +109,30 @@ def handleWebPages(entityFacts: Graph) -> None:
 # Predicates that generate a class membership
 TYPE_PREDICATES=[Prefixes.wikidataType, Prefixes.wikidataOccupation, Prefixes.wikidataGenre, Prefixes.wikidataPosition]
     
-def translateTypeAssertions(entityFacts: Graph, yagoTaxonomyUp: Dict[str, Set[str]]) -> None:
-    """Replace all facts <subject, wikidata:type, class> by <subject, rdf:type, class>"""
+def translateTypeAssertions(entityFacts: Graph, yagoTaxonomyUp: Dict[str, Set[str]]):
+    """Replace all facts <subject, wikidata:type, class> by <subject, rdf:type, class>, returns Wikidata types"""
     # Given types are mostly meta stuff
     mainEntity: str = entityFacts.mainSubject()
     entityFacts.removeObjects(mainEntity, Prefixes.rdfType)
+    declaredWikidataTypes=set()
     # If you're a class, say it
     if mainEntity in yagoTaxonomyUp:
         entityFacts.add((mainEntity, Prefixes.rdfType, Prefixes.rdfsClass))
-        return
+        return declaredWikidataTypes
     # Translate all type-generating predicates to an rdf:type fact    
     for predicate in TYPE_PREDICATES:
         if predicate in entityFacts.predicatesOf(mainEntity):
             for obj in entityFacts.objectsOf(mainEntity, predicate):
                 if obj in yagoTaxonomyUp:
+                    if predicate==Prefixes.wikidataType:
+                        declaredWikidataTypes.add(obj)
                     entityFacts.add((mainEntity, Prefixes.rdfType, obj))
             entityFacts.removeObjects(mainEntity, predicate)
     # Anything that has a parent taxon is an instance of taxon
     if Prefixes.schemaParentTaxon in entityFacts.predicatesOf(mainEntity):
         entityFacts.add((mainEntity, Prefixes.rdfType, Prefixes.schemaTaxon))
-
+    return declaredWikidataTypes
+    
 ##########################################################################
 #             Ranks
 ##########################################################################
@@ -232,7 +236,7 @@ def getUnitOfMeasurement(subject, predicate, obj, entityGraph):
 #             Taxonomy checks
 ##########################################################################
 
-def cleanAndReturnTypes(entityFacts: Graph, yagoSchema: YagoSchema, yagoTaxonomyUp: Dict[str, Set[str]], writer) -> Set[str]:
+def cleanAndReturnTypes(entityFacts: Graph, yagoSchema: YagoSchema, yagoTaxonomyUp: Dict[str, Set[str]], writer, declaredWikidataTypes) -> Set[str]:
     """Removes disjoint classes and shortcuts, returns super types"""
     mainEntity: str = entityFacts.mainSubject()
     myTypesAndSuperTypes: Set[str] = set()
@@ -243,7 +247,8 @@ def cleanAndReturnTypes(entityFacts: Graph, yagoSchema: YagoSchema, yagoTaxonomy
         # Remove type if I am a shortcut
         if directType in myTypesAndSuperTypes:
             entityFacts.remove((mainEntity, Prefixes.rdfType, directType))
-            writer.writeMetaFact(mainEntity, Prefixes.rdfType, directType, Prefixes.ysReason, f'"is shortcut"')
+            if directType in declaredWikidataTypes:
+                writer.writeMetaFact(mainEntity, Prefixes.rdfType, directType, Prefixes.ysReason, f'"is shortcut"')
             continue               
         # Remove disjoint types
         superClasses: Set[str] = getSuperClasses(directType, yagoTaxonomyUp, set())
@@ -253,7 +258,8 @@ def cleanAndReturnTypes(entityFacts: Graph, yagoSchema: YagoSchema, yagoTaxonomy
                 for disjointClass in yagoSchema.classes[superClass].disjointWith:
                     if disjointClass.identifier in myTypesAndSuperTypes:
                         entityFacts.remove((mainEntity, Prefixes.rdfType, directType))
-                        writer.writeMetaFact(mainEntity, Prefixes.rdfType, directType, Prefixes.ysReason, f'"disjoint with {disjointClass}"')
+                        if directType in declaredWikidataTypes:
+                            writer.writeMetaFact(mainEntity, Prefixes.rdfType, directType, Prefixes.ysReason, f'"disjoint with {disjointClass}"')
                         gotRemoved=True
                         break
                 if gotRemoved:
@@ -264,7 +270,8 @@ def cleanAndReturnTypes(entityFacts: Graph, yagoSchema: YagoSchema, yagoTaxonomy
         for j in range(0,i):
             if directTypes[j] in superClasses: 
                 entityFacts.remove((mainEntity, Prefixes.rdfType, directTypes[j]))
-                writer.writeMetaFact(mainEntity, Prefixes.rdfType, directTypes[j], Prefixes.ysReason, f'"is shortcut"')                
+                if directTypes[j] in declaredWikidataTypes:
+                    writer.writeMetaFact(mainEntity, Prefixes.rdfType, directTypes[j], Prefixes.ysReason, f'"is shortcut"')                
         # The class is OK
         myTypesAndSuperTypes.update(superClasses)
     return myTypesAndSuperTypes
@@ -558,9 +565,9 @@ class treatWikidataEntity():
         
         entityFacts, dates, unitsOfMeasurement = translatePropertiesAndClasses(entityFacts, self.yagoSchema)
                 
-        translateTypeAssertions(entityFacts, self.yagoTaxonomyUp)        
+        declaredWikidataTypes = translateTypeAssertions(entityFacts, self.yagoTaxonomyUp)        
                 
-        types = cleanAndReturnTypes(entityFacts, self.yagoSchema, self.yagoTaxonomyUp, self.writer)
+        types = cleanAndReturnTypes(entityFacts, self.yagoSchema, self.yagoTaxonomyUp, self.writer, declaredWikidataTypes)
         
         if not types:
             self.writer.writeMetaFact(entityFacts.mainSubject(), Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, f'"no valid type among {", ".join(str(s) for s in oldTypes)}"')
