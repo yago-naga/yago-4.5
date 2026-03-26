@@ -360,14 +360,16 @@ class YagoSchema(object):
         for p in self.properties.values():
             p.check()
         for c in self.classes.values():
+            if not c.fromClasses and not c.identifier.startswith("rdf") and not any(c in c2.superClasses for c2 in self.classes.values()):
+               print("    Warning: Class",c,"is not mapped to Wikidata")
             for c2 in c.disjointWith:
                 if c2.identifier not in self.classes:
-                    print("  Warning: Undeclared disjoint class",c2,"of",c)
+                    print("    Warning: Undeclared disjoint class",c2,"of",c)
             for c2 in c.superClasses:
                 if c2.identifier not in self.classes:
-                    print("  Warning: Undeclared superclass",c2,"of",c)
+                    print("    Warning: Undeclared superclass",c2,"of",c)
             for p in c.properties:
                 for o in p.objectTypes:
                     if not o.startswith("xsd:") and o!=Prefixes.rdfLangString and o!=Prefixes.geoPoint and o not in self.classes:
-                        print("  Warning: Undeclared range",o,"of property",p,"in class",c)                
+                        print("    Warning: Undeclared range",o,"of property",p,"in class",c)                
                 
