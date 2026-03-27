@@ -48,25 +48,34 @@ schema:Taxon owl:disjointWith
 schema:Person owl:disjointWith 
     schema:CreativeWork,
     schema:Event,
-	schema:Taxon,
+    schema:Taxon,
     schema:Organization.
 schema:Place owl:disjointWith 
     schema:CreativeWork, 
     schema:Event,
-	schema:Person,
+    schema:Person,
     schema:Taxon. 
 schema:Product owl:disjointWith
     schema:Event,
     schema:Organization,
     schema:Taxon,
-	schema:Person,
+    schema:Person,
+    schema:Place.	
+# Thomas 26/03/26 added top-level class 
+schema:MedicalEntity owl:disjointWith
+    schema:CreativeWork,
+    schema:Event,
+    schema:Organization,
+    schema:Taxon,
+    schema:Person,
     schema:Place.	
 schema:Intangible  owl:disjointWith
     schema:Event,
     schema:Organization,
     schema:Taxon,
-	schema:Person,
-    schema:Place.	
+    schema:Person,
+    schema:Place,
+    schema:MedicalEntity.	
 
 # Top-level class of all individuals
 # (excluding literals, classes, properties, etc.)
@@ -129,7 +138,7 @@ schema:Thing a sh:NodeShape ;
         sh:path yago:follows ;
         sh:class schema:Thing ;
         ys:fromProperty wdt:P155, wdt:P1365 ;
-        rdfs:comment "An Thing that follows another Thing chronologically or conceptually"@en ;
+        rdfs:comment "A Thing that follows another Thing chronologically or conceptually"@en ;
     ] ;
 
     sh:property [
@@ -806,6 +815,14 @@ schema:Event a sh:NodeShape ;
         rdfs:comment "A Person who performs in this event"@en ;
     ] ;
 
+   # Thomas 26/03/26 added property
+   sh:property [
+        sh:path yago:deathNumber ;
+        sh:class schema:Person ;
+        ys:fromProperty wdt: P1120  ;
+        rdfs:comment "Number of people who died due to this event"@en ;
+    ] ;
+
     sh:property [
         sh:path schema:startDate ;
         sh:or (
@@ -1361,6 +1378,14 @@ schema:Person a sh:NodeShape ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P20 ;
         rdfs:comment "The place where a Person died"@en ;
+    ] ;
+
+   # Thomas 27/03/26
+    sh:property [
+        sh:path schema:deathCause ;
+        sh:class schema:MedicalEntity, schema:Event, schema:Person ;
+        ys:fromProperty wdt:P509, wdt:P1196 ;
+        rdfs:comment "Cause of death"@en ;
     ] ;
 
     #Margherita 20/02/2026 added prop 
@@ -2180,7 +2205,7 @@ schema:Taxon a sh:NodeShape;
         sh:datatype yago:UnitOfMass ;
         ys:fromProperty wdt:P2067 ;
 		sh:maxCount 1 ;
-        rdfs:comment "The mass of an AstronomicalObject"@en ;
+        rdfs:comment "The mass of the entity"@en ;
     ] ;    
 	sh:property [
         sh:path schema:parentTaxon ;
@@ -2197,6 +2222,59 @@ schema:Taxon a sh:NodeShape;
     ] ;
 	ys:fromClass wd:Q16521 .
 	
+################################################################
+#                Medical entities
+################################################################
+
+
+# Thomas 27/03/26
+schema:MedicalEntity a sh:NodeShape;
+	rdfs:subClassOf schema:Thing ;
+	sh:property [
+        sh:path yago:healthSpeciality ;
+        sh:class schema:MedicalEntity ;
+        ys:fromProperty wdt:P1995 ;
+        rdfs:comment "Health speciality of the medical entity"@en ;
+    ] ;   
+	sh:property [
+        sh:path yago:treatment ;
+        sh:class schema:MedicalEntity, schema:Product ;
+        ys:fromProperty wdt:P2176, wdt:P924 ;
+        rdfs:comment "Drug or therapy used for treatment"@en ;
+    ] ;   
+	sh:property [
+        sh:path yago:symptom ;
+        sh:class schema:MedicalEntity ;
+        ys:fromProperty wdt:P780 ;
+        rdfs:comment "Symptoms or signs of a medical condition"@en ;
+    ] ;  
+    	sh:property [
+        sh:path yago:hasCause ;
+        ys:fromProperty wdt:P828 ;
+        sh:class schema:MedicalEntity, schema:Event ;
+        rdfs:comment "Cause of the medical condition"@en ;
+    ] ;
+	sh:property [
+        sh:path yago:examination ;
+        ys:fromProperty wdt:P923 ;
+        sh:class schema:MedicalEntity ;
+        rdfs:comment "Medical examination to diagnose the medical condition"@en ;
+    ] ;
+	sh:property [
+        sh:path yago:afflicts ;
+        ys:fromProperty wdt:P689 ;
+        sh:class schema:Taxon ;
+        rdfs:comment "Type of organism which a condition or disease afflicts"@en ;
+    ] ;
+
+	sh:property [
+        sh:path yago:riskFactor ;
+        ys:fromProperty wdt:P5642 ;
+        sh:class schema:Thing ;
+        rdfs:comment "Risk factor for this medical condition"@en ;
+    ] ;
+	ys:fromClass wd:Q7189713 .
+
 ################################################################
 #                Time annotation
 ################################################################
