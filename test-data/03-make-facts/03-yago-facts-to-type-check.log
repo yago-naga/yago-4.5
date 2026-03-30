@@ -11,4 +11,4 @@
 <<	wd:Q31	yago:literacyRate	"500"^^xsd:decimal	>>	ys:excludedFor	"not in min-max range"	.
 <<	wd:Q31	yago:literacyRate	"lkblblhbl"^^xsd:decimal	>>	ys:excludedFor	"not a number"	.
 <<	wd:Q312	schema:dateCreated	"1976-04-01"^^xsd:date	>>	ys:excludedFor	"maxcount overflow"	.
-<<	wd:Q_fictional	schema:geo	schema:Thing	>>	ys:excludedFor	"Domain check failed (yago:FictionalEntity, schema:Person, yago:Worker)"	.
+<<	wd:Q_fictional	schema:geo	schema:Thing	>>	ys:excludedFor	"Domain check failed (yago:Worker, yago:FictionalEntity, schema:Person)"	.

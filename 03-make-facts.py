@@ -439,7 +439,7 @@ def handleRange(entityFacts: Graph, yagoSchema: YagoSchema, writer) -> None:
                 debug("Cleaned object", obj, cleanObj)
                 entityFacts.remove((mainEntity, predicate, obj))         
                 entityFacts.add((mainEntity, predicate, cleanObj))
-                
+
 ##########################################################################
 #             Handling min and max counts
 ##########################################################################
@@ -585,14 +585,9 @@ class treatWikidataEntity():
         
         if not checkMinCounts(entityFacts, self.yagoSchema, isSecondaryClass):
             self.writer.writeMetaFact(entityFacts.mainSubject(), Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, '"mincount failed"')
-            return True
-        
-        # Kick out entities without a type
-        subject: str = entityFacts.mainSubject()        
-        if Prefixes.rdfType not in entityFacts.predicatesOf(subject):
-            self.writer.writeMetaFact(entityFacts.mainSubject(), Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, f'"no type left among {", ".join(str(s) for s in oldTypes)} and {", ".join(str(s) for s in types)}"')
-            return True
-                
+            return True               
+
+        subject=entityFacts.mainSubject()
         for predicate in entityFacts.predicatesOf(subject):
             for obj in entityFacts.objectsOf(subject, predicate):
                 if subject == obj:
