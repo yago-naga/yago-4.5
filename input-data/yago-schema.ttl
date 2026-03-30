@@ -1600,6 +1600,14 @@ schema:Place a sh:NodeShape ;
         rdfs:comment "The length of an object"@en ;
     ] ;
 
+    #Thomas 30/03/2026 added prop
+    sh:property [
+        sh:path schema:material ;
+        sh:class schema:BioChemEntity ;
+        ys:fromProperty wdt:P186 ;
+        rdfs:comment "The material an object or a place is made of"@en ;
+    ] ;
+
     sh:property [
         sh:path schema:geo ;
         sh:datatype geo:wktLiteral ;
@@ -2121,9 +2129,13 @@ schema:Product a sh:NodeShape ;
         ys:fromProperty wdt:P166 ;
         rdfs:comment "An award won by a Person, Organization, CreativeWork, or Product"@en ;
     ] ;
+# Thomas 30/03/26 Update property
     sh:property [
         sh:path schema:material ;
-        sh:class schema:Product ;
+        sh:or (
+            [ sh:class schema:Product ]
+            [ sh:class schema:BioChemEntity ]
+            ) ;
         ys:fromProperty wdt:P186 ;
         rdfs:comment "The material a Product is made of"@en ;
     ] ;
