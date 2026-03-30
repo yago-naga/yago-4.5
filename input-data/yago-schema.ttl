@@ -828,7 +828,7 @@ schema:Event a sh:NodeShape ;
    sh:property [
         sh:path yago:deathNumber ;
         sh:datatype xsd:integer ;
-        ys:fromProperty wdt: P1120  ;
+        ys:fromProperty wdt:P1120  ;
         rdfs:comment "Number of people who died due to this event"@en ;
     ] ;
 
