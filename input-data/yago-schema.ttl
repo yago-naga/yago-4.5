@@ -818,7 +818,7 @@ schema:Event a sh:NodeShape ;
    # Thomas 26/03/26 added property
    sh:property [
         sh:path yago:deathNumber ;
-        sh:class schema:Person ;
+        sh:datatype xsd:integer ;
         ys:fromProperty wdt: P1120  ;
         rdfs:comment "Number of people who died due to this event"@en ;
     ] ;
@@ -1382,9 +1382,16 @@ schema:Person a sh:NodeShape ;
 
    # Thomas 27/03/26
     sh:property [
-        sh:path schema:deathCause ;
-        sh:class schema:MedicalEntity, schema:Event, schema:Person ;
-        ys:fromProperty wdt:P509, wdt:P1196 ;
+        sh:path yago:deathCause ;
+        sh:or (
+            [ sh:class schema:MedicalEntity ]
+			[ sh:class schema:Event ]
+			[ sh:class schema:Person ]
+			[ sh:class schema:Organization ]
+			[ sh:class schema:Taxon ]
+			[ sh:class schema:Product ]
+        ) ;
+        ys:fromProperty wdt:P509, wdt:P1196, wdt:P157 ;
         rdfs:comment "Cause of death"@en ;
     ] ;
 
@@ -1399,18 +1406,6 @@ schema:Person a sh:NodeShape ;
         ) ;
         ys:fromProperty wdt:P1317 ;
         rdfs:comment "Date when the person was known to be active"@en ;
-    ] ;
-
-    #Margherita 30/01/26 added property, limited the constraints to Person e Organization
-    sh:property [
-        sh:path yago:killedBy ;
-        ys:fromProperty wdt:P157 ;
-        sh:or (
-            [ sh:class schema:Person ]
-            [ sh:class schema:Organization ]
-        ) ;
-		sh:maxCount 1 ;
-        rdfs:comment "Killed by, can either be a Person or an Organization"@en ;
     ] ;
 
     sh:property [
