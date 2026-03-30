@@ -68,6 +68,15 @@ schema:MedicalEntity owl:disjointWith
     schema:Organization,
     schema:Taxon,
     schema:Person,
+    schema:Place,
+    schema:Product.	
+# Thomas 30/03/26 added top-level class 
+schema:BioChemEntity owl:disjointWith
+    schema:CreativeWork,
+    schema:Event,
+    schema:Organization,
+    schema:Taxon,
+    schema:Person,
     schema:Place.	
 schema:Intangible  owl:disjointWith
     schema:Event,
@@ -1385,6 +1394,7 @@ schema:Person a sh:NodeShape ;
         sh:path yago:deathCause ;
         sh:or (
             [ sh:class schema:MedicalEntity ]
+            [ sh:class schema:BioChemEntity ]
 			[ sh:class schema:Event ]
 			[ sh:class schema:Person ]
 			[ sh:class schema:Organization ]
@@ -2233,7 +2243,11 @@ schema:MedicalEntity a sh:NodeShape;
     ] ;   
 	sh:property [
         sh:path yago:treatment ;
-        sh:class schema:MedicalEntity, schema:Product ;
+        sh:or (
+            [ sh:class schema:MedicalEntity ]
+            [ sh:class schema:BioChemEntity ]
+	    [ sh:class schema:Product ]
+        ) ;
         ys:fromProperty wdt:P2176, wdt:P924 ;
         rdfs:comment "Drug or therapy used for treatment"@en ;
     ] ;   
@@ -2246,7 +2260,11 @@ schema:MedicalEntity a sh:NodeShape;
     	sh:property [
         sh:path yago:hasCause ;
         ys:fromProperty wdt:P828 ;
-        sh:class schema:MedicalEntity, schema:Event ;
+        sh:or (
+            [ sh:class schema:MedicalEntity ]
+            [ sh:class schema:BioChemEntity ]
+	    [ sh:class schema:Event ]
+        ) ;
         rdfs:comment "Cause of the medical condition"@en ;
     ] ;
 	sh:property [
@@ -2269,6 +2287,40 @@ schema:MedicalEntity a sh:NodeShape;
         rdfs:comment "Risk factor for this medical condition"@en ;
     ] ;
 	ys:fromClass wd:Q7189713 .
+
+################################################################
+#                Bio-chemical entities
+################################################################
+
+
+# Thomas 27/03/26
+schema:BioChemEntity a sh:NodeShape;
+	rdfs:subClassOf schema:Thing ;
+	sh:property [
+        sh:path yago:interacts ;
+        sh:class schema:BioChemEntity ;
+        ys:fromProperty wdt:P769 ;
+        rdfs:comment "Significant drug interaction"@en ;
+    ] ;   
+	sh:property [
+        sh:path yago:hasEffect ;
+        sh:class schema:MedicalEntity ;
+        ys:fromProperty wdt:P1542 ;
+        rdfs:comment "Has effect on this medical condition"@en ;
+    ] ;   
+	sh:property [
+        sh:path yago:chemicalStructure ;
+        sh:datatype xsd:anyURI ;
+        ys:fromProperty wdt:P117 ;
+        rdfs:comment "An image of the chemical structure of the entity"@en ;
+    ] ;	
+	sh:property [
+        sh:path yago:contains ;
+        sh:class schema:BioChemEntity ;
+        ys:fromProperty wdt:P527 ;
+        rdfs:comment "Contains this bio-chemical entity"@en ;
+    ] ;	
+	ys:fromClass wd:Q43460564, wd:Q55568967 .
 
 ################################################################
 #                Time annotation
