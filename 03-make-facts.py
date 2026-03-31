@@ -494,13 +494,13 @@ def handleMaxCounts(entityFacts: Graph, yagoSchema: YagoSchema, writer, isSecond
                    else:
                         languages.add(lang)
 
-def checkMinCounts(entityFacts: Graph, yagoSchema: YagoSchema, isSecondaryClass: bool) -> bool:
+def checkMinCounts(entityFacts: Graph, yagoSchema: YagoSchema, isSecondaryClass: bool, writer) -> bool:
     """ TRUE if the object passes the MinCount checks"""
     mainEntity: str = entityFacts.mainSubject()            
     for predicate in entityFacts.predicatesOf(mainEntity):        
         yagoProperty = yagoSchema.properties.get(predicate, None)
         if yagoProperty and yagoProperty.minCount and len(entityFacts.objectsOf(mainEntity, predicate)) < yagoProperty.minCount and not (isSecondaryClass and predicate == Prefixes.rdfsLabel):
-            debug("Min count", yagoProperty.minCount, "not satisfied for", mainEntity, predicate)
+            self.writer.writeMetaFact(mainEntity, predicate, Prefixes.schemaThing, Prefixes.ysReason, '"mincount failed: just {len(entityFacts.objectsOf(mainEntity, predicate))} objects instead of {yagoProperty.minCount}"')
             return False
     return True
 
@@ -583,8 +583,7 @@ class treatWikidataEntity():
             self.writer.writeMetaFact(entityFacts.mainSubject(), Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, '"no label"')
             return True
         
-        if not checkMinCounts(entityFacts, self.yagoSchema, isSecondaryClass):
-            self.writer.writeMetaFact(entityFacts.mainSubject(), Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, '"mincount failed"')
+        if not checkMinCounts(entityFacts, self.yagoSchema, isSecondaryClass, self.writer):
             return True               
 
         subject=entityFacts.mainSubject()

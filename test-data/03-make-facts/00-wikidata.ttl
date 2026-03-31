@@ -197,7 +197,10 @@ wd:Q493293
         wdt:P1705 "Andrea"@mul ;
         wdt:P31 wd:Q3409032 .
 		
-
+# No mincount
+wd:Q678 wdt:P31 schema:Corporation ;
+    schema:description "corporatin without label"@en .
+	
 # Units of measurement with conversion factor
 wd:Q100995 wdt:P31 wd:Q3647172,
                 wd:Q82047057 ;

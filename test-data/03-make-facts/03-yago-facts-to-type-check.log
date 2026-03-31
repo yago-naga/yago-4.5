@@ -8,7 +8,8 @@
 <<	wd:Q_Elvis	schema:image	"http://elibrary.unm.edu/sora/jrr/index.php#http://elibrary.unm.edu/sora/jrr/index.php#"	>>	ys:excludedFor	"uncastable literal"	.
 <<	wd:Q_Elvis	schema:deathDate	"0000-02-22T00:00:00Z"^^xsd:dateTime	>>	ys:excludedFor	"uncastable literal"	.
 <<	wd:Q_Elvis	schema:birthPlace	wd:Q_birth_place_2	>>	ys:excludedFor	"maxcount overflow"	.
-<<	wd:Q31	yago:literacyRate	"500"^^xsd:decimal	>>	ys:excludedFor	"not in min-max range"	.
 <<	wd:Q31	yago:literacyRate	"lkblblhbl"^^xsd:decimal	>>	ys:excludedFor	"not a number"	.
+<<	wd:Q31	yago:literacyRate	"500"^^xsd:decimal	>>	ys:excludedFor	"not in min-max range"	.
 <<	wd:Q312	schema:dateCreated	"1976-04-01"^^xsd:date	>>	ys:excludedFor	"maxcount overflow"	.
 <<	wd:Q_fictional	schema:geo	schema:Thing	>>	ys:excludedFor	"Domain check failed (yago:Worker, yago:FictionalEntity, schema:Person)"	.
+<<	wd:Q678	rdf:type	schema:Thing	>>	ys:excludedFor	"no label"	.
