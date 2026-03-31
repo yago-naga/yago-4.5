@@ -103,6 +103,7 @@ badClasses = {
     "wd:Q111279923",  # same 
     "wd:Q4167410",    # disambiguation page
     "wd:Q13406463",   # list article
+    "wd:Q188889",     # Code
     "wd:Q17524420",   # aspect of history
     "wd:Q18340514",   # article about events in a specific year or time period
     "wd:Q24017414",   # second-order class

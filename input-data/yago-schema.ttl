@@ -1969,9 +1969,9 @@ schema:Country a sh:NodeShape ;
 
     #Margherita 10/2/26 added property
     sh:property [
-        sh:path yago:UnitOfMoney ;
+        sh:path yago:currency ;
         ys:fromProperty wdt:P38 ;
-        sh:datatype xsd:string ;
+        sh:class yago:UnitOfMoney ;
         rdfs:comment "Official currency of the country"@en ;
     ] ;
 
