@@ -1600,7 +1600,7 @@ schema:Place a sh:NodeShape ;
         rdfs:comment "The length of an object"@en ;
     ] ;
 
-    #Thomas 30/03/2026 added prop
+    #Thomas 30/03/2026 added prop # TODO: Fabian: why are places made out of material?
     sh:property [
         sh:path schema:material ;
         sh:class schema:BioChemEntity ;
@@ -2245,18 +2245,19 @@ schema:Taxon a sh:NodeShape;
 
 
 # Thomas 27/03/26
+# Fabian TODO: are these illnesses? Could you add a comment and a label? Should it be a subclass of intangible? 
 schema:MedicalEntity a sh:NodeShape;
 	rdfs:subClassOf schema:Thing ;
 	sh:property [
         sh:path yago:healthSpeciality ;
-        sh:class schema:MedicalEntity ;
+        sh:class schema:MedicalEntity ; # Fabian TODO: so are medical entities also domains of research? Would subclasses maybe be better?
         ys:fromProperty wdt:P1995 ;
         rdfs:comment "Health speciality of the medical entity"@en ;
     ] ;   
 	sh:property [
         sh:path yago:treatment ;
         sh:or (
-            [ sh:class schema:MedicalEntity ]
+            [ sh:class schema:MedicalEntity ] # Fabian TODO: Are medical entities also cures? Shoiuld we have subclasses?
             [ sh:class schema:BioChemEntity ]
 	    [ sh:class schema:Product ]
         ) ;
@@ -2282,7 +2283,7 @@ schema:MedicalEntity a sh:NodeShape;
 	sh:property [
         sh:path yago:examination ;
         ys:fromProperty wdt:P923 ;
-        sh:class schema:MedicalEntity ;
+        sh:class schema:MedicalEntity ; # Fabian TODO: are examinations medical entities?
         rdfs:comment "Medical examination to diagnose the medical condition"@en ;
     ] ;
 	sh:property [
@@ -2305,7 +2306,7 @@ schema:MedicalEntity a sh:NodeShape;
 ################################################################
 
 
-# Thomas 27/03/26
+# Thomas 27/03/26 # Fabian TODO: are these drugs? could you add a label and a comment? Are these disjoint from Products, or is "Aspirin" both a product and a drug?
 schema:BioChemEntity a sh:NodeShape;
 	rdfs:subClassOf schema:Thing ;
 	sh:property [
