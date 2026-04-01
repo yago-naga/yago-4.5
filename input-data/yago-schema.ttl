@@ -153,7 +153,7 @@ schema:Thing a sh:NodeShape ;
     sh:property [
         sh:path schema:url ;
         sh:datatype xsd:anyURI ;
-        ys:fromProperty wdt:P854, wdt:P856, wdt:P973, wdt:P2699 ; # Thomas: added other URL properties 2026-01-16
+        ys:fromProperty wdt:P854, wdt:P856, wdt:P973, wdt:P2699 ; 
         rdfs:comment "A URL associated with the entity"@en ;
     ] ;
 
@@ -485,7 +485,6 @@ schema:CreativeWork a sh:NodeShape ;
         ys:fromProperty wdt:P3174 ;
         rdfs:comment "Person credited as the art director/artistic director of this Creative Work"@en ;
     ] ;
-   # Thomas 26/03/26 added property
    sh:property [
         sh:path schema:performer ;
         sh:class schema:Person ;
@@ -815,16 +814,12 @@ schema:Event a sh:NodeShape ;
         ) ;
         rdfs:comment "Winner of the event"@en ;
     ] ;
-
-   # Thomas 26/03/26 added property
    sh:property [
         sh:path schema:performer ;
         sh:class schema:Person ;
         ys:fromProperty wdt:P175  ;
         rdfs:comment "A Person who performs in this event"@en ;
     ] ;
-
-   # Thomas 26/03/26 added property
    sh:property [
         sh:path yago:deathNumber ;
         sh:datatype xsd:integer ;
@@ -1388,8 +1383,6 @@ schema:Person a sh:NodeShape ;
         ys:fromProperty wdt:P20 ;
         rdfs:comment "The place where a Person died"@en ;
     ] ;
-
-   # Thomas 27/03/26
     sh:property [
         sh:path yago:deathCause ;
         sh:or (
@@ -1604,8 +1597,6 @@ schema:Place a sh:NodeShape ;
         ys:fromProperty wdt:P2043 ;
         rdfs:comment "The length of an object"@en ;
     ] ;
-
-    #Thomas 30/03/2026 added prop # TODO: Fabian: why are places made out of material? # ANS: Thomas: I was thinking of buildings (e.g., Eiffel tower), some landforms (e.g., Sahara) and astronomical objects.
     sh:property [
         sh:path schema:material ;
         sh:class schema:BioChemEntity ;
@@ -2134,7 +2125,6 @@ schema:Product a sh:NodeShape ;
         ys:fromProperty wdt:P166 ;
         rdfs:comment "An award won by a Person, Organization, CreativeWork, or Product"@en ;
     ] ;
-# Thomas 30/03/26 Update property
     sh:property [
         sh:path schema:material ;
         sh:or (
