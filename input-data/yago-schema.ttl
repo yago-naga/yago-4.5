@@ -500,6 +500,13 @@ schema:CreativeWork a sh:NodeShape ;
         ys:fromProperty wdt:P449 ;
         rdfs:comment "Original broadcaster of a creative work"@en ;
     ] ;
+    sh:property [
+        sh:path schema:duration ;
+		sh:maxCount 1 ;
+        sh:datatype yago:UnitOfTime ;
+        ys:fromProperty wdt:P2047 ;
+        rdfs:comment "The duration of a CreativeWork (movie, song, etc.)"@en ;
+    ] ;
 
     #Margherita 20/02/26 added property 
     sh:property [
@@ -721,14 +728,7 @@ schema:Movie a sh:NodeShape ;
         ys:fromProperty wdt:P57 ;
         rdfs:comment "The director of a Movie, TV Series, or PerformingGroup"@en ;
     ] ;
-    sh:property [
-        sh:path schema:duration ;
-		sh:maxCount 1 ;
-        sh:datatype yago:UnitOfTime ;
-        ys:fromProperty wdt:P2047 ;
-        rdfs:comment "The duration of a Movie"@en ;
-    ] ;
-    sh:property [
+     sh:property [
         sh:path schema:productionCompany ;
         sh:class schema:Organization ;
         ys:fromProperty wdt:P272 ;
@@ -1448,11 +1448,10 @@ schema:Person a sh:NodeShape ;
         ys:fromProperty wdt:P103 ;
         rdfs:comment "Native language of a Person"@en ;
     ] ;
-
     sh:property [
         sh:path schema:memberOf ;
         sh:class schema:Organization ;
-        ys:fromPropertyt wdt:P463 , wdt:P54 , wdt:P102, wdt:P1416 ;
+        ys:fromProperty wdt:P463 , wdt:P54 , wdt:P102, wdt:P1416 ;
         rdfs:comment "An Organization that a Person or another Organization is a member of"@en ;
     ] ;
     sh:property [
@@ -1484,6 +1483,12 @@ yago:Creator a sh:NodeShape ;
         ys:fromProperty wdt:P737, wdt:P941 ;
         rdfs:comment "An entity (Thing) that influenced a Creator or MusicGroup"@en ;
     ];	
+	sh:property [
+        sh:path schema:recordLabel ;
+        sh:class schema:Organization ;
+        ys:fromProperty wdt:P264 ;
+        rdfs:comment "The record label of a MusicGroup"@en ;
+    ]
     sh:property [
         sh:path yago:notableWork ;
         sh:class schema:CreativeWork ;
