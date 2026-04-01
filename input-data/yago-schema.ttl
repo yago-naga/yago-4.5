@@ -1605,7 +1605,7 @@ schema:Place a sh:NodeShape ;
         rdfs:comment "The length of an object"@en ;
     ] ;
 
-    #Thomas 30/03/2026 added prop # TODO: Fabian: why are places made out of material?
+    #Thomas 30/03/2026 added prop # TODO: Fabian: why are places made out of material? # ANS: Thomas: I was thinking of buildings (e.g., Eiffel tower), some landforms (e.g., Sahara) and astronomical objects.
     sh:property [
         sh:path schema:material ;
         sh:class schema:BioChemEntity ;
@@ -2250,19 +2250,20 @@ schema:Taxon a sh:NodeShape;
 
 
 # Thomas 27/03/26
-# Fabian TODO: are these illnesses? Could you add a comment and a label? Should it be a subclass of intangible? 
+# Fabian TODO: are these illnesses? Could you add a comment and a label? Should it be a subclass of intangible?  
+# Thomas Comment added (see below). Should be a top-level class as in Schema. 
 schema:MedicalEntity a sh:NodeShape;
 	rdfs:subClassOf schema:Thing ;
 	sh:property [
         sh:path yago:healthSpeciality ;
-        sh:class schema:MedicalEntity ; # Fabian TODO: so are medical entities also domains of research? Would subclasses maybe be better?
+        sh:class schema:MedicalEntity ; # Fabian TODO: so are medical entities also domains of research? Would subclasses maybe be better? # Thomas ANS: we can indeed add a subclass health specialty mapped to Q44597158. We need to name the property differently, then.
         ys:fromProperty wdt:P1995 ;
         rdfs:comment "Health speciality of the medical entity"@en ;
     ] ;   
 	sh:property [
         sh:path yago:treatment ;
         sh:or (
-            [ sh:class schema:MedicalEntity ] # Fabian TODO: Are medical entities also cures? Shoiuld we have subclasses?
+            [ sh:class schema:MedicalEntity ] # Fabian TODO: Are medical entities also cures? Should we have subclasses? # Thomas : Same answer. We can add the subclass medical treatment (Q179661) but need to name the property differently.
             [ sh:class schema:BioChemEntity ]
 	    [ sh:class schema:Product ]
         ) ;
@@ -2288,7 +2289,7 @@ schema:MedicalEntity a sh:NodeShape;
 	sh:property [
         sh:path yago:examination ;
         ys:fromProperty wdt:P923 ;
-        sh:class schema:MedicalEntity ; # Fabian TODO: are examinations medical entities?
+        sh:class schema:MedicalEntity ; # Fabian TODO: are examinations medical entities? # Thomas ANS: Yes, of course. We can add a subclass medical examination (Q4287917).
         rdfs:comment "Medical examination to diagnose the medical condition"@en ;
     ] ;
 	sh:property [
@@ -2304,6 +2305,8 @@ schema:MedicalEntity a sh:NodeShape;
         sh:class schema:Thing ;
         rdfs:comment "Risk factor for this medical condition"@en ;
     ] ;
+	rdfs:label "Medical entity"@en ;
+	rdfs:comment "Any entity related to health (disease, treatment, examinations, etc.)"@en ;
 	ys:fromClass wd:Q7189713 .
 
 ################################################################
@@ -2311,7 +2314,7 @@ schema:MedicalEntity a sh:NodeShape;
 ################################################################
 
 
-# Thomas 27/03/26 # Fabian TODO: are these drugs? could you add a label and a comment? Are these disjoint from Products, or is "Aspirin" both a product and a drug?
+# Thomas 27/03/26 # Fabian TODO: are these drugs? could you add a label and a comment? Are these disjoint from Products, or is "Aspirin" both a product and a drug? Thomas ANS: Not only drugs. Any chemical entity as well (so we get oxygene, etc.). And bio entity (protein, gene, etc.). 
 schema:BioChemEntity a sh:NodeShape;
 	rdfs:subClassOf schema:Thing ;
 	sh:property [
@@ -2338,6 +2341,8 @@ schema:BioChemEntity a sh:NodeShape;
         ys:fromProperty wdt:P527 ;
         rdfs:comment "Contains this bio-chemical entity"@en ;
     ] ;	
+	rdfs:label "Biological or chemical entity"@en ;
+	rdfs:comment "Any biological, chemical, or biochemical entity. For example: a protein; a gene; a chemical; a synthetic chemical."@en ;
 	ys:fromClass wd:Q43460564, wd:Q55568967 .
 
 ################################################################
