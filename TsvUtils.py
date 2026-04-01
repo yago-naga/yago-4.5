@@ -62,6 +62,7 @@ class TsvFileWriter(object):
     """ To be used in a WITH...AS clause to write facts to TSV files"""
     def __init__(self, file_name):
         self.file_name = file_name
+        self.lastWritePos = 0
       
     def __enter__(self):
         self.file = open(self.file_name, "tw", encoding="utf=8", buffering=BUFFER)
@@ -73,6 +74,7 @@ class TsvFileWriter(object):
         self.writeTuple(args)
 
     def writeTuple(self, args):
+        self.lastWritePos = self.file.tell()
         for i in range(0,len(args)-1):
             self.file.write(args[i] if args[i] else '')
             self.file.write("\t")
@@ -84,6 +86,11 @@ class TsvFileWriter(object):
         
     def writeMetaFact(self, subject, predicate, object, metaPred, metaObj):
         self.write("<<",subject, predicate, object, ">>", metaPred, metaObj, ".")
+    
+    def unWrite(self):
+        self.file.seek(self.lastWritePos)
+        self.file.truncate()    
+        self.file.seek(self.lastWritePos)
         
     def __exit__(self, *exceptions):
         self.file.close()

@@ -69,3 +69,6 @@ wd:Q_prof	rdf:type	rdfs:Class	. #
 wd:Q_prof	rdfs:label	"professor"@en	. #		
 wd:Q174789	rdf:type	yago:UnitOfMeasurement	. #		
 wd:Q174789	rdfs:label	"meter"@en	. #		
+wd:Q403	rdf:type	schema:Person	. #		
+wd:Q403	schema:children	wd:Q42	. #		
+wd:Q403	schema:height	"200"^^wd:Q174789	. #		

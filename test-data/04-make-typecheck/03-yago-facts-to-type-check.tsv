@@ -94,3 +94,10 @@ wd:Q_prof	rdfs:label	"professor"@en	.
 # Here is a unit of measurement
 wd:Q174789	rdf:type	yago:UnitOfMeasurement	.
 wd:Q174789	rdfs:label	"meter"@en	.
+
+# Example with overloaded facts, only one of whom should be in the logs
+wd:Q403	rdf:type	schema:Person	.
+wd:Q403	schema:children	wd:Q42	. # IF	schema:Person
+wd:Q403	schema:otherRelation	wd:Q42	. # IF	schema:Book
+wd:Q403	schema:otherRelation	"200"^^wd:Q174789	. # IF	schema:Person
+wd:Q403	schema:height	"200"^^wd:Q174789	. # IF	yago:UnitOfMeasurement

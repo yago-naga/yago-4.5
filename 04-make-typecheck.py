@@ -225,6 +225,8 @@ with TsvUtils.Timer("Step 04: Type-checking YAGO"):
                 currentEnglishLabel=""
                 currentLabel=""
                 currentWikipediaPage=""
+                lastObject=""
+                wroteObject=False # True if the last object was written out
                 wroteFacts=False # True if the entity had any valid facts
                 isName = False # True for person names
                 
@@ -247,6 +249,8 @@ with TsvUtils.Timer("Step 04: Type-checking YAGO"):
                         currentLabel=""
                         currentWikipediaPage=""
                         wroteFacts=False
+                        lastObject=""
+                        wroteLastObject=False
                         isName=instanceOf(subject,Prefixes.yagoPersonName)
                         if isName:
                             # We remove ourselves from the type hierarchy, 
@@ -262,23 +266,36 @@ with TsvUtils.Timer("Step 04: Type-checking YAGO"):
                     elif predicate==Prefixes.schemaUrl and obj.startswith('"https://en.wikipedia.org/wiki/'):
                         currentWikipediaPage=obj[31:-13]
                     
-                    # We do not write out anything about names, just collect their label
+                    # For names, we do not write out anything, just collect their label
                     if isName:
                         wroteFacts=True
                         continue
                         
                     # Write out the fact
+                    # If two successive facts have the same subject and object, this is because of overloading
+                    # In that case, the logs should be written only for one of the facts
                     if classes is None or any(instanceOf(obj,c) for c in classes):
                         out.write(subject, predicate, obj, ". #", startDate, endDate)
                         wroteFacts=True
+                        if obj==lastObject and not wroteLastObject:
+                            logFile.unWrite()
+                        lastObject=obj
+                        wroteLastObject=True
                         count+=1
                     elif any(isSubclassOf(obj,c) for c in classes):
                         newObject=createGenericInstance(obj, out)
                         out.write(subject, predicate, newObject, ". #", startDate, endDate)
+                        if newObject==lastObject and not wroteLastObject:
+                            logFile.unWrite()
+                        lastObject=newObject
+                        wroteLastObject=True
                         count+=1
                         wroteFacts=True
                     else:
-                        logFile.writeMetaFact(subject, predicate, obj, Prefixes.ysReason, f'"object is not in {", ".join(str(s) for s in classes)}"')
+                        if obj!=lastObject or not wroteLastObject:
+                            logFile.writeMetaFact(subject, predicate, obj, Prefixes.ysReason, f'"object is not in {", ".join(str(s) for s in classes)}"')
+                        lastObject=obj
+                        wroteLastObject=False
                         
                 # Also flush the ids of the last entity...
                 if wroteFacts:
