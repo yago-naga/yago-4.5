@@ -2248,6 +2248,27 @@ schema:MedicalEntity a sh:NodeShape;
         ys:fromProperty wdt:P1995 ;
         rdfs:comment "Medical speciality of the entity"@en ;
     ] ;   
+	rdfs:label "Medical entity"@en ;
+	rdfs:comment "Any entity related to health (disease, treatment, examinations, etc.)"@en ;
+	ys:fromClass wd:Q7189713 .
+
+# Thomas 01/04/26
+schema:MedicalSpecialty a sh:NodeShape;
+	rdfs:subClassOf schema:MedicalEntity ;
+	rdfs:label "Medical Speciality"@en ;
+	rdfs:comment "Branch of medicine concerning a specific group of diseases or population"@en ;
+	ys:fromClass wd:Q44597158 .
+
+# Thomas 01/04/26
+schema:MedicalProcedure a sh:NodeShape;
+	rdfs:subClassOf schema:MedicalEntity ;
+	rdfs:label "Medical Procedure"@en ;
+	rdfs:comment "Medical procedure for diagnosis or treatment"@en ;
+	ys:fromClass wd:Q179661, wd:Q5690807 .
+
+# Thomas 01/04/26
+schema:MedicalCondition a sh:NodeShape;
+	rdfs:subClassOf schema:MedicalEntity ;
 	sh:property [
         sh:path yago:treatment ;
         sh:or (
@@ -2264,7 +2285,7 @@ schema:MedicalEntity a sh:NodeShape;
         ys:fromProperty wdt:P780 ;
         rdfs:comment "Symptoms or signs of a medical condition"@en ;
     ] ;  
-    	sh:property [
+	sh:property [
         sh:path yago:hasCause ;
         ys:fromProperty wdt:P828 ;
         sh:or (
@@ -2293,23 +2314,9 @@ schema:MedicalEntity a sh:NodeShape;
         sh:class schema:Thing ;
         rdfs:comment "Risk factor for this medical condition"@en ;
     ] ;
-	rdfs:label "Medical entity"@en ;
-	rdfs:comment "Any entity related to health (disease, treatment, examinations, etc.)"@en ;
-	ys:fromClass wd:Q7189713 .
-
-# Thomas 01/04/26
-schema:MedicalSpecialty a sh:NodeShape;
-	rdfs:subClassOf schema:MedicalEntity ;
-	dfs:label "Medical Speciality"@en ;
-	rdfs:comment "Branch of medicine concerning a specific group of diseases or population"@en ;
-	ys:fromClass wd:Q44597158 .
-
-# Thomas 01/04/26
-schema:MedicalProcedure a sh:NodeShape;
-	rdfs:subClassOf schema:MedicalEntity ;
-	dfs:label "Medical Procedure"@en ;
-	rdfs:comment "Medical procedure for diagnosis or treatment"@en ;
-	ys:fromClass wd:Q179661, wd: Q5690807 .
+	rdfs:label "Medical Condition"@en ;
+	rdfs:comment "Any condition that affects the normal functioning of a person or an animal"@en ;
+	ys:fromClass wd: 12136.
 
 
 ################################################################
