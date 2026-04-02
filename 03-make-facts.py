@@ -152,16 +152,15 @@ def translateTypeAssertions(entityFacts: Graph, yagoTaxonomyUp: Dict[str, Set[st
 #        ps:P1082 "+11825551"^^xsd:decimal ;
         
 def addNonBestRanks(entityFacts, yagoSchema):
-    """ Adds all non-best facts except for functions"""
+    """ Adds all non-best facts for type generators"""
     subject=entityFacts.mainSubject()
     for statement in entityFacts.subjectsOf("wikibase:rank", "wikibase:NormalRank"):
         if (statement, Prefixes.rdfType, "wikibase:BestRank") not in entityFacts:
             for predicate in entityFacts.predicatesOf(statement):
                 if predicate.startswith("ps:"):
                     wikidataPredicate="wdt:"+predicate[3:]
-                    yagoPredicate=getFirst(yagoSchema.wikidataProperties.get(wikidataPredicate))
-                    if yagoPredicate and yagoPredicate.maxCount:
-                        debug("Not adding non-best fact because of function:",subject, wikidataPredicate, statement)
+                    if wikidataPredicate not in TYPE_PREDICATES:
+                        debug("Not adding non-best fact because it's not type generating:",subject, wikidataPredicate, statement)
                         continue
                     for obj in entityFacts.objectsOf(statement, predicate):
                         debug("Adding non-best fact:",subject, wikidataPredicate, obj, statement)

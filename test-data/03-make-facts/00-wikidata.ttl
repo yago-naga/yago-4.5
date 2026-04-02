@@ -234,3 +234,8 @@ wds:Q1340-244BF02D-91AC-4783-BCB6-4247B0B0D80E a wikibase:Statement ;
         wikibase:rank wikibase:NormalRank ;
         ps:P106 wd:Q1259917 ;
         prov:wasDerivedFrom wdref:4b26f751272dd598f012deae8e4d9625c6055473 .
+
+# Marseille bug
+wd:Q23482  wdt:P31 schema:City ; rdfs:label "Marseille"@en ; 
+wdt:P1225 "10045029" ;
+        wdt:P6 wd:Q63766719 .
