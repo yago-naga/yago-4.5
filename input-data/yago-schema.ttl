@@ -1393,6 +1393,15 @@ schema:Person a sh:NodeShape ;
         ys:fromProperty wdt:P20 ;
         rdfs:comment "The place where a Person died"@en ;
     ] ;
+	# Thomas 02/04/26
+    sh:property [
+        sh:path yago:burialPlace ;
+        sh:class schema:Place ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P119 ;
+        rdfs:comment "The place where a Person is buried"@en ;
+    ] ;
+
     sh:property [
         sh:path yago:deathCause ;
         sh:or (
