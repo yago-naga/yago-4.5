@@ -1222,7 +1222,15 @@ schema:Person a sh:NodeShape ;
 		sh:maxCount 1 ;
         sh:datatype yago:UnitOfLength ;
         ys:fromProperty wdt:P2048 ;
-        rdfs:comment "The height of an object"@en ;
+        rdfs:comment "The height of a person"@en ;
+    ] ;
+	# Thomas 02/04/26 added property
+    sh:property [
+        sh:path schema:mass ;
+		sh:maxCount 1 ;
+        sh:datatype yago:UnitOfMass ;
+        ys:fromProperty wdt:P2067 ;
+        rdfs:comment "The mass of a person"@en ;
     ] ;
 
     #Margherita 10/02/26: added property
