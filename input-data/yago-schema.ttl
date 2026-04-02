@@ -61,16 +61,6 @@ schema:Product owl:disjointWith
     schema:Taxon,
     schema:Person,
     schema:Place.	
-# Thomas 26/03/26 added top-level class 
-schema:MedicalEntity owl:disjointWith
-    schema:CreativeWork,
-    schema:Event,
-    schema:Organization,
-    schema:Taxon,
-    schema:Person,
-    schema:Place,
-    schema:Product.	
-# Thomas 30/03/26 added top-level class 
 schema:BioChemEntity owl:disjointWith
     schema:CreativeWork,
     schema:Event,
@@ -82,9 +72,9 @@ schema:Intangible  owl:disjointWith
     schema:Event,
     schema:Organization,
     schema:Taxon,
+	schema:BioChemEntity,
     schema:Person,
-    schema:Place,
-    schema:MedicalEntity.	
+    schema:Place.	
 
 # Top-level class of all individuals
 # (excluding literals, classes, properties, etc.)
@@ -320,7 +310,7 @@ yago:Color a sh:NodeShape ;
 
 #Margherita 7/3/26 created class
 yago:HairColor a sh:NodeShape ;
-    ys:fromClass wd:Q1048314 ;         
+    ys:fromClass wd:Q1048314, wd:Q105825176 ;         
     rdfs:subClassOf yago:Color .
 
 #Margherita 17/03/2026 added class 
@@ -1224,7 +1214,6 @@ schema:Person a sh:NodeShape ;
         ys:fromProperty wdt:P2048 ;
         rdfs:comment "The height of a person"@en ;
     ] ;
-	# Thomas 02/04/26 added property
     sh:property [
         sh:path schema:mass ;
 		sh:maxCount 1 ;
@@ -1275,7 +1264,6 @@ schema:Person a sh:NodeShape ;
         ys:fromProperty wdt:P512 ;
         rdfs:comment "An academic degree (Award) held by a Person"@en ;
     ] ;
-    # Thomas 02/04/26 update property
     sh:property [ 
         sh:path schema:worksFor ;
         sh:or (
@@ -1401,7 +1389,6 @@ schema:Person a sh:NodeShape ;
         ys:fromProperty wdt:P20 ;
         rdfs:comment "The place where a Person died"@en ;
     ] ;
-	# Thomas 02/04/26
     sh:property [
         sh:path yago:burialPlace ;
         sh:class schema:Place ;
@@ -2268,16 +2255,9 @@ schema:Taxon a sh:NodeShape;
 
 # Thomas 27/03/26
 schema:MedicalEntity a sh:NodeShape;
-	rdfs:subClassOf schema:Thing ;
-	sh:property [
-        sh:path yago:medicalSpeciality ;
-        sh:class schema:MedicalSpeciality ;
-        ys:fromProperty wdt:P1995 ;
-        rdfs:comment "Medical speciality of the entity"@en ;
-    ] ;   
+	rdfs:subClassOf schema:Intangible ;
 	rdfs:label "Medical entity"@en ;
-	rdfs:comment "Any entity related to health (disease, treatment, examinations, etc.)"@en ;
-	ys:fromClass wd:Q7189713 .
+	rdfs:comment "Any entity related to health (disease, treatment, examinations, etc.)"@en .
 
 # Thomas 01/04/26
 schema:MedicalSpecialty a sh:NodeShape;
@@ -2291,6 +2271,12 @@ schema:MedicalProcedure a sh:NodeShape;
 	rdfs:subClassOf schema:MedicalEntity ;
 	rdfs:label "Medical Procedure"@en ;
 	rdfs:comment "Medical procedure for diagnosis or treatment"@en ;
+	sh:property [
+        sh:path yago:medicalSpecialty ;
+        sh:class schema:MedicalSpecialty ;
+        ys:fromProperty wdt:P1995 ;
+        rdfs:comment "Medical speciality of the entity"@en ;
+    ] ;   
 	ys:fromClass wd:Q179661, wd:Q5690807 .
 
 # Thomas 01/04/26
@@ -2301,14 +2287,20 @@ schema:MedicalCondition a sh:NodeShape;
         sh:or (
             [ sh:class schema:MedicalProcedure ] 
             [ sh:class schema:BioChemEntity ]
-	    [ sh:class schema:Product ]
+	        [ sh:class schema:Product ]
         ) ;
         ys:fromProperty wdt:P2176, wdt:P924 ;
         rdfs:comment "Drug or therapy used for treatment"@en ;
     ] ;   
 	sh:property [
+        sh:path yago:medicalSpecialty ;
+        sh:class schema:MedicalSpecialty ;
+        ys:fromProperty wdt:P1995 ;
+        rdfs:comment "Medical speciality of the entity"@en ;
+    ] ;   
+	sh:property [
         sh:path yago:symptom ;
-        sh:class schema:MedicalEntity ;
+        sh:class schema:MedicalCondition ;
         ys:fromProperty wdt:P780 ;
         rdfs:comment "Symptoms or signs of a medical condition"@en ;
     ] ;  
@@ -2316,9 +2308,9 @@ schema:MedicalCondition a sh:NodeShape;
         sh:path yago:hasCause ;
         ys:fromProperty wdt:P828 ;
         sh:or (
-            [ sh:class schema:MedicalEntity ]
+            [ sh:class schema:MedicalCondition ]
             [ sh:class schema:BioChemEntity ]
-	    [ sh:class schema:Event ]
+	        [ sh:class schema:Event ]
         ) ;
         rdfs:comment "Cause of the medical condition"@en ;
     ] ;
@@ -2334,7 +2326,6 @@ schema:MedicalCondition a sh:NodeShape;
         sh:class schema:Taxon ;
         rdfs:comment "Type of organism which a condition or disease afflicts"@en ;
     ] ;
-
 	sh:property [
         sh:path yago:riskFactor ;
         ys:fromProperty wdt:P5642 ;
@@ -2343,7 +2334,7 @@ schema:MedicalCondition a sh:NodeShape;
     ] ;
 	rdfs:label "Medical Condition"@en ;
 	rdfs:comment "Any condition that affects the normal functioning of a person or an animal"@en ;
-	ys:fromClass wd: 12136.
+	ys:fromClass wd:Q7189713.
 
 
 ################################################################
@@ -2361,16 +2352,10 @@ schema:BioChemEntity a sh:NodeShape;
         rdfs:comment "Significant drug interaction"@en ;
     ] ;   
 	sh:property [
-        sh:path yago:hasEffect ;
-        sh:class schema:MedicalEntity ;
-        ys:fromProperty wdt:P1542 ;
-        rdfs:comment "Has effect on this medical condition"@en ;
-    ] ;   
-	sh:property [
         sh:path yago:chemicalStructure ;
-        sh:datatype xsd:anyURI ;
-        ys:fromProperty wdt:P117 ;
-        rdfs:comment "An image of the chemical structure of the entity"@en ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P274 ;
+        rdfs:comment "The chemical structure of the entity"@en ;
     ] ;	
 	sh:property [
         sh:path yago:contains ;
