@@ -1267,11 +1267,21 @@ schema:Person a sh:NodeShape ;
         ys:fromProperty wdt:P512 ;
         rdfs:comment "An academic degree (Award) held by a Person"@en ;
     ] ;
-    sh:property [
+    # Thomas 02/04/26 update property
+    sh:property [ 
         sh:path schema:worksFor ;
-        sh:class schema:Organization ;
+        sh:or (
+            [        sh:class schema:Organization ;
+            ]
+            [	
+		     sh:class schema:Person ;
+            ]
+            [
+	             sh:class schema:Place ;
+            ]
+         ) ;
         ys:fromProperty wdt:P108 ;
-        rdfs:comment "An Organization that a Person works for"@en ;
+        rdfs:comment "An organization, person or place (e.g., theater) that a Person works for"@en ;
     ] ;
 
     #Margherita 20/02/2026 added prop
