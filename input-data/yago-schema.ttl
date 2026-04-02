@@ -325,7 +325,7 @@ yago:HairColor a sh:NodeShape ;
 
 #Margherita 17/03/2026 added class 
 yago:MusicalInstrument a sh:NodeShape ;
-    ys:fromClass wd:Q34379 ;
+    ys:fromClass wd:Q34379, wd:Q1254773 ;
     rdfs:subClassOf schema:Product .
 
 # Needed as range of the property schema:inLanguage
