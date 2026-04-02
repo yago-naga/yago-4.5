@@ -85,3 +85,4 @@ wd:Q3647172	rdfs:subClassOf	yago:UnitOfMass .
 wd:Q3409032	rdfs:subClassOf	yago:PersonName	.
 yago:PersonName	rdfs:subClassOf	yago:Intangible	.
 yago:Intangible	rdfs:subClassOf	schema:Thing	.
+wd:Q1259917	rdfs:subClassOf	schema:Person	.

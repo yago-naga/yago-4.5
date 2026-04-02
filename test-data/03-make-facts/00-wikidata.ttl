@@ -142,7 +142,7 @@ wds:Q31-93ba9638-404b-66ac-2733-e6292666a326 a wikibase:Statement, wikibase:Best
         pqv:P585 wdv:867dd64466aae4fb2a651732ec5a1744 ;
         prov:wasDerivedFrom wdref:9b216970abe8fb8f730ebadbbfecc1b19d17c900 .
 
-# Non-preferred ranks
+# Non-preferred ranks should not be added
 wd:Q31 wdt:P1082 "+15"^^xsd:decimal .
 wd:Q31 p:P1082 wds:Q31-93ba9638-404b-66ac-2733-e6292666a326-nonbest .
 wds:Q31-93ba9638-404b-66ac-2733-e6292666a326-nonbest a wikibase:Statement ;
@@ -223,3 +223,14 @@ wdv:dc804715c6c498c4d7015e949d348eec a wikibase:QuantityValue ;
         wikibase:quantityAmount "+0.45359237"^^xsd:decimal ;
         wikibase:quantityUnit <http://www.wikidata.org/entity/Q11570> ;
         wikibase:quantityNormalized wdv:dc804715c6c498c4d7015e949d348eec .		
+		
+# NonBest ranks should be added		
+wd:Q1340 wdt:P31 wd:Q5 ; 
+        schema:name "Vivaldi"@en .
+
+wd:Q1340 p:P106 wds:Q1340-244BF02D-91AC-4783-BCB6-4247B0B0D80E .
+
+wds:Q1340-244BF02D-91AC-4783-BCB6-4247B0B0D80E a wikibase:Statement ;
+        wikibase:rank wikibase:NormalRank ;
+        ps:P106 wd:Q1259917 ;
+        prov:wasDerivedFrom wdref:4b26f751272dd598f012deae8e4d9625c6055473 .

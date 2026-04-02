@@ -62,6 +62,8 @@ def debug(*message: Any) -> None:
     
 def getFirst(iterable: Iterator[Any], default=None) -> Optional[Any]:
     """ Returns the first element of an iterable or None"""
+    if iterable is None:
+        return None
     return next(iter(iterable), default)
     
 ##########################################################################
@@ -126,6 +128,8 @@ def translateTypeAssertions(entityFacts: Graph, yagoTaxonomyUp: Dict[str, Set[st
                 if obj in yagoTaxonomyUp:
                     if predicate==Prefixes.wikidataType:
                         declaredWikidataTypes.add(obj)
+                    else:
+                        debug("Adding type",obj,"from",predicate)
                     entityFacts.add((mainEntity, Prefixes.rdfType, obj))
             entityFacts.removeObjects(mainEntity, predicate)
     # Anything that has a parent taxon is an instance of taxon
@@ -147,16 +151,21 @@ def translateTypeAssertions(entityFacts: Graph, yagoTaxonomyUp: Dict[str, Set[st
 #        wikibase:rank wikibase:PreferredRank ;
 #        ps:P1082 "+11825551"^^xsd:decimal ;
         
-def removeNonBestRank(entityFacts):
-    """ Removes all facts that are not best rank"""
+def addNonBestRanks(entityFacts, yagoSchema):
+    """ Adds all non-best facts except for functions"""
     subject=entityFacts.mainSubject()
-    for statement in entityFacts.subjectsOf(Prefixes.rdfType, "wikibase:Statement"):
+    for statement in entityFacts.subjectsOf("wikibase:rank", "wikibase:NormalRank"):
         if (statement, Prefixes.rdfType, "wikibase:BestRank") not in entityFacts:
             for predicate in entityFacts.predicatesOf(statement):
                 if predicate.startswith("ps:"):
+                    wikidataPredicate="wdt:"+predicate[3:]
+                    yagoPredicate=getFirst(yagoSchema.wikidataProperties.get(wikidataPredicate))
+                    if yagoPredicate and yagoPredicate.maxCount:
+                        debug("Not adding non-best fact because of function:",subject, wikidataPredicate, statement)
+                        continue
                     for obj in entityFacts.objectsOf(statement, predicate):
-                        debug("Removing non-best fact",subject, "wdt:"+predicate[3:], obj, statement)
-                        entityFacts.remove((subject, "wdt:"+predicate[3:], obj))
+                        debug("Adding non-best fact:",subject, wikidataPredicate, obj, statement)
+                        entityFacts.add((subject, wikidataPredicate, obj))
 
 ##########################################################################
 #             Start and end dates
@@ -544,7 +553,7 @@ class treatWikidataEntity():
         
         handleWebPages(entityFacts)               
 
-        removeNonBestRank(entityFacts)
+        addNonBestRanks(entityFacts, self.yagoSchema)
         
         # We backup the existing Wikidata types for the log messages
         oldTypes = entityFacts.objectsOf(entityFacts.mainSubject(), Prefixes.wikidataType)
@@ -569,8 +578,6 @@ class treatWikidataEntity():
         
         handleMaxCounts(entityFacts, self.yagoSchema, self.writer, isSecondaryClass)
 
-        guessLabelIfNecessary(entityFacts)
-        
         if not isSecondaryClass and not guessLabelIfNecessary(entityFacts):
             self.writer.writeMetaFact(entityFacts.mainSubject(), Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, '"no label"')
             return True

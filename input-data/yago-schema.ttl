@@ -334,6 +334,7 @@ yago:UnitOfMeasurement a sh:NodeShape ;
 	rdfs:subClassOf schema:Intangible ;
 	sh:property [
         sh:path yago:siConversion ;
+		sh:maxCount 1;
 		sh:datatype yago:UnitOfMeasurement ;
 		ys:fromProperty wdt:P2370 ;
 	] ;	
