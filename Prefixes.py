@@ -173,6 +173,8 @@ yagoUnitOfMeasurement="yago:UnitOfMeasurement"
 
 yagoUnit="yago:UnitOf"
 
+yagoCurrency="yago:currency"
+
 yagoPersonName="yago:PersonName"
 
 wikibaseQuantityUnit="wikibase:quantityUnit"

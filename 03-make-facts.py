@@ -387,6 +387,13 @@ def cleanLiteralObject(obj: str, datatype: str) -> Optional[str]:
         
 def cleanObject(subject, obj: str, yagoProperty: Any, writer) -> Optional[str]:
     """Returns an object that conforms to the range of the yagoProperty -- or None in case of failure. Returns normalized object (normalized string and date) ready for use."""
+    
+    # The currency of a country must be a currency, but not a literal
+    if yagoProperty.identifier==Prefixes.yagoCurrency:
+        if obj.startswith('"'):
+            return None
+        return obj
+        
     # Patterns are verified in a fall-through fashion,
     # because verifying a pattern is a necessary but not sufficient condition
     if yagoProperty.pattern:
@@ -416,7 +423,10 @@ def cleanObject(subject, obj: str, yagoProperty: Any, writer) -> Optional[str]:
         return None
     
     # If the object is not a literal, it can still work if we allow entities
-    return obj if couldBeEntity else None
+    if couldBeEntity:
+         return obj
+    writer.writeMetaFact(subject, yagoProperty.identifier, obj, Prefixes.ysReason, '"expected literal"')
+    return None
 
 def handleRange(entityFacts: Graph, yagoSchema: YagoSchema, writer) -> None:
     """ Performs a range check, removes offending facts"""
@@ -502,10 +512,17 @@ def handleMaxCounts(entityFacts: Graph, yagoSchema: YagoSchema, writer, isSecond
                    else:
                         languages.add(lang)
 
-def guessLabelIfNecessary(entityFacts: Graph) -> bool:
+# Pattern for astronomical object names
+astro=r'"[-+A-Z0-9\[\] ]{3,} [JBF]?[-0-9.+]{6,}"@mul'
+
+def guessLabelIfNecessary(entityFacts: Graph, writer) -> bool:
     """ Tries to guess a label for an entity from a Wikipedia URL"""
     mainEntity: str = entityFacts.mainSubject()            
-    if entityFacts.objectsOf(mainEntity, Prefixes.rdfsLabel):
+    for l in entityFacts.objectsOf(mainEntity, Prefixes.rdfsLabel):
+        if re.match(astro,l): 
+            writer.writeMetaFact(mainEntity, Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, f'"has invalid name: {l[1:9]}..."')
+            return False
+    if entityFacts.objectsOf(mainEntity, Prefixes.rdfsLabel):   
         debug(mainEntity, "already has a label", entityFacts.objectsOf(mainEntity, Prefixes.rdfsLabel))
         return True
     wikipediaPages = entityFacts.objectsOf(mainEntity, Prefixes.schemaUrl)
@@ -523,7 +540,7 @@ def guessLabelIfNecessary(entityFacts: Graph) -> bool:
             debug("Found label for", mainEntity, ": ", labelName)
             entityFacts.add((mainEntity, Prefixes.rdfsLabel, '"' + labelName + '"@' + labelLanguage))
             return True
-    debug("Found no label for", mainEntity)
+    writer.writeMetaFact(mainEntity, Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, '"no label"')
     return False
     
 ##########################################################################
@@ -572,16 +589,16 @@ class treatWikidataEntity():
             return True
         
         handleDomain(entityFacts, self.yagoSchema, types, self.writer)
-        
+                        
         handleRange(entityFacts, self.yagoSchema, self.writer)
-        
+
         handleMaxCounts(entityFacts, self.yagoSchema, self.writer, isSecondaryClass)
 
-        if not isSecondaryClass and not guessLabelIfNecessary(entityFacts):
-            self.writer.writeMetaFact(entityFacts.mainSubject(), Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, '"no label"')
-            return True
-            
-        subject=entityFacts.mainSubject()
+        if not isSecondaryClass and not guessLabelIfNecessary(entityFacts, self.writer):
+            return True       
+        
+        # Get the subject only here, because it might have changed by mapping to YAGO schema
+        subject=entityFacts.mainSubject()                
         for predicate in entityFacts.predicatesOf(subject):
             for obj in entityFacts.objectsOf(subject, predicate):
                 if subject == obj:
@@ -591,7 +608,7 @@ class treatWikidataEntity():
                     self.writer.write(subject, "rdf:type", obj, ".")
                     continue
                 else:
-                    yagoProperty = self.yagoSchema.properties[predicate]
+                    yagoProperty = self.yagoSchema.properties[predicate]                    
                 (startDate, endDate) = dates.get((subject, predicate, obj), (None, None))
                 # Remove end date for alumni
                 if predicate == Prefixes.schemaAlumniOf:

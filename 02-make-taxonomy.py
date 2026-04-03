@@ -101,6 +101,7 @@ badClasses = {
     "wd:Q17442446",   # Wikimedia internal stuff
     "wd:Q15474042",   # same
     "wd:Q111279923",  # same 
+    "wd:Q38926",      # news
     "wd:Q4167410",    # disambiguation page
     "wd:Q13406463",   # list article
     "wd:Q188889",     # Code

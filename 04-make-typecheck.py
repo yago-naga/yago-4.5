@@ -261,6 +261,8 @@ with TsvUtils.Timer("Step 04: Type-checking YAGO"):
                     if predicate==Prefixes.rdfsLabel:
                         if obj.endswith('"@en'):
                             currentEnglishLabel=obj[1:-4]
+                        elif obj.endswith('"@mul'):
+                            currentEnglishLabel=obj[1:-5]                            
                         elif not currentLabel or not allLegal(currentLabel):
                             currentLabel=TurtleUtils.splitLiteral(obj)[0]                            
                     elif predicate==Prefixes.schemaUrl and obj.startswith('"https://en.wikipedia.org/wiki/'):

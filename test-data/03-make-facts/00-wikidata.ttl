@@ -120,10 +120,12 @@ wd:Q_org wdt:P31 schema:Organization;
 	schema:name "organization"@en .
 
 # Geo locations
-wd:Q31  wdt:P31	schema:Country ;
+wd:Q31  wdt:P31	wd:Q123456 ;
 	schema:name "Belgium"@en ;
 	# Memberof should go to locatedIn
 	wdt:P463 wd:Schengen ;
+	# Currency
+	 wdt:P38 wd:Q4916 ;
 	# Max value bypassed
 	wdt:P6897	"lkblblhbl"^^xsd:decimal ;
 	wdt:P6897	"500"^^xsd:decimal ;
@@ -235,7 +237,6 @@ wds:Q1340-244BF02D-91AC-4783-BCB6-4247B0B0D80E a wikibase:Statement ;
         ps:P106 wd:Q1259917 ;
         prov:wasDerivedFrom wdref:4b26f751272dd598f012deae8e4d9625c6055473 .
 
-# Marseille bug
-wd:Q23482  wdt:P31 schema:City ; rdfs:label "Marseille"@en ; 
-wdt:P1225 "10045029" ;
-        wdt:P6 wd:Q63766719 .
+# Stars should be excluded
+wd:Q23482  wdt:P31 yago:AstronomicalObject ;
+schema:name "Good name"@en, "BAD-NAME J100216.27+203031.3"@mul .

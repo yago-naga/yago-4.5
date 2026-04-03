@@ -12,6 +12,7 @@
 <<	wd:Q31	yago:literacyRate	"500"^^xsd:decimal	>>	ys:excludedFor	"not in min-max range"	.
 <<	wd:Q31	yago:populationNumber	"15"^^xsd:integer	>>	ys:excludedFor	"maxcount overflow"	.
 <<	wd:Q312	schema:dateCreated	"1976-04-01"^^xsd:date	>>	ys:excludedFor	"maxcount overflow"	.
-<<	wd:Q_fictional	schema:geo	schema:Thing	>>	ys:excludedFor	"Domain check failed (schema:Person, yago:FictionalEntity, yago:Worker)"	.
+<<	wd:Q_fictional	schema:geo	schema:Thing	>>	ys:excludedFor	"Domain check failed (yago:FictionalEntity, schema:Person, yago:Worker)"	.
 <<	wd:Q678	rdf:type	schema:Thing	>>	ys:excludedFor	"no label"	.
 <<	wd:Q1340	rdf:type	schema:Person	>>	ys:excludedFor	"is shortcut"	.
+<<	wd:Q23482	rdf:type	schema:Thing	>>	ys:excludedFor	"has invalid name: BAD-NAME..."	.

@@ -1216,7 +1216,7 @@ schema:Person a sh:NodeShape ;
         rdfs:comment "The height of a person"@en ;
     ] ;
     sh:property [
-        sh:path schema:mass ;
+        sh:path yago:mass ;
 		sh:maxCount 1 ;
         sh:datatype yago:UnitOfMass ;
         ys:fromProperty wdt:P2067 ;
@@ -1401,7 +1401,7 @@ schema:Person a sh:NodeShape ;
     sh:property [
         sh:path yago:deathCause ;
         sh:or (
-            [ sh:class schema:MedicalEntity ]
+            #[ sh:class schema:MedicalEntity ]
             [ sh:class schema:BioChemEntity ]
 			[ sh:class schema:Event ]
 			[ sh:class schema:Person ]
@@ -1731,6 +1731,14 @@ schema:AdministrativeArea a sh:NodeShape ;
 		sh:maxCount 1 ;
         rdfs:comment "The date something was created (used for CreativeWorks, Organizations, Products, AdministrativeAreas, etc.)"@en ;
     ] ;
+	    #Margherita 10/2/26 added property
+    sh:property [
+        sh:path yago:currency ;
+        ys:fromProperty wdt:P38 ;
+        sh:class yago:UnitOfMoney ;
+        rdfs:comment "Official currency of the country"@en ;
+    ] ;
+
     sh:property [
         sh:path yago:beliefSystem ;
         sh:class yago:BeliefSystem ; # Fabian: merge with belief system for people?
@@ -1894,7 +1902,6 @@ schema:AdministrativeArea a sh:NodeShape ;
         rdfs:comment "Number of vehicles per 1000 people"@en ;
     ] ;
 
-    #Fabian: 2023-04-12 don't know how to handle the currency...
     #Margherita 20/02/26 reintegrated property thanks to UnitOfMoney, moved to AdministrativeArea, maybe should be in Country?
     sh:property [
         sh:path schema:medianIncome ;
@@ -1976,14 +1983,6 @@ schema:Country a sh:NodeShape ;
         sh:pattern "^\\+\\d+$" ;
         ys:fromProperty wdt:P474 ;
         rdfs:comment "Telephone country calling code, format: +<digits>"@en ;
-    ] ;
-
-    #Margherita 10/2/26 added property
-    sh:property [
-        sh:path yago:currency ;
-        ys:fromProperty wdt:P38 ;
-        sh:class yago:UnitOfMoney ;
-        rdfs:comment "Official currency of the country"@en ;
     ] ;
 
     #Margherita 29/01/26 added property
@@ -2255,87 +2254,91 @@ schema:Taxon a sh:NodeShape;
 
 
 # Thomas 27/03/26
-schema:MedicalEntity a sh:NodeShape;
-	rdfs:subClassOf schema:Intangible ;
-	rdfs:label "Medical entity"@en ;
-	rdfs:comment "Any entity related to health (disease, treatment, examinations, etc.)"@en .
+#schema:MedicalEntity a sh:NodeShape;
+#	rdfs:subClassOf schema:Intangible ;
+#	rdfs:label "Medical entity"@en ;
+#	rdfs:comment "Any entity related to health (disease, treatment, examinations, etc.)"@en .
 
 # Thomas 01/04/26
-schema:MedicalSpecialty a sh:NodeShape;
-	rdfs:subClassOf schema:MedicalEntity ;
-	rdfs:label "Medical Speciality"@en ;
-	rdfs:comment "Branch of medicine concerning a specific group of diseases or population"@en ;
-	ys:fromClass wd:Q44597158 .
+#schema:MedicalSpecialty a sh:NodeShape;
+#	rdfs:subClassOf schema:MedicalEntity ;
+#	rdfs:label "Medical Speciality"@en ;
+#	rdfs:comment "Branch of medicine concerning a specific group of diseases or population"@en ;
+#	ys:fromClass wd:Q44597158 .
 
 # Thomas 01/04/26
-schema:MedicalProcedure a sh:NodeShape;
-	rdfs:subClassOf schema:MedicalEntity ;
-	rdfs:label "Medical Procedure"@en ;
-	rdfs:comment "Medical procedure for diagnosis or treatment"@en ;
-	sh:property [
-        sh:path yago:medicalSpecialty ;
-        sh:class schema:MedicalSpecialty ;
-        ys:fromProperty wdt:P1995 ;
-        rdfs:comment "Medical speciality of the entity"@en ;
-    ] ;   
-	ys:fromClass wd:Q179661, wd:Q5690807 .
+#schema:MedicalProcedure a sh:NodeShape;
+#	rdfs:subClassOf schema:MedicalEntity ;
+#	rdfs:label "Medical Procedure"@en ;
+#	rdfs:comment "Medical procedure for diagnosis or treatment"@en ;
+#	sh:property [
+#       sh:path yago:medicalSpecialty ;
+#        sh:class schema:MedicalSpecialty ;
+#        ys:fromProperty wdt:P1995 ;
+#        rdfs:comment "Medical speciality of the entity"@en ;
+#    ] ;   
+#	ys:fromClass wd:Q179661, wd:Q5690807 .
 
-# Thomas 01/04/26
-schema:MedicalCondition a sh:NodeShape;
-	rdfs:subClassOf schema:MedicalEntity ;
-	sh:property [
-        sh:path yago:treatment ;
-        sh:or (
-            [ sh:class schema:MedicalProcedure ] 
-            [ sh:class schema:BioChemEntity ]
-	        [ sh:class schema:Product ]
-        ) ;
-        ys:fromProperty wdt:P2176, wdt:P924 ;
-        rdfs:comment "Drug or therapy used for treatment"@en ;
-    ] ;   
-	sh:property [
-        sh:path yago:medicalSpecialty ;
-        sh:class schema:MedicalSpecialty ;
-        ys:fromProperty wdt:P1995 ;
-        rdfs:comment "Medical speciality of the entity"@en ;
-    ] ;   
-	sh:property [
-        sh:path yago:symptom ;
-        sh:class schema:MedicalCondition ;
-        ys:fromProperty wdt:P780 ;
-        rdfs:comment "Symptoms or signs of a medical condition"@en ;
-    ] ;  
-	sh:property [
-        sh:path yago:hasCause ;
-        ys:fromProperty wdt:P828 ;
-        sh:or (
-            [ sh:class schema:MedicalCondition ]
-            [ sh:class schema:BioChemEntity ]
-	        [ sh:class schema:Event ]
-        ) ;
-        rdfs:comment "Cause of the medical condition"@en ;
-    ] ;
-	sh:property [
-        sh:path yago:examination ;
-        ys:fromProperty wdt:P923 ;
-        sh:class schema:MedicalProcedure ; 
-        rdfs:comment "Medical examination to diagnose the medical condition"@en ;
-    ] ;
-	sh:property [
-        sh:path yago:afflicts ;
-        ys:fromProperty wdt:P689 ;
-        sh:class schema:Taxon ;
-        rdfs:comment "Type of organism which a condition or disease afflicts"@en ;
-    ] ;
-	sh:property [
-        sh:path yago:riskFactor ;
-        ys:fromProperty wdt:P5642 ;
-        sh:class schema:Thing ;
-        rdfs:comment "Risk factor for this medical condition"@en ;
-    ] ;
-	rdfs:label "Medical Condition"@en ;
-	rdfs:comment "Any condition that affects the normal functioning of a person or an animal"@en ;
-	ys:fromClass wd:Q7189713.
+# Thomas 01/04/26 # Medical conditions are classes
+#schema:MedicalCondition a sh:NodeShape;
+#	rdfs:subClassOf schema:MedicalEntity ;
+	# Too few facts
+	#sh:property [
+    #    sh:path yago:treatment ;
+    #    sh:or (
+    #        [ sh:class schema:MedicalProcedure ] 
+    #        [ sh:class schema:BioChemEntity ]
+	#        [ sh:class schema:Product ]
+    #    ) ;
+    #    ys:fromProperty wdt:P2176, wdt:P924 ;
+    #    rdfs:comment "Drug or therapy used for treatment"@en ;
+    #] ;   
+#	sh:property [
+#        sh:path yago:medicalSpecialty ;
+#        sh:class schema:MedicalSpecialty ;
+#        ys:fromProperty wdt:P1995 ;
+#        rdfs:comment "Medical speciality of the entity"@en ;
+#    ] ;   
+	# Too few facts
+	#sh:property [
+    #    sh:path yago:symptom ;
+    #    sh:class schema:MedicalCondition ;
+    #    ys:fromProperty wdt:P780 ;
+    #    rdfs:comment "Symptoms or signs of a medical condition"@en ;
+    #] ;  
+#	sh:property [
+#        sh:path yago:hasCause ;
+#        ys:fromProperty wdt:P828 ;
+#        sh:or (
+#            [ sh:class schema:MedicalCondition ]
+#            [ sh:class schema:BioChemEntity ]
+#            [ sh:class schema:Event ]
+#        ) ;
+#        rdfs:comment "Cause of the medical condition"@en ;
+#    ] ;
+	# Too few facts
+	#sh:property [
+    #    sh:path yago:examination ;
+    #    ys:fromProperty wdt:P923 ;
+    #    sh:class schema:MedicalProcedure ; 
+    #    rdfs:comment "Medical examination to diagnose the medical condition"@en ;
+    #] ;
+#	sh:property [
+#        sh:path yago:afflicts ;
+#        ys:fromProperty wdt:P689 ;
+#        sh:class schema:Taxon ;
+#        rdfs:comment "Type of organism which a condition or disease afflicts"@en ;
+#    ] ;
+	# Too few facts
+	#sh:property [
+    #    sh:path yago:riskFactor ;
+    #    ys:fromProperty wdt:P5642 ;
+    #    sh:class schema:Thing ;
+    #    rdfs:comment "Risk factor for this medical condition"@en ;
+    #] ;
+#	rdfs:label "Medical Condition"@en ;
+#	rdfs:comment "Any condition that affects the normal functioning of a person or an animal"@en ;
+#	ys:fromClass wd:Q7189713.
 
 
 ################################################################
@@ -2346,24 +2349,26 @@ schema:MedicalCondition a sh:NodeShape;
 # Thomas 27/03/26 
 schema:BioChemEntity a sh:NodeShape;
 	rdfs:subClassOf schema:Thing ;
-	sh:property [
-        sh:path yago:interacts ;
-        sh:class schema:BioChemEntity ;
-        ys:fromProperty wdt:P769 ;
-        rdfs:comment "Significant drug interaction"@en ;
-    ] ;   
+	# Too few facts
+	#sh:property [ 
+    #    sh:path yago:interacts ;
+    #    sh:class schema:BioChemEntity ;
+    #    ys:fromProperty wdt:P769 ;
+    #    rdfs:comment "Significant drug interaction"@en ;
+    #] ;   
 	sh:property [
         sh:path yago:chemicalStructure ;
         sh:datatype xsd:string ;
         ys:fromProperty wdt:P274 ;
         rdfs:comment "The chemical structure of the entity"@en ;
-    ] ;	
-	sh:property [
-        sh:path yago:contains ;
-        sh:class schema:BioChemEntity ;
-        ys:fromProperty wdt:P527 ;
-        rdfs:comment "Contains this bio-chemical entity"@en ;
-    ] ;	
+    ] ;
+    # duplicate with partOf
+	#sh:property [
+    #    sh:path yago:contains ;
+    #    sh:class schema:BioChemEntity ;
+    #    ys:fromProperty wdt:P527 ;
+    #    rdfs:comment "Contains this bio-chemical entity"@en ;
+    #] ;	
 	rdfs:label "Biological or chemical entity"@en ;
 	rdfs:comment "Any biological, chemical, or biochemical entity. For example: a protein; a gene; a chemical; a synthetic chemical; a drug."@en ;
 	ys:fromClass wd:Q43460564, wd:Q55568967 .
