@@ -57,16 +57,18 @@ def getFirst(myList):
 #             Full Taxonomy as HTML
 ##########################################################################
 
-def getSuperClasses(cls, classes, yagoTaxonomyUp, pathsToRoot):
+def getSuperClasses(cls, classes, yagoTaxonomyUp, pathsToRoot, counter=0):
     """Adds all superclasses of a class <cls> (including <cls>) to the set <classes>"""
     classes.add(cls)
+    if counter>200:
+        print("  Warning: recursion overflow in taxonomy with",cls,"and",classes)
     # Make a check before because it's a defaultdict,
     # which would create cls if it's not there
     if cls==Prefixes.schemaThing:
         pathsToRoot[0]+=1
     if cls in yagoTaxonomyUp:
         for sc in yagoTaxonomyUp[cls]:
-            getSuperClasses(sc, classes, yagoTaxonomyUp, pathsToRoot)
+            getSuperClasses(sc, classes, yagoTaxonomyUp, pathsToRoot, counter+1)
 
 def _printTaxonomy(writer, cls=Prefixes.schemaThing):
     """ Prints the taxonomy to the writer. <cls> is the class to start with, i.e., the top-level class. """
