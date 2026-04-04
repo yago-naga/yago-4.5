@@ -62,14 +62,17 @@ def getSuperClasses(cls, classes, yagoTaxonomyUp, pathsToRoot, counter=0):
     classes.add(cls)
     if counter>200:
         print("  Warning: recursion overflow in taxonomy with",cls,"and",classes)
+        return False
     # Make a check before because it's a defaultdict,
     # which would create cls if it's not there
     if cls==Prefixes.schemaThing:
         pathsToRoot[0]+=1
     if cls in yagoTaxonomyUp:
         for sc in yagoTaxonomyUp[cls]:
-            getSuperClasses(sc, classes, yagoTaxonomyUp, pathsToRoot, counter+1)
-
+            if not getSuperClasses(sc, classes, yagoTaxonomyUp, pathsToRoot, counter+1):
+                return False
+    return True 
+    
 def _printTaxonomy(writer, cls=Prefixes.schemaThing):
     """ Prints the taxonomy to the writer. <cls> is the class to start with, i.e., the top-level class. """
     if cls not in yagoTaxonomyDown:
