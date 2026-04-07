@@ -188,6 +188,9 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
             if not obj:
                 # Happens if a class has no label or no instances
                 continue
+            # Happened with yago:Award rdfs:subClassOf yago:Award...
+            if subject==obj:
+                continue
             # Write taxonomic fact
             taxFacts.writeFact(subject, relation, obj)            
 

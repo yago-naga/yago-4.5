@@ -158,10 +158,10 @@ class YagoProperty(YagoObject):
         out.write("\t\tys:fromProperty "+", ".join(c for c in self.wikidataProperties)+" ;\n")
         if len(self.objectTypes)>1:
             out.write("\t\tsh:or ([ ")            
-            out.write(" ][ ".join("sh:datatype "+p if p.startswith("xsd:") else "sh:class "+p for p in self.objectTypes))
+            out.write(" ][ ".join("sh:datatype "+p if p.startswith("xsd:") or p.startswith("rdf:") else "sh:class "+p for p in self.objectTypes))
             out.write("]).\n\n")
         else:
-            out.write("".join("\t\tsh:datatype "+p if p.startswith("xsd:") else "\t\tsh:class "+p for p in self.objectTypes)+" .\n\n")  
+            out.write("".join("\t\tsh:datatype "+p if p.startswith("xsd:") or p.startswith("rdf:") else "\t\tsh:class "+p for p in self.objectTypes)+" .\n\n")  
         if self.labels:
             out.write(self.identifier+"\trdfs:label "+", ".join(c for c in self.labels)+" .\n\n")        
         if self.comments:
