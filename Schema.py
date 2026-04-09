@@ -92,6 +92,10 @@ def minValue(val, values):
         except:
             warning("Invalid numerical value:",v)            
     return val
+
+def isDataType(typ):
+    """ TRUE for types that are datatypes (rdf:langstring etc.)"""
+    return typ.startswith("xsd:") or typ.startswith("rdf:") or typ.startswith(Prefixes.yagoUnitOfMeasurement)
     
 class YagoProperty(YagoObject):
     """ Represents a YAGO property with its attributes"""
@@ -158,10 +162,10 @@ class YagoProperty(YagoObject):
         out.write("\t\tys:fromProperty "+", ".join(c for c in self.wikidataProperties)+" ;\n")
         if len(self.objectTypes)>1:
             out.write("\t\tsh:or ([ ")            
-            out.write(" ][ ".join("sh:datatype "+p if p.startswith("xsd:") or p.startswith("rdf:") else "sh:class "+p for p in self.objectTypes))
+            out.write(" ][ ".join("sh:datatype "+p if isDataType(p) else "sh:class "+p for p in self.objectTypes))
             out.write("]).\n\n")
         else:
-            out.write("".join("\t\tsh:datatype "+p if p.startswith("xsd:") or p.startswith("rdf:") else "\t\tsh:class "+p for p in self.objectTypes)+" .\n\n")  
+            out.write("".join("\t\tsh:datatype "+p if isDataType(p) else "\t\tsh:class "+p for p in self.objectTypes)+" .\n\n")  
         if self.labels:
             out.write(self.identifier+"\trdfs:label "+", ".join(c for c in self.labels)+" .\n\n")        
         if self.comments:
