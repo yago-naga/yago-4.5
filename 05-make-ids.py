@@ -46,6 +46,10 @@ def isLiteral(entity):
     """ TRUE for literals and external URLs """
     return entity.startswith('"') or entity.startswith('<http://') or entity.startswith('<https://')
 
+def isGenericInstance(entity):
+    """ TRUE if this entity is a generic instance"""
+    return entity.endswith("_generic_instance")
+    
 def yagoIdToString(yagoId):
     """ Decodes Unicode character escapes in a YAGO ID and returns a string."""
     if not yagoId:
@@ -70,7 +74,7 @@ def toYagoEntity(entity):
         return entity
     if entity.startswith("_:"):
         # Anonymous members of lists etc.
-        if not entity.endswith("_generic_instance"):
+        if not isGenericInstance(entity):
             return entity
         # Generic instances
         cls=entity[2:-17]
@@ -84,7 +88,7 @@ def toYagoEntity(entity):
     
 def goesToWikipediaVersion(entity):
     """ TRUE if the entity is a literal or has a Wikipedia page or is a generic instance"""
-    return isLiteral(entity) or entity in entitiesWithWikipediaPage or entity.endswith("_generic_instance")
+    return isLiteral(entity) or entity in entitiesWithWikipediaPage or isGenericInstance(entity)
 
 wikipediaUrlPattern=re.compile("https://([a-z-]+)\\.wiki.*")
 
@@ -154,7 +158,7 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
                                     wikipediaLabelFacts.writeFact(subject, relation, obj)
                                 else:
                                     wikipediaFacts.writeFact(subject, relation, obj)
-                                if subject.endswith("_generic_instance"):
+                                if isGenericInstance(subject):
                                     wikipediaFacts.writeFact(subject, "rdfs:label", f'"{subject[5:-17].replace('_', ' ')}"@en')
                                 if subject!=previousEntity and split[0] in yagoIds:
                                    wikipediaFacts.writeFact(subject, "owl:sameAs", split[0])
@@ -172,7 +176,7 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
                                 else:
                                     if split[4]: metaFacts.writeMetaFact(subject, relation, obj, "schema:startDate", split[4])
                                     if split[5]: metaFacts.writeMetaFact(subject, relation, obj, "schema:endDate", split[5])
-                            if not subject.endswith("_generic_instance"):
+                            if not isGenericInstance(subject):
                                 previousEntity=subject
                     
     with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-taxonomy.tsv") as taxFacts:
