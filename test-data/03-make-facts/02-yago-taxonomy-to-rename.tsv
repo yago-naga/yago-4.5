@@ -87,3 +87,4 @@ yago:PersonName	rdfs:subClassOf	yago:Intangible	.
 yago:Intangible	rdfs:subClassOf	schema:Thing	.
 wd:Q1259917	rdfs:subClassOf	schema:Person	.
 wd:Q123456	rdfs:subClassOf	schema:Country	.
+wd:Q245068	rdfs:subClassOf	yago:Creator	.

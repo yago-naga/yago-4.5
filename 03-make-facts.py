@@ -311,7 +311,7 @@ def handleDomain(entityFacts: Graph, yagoSchema: YagoSchema, fullTransitiveClass
            continue
         if fullTransitiveClasses.isdisjoint(yagoProperty.subjectTypes):
             # Remove all objects for this predicate if domain check fails
-            writer.writeMetaFact(mainEntity, yagoProperty.identifier, Prefixes.schemaThing, Prefixes.ysReason, f'"Domain check failed ({", ".join(s for s in fullTransitiveClasses if not s.startswith("wd:") and s!=Prefixes.schemaThing)})"')
+            writer.writeMetaFact(mainEntity, yagoProperty.identifier, Prefixes.schemaThing, Prefixes.ysReason, f'"Domain check failed, subject is {", ".join(s for s in fullTransitiveClasses if not s.startswith("wd:") and s!=Prefixes.schemaThing)} and expected types are {", ".join(yagoProperty.subjectTypes)}"')
             entityFacts.removeObjects(mainEntity, predicate)
                      
 def isURI(s: str) -> bool: 
@@ -425,7 +425,8 @@ def cleanObject(subject, obj: str, yagoProperty: Any, writer) -> Optional[str]:
     # If the object is not a literal, it can still work if we allow entities
     if couldBeEntity:
          return obj
-    writer.writeMetaFact(subject, yagoProperty.identifier, obj, Prefixes.ysReason, '"expected literal"')
+    # This happens mainly for datasets, so no need to write a log entry     
+    debug(obj, "is not a literal as expected for",yagoProperty.identifier) 
     return None
 
 def handleRange(entityFacts: Graph, yagoSchema: YagoSchema, writer) -> None:

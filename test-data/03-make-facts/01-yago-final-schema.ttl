@@ -35,92 +35,92 @@
 
 schema:CreativeWork a sh:NodeShape ;
 	rdfs:subClassOf schema:Thing ;
-	owl:disjointWith schema:Organization, schema:Taxon, schema:Event, schema:BioChemEntity, schema:Person, schema:Place ;
+	owl:disjointWith schema:Taxon, schema:BioChemEntity, schema:Organization, schema:Event, schema:Place, schema:Person ;
 	ys:fromClass wd:Q386724, wd:Q17537576 ;
-	sh:property ys:dateCreated_property, ys:contentLocation_property, ys:requiredMinAge_property, ys:requiredMaxAge_property, ys:publishedOn_property, ys:author_property, ys:inLanguage_property, ys:duration_property, ys:award_property, ys:artDirector_property, ys:performer_property, ys:about_property ;
+	sh:property ys:performer_property, ys:requiredMaxAge_property, ys:duration_property, ys:requiredMinAge_property, ys:publishedOn_property, ys:about_property, ys:contentLocation_property, ys:award_property, ys:author_property, ys:inLanguage_property, ys:artDirector_property, ys:dateCreated_property ;
 	a rdfs:Class .
 
 schema:Thing a sh:NodeShape ;
 	rdfs:label "Thing"@en ;
-	sh:property ys:image_property, ys:siteLinks_property, ys:label_property, ys:sameAs_property, ys:follows_property, ys:url_property, ys:location_property, ys:partOf_property, ys:alternateName_property, ys:comment_property, ys:namedAfter_property ;
+	sh:property ys:siteLinks_property, ys:namedAfter_property, ys:partOf_property, ys:url_property, ys:label_property, ys:comment_property, ys:image_property, ys:location_property, ys:sameAs_property, ys:alternateName_property, ys:follows_property ;
 	a rdfs:Class .
 
 schema:Event a sh:NodeShape ;
 	rdfs:subClassOf schema:Thing ;
-	owl:disjointWith schema:CreativeWork, schema:Organization, schema:Taxon, schema:BioChemEntity, schema:Person, schema:Intangible, schema:Product, schema:Place ;
+	owl:disjointWith schema:Intangible, schema:Taxon, schema:CreativeWork, schema:BioChemEntity, schema:Organization, schema:Place, schema:Person, schema:Product ;
 	ys:fromClass wd:Q1656682, wd:Q1190554 ;
-	sh:property ys:deathNumber_property, ys:requiredMinAge_property, ys:sponsor_property, ys:maximumAttendeeCapacity_property, ys:winner_property, ys:requiredMaxAge_property, ys:participant_property, ys:about_property, ys:startDate_property, ys:organizer_property, ys:artDirector_property, ys:performer_property, ys:endDate_property, ys:hasCause_property ;
+	sh:property ys:performer_property, ys:requiredMaxAge_property, ys:maximumAttendeeCapacity_property, ys:deathNumber_property, ys:organizer_property, ys:requiredMinAge_property, ys:endDate_property, ys:participant_property, ys:sponsor_property, ys:about_property, ys:winner_property, ys:artDirector_property, ys:hasCause_property, ys:startDate_property ;
 	a rdfs:Class .
 
 schema:Organization a sh:NodeShape ;
 	rdfs:subClassOf schema:Thing ;
-	owl:disjointWith schema:CreativeWork, schema:Taxon, schema:Event, schema:BioChemEntity, schema:Person, schema:Intangible, schema:Product ;
-	ys:fromClass wd:Q895526, wd:Q43229, wd:Q167037, wd:Q155076 ;
-	sh:property ys:dissolutionDate_property, ys:dateCreated_property, ys:leader_property, ys:founder_property, ys:locationCreated_property, ys:fieldOfWork_property, ys:duns_property, ys:award_property, ys:numberOfEmployees_property, ys:memberOf_property, ys:ownedBy_property, ys:address_property, ys:slogan_property, ys:logo_property, ys:leiCode_property, ys:beliefSystem_property ;
+	owl:disjointWith schema:Intangible, schema:Taxon, schema:CreativeWork, schema:BioChemEntity, schema:Event, schema:Person, schema:Product ;
+	ys:fromClass wd:Q167037, wd:Q155076, wd:Q895526, wd:Q43229 ;
+	sh:property ys:dissolutionDate_property, ys:slogan_property, ys:beliefSystem_property, ys:leader_property, ys:award_property, ys:founder_property, ys:ownedBy_property, ys:duns_property, ys:leiCode_property, ys:logo_property, ys:locationCreated_property, ys:fieldOfWork_property, ys:memberOf_property, ys:numberOfEmployees_property, ys:dateCreated_property, ys:address_property ;
 	a rdfs:Class .
 
 schema:Taxon a sh:NodeShape ;
 	rdfs:subClassOf schema:Thing ;
-	owl:disjointWith schema:CreativeWork, schema:Organization, schema:Event, schema:BioChemEntity, schema:Person, schema:Intangible, schema:Product, schema:Place ;
+	owl:disjointWith schema:Intangible, schema:CreativeWork, schema:BioChemEntity, schema:Organization, schema:Event, schema:Place, schema:Person, schema:Product ;
 	ys:fromClass wd:Q16521 ;
-	sh:property ys:consumes_property, ys:mass_property, ys:parentTaxon_property ;
+	sh:property ys:mass_property, ys:consumes_property, ys:parentTaxon_property ;
 	a rdfs:Class .
 
 schema:Person a sh:NodeShape ;
 	rdfs:subClassOf schema:Thing ;
-	owl:disjointWith schema:CreativeWork, schema:Organization, schema:Taxon, schema:Event, schema:BioChemEntity, schema:Intangible, schema:Product, schema:Place ;
-	ys:fromClass wd:Q215627, wd:Q5 ;
-	sh:property ys:birthPlace_property, ys:nationality_property, ys:familyName_property, ys:alumniOf_property, ys:knowsLanguage_property, ys:deathCause_property, ys:sponsor_property, ys:award_property, ys:height_property, ys:memberOf_property, ys:eyeColor_property, ys:hasMother_property, ys:worksFor_property, ys:studentOf_property, ys:academicDegree_property, ys:floruit_property, ys:hasFather_property, ys:fieldOfWork_property, ys:mass_property, ys:deathPlace_property, ys:interestedIn_property, ys:beliefSystem_property, ys:instrument_property, ys:gender_property, ys:givenName_property, ys:spouse_property, ys:birthDate_property, ys:deathDate_property, ys:hairColor_property, ys:burialPlace_property, ys:nativeLanguage_property ;
+	owl:disjointWith schema:Intangible, schema:CreativeWork, schema:Taxon, schema:BioChemEntity, schema:Organization, schema:Event, schema:Place, schema:Product ;
+	ys:fromClass wd:Q5, wd:Q215627 ;
+	sh:property ys:height_property, ys:mass_property, ys:gender_property, ys:award_property, ys:hairColor_property, ys:fieldOfWork_property, ys:birthPlace_property, ys:academicDegree_property, ys:nationality_property, ys:hasMother_property, ys:alumniOf_property, ys:knowsLanguage_property, ys:burialPlace_property, ys:beliefSystem_property, ys:deathCause_property, ys:nativeLanguage_property, ys:floruit_property, ys:eyeColor_property, ys:instrument_property, ys:sponsor_property, ys:worksFor_property, ys:studentOf_property, ys:hasFather_property, ys:familyName_property, ys:memberOf_property, ys:givenName_property, ys:deathPlace_property, ys:interestedIn_property, ys:deathDate_property, ys:birthDate_property, ys:spouse_property ;
 	a rdfs:Class .
 
 schema:Place a sh:NodeShape ;
 	rdfs:subClassOf schema:Thing ;
-	owl:disjointWith schema:CreativeWork, schema:Taxon, schema:Event, schema:BioChemEntity, schema:Person, schema:Intangible, schema:Product ;
+	owl:disjointWith schema:Intangible, schema:CreativeWork, schema:Taxon, schema:BioChemEntity, schema:Event, schema:Person, schema:Product ;
 	ys:fromClass wd:Q82794 ;
-	sh:property ys:geo_property, ys:length_property, ys:material_property, ys:width_property, ys:lowestPoint_property, ys:neighbor_property, ys:highestPoint_property, ys:elevation_property, ys:area_property, ys:twinnedWith_property ;
+	sh:property ys:elevation_property, ys:lowestPoint_property, ys:width_property, ys:material_property, ys:geo_property, ys:length_property, ys:twinnedWith_property, ys:area_property, ys:neighbor_property, ys:highestPoint_property ;
 	a rdfs:Class .
 
 schema:Product a sh:NodeShape ;
 	rdfs:subClassOf schema:Thing ;
-	owl:disjointWith schema:Organization, schema:Taxon, schema:Event, schema:Person, schema:Place ;
-	ys:fromClass wd:Q2342494, wd:Q2424752, wd:Q28877, wd:Q2184715 ;
-	sh:property ys:dateCreated_property, ys:length_property, ys:gtin_property, ys:material_property, ys:width_property, ys:price_property, ys:award_property, ys:color_property, ys:height_property, ys:manufacturer_property ;
+	owl:disjointWith schema:Taxon, schema:Organization, schema:Event, schema:Place, schema:Person ;
+	ys:fromClass wd:Q28877, wd:Q2184715, wd:Q2424752, wd:Q2342494 ;
+	sh:property ys:price_property, ys:height_property, ys:manufacturer_property, ys:color_property, ys:width_property, ys:material_property, ys:award_property, ys:length_property, ys:gtin_property, ys:dateCreated_property ;
 	a rdfs:Class .
 
 schema:BioChemEntity a sh:NodeShape ;
 	rdfs:subClassOf schema:Thing ;
-	owl:disjointWith schema:CreativeWork, schema:Organization, schema:Taxon, schema:Event, schema:Person, schema:Intangible, schema:Place ;
+	owl:disjointWith schema:Intangible, schema:CreativeWork, schema:Taxon, schema:Organization, schema:Event, schema:Place, schema:Person ;
 	rdfs:label "Biological or chemical entity"@en ;
 	rdfs:comment "Any biological, chemical, or biochemical entity. For example: a protein; a gene; a chemical; a synthetic chemical; a drug."@en ;
-	ys:fromClass wd:Q43460564, wd:Q55568967 ;
+	ys:fromClass wd:Q55568967, wd:Q43460564 ;
 	sh:property ys:chemicalStructure_property ;
 	a rdfs:Class .
 
 schema:Intangible a sh:NodeShape ;
 	rdfs:subClassOf schema:Thing ;
-	owl:disjointWith schema:Organization, schema:Taxon, schema:Event, schema:BioChemEntity, schema:Person, schema:Place ;
+	owl:disjointWith schema:Taxon, schema:BioChemEntity, schema:Organization, schema:Event, schema:Place, schema:Person ;
 	rdfs:label "Intangible"@en ;
 	a rdfs:Class .
 
 rdfs:Class a sh:NodeShape ;
 	rdfs:label "Class"@en ;
-	sh:property ys:alternateName_property, ys:image_property, ys:siteLinks_property, ys:sameAs_property, ys:label_property, ys:follows_property, ys:url_property, ys:comment_property, ys:namedAfter_property ;
+	sh:property ys:siteLinks_property, ys:namedAfter_property, ys:url_property, ys:label_property, ys:comment_property, ys:image_property, ys:sameAs_property, ys:alternateName_property, ys:follows_property ;
 	a rdfs:Class .
 
 rdf:Property a sh:NodeShape ;
 	ys:fromClass wd:Q18616576 ;
-	sh:property ys:label_property, ys:alternateName_property, ys:comment_property, ys:sameAs_property ;
+	sh:property ys:alternateName_property, ys:label_property, ys:comment_property, ys:sameAs_property ;
 	a rdfs:Class .
 
 yago:Award a sh:NodeShape ;
 	rdfs:subClassOf schema:Intangible ;
-	ys:fromClass wd:Q38033430, wd:Q618779 ;
+	ys:fromClass wd:Q618779, wd:Q38033430 ;
 	sh:property ys:conferredBy_property ;
 	a rdfs:Class .
 
 yago:BeliefSystem a sh:NodeShape ;
 	rdfs:subClassOf schema:Intangible ;
-	ys:fromClass wd:Q5390013 ;
+	ys:fromClass wd:Q49447, wd:Q5390013 ;
 	a rdfs:Class .
 
 yago:Gender a sh:NodeShape ;
@@ -135,17 +135,17 @@ yago:Color a sh:NodeShape ;
 
 yago:HairColor a sh:NodeShape ;
 	rdfs:subClassOf yago:Color ;
-	ys:fromClass wd:Q105825176, wd:Q1048314 ;
+	ys:fromClass wd:Q1048314, wd:Q105825176 ;
 	a rdfs:Class .
 
 yago:MusicalInstrument a sh:NodeShape ;
 	rdfs:subClassOf schema:Product ;
-	ys:fromClass wd:Q34379, wd:Q1254773 ;
+	ys:fromClass wd:Q1254773, wd:Q34379 ;
 	a rdfs:Class .
 
 schema:Language a sh:NodeShape ;
 	rdfs:subClassOf schema:Intangible ;
-	ys:fromClass wd:Q17376908, wd:Q34770 ;
+	ys:fromClass wd:Q34770, wd:Q17376908 ;
 	a rdfs:Class .
 
 yago:PersonName a sh:NodeShape ;
@@ -198,38 +198,38 @@ yago:UnitOfTemperature a sh:NodeShape ;
 schema:Book a sh:NodeShape ;
 	rdfs:subClassOf schema:CreativeWork ;
 	ys:fromClass wd:Q571 ;
-	sh:property ys:editor_property, ys:numberOfPages_property, ys:isbn_property, ys:publisher_property, ys:illustrator_property ;
+	sh:property ys:publisher_property, ys:illustrator_property, ys:numberOfPages_property, ys:isbn_property, ys:editor_property ;
 	a rdfs:Class .
 
 schema:Newspaper a sh:NodeShape ;
 	rdfs:subClassOf schema:CreativeWork ;
 	ys:fromClass wd:Q11032 ;
-	sh:property ys:publisher_property, ys:sponsor_property ;
+	sh:property ys:sponsor_property, ys:publisher_property ;
 	a rdfs:Class .
 
 schema:TVSeries a sh:NodeShape ;
 	rdfs:subClassOf schema:CreativeWork ;
 	ys:fromClass wd:Q5398426 ;
-	sh:property ys:productionCompany_property, ys:director_property, ys:locationCreated_property, ys:actor_property, ys:numberOfSeasons_property, ys:numberOfEpisodes_property, ys:directorOfPhotography_property, ys:musicBy_property ;
+	sh:property ys:numberOfEpisodes_property, ys:numberOfSeasons_property, ys:productionCompany_property, ys:director_property, ys:locationCreated_property, ys:musicBy_property, ys:actor_property, ys:directorOfPhotography_property ;
 	a rdfs:Class .
 
 schema:MusicComposition a sh:NodeShape ;
 	rdfs:subClassOf schema:CreativeWork ;
-	ys:fromClass wd:Q2188189, wd:Q207628 ;
-	sh:property ys:lyricist_property, ys:musicBy_property, ys:iswcCode_property ;
+	ys:fromClass wd:Q207628, wd:Q2188189 ;
+	sh:property ys:musicBy_property, ys:iswcCode_property, ys:lyricist_property ;
 	a rdfs:Class .
 
 schema:Movie a sh:NodeShape ;
 	rdfs:subClassOf schema:CreativeWork ;
 	ys:fromClass wd:Q11424 ;
-	sh:property ys:productionCompany_property, ys:director_property, ys:locationCreated_property, ys:actor_property, ys:directorOfPhotography_property, ys:musicBy_property ;
+	sh:property ys:productionCompany_property, ys:locationCreated_property, ys:director_property, ys:directorOfPhotography_property, ys:musicBy_property, ys:actor_property ;
 	a rdfs:Class .
 
 yago:FictionalEntity a sh:NodeShape ;
 	rdfs:subClassOf schema:Thing ;
 	rdfs:label "Fictional entity"@en ;
-	ys:fromClass wd:Q115537581, wd:Q64728693, wd:Q18706315, wd:Q21070598, wd:Q14897293 ;
-	sh:property ys:performer_property, ys:author_property, ys:appearsIn_property ;
+	ys:fromClass wd:Q64728693, wd:Q21070598, wd:Q115537581, wd:Q18706315, wd:Q14897293 ;
+	sh:property ys:performer_property, ys:appearsIn_property, ys:author_property ;
 	a rdfs:Class .
 
 yago:Election a sh:NodeShape ;
@@ -245,7 +245,7 @@ schema:Corporation a sh:NodeShape ;
 schema:Airline a sh:NodeShape ;
 	rdfs:subClassOf schema:Corporation ;
 	ys:fromClass wd:Q46970 ;
-	sh:property ys:icaoCode_property, ys:iataCode_property ;
+	sh:property ys:iataCode_property, ys:icaoCode_property ;
 	a rdfs:Class .
 
 schema:EducationalOrganization a sh:NodeShape ;
@@ -257,13 +257,13 @@ schema:EducationalOrganization a sh:NodeShape ;
 schema:PerformingGroup a sh:NodeShape ;
 	rdfs:subClassOf schema:Organization ;
 	ys:fromClass wd:Q105815710 ;
-	sh:property ys:notableWork_property, ys:knowsLanguage_property, ys:director_property ;
+	sh:property ys:knowsLanguage_property, ys:director_property, ys:notableWork_property ;
 	a rdfs:Class .
 
 schema:MusicGroup a sh:NodeShape ;
 	rdfs:subClassOf schema:PerformingGroup ;
 	ys:fromClass wd:Q2088357 ;
-	sh:property ys:recordLabel_property, ys:influencedBy_property ;
+	sh:property ys:influencedBy_property ;
 	a rdfs:Class .
 
 yago:Worker a sh:NodeShape ;
@@ -274,7 +274,7 @@ yago:Worker a sh:NodeShape ;
 yago:Creator a sh:NodeShape ;
 	rdfs:subClassOf yago:Worker ;
 	ys:fromClass wd:Q2500638 ;
-	sh:property ys:influencedBy_property, ys:recordLabel_property ;
+	sh:property ys:notableWork_property, ys:influencedBy_property ;
 	a rdfs:Class .
 
 yago:Academic a sh:NodeShape ;
@@ -298,29 +298,29 @@ yago:Politician a sh:NodeShape ;
 yago:AstronomicalObject a sh:NodeShape ;
 	rdfs:subClassOf schema:Place ;
 	ys:fromClass wd:Q6999 ;
-	sh:property ys:parentBody_property, ys:radialVelocity_property, ys:luminosity_property, ys:distanceFromEarth_property, ys:parallax_property, ys:mass_property, ys:temperature_property ;
+	sh:property ys:parallax_property, ys:radialVelocity_property, ys:mass_property, ys:luminosity_property, ys:parentBody_property, ys:temperature_property, ys:distanceFromEarth_property ;
 	a rdfs:Class .
 
 schema:AdministrativeArea a sh:NodeShape ;
 	rdfs:subClassOf schema:Place ;
 	ys:fromClass wd:Q56061, wd:Q486972 ;
-	sh:property ys:founder_property, ys:medianIncome_property, ys:suicideRate_property, ys:unemploymentRate_property, ys:populationNumber_property, ys:marriageableAge_property, ys:dateCreated_property, ys:literacyRate_property, ys:currency_property, ys:memberOf_property, ys:slogan_property, ys:capital_property, ys:deathRate_property, ys:vehicleOwnershipRate_property, ys:leader_property, ys:postalCode_property, ys:lifeExpectancy_property, ys:demonym_property, ys:beliefSystem_property, ys:birthRate_property, ys:malePopulation_property, ys:femalePopulation_property ;
+	sh:property ys:suicideRate_property, ys:femalePopulation_property, ys:deathRate_property, ys:populationNumber_property, ys:dateCreated_property, ys:demonym_property, ys:capital_property, ys:unemploymentRate_property, ys:beliefSystem_property, ys:malePopulation_property, ys:founder_property, ys:postalCode_property, ys:slogan_property, ys:lifeExpectancy_property, ys:marriageableAge_property, ys:memberOf_property, ys:leader_property, ys:birthRate_property, ys:vehicleOwnershipRate_property, ys:medianIncome_property, ys:literacyRate_property, ys:currency_property ;
 	a rdfs:Class .
 
 schema:City a sh:NodeShape ;
 	rdfs:subClassOf schema:AdministrativeArea ;
-	ys:fromClass wd:Q515, wd:Q7930989 ;
+	ys:fromClass wd:Q7930989, wd:Q515 ;
 	a rdfs:Class .
 
 schema:Country a sh:NodeShape ;
 	rdfs:subClassOf schema:AdministrativeArea ;
 	ys:fromClass wd:Q3024240, wd:Q6256 ;
-	sh:property ys:inequalityAdjustedHumanDevelopmentIndex_property, ys:officialLanguage_property, ys:ageOfMajority_property, ys:democracyIndex_property, ys:totalFertilityRate_property, ys:happyPlanetIndex_property, ys:humanDevelopmentIndex_property, ys:BTIndex_property, ys:telephoneCountryCode_property ;
+	sh:property ys:ageOfMajority_property, ys:democracyIndex_property, ys:humanDevelopmentIndex_property, ys:happyPlanetIndex_property, ys:totalFertilityRate_property, ys:telephoneCountryCode_property, ys:BTIndex_property, ys:inequalityAdjustedHumanDevelopmentIndex_property, ys:officialLanguage_property ;
 	a rdfs:Class .
 
 schema:Landform a sh:NodeShape ;
 	rdfs:subClassOf schema:Place ;
-	ys:fromClass wd:Q3622002, wd:Q271669, wd:Q14524493, wd:Q205895, wd:Q35145263 ;
+	ys:fromClass wd:Q14524493, wd:Q271669, wd:Q205895, wd:Q35145263, wd:Q3622002 ;
 	a rdfs:Class .
 
 schema:BodyOfWater a sh:NodeShape ;
@@ -337,8 +337,8 @@ schema:Continent a sh:NodeShape ;
 yago:HumanMadeGeographicalEntity a sh:NodeShape ;
 	rdfs:subClassOf schema:Place ;
 	rdfs:label "Human-made geographical entity"@en ;
-	ys:fromClass wd:Q845132, wd:Q12292478, wdt:Q699405, wd:Q1497375, wd:Q811979, wd:Q811430, wd:Q18247357, wdt:Q684740, wd:Q811463, wd:Q35145743 ;
-	sh:property ys:dateCreated_property, ys:ownedBy_property, ys:maximumAttendeeCapacity_property ;
+	ys:fromClass wd:Q811979, wd:Q18247357, wd:Q1497375, wd:Q975783, wd:Q845132, wd:Q811430, wd:Q684740, wd:Q12292478, wd:Q35145743, wd:Q811463, wd:Q699405, wd:Q1403389 ;
+	sh:property ys:maximumAttendeeCapacity_property, ys:dateCreated_property, ys:ownedBy_property ;
 	a rdfs:Class .
 
 yago:Way a sh:NodeShape ;
@@ -354,6 +354,28 @@ schema:Airport a sh:NodeShape ;
 	sh:property ys:iataCode_property ;
 	a rdfs:Class .
 
+ys:contentLocation_property
+		sh:path schema:contentLocation ;
+		rdfs:label "content Location"@en ;
+		rdfs:comment "The location depicted or described in the CreativeWork"@en ;
+		ys:fromProperty wdt:P840 ;
+		sh:class schema:Place .
+
+schema:contentLocation	rdfs:label "content Location"@en .
+
+schema:contentLocation	rdfs:comment "The location depicted or described in the CreativeWork"@en .
+
+ys:award_property
+		sh:path schema:award ;
+		rdfs:label "award"@en ;
+		rdfs:comment "An award won by a Person, Organization, CreativeWork, or Product"@en ;
+		ys:fromProperty wdt:P166 ;
+		sh:class yago:Award .
+
+schema:award	rdfs:label "award"@en .
+
+schema:award	rdfs:comment "An award won by a Person, Organization, CreativeWork, or Product"@en .
+
 ys:publishedOn_property
 		sh:path yago:publishedOn ;
 		rdfs:label "published On"@en ;
@@ -365,63 +387,27 @@ yago:publishedOn	rdfs:label "published On"@en .
 
 yago:publishedOn	rdfs:comment "Original broadcaster of a creative work"@en .
 
-ys:inLanguage_property
-		sh:path schema:inLanguage ;
-		rdfs:label "in Language"@en ;
-		rdfs:comment "The language of a CreativeWork"@en ;
-		ys:fromProperty wdt:P364, wdt:P407 ;
-		sh:class schema:Language .
+ys:performer_property
+		sh:path schema:performer ;
+		rdfs:label "performer"@en ;
+		rdfs:comment "A Person who performs as a FictionalEntity"@en, "A Person who performs in this event"@en, "A Person who performs in this Creative Work"@en ;
+		ys:fromProperty wdt:P175 ;
+		sh:class schema:Person .
 
-schema:inLanguage	rdfs:label "in Language"@en .
+schema:performer	rdfs:label "performer"@en .
 
-schema:inLanguage	rdfs:comment "The language of a CreativeWork"@en .
-
-ys:dateCreated_property
-		sh:path schema:dateCreated ;
-		rdfs:label "date Created"@en ;
-		rdfs:comment "The date something was created (used for CreativeWorks, Organizations, Products, AdministrativeAreas, etc.)"@en ;
-		sh:maxCount 1 ;
-		ys:fromProperty wdt:P571, wdt:P577 ;
-		sh:or ([ sh:datatype xsd:dateTime ][ sh:datatype xsd:gYearMonth ][ sh:datatype xsd:gYear ][ sh:datatype xsd:date]).
-
-schema:dateCreated	rdfs:label "date Created"@en .
-
-schema:dateCreated	rdfs:comment "The date something was created (used for CreativeWorks, Organizations, Products, AdministrativeAreas, etc.)"@en .
+schema:performer	rdfs:comment "A Person who performs as a FictionalEntity"@en, "A Person who performs in this event"@en, "A Person who performs in this Creative Work"@en .
 
 ys:about_property
 		sh:path schema:about ;
 		rdfs:label "about"@en ;
-		rdfs:comment "Indicates what a CreativeWork or Event is about"@en, "Indicates what a CreativeWork is about"@en ;
+		rdfs:comment "Indicates what a CreativeWork is about"@en, "Indicates what a CreativeWork or Event is about"@en ;
 		ys:fromProperty wdt:P921 ;
 		sh:class schema:Thing .
 
 schema:about	rdfs:label "about"@en .
 
-schema:about	rdfs:comment "Indicates what a CreativeWork or Event is about"@en, "Indicates what a CreativeWork is about"@en .
-
-ys:artDirector_property
-		sh:path yago:artDirector ;
-		rdfs:label "art Director"@en ;
-		rdfs:comment "Person credited as the art director/artistic director of this Creative Work"@en ;
-		ys:fromProperty wdt:P3174 ;
-		sh:class schema:Person .
-
-yago:artDirector	rdfs:label "art Director"@en .
-
-yago:artDirector	rdfs:comment "Person credited as the art director/artistic director of this Creative Work"@en .
-
-ys:requiredMaxAge_property
-		sh:path schema:requiredMaxAge ;
-		rdfs:label "required Max Age"@en ;
-		rdfs:comment "Maximum required age in years"@en ;
-		sh:maxCount 1 ;
-		sh:minInclusive 0 ;
-		ys:fromProperty wdt:P4135 ;
-		sh:datatype xsd:integer .
-
-schema:requiredMaxAge	rdfs:label "required Max Age"@en .
-
-schema:requiredMaxAge	rdfs:comment "Maximum required age in years"@en .
+schema:about	rdfs:comment "Indicates what a CreativeWork is about"@en, "Indicates what a CreativeWork or Event is about"@en .
 
 ys:requiredMinAge_property
 		sh:path schema:requiredMinAge ;
@@ -436,27 +422,41 @@ schema:requiredMinAge	rdfs:label "required Min Age"@en .
 
 schema:requiredMinAge	rdfs:comment "Minimum required age in years"@en .
 
-ys:contentLocation_property
-		sh:path schema:contentLocation ;
-		rdfs:label "content Location"@en ;
-		rdfs:comment "The location depicted or described in the CreativeWork"@en ;
-		ys:fromProperty wdt:P840 ;
-		sh:class schema:Place .
-
-schema:contentLocation	rdfs:label "content Location"@en .
-
-schema:contentLocation	rdfs:comment "The location depicted or described in the CreativeWork"@en .
-
 ys:author_property
 		sh:path schema:author ;
 		rdfs:label "author"@en ;
 		rdfs:comment "The author of a CreativeWork or FictionalEntity"@en ;
-		ys:fromProperty wdt:P50, wdt:P170 ;
+		ys:fromProperty wdt:P170, wdt:P50 ;
 		sh:or ([ sh:class schema:Organization ][ sh:class schema:Person]).
 
 schema:author	rdfs:label "author"@en .
 
 schema:author	rdfs:comment "The author of a CreativeWork or FictionalEntity"@en .
+
+ys:requiredMaxAge_property
+		sh:path schema:requiredMaxAge ;
+		rdfs:label "required Max Age"@en ;
+		rdfs:comment "Maximum required age in years"@en ;
+		sh:maxCount 1 ;
+		sh:minInclusive 0 ;
+		ys:fromProperty wdt:P4135 ;
+		sh:datatype xsd:integer .
+
+schema:requiredMaxAge	rdfs:label "required Max Age"@en .
+
+schema:requiredMaxAge	rdfs:comment "Maximum required age in years"@en .
+
+ys:dateCreated_property
+		sh:path schema:dateCreated ;
+		rdfs:label "date Created"@en ;
+		rdfs:comment "The date something was created (used for CreativeWorks, Organizations, Products, AdministrativeAreas, etc.)"@en ;
+		sh:maxCount 1 ;
+		ys:fromProperty wdt:P577, wdt:P571 ;
+		sh:or ([ sh:datatype xsd:date ][ sh:datatype xsd:dateTime ][ sh:datatype xsd:gYearMonth ][ sh:datatype xsd:gYear]).
+
+schema:dateCreated	rdfs:label "date Created"@en .
+
+schema:dateCreated	rdfs:comment "The date something was created (used for CreativeWorks, Organizations, Products, AdministrativeAreas, etc.)"@en .
 
 ys:duration_property
 		sh:path schema:duration ;
@@ -470,27 +470,60 @@ schema:duration	rdfs:label "duration"@en .
 
 schema:duration	rdfs:comment "The duration of a CreativeWork (movie, song, etc.)"@en .
 
-ys:award_property
-		sh:path schema:award ;
-		rdfs:label "award"@en ;
-		rdfs:comment "An award won by a Person, Organization, CreativeWork, or Product"@en ;
-		ys:fromProperty wdt:P166 ;
-		sh:class yago:Award .
+ys:inLanguage_property
+		sh:path schema:inLanguage ;
+		rdfs:label "in Language"@en ;
+		rdfs:comment "The language of a CreativeWork"@en ;
+		ys:fromProperty wdt:P364, wdt:P407 ;
+		sh:class schema:Language .
 
-schema:award	rdfs:label "award"@en .
+schema:inLanguage	rdfs:label "in Language"@en .
 
-schema:award	rdfs:comment "An award won by a Person, Organization, CreativeWork, or Product"@en .
+schema:inLanguage	rdfs:comment "The language of a CreativeWork"@en .
 
-ys:performer_property
-		sh:path schema:performer ;
-		rdfs:label "performer"@en ;
-		rdfs:comment "A Person who performs in this Creative Work"@en, "A Person who performs as a FictionalEntity"@en, "A Person who performs in this event"@en ;
-		ys:fromProperty wdt:P175 ;
+ys:artDirector_property
+		sh:path yago:artDirector ;
+		rdfs:label "art Director"@en ;
+		rdfs:comment "Person credited as the art director/artistic director of this Creative Work"@en ;
+		ys:fromProperty wdt:P3174 ;
 		sh:class schema:Person .
 
-schema:performer	rdfs:label "performer"@en .
+yago:artDirector	rdfs:label "art Director"@en .
 
-schema:performer	rdfs:comment "A Person who performs in this Creative Work"@en, "A Person who performs as a FictionalEntity"@en, "A Person who performs in this event"@en .
+yago:artDirector	rdfs:comment "Person credited as the art director/artistic director of this Creative Work"@en .
+
+ys:hasCause_property
+		sh:path yago:hasCause ;
+		rdfs:label "has Cause"@en ;
+		rdfs:comment "Cause of the Event"@en ;
+		ys:fromProperty wdt:P828 ;
+		sh:class schema:Thing .
+
+yago:hasCause	rdfs:label "has Cause"@en .
+
+yago:hasCause	rdfs:comment "Cause of the Event"@en .
+
+ys:winner_property
+		sh:path yago:winner ;
+		rdfs:label "winner"@en ;
+		rdfs:comment "Winner of the event"@en ;
+		ys:fromProperty wdt:P1346 ;
+		sh:or ([ sh:class schema:Organization ][ sh:class schema:Person ][ sh:class schema:CreativeWork]).
+
+yago:winner	rdfs:label "winner"@en .
+
+yago:winner	rdfs:comment "Winner of the event"@en .
+
+ys:organizer_property
+		sh:path schema:organizer ;
+		rdfs:label "organizer"@en ;
+		rdfs:comment "The organizer of an Event"@en ;
+		ys:fromProperty wdt:P664 ;
+		sh:or ([ sh:class schema:Organization ][ sh:class schema:Person]).
+
+schema:organizer	rdfs:label "organizer"@en .
+
+schema:organizer	rdfs:comment "The organizer of an Event"@en .
 
 ys:maximumAttendeeCapacity_property
 		sh:path schema:maximumAttendeeCapacity ;
@@ -504,16 +537,28 @@ schema:maximumAttendeeCapacity	rdfs:label "maximum Attendee Capacity"@en .
 
 schema:maximumAttendeeCapacity	rdfs:comment "The total number of individuals that this place can contain"@en, "The total number of individuals that may attend an event or venue"@en .
 
-ys:winner_property
-		sh:path yago:winner ;
-		rdfs:label "winner"@en ;
-		rdfs:comment "Winner of the event"@en ;
-		ys:fromProperty wdt:P1346 ;
-		sh:or ([ sh:class schema:Organization ][ sh:class schema:CreativeWork ][ sh:class schema:Person]).
+ys:startDate_property
+		sh:path schema:startDate ;
+		rdfs:label "start Date"@en ;
+		rdfs:comment "The start date of an Event"@en ;
+		sh:maxCount 1 ;
+		ys:fromProperty wdt:P580 ;
+		sh:or ([ sh:datatype xsd:date ][ sh:datatype xsd:dateTime ][ sh:datatype xsd:gYearMonth ][ sh:datatype xsd:gYear]).
 
-yago:winner	rdfs:label "winner"@en .
+schema:startDate	rdfs:label "start Date"@en .
 
-yago:winner	rdfs:comment "Winner of the event"@en .
+schema:startDate	rdfs:comment "The start date of an Event"@en .
+
+ys:participant_property
+		sh:path yago:participant ;
+		rdfs:label "participant"@en ;
+		rdfs:comment "A Person or Organization that participated in an Event"@en ;
+		ys:fromProperty wdt:P1923, wdt:P710 ;
+		sh:or ([ sh:class schema:Organization ][ sh:class schema:Person]).
+
+yago:participant	rdfs:label "participant"@en .
+
+yago:participant	rdfs:comment "A Person or Organization that participated in an Event"@en .
 
 ys:deathNumber_property
 		sh:path yago:deathNumber ;
@@ -526,52 +571,6 @@ yago:deathNumber	rdfs:label "death Number"@en .
 
 yago:deathNumber	rdfs:comment "Number of people who died due to this event"@en .
 
-ys:startDate_property
-		sh:path schema:startDate ;
-		rdfs:label "start Date"@en ;
-		rdfs:comment "The start date of an Event"@en ;
-		sh:maxCount 1 ;
-		ys:fromProperty wdt:P580 ;
-		sh:or ([ sh:datatype xsd:dateTime ][ sh:datatype xsd:gYearMonth ][ sh:datatype xsd:gYear ][ sh:datatype xsd:date]).
-
-schema:startDate	rdfs:label "start Date"@en .
-
-schema:startDate	rdfs:comment "The start date of an Event"@en .
-
-ys:organizer_property
-		sh:path schema:organizer ;
-		rdfs:label "organizer"@en ;
-		rdfs:comment "The organizer of an Event"@en ;
-		ys:fromProperty wdt:P664 ;
-		sh:or ([ sh:class schema:Organization ][ sh:class schema:Person]).
-
-schema:organizer	rdfs:label "organizer"@en .
-
-schema:organizer	rdfs:comment "The organizer of an Event"@en .
-
-ys:endDate_property
-		sh:path schema:endDate ;
-		rdfs:label "end Date"@en ;
-		rdfs:comment "The end date of an Event"@en ;
-		sh:maxCount 1 ;
-		ys:fromProperty wdt:P582 ;
-		sh:or ([ sh:datatype xsd:dateTime ][ sh:datatype xsd:gYearMonth ][ sh:datatype xsd:gYear ][ sh:datatype xsd:date]).
-
-schema:endDate	rdfs:label "end Date"@en .
-
-schema:endDate	rdfs:comment "The end date of an Event"@en .
-
-ys:hasCause_property
-		sh:path yago:hasCause ;
-		rdfs:label "has Cause"@en ;
-		rdfs:comment "Cause of the Event"@en ;
-		ys:fromProperty wdt:P828 ;
-		sh:class schema:Thing .
-
-yago:hasCause	rdfs:label "has Cause"@en .
-
-yago:hasCause	rdfs:comment "Cause of the Event"@en .
-
 ys:sponsor_property
 		sh:path schema:sponsor ;
 		rdfs:label "sponsor"@en ;
@@ -583,16 +582,63 @@ schema:sponsor	rdfs:label "sponsor"@en .
 
 schema:sponsor	rdfs:comment "The sponsor of an Event or Newspaper or Person"@en .
 
-ys:participant_property
-		sh:path yago:participant ;
-		rdfs:label "participant"@en ;
-		rdfs:comment "A Person or Organization that participated in an Event"@en ;
-		ys:fromProperty wdt:P1923, wdt:P710 ;
+ys:endDate_property
+		sh:path schema:endDate ;
+		rdfs:label "end Date"@en ;
+		rdfs:comment "The end date of an Event"@en ;
+		sh:maxCount 1 ;
+		ys:fromProperty wdt:P582 ;
+		sh:or ([ sh:datatype xsd:date ][ sh:datatype xsd:dateTime ][ sh:datatype xsd:gYearMonth ][ sh:datatype xsd:gYear]).
+
+schema:endDate	rdfs:label "end Date"@en .
+
+schema:endDate	rdfs:comment "The end date of an Event"@en .
+
+ys:locationCreated_property
+		sh:path schema:locationCreated ;
+		rdfs:label "location Created"@en ;
+		rdfs:comment "The location where a Movie, TV Series, Organization, or HumanMadeGeographicalEntity was created"@en ;
+		ys:fromProperty wdt:P495, wdt:P740 ;
+		sh:class schema:Place .
+
+schema:locationCreated	rdfs:label "location Created"@en .
+
+schema:locationCreated	rdfs:comment "The location where a Movie, TV Series, Organization, or HumanMadeGeographicalEntity was created"@en .
+
+ys:founder_property
+		sh:path schema:founder ;
+		rdfs:label "founder"@en ;
+		rdfs:comment "The founder of an Organization or Administrative Area"@en ;
+		ys:fromProperty wdt:P112 ;
 		sh:or ([ sh:class schema:Organization ][ sh:class schema:Person]).
 
-yago:participant	rdfs:label "participant"@en .
+schema:founder	rdfs:label "founder"@en .
 
-yago:participant	rdfs:comment "A Person or Organization that participated in an Event"@en .
+schema:founder	rdfs:comment "The founder of an Organization or Administrative Area"@en .
+
+ys:address_property
+		sh:path schema:address ;
+		rdfs:label "address"@en ;
+		rdfs:comment "The physical address of an Organization"@en ;
+		ys:fromProperty wdt:P6375 ;
+		sh:datatype xsd:string .
+
+schema:address	rdfs:label "address"@en .
+
+schema:address	rdfs:comment "The physical address of an Organization"@en .
+
+ys:leiCode_property
+		sh:path schema:leiCode ;
+		rdfs:label "lei Code"@en ;
+		rdfs:comment "The Legal Entity Identifier (LEI) code for an Organization"@en ;
+		sh:maxCount 1 ;
+		sh:pattern "^[0-9A-Z]{18}[0-9]{2}$" ;
+		ys:fromProperty wdt:P1278 ;
+		sh:datatype xsd:string .
+
+schema:leiCode	rdfs:label "lei Code"@en .
+
+schema:leiCode	rdfs:comment "The Legal Entity Identifier (LEI) code for an Organization"@en .
 
 ys:duns_property
 		sh:path schema:duns ;
@@ -606,18 +652,6 @@ ys:duns_property
 schema:duns	rdfs:label "duns"@en .
 
 schema:duns	rdfs:comment "The Dun & Bradstreet DUNS number for identifying an Organization"@en .
-
-ys:dissolutionDate_property
-		sh:path schema:dissolutionDate ;
-		rdfs:label "dissolution Date"@en ;
-		rdfs:comment "The date when an Organization was dissolved"@en ;
-		sh:maxCount 1 ;
-		ys:fromProperty wdt:P576 ;
-		sh:or ([ sh:datatype xsd:dateTime ][ sh:datatype xsd:gYearMonth ][ sh:datatype xsd:gYear ][ sh:datatype xsd:date]).
-
-schema:dissolutionDate	rdfs:label "dissolution Date"@en .
-
-schema:dissolutionDate	rdfs:comment "The date when an Organization was dissolved"@en .
 
 ys:logo_property
 		sh:path schema:logo ;
@@ -643,48 +677,50 @@ schema:numberOfEmployees	rdfs:label "number Of Employees"@en .
 
 schema:numberOfEmployees	rdfs:comment "The number of employees in an Organization"@en .
 
-ys:address_property
-		sh:path schema:address ;
-		rdfs:label "address"@en ;
-		rdfs:comment "The physical address of an Organization"@en ;
-		ys:fromProperty wdt:P6375 ;
-		sh:datatype xsd:string .
+ys:memberOf_property
+		sh:path schema:memberOf ;
+		rdfs:label "member Of"@en ;
+		rdfs:comment "An Organization that a Person or another Organization is a member of"@en ;
+		ys:fromProperty wdt:P54, wdt:P463, wdt:P1416, wdt:P102, wdt:P114 ;
+		sh:class schema:Organization .
 
-schema:address	rdfs:label "address"@en .
+schema:memberOf	rdfs:label "member Of"@en .
 
-schema:address	rdfs:comment "The physical address of an Organization"@en .
+schema:memberOf	rdfs:comment "An Organization that a Person or another Organization is a member of"@en .
 
-ys:slogan_property
-		sh:path schema:slogan ;
-		rdfs:label "slogan"@en ;
-		ys:fromProperty wdt:P1451 ;
-		sh:class rdf:langString .
+ys:beliefSystem_property
+		sh:path yago:beliefSystem ;
+		rdfs:label "belief System"@en ;
+		rdfs:comment "The belief system (e.g., religion) of a Person or Organization or Administrative Area"@en, "The belief system (e.g., religion) of a Person or Organization"@en ;
+		ys:fromProperty wdt:P140, wdt:P1142 ;
+		sh:class yago:BeliefSystem .
 
-schema:slogan	rdfs:label "slogan"@en .
+yago:beliefSystem	rdfs:label "belief System"@en .
 
-ys:leiCode_property
-		sh:path schema:leiCode ;
-		rdfs:label "lei Code"@en ;
-		rdfs:comment "The Legal Entity Identifier (LEI) code for an Organization"@en ;
+yago:beliefSystem	rdfs:comment "The belief system (e.g., religion) of a Person or Organization or Administrative Area"@en, "The belief system (e.g., religion) of a Person or Organization"@en .
+
+ys:dissolutionDate_property
+		sh:path schema:dissolutionDate ;
+		rdfs:label "dissolution Date"@en ;
+		rdfs:comment "The date when an Organization was dissolved"@en ;
 		sh:maxCount 1 ;
-		sh:pattern "^[0-9A-Z]{18}[0-9]{2}$" ;
-		ys:fromProperty wdt:P1278 ;
-		sh:datatype xsd:string .
+		ys:fromProperty wdt:P576 ;
+		sh:or ([ sh:datatype xsd:date ][ sh:datatype xsd:dateTime ][ sh:datatype xsd:gYearMonth ][ sh:datatype xsd:gYear]).
 
-schema:leiCode	rdfs:label "lei Code"@en .
+schema:dissolutionDate	rdfs:label "dissolution Date"@en .
 
-schema:leiCode	rdfs:comment "The Legal Entity Identifier (LEI) code for an Organization"@en .
+schema:dissolutionDate	rdfs:comment "The date when an Organization was dissolved"@en .
 
-ys:fieldOfWork_property
-		sh:path yago:fieldOfWork ;
-		rdfs:label "field Of Work"@en ;
-		rdfs:comment "The field of work of the Person or Organization"@en ;
-		ys:fromProperty wdt:P101 ;
-		sh:class schema:Thing .
+ys:leader_property
+		sh:path yago:leader ;
+		rdfs:label "leader"@en ;
+		rdfs:comment "The leader of an Organization or AdministrativeArea"@en ;
+		ys:fromProperty wdt:P35, wdt:P6, wdt:P169, wdt:P168, wdt:P1075 ;
+		sh:class schema:Person .
 
-yago:fieldOfWork	rdfs:label "field Of Work"@en .
+yago:leader	rdfs:label "leader"@en .
 
-yago:fieldOfWork	rdfs:comment "The field of work of the Person or Organization"@en .
+yago:leader	rdfs:comment "The leader of an Organization or AdministrativeArea"@en .
 
 ys:ownedBy_property
 		sh:path yago:ownedBy ;
@@ -697,60 +733,36 @@ yago:ownedBy	rdfs:label "owned By"@en .
 
 yago:ownedBy	rdfs:comment "The Organization or Person that owns an Organization or HumanMadeGeographicalEntity"@en .
 
-ys:locationCreated_property
-		sh:path schema:locationCreated ;
-		rdfs:label "location Created"@en ;
-		rdfs:comment "The location where a Movie, TV Series, Organization, or HumanMadeGeographicalEntity was created"@en ;
-		ys:fromProperty wdt:P740, wdt:P495 ;
-		sh:class schema:Place .
+ys:slogan_property
+		sh:path schema:slogan ;
+		rdfs:label "slogan"@en ;
+		ys:fromProperty wdt:P1451 ;
+		sh:datatype rdf:langString .
 
-schema:locationCreated	rdfs:label "location Created"@en .
+schema:slogan	rdfs:label "slogan"@en .
 
-schema:locationCreated	rdfs:comment "The location where a Movie, TV Series, Organization, or HumanMadeGeographicalEntity was created"@en .
+ys:fieldOfWork_property
+		sh:path yago:fieldOfWork ;
+		rdfs:label "field Of Work"@en ;
+		rdfs:comment "The field of work of the Person or Organization"@en ;
+		ys:fromProperty wdt:P101 ;
+		sh:class schema:Thing .
 
-ys:beliefSystem_property
-		sh:path yago:beliefSystem ;
-		rdfs:label "belief System"@en ;
-		rdfs:comment "The belief system (e.g., religion) of a Person or Organization"@en, "The belief system (e.g., religion) of a Person or Organization or Administrative Area"@en ;
-		ys:fromProperty wdt:P140, wdt:P1142 ;
-		sh:class yago:BeliefSystem .
+yago:fieldOfWork	rdfs:label "field Of Work"@en .
 
-yago:beliefSystem	rdfs:label "belief System"@en .
+yago:fieldOfWork	rdfs:comment "The field of work of the Person or Organization"@en .
 
-yago:beliefSystem	rdfs:comment "The belief system (e.g., religion) of a Person or Organization"@en, "The belief system (e.g., religion) of a Person or Organization or Administrative Area"@en .
+ys:parentTaxon_property
+		sh:path schema:parentTaxon ;
+		rdfs:label "parent Taxon"@en ;
+		rdfs:comment "The parent taxon of a Taxon in biological classification"@en ;
+		sh:maxCount 1 ;
+		ys:fromProperty wdt:P171 ;
+		sh:class schema:Taxon .
 
-ys:founder_property
-		sh:path schema:founder ;
-		rdfs:label "founder"@en ;
-		rdfs:comment "The founder of an Organization or Administrative Area"@en ;
-		ys:fromProperty wdt:P112 ;
-		sh:or ([ sh:class schema:Organization ][ sh:class schema:Person]).
+schema:parentTaxon	rdfs:label "parent Taxon"@en .
 
-schema:founder	rdfs:label "founder"@en .
-
-schema:founder	rdfs:comment "The founder of an Organization or Administrative Area"@en .
-
-ys:leader_property
-		sh:path yago:leader ;
-		rdfs:label "leader"@en ;
-		rdfs:comment "The leader of an Organization or AdministrativeArea"@en ;
-		ys:fromProperty wdt:P35, wdt:P1075, wdt:P169, wdt:P168, wdt:P6 ;
-		sh:class schema:Person .
-
-yago:leader	rdfs:label "leader"@en .
-
-yago:leader	rdfs:comment "The leader of an Organization or AdministrativeArea"@en .
-
-ys:memberOf_property
-		sh:path schema:memberOf ;
-		rdfs:label "member Of"@en ;
-		rdfs:comment "An Organization that a Person or another Organization is a member of"@en ;
-		ys:fromProperty wdt:P463, wdt:P102, wdt:P114, wdt:P1416, wdt:P54 ;
-		sh:class schema:Organization .
-
-schema:memberOf	rdfs:label "member Of"@en .
-
-schema:memberOf	rdfs:comment "An Organization that a Person or another Organization is a member of"@en .
+schema:parentTaxon	rdfs:comment "The parent taxon of a Taxon in biological classification"@en .
 
 ys:consumes_property
 		sh:path yago:consumes ;
@@ -775,29 +787,86 @@ yago:mass	rdfs:label "mass"@en .
 
 yago:mass	rdfs:comment "The mass of the entity"@en, "The mass of an AstronomicalObject"@en, "The mass of a person"@en .
 
-ys:parentTaxon_property
-		sh:path schema:parentTaxon ;
-		rdfs:label "parent Taxon"@en ;
-		rdfs:comment "The parent taxon of a Taxon in biological classification"@en ;
+ys:height_property
+		sh:path schema:height ;
+		rdfs:label "height"@en ;
+		rdfs:comment "The height of a person"@en, "The height of an object"@en ;
 		sh:maxCount 1 ;
-		ys:fromProperty wdt:P171 ;
-		sh:class schema:Taxon .
+		ys:fromProperty wdt:P2048 ;
+		sh:class yago:UnitOfLength .
 
-schema:parentTaxon	rdfs:label "parent Taxon"@en .
+schema:height	rdfs:label "height"@en .
 
-schema:parentTaxon	rdfs:comment "The parent taxon of a Taxon in biological classification"@en .
+schema:height	rdfs:comment "The height of a person"@en, "The height of an object"@en .
 
-ys:deathDate_property
-		sh:path schema:deathDate ;
-		rdfs:label "death Date"@en ;
-		rdfs:comment "The date of death of a Person"@en ;
+ys:instrument_property
+		sh:path schema:instrument ;
+		rdfs:label "instrument"@en ;
+		rdfs:comment "Musical instrument played by the Person"@en ;
+		ys:fromProperty wdt:P1303 ;
+		sh:class yago:MusicalInstrument .
+
+schema:instrument	rdfs:label "instrument"@en .
+
+schema:instrument	rdfs:comment "Musical instrument played by the Person"@en .
+
+ys:hasMother_property
+		sh:path yago:hasMother ;
+		rdfs:label "has Mother"@en ;
+		rdfs:comment "A mother of the Person" ;
+		sh:maxCount 2 ;
+		ys:fromProperty wdt:P25 ;
+		sh:class schema:Person .
+
+yago:hasMother	rdfs:label "has Mother"@en .
+
+yago:hasMother	rdfs:comment "A mother of the Person" .
+
+ys:givenName_property
+		sh:path schema:givenName ;
+		rdfs:label "given Name"@en ;
+		rdfs:comment "First name or another given name of this person"@en ;
+		ys:fromProperty wdt:P735 ;
+		sh:datatype xsd:string .
+
+schema:givenName	rdfs:label "given Name"@en .
+
+schema:givenName	rdfs:comment "First name or another given name of this person"@en .
+
+ys:interestedIn_property
+		sh:path yago:interestedIn ;
+		rdfs:label "interested In"@en ;
+		rdfs:comment "The field of interest of the Person"@en ;
+		ys:fromProperty wdt:P2650 ;
+		sh:class schema:Thing .
+
+yago:interestedIn	rdfs:label "interested In"@en .
+
+yago:interestedIn	rdfs:comment "The field of interest of the Person"@en .
+
+ys:hairColor_property
+		sh:path yago:hairColor ;
+		rdfs:label "hair Color"@en ;
+		rdfs:comment "The hair color of a a person"@en ;
 		sh:maxCount 1 ;
-		ys:fromProperty wdt:P570 ;
-		sh:or ([ sh:datatype xsd:dateTime ][ sh:datatype xsd:gYearMonth ][ sh:datatype xsd:gYear ][ sh:datatype xsd:date]).
+		ys:fromProperty wdt:P1884 ;
+		sh:class yago:HairColor .
 
-schema:deathDate	rdfs:label "death Date"@en .
+yago:hairColor	rdfs:label "hair Color"@en .
 
-schema:deathDate	rdfs:comment "The date of death of a Person"@en .
+yago:hairColor	rdfs:comment "The hair color of a a person"@en .
+
+ys:burialPlace_property
+		sh:path yago:burialPlace ;
+		rdfs:label "burial Place"@en ;
+		rdfs:comment "The place where a Person is buried"@en ;
+		sh:maxCount 1 ;
+		ys:fromProperty wdt:P119 ;
+		sh:class schema:Place .
+
+yago:burialPlace	rdfs:label "burial Place"@en .
+
+yago:burialPlace	rdfs:comment "The place where a Person is buried"@en .
 
 ys:spouse_property
 		sh:path schema:spouse ;
@@ -823,97 +892,51 @@ yago:hasFather	rdfs:label "has Father"@en .
 
 yago:hasFather	rdfs:comment "A father of the Person" .
 
+ys:eyeColor_property
+		sh:path yago:eyeColor ;
+		rdfs:label "eye Color"@en ;
+		rdfs:comment "The eye color of a a person"@en ;
+		sh:maxCount 1 ;
+		ys:fromProperty wdt:P1340 ;
+		sh:class yago:Color .
+
+yago:eyeColor	rdfs:label "eye Color"@en .
+
+yago:eyeColor	rdfs:comment "The eye color of a a person"@en .
+
+ys:birthDate_property
+		sh:path schema:birthDate ;
+		rdfs:label "birth Date"@en ;
+		rdfs:comment "The date of birth of a Person"@en ;
+		sh:maxCount 1 ;
+		ys:fromProperty wdt:P569 ;
+		sh:or ([ sh:datatype xsd:date ][ sh:datatype xsd:dateTime ][ sh:datatype xsd:gYearMonth ][ sh:datatype xsd:gYear]).
+
+schema:birthDate	rdfs:label "birth Date"@en .
+
+schema:birthDate	rdfs:comment "The date of birth of a Person"@en .
+
 ys:deathCause_property
 		sh:path yago:deathCause ;
 		rdfs:label "death Cause"@en ;
 		rdfs:comment "Cause of death"@en ;
-		ys:fromProperty wdt:P157, wdt:P509, wdt:P1196 ;
-		sh:or ([ sh:class schema:Organization ][ sh:class schema:Taxon ][ sh:class schema:BioChemEntity ][ sh:class schema:Event ][ sh:class schema:Person ][ sh:class schema:Product]).
+		ys:fromProperty wdt:P509, wdt:P1196, wdt:P157 ;
+		sh:or ([ sh:class schema:Taxon ][ sh:class schema:BioChemEntity ][ sh:class schema:Organization ][ sh:class schema:Event ][ sh:class schema:Person ][ sh:class schema:Product]).
 
 yago:deathCause	rdfs:label "death Cause"@en .
 
 yago:deathCause	rdfs:comment "Cause of death"@en .
 
-ys:burialPlace_property
-		sh:path yago:burialPlace ;
-		rdfs:label "burial Place"@en ;
-		rdfs:comment "The place where a Person is buried"@en ;
-		sh:maxCount 1 ;
-		ys:fromProperty wdt:P119 ;
-		sh:class schema:Place .
-
-yago:burialPlace	rdfs:label "burial Place"@en .
-
-yago:burialPlace	rdfs:comment "The place where a Person is buried"@en .
-
-ys:knowsLanguage_property
-		sh:path schema:knowsLanguage ;
-		rdfs:label "knows Language"@en ;
-		rdfs:comment "A language known by a Person or PerformingGroup"@en ;
-		ys:fromProperty wdt:P1412 ;
-		sh:class schema:Language .
-
-schema:knowsLanguage	rdfs:label "knows Language"@en .
-
-schema:knowsLanguage	rdfs:comment "A language known by a Person or PerformingGroup"@en .
-
-ys:hasMother_property
-		sh:path yago:hasMother ;
-		rdfs:label "has Mother"@en ;
-		rdfs:comment "A mother of the Person" ;
-		sh:maxCount 2 ;
-		ys:fromProperty wdt:P25 ;
+ys:studentOf_property
+		sh:path yago:studentOf ;
+		rdfs:label "student Of"@en ;
+		rdfs:comment "A Person who was a student of an Academic"@en ;
+		ys:fromProperty wdt:P1066 ;
 		sh:class schema:Person .
 
-yago:hasMother	rdfs:label "has Mother"@en .
+yago:studentOf	rdfs:label "student Of"@en .
 
-yago:hasMother	rdfs:comment "A mother of the Person" .
-
-ys:interestedIn_property
-		sh:path yago:interestedIn ;
-		rdfs:label "interested In"@en ;
-		rdfs:comment "The field of interest of the Person"@en ;
-		ys:fromProperty wdt:P2650 ;
-		sh:class schema:Thing .
-
-yago:interestedIn	rdfs:label "interested In"@en .
-
-yago:interestedIn	rdfs:comment "The field of interest of the Person"@en .
-
-ys:deathPlace_property
-		sh:path schema:deathPlace ;
-		rdfs:label "death Place"@en ;
-		rdfs:comment "The place where a Person died"@en ;
-		sh:maxCount 1 ;
-		ys:fromProperty wdt:P20 ;
-		sh:class schema:Place .
-
-schema:deathPlace	rdfs:label "death Place"@en .
-
-schema:deathPlace	rdfs:comment "The place where a Person died"@en .
-
-ys:nativeLanguage_property
-		sh:path yago:nativeLanguage ;
-		rdfs:label "native Language"@en ;
-		rdfs:comment "Native language of a Person"@en ;
-		ys:fromProperty wdt:P103 ;
-		sh:class schema:Language .
-
-yago:nativeLanguage	rdfs:label "native Language"@en .
-
-yago:nativeLanguage	rdfs:comment "Native language of a Person"@en .
-
-ys:height_property
-		sh:path schema:height ;
-		rdfs:label "height"@en ;
-		rdfs:comment "The height of a person"@en, "The height of an object"@en ;
-		sh:maxCount 1 ;
-		ys:fromProperty wdt:P2048 ;
-		sh:class yago:UnitOfLength .
-
-schema:height	rdfs:label "height"@en .
-
-schema:height	rdfs:comment "The height of a person"@en, "The height of an object"@en .
+yago:studentOf	rdfs:comment "A Person who was a student of an Academic"@en .
 
 ys:birthPlace_property
 		sh:path schema:birthPlace ;
@@ -927,28 +950,62 @@ schema:birthPlace	rdfs:label "birth Place"@en .
 
 schema:birthPlace	rdfs:comment "The place where a Person was born"@en .
 
-ys:birthDate_property
-		sh:path schema:birthDate ;
-		rdfs:label "birth Date"@en ;
-		rdfs:comment "The date of birth of a Person"@en ;
+ys:floruit_property
+		sh:path yago:floruit ;
+		rdfs:label "floruit"@en ;
+		rdfs:comment "Date when the person was known to be active"@en ;
+		ys:fromProperty wdt:P1317 ;
+		sh:or ([ sh:datatype xsd:date ][ sh:datatype xsd:dateTime ][ sh:datatype xsd:gYearMonth ][ sh:datatype xsd:gYear]).
+
+yago:floruit	rdfs:label "floruit"@en .
+
+yago:floruit	rdfs:comment "Date when the person was known to be active"@en .
+
+ys:deathDate_property
+		sh:path schema:deathDate ;
+		rdfs:label "death Date"@en ;
+		rdfs:comment "The date of death of a Person"@en ;
 		sh:maxCount 1 ;
-		ys:fromProperty wdt:P569 ;
-		sh:or ([ sh:datatype xsd:dateTime ][ sh:datatype xsd:gYearMonth ][ sh:datatype xsd:gYear ][ sh:datatype xsd:date]).
+		ys:fromProperty wdt:P570 ;
+		sh:or ([ sh:datatype xsd:date ][ sh:datatype xsd:dateTime ][ sh:datatype xsd:gYearMonth ][ sh:datatype xsd:gYear]).
 
-schema:birthDate	rdfs:label "birth Date"@en .
+schema:deathDate	rdfs:label "death Date"@en .
 
-schema:birthDate	rdfs:comment "The date of birth of a Person"@en .
+schema:deathDate	rdfs:comment "The date of death of a Person"@en .
 
-ys:givenName_property
-		sh:path schema:givenName ;
-		rdfs:label "given Name"@en ;
-		rdfs:comment "First name or another given name of this person"@en ;
-		ys:fromProperty wdt:P735 ;
-		sh:datatype xsd:string .
+ys:worksFor_property
+		sh:path schema:worksFor ;
+		rdfs:label "works For"@en ;
+		rdfs:comment "An organization, person or place (e.g., theater) that a Person works for"@en ;
+		ys:fromProperty wdt:P108 ;
+		sh:or ([ sh:class schema:Organization ][ sh:class schema:Person ][ sh:class schema:Place]).
 
-schema:givenName	rdfs:label "given Name"@en .
+schema:worksFor	rdfs:label "works For"@en .
 
-schema:givenName	rdfs:comment "First name or another given name of this person"@en .
+schema:worksFor	rdfs:comment "An organization, person or place (e.g., theater) that a Person works for"@en .
+
+ys:deathPlace_property
+		sh:path schema:deathPlace ;
+		rdfs:label "death Place"@en ;
+		rdfs:comment "The place where a Person died"@en ;
+		sh:maxCount 1 ;
+		ys:fromProperty wdt:P20 ;
+		sh:class schema:Place .
+
+schema:deathPlace	rdfs:label "death Place"@en .
+
+schema:deathPlace	rdfs:comment "The place where a Person died"@en .
+
+ys:alumniOf_property
+		sh:path schema:alumniOf ;
+		rdfs:label "alumni Of"@en ;
+		rdfs:comment "An Organization that a Person is an alumnus of (typically an educational institution)" ;
+		ys:fromProperty wdt:P69 ;
+		sh:class schema:Organization .
+
+schema:alumniOf	rdfs:label "alumni Of"@en .
+
+schema:alumniOf	rdfs:comment "An Organization that a Person is an alumnus of (typically an educational institution)" .
 
 ys:nationality_property
 		sh:path schema:nationality ;
@@ -961,95 +1018,27 @@ schema:nationality	rdfs:label "nationality"@en .
 
 schema:nationality	rdfs:comment "The nationality of a Person (links to a Country)"@en .
 
-ys:hairColor_property
-		sh:path yago:hairColor ;
-		rdfs:label "hair Color"@en ;
-		rdfs:comment "The hair color of a a person"@en ;
-		sh:maxCount 1 ;
-		ys:fromProperty wdt:P1884 ;
-		sh:class yago:HairColor .
+ys:nativeLanguage_property
+		sh:path yago:nativeLanguage ;
+		rdfs:label "native Language"@en ;
+		rdfs:comment "Native language of a Person"@en ;
+		ys:fromProperty wdt:P103 ;
+		sh:class schema:Language .
 
-yago:hairColor	rdfs:label "hair Color"@en .
+yago:nativeLanguage	rdfs:label "native Language"@en .
 
-yago:hairColor	rdfs:comment "The hair color of a a person"@en .
+yago:nativeLanguage	rdfs:comment "Native language of a Person"@en .
 
-ys:academicDegree_property
-		sh:path yago:academicDegree ;
-		rdfs:label "academic Degree"@en ;
-		rdfs:comment "An academic degree (Award) held by a Person"@en ;
-		ys:fromProperty wdt:P512 ;
-		sh:class yago:Award .
+ys:knowsLanguage_property
+		sh:path schema:knowsLanguage ;
+		rdfs:label "knows Language"@en ;
+		rdfs:comment "A language known by a Person or PerformingGroup"@en ;
+		ys:fromProperty wdt:P1412 ;
+		sh:class schema:Language .
 
-yago:academicDegree	rdfs:label "academic Degree"@en .
+schema:knowsLanguage	rdfs:label "knows Language"@en .
 
-yago:academicDegree	rdfs:comment "An academic degree (Award) held by a Person"@en .
-
-ys:floruit_property
-		sh:path yago:floruit ;
-		rdfs:label "floruit"@en ;
-		rdfs:comment "Date when the person was known to be active"@en ;
-		ys:fromProperty wdt:P1317 ;
-		sh:or ([ sh:datatype xsd:dateTime ][ sh:datatype xsd:gYearMonth ][ sh:datatype xsd:gYear ][ sh:datatype xsd:date]).
-
-yago:floruit	rdfs:label "floruit"@en .
-
-yago:floruit	rdfs:comment "Date when the person was known to be active"@en .
-
-ys:instrument_property
-		sh:path schema:instrument ;
-		rdfs:label "instrument"@en ;
-		rdfs:comment "Musical instrument played by the Person"@en ;
-		ys:fromProperty wdt:P1303 ;
-		sh:class yago:MusicalInstrument .
-
-schema:instrument	rdfs:label "instrument"@en .
-
-schema:instrument	rdfs:comment "Musical instrument played by the Person"@en .
-
-ys:studentOf_property
-		sh:path yago:studentOf ;
-		rdfs:label "student Of"@en ;
-		rdfs:comment "A Person who was a student of an Academic"@en ;
-		ys:fromProperty wdt:P1066 ;
-		sh:class schema:Person .
-
-yago:studentOf	rdfs:label "student Of"@en .
-
-yago:studentOf	rdfs:comment "A Person who was a student of an Academic"@en .
-
-ys:familyName_property
-		sh:path schema:familyName ;
-		rdfs:label "family Name"@en ;
-		rdfs:comment "Family name of this person"@en ;
-		sh:maxCount 1 ;
-		ys:fromProperty wdt:P734 ;
-		sh:datatype xsd:string .
-
-schema:familyName	rdfs:label "family Name"@en .
-
-schema:familyName	rdfs:comment "Family name of this person"@en .
-
-ys:worksFor_property
-		sh:path schema:worksFor ;
-		rdfs:label "works For"@en ;
-		rdfs:comment "An organization, person or place (e.g., theater) that a Person works for"@en ;
-		ys:fromProperty wdt:P108 ;
-		sh:or ([ sh:class schema:Organization ][ sh:class schema:Place ][ sh:class schema:Person]).
-
-schema:worksFor	rdfs:label "works For"@en .
-
-schema:worksFor	rdfs:comment "An organization, person or place (e.g., theater) that a Person works for"@en .
-
-ys:alumniOf_property
-		sh:path schema:alumniOf ;
-		rdfs:label "alumni Of"@en ;
-		rdfs:comment "An Organization that a Person is an alumnus of (typically an educational institution)" ;
-		ys:fromProperty wdt:P69 ;
-		sh:class schema:Organization .
-
-schema:alumniOf	rdfs:label "alumni Of"@en .
-
-schema:alumniOf	rdfs:comment "An Organization that a Person is an alumnus of (typically an educational institution)" .
+schema:knowsLanguage	rdfs:comment "A language known by a Person or PerformingGroup"@en .
 
 ys:gender_property
 		sh:path schema:gender ;
@@ -1063,17 +1052,28 @@ schema:gender	rdfs:label "gender"@en .
 
 schema:gender	rdfs:comment "The gender of a Person"@en .
 
-ys:eyeColor_property
-		sh:path yago:eyeColor ;
-		rdfs:label "eye Color"@en ;
-		rdfs:comment "The eye color of a a person"@en ;
+ys:academicDegree_property
+		sh:path yago:academicDegree ;
+		rdfs:label "academic Degree"@en ;
+		rdfs:comment "An academic degree (Award) held by a Person"@en ;
+		ys:fromProperty wdt:P512 ;
+		sh:class yago:Award .
+
+yago:academicDegree	rdfs:label "academic Degree"@en .
+
+yago:academicDegree	rdfs:comment "An academic degree (Award) held by a Person"@en .
+
+ys:familyName_property
+		sh:path schema:familyName ;
+		rdfs:label "family Name"@en ;
+		rdfs:comment "Family name of this person"@en ;
 		sh:maxCount 1 ;
-		ys:fromProperty wdt:P1340 ;
-		sh:class yago:Color .
+		ys:fromProperty wdt:P734 ;
+		sh:datatype xsd:string .
 
-yago:eyeColor	rdfs:label "eye Color"@en .
+schema:familyName	rdfs:label "family Name"@en .
 
-yago:eyeColor	rdfs:comment "The eye color of a a person"@en .
+schema:familyName	rdfs:comment "Family name of this person"@en .
 
 ys:elevation_property
 		sh:path yago:elevation ;
@@ -1083,16 +1083,16 @@ ys:elevation_property
 
 yago:elevation	rdfs:label "elevation"@en .
 
-ys:neighbor_property
-		sh:path yago:neighbor ;
-		rdfs:label "neighbor"@en ;
-		rdfs:comment "A neighboring Place"@en ;
-		ys:fromProperty wdt:P206, wdt:P47 ;
-		sh:class schema:Place .
+ys:material_property
+		sh:path schema:material ;
+		rdfs:label "material"@en ;
+		rdfs:comment "The material a Product is made of"@en, "The material an object or a place is made of"@en ;
+		ys:fromProperty wdt:P186 ;
+		sh:or ([ sh:class schema:Product ][ sh:class schema:BioChemEntity]).
 
-yago:neighbor	rdfs:label "neighbor"@en .
+schema:material	rdfs:label "material"@en .
 
-yago:neighbor	rdfs:comment "A neighboring Place"@en .
+schema:material	rdfs:comment "The material a Product is made of"@en, "The material an object or a place is made of"@en .
 
 ys:twinnedWith_property
 		sh:path yago:twinnedWith ;
@@ -1104,41 +1104,6 @@ ys:twinnedWith_property
 yago:twinnedWith	rdfs:label "twinned With"@en .
 
 yago:twinnedWith	rdfs:comment "Twin place relationship (twinned administrative body)"@en .
-
-ys:length_property
-		sh:path yago:length ;
-		rdfs:label "length"@en ;
-		rdfs:comment "The length of an object"@en ;
-		sh:maxCount 1 ;
-		ys:fromProperty wdt:P2043 ;
-		sh:class yago:UnitOfLength .
-
-yago:length	rdfs:label "length"@en .
-
-yago:length	rdfs:comment "The length of an object"@en .
-
-ys:material_property
-		sh:path schema:material ;
-		rdfs:label "material"@en ;
-		rdfs:comment "The material an object or a place is made of"@en, "The material a Product is made of"@en ;
-		ys:fromProperty wdt:P186 ;
-		sh:or ([ sh:class schema:BioChemEntity ][ sh:class schema:Product]).
-
-schema:material	rdfs:label "material"@en .
-
-schema:material	rdfs:comment "The material an object or a place is made of"@en, "The material a Product is made of"@en .
-
-ys:width_property
-		sh:path schema:width ;
-		rdfs:label "width"@en ;
-		rdfs:comment "The width of an object"@en ;
-		sh:maxCount 1 ;
-		ys:fromProperty wdt:P2049 ;
-		sh:class yago:UnitOfLength .
-
-schema:width	rdfs:label "width"@en .
-
-schema:width	rdfs:comment "The width of an object"@en .
 
 ys:highestPoint_property
 		sh:path yago:highestPoint ;
@@ -1152,6 +1117,30 @@ yago:highestPoint	rdfs:label "highest Point"@en .
 
 yago:highestPoint	rdfs:comment "The highest point of a Place"@en .
 
+ys:lowestPoint_property
+		sh:path yago:lowestPoint ;
+		rdfs:label "lowest Point"@en ;
+		rdfs:comment "The lowest point of a Place"@en ;
+		sh:maxCount 1 ;
+		ys:fromProperty wdt:P1589 ;
+		sh:class schema:Place .
+
+yago:lowestPoint	rdfs:label "lowest Point"@en .
+
+yago:lowestPoint	rdfs:comment "The lowest point of a Place"@en .
+
+ys:width_property
+		sh:path schema:width ;
+		rdfs:label "width"@en ;
+		rdfs:comment "The width of an object"@en ;
+		sh:maxCount 1 ;
+		ys:fromProperty wdt:P2049 ;
+		sh:class yago:UnitOfLength .
+
+schema:width	rdfs:label "width"@en .
+
+schema:width	rdfs:comment "The width of an object"@en .
+
 ys:area_property
 		sh:path yago:area ;
 		rdfs:label "area"@en ;
@@ -1160,6 +1149,17 @@ ys:area_property
 		sh:class yago:UnitOfArea .
 
 yago:area	rdfs:label "area"@en .
+
+ys:neighbor_property
+		sh:path yago:neighbor ;
+		rdfs:label "neighbor"@en ;
+		rdfs:comment "A neighboring Place"@en ;
+		ys:fromProperty wdt:P47, wdt:P206 ;
+		sh:class schema:Place .
+
+yago:neighbor	rdfs:label "neighbor"@en .
+
+yago:neighbor	rdfs:comment "A neighboring Place"@en .
 
 ys:geo_property
 		sh:path schema:geo ;
@@ -1173,17 +1173,25 @@ schema:geo	rdfs:label "geo"@en .
 
 schema:geo	rdfs:comment "The geographic coordinates of a Place (in WKT literal format)"@en .
 
-ys:lowestPoint_property
-		sh:path yago:lowestPoint ;
-		rdfs:label "lowest Point"@en ;
-		rdfs:comment "The lowest point of a Place"@en ;
+ys:length_property
+		sh:path yago:length ;
+		rdfs:label "length"@en ;
+		rdfs:comment "The length of an object"@en ;
 		sh:maxCount 1 ;
-		ys:fromProperty wdt:P1589 ;
-		sh:class schema:Place .
+		ys:fromProperty wdt:P2043 ;
+		sh:class yago:UnitOfLength .
 
-yago:lowestPoint	rdfs:label "lowest Point"@en .
+yago:length	rdfs:label "length"@en .
 
-yago:lowestPoint	rdfs:comment "The lowest point of a Place"@en .
+yago:length	rdfs:comment "The length of an object"@en .
+
+ys:color_property
+		sh:path schema:color ;
+		rdfs:label "color"@en ;
+		ys:fromProperty wdt:P462 ;
+		sh:class yago:Color .
+
+schema:color	rdfs:label "color"@en .
 
 ys:price_property
 		sh:path schema:price ;
@@ -1195,14 +1203,6 @@ ys:price_property
 schema:price	rdfs:label "price"@en .
 
 schema:price	rdfs:comment "The published price listed or paid for a product (with unit of currency)"@en .
-
-ys:color_property
-		sh:path schema:color ;
-		rdfs:label "color"@en ;
-		ys:fromProperty wdt:P462 ;
-		sh:class yago:Color .
-
-schema:color	rdfs:label "color"@en .
 
 ys:gtin_property
 		sh:path schema:gtin ;
@@ -1240,63 +1240,18 @@ yago:chemicalStructure	rdfs:label "chemical Structure"@en .
 
 yago:chemicalStructure	rdfs:comment "The chemical structure of the entity"@en .
 
-ys:sameAs_property
-		sh:path schema:sameAs ;
-		rdfs:label "same As"@en ;
-		rdfs:comment "An identifier of the same entity in another knowledge base", "An identifier of the same entity in another knowledge base"@en ;
-		ys:fromProperty wdt:P345, wdt:P8814, wdt:P1053, schema:sameAs, wdt:P1628, wdt:P646, wdt:P2671 ;
-		sh:datatype xsd:string .
-
-schema:sameAs	rdfs:label "same As"@en .
-
-schema:sameAs	rdfs:comment "An identifier of the same entity in another knowledge base", "An identifier of the same entity in another knowledge base"@en .
-
-ys:image_property
-		sh:path schema:image ;
-		rdfs:label "image"@en ;
-		rdfs:comment "An image of the entity"@en ;
-		ys:fromProperty wdt:P18 ;
-		sh:datatype xsd:anyURI .
-
-schema:image	rdfs:label "image"@en .
-
-schema:image	rdfs:comment "An image of the entity"@en .
-
 ys:label_property
 		sh:path rdfs:label ;
 		rdfs:label "label"@en ;
 		rdfs:comment "Provides a human-readable label for an entity in a specific language"@en ;
 		sh:uniqueLang true ;
 		sh:minCount 1 ;
-		ys:fromProperty wdt:P2561, wdt:P1705, rdfs:label, schema:name, wdt:P5061, wdt:P1476 ;
-		sh:class rdf:langString .
+		ys:fromProperty wdt:P1705, wdt:P1476, wdt:P2561, schema:name, wdt:P5061, rdfs:label ;
+		sh:datatype rdf:langString .
 
 rdfs:label	rdfs:label "label"@en .
 
 rdfs:label	rdfs:comment "Provides a human-readable label for an entity in a specific language"@en .
-
-ys:comment_property
-		sh:path rdfs:comment ;
-		rdfs:label "comment"@en ;
-		rdfs:comment "Provides a comment or description of an entity in a specific language"@en ;
-		sh:uniqueLang true ;
-		ys:fromProperty schema:description, rdfs:comment ;
-		sh:class rdf:langString .
-
-rdfs:comment	rdfs:label "comment"@en .
-
-rdfs:comment	rdfs:comment "Provides a comment or description of an entity in a specific language"@en .
-
-ys:partOf_property
-		sh:path yago:partOf ;
-		rdfs:label "part Of"@en ;
-		rdfs:comment "A larger Thing that contains this Thing"@en ;
-		ys:fromProperty wdt:P361 ;
-		sh:class schema:Thing .
-
-yago:partOf	rdfs:label "part Of"@en .
-
-yago:partOf	rdfs:comment "A larger Thing that contains this Thing"@en .
 
 ys:namedAfter_property
 		sh:path yago:namedAfter ;
@@ -1308,50 +1263,6 @@ ys:namedAfter_property
 yago:namedAfter	rdfs:label "named After"@en .
 
 yago:namedAfter	rdfs:comment "Entity after which this item is named"@en .
-
-ys:alternateName_property
-		sh:path schema:alternateName ;
-		rdfs:label "alternate Name"@en ;
-		rdfs:comment "An alternative name for the entity"@en ;
-		ys:fromProperty wdt:P1449, schema:alternateName, wdt:P1448, wdt:P742, wdt:P1559, wdt:P2521, wdt:P1843, wdt:P1477, wdt:P225, skos:altLabel, wdt:P2562 ;
-		sh:class rdf:langString .
-
-schema:alternateName	rdfs:label "alternate Name"@en .
-
-schema:alternateName	rdfs:comment "An alternative name for the entity"@en .
-
-ys:location_property
-		sh:path schema:location ;
-		rdfs:label "location"@en ;
-		rdfs:comment "The location of a Thing"@en ;
-		ys:fromProperty wdt:P17, wdt:P4552, wdt:P361, wdt:P706, wdt:P131, wdt:P463, wdt:P30, wdt:P551, wdt:P276 ;
-		sh:class schema:Place .
-
-schema:location	rdfs:label "location"@en .
-
-schema:location	rdfs:comment "The location of a Thing"@en .
-
-ys:url_property
-		sh:path schema:url ;
-		rdfs:label "url"@en ;
-		rdfs:comment "A URL associated with the entity"@en, "A URL of a page about the entity"@en ;
-		ys:fromProperty wdt:P973, wdt:P856, wdt:P2699, wdt:P854 ;
-		sh:datatype xsd:anyURI .
-
-schema:url	rdfs:label "url"@en .
-
-schema:url	rdfs:comment "A URL associated with the entity"@en, "A URL of a page about the entity"@en .
-
-ys:follows_property
-		sh:path yago:follows ;
-		rdfs:label "follows"@en ;
-		rdfs:comment "An Thing that follows another Thing chronologically or conceptually"@en, "A Thing that follows another Thing chronologically or conceptually"@en ;
-		ys:fromProperty wdt:P1365, wdt:P155 ;
-		sh:or ([ sh:class schema:Thing ][ sh:class schema:Event]).
-
-yago:follows	rdfs:label "follows"@en .
-
-yago:follows	rdfs:comment "An Thing that follows another Thing chronologically or conceptually"@en, "A Thing that follows another Thing chronologically or conceptually"@en .
 
 ys:siteLinks_property
 		sh:path yago:siteLinks ;
@@ -1365,6 +1276,95 @@ ys:siteLinks_property
 yago:siteLinks	rdfs:label "site Links"@en .
 
 yago:siteLinks	rdfs:comment "The number of Wikipedia links to this entity, as a proxy measure for importance"@en .
+
+ys:follows_property
+		sh:path yago:follows ;
+		rdfs:label "follows"@en ;
+		rdfs:comment "An Thing that follows another Thing chronologically or conceptually"@en, "A Thing that follows another Thing chronologically or conceptually"@en ;
+		ys:fromProperty wdt:P1365, wdt:P155 ;
+		sh:or ([ sh:class schema:Event ][ sh:class schema:Thing]).
+
+yago:follows	rdfs:label "follows"@en .
+
+yago:follows	rdfs:comment "An Thing that follows another Thing chronologically or conceptually"@en, "A Thing that follows another Thing chronologically or conceptually"@en .
+
+ys:url_property
+		sh:path schema:url ;
+		rdfs:label "url"@en ;
+		rdfs:comment "A URL of a page about the entity"@en, "A URL associated with the entity"@en ;
+		ys:fromProperty wdt:P973, wdt:P854, wdt:P2699, wdt:P856 ;
+		sh:datatype xsd:anyURI .
+
+schema:url	rdfs:label "url"@en .
+
+schema:url	rdfs:comment "A URL of a page about the entity"@en, "A URL associated with the entity"@en .
+
+ys:image_property
+		sh:path schema:image ;
+		rdfs:label "image"@en ;
+		rdfs:comment "An image of the entity"@en ;
+		ys:fromProperty wdt:P18 ;
+		sh:datatype xsd:anyURI .
+
+schema:image	rdfs:label "image"@en .
+
+schema:image	rdfs:comment "An image of the entity"@en .
+
+ys:alternateName_property
+		sh:path schema:alternateName ;
+		rdfs:label "alternate Name"@en ;
+		rdfs:comment "An alternative name for the entity"@en ;
+		ys:fromProperty wdt:P742, wdt:P1843, wdt:P1448, wdt:P1477, wdt:P2562, skos:altLabel, wdt:P225, schema:alternateName, wdt:P2521, wdt:P1559, wdt:P1449 ;
+		sh:datatype rdf:langString .
+
+schema:alternateName	rdfs:label "alternate Name"@en .
+
+schema:alternateName	rdfs:comment "An alternative name for the entity"@en .
+
+ys:comment_property
+		sh:path rdfs:comment ;
+		rdfs:label "comment"@en ;
+		rdfs:comment "Provides a comment or description of an entity in a specific language"@en ;
+		sh:uniqueLang true ;
+		ys:fromProperty rdfs:comment, schema:description ;
+		sh:datatype rdf:langString .
+
+rdfs:comment	rdfs:label "comment"@en .
+
+rdfs:comment	rdfs:comment "Provides a comment or description of an entity in a specific language"@en .
+
+ys:location_property
+		sh:path schema:location ;
+		rdfs:label "location"@en ;
+		rdfs:comment "The location of a Thing"@en ;
+		ys:fromProperty wdt:P361, wdt:P551, wdt:P706, wdt:P276, wdt:P17, wdt:P463, wdt:P131, wdt:P30, wdt:P4552 ;
+		sh:class schema:Place .
+
+schema:location	rdfs:label "location"@en .
+
+schema:location	rdfs:comment "The location of a Thing"@en .
+
+ys:sameAs_property
+		sh:path schema:sameAs ;
+		rdfs:label "same As"@en ;
+		rdfs:comment "An identifier of the same entity in another knowledge base"@en, "An identifier of the same entity in another knowledge base" ;
+		ys:fromProperty wdt:P345, wdt:P8814, wdt:P1628, schema:sameAs, wdt:P1053, wdt:P2671, wdt:P646 ;
+		sh:datatype xsd:string .
+
+schema:sameAs	rdfs:label "same As"@en .
+
+schema:sameAs	rdfs:comment "An identifier of the same entity in another knowledge base"@en, "An identifier of the same entity in another knowledge base" .
+
+ys:partOf_property
+		sh:path yago:partOf ;
+		rdfs:label "part Of"@en ;
+		rdfs:comment "A larger Thing that contains this Thing"@en ;
+		ys:fromProperty wdt:P361 ;
+		sh:class schema:Thing .
+
+yago:partOf	rdfs:label "part Of"@en .
+
+yago:partOf	rdfs:comment "A larger Thing that contains this Thing"@en .
 
 ys:conferredBy_property
 		sh:path yago:conferredBy ;
@@ -1382,9 +1382,44 @@ ys:siConversion_property
 		rdfs:label "si Conversion"@en ;
 		sh:maxCount 1 ;
 		ys:fromProperty wdt:P2370 ;
-		sh:class yago:UnitOfMeasurement .
+		sh:datatype yago:UnitOfMeasurement .
 
 yago:siConversion	rdfs:label "si Conversion"@en .
+
+ys:numberOfPages_property
+		sh:path schema:numberOfPages ;
+		rdfs:label "number Of Pages"@en ;
+		rdfs:comment "The number of pages in a Book"@en ;
+		sh:maxCount 1 ;
+		ys:fromProperty wdt:P1104 ;
+		sh:datatype xsd:integer .
+
+schema:numberOfPages	rdfs:label "number Of Pages"@en .
+
+schema:numberOfPages	rdfs:comment "The number of pages in a Book"@en .
+
+ys:editor_property
+		sh:path schema:editor ;
+		rdfs:label "editor"@en ;
+		rdfs:comment "An editor of a Book"@en ;
+		ys:fromProperty wdt:P98 ;
+		sh:class schema:Person .
+
+schema:editor	rdfs:label "editor"@en .
+
+schema:editor	rdfs:comment "An editor of a Book"@en .
+
+ys:publisher_property
+		sh:path schema:publisher ;
+		rdfs:label "publisher"@en ;
+		rdfs:comment "The publisher of a Book or Newspaper"@en ;
+		sh:maxCount 1 ;
+		ys:fromProperty wdt:P123 ;
+		sh:or ([ sh:class schema:Organization ][ sh:class schema:Person]).
+
+schema:publisher	rdfs:label "publisher"@en .
+
+schema:publisher	rdfs:comment "The publisher of a Book or Newspaper"@en .
 
 ys:illustrator_property
 		sh:path schema:illustrator ;
@@ -1403,114 +1438,12 @@ ys:isbn_property
 		rdfs:comment "The ISBN (International Standard Book Number) of a Book"@en ;
 		sh:maxCount 1 ;
 		sh:pattern "^(97[89]-([0-57]-(\\d-\\d{7}|\\d\\d-\\d{6}|\\d\\d\\d-\\d{5}|\\d{4}-\\d{4}|\\d{5}-\\d\\d\\d|\\d{6}-\\d\\d|\\d{7}-\\d)|[89]\\d-(\\d-\\d{6}|\\d\\d-\\d{5}|\\d\\d\\d-\\d{4}|\\d{4}-\\d\\d\\d|\\d{5}-\\d\\d|\\d{6}-\\d)|[69]\\d\\d-(\\d-\\d{5}|\\d\\d-\\d{4}|\\d\\d\\d-\\d\\d\\d|\\d{4}-\\d\\d|\\d{5}-\\d)|99[0-8]\\d-\\d-\\d{4}|99[0-8]\\d-\\d\\d-\\d\\d\\d|99[0-8]\\d-\\d\\d\\d-\\d\\d|99[0-8]\\d-\\d{4}-\\d|999\\d\\d-\\d-\\d\\d\\d|999\\d\\d-\\d\\d-\\d\\d|999\\d\\d-\\d\\d\\d-\\d)-\\d|\\d{9}(\\d|X))|(\\d{1,5}-\\d{1,7}-\\d{1,6}-[0-9X])$" ;
-		ys:fromProperty wdt:P212, wdt:P957 ;
+		ys:fromProperty wdt:P957, wdt:P212 ;
 		sh:datatype xsd:string .
 
 schema:isbn	rdfs:label "isbn"@en .
 
 schema:isbn	rdfs:comment "The ISBN (International Standard Book Number) of a Book"@en .
-
-ys:editor_property
-		sh:path schema:editor ;
-		rdfs:label "editor"@en ;
-		rdfs:comment "An editor of a Book"@en ;
-		ys:fromProperty wdt:P98 ;
-		sh:class schema:Person .
-
-schema:editor	rdfs:label "editor"@en .
-
-schema:editor	rdfs:comment "An editor of a Book"@en .
-
-ys:numberOfPages_property
-		sh:path schema:numberOfPages ;
-		rdfs:label "number Of Pages"@en ;
-		rdfs:comment "The number of pages in a Book"@en ;
-		sh:maxCount 1 ;
-		ys:fromProperty wdt:P1104 ;
-		sh:datatype xsd:integer .
-
-schema:numberOfPages	rdfs:label "number Of Pages"@en .
-
-schema:numberOfPages	rdfs:comment "The number of pages in a Book"@en .
-
-ys:publisher_property
-		sh:path schema:publisher ;
-		rdfs:label "publisher"@en ;
-		rdfs:comment "The publisher of a Book or Newspaper"@en ;
-		sh:maxCount 1 ;
-		ys:fromProperty wdt:P123 ;
-		sh:or ([ sh:class schema:Organization ][ sh:class schema:Person]).
-
-schema:publisher	rdfs:label "publisher"@en .
-
-schema:publisher	rdfs:comment "The publisher of a Book or Newspaper"@en .
-
-ys:musicBy_property
-		sh:path schema:musicBy ;
-		rdfs:label "music By"@en ;
-		rdfs:comment "The composer or musician for a Movie, TV Series, or MusicComposition"@en ;
-		ys:fromProperty wdt:P86 ;
-		sh:or ([ sh:class schema:MusicGroup ][ sh:class schema:Person]).
-
-schema:musicBy	rdfs:label "music By"@en .
-
-schema:musicBy	rdfs:comment "The composer or musician for a Movie, TV Series, or MusicComposition"@en .
-
-ys:actor_property
-		sh:path schema:actor ;
-		rdfs:label "actor"@en ;
-		rdfs:comment "Indicates an actor who appeared in a Movie or TV Series"@en ;
-		ys:fromProperty wdt:P161 ;
-		sh:class schema:Person .
-
-schema:actor	rdfs:label "actor"@en .
-
-schema:actor	rdfs:comment "Indicates an actor who appeared in a Movie or TV Series"@en .
-
-ys:director_property
-		sh:path schema:director ;
-		rdfs:label "director"@en ;
-		rdfs:comment "The director of a PerformingGroup"@en, "The director of a Movie, TV Series, or PerformingGroup"@en ;
-		ys:fromProperty wdt:P1037, wdt:P1875, wdt:P57 ;
-		sh:class schema:Person .
-
-schema:director	rdfs:label "director"@en .
-
-schema:director	rdfs:comment "The director of a PerformingGroup"@en, "The director of a Movie, TV Series, or PerformingGroup"@en .
-
-ys:productionCompany_property
-		sh:path schema:productionCompany ;
-		rdfs:label "production Company"@en ;
-		rdfs:comment "The production company for a Movie or TV Series"@en ;
-		ys:fromProperty wdt:P272 ;
-		sh:class schema:Organization .
-
-schema:productionCompany	rdfs:label "production Company"@en .
-
-schema:productionCompany	rdfs:comment "The production company for a Movie or TV Series"@en .
-
-ys:numberOfSeasons_property
-		sh:path schema:numberOfSeasons ;
-		rdfs:label "number Of Seasons"@en ;
-		rdfs:comment "The number of seasons in a TV Series"@en ;
-		sh:maxCount 1 ;
-		ys:fromProperty wdt:P2437 ;
-		sh:datatype xsd:integer .
-
-schema:numberOfSeasons	rdfs:label "number Of Seasons"@en .
-
-schema:numberOfSeasons	rdfs:comment "The number of seasons in a TV Series"@en .
-
-ys:directorOfPhotography_property
-		sh:path yago:directorOfPhotography ;
-		rdfs:label "director Of Photography"@en ;
-		rdfs:comment "The director of photography for a Movie or TV Series"@en ;
-		ys:fromProperty wdt:P344 ;
-		sh:class schema:Person .
-
-yago:directorOfPhotography	rdfs:label "director Of Photography"@en .
-
-yago:directorOfPhotography	rdfs:comment "The director of photography for a Movie or TV Series"@en .
 
 ys:numberOfEpisodes_property
 		sh:path schema:numberOfEpisodes ;
@@ -1524,6 +1457,84 @@ schema:numberOfEpisodes	rdfs:label "number Of Episodes"@en .
 
 schema:numberOfEpisodes	rdfs:comment "The number of episodes in a TV Series"@en .
 
+ys:numberOfSeasons_property
+		sh:path schema:numberOfSeasons ;
+		rdfs:label "number Of Seasons"@en ;
+		rdfs:comment "The number of seasons in a TV Series"@en ;
+		sh:maxCount 1 ;
+		ys:fromProperty wdt:P2437 ;
+		sh:datatype xsd:integer .
+
+schema:numberOfSeasons	rdfs:label "number Of Seasons"@en .
+
+schema:numberOfSeasons	rdfs:comment "The number of seasons in a TV Series"@en .
+
+ys:director_property
+		sh:path schema:director ;
+		rdfs:label "director"@en ;
+		rdfs:comment "The director of a PerformingGroup"@en, "The director of a Movie, TV Series, or PerformingGroup"@en ;
+		ys:fromProperty wdt:P1037, wdt:P1875, wdt:P57 ;
+		sh:class schema:Person .
+
+schema:director	rdfs:label "director"@en .
+
+schema:director	rdfs:comment "The director of a PerformingGroup"@en, "The director of a Movie, TV Series, or PerformingGroup"@en .
+
+ys:actor_property
+		sh:path schema:actor ;
+		rdfs:label "actor"@en ;
+		rdfs:comment "Indicates an actor who appeared in a Movie or TV Series"@en ;
+		ys:fromProperty wdt:P161 ;
+		sh:class schema:Person .
+
+schema:actor	rdfs:label "actor"@en .
+
+schema:actor	rdfs:comment "Indicates an actor who appeared in a Movie or TV Series"@en .
+
+ys:productionCompany_property
+		sh:path schema:productionCompany ;
+		rdfs:label "production Company"@en ;
+		rdfs:comment "The production company for a Movie or TV Series"@en ;
+		ys:fromProperty wdt:P272 ;
+		sh:class schema:Organization .
+
+schema:productionCompany	rdfs:label "production Company"@en .
+
+schema:productionCompany	rdfs:comment "The production company for a Movie or TV Series"@en .
+
+ys:musicBy_property
+		sh:path schema:musicBy ;
+		rdfs:label "music By"@en ;
+		rdfs:comment "The composer or musician for a Movie, TV Series, or MusicComposition"@en ;
+		ys:fromProperty wdt:P86 ;
+		sh:or ([ sh:class schema:Person ][ sh:class schema:MusicGroup]).
+
+schema:musicBy	rdfs:label "music By"@en .
+
+schema:musicBy	rdfs:comment "The composer or musician for a Movie, TV Series, or MusicComposition"@en .
+
+ys:directorOfPhotography_property
+		sh:path yago:directorOfPhotography ;
+		rdfs:label "director Of Photography"@en ;
+		rdfs:comment "The director of photography for a Movie or TV Series"@en ;
+		ys:fromProperty wdt:P344 ;
+		sh:class schema:Person .
+
+yago:directorOfPhotography	rdfs:label "director Of Photography"@en .
+
+yago:directorOfPhotography	rdfs:comment "The director of photography for a Movie or TV Series"@en .
+
+ys:lyricist_property
+		sh:path schema:lyricist ;
+		rdfs:label "lyricist"@en ;
+		rdfs:comment "The lyricist of a MusicComposition"@en ;
+		ys:fromProperty wdt:P676 ;
+		sh:or ([ sh:class schema:Person ][ sh:class schema:MusicGroup]).
+
+schema:lyricist	rdfs:label "lyricist"@en .
+
+schema:lyricist	rdfs:comment "The lyricist of a MusicComposition"@en .
+
 ys:iswcCode_property
 		sh:path yago:iswcCode ;
 		rdfs:label "iswc Code"@en ;
@@ -1534,40 +1545,16 @@ ys:iswcCode_property
 
 yago:iswcCode	rdfs:label "iswc Code"@en .
 
-ys:lyricist_property
-		sh:path schema:lyricist ;
-		rdfs:label "lyricist"@en ;
-		rdfs:comment "The lyricist of a MusicComposition"@en ;
-		ys:fromProperty wdt:P676 ;
-		sh:or ([ sh:class schema:MusicGroup ][ sh:class schema:Person]).
-
-schema:lyricist	rdfs:label "lyricist"@en .
-
-schema:lyricist	rdfs:comment "The lyricist of a MusicComposition"@en .
-
 ys:appearsIn_property
 		sh:path yago:appearsIn ;
 		rdfs:label "appears In"@en ;
 		rdfs:comment "A CreativeWork in which a FictionalEntity appears"@en ;
-		ys:fromProperty wdt:P4584, wdt:P1441, wdt:P1080 ;
+		ys:fromProperty wdt:P1080, wdt:P1441, wdt:P4584 ;
 		sh:class schema:CreativeWork .
 
 yago:appearsIn	rdfs:label "appears In"@en .
 
 yago:appearsIn	rdfs:comment "A CreativeWork in which a FictionalEntity appears"@en .
-
-ys:iataCode_property
-		sh:path schema:iataCode ;
-		rdfs:label "iata Code"@en ;
-		rdfs:comment "The IATA code for an Airport or Airline"@en, "The IATA code for an Airport or Airline" ;
-		sh:maxCount 1 ;
-		sh:pattern "^[A-Z0-9]{2,3}$" ;
-		ys:fromProperty wdt:P229, wdt:P238 ;
-		sh:datatype xsd:string .
-
-schema:iataCode	rdfs:label "iata Code"@en .
-
-schema:iataCode	rdfs:comment "The IATA code for an Airport or Airline"@en, "The IATA code for an Airport or Airline" .
 
 ys:icaoCode_property
 		sh:path schema:icaoCode ;
@@ -1581,6 +1568,19 @@ ys:icaoCode_property
 schema:icaoCode	rdfs:label "icao Code"@en .
 
 schema:icaoCode	rdfs:comment "The ICAO code for an Airport or Airline"@en .
+
+ys:iataCode_property
+		sh:path schema:iataCode ;
+		rdfs:label "iata Code"@en ;
+		rdfs:comment "The IATA code for an Airport or Airline"@en, "The IATA code for an Airport or Airline" ;
+		sh:maxCount 1 ;
+		sh:pattern "^[A-Z0-9]{2,3}$" ;
+		ys:fromProperty wdt:P238, wdt:P229 ;
+		sh:datatype xsd:string .
+
+schema:iataCode	rdfs:label "iata Code"@en .
+
+schema:iataCode	rdfs:comment "The IATA code for an Airport or Airline"@en, "The IATA code for an Airport or Airline" .
 
 ys:studentsCount_property
 		sh:path yago:studentsCount ;
@@ -1615,17 +1615,6 @@ ys:influencedBy_property
 yago:influencedBy	rdfs:label "influenced By"@en .
 
 yago:influencedBy	rdfs:comment "An entity (Thing) that influenced a Creator or MusicGroup"@en .
-
-ys:recordLabel_property
-		sh:path schema:recordLabel ;
-		rdfs:label "record Label"@en ;
-		rdfs:comment "The record label of a MusicGroup"@en ;
-		ys:fromProperty wdt:P264 ;
-		sh:class schema:Organization .
-
-schema:recordLabel	rdfs:label "record Label"@en .
-
-schema:recordLabel	rdfs:comment "The record label of a MusicGroup"@en .
 
 ys:doctoralAdvisor_property
 		sh:path yago:doctoralAdvisor ;
@@ -1671,18 +1660,6 @@ yago:candidateIn	rdfs:label "candidate In"@en .
 
 yago:candidateIn	rdfs:comment "An Election that a Politician was a candidate in"@en .
 
-ys:radialVelocity_property
-		sh:path yago:radialVelocity ;
-		rdfs:label "radial Velocity"@en ;
-		rdfs:comment "The radial velocity of an AstronomicalObject"@en ;
-		sh:maxCount 1 ;
-		ys:fromProperty wdt:P2216 ;
-		sh:class yago:UnitOfSpeed .
-
-yago:radialVelocity	rdfs:label "radial Velocity"@en .
-
-yago:radialVelocity	rdfs:comment "The radial velocity of an AstronomicalObject"@en .
-
 ys:distanceFromEarth_property
 		sh:path yago:distanceFromEarth ;
 		rdfs:label "distance From Earth"@en ;
@@ -1695,29 +1672,17 @@ yago:distanceFromEarth	rdfs:label "distance From Earth"@en .
 
 yago:distanceFromEarth	rdfs:comment "The distance of an AstronomicalObject from Earth"@en .
 
-ys:luminosity_property
-		sh:path yago:luminosity ;
-		rdfs:label "luminosity"@en ;
-		rdfs:comment "The luminosity of an AstronomicalObject"@en ;
+ys:parallax_property
+		sh:path yago:parallax ;
+		rdfs:label "parallax"@en ;
+		rdfs:comment "The parallax measurement of an AstronomicalObject"@en ;
 		sh:maxCount 1 ;
-		ys:fromProperty wdt:P2060 ;
-		sh:class yago:UnitOfMeasurement .
+		ys:fromProperty wdt:P2214 ;
+		sh:datatype xsd:decimal .
 
-yago:luminosity	rdfs:label "luminosity"@en .
+yago:parallax	rdfs:label "parallax"@en .
 
-yago:luminosity	rdfs:comment "The luminosity of an AstronomicalObject"@en .
-
-ys:temperature_property
-		sh:path yago:temperature ;
-		rdfs:label "temperature"@en ;
-		rdfs:comment "Temperature of an Astronomical Object"@en ;
-		sh:maxCount 1 ;
-		ys:fromProperty wdt:P2076 ;
-		sh:class yago:UnitOfTemperature .
-
-yago:temperature	rdfs:label "temperature"@en .
-
-yago:temperature	rdfs:comment "Temperature of an Astronomical Object"@en .
+yago:parallax	rdfs:comment "The parallax measurement of an AstronomicalObject"@en .
 
 ys:parentBody_property
 		sh:path yago:parentBody ;
@@ -1731,17 +1696,41 @@ yago:parentBody	rdfs:label "parent Body"@en .
 
 yago:parentBody	rdfs:comment "The parent celestial body of an AstronomicalObject"@en .
 
-ys:parallax_property
-		sh:path yago:parallax ;
-		rdfs:label "parallax"@en ;
-		rdfs:comment "The parallax measurement of an AstronomicalObject"@en ;
+ys:temperature_property
+		sh:path yago:temperature ;
+		rdfs:label "temperature"@en ;
+		rdfs:comment "Temperature of an Astronomical Object"@en ;
 		sh:maxCount 1 ;
-		ys:fromProperty wdt:P2214 ;
-		sh:datatype xsd:decimal .
+		ys:fromProperty wdt:P2076 ;
+		sh:class yago:UnitOfTemperature .
 
-yago:parallax	rdfs:label "parallax"@en .
+yago:temperature	rdfs:label "temperature"@en .
 
-yago:parallax	rdfs:comment "The parallax measurement of an AstronomicalObject"@en .
+yago:temperature	rdfs:comment "Temperature of an Astronomical Object"@en .
+
+ys:radialVelocity_property
+		sh:path yago:radialVelocity ;
+		rdfs:label "radial Velocity"@en ;
+		rdfs:comment "The radial velocity of an AstronomicalObject"@en ;
+		sh:maxCount 1 ;
+		ys:fromProperty wdt:P2216 ;
+		sh:class yago:UnitOfSpeed .
+
+yago:radialVelocity	rdfs:label "radial Velocity"@en .
+
+yago:radialVelocity	rdfs:comment "The radial velocity of an AstronomicalObject"@en .
+
+ys:luminosity_property
+		sh:path yago:luminosity ;
+		rdfs:label "luminosity"@en ;
+		rdfs:comment "The luminosity of an AstronomicalObject"@en ;
+		sh:maxCount 1 ;
+		ys:fromProperty wdt:P2060 ;
+		sh:datatype yago:UnitOfMeasurement .
+
+yago:luminosity	rdfs:label "luminosity"@en .
+
+yago:luminosity	rdfs:comment "The luminosity of an AstronomicalObject"@en .
 
 ys:lifeExpectancy_property
 		sh:path yago:lifeExpectancy ;
@@ -1756,131 +1745,6 @@ yago:lifeExpectancy	rdfs:label "life Expectancy"@en .
 
 yago:lifeExpectancy	rdfs:comment "Life expectancy in years"@en .
 
-ys:populationNumber_property
-		sh:path yago:populationNumber ;
-		rdfs:label "population Number"@en ;
-		rdfs:comment "Population count"@en ;
-		sh:maxCount 1 ;
-		sh:minInclusive 0 ;
-		ys:fromProperty wdt:P1082 ;
-		sh:datatype xsd:integer .
-
-yago:populationNumber	rdfs:label "population Number"@en .
-
-yago:populationNumber	rdfs:comment "Population count"@en .
-
-ys:literacyRate_property
-		sh:path yago:literacyRate ;
-		rdfs:label "literacy Rate"@en ;
-		rdfs:comment "Literacy rate as percentage (0–100)"@en ;
-		sh:maxCount 1 ;
-		sh:maxInclusive 100 ;
-		sh:minInclusive 0 ;
-		ys:fromProperty wdt:P6897 ;
-		sh:datatype xsd:decimal .
-
-yago:literacyRate	rdfs:label "literacy Rate"@en .
-
-yago:literacyRate	rdfs:comment "Literacy rate as percentage (0–100)"@en .
-
-ys:postalCode_property
-		sh:path schema:postalCode ;
-		rdfs:label "postal Code"@en ;
-		rdfs:comment "The postal code of an AdministrativeArea"@en ;
-		ys:fromProperty wdt:P281 ;
-		sh:datatype xsd:string .
-
-schema:postalCode	rdfs:label "postal Code"@en .
-
-schema:postalCode	rdfs:comment "The postal code of an AdministrativeArea"@en .
-
-ys:currency_property
-		sh:path yago:currency ;
-		rdfs:label "currency"@en ;
-		rdfs:comment "Official currency of the country"@en ;
-		ys:fromProperty wdt:P38 ;
-		sh:class yago:UnitOfMoney .
-
-yago:currency	rdfs:label "currency"@en .
-
-yago:currency	rdfs:comment "Official currency of the country"@en .
-
-ys:unemploymentRate_property
-		sh:path yago:unemploymentRate ;
-		rdfs:label "unemployment Rate"@en ;
-		rdfs:comment "Portion of a workforce population that is not employed"@en ;
-		sh:maxCount 1 ;
-		ys:fromProperty wdt:P1198 ;
-		sh:datatype xsd:decimal .
-
-yago:unemploymentRate	rdfs:label "unemployment Rate"@en .
-
-yago:unemploymentRate	rdfs:comment "Portion of a workforce population that is not employed"@en .
-
-ys:birthRate_property
-		sh:path yago:birthRate ;
-		rdfs:label "birth Rate"@en ;
-		rdfs:comment "Birth rate (live births per 1,000 inhabitants per year)"@en ;
-		sh:maxCount 1 ;
-		sh:minInclusive 0 ;
-		ys:fromProperty wdt:P8763 ;
-		sh:datatype xsd:decimal .
-
-yago:birthRate	rdfs:label "birth Rate"@en .
-
-yago:birthRate	rdfs:comment "Birth rate (live births per 1,000 inhabitants per year)"@en .
-
-ys:deathRate_property
-		sh:path yago:deathRate ;
-		rdfs:label "death Rate"@en ;
-		rdfs:comment "Death rate (deaths per 1,000 inhabitants per year)"@en ;
-		sh:maxCount 1 ;
-		sh:minInclusive 0 ;
-		ys:fromProperty wdt:P10091 ;
-		sh:datatype xsd:decimal .
-
-yago:deathRate	rdfs:label "death Rate"@en .
-
-yago:deathRate	rdfs:comment "Death rate (deaths per 1,000 inhabitants per year)"@en .
-
-ys:medianIncome_property
-		sh:path schema:medianIncome ;
-		rdfs:label "median Income"@en ;
-		rdfs:comment "Median household income in a place"@en ;
-		sh:maxCount 1 ;
-		ys:fromProperty wdt:P3529 ;
-		sh:class yago:UnitOfMoney .
-
-schema:medianIncome	rdfs:label "median Income"@en .
-
-schema:medianIncome	rdfs:comment "Median household income in a place"@en .
-
-ys:malePopulation_property
-		sh:path yago:malePopulation ;
-		rdfs:label "male Population"@en ;
-		rdfs:comment "Male population count"@en ;
-		sh:maxCount 1 ;
-		sh:minInclusive 0 ;
-		ys:fromProperty wdt:P1540 ;
-		sh:datatype xsd:integer .
-
-yago:malePopulation	rdfs:label "male Population"@en .
-
-yago:malePopulation	rdfs:comment "Male population count"@en .
-
-ys:femalePopulation_property
-		sh:path yago:femalePopulation ;
-		rdfs:label "female Population"@en ;
-		rdfs:comment "Female population count"@en ;
-		sh:maxCount 1 ;
-		sh:minInclusive 0 ;
-		ys:fromProperty wdt:P1539 ;
-		sh:datatype xsd:integer .
-
-yago:femalePopulation	rdfs:label "female Population"@en .
-
-yago:femalePopulation	rdfs:comment "Female population count"@en .
-
 ys:vehicleOwnershipRate_property
 		sh:path yago:vehicleOwnershipRate ;
 		rdfs:label "vehicle Ownership Rate"@en ;
@@ -1894,16 +1758,52 @@ yago:vehicleOwnershipRate	rdfs:label "vehicle Ownership Rate"@en .
 
 yago:vehicleOwnershipRate	rdfs:comment "Number of vehicles per 1000 people"@en .
 
-ys:capital_property
-		sh:path yago:capital ;
-		rdfs:label "capital"@en ;
-		rdfs:comment "The capital City of an AdministrativeArea"@en ;
-		ys:fromProperty wdt:P36 ;
-		sh:class schema:City .
+ys:currency_property
+		sh:path yago:currency ;
+		rdfs:label "currency"@en ;
+		rdfs:comment "Official currency of the country"@en ;
+		ys:fromProperty wdt:P38 ;
+		sh:class yago:UnitOfMoney .
 
-yago:capital	rdfs:label "capital"@en .
+yago:currency	rdfs:label "currency"@en .
 
-yago:capital	rdfs:comment "The capital City of an AdministrativeArea"@en .
+yago:currency	rdfs:comment "Official currency of the country"@en .
+
+ys:postalCode_property
+		sh:path schema:postalCode ;
+		rdfs:label "postal Code"@en ;
+		rdfs:comment "The postal code of an AdministrativeArea"@en ;
+		ys:fromProperty wdt:P281 ;
+		sh:datatype xsd:string .
+
+schema:postalCode	rdfs:label "postal Code"@en .
+
+schema:postalCode	rdfs:comment "The postal code of an AdministrativeArea"@en .
+
+ys:suicideRate_property
+		sh:path yago:suicideRate ;
+		rdfs:label "suicide Rate"@en ;
+		rdfs:comment "Amount of suicides per 100,000 people and year in the Country"@en ;
+		sh:maxCount 1 ;
+		sh:minInclusive 0 ;
+		ys:fromProperty wdt:P3864 ;
+		sh:datatype xsd:decimal .
+
+yago:suicideRate	rdfs:label "suicide Rate"@en .
+
+yago:suicideRate	rdfs:comment "Amount of suicides per 100,000 people and year in the Country"@en .
+
+ys:unemploymentRate_property
+		sh:path yago:unemploymentRate ;
+		rdfs:label "unemployment Rate"@en ;
+		rdfs:comment "Portion of a workforce population that is not employed"@en ;
+		sh:maxCount 1 ;
+		ys:fromProperty wdt:P1198 ;
+		sh:datatype xsd:decimal .
+
+yago:unemploymentRate	rdfs:label "unemployment Rate"@en .
+
+yago:unemploymentRate	rdfs:comment "Portion of a workforce population that is not employed"@en .
 
 ys:marriageableAge_property
 		sh:path yago:marriageableAge ;
@@ -1922,86 +1822,111 @@ ys:demonym_property
 		sh:path yago:demonym ;
 		rdfs:label "demonym"@en ;
 		ys:fromProperty wdt:P1549 ;
-		sh:class rdf:langString .
+		sh:datatype rdf:langString .
 
 yago:demonym	rdfs:label "demonym"@en .
 
-ys:suicideRate_property
-		sh:path yago:suicideRate ;
-		rdfs:label "suicide Rate"@en ;
-		rdfs:comment "Amount of suicides per 100,000 people and year in the Country"@en ;
+ys:birthRate_property
+		sh:path yago:birthRate ;
+		rdfs:label "birth Rate"@en ;
+		rdfs:comment "Birth rate (live births per 1,000 inhabitants per year)"@en ;
 		sh:maxCount 1 ;
 		sh:minInclusive 0 ;
-		ys:fromProperty wdt:P3864 ;
+		ys:fromProperty wdt:P8763 ;
 		sh:datatype xsd:decimal .
 
-yago:suicideRate	rdfs:label "suicide Rate"@en .
+yago:birthRate	rdfs:label "birth Rate"@en .
 
-yago:suicideRate	rdfs:comment "Amount of suicides per 100,000 people and year in the Country"@en .
+yago:birthRate	rdfs:comment "Birth rate (live births per 1,000 inhabitants per year)"@en .
 
-ys:BTIndex_property
-		sh:path yago:BTIndex ;
-		rdfs:label "BTIndex"@en ;
-		rdfs:comment "The Bertelsmann Transformation Index (BTI) value for a Country"@en ;
-		sh:maxCount 1 ;
-		sh:maxInclusive 10 ;
-		sh:minInclusive 0 ;
-		ys:fromProperty wdt:P8477, wdt:P8476 ;
-		sh:datatype xsd:decimal .
-
-yago:BTIndex	rdfs:label "BTIndex"@en .
-
-yago:BTIndex	rdfs:comment "The Bertelsmann Transformation Index (BTI) value for a Country"@en .
-
-ys:officialLanguage_property
-		sh:path yago:officialLanguage ;
-		rdfs:label "official Language"@en ;
-		rdfs:comment "An official Language of a Country"@en ;
-		ys:fromProperty wdt:P37 ;
-		sh:class schema:Language .
-
-yago:officialLanguage	rdfs:label "official Language"@en .
-
-yago:officialLanguage	rdfs:comment "An official Language of a Country"@en .
-
-ys:ageOfMajority_property
-		sh:path yago:ageOfMajority ;
-		rdfs:label "age Of Majority"@en ;
-		rdfs:comment "Age of majority in years"@en ;
+ys:populationNumber_property
+		sh:path yago:populationNumber ;
+		rdfs:label "population Number"@en ;
+		rdfs:comment "Population count"@en ;
 		sh:maxCount 1 ;
 		sh:minInclusive 0 ;
-		ys:fromProperty wdt:P2997 ;
+		ys:fromProperty wdt:P1082 ;
 		sh:datatype xsd:integer .
 
-yago:ageOfMajority	rdfs:label "age Of Majority"@en .
+yago:populationNumber	rdfs:label "population Number"@en .
 
-yago:ageOfMajority	rdfs:comment "Age of majority in years"@en .
+yago:populationNumber	rdfs:comment "Population count"@en .
 
-ys:humanDevelopmentIndex_property
-		sh:path yago:humanDevelopmentIndex ;
-		rdfs:label "human Development Index"@en ;
-		rdfs:comment "The Human Development Index value for a Country"@en ;
+ys:femalePopulation_property
+		sh:path yago:femalePopulation ;
+		rdfs:label "female Population"@en ;
+		rdfs:comment "Female population count"@en ;
 		sh:maxCount 1 ;
-		ys:fromProperty wdt:P1081 ;
-		sh:datatype xsd:decimal .
-
-yago:humanDevelopmentIndex	rdfs:label "human Development Index"@en .
-
-yago:humanDevelopmentIndex	rdfs:comment "The Human Development Index value for a Country"@en .
-
-ys:inequalityAdjustedHumanDevelopmentIndex_property
-		sh:path yago:inequalityAdjustedHumanDevelopmentIndex ;
-		rdfs:label "inequality Adjusted Human Development Index"@en ;
-		rdfs:comment "The Inequality-adjusted Human Development Index value for a Country"@en ;
-		sh:maxCount 1 ;
-		sh:maxInclusive 1 ;
 		sh:minInclusive 0 ;
-		ys:fromProperty wdt:P11593 ;
+		ys:fromProperty wdt:P1539 ;
+		sh:datatype xsd:integer .
+
+yago:femalePopulation	rdfs:label "female Population"@en .
+
+yago:femalePopulation	rdfs:comment "Female population count"@en .
+
+ys:malePopulation_property
+		sh:path yago:malePopulation ;
+		rdfs:label "male Population"@en ;
+		rdfs:comment "Male population count"@en ;
+		sh:maxCount 1 ;
+		sh:minInclusive 0 ;
+		ys:fromProperty wdt:P1540 ;
+		sh:datatype xsd:integer .
+
+yago:malePopulation	rdfs:label "male Population"@en .
+
+yago:malePopulation	rdfs:comment "Male population count"@en .
+
+ys:medianIncome_property
+		sh:path schema:medianIncome ;
+		rdfs:label "median Income"@en ;
+		rdfs:comment "Median household income in a place"@en ;
+		sh:maxCount 1 ;
+		ys:fromProperty wdt:P3529 ;
+		sh:class yago:UnitOfMoney .
+
+schema:medianIncome	rdfs:label "median Income"@en .
+
+schema:medianIncome	rdfs:comment "Median household income in a place"@en .
+
+ys:literacyRate_property
+		sh:path yago:literacyRate ;
+		rdfs:label "literacy Rate"@en ;
+		rdfs:comment "Literacy rate as percentage (0–100)"@en ;
+		sh:maxCount 1 ;
+		sh:maxInclusive 100 ;
+		sh:minInclusive 0 ;
+		ys:fromProperty wdt:P6897 ;
 		sh:datatype xsd:decimal .
 
-yago:inequalityAdjustedHumanDevelopmentIndex	rdfs:label "inequality Adjusted Human Development Index"@en .
+yago:literacyRate	rdfs:label "literacy Rate"@en .
 
-yago:inequalityAdjustedHumanDevelopmentIndex	rdfs:comment "The Inequality-adjusted Human Development Index value for a Country"@en .
+yago:literacyRate	rdfs:comment "Literacy rate as percentage (0–100)"@en .
+
+ys:deathRate_property
+		sh:path yago:deathRate ;
+		rdfs:label "death Rate"@en ;
+		rdfs:comment "Death rate (deaths per 1,000 inhabitants per year)"@en ;
+		sh:maxCount 1 ;
+		sh:minInclusive 0 ;
+		ys:fromProperty wdt:P10091 ;
+		sh:datatype xsd:decimal .
+
+yago:deathRate	rdfs:label "death Rate"@en .
+
+yago:deathRate	rdfs:comment "Death rate (deaths per 1,000 inhabitants per year)"@en .
+
+ys:capital_property
+		sh:path yago:capital ;
+		rdfs:label "capital"@en ;
+		rdfs:comment "The capital City of an AdministrativeArea"@en ;
+		ys:fromProperty wdt:P36 ;
+		sh:class schema:City .
+
+yago:capital	rdfs:label "capital"@en .
+
+yago:capital	rdfs:comment "The capital City of an AdministrativeArea"@en .
 
 ys:happyPlanetIndex_property
 		sh:path yago:happyPlanetIndex ;
@@ -2015,30 +1940,31 @@ yago:happyPlanetIndex	rdfs:label "happy Planet Index"@en .
 
 yago:happyPlanetIndex	rdfs:comment "The Happy Planet Index rating of a country"@en .
 
-ys:totalFertilityRate_property
-		sh:path yago:totalFertilityRate ;
-		rdfs:label "total Fertility Rate"@en ;
-		rdfs:comment "Total fertility rate (children per woman)"@en ;
+ys:humanDevelopmentIndex_property
+		sh:path yago:humanDevelopmentIndex ;
+		rdfs:label "human Development Index"@en ;
+		rdfs:comment "The Human Development Index value for a Country"@en ;
 		sh:maxCount 1 ;
-		sh:minInclusive 0 ;
-		ys:fromProperty wdt:P4841 ;
+		ys:fromProperty wdt:P1081 ;
 		sh:datatype xsd:decimal .
 
-yago:totalFertilityRate	rdfs:label "total Fertility Rate"@en .
+yago:humanDevelopmentIndex	rdfs:label "human Development Index"@en .
 
-yago:totalFertilityRate	rdfs:comment "Total fertility rate (children per woman)"@en .
+yago:humanDevelopmentIndex	rdfs:comment "The Human Development Index value for a Country"@en .
 
-ys:telephoneCountryCode_property
-		sh:path yago:telephoneCountryCode ;
-		rdfs:label "telephone Country Code"@en ;
-		rdfs:comment "Telephone country calling code, format: +<digits>"@en ;
-		sh:pattern "^\\+\\d+$" ;
-		ys:fromProperty wdt:P474 ;
-		sh:datatype xsd:string .
+ys:BTIndex_property
+		sh:path yago:BTIndex ;
+		rdfs:label "BTIndex"@en ;
+		rdfs:comment "The Bertelsmann Transformation Index (BTI) value for a Country"@en ;
+		sh:maxCount 1 ;
+		sh:maxInclusive 10 ;
+		sh:minInclusive 0 ;
+		ys:fromProperty wdt:P8476, wdt:P8477 ;
+		sh:datatype xsd:decimal .
 
-yago:telephoneCountryCode	rdfs:label "telephone Country Code"@en .
+yago:BTIndex	rdfs:label "BTIndex"@en .
 
-yago:telephoneCountryCode	rdfs:comment "Telephone country calling code, format: +<digits>"@en .
+yago:BTIndex	rdfs:comment "The Bertelsmann Transformation Index (BTI) value for a Country"@en .
 
 ys:democracyIndex_property
 		sh:path yago:democracyIndex ;
@@ -2054,12 +1980,75 @@ yago:democracyIndex	rdfs:label "democracy Index"@en .
 
 yago:democracyIndex	rdfs:comment "Democracy Index rating of a country"@en .
 
+ys:ageOfMajority_property
+		sh:path yago:ageOfMajority ;
+		rdfs:label "age Of Majority"@en ;
+		rdfs:comment "Age of majority in years"@en ;
+		sh:maxCount 1 ;
+		sh:minInclusive 0 ;
+		ys:fromProperty wdt:P2997 ;
+		sh:datatype xsd:integer .
+
+yago:ageOfMajority	rdfs:label "age Of Majority"@en .
+
+yago:ageOfMajority	rdfs:comment "Age of majority in years"@en .
+
+ys:officialLanguage_property
+		sh:path yago:officialLanguage ;
+		rdfs:label "official Language"@en ;
+		rdfs:comment "An official Language of a Country"@en ;
+		ys:fromProperty wdt:P37 ;
+		sh:class schema:Language .
+
+yago:officialLanguage	rdfs:label "official Language"@en .
+
+yago:officialLanguage	rdfs:comment "An official Language of a Country"@en .
+
+ys:telephoneCountryCode_property
+		sh:path yago:telephoneCountryCode ;
+		rdfs:label "telephone Country Code"@en ;
+		rdfs:comment "Telephone country calling code, format: +<digits>"@en ;
+		sh:pattern "^\\+\\d+$" ;
+		ys:fromProperty wdt:P474 ;
+		sh:datatype xsd:string .
+
+yago:telephoneCountryCode	rdfs:label "telephone Country Code"@en .
+
+yago:telephoneCountryCode	rdfs:comment "Telephone country calling code, format: +<digits>"@en .
+
+ys:inequalityAdjustedHumanDevelopmentIndex_property
+		sh:path yago:inequalityAdjustedHumanDevelopmentIndex ;
+		rdfs:label "inequality Adjusted Human Development Index"@en ;
+		rdfs:comment "The Inequality-adjusted Human Development Index value for a Country"@en ;
+		sh:maxCount 1 ;
+		sh:maxInclusive 1 ;
+		sh:minInclusive 0 ;
+		ys:fromProperty wdt:P11593 ;
+		sh:datatype xsd:decimal .
+
+yago:inequalityAdjustedHumanDevelopmentIndex	rdfs:label "inequality Adjusted Human Development Index"@en .
+
+yago:inequalityAdjustedHumanDevelopmentIndex	rdfs:comment "The Inequality-adjusted Human Development Index value for a Country"@en .
+
+ys:totalFertilityRate_property
+		sh:path yago:totalFertilityRate ;
+		rdfs:label "total Fertility Rate"@en ;
+		rdfs:comment "Total fertility rate (children per woman)"@en ;
+		sh:maxCount 1 ;
+		sh:minInclusive 0 ;
+		ys:fromProperty wdt:P4841 ;
+		sh:datatype xsd:decimal .
+
+yago:totalFertilityRate	rdfs:label "total Fertility Rate"@en .
+
+yago:totalFertilityRate	rdfs:comment "Total fertility rate (children per woman)"@en .
+
 ys:flowsInto_property
 		sh:path yago:flowsInto ;
 		rdfs:label "flows Into"@en ;
 		rdfs:comment "The BodyOfWater that another body of water flows into"@en ;
 		sh:maxCount 1 ;
-		ys:fromProperty wdt:P201, wdt:P403 ;
+		ys:fromProperty wdt:P403, wdt:P201 ;
 		sh:class schema:BodyOfWater .
 
 yago:flowsInto	rdfs:label "flows Into"@en .

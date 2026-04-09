@@ -358,8 +358,7 @@ class Graph(object):
         return result 
     def removeObjects(self, subject, predicate):
         if subject in self.index:
-            if predicate in self.index[subject]:                    
-                    self.index[subject][predicate].clear()
+           self.index[subject].pop(predicate, None)
     def printToWriter(self, result):        
         for subject in self.index:
             if subject.startswith("_:list_"):

@@ -95,9 +95,14 @@ wd:Q_prof	rdfs:label	"professor"@en	.
 wd:Q174789	rdf:type	yago:UnitOfMeasurement	.
 wd:Q174789	rdfs:label	"meter"@en	.
 
-# Example with overloaded facts, only one of whom should be in the logs
+# A fact should appear in the logs only if none of the overloaded facts succeeded
 wd:Q403	rdf:type	schema:Person	.
+# First overload succeeds -> no log entry
 wd:Q403	schema:children	wd:Q42	. # IF	schema:Person
 wd:Q403	schema:otherRelation	wd:Q42	. # IF	schema:Book
+# Second overload succeeds -> no log entry
 wd:Q403	schema:otherRelation	"200"^^wd:Q174789	. # IF	schema:Person
 wd:Q403	schema:height	"200"^^wd:Q174789	. # IF	yago:UnitOfMeasurement
+# No overload succeeds -> two log entries
+wd:Q403	schema:location	wd:Q42	. # IF	schema:Place
+wd:Q403	schema:memberOf	wd:Q42	. # IF	schema:Organization

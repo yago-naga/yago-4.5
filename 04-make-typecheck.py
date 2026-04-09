@@ -146,7 +146,9 @@ def writeYagoId(out, currentTopic, currentEnglishLabel, currentLabel, currentWik
         return
     # Names get an id that mirrors its label
     if isName:
-       out.write(currentTopic,"owl:sameAs", "yago:"+titleFromName(currentLabel),". #OTHER") 
+       # Names have a @mul tag, but the @mul tags becomes the English label,
+       # mainly to deal with chemical entities
+       out.write(currentTopic,"owl:sameAs", "yago:"+titleFromName(currentEnglishLabel),". #OTHER") 
        return
     if currentWikipediaPage and tryYagoId(out,currentTopic, titleFromWikipediaPage(currentWikipediaPage), True):
         return

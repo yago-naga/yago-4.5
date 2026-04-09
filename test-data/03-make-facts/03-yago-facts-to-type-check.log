@@ -1,18 +1,8 @@
-<<	wd:Q_Inconsistent	rdf:type	wd:Q_rock_singer	>>	ys:excludedFor	"disjoint with schema:Organization"	.
-<<	wd:Q_Has_no_label	rdf:type	schema:Thing	>>	ys:excludedFor	"no label"	.
-<<	wd:Q_has_no_type	rdf:type	schema:Thing	>>	ys:excludedFor	"no valid type among wd:invalid"	.
-<<	wd:Q_Elvis	rdf:type	schema:Thing	>>	ys:excludedFor	"no valid type among "	.
-<<	wd:Q31	rdf:type	schema:Thing	>>	ys:excludedFor	"no valid type among "	.
-<<	wd:Q_Elvis	rdf:type	schema:Person	>>	ys:excludedFor	"is shortcut"	.
-<<	wd:Q_Elvis	rdf:type	wd:Q_singer	>>	ys:excludedFor	"is shortcut"	.
-<<	wd:Q_Elvis	schema:image	"http://elibrary.unm.edu/sora/jrr/index.php#http://elibrary.unm.edu/sora/jrr/index.php#"	>>	ys:excludedFor	"uncastable literal"	.
-<<	wd:Q_Elvis	schema:deathDate	"0000-02-22T00:00:00Z"^^xsd:dateTime	>>	ys:excludedFor	"uncastable literal"	.
-<<	wd:Q_Elvis	schema:birthPlace	wd:Q_birth_place_2	>>	ys:excludedFor	"maxcount overflow"	.
-<<	wd:Q31	yago:literacyRate	"500"^^xsd:decimal	>>	ys:excludedFor	"not in min-max range"	.
-<<	wd:Q31	yago:literacyRate	"lkblblhbl"^^xsd:decimal	>>	ys:excludedFor	"not a number"	.
-<<	wd:Q31	yago:populationNumber	"15"^^xsd:integer	>>	ys:excludedFor	"maxcount overflow"	.
-<<	wd:Q312	schema:dateCreated	"1976-04-01"^^xsd:date	>>	ys:excludedFor	"maxcount overflow"	.
-<<	wd:Q_fictional	schema:geo	schema:Thing	>>	ys:excludedFor	"Domain check failed (yago:FictionalEntity, yago:Worker, schema:Person)"	.
-<<	wd:Q678	rdf:type	schema:Thing	>>	ys:excludedFor	"no label"	.
-<<	wd:Q1340	rdf:type	schema:Person	>>	ys:excludedFor	"is shortcut"	.
-<<	wd:Q23482	rdf:type	schema:Thing	>>	ys:excludedFor	"has invalid name: BAD-NAME..."	.
+<<	wd:Q42	rdf:type	schema:Person	>>	ys:excludedFor	"is shortcut"	.
+<<	wd:Q42	schema:alternateName	"David Agnew"	>>	ys:excludedFor	"uncastable literal"	.
+<<	wd:Q42	rdfs:comment	"Ing-kok bûn-ha̍k-ka, tshù-bī tsok-ka (1952–2001)"	>>	ys:excludedFor	"uncastable literal"	.
+<<	wd:Q42	rdfs:comment	"Eng-kok bûn-ha̍k-ka, chhù-bī chok-ka (1952–2001)"	>>	ys:excludedFor	"uncastable literal"	.
+<<	wd:Q1868	yago:notableWork	schema:Thing	>>	ys:excludedFor	"Domain check failed, subject is schema:Person and expected types are yago:Creator, schema:PerformingGroup"	.
+<<	wd:Q1868	yago:influencedBy	schema:Thing	>>	ys:excludedFor	"Domain check failed, subject is schema:Person and expected types are yago:Creator, schema:MusicGroup"	.
+<<	wd:Q1868	schema:url	wd:Q1868	>>	ys:excludedFor	"expected literal"	.
+<<	wd:Q2013	rdf:type	schema:Thing	>>	ys:excludedFor	"no valid type among "	.
