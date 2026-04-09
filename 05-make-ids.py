@@ -155,7 +155,7 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
                                 else:
                                     wikipediaFacts.writeFact(subject, relation, obj)
                                 if subject.endswith("_generic_instance"):
-                                    wikipediaFacts.writeFact(subject, "rdfs:label", f'"{subject[5:-17]}"@en')
+                                    wikipediaFacts.writeFact(subject, "rdfs:label", f'"{subject[5:-17].replace('_', ' ')}"@en')
                                 if subject!=previousEntity and split[0] in yagoIds:
                                    wikipediaFacts.writeFact(subject, "owl:sameAs", split[0])
                             else:
