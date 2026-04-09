@@ -102,7 +102,7 @@ wd:Q_tiger wdt:P171 wd:Q_cat ;
 
 # People should become people    
 wd:Q_Barack_Obama wdt:P31 wd:Q5 ;
-    schema:name "Barack Obama"@en .
+     wdt:P1476 "Barack Obama"@en .
 	
 # Disjoint ranges
 wd:Q_composition  wdt:P31 wd:Q207628;

@@ -360,9 +360,9 @@ def cleanLiteralObject(obj: str, datatype: str) -> Optional[str]:
     if datatype == Prefixes.xsdAnyURI:
         return '"' + literalValue + '"^^' + Prefixes.xsdAnyURI if isURI(literalValue) else None
     if datatype == Prefixes.xsdString:
-        return '"' + literalValue + '"'
+        return '"' + literalValue.replace("’","'")+'"' # For entities like "Monty Python's Life of Brian"
     if datatype == Prefixes.rdfLangString:
-        return obj if literalDataType is None and lang is not None else None
+        return obj.replace("’","'") if literalDataType is None and lang is not None else None
     if datatype == Prefixes.xsdDecimal and literalDataType == Prefixes.xsdInteger:
         return '"'+literalValue+'"^^'+Prefixes.xsdDecimal
     if datatype == Prefixes.xsdInteger:
