@@ -32,588 +32,70 @@
 @prefix prn: <http://www.wikidata.org/prop/reference/value-normalized/> .
 @prefix wdno: <http://www.wikidata.org/prop/novalue/> .
 @prefix ys: <http://yago-knowledge.org/schema#> .
-wd:Q42	schema:gender	wd:Q6581097	. # IF	yago:Gender		
-wd:Q42	yago:notableWork	wd:Q7758404	. # IF	schema:CreativeWork		
-wd:Q42	yago:notableWork	wd:Q20736364	. # IF	schema:CreativeWork		
-wd:Q42	yago:notableWork	wd:Q25169	. # IF	schema:CreativeWork		
-wd:Q42	schema:birthPlace	wd:Q350	. # IF	schema:Place		
-wd:Q42	yago:deathCause	wd:Q3739104	. # IF	schema:BioChemEntity, schema:Event, schema:Organization, schema:Person, schema:Product, schema:Taxon		
-wd:Q42	yago:deathCause	wd:Q12152	. # IF	schema:BioChemEntity, schema:Event, schema:Organization, schema:Person, schema:Product, schema:Taxon		
-wd:Q42	schema:deathPlace	wd:Q159288	. # IF	schema:Place		
-wd:Q42	yago:burialPlace	wd:Q533697	. # IF	schema:Place		
-wd:Q42	schema:givenName	"YAGO-REPLACE wd:Q19688263"	.
-wd:Q42	schema:givenName	"YAGO-REPLACE wd:Q463035"	.
-wd:Q42	schema:nationality	wd:Q145	. # IF	schema:Country		
-wd:Q42	yago:nativeLanguage	wd:Q1860	. # IF	schema:Language		
-wd:Q42	schema:sameAs	"/m/0282x"	.
-wd:Q42	schema:sameAs	"nm0010930"	.
-wd:Q42	yago:hasFather	wd:Q14623675	. # IF	schema:Person		
-wd:Q42	yago:hasMother	wd:Q14623678	. # IF	schema:Person		
-wd:Q42	schema:worksFor	wd:Q9531	. # IF	schema:Organization, schema:Person, schema:Place		
-wd:Q42	schema:worksFor	wd:Q3520623	. # IF	schema:Organization, schema:Person, schema:Place	"1996"^^xsd:gYear	
-wd:Q42	schema:url	"https://uk.wikiquote.org/wiki/%D0%94%D1%83%D0%B3%D0%BB%D0%B0%D1%81_%D0%90%D0%B4%D0%B0%D0%BC%D1%81"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://sq.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://no.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://mr.wikipedia.org/wiki/%E0%A4%A1%E0%A4%97%E0%A5%8D%E0%A4%B2%E0%A4%B8_%E0%A4%85%E2%80%8D%E0%A5%85%E0%A4%A1%E0%A4%AE%E0%A5%8D%E0%A4%B8"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://it.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://mk.wikipedia.org/wiki/%D0%94%D0%B0%D0%B3%D0%BB%D0%B0%D1%81_%D0%90%D0%B4%D0%B0%D0%BC%D1%81"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://nl.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://lv.wikipedia.org/wiki/Duglass_Adamss"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://nl.wikiquote.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://es.wikiquote.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://ba.wikipedia.org/wiki/%D0%94%D1%83%D0%B3%D0%BB%D0%B0%D1%81_%D0%90%D0%B4%D0%B0%D0%BC%D1%81"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://douglasadams.com"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://de.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://simple.wikiquote.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://bg.wikiquote.org/wiki/%D0%94%D1%8A%D0%B3%D0%BB%D0%B0%D1%81_%D0%90%D0%B4%D0%B0%D0%BC%D1%81"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://fa.wikiquote.org/wiki/%D8%AF%D8%A7%DA%AF%D9%84%D8%A7%D8%B3_%D8%A2%D8%AF%D8%A7%D9%85%D8%B2"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://sl.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://war.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://et.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://sk.wikiquote.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://zh-yue.wikipedia.org/wiki/%E9%81%93%E6%A0%BC%E6%8B%89%E6%96%AF%E4%BA%9E%E7%95%B6%E6%96%AF"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://sco.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://ml.wikipedia.org/wiki/%E0%B4%A1%E0%B4%97%E0%B5%8D%E0%B4%B2%E0%B4%B8%E0%B5%8D_%E0%B4%86%E0%B4%A1%E0%B4%82%E0%B4%B8%E0%B5%8D"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://ig.wikiquote.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://az.wikipedia.org/wiki/Duqlas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://ga.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://la.wikipedia.org/wiki/Duglassius_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://cs.wikiquote.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://pa.wikipedia.org/wiki/%E0%A8%A1%E0%A8%97%E0%A8%B2%E0%A8%B8_%E0%A8%90%E0%A8%A1%E0%A8%AE%E0%A8%B8"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://es.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://pl.wikiquote.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://he.wikipedia.org/wiki/%D7%93%D7%90%D7%92%D7%9C%D7%A1_%D7%90%D7%93%D7%9E%D7%A1"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://mg.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://simple.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://lt.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://el.wikiquote.org/wiki/%CE%9D%CF%84%CE%AC%CE%B3%CE%BA%CE%BB%CE%B1%CF%82_%CE%86%CE%BD%CF%84%CE%B1%CE%BC%CF%82"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://kw.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://et.wikiquote.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://wuu.wikipedia.org/wiki/%E9%81%93%E6%A0%BC%E6%8B%89%E6%96%AF%C2%B7%E4%BA%9A%E5%BD%93%E6%96%AF"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://is.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://pnb.wikipedia.org/wiki/%DA%88%DA%AF%D9%84%D8%B3_%D8%A7%DB%8C%DA%88%D9%85%D8%B3"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://lfn.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://azb.wikipedia.org/wiki/%D8%AF%D8%A7%D9%82%D9%84%D8%A7%D8%B3_%D8%A2%D8%AF%D8%A7%D9%85%D8%B2"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://li.wikiquote.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://ja.wikipedia.org/wiki/%E3%83%80%E3%82%B0%E3%83%A9%E3%82%B9%E3%83%BB%E3%82%A2%E3%83%80%E3%83%A0%E3%82%BA"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://zh.wikipedia.org/wiki/%E9%81%93%E6%A0%BC%E6%8B%89%E6%96%AF%C2%B7%E4%BA%9A%E5%BD%93%E6%96%AF"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://gl.wikiquote.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://sr.wikiquote.org/wiki/%D0%94%D0%B0%D0%B3%D0%BB%D0%B0%D1%81_%D0%90%D0%B4%D0%B0%D0%BC%D1%81"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://ca.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://fi.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://cy.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://sv.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://vi.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://fr.wikiquote.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://ky.wikipedia.org/wiki/%D0%94%D1%83%D0%B3%D0%BB%D0%B0%D1%81_%D0%90%D0%B4%D0%B0%D0%BC%D1%81"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://fy.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://zh.wikiquote.org/wiki/%E9%81%93%E6%A0%BC%E6%8B%89%E6%96%AF%C2%B7%E4%BA%9E%E7%95%B6%E6%96%AF"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://bs.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://sc.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://ur.wikipedia.org/wiki/%DA%88%DA%AF%D9%84%D8%B3_%D8%A7%DB%8C%DA%88%D9%85%D8%B3"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://bn.wikiquote.org/wiki/%E0%A6%A1%E0%A6%97%E0%A6%B2%E0%A6%BE%E0%A6%B8_%E0%A6%85%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%A1%E0%A6%BE%E0%A6%AE%E0%A6%B8"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://el.wikipedia.org/wiki/%CE%9D%CF%84%CE%AC%CE%B3%CE%BA%CE%BB%CE%B1%CF%82_%CE%86%CE%BD%CF%84%CE%B1%CE%BC%CF%82"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://gl.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://zh-min-nan.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://da.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://arz.wikipedia.org/wiki/%D8%AF%D9%88%D8%AC%D9%84%D8%A7%D8%B3_%D8%A7%D8%AF%D8%A7%D9%85%D8%B2"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://eo.wikiquote.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://th.wikipedia.org/wiki/%E0%B8%94%E0%B8%B1%E0%B8%81%E0%B8%A5%E0%B8%B2%E0%B8%AA_%E0%B8%AD%E0%B8%94%E0%B8%B1%E0%B8%A1%E0%B8%AA%E0%B9%8C"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://ru.wikiquote.org/wiki/%D0%94%D1%83%D0%B3%D0%BB%D0%B0%D1%81_%D0%9D%D0%BE%D1%8D%D0%BB%D1%8C_%D0%90%D0%B4%D0%B0%D0%BC%D1%81"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://ko.wikipedia.org/wiki/%EB%8D%94%EA%B8%80%EB%9F%AC%EC%8A%A4_%EC%95%A0%EB%8D%A4%EC%8A%A4"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://ast.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://cs.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://tr.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://hr.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://ar.wikiquote.org/wiki/%D8%AF%D9%88%D8%AC%D9%84%D8%A7%D8%B3_%D8%A2%D8%AF%D8%A7%D9%85%D8%B2"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://en.wikiquote.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://sk.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://fa.wikipedia.org/wiki/%D8%AF%D8%A7%DA%AF%D9%84%D8%A7%D8%B3_%D8%A2%D8%AF%D8%A7%D9%85%D8%B2"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://hy.wikiquote.org/wiki/%D4%B4%D5%B8%D6%82%D5%A3%D5%AC%D5%A1%D5%BD_%D4%B1%D5%A4%D5%A1%D5%B4%D5%BD"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://bg.wikipedia.org/wiki/%D0%94%D1%8A%D0%B3%D0%BB%D0%B0%D1%81_%D0%90%D0%B4%D0%B0%D0%BC%D1%81"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://eu.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://tr.wikiquote.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://guw.wikiquote.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://sv.wikiquote.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://gor.wikiquote.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://az.wikiquote.org/wiki/Duqlas_Noel_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://nn.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://id.wikiquote.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://af.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://hu.wikiquote.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://ta.wikipedia.org/wiki/%E0%AE%9F%E0%AE%95%E0%AF%8D%E0%AE%B3%E0%AE%B8%E0%AF%8D_%E0%AE%86%E0%AE%9F%E0%AE%AE%E0%AF%8D%E0%AE%B8%E0%AF%8D"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://fi.wikiquote.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://oc.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://pt.wikiquote.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://ms.wikiquote.org/wiki/Douglas_Adam"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://pt.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://de.wikiquote.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://bs.wikiquote.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://ar.wikipedia.org/wiki/%D8%AF%D9%88%D8%BA%D9%84%D8%A7%D8%B3_%D8%A2%D8%AF%D9%85%D8%B2"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://ks.wikipedia.org/wiki/%DA%88%DA%AF%D9%84%D8%B3_%D8%A7%DB%8C%DA%88%D9%85%D8%B2"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://bn.wikipedia.org/wiki/%E0%A6%A1%E0%A6%97%E0%A6%B2%E0%A6%BE%E0%A6%B8_%E0%A6%85%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%A1%E0%A6%BE%E0%A6%AE%E0%A6%B8"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://jv.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://ru.wikipedia.org/wiki/%D0%90%D0%B4%D0%B0%D0%BC%D1%81,_%D0%94%D1%83%D0%B3%D0%BB%D0%B0%D1%81"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://lt.wikiquote.org/wiki/Douglas_Adamsas"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://uk.wikipedia.org/wiki/%D0%94%D1%83%D0%B3%D0%BB%D0%B0%D1%81_%D0%90%D0%B4%D0%B0%D0%BC%D1%81"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://sh.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://mzn.wikipedia.org/wiki/%D8%AF%D8%A7%DA%AF%D9%84%D8%A7%D8%B3_%D8%A2%D8%AF%D8%A7%D9%85%D8%B2"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://fr.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://pl.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://id.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://hu.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://it.wikiquote.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://hy.wikipedia.org/wiki/%D4%B4%D5%B8%D6%82%D5%A3%D5%AC%D5%A1%D5%BD_%D4%B1%D5%A4%D5%A1%D5%B4%D5%BD"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://sr.wikipedia.org/wiki/%D0%94%D0%B0%D0%B3%D0%BB%D0%B0%D1%81_%D0%90%D0%B4%D0%B0%D0%BC%D1%81"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://vep.wikipedia.org/wiki/Adams_Duglas"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://ms.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://mrj.wikipedia.org/wiki/%D0%90%D0%B4%D0%B0%D0%BC%D1%81,_%D0%94%D1%83%D0%B3%D0%BB%D0%B0%D1%81"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://bar.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://be.wikipedia.org/wiki/%D0%94%D1%83%D0%B3%D0%BB%D0%B0%D1%81_%D0%90%D0%B4%D0%B0%D0%BC%D1%81"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://en.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://ie.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://he.wikiquote.org/wiki/%D7%93%D7%90%D7%92%D7%9C%D7%A1_%D7%90%D7%93%D7%9E%D7%A1"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://ka.wikipedia.org/wiki/%E1%83%93%E1%83%90%E1%83%92%E1%83%9A%E1%83%90%E1%83%A1_%E1%83%90%E1%83%93%E1%83%90%E1%83%9B%E1%83%A1%E1%83%98"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://baike.sogou.com/v367134.htm"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://fo.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://pam.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://io.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://eo.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://ro.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://ia.wikipedia.org/wiki/Douglas_Adams"^^xsd:anyURI	.
-wd:Q42	schema:url	"https://be-tarask.wikipedia.org/wiki/%D0%94%D1%83%D0%B3%D0%BB%D0%B0%D1%81_%D0%90%D0%B4%D0%B0%D0%BC%D0%B7"^^xsd:anyURI	.
-wd:Q42	schema:instrument	wd:Q6607	. # IF	yago:MusicalInstrument		
-wd:Q42	schema:height	"+1.96"^^wd:Q11573	. # IF	yago:UnitOfLength		
-wd:Q42	schema:spouse	wd:Q14623681	. # IF	schema:Person		
-wd:Q42	schema:location	wd:Q84	. # IF	schema:Place	"1952-09-01"^^xsd:date	"1957"^^xsd:gYear
-wd:Q42	schema:location	wd:Q857679	. # IF	schema:Place		
-wd:Q42	schema:location	wd:Q909993	. # IF	schema:Place	"1957"^^xsd:gYear	
-wd:Q42	schema:location	wd:Q350	. # IF	schema:Place	"1952-03-11"^^xsd:date	"1952-09-01"^^xsd:date
-wd:Q42	schema:location	wd:Q5610831	. # IF	schema:Place		
-wd:Q42	schema:location	wd:Q159288	. # IF	schema:Place		"2001-05-11"^^xsd:date
-wd:Q42	schema:memberOf	wd:Q857679	. # IF	schema:Organization		
-wd:Q42	schema:memberOf	wd:Q5610831	. # IF	schema:Organization		
-wd:Q42	schema:knowsLanguage	wd:Q1860	. # IF	schema:Language		
-wd:Q42	schema:alternateName	"Douglas ADAMS"@eo	.
-wd:Q42	schema:alternateName	"亞當斯"@zh	.
-wd:Q42	schema:alternateName	"دوجلاس آدمز"@ar	.
-wd:Q42	schema:alternateName	"Duglassius Natalis Adams"@la	.
-wd:Q42	schema:alternateName	"דאגלס נואל אדמס"@he	.
-wd:Q42	schema:alternateName	"Douglas Noël ADAMS"@eo	.
-wd:Q42	schema:alternateName	"Ντάγκλας Νόελ Άνταμς"@el	.
-wd:Q42	schema:alternateName	"دوغلاس ن. آدمز"@ar	.
-wd:Q42	schema:alternateName	"Адамс, Дуглас Ноэль"@ru	.
-wd:Q42	schema:alternateName	"ਡੁਗਲਸ ਐਡਮਸ"@pa	.
-wd:Q42	schema:alternateName	"ߘߎߜ߭ߑߟߊߛ ߣ. ߊߘߊߡߛ"@nqo	.
-wd:Q42	schema:alternateName	"Дуглас Ноел Адамс"@uk	.
-wd:Q42	schema:alternateName	"Дуглас Адамс"@be-tarask	.
-wd:Q42	schema:alternateName	"دوجلاس آدامز"@ar	.
-wd:Q42	schema:alternateName	"Duglas Noel' Adams"@vep	.
-wd:Q42	schema:alternateName	"Douglas Noël Adams"@mul	.
-wd:Q42	schema:alternateName	"ഡഗ്ലസ് എന്‍ ആഡംസ്"@ml	.
-wd:Q42	schema:alternateName	"Duqlas Noel Adams"@az	.
-wd:Q42	schema:alternateName	"डग्लस एडम्स"@bho	.
-wd:Q42	schema:alternateName	"Douglas Adams"@en	.
-wd:Q42	schema:alternateName	"ダグラス・アダムス"@ja	.
-wd:Q42	schema:alternateName	"دوغلاس نويل آدمز"@ar	.
-wd:Q42	schema:alternateName	"더글라스 애덤스"@ko	.
-wd:Q42	schema:alternateName	"Douglas N. Adams"@mul	.
-wd:Q42	schema:alternateName	"डग्लस अडम्स"@bho	.
-wd:Q42	schema:alternateName	"Ադամս, Դուգլաս"@hy	.
-wd:Q42	schema:alternateName	"ਡਗਲਸ ਨੋਏਲ ਐਡਮਜ਼"@pa	.
-wd:Q42	schema:alternateName	"ߘߎߜ߭ߑߟߊߛ ߣߏߥߍߟ ߊߘߊߡߛ"@nqo	.
-wd:Q42	schema:alternateName	"Адамс Дуглас"@uk	.
-wd:Q42	schema:alternateName	"jan Douglas Adams"@tok	.
-wd:Q42	schema:alternateName	"道格拉斯·諾耶爾·亞當斯"@zh-tw	.
-wd:Q42	schema:alternateName	"jan Takala Atan"@tok	.
-wd:Q42	schema:alternateName	"더글러스 노엘 애덤스"@ko	.
-wd:Q42	schema:alternateName	"Douglas Noël Adams"@en	.
-wd:Q42	schema:alternateName	"Адамс, Дуглас"@mrj	.
-wd:Q42	schema:alternateName	"Douglas Noel Adams"@mul	.
-wd:Q42	schema:alternateName	"Адамс, Дуглас"@ru	.
-wd:Q42	schema:alternateName	"ডগলাস নোয়েল অ্যাডামস"@bn	.
-wd:Q42	schema:alternateName	"ഡഗ്ലസ് നോയൽ ആഡംസ്"@ml	.
-wd:Q42	schema:alternateName	"ڈگلس ایڈمس"@ur	.
-wd:Q42	schema:alternateName	"دوغلاس آدامز"@ar	.
-wd:Q42	schema:alternateName	"דגלס אדמס"@he	.
-wd:Q42	schema:alternateName	"Дуглас Ноэль Адамс"@ru	.
-wd:Q42	schema:alternateName	"Daglasas Adamsas"@lt	.
-wd:Q42	schema:alternateName	"Duglassius Noëlus Adams"@la	.
-wd:Q42	yago:eyeColor	wd:Q17122705	. # IF	yago:Color		
-wd:Q42	yago:fieldOfWork	wd:Q3238422	. # IF	schema:Thing		
-wd:Q42	schema:award	wd:Q2687578	. # IF	yago:Award	"1983"^^xsd:gYear	"1983"^^xsd:gYear
-wd:Q42	schema:award	wd:Q906455	. # IF	yago:Award	"1980"^^xsd:gYear	"1980"^^xsd:gYear
-wd:Q42	yago:beliefSystem	wd:Q7066	. # IF	yago:BeliefSystem		
-wd:Q42	schema:alumniOf	wd:Q691283	. # IF	schema:Organization		
-wd:Q42	schema:alumniOf	wd:Q4961791	. # IF	schema:Organization	"1959"^^xsd:gYear	
-wd:Q42	rdfs:label	"دەگلاس ئادمز"@ckb	.
-wd:Q42	rdfs:label	"ᱰᱚᱜᱽᱞᱟᱥ ᱮᱰᱟᱢᱥ"@sat	.
-wd:Q42	rdfs:label	"ડગ્લાસ એડમ્સ"@gu	.
-wd:Q42	rdfs:label	"دوجلاس ادامز"@arz	.
-wd:Q42	rdfs:label	"Duqlas Adams"@az	.
-wd:Q42	rdfs:label	"道格拉斯亞當斯"@yue	.
-wd:Q42	rdfs:label	"道格拉斯·亞當斯"@zh-mo	.
-wd:Q42	rdfs:label	"道格拉斯·亚当斯"@zh-sg	.
-wd:Q42	rdfs:label	"ڈگلس ایڈم"@ur	.
-wd:Q42	rdfs:label	"დაგლას ადამსი"@ka	.
-wd:Q42	rdfs:label	"Дуглас Адамс"@ky	.
-wd:Q42	rdfs:label	"داگلاس آدامز"@fa	.
-wd:Q42	rdfs:label	"道格拉斯·亚当斯"@zh-my	.
-wd:Q42	rdfs:label	"داگلاس آدامز"@mzn	.
-wd:Q42	rdfs:label	"Дуглас Адамс"@tt	.
-wd:Q42	rdfs:label	"ಡಾಗ್ಲಸ್ ಆಡಮ್ಸ್"@tcy	.
-wd:Q42	rdfs:label	"डगलस एडम्स"@bho	.
-wd:Q42	rdfs:label	"Duglass Adamss"@lv	.
-wd:Q42	rdfs:label	"Ντάγκλας Άνταμς"@el	.
-wd:Q42	rdfs:label	"ਡਗਲਸ ਐਡਮਸ"@pa	.
-wd:Q42	rdfs:label	"డగ్లస్ ఆడమ్స్"@te	.
-wd:Q42	rdfs:label	"דאַגלאַס אַדאַמס"@yi	.
-wd:Q42	rdfs:label	"道格拉斯·亞當斯"@zh	.
-wd:Q42	rdfs:label	"Дуглас Адамс"@cv	.
-wd:Q42	rdfs:label	"Adams Duglas"@vep	.
-wd:Q42	rdfs:label	"道格拉斯·亚当斯"@zh-cn	.
-wd:Q42	rdfs:label	"Даглас Адамс"@mk	.
-wd:Q42	rdfs:label	"Douglas Adams"@mul	.
-wd:Q42	rdfs:label	"ড'গলাছ এডাম্‌ছ"@as	.
-wd:Q42	rdfs:label	"ଡଗ୍‌ଲାସ୍‌ ଆଦାମ୍‌ସ"@or	.
-wd:Q42	rdfs:label	"डग्लस अ‍डम्स"@rwr	.
-wd:Q42	rdfs:label	"Дуглас Адамс"@tt-cyrl	.
-wd:Q42	rdfs:label	"道格拉斯·亞當斯"@zh-tw	.
-wd:Q42	rdfs:label	"Duglassius Adams"@la	.
-wd:Q42	rdfs:label	"डग्लस अ‍डम्स"@hi	.
-wd:Q42	rdfs:label	"ߘߎߜ߭ߑߟߊߛ ߊߘߊߡߛ"@nqo	.
-wd:Q42	rdfs:label	"ඩග්ලස් ඇඩම්ස්"@si	.
-wd:Q42	rdfs:label	"Дуглас Адамз"@be-tarask	.
-wd:Q42	rdfs:label	"डग्लस अॅडम्स"@mr	.
-wd:Q42	rdfs:label	"דאגלס אדמס"@he	.
-wd:Q42	rdfs:label	"Дъглас Адамс"@bg	.
-wd:Q42	rdfs:label	"Дуглас Адамс"@be	.
-wd:Q42	rdfs:label	"Даглас Адамс"@sr-ec	.
-wd:Q42	rdfs:label	"道格拉斯·亞當斯"@zh-hant	.
-wd:Q42	rdfs:label	"ڈگلس ایڈمس"@skr	.
-wd:Q42	rdfs:label	"道格拉斯·亞當斯"@zh-hk	.
-wd:Q42	rdfs:label	"دوڭلاس أدامز"@ary	.
-wd:Q42	rdfs:label	"ಡಗ್ಲಸ್ ಆಡಮ್ಸ್"@kn	.
-wd:Q42	rdfs:label	"ডগলাস অ্যাডামস"@bn	.
-wd:Q42	rdfs:label	"Дуглас Адамс"@ru	.
-wd:Q42	rdfs:label	"ڈگلس ایڈمس"@pnb	.
-wd:Q42	rdfs:label	"डगलस एडम्स"@ne	.
-wd:Q42	rdfs:label	"Даглас Адамс"@sr	.
-wd:Q42	rdfs:label	"더글러스 애덤스"@ko	.
-wd:Q42	rdfs:label	"道哥拉斯·亞當斯"@nan-hant	.
-wd:Q42	rdfs:label	"ดักลัส แอดัมส์"@th	.
-wd:Q42	rdfs:label	"Адамс"@mrj	.
-wd:Q42	rdfs:label	"道格拉斯·亚当斯"@zh-hans	.
-wd:Q42	rdfs:label	"ڈگلس ایڈمز"@ks	.
-wd:Q42	rdfs:label	"دوغلاس آدمز"@ar	.
-wd:Q42	rdfs:label	"道格拉斯·亚当斯"@wuu	.
-wd:Q42	rdfs:label	"دݢلس ايدمﺯ"@ms-arab	.
-wd:Q42	rdfs:label	"jan Taka Atan"@tok	.
-wd:Q42	rdfs:label	"Дуглас Адамс"@uk	.
-wd:Q42	rdfs:label	"Դուգլաս Ադամս"@hy	.
-wd:Q42	rdfs:label	"داقلاس آدامز"@azb	.
-wd:Q42	rdfs:label	"ダグラス・アダムズ"@ja	.
-wd:Q42	rdfs:label	"Дуглас Адамс"@ba	.
-wd:Q42	rdfs:label	"டக்ளஸ் ஆடம்ஸ்"@ta	.
-wd:Q42	rdfs:label	"Daglas Adams"@sr-el	.
-wd:Q42	rdfs:label	"道哥拉斯·亞當斯"@nan-hani	.
-wd:Q42	rdfs:label	"ഡഗ്ലസ് ആഡംസ്"@ml	.
-wd:Q42	rdfs:comment	"britský spisovatel, humorista a dramatik"@cs	.
-wd:Q42	rdfs:comment	"scriitor, dramaturg englez"@ro	.
-wd:Q42	rdfs:comment	"Engiresini ɔkyerɛwfo ne aseresɛm kyerɛwfo (1952–2001)"@tw	.
-wd:Q42	rdfs:comment	"英國文學家、幽默作家 (1952–2001)"@zh-tw	.
-wd:Q42	rdfs:comment	"nivîskarê brîtanî"@ku-latn	.
-wd:Q42	rdfs:comment	"英国作家"@zh-cn	.
-wd:Q42	rdfs:comment	"Engelse schrijver (1952-2001)"@nl	.
-wd:Q42	rdfs:comment	"engleski pisac naučne fantastike i humorista"@sr-el	.
-wd:Q42	rdfs:comment	"Panulih jo palawak dari Inggirih"@min	.
-wd:Q42	rdfs:comment	"英国作家"@zh-sg	.
-wd:Q42	rdfs:comment	"skrivagner saoznek"@br	.
-wd:Q42	rdfs:comment	"angleški pisatelj, humorist in dramatik (1952–2001)"@sl	.
-wd:Q42	rdfs:comment	"ஆங்கில எழுத்தாளர் மற்றும் நகைச்சுவையாளர்"@ta	.
-wd:Q42	rdfs:comment	"инглиз яҙыусыһы, драматург һәм сценарист, юмористик фантастик әҫәрҙәр авторы"@ba	.
-wd:Q42	rdfs:comment	"британський комічний радіодраматург, письменник"@uk	.
-wd:Q42	rdfs:comment	"անգլիացի գրող, դրամատուրգ, սցենարիստ, «Ավտոստոպով զբոսաշրջիկի միջգալակտիկական ուղեցույց» վեպերի շարք"@hy	.
-wd:Q42	rdfs:comment	"англиски писател и хуморист"@mk	.
-wd:Q42	rdfs:comment	"brytyjski pisarz"@pl	.
-wd:Q42	rdfs:comment	"ബ്രിട്ടീഷ് എഴുത്തുകാരനും ഹാസ്യസാഹിത്യാകാരനും"@ml	.
-wd:Q42	rdfs:comment	"英國文學家、趣味作家 (1952–2001)"@nan-hant	.
-wd:Q42	rdfs:comment	"penulis dan pelawak Inggeris"@ms	.
-wd:Q42	rdfs:comment	"ангельскі пісьменьнік, гумарыст"@be-tarask	.
-wd:Q42	rdfs:comment	"brittiläinen kirjailija ja humoristi"@fi	.
-wd:Q42	rdfs:comment	"ühteks kaikiš tetabambišpäi"@vep	.
-wd:Q42	rdfs:comment	"taga-Inglatera na manunulat at tagapagpatawa"@tl	.
-wd:Q42	rdfs:comment	"イングランドの作家"@ja	.
-wd:Q42	rdfs:comment	"ލިޔުންތެރިއެއް"@dv	.
-wd:Q42	rdfs:comment	"angļu zinātniskās fantastikas rakstnieks un humorists"@lv	.
-wd:Q42	rdfs:comment	"forfattar"@nn	.
-wd:Q42	rdfs:comment	"escritor de ciencia ficción y humorista inglés (1952–2001)"@es	.
-wd:Q42	rdfs:comment	"كاتب نڭليزي ديال لخيال لعلمي و لفكاهة"@ary	.
-wd:Q42	rdfs:comment	"penulis dan humoris asal Britania Raya (1952-2001)"@id	.
-wd:Q42	rdfs:comment	"Siliminsili buku sabra kabi dɔɣɔ (1952-2001)"@dag	.
-wd:Q42	rdfs:comment	"ߊ߲߬ߜ߭ߌ߬ߟߋ߬ ߛߓߍߦߟߊ ߞߎ߲߬ߘߐ߬ߕߍ߰ ߟߐ߲ߞߏ ߞߊ߲߬"@nqo	.
-wd:Q42	rdfs:comment	"英國文學家、幽默作家 (1952–2001)"@zh-hant	.
-wd:Q42	rdfs:comment	"scrittore di fantascienza ed umorista britannico (1952–2001)"@it	.
-wd:Q42	rdfs:comment	"סופר והומוריסטן בריטי"@he	.
-wd:Q42	rdfs:comment	"anglų rašytojas"@lt	.
-wd:Q42	rdfs:comment	"britský spisovateľ"@sk	.
-wd:Q42	rdfs:comment	"scritturi còmicu ngrisi (1952–2001)"@scn	.
-wd:Q42	rdfs:comment	"English science fiction writer and humorist (1952–2001)"@en-us	.
-wd:Q42	rdfs:comment	"英國作家"@zh-mo	.
-wd:Q42	rdfs:comment	"นักเขียนและผู้เล่าเรื่องอารมณ์ขันชาวอังกฤษ"@th	.
-wd:Q42	rdfs:comment	"英國文學家、幽默作家 (1952–2001)"@zh	.
-wd:Q42	rdfs:comment	"sgrìobhadair Sasannach"@gd	.
-wd:Q42	rdfs:comment	"escriptor anglès"@ca	.
-wd:Q42	rdfs:comment	"英國作家"@zh-hk	.
-wd:Q42	rdfs:comment	"ब्रिटिश लेखक व नाटककार"@mr	.
-wd:Q42	rdfs:comment	"अंग्रेजी लेखक"@hi	.
-wd:Q42	rdfs:comment	"ინგლისელი მწერალი და იუმორისტი"@ka	.
-wd:Q42	rdfs:comment	"écrivain de science-fiction et humoriste anglais (1952–2001)"@fr	.
-wd:Q42	rdfs:comment	"енглески писац научне фантастике и хумориста"@sr-ec	.
-wd:Q42	rdfs:comment	"angol író és humorista (1952–2001)"@hu	.
-wd:Q42	rdfs:comment	"Engelse skrywer en humoris (1952–2001)"@af	.
-wd:Q42	rdfs:comment	"brittisk författare (1952–2001)"@sv	.
-wd:Q42	rdfs:comment	"mwandishi Mwingereza"@sw	.
-wd:Q42	rdfs:comment	"ᱤᱝᱞᱤᱥ ᱩᱭᱦᱟᱹᱨ ᱥᱟᱬᱮᱥ ᱚᱱᱚᱞᱤᱭᱟᱹ ᱟᱨ ᱞᱟᱸᱫᱟ ᱨᱩᱥᱤᱠᱟ"@sat	.
-wd:Q42	rdfs:comment	"영국의 작가"@ko	.
-wd:Q42	rdfs:comment	"idazle eta umorista britaniarra"@eu	.
-wd:Q42	rdfs:comment	"autor dhe humorist anglez"@sq	.
-wd:Q42	rdfs:comment	"Ingliz yozuvchisi, dramaturg va ssenariynavis, “Hitchikerning Galaktikaga qoʻllanma” turkum kitoblari muallifi."@uz	.
-wd:Q42	rdfs:comment	"ingilis yazıçı"@az	.
-wd:Q42	rdfs:comment	"كاتب إنجليزي فكاهي"@ar	.
-wd:Q42	rdfs:comment	"英国作家"@zh-hans	.
-wd:Q42	rdfs:comment	"Enskur höfundur"@is	.
-wd:Q42	rdfs:comment	"inglise ulmekirjanik"@et	.
-wd:Q42	rdfs:comment	"английский писатель, драматург и сценарист и юморист (1952–2001)"@ru	.
-wd:Q42	rdfs:comment	"Onye edemede sayensị sayensị Bekee na onye ọchị ọchị"@ig	.
-wd:Q42	rdfs:comment	"Άγγλος συγγραφέας"@el	.
-wd:Q42	rdfs:comment	"English writer"@en-ca	.
-wd:Q42	rdfs:comment	"ఇంగ్లీషు రచయిత, హాస్యకారుడు"@te	.
-wd:Q42	rdfs:comment	"английски писател и хуморист"@bg	.
-wd:Q42	rdfs:comment	"અંગ્રેજી લેખક અને હાસ્યકાર"@gu	.
-wd:Q42	rdfs:comment	"англійскі пісьменнік"@be	.
-wd:Q42	rdfs:comment	"فیلمنامه‌نویس و نویسنده بریتانیایی"@fa	.
-wd:Q42	rdfs:comment	"scritore britànego"@vec	.
-wd:Q42	rdfs:comment	"scriptor, scriptor scaenicus, et mythistoricus (1952–2001)"@la	.
-wd:Q42	rdfs:comment	"British science fiction writer and humorist (1952–2001)"@en	.
-wd:Q42	rdfs:comment	"енглески писац и хумориста"@sr	.
-wd:Q42	rdfs:comment	"ಇಂಗ್ಲಿಷ್ ಭಾಷೆಯ ಬರಹಗಾರ ಹಾಗೂ ಹಾಸ್ಯ ಲೇಖಕ"@kn	.
-wd:Q42	rdfs:comment	"ইংৰাজী কল্পবিজ্ঞান লেখক তথা কৌতুকবিদ (১৯৫২–২০০১)"@as	.
-wd:Q42	rdfs:comment	"escritor e comediante britânico (1952-2001)"@pt	.
-wd:Q42	rdfs:comment	"britischer Schriftsteller"@de-at	.
-wd:Q42	rdfs:comment	"English science fiction writer and humourist (1952–2001)"@en-gb	.
-wd:Q42	rdfs:comment	"britischer Science-Fiction-Autor und Humorist"@de	.
-wd:Q42	rdfs:comment	"escritor e guionista británico"@gl	.
-wd:Q42	rdfs:comment	"englischer Schriftsteller"@nds	.
-wd:Q42	rdfs:comment	"ඉංග්‍රීසි කවියෙක්"@si	.
-wd:Q42	rdfs:comment	"Muwandisi wa fiction"@lg	.
-wd:Q42	rdfs:comment	"a englischer Science-Fiction-Schriftsteller"@bar	.
-wd:Q42	rdfs:comment	"britischer Schriftsteller"@de-ch	.
-wd:Q42	rdfs:comment	"awdur a dychanwr Seisnig"@cy	.
-wd:Q42	rdfs:comment	"英國文學家、趣味作家 (1952–2001)"@nan-hani	.
-wd:Q42	rdfs:comment	"English write who dey write or act in funny way bi"@gpe	.
-wd:Q42	rdfs:comment	"jan ni li toki musi li tan ma Juke"@tok	.
-wd:Q42	rdfs:comment	"ਅੰਗਰੇਜ਼ੀ ਲੇਖਕ"@pa	.
-wd:Q42	rdfs:comment	"Marubucin Ingilishi kuma ɗan ɗan adam (1952-2001)"@ha	.
-wd:Q42	rdfs:comment	"britanski radijski dramaturg i pisac znanstvene fantastike"@hr	.
-wd:Q42	rdfs:comment	"britischer Schriftsteller"@gsw	.
-wd:Q42	rdfs:comment	"nhà văn và nhà soạn hài kịch người Anh (1952-2001)"@vi	.
-wd:Q42	rdfs:comment	"ইংরেজ কল্পবিজ্ঞান লেখক ও কৌতুকবিদ"@bn	.
-wd:Q42	rdfs:comment	"angla aŭtoro de sciencfikcio-romanoj kaj humoristo"@eo	.
-wd:Q42	rdfs:comment	"engelsk science fiction-forfatter og humorist (1952–2001)"@nb	.
-wd:Q42	rdfs:comment	"engelsk forfatter (1952-2001)"@da	.
-wd:Q42	rdfs:comment	"инглиз язучысы, драматург һәм сценарист"@tt-cyrl	.
-wd:Q42	rdfs:comment	"scríbhneoir Sasanach (1952–2001)"@ga	.
-wd:Q42	rdfs:comment	"İngiliz bilim kurgu ve mizah yazarı"@tr	.
-wd:Q42	rdfs:comment	"escritor y humorista inglés"@ast	.
-wd:Q42	rdfs:comment	"engleski pisac i humorist"@bs	.
-wd:Q42	rdfs:comment	"英国作家"@zh-my	.
-wd:Q42	rdfs:comment	"अङ्ग्रेजी लेखक र व्यङ्ग्यकार"@ne	.
-wd:Q42	rdfs:comment	"инглиз язучысы, драматург һәм сценарист"@tt	.
-wd:Q42	rdfs:comment	"अंग्रेजी भाषा के ब्रिटिश लेखक"@bho	.
-wd:Q42	rdfs:comment	"Eng-kok bûn-ha̍k-ka, chhù-bī chok-ka (1952–2001)"@nan	.
-wd:Q42	rdf:type	wd:Q245068	.
-wd:Q42	schema:birthDate	"1952-03-11"^^xsd:date	.
-wd:Q42	schema:deathDate	"2001-05-11"^^xsd:date	.
-wd:Q42	schema:familyName	"YAGO-REPLACE wd:Q351735"	.
-wd:Q42	schema:image	"http://commons.wikimedia.org/wiki/Special:FilePath/Douglas%20adams%20portrait.jpg"^^xsd:anyURI	.
-wd:Q1868	yago:siteLinks	"30"^^xsd:integer	.
-wd:Q1868	yago:burialPlace	wd:Q95153477	. # IF	schema:Place		
-wd:Q1868	yago:hasFather	wd:Q3579983	. # IF	schema:Person		
-wd:Q1868	schema:birthPlace	wd:Q239	. # IF	schema:Place		
-wd:Q1868	schema:deathPlace	wd:Q239	. # IF	schema:Place		
-wd:Q1868	schema:nationality	wd:Q31	. # IF	schema:Country		
-wd:Q1868	schema:sameAs	"/m/0524xb"	.
-wd:Q1868	schema:alumniOf	wd:Q20754971	. # IF	schema:Organization		
-wd:Q1868	schema:alumniOf	wd:Q644789	. # IF	schema:Organization		
-wd:Q1868	schema:alumniOf	wd:Q2983669	. # IF	schema:Organization		
-wd:Q1868	yago:fieldOfWork	wd:Q5962346	. # IF	schema:Thing		
-wd:Q1868	yago:fieldOfWork	wd:Q16387	. # IF	schema:Thing		
-wd:Q1868	yago:fieldOfWork	wd:Q21198	. # IF	schema:Thing		
-wd:Q1868	yago:fieldOfWork	wd:Q134995	. # IF	schema:Thing		
-wd:Q1868	schema:knowsLanguage	wd:Q143	. # IF	schema:Language		
-wd:Q1868	schema:knowsLanguage	wd:Q150	. # IF	schema:Language		
-wd:Q1868	schema:gender	wd:Q6581097	. # IF	yago:Gender		
-wd:Q1868	schema:alternateName	"Paul Marie Gislain Otlet"@pt	.
-wd:Q1868	schema:alternateName	"Paul-Marie-Ghislain Otlet"@pl	.
-wd:Q1868	schema:alternateName	"ポール・マリー・ギスラン・オトレ"@ja	.
-wd:Q1868	schema:alternateName	"Paul Marie Otlet"@es	.
-wd:Q1868	schema:alternateName	"Paul Marie Otlet"@pt	.
-wd:Q1868	schema:alternateName	"Paul Otlet"@la	.
-wd:Q1868	schema:alternateName	"Paul Marie Gislain Otlet"@pt-br	.
-wd:Q1868	schema:alternateName	"保罗·奥特莱"@zh	.
-wd:Q1868	schema:alternateName	"Paul Marie Ghislain Otlet"@mul	.
-wd:Q1868	schema:alternateName	"폴 마리 길렌 오틀레"@ko	.
-wd:Q1868	schema:alternateName	"Paul Marie Ghislain Otlet"@fr	.
-wd:Q1868	schema:alternateName	"Paul Marie Otlet"@pt-br	.
-wd:Q1868	schema:alternateName	"Paul Otlet"@fr	.
-wd:Q1868	schema:alternateName	"Paul Marie Otlet"@en	.
-wd:Q1868	schema:alternateName	"Paul Marie Ghislan Otlet"@fr	.
-wd:Q1868	schema:alternateName	"Отле, Поль"@ru	.
-wd:Q1868	schema:alternateName	"Paul Marie Otlet"@vi	.
-wd:Q1868	schema:location	wd:Q708312	. # IF	schema:Place		
-wd:Q1868	schema:location	wd:Q3145619	. # IF	schema:Place		
-wd:Q1868	schema:memberOf	wd:Q708312	. # IF	schema:Organization		
-wd:Q1868	yago:nativeLanguage	wd:Q150	. # IF	schema:Language		
-wd:Q1868	rdfs:label	"Paul Otlet"@nds	.
-wd:Q1868	rdfs:label	"Paul Otlet"@sk	.
-wd:Q1868	rdfs:label	"Paul Otlet"@af	.
-wd:Q1868	rdfs:label	"Paul Otlet"@sco	.
-wd:Q1868	rdfs:label	"Paul Otlet"@nn	.
-wd:Q1868	rdfs:label	"Paul Otlet"@lt	.
-wd:Q1868	rdfs:label	"Paul Otlet"@sje	.
-wd:Q1868	rdfs:label	"Paul Otlet"@eo	.
-wd:Q1868	rdfs:label	"Paul Otlet"@id	.
-wd:Q1868	rdfs:label	"Paul Otlet"@eu	.
-wd:Q1868	rdfs:label	"Paul Otlet"@pms	.
-wd:Q1868	rdfs:label	"Paul Otlet"@tr	.
-wd:Q1868	rdfs:label	"Paul Otlet"@jut	.
-wd:Q1868	rdfs:label	"Paul Otlet"@en-ca	.
-wd:Q1868	rdfs:label	"Paul Otlet"@en	.
-wd:Q1868	rdfs:label	"Paul Otlet"@lmo	.
-wd:Q1868	rdfs:label	"Paul Otlet"@ca	.
-wd:Q1868	rdfs:label	"Paul Otlet"@da	.
-wd:Q1868	rdfs:label	"Paul Otlet"@is	.
-wd:Q1868	rdfs:label	"Paul Otlet"@cs	.
-wd:Q1868	rdfs:label	"Paul Otlet"@oc	.
-wd:Q1868	rdfs:label	"Paul Otlet"@pt-br	.
-wd:Q1868	rdfs:label	"Paul Otlet"@de-at	.
-wd:Q1868	rdfs:label	"Paul Otlet"@sl	.
-wd:Q1868	rdfs:label	"پل اوتله"@fa	.
-wd:Q1868	rdfs:label	"Paul Otlet"@pt	.
-wd:Q1868	rdfs:label	"Paul Otlet"@fi	.
-wd:Q1868	rdfs:label	"Paul Otlet"@fr	.
-wd:Q1868	rdfs:label	"Paul Otlet"@ga	.
-wd:Q1868	rdfs:label	"ਪਾਲ ਓਟਲੇਟ"@pa	.
-wd:Q1868	rdfs:label	"பவுல் ஓட்லெட்"@ta	.
-wd:Q1868	rdfs:label	"Paul Otlet"@hr	.
-wd:Q1868	rdfs:label	"Paul Otlet"@en-gb	.
-wd:Q1868	rdfs:label	"פול אוטלט"@he	.
-wd:Q1868	rdfs:label	"Поль Отле"@ru	.
-wd:Q1868	rdfs:label	"Paul Otlet"@ro	.
-wd:Q1868	rdfs:label	"Paul Otlet"@an	.
-wd:Q1868	rdfs:label	"Поль Атле"@be	.
-wd:Q1868	rdfs:label	"Paul Otlet"@wa	.
-wd:Q1868	rdfs:label	"Paul Otlet"@nb	.
-wd:Q1868	rdfs:label	"Պոլ Օտլե"@hy	.
-wd:Q1868	rdfs:label	"Paul Otlet"@et	.
-wd:Q1868	rdfs:label	"Поль Отле"@uk	.
-wd:Q1868	rdfs:label	"Paul Otlet"@ext	.
-wd:Q1868	rdfs:label	"Paul Otlet"@bs	.
-wd:Q1868	rdfs:label	"Paul Otlet"@de	.
-wd:Q1868	rdfs:label	"بول اوتليه"@arz	.
-wd:Q1868	rdfs:label	"Paul Otlet"@es	.
-wd:Q1868	rdfs:label	"폴 오틀레"@ko	.
-wd:Q1868	rdfs:label	"Paul Otlet"@ast	.
-wd:Q1868	rdfs:label	"Paul Otlet"@it	.
-wd:Q1868	rdfs:label	"Paul Otlet"@br	.
-wd:Q1868	rdfs:label	"Paul Otlet"@cy	.
-wd:Q1868	rdfs:label	"Paul Otlet"@sq	.
-wd:Q1868	rdfs:label	"保羅·奧特勒"@zh	.
-wd:Q1868	rdfs:label	"Paul Otlet"@nds-nl	.
-wd:Q1868	rdfs:label	"پل اوتله"@azb	.
-wd:Q1868	rdfs:label	"Paul Otlet"@io	.
-wd:Q1868	rdfs:label	"Paul Otlet"@gl	.
-wd:Q1868	rdfs:label	"ポール・オトレ"@ja	.
-wd:Q1868	rdfs:label	"Paul Otlet"@mg	.
-wd:Q1868	rdfs:label	"Paul Otlet"@de-ch	.
-wd:Q1868	rdfs:label	"Paul Otlet"@pl	.
-wd:Q1868	rdfs:label	"Paul Otlet"@mul	.
-wd:Q1868	rdfs:label	"بول اوتليه"@ar	.
-wd:Q1868	rdfs:label	"Пол Отле"@bg	.
-wd:Q1868	rdfs:label	"Paul Otlet"@nl	.
-wd:Q1868	rdfs:label	"Paul Otlet"@vi	.
-wd:Q1868	rdfs:label	"Paul Otlet"@gsw	.
-wd:Q1868	rdfs:label	"Paulus Otlet"@la	.
-wd:Q1868	rdfs:label	"Paul Otlet"@hu	.
-wd:Q1868	rdfs:label	"Paul Otlet"@lb	.
-wd:Q1868	rdfs:label	"Paul Otlet"@vec	.
-wd:Q1868	rdfs:label	"Paul Otlet"@sv	.
-wd:Q1868	rdfs:label	"Paul Otlet"@sc	.
-wd:Q1868	rdfs:comment	"ލިޔުންތެރިއެއް"@dv	.
-wd:Q1868	rdfs:comment	"نویسنده، وکیل، و کتابدار بلژیکی"@fa	.
-wd:Q1868	rdfs:comment	"tác giả, thủ thư và nhà tư tưởng chống thực dân người Bỉ"@vi	.
-wd:Q1868	rdfs:comment	"סופר בלגי"@he	.
-wd:Q1868	rdfs:comment	"бельгийский библиограф, один из создателей УДК"@ru	.
-wd:Q1868	rdfs:comment	"bibliografo belga"@it	.
-wd:Q1868	rdfs:comment	"belgický právník, spisovatel a mírový aktivista"@cs	.
-wd:Q1868	rdfs:comment	"belgijski bibliograf i nobelovac"@hr	.
-wd:Q1868	rdfs:comment	"belgisk författare, advokat och bibliotekarie"@sv	.
-wd:Q1868	rdfs:comment	"Pionier des Informationsmanagements"@de	.
-wd:Q1868	rdfs:comment	"belgisk skribent, advokat og bibliotekar"@nn	.
-wd:Q1868	rdfs:comment	"escritor e visionário belga"@pt-br	.
-wd:Q1868	rdfs:comment	"belgisk skribent, advokat og bibliotekar"@nb	.
-wd:Q1868	rdfs:comment	"бельгійський бібліограф, один з творців УДК"@uk	.
-wd:Q1868	rdfs:comment	"ベルギーの著作家、法律家、書誌学者 (1868-1944)"@ja	.
-wd:Q1868	rdfs:comment	"bibliográfo, jurista y científico de la información belga"@es	.
-wd:Q1868	rdfs:comment	"Белгийски автор, библиотекар и колониален мислител"@bg	.
-wd:Q1868	rdfs:comment	"ਬੈਲਜੀਅਮ ਲੇਖਕ, ਲਾਇਬ੍ਰੇਰੀਅਨ ਅਤੇ ਬਸਤੀਵਾਦੀ ਵਿਰੋਧੀ ਚਿੰਤਕ"@pa	.
-wd:Q1868	rdfs:comment	"autor belga, bibliotecário e pensador anticolonialista"@pt	.
-wd:Q1868	rdfs:comment	"belga bibliografo, teozofo, pacemulo kaj entreprenisto"@eo	.
-wd:Q1868	rdfs:comment	"բելգիացի գրող"@hy	.
-wd:Q1868	rdfs:comment	"belgisk skribent, advokat og bibliotekar"@da	.
-wd:Q1868	rdfs:comment	"bibliographe, juriste, entrepreneur et militant belge, socialiste, pacifiste et anticolonialiste"@fr	.
-wd:Q1868	rdfs:comment	"벨기에 작가, 사서"@ko	.
-wd:Q1868	rdfs:comment	"bibliógrafo e xurista belga, pioneiro da ciencia da documentación"@gl	.
-wd:Q1868	rdfs:comment	"Belgian author, librarian and colonial thinker"@en-gb	.
-wd:Q1868	rdfs:comment	"belga író, vállalkozó, ügyvéd, békeaktivista"@hu	.
-wd:Q1868	rdfs:comment	"prawnik belgijski, twórca bibliografii"@pl	.
-wd:Q1868	rdfs:comment	"Belgian author, librarian and anti-colonial thinker"@en	.
-wd:Q1868	rdfs:comment	"escriptor i inventor belga"@ca	.
-wd:Q1868	rdfs:comment	"Belgische bibliograaf, theosoof, pacifist en ondernemer"@nl	.
-wd:Q1868	schema:url	"https://fr.wikipedia.org/wiki/Paul_Otlet"^^xsd:anyURI	.
-wd:Q1868	schema:url	"https://lb.wikipedia.org/wiki/Paul_Otlet"^^xsd:anyURI	.
-wd:Q1868	schema:url	"https://ar.wikipedia.org/wiki/%D8%A8%D9%88%D9%84_%D8%A7%D9%88%D8%AA%D9%84%D9%8A%D9%87"^^xsd:anyURI	.
-wd:Q1868	schema:url	"https://en.wikipedia.org/wiki/Paul_Otlet"^^xsd:anyURI	.
-wd:Q1868	schema:url	"https://id.wikipedia.org/wiki/Paul_Otlet"^^xsd:anyURI	.
-wd:Q1868	schema:url	"https://arz.wikipedia.org/wiki/%D8%A8%D9%88%D9%84_%D8%A7%D9%88%D8%AA%D9%84%D9%8A%D9%87"^^xsd:anyURI	.
-wd:Q1868	schema:url	"https://pt.wikipedia.org/wiki/Paul_Otlet"^^xsd:anyURI	.
-wd:Q1868	schema:url	"https://ca.wikipedia.org/wiki/Paul_Otlet"^^xsd:anyURI	.
-wd:Q1868	schema:url	"https://nl.wikipedia.org/wiki/Paul_Otlet"^^xsd:anyURI	.
-wd:Q1868	schema:url	"https://es.wikipedia.org/wiki/Paul_Otlet"^^xsd:anyURI	.
-wd:Q1868	schema:url	"https://fr.wikisource.org/wiki/Auteur:Paul_Otlet"^^xsd:anyURI	.
-wd:Q1868	schema:url	"https://fi.wikipedia.org/wiki/Paul_Otlet"^^xsd:anyURI	.
-wd:Q1868	schema:url	"https://ja.wikipedia.org/wiki/%E3%83%9D%E3%83%BC%E3%83%AB%E3%83%BB%E3%82%AA%E3%83%88%E3%83%AC"^^xsd:anyURI	.
-wd:Q1868	schema:url	"https://pl.wikipedia.org/wiki/Paul_Otlet"^^xsd:anyURI	.
-wd:Q1868	schema:url	"https://uk.wikipedia.org/wiki/%D0%9F%D0%BE%D0%BB%D1%8C_%D0%9E%D1%82%D0%BB%D0%B5"^^xsd:anyURI	.
-wd:Q1868	schema:url	"https://en.wikisource.org/wiki/Author:Paul_Otlet"^^xsd:anyURI	.
-wd:Q1868	schema:url	"https://it.wikipedia.org/wiki/Paul_Otlet"^^xsd:anyURI	.
-wd:Q1868	schema:url	"https://mg.wikipedia.org/wiki/Paul_Otlet"^^xsd:anyURI	.
-wd:Q1868	schema:url	"https://azb.wikipedia.org/wiki/%D9%BE%D9%84_%D8%A7%D9%88%D8%AA%D9%84%D9%87"^^xsd:anyURI	.
-wd:Q1868	schema:url	"https://eo.wikipedia.org/wiki/Paul_Otlet"^^xsd:anyURI	.
-wd:Q1868	schema:url	"https://commons.wikimedia.org/wiki/Category:Paul_Otlet"^^xsd:anyURI	.
-wd:Q1868	schema:url	"https://cs.wikipedia.org/wiki/Paul_Otlet"^^xsd:anyURI	.
-wd:Q1868	schema:url	"https://la.wikipedia.org/wiki/Paulus_Otlet"^^xsd:anyURI	.
-wd:Q1868	schema:url	"https://gl.wikipedia.org/wiki/Paul_Otlet"^^xsd:anyURI	.
-wd:Q1868	schema:url	"https://zh.wikipedia.org/wiki/%E4%BF%9D%E7%BD%97%C2%B7%E5%A5%A5%E7%89%B9%E8%8E%B1"^^xsd:anyURI	.
-wd:Q1868	schema:url	"https://ru.wikipedia.org/wiki/%D0%9E%D1%82%D0%BB%D0%B5,_%D0%9F%D0%BE%D0%BB%D1%8C"^^xsd:anyURI	.
-wd:Q1868	schema:url	"https://de.wikipedia.org/wiki/Paul_Otlet"^^xsd:anyURI	.
-wd:Q1868	schema:url	"https://fa.wikipedia.org/wiki/%D9%BE%D9%84_%D8%A7%D9%88%D8%AA%D9%84%D9%87"^^xsd:anyURI	.
-wd:Q1868	schema:url	"https://be.wikipedia.org/wiki/%D0%9F%D0%BE%D0%BB%D1%8C_%D0%90%D1%82%D0%BB%D0%B5"^^xsd:anyURI	.
-wd:Q1868	schema:url	"https://bg.wikipedia.org/wiki/%D0%9F%D0%BE%D0%BB_%D0%9E%D1%82%D0%BB%D0%B5"^^xsd:anyURI	.
-wd:Q1868	rdf:type	schema:Person	.
-wd:Q1868	schema:familyName	"YAGO-REPLACE wd:Q18375245"	.
-wd:Q1868	schema:birthDate	"1868-08-23"^^xsd:date	.
-wd:Q1868	schema:deathDate	"1944-12-10"^^xsd:date	.
-wd:Q1868	schema:givenName	"YAGO-REPLACE wd:Q4925623"	.
-wd:Q1868	schema:image	"http://commons.wikimedia.org/wiki/Special:FilePath/Paul%20Otlet%20%C3%A0%20son%20bureau%20%28cropped%29.jpg"^^xsd:anyURI	.
+wd:Q_Inconsistent	rdfs:label	"Inconsistent"@en	.
+wd:Q_Inconsistent	rdf:type	schema:Organization	.
+wd:Q_Elvis	yago:siteLinks	"369"^^xsd:integer	.
+wd:Q_Elvis	schema:birthPlace	wd:Q_birth_place_1	. # IF	schema:Place		
+wd:Q_Elvis	yago:hasFather	wd:Q_child	. # IF	schema:Person	"2014-01-02"^^xsd:date	"2014-01-02"^^xsd:date
+wd:Q_Elvis	yago:academicDegree	wd:Q_doctoralDegree	. # IF	yago:Award		
+wd:Q_Elvis	schema:height	"200"^^wd:Q174789	. # IF	yago:UnitOfLength		
+wd:Q_Elvis	schema:image	"http://good-image.com"^^xsd:anyURI	.
+wd:Q_Elvis	rdfs:comment	"Elvis Presley, the great singer"@en	.
+wd:Q_Elvis	schema:url	"https://elvis.com"^^xsd:anyURI	.
+wd:Q_Elvis	schema:url	"https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%B5%D1%81%D0%BB%D0%B8,_%D0%AD%D0%BB%D0%B2%D0%B8%D1%81"^^xsd:anyURI	.
+wd:Q_Elvis	rdf:type	wd:Q_rock_singer	.
+wd:Q_Elvis	schema:givenName	"YAGO-REPLACE wd:Q493293"	.
+wd:Q_Elvis	schema:birthDate	"1935"^^xsd:gYear	.
+wd:Q_Elvis	rdfs:label	"Пресли,_Элвис"@ru	.
+wd:Q_tiger	schema:parentTaxon	wd:Q_cat	. # IF	schema:Taxon		
+wd:Q_tiger	yago:consumes	wd:Q_sheep	. # IF	schema:Taxon		
+wd:Q_tiger	rdfs:label	"tiger"@en	.
+wd:Q_tiger	rdf:type	schema:Taxon	.
+wd:Q_Barack_Obama	rdfs:label	"Barack Obama"@en	.
+wd:Q_Barack_Obama	rdf:type	schema:Person	.
+wd:Q_composition	schema:musicBy	wd:Q_person_or_band	. # IF	schema:MusicGroup, schema:Person		
+wd:Q_composition	rdfs:label	"composition"@en	.
+wd:Q_composition	rdf:type	schema:MusicComposition	.
+wd:Q_product	schema:gtin	"12345678"	.
+wd:Q_product	rdfs:label	"product"@en	.
+wd:Q_product	rdf:type	schema:Product	.
+wd:Q_org	schema:slogan	"Blah blah"@en	.
+wd:Q_org	rdfs:label	"organization"@en	.
+wd:Q_org	rdf:type	schema:Organization	.
+wd:Q31	rdfs:label	"Belgium"@en	.
+wd:Q31	schema:memberOf	wd:Schengen	. # IF	schema:Organization		
+wd:Q31	schema:location	wd:Schengen	. # IF	schema:Place		
+wd:Q31	yago:currency	wd:Q4916	. # IF	yago:UnitOfMoney		
+wd:Q31	schema:geo	"Point(4.6680555555556 50.641111111111)"^^geo:wktLiteral	.
+wd:Q31	yago:populationNumber	"11825551"^^xsd:integer	.
+wd:Q31	rdf:type	wd:Q123456	.
+wd:Q31	yago:marriageableAge	"20"^^xsd:integer	.
+wd:Q312	rdfs:label	"corporation"@en	.
+wd:Q312	schema:dateCreated	"1976-01-02"^^xsd:date	.
+wd:Q312	rdf:type	schema:Corporation	.
+wd:Q_fictional	rdfs:label	"fictional"@en	.
+wd:Q_fictional	schema:birthPlace	wd:Q_birth_place_1	. # IF	schema:Place		
+wd:Q_fictional	yago:appearsIn	wd:Q_book	. # IF	schema:CreativeWork		
+wd:Q_fictional	rdf:type	wd:Q_rock_singer	.
+wd:Q_fictional	rdf:type	wd:Q2593744	.
+wd:Q_singer	rdfs:label	"chanteur plus en détail"@fr	.
+wd:Q_singer	rdfs:label	"singer"@en	.
+wd:Q_singer	rdfs:comment	"this is a singer"@en	.
+wd:Q_singer	schema:alternateName	"this is a human singer"@en	.
+wd:Q_singer	rdf:type	rdfs:Class	.
+wd:Q_singer	schema:sameAs	"https://freebase.com/id"	.
+wd:Q_singer	schema:url	"https://de.wikipedia.org/wiki/Mensch"^^xsd:anyURI	.
+yago:Worker	rdfs:label	"label that survives"@en	.
+yago:Worker	rdf:type	rdfs:Class	.
+yago:Worker	schema:sameAs	"https://freebase.com/first-id-that-survives"	.
+yago:Worker	rdf:type	rdfs:Class	.
+yago:Worker	schema:sameAs	"https://freebase.com/second-id-that-survives"	.
+wd:Q493293	rdfs:label	"Andrea"@mul	.
+wd:Q493293	rdf:type	wd:Q3409032	.
+wd:Q100995	schema:sameAs	"/m/05t56"	.
+wd:Q100995	yago:siConversion	"+0.45359237"^^wd:Q11570	. # IF	yago:UnitOfMeasurement		
+wd:Q100995	rdfs:label	"lb"@en	.
+wd:Q100995	rdfs:label	"رطل"@ar	.
+wd:Q100995	rdf:type	yago:UnitOfMass	.
+wd:Q1340	rdfs:label	"Vivaldi"@en	.
+wd:Q1340	rdf:type	wd:Q1259917	.
