@@ -177,7 +177,31 @@ def createGenericInstance(targetClass, outFile):
 # We store the global taxonomy here
 yagoTaxonomyUp={}
 
-def isSubclassOf(c1, c2):
+def isSubClassOfAny_(c, superclasses, seenClasses):
+    if c in seenClasses:
+        return False
+    if c in superclasses:
+        return True
+    if c not in yagoTaxonomyUp:
+        return False
+    seenClasses.add(c)
+    for superclass in yagoTaxonomyUp[c]:
+        if isSubClassOfAny_(superclass, superclasses, seenClasses):
+            return True
+    seenClasses.discard(c)
+    return False
+
+def isSubClassOfAny(c, superclasses):
+    # Can't use default argument as this is instantianted only once
+    return isSubClassOfAny_(c, superclasses, set()) 
+    
+def instanceOfAny(obj, classes):
+    literalValue, _, _, datatype = TurtleUtils.splitLiteral(obj)
+    if datatype:
+        obj = datatype
+    return any(isSubClassOfAny(c, classes) for c in yagoInstances[obj])
+
+def isSubclassOfOLD(c1, c2):
     if c1==c2:
         return True
     if c1 not in yagoTaxonomyUp:
@@ -187,7 +211,7 @@ def isSubclassOf(c1, c2):
             return True
     return False
     
-def instanceOf(obj, cls):
+def instanceOfOLD(obj, cls):
     literalValue, _, _, datatype = TurtleUtils.splitLiteral(obj)
     if datatype:
         obj = datatype
@@ -261,7 +285,7 @@ with TsvUtils.Timer("Step 04: Type-checking YAGO"):
                         wroteFacts=False
                         lastObject=""
                         wroteLastObject=False
-                        isName=instanceOf(subject,Prefixes.yagoPersonName)
+                        isName=instanceOfAny(subject,[Prefixes.yagoPersonName])
                         if isName:
                             # We remove ourselves from the type hierarchy, 
                             # so that the class yago:PersonName will be empty and will be removed
@@ -282,11 +306,16 @@ with TsvUtils.Timer("Step 04: Type-checking YAGO"):
                     if isName:
                         wroteFacts=True
                         continue
+                    
+                    # If the object is a name, we have to discard the fact,
+                    # because names are removed from the set of entities
+                    if instanceOfAny(obj,[Prefixes.yagoPersonName]):
+                        continue
                         
                     # Write out the fact
                     # If two successive facts have the same subject and object, this is because of overloading
                     # In that case, the logs should be written only for one of the facts
-                    if classes is None or any(instanceOf(obj,c) for c in classes):
+                    if classes is None or instanceOfAny(obj,classes):
                         out.write(subject, predicate, obj, ". #", startDate, endDate)
                         wroteFacts=True
                         if obj==lastObject and not wroteLastObject:
@@ -294,7 +323,7 @@ with TsvUtils.Timer("Step 04: Type-checking YAGO"):
                         lastObject=obj
                         wroteLastObject=True
                         count+=1
-                    elif any(isSubclassOf(obj,c) for c in classes):
+                    elif isSubClassOfAny(obj,classes):
                         newObject=createGenericInstance(obj, out)
                         out.write(subject, predicate, newObject, ". #", startDate, endDate)
                         if newObject==lastObject and not wroteLastObject:

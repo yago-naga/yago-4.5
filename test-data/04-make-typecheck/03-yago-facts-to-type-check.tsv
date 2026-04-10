@@ -54,6 +54,8 @@ wd:Q493293	rdfs:label	"Andr ea"@mul	.
 
 # Good child id should be yago:Q42, from the Wikidata ID (which will be something like wd:Q123, i.e., yago:Q123)
 wd:Q42	rdf:type	wd:Q_singer
+# This fact should not appear because it connects to a name (which will be erased)
+wd:Q42	yago:namedAfter	wd:Q493293	. # IF	schema:Thing
 
 # Bad child id should be yago:Bad_chè-ld_Q43, which is the label plus the Wikidata id as disambiguation
 wd:Q43	rdf:type	wd:Q_european_book
