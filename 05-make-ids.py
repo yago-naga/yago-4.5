@@ -55,6 +55,8 @@ def yagoIdToString(yagoId):
     if not yagoId:
         return yagoId
     yagoId=yagoId[yagoId.find(':')+1:]
+    if yagoId.startswith(Prefixes.namePrefix):
+        yagoId = yagoId[len(Prefixes.namePrefix):]
     return re.sub(r'_U([0-9a-fA-F]{4})_', lambda m: chr(int(m.group(1), 16)), yagoId)
     
 def toYagoEntity(entity):

@@ -33,7 +33,7 @@
 @prefix wdno: <http://www.wikidata.org/prop/novalue/> .
 @prefix ys: <http://yago-knowledge.org/schema#> .
 wd:Q_Elvis	owl:sameAs	yago:Elvis	. #WIKI
-wd:Q493293	owl:sameAs	yago:Andr_U0020_ea	. #OTHER
+wd:Q493293	owl:sameAs	yago:YAGO_NAME_Andr_U0020_ea	. #OTHER
 wd:Q42	owl:sameAs	yago:Q42	. #OTHER
 wd:Q43	owl:sameAs	yago:Bad_Chè-Ld_Q43	. #OTHER
 wd:Q45	owl:sameAs	yago:Test_Q45	. #OTHER

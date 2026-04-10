@@ -72,7 +72,7 @@ def allLegal(s):
 
 def titleFromName(s):
     """ Creates a YAGO title from a name, mirroring every character """
-    result=""
+    result=Prefixes.namePrefix
     for c in s:
         if legal(c):
             result+=c
