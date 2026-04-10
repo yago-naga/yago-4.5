@@ -63,8 +63,8 @@ wd:Q_org	schema:slogan	"Blah blah"@en	.
 wd:Q_org	rdfs:label	"organization"@en	.
 wd:Q_org	rdf:type	schema:Organization	.
 wd:Q31	rdfs:label	"Belgium"@en	.
-wd:Q31	schema:memberOf	wd:Schengen	. # IF	schema:Organization		
 wd:Q31	schema:location	wd:Schengen	. # IF	schema:Place		
+wd:Q31	schema:memberOf	wd:Schengen	. # IF	schema:Organization		
 wd:Q31	yago:currency	wd:Q4916	. # IF	yago:UnitOfMoney		
 wd:Q31	schema:geo	"Point(4.6680555555556 50.641111111111)"^^geo:wktLiteral	.
 wd:Q31	yago:populationNumber	"11825551"^^xsd:integer	.
@@ -78,8 +78,8 @@ wd:Q_fictional	schema:birthPlace	wd:Q_birth_place_1	. # IF	schema:Place
 wd:Q_fictional	yago:appearsIn	wd:Q_book	. # IF	schema:CreativeWork		
 wd:Q_fictional	rdf:type	wd:Q_rock_singer	.
 wd:Q_fictional	rdf:type	wd:Q2593744	.
-wd:Q_singer	rdfs:label	"chanteur plus en détail"@fr	.
 wd:Q_singer	rdfs:label	"singer"@en	.
+wd:Q_singer	rdfs:label	"chanteur plus en détail"@fr	.
 wd:Q_singer	rdfs:comment	"this is a singer"@en	.
 wd:Q_singer	schema:alternateName	"this is a human singer"@en	.
 wd:Q_singer	rdf:type	rdfs:Class	.
@@ -94,8 +94,8 @@ wd:Q493293	rdfs:label	"Andrea"@mul	.
 wd:Q493293	rdf:type	wd:Q3409032	.
 wd:Q100995	schema:sameAs	"/m/05t56"	.
 wd:Q100995	yago:siConversion	"+0.45359237"^^wd:Q11570	. # IF	yago:UnitOfMeasurement		
-wd:Q100995	rdfs:label	"lb"@en	.
 wd:Q100995	rdfs:label	"رطل"@ar	.
+wd:Q100995	rdfs:label	"lb"@en	.
 wd:Q100995	rdf:type	yago:UnitOfMass	.
 wd:Q1340	rdfs:label	"Vivaldi"@en	.
 wd:Q1340	rdf:type	wd:Q1259917	.

@@ -336,7 +336,11 @@ def normalizeDate(literal: Optional[str]) -> Optional[str]:
     # the facts itself, making it hard to recover.
     literal = re.sub('-01-01"\\^\\^xsd:date$', '"^^xsd:gYear', literal)
     return literal
-   
+
+DATE_REGEX=r'[+-]?[0-9]{1,4}-[0-9]{1,2}-[0-9]{1,2}(T[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}(\\.[0-9]+)?(Z|[+-][0-9]{2}:[0-9]{2})?)?'
+
+INT_REGEX=r"\+?(-?[0-9]+)(\.[0-9]+)?"
+
 def cleanLiteralObject(obj: str, datatype: str) -> Optional[str]:
     """ Returns a version of obj that corresponds to the datatype -- or None"""
     if datatype == Prefixes.xsdAnytype:
@@ -366,7 +370,7 @@ def cleanLiteralObject(obj: str, datatype: str) -> Optional[str]:
     if datatype == Prefixes.xsdDecimal and literalDataType == Prefixes.xsdInteger:
         return '"'+literalValue+'"^^'+Prefixes.xsdDecimal
     if datatype == Prefixes.xsdInteger:
-        match=re.fullmatch("\\+?(-?[0-9]+)(\\.[0-9]+)?",literalValue)
+        match=re.fullmatch(INT_REGEX,literalValue)
         if match:
             return f'"{match.group(1)}"^^{Prefixes.xsdInteger}'
         return None
@@ -374,8 +378,8 @@ def cleanLiteralObject(obj: str, datatype: str) -> Optional[str]:
         # Erroneous default dates in Wikidata
         if obj.startswith('"0000'):
            return None
-        # Strings that are longer than any possible date   
-        if len(obj) > Prefixes.MAX_DATE_LENGTH:
+        # Strings that are bad dates
+        if not re.fullmatch(DATE_REGEX,literalValue):
            return None
         # Fall through
     # Any decimals are OK for units of measurement
