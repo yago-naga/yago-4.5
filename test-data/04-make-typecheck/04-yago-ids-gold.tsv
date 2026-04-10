@@ -42,3 +42,5 @@ wd:Q_other_other_elvis	owl:sameAs	yago:Eehlvis_Q_other_other_elvis	. #OTHER
 wd:Q_singer	owl:sameAs	yago:Stngerè	. #WIKI
 wd:Q_prof	owl:sameAs	yago:Professor	. #WIKI
 wd:Q174789	owl:sameAs	yago:Meter_Q174789	. #OTHER
+wd:Q403	owl:sameAs	yago:Q403	. #OTHER
+wd:Q112	owl:sameAs	yago:Election_Q112	. #OTHER

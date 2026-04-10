@@ -36,6 +36,7 @@ import re
 import unicodedata
 import Evaluator
 import Prefixes
+from Schema import YagoSchema
 from collections import defaultdict
 
 TEST=len(sys.argv)>1 and sys.argv[1]=="--test"
@@ -207,6 +208,13 @@ def removeClass(c):
 ##########################################################################
 
 with TsvUtils.Timer("Step 04: Type-checking YAGO"):
+    # Load schema to register ids of existing classes and properties
+    yagoSchema = YagoSchema(FOLDER+"01-yago-final-schema.ttl", False)
+    for cls in yagoSchema.classes:
+        yagoTitles.add(cls[cls.find(':')+1:])
+    for prop in yagoSchema.properties:
+        yagoTitles.add(prop[prop.find(':')+1:])
+        
     # Load taxonomy
     for triple in TsvUtils.tsvTuples(FOLDER+"02-yago-taxonomy-to-rename.tsv", "  Loading YAGO taxonomy"):
         if len(triple)>2:

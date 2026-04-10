@@ -106,3 +106,7 @@ wd:Q403	schema:height	"200"^^wd:Q174789	. # IF	yago:UnitOfMeasurement
 # No overload succeeds -> two log entries
 wd:Q403	schema:location	wd:Q42	. # IF	schema:Place
 wd:Q403	schema:memberOf	wd:Q42	. # IF	schema:Organization
+
+# Should get a different id from yago:Election (which exists already)
+wd:Q112	rdf:type	schema:Person	.
+wd:Q112	rdfs:label	"Election"@en	.
