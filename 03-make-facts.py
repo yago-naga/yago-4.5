@@ -627,13 +627,10 @@ class treatWikidataEntity():
                         unit=unitsOfMeasurement.get((subject, predicate, obj), None)
                         if unit:
                             obj = obj.replace(Prefixes.xsdDecimal, unit)
-                            self.writer.write(subject, yagoProperty.identifier, obj, ". # IF", targetDataType, normalizeDate(startDate), normalizeDate(endDate))
-                    elif startDate or endDate:
-                        self.writer.write(subject, yagoProperty.identifier, obj, ". #", "", normalizeDate(startDate), normalizeDate(endDate))                
-                    else:
-                        self.writer.write(subject, yagoProperty.identifier, obj, ".")
+                if startDate or endDate:
+                    self.writer.write(subject, yagoProperty.identifier, obj, ". #", normalizeDate(startDate), normalizeDate(endDate))                
                 else:
-                    self.writer.write(subject, yagoProperty.identifier, obj, ". # IF", (", ".join(sorted(yagoProperty.objectTypes))), normalizeDate(startDate), normalizeDate(endDate))                    
+                    self.writer.write(subject, yagoProperty.identifier, obj, ".")
         return True
         
     def result(self) -> None:

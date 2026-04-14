@@ -32,7 +32,8 @@
 @prefix prn: <http://www.wikidata.org/prop/reference/value-normalized/> .
 @prefix wdno: <http://www.wikidata.org/prop/novalue/> .
 @prefix ys: <http://yago-knowledge.org/schema#> .
-<<	wd:Q_Elvis	schema:children	wd:Q43	>>	ys:excludedFor	"object is not in schema:Person, schema:Organization"	.
-<<	wd:Q42	yago:namedAfter	wd:Q493293	>>	ys:excludedFor	"object is not in schema:Thing"	.
-<<	wd:Q403	schema:location	wd:Q42	>>	ys:excludedFor	"object is not in schema:Place"	.
-<<	wd:Q403	schema:memberOf	wd:Q42	>>	ys:excludedFor	"object is not in schema:Organization"	.
+<<	wd:Q_Elvis	schema:height	"500"^^wd:Q_Elvis	>>	ys:excludedFor	"object is not in range"	.
+<<	wd:Q_Elvis	yago:hasFather	wd:Q43	>>	ys:excludedFor	"object is not in range"	.
+<<	wd:Q42	yago:namedAfter	wd:Q493293	>>	ys:excludedFor	"object is not in range"	.
+<<	wd:Q403	schema:location	wd:Q174789	>>	ys:excludedFor	"object is not in range"	.
+<<	wd:Q403	schema:memberOf	wd:Q174789	>>	ys:excludedFor	"object is not in range"	.

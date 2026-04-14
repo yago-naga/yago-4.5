@@ -42,10 +42,11 @@ wd:Q_Elvis	rdf:type	wd:Q_singer
 wd:Q_Elvis	schema:deathDate	"1970-01-01"^^xsd:gYear
 wd:Q_Elvis	schema:url	<https://elvis.com>
 wd:Q_Elvis	schema:url	"https://en.wikipedia.org/wiki/Elvis"^^xsd:anyURI
-wd:Q_Elvis	schema:children	wd:Q42	. # IF	schema:Person, schema:Organization	"1960"^^xml:gYear	"1980"^^xml:gYear
-wd:Q_Elvis	schema:height	"200"^^wd:Q174789	. # IF	yago:UnitOfMeasurement
-wd:Q_Elvis	schema:children	wd:Q43	. # IF	schema:Person, schema:Organization
-wd:Q_Elvis	yago:academicTitle	wd:Q_doctoralDegree	. # IF	yago:Award
+wd:Q_Elvis	yago:hasMother	wd:Q42	. # 	"1960"^^xml:gYear	"1980"^^xml:gYear
+wd:Q_Elvis	schema:height	"200"^^wd:Q174789	.
+wd:Q_Elvis	schema:height	"500"^^wd:Q_Elvis	.
+wd:Q_Elvis	yago:hasFather	wd:Q43	.
+wd:Q_Elvis	yago:academicDegree	wd:Q_doctoralDegree	.
 wd:Q_Elvis	schema:givenName	"YAGO-REPLACE wd:Q493293"	.
 
 # YAGO id should be "Andr ea"
@@ -55,11 +56,11 @@ wd:Q493293	rdfs:label	"Andr ea"@mul	.
 # Good child id should be yago:Q42, from the Wikidata ID (which will be something like wd:Q123, i.e., yago:Q123)
 wd:Q42	rdf:type	wd:Q_singer
 # This fact should not appear because it connects to a name (which will be erased)
-wd:Q42	yago:namedAfter	wd:Q493293	. # IF	schema:Thing
+wd:Q42	yago:namedAfter	wd:Q493293	.
 
 # Bad child id should be yago:Bad_chè-ld_Q43, which is the label plus the Wikidata id as disambiguation
 wd:Q43	rdf:type	wd:Q_european_book
-wd:Q43	schema:inLanguage	wd:Q1860	. # IF	yago:Language
+wd:Q43	schema:inLanguage	wd:Q1860	.
 wd:Q43	rdfs:label	"Bad chè³ld"@en
 wd:Q43	rdfs:label	"Kind"@de
 
@@ -94,20 +95,20 @@ wd:Q_prof	rdf:type	rdfs:Class	.
 wd:Q_prof	rdfs:label	"professor"@en	.
 
 # Here is a unit of measurement
-wd:Q174789	rdf:type	yago:UnitOfMeasurement	.
+wd:Q174789	rdf:type	yago:UnitOfLength	.
 wd:Q174789	rdfs:label	"meter"@en	.
 
 # A fact should appear in the logs only if none of the overloaded facts succeeded
 wd:Q403	rdf:type	schema:Person	.
 # First overload succeeds -> no log entry
-wd:Q403	schema:children	wd:Q42	. # IF	schema:Person
-wd:Q403	schema:otherRelation	wd:Q42	. # IF	schema:Book
+wd:Q403	yago:hasMother	wd:Q42	.
+wd:Q403	schema:knowsLanguage	wd:Q42	.
 # Second overload succeeds -> no log entry
-wd:Q403	schema:otherRelation	"200"^^wd:Q174789	. # IF	schema:Person
-wd:Q403	schema:height	"200"^^wd:Q174789	. # IF	yago:UnitOfMeasurement
-# No overload succeeds -> two log entries
-wd:Q403	schema:location	wd:Q42	. # IF	schema:Place
-wd:Q403	schema:memberOf	wd:Q42	. # IF	schema:Organization
+wd:Q403	schema:knowsLanguage	"200"^^wd:Q174789	.
+wd:Q403	schema:height	"200"^^wd:Q174789	.
+# No overload succeeds -> at least one log entry
+wd:Q403	schema:location	wd:Q174789	.
+wd:Q403	schema:memberOf	wd:Q174789	.
 
 # Should get a different id from yago:Election (which exists already)
 wd:Q112	rdf:type	schema:Person	.

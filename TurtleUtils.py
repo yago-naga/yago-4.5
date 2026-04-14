@@ -289,6 +289,7 @@ class Graph(object):
         return
     def clear(self):
         self.index.clear()
+        self.mainSubjectCache=None
     def add(self, triple):
         (subject, predicate, obj) = triple
         if subject not in self.index:
@@ -344,6 +345,13 @@ class Graph(object):
         return self.index.get(subject,{})
     def objectsOf(self, subject, predicate):
         return self.index.get(subject,{}).get(predicate,set())
+    def objectOf(self, subject, predicate):
+        return next(iter(self.index.get(subject,{}).get(predicate,set())),None)
+    def objectWhere(self, subject, predicate, condition):
+        for obj in self.objectsOf(subject, predicate):
+            if condition(obj):
+                return obj
+        return None
     def subjectsOf(self, predicate, obj):
         return list(s for s in self.index if predicate in self.index[s] and obj in self.index[s][predicate])
     def subjects(self):

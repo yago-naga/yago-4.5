@@ -37,6 +37,7 @@ import unicodedata
 import Evaluator
 import Prefixes
 from Schema import YagoSchema
+from TurtleUtils import Graph
 from collections import defaultdict
 
 TEST=len(sys.argv)>1 and sys.argv[1]=="--test"
@@ -140,24 +141,33 @@ def tryYagoId(out,currentTopic, title, isWikipedia=False):
         return True
     return False
     
-def writeYagoId(out, currentTopic, currentEnglishLabel, currentLabel, currentWikipediaPage, isName):
+def writeId(entityGraph, out, isName):
     """ Writes wd:Q303 owl:sameAs yago:Elvis """ 
+    subject=entityGraph.mainSubject()
     # Don't print ids for built-in classes
-    if currentTopic.startswith("schema:") or currentTopic.startswith("yago:"):
+    if subject.startswith("schema:") or subject.startswith("yago:"):
         return
     # Names get an id that mirrors its label
     if isName:
-       # Names have a @mul tag, but the @mul tags becomes the English label,
-       # mainly to deal with chemical entities
-       out.write(currentTopic,"owl:sameAs", "yago:"+titleFromName(currentEnglishLabel),". #OTHER") 
-       return
-    if currentWikipediaPage and tryYagoId(out,currentTopic, titleFromWikipediaPage(currentWikipediaPage), True):
+       label=entityGraph.objectWhere(subject, Prefixes.rdfsLabel, lambda s: s.endswith("@mul"))
+       if label:          
+           out.write(subject,"owl:sameAs", "yago:"+titleFromName(label[1:-5]),". #OTHER") 
+           return
+    # Try English Wikipedia first
+    label=entityGraph.objectWhere(subject, Prefixes.schemaUrl, lambda s: s.startswith('"https://en.wikipedia.org/wiki/'))
+    if label and tryYagoId(out,subject, titleFromWikipediaPage(label[30:-13]), True):
         return
-    if currentEnglishLabel and tryYagoId(out,currentTopic, titleFromLabel(currentTopic,currentEnglishLabel)):
+    # Next try the English label 
+    label=entityGraph.objectWhere(subject, Prefixes.rdfsLabel, lambda s: s.endswith("@en")) 
+    if label and tryYagoId(out,subject, titleFromLabel(subject,label[1:-4])):
         return        
-    if currentLabel and tryYagoId(out,currentTopic, titleFromLabel(currentTopic,currentLabel)):
-        return        
-    out.write(currentTopic,"owl:sameAs","yago:"+titleFromWikidataId(currentTopic),". #OTHER")
+    # Try any legible label
+    for label in entityGraph.objectsOf(subject, Prefixes.rdfsLabel):
+        label=TurtleUtils.splitLiteral(label)[0]
+        if tryYagoId(out,subject, titleFromLabel(subject,label)):
+            return        
+    # Otherwise write the Wikidata ID
+    out.write(subject,"owl:sameAs","yago:"+titleFromWikidataId(subject),". #OTHER")
 
 ##########################################################################
 #             Class operations
@@ -178,6 +188,7 @@ def createGenericInstance(targetClass, outFile):
 yagoTaxonomyUp={}
 
 def isSubClassOfAny_(c, superclasses, seenClasses):
+    """ True if this class is a subclass of any of the given superclasses, avoiding loops"""
     if c in seenClasses:
         return False
     if c in superclasses:
@@ -192,30 +203,28 @@ def isSubClassOfAny_(c, superclasses, seenClasses):
     return False
 
 def isSubClassOfAny(c, superclasses):
-    # Can't use default argument as this is instantianted only once
+    """ True if this class is a subclass of any of the given superclasses"""
+    # Can't use default argument as this is instantiated only once
     return isSubClassOfAny_(c, superclasses, set()) 
     
-def instanceOfAny(obj, classes):
-    literalValue, _, _, datatype = TurtleUtils.splitLiteral(obj)
-    if datatype:
-        obj = datatype
-    return any(isSubClassOfAny(c, classes) for c in yagoInstances[obj])
-
-def isSubclassOfOLD(c1, c2):
-    if c1==c2:
-        return True
-    if c1 not in yagoTaxonomyUp:
-        return False
-    for superclass in yagoTaxonomyUp[c1]:
-        if isSubclassOf(superclass, c2):
+def isInstanceOfAny(obj, classes):
+    """ True if this instance is an instance of any of the given classes"""
+    # URIs are instances of anyURI and Thing (for external entities)
+    if obj.startswith('<'):
+        return Prefixes.xsdAnyURI in classes or Prefixes.schemaThing in classes
+    # Literals
+    if obj.startswith('"'):
+        # These types have been checked beforehand in Step 3
+        if any(c.startswith("xsd:") or c.startswith("rdf:") or c.startswith("geo:") or c.startswith("xsd:") for c in classes):
             return True
-    return False
-    
-def instanceOfOLD(obj, cls):
-    literalValue, _, _, datatype = TurtleUtils.splitLiteral(obj)
-    if datatype:
-        obj = datatype
-    return any(isSubclassOf(c, cls) for c in yagoInstances[obj])
+        # YAGO units are to be checked here    
+        elif any(c.startswith(Prefixes.yagoUnit) for c in classes):
+            literalValue, _, _, datatype = TurtleUtils.splitLiteral(obj)
+            obj = datatype
+        # Everything else fails...    
+        else:
+            return False
+    return any(isSubClassOfAny(c, classes) for c in yagoInstances[obj])
     
 def removeClass(c):
     """ Removes this class and all superclasses from the YAGO taxonomy """    
@@ -227,9 +236,52 @@ def removeClass(c):
         removeClass(superClass)
     yagoTaxonomyUp.pop(c)
 
+# We store the global YAGO Schema here
+yagoSchema = None
+
 ##########################################################################
 #             Main
 ##########################################################################
+
+def writeFacts(entityGraph, dates, out, idsFile, logFile):
+    """ Type checks the facts of the entity and writes them out """
+    subject=entityGraph.mainSubject()
+            
+    # Count how often each object appears
+    # We do this to decide when we write a range violation to the log file
+    count=0
+    objects2freq={}
+    for predicate in entityGraph.predicatesOf(subject):
+        for obj in entityGraph.objectsOf(subject, predicate):    
+            if obj not in objects2freq:
+                objects2freq[obj]=0
+            objects2freq[obj]+=1
+            
+    # Write out the facts
+    for predicate in entityGraph.predicatesOf(subject):
+        yagoProperty=yagoSchema.properties.get(predicate,None)
+        targetClasses=yagoProperty.objectTypes if yagoProperty else None
+        for obj in entityGraph.objectsOf(subject, predicate):    
+            # If the object is a name, we have to discard the fact,
+            # because names are removed from the set of entities
+            if isInstanceOfAny(obj,[Prefixes.yagoPersonName]):
+                continue
+            startDate, endDate = dates.get((subject, predicate, obj),("", ""))
+            if predicate==Prefixes.rdfType or not targetClasses or isInstanceOfAny(obj,targetClasses):
+                out.write(subject, predicate, obj, ". #", startDate, endDate)
+                count+=1
+                continue
+            if isSubClassOfAny(obj,targetClasses):
+                newObject=createGenericInstance(obj, out)
+                out.write(subject, predicate, newObject, ". #", startDate, endDate)
+                count+=1                    
+                continue
+            if objects2freq[obj]==1:
+                for p in entityGraph.predicatesOf(subject):
+                    if obj in entityGraph.objectsOf(subject, p):
+                        logFile.writeMetaFact(subject, p, obj, Prefixes.ysReason, f'"object is not in range"')
+            objects2freq[obj]-=1
+    return count
 
 with TsvUtils.Timer("Step 04: Type-checking YAGO"):
     # Load schema to register ids of existing classes and properties
@@ -255,14 +307,8 @@ with TsvUtils.Timer("Step 04: Type-checking YAGO"):
     with TsvUtils.TsvFileWriter(FOLDER+"04-yago-facts-to-rename.tsv") as out:
         with TsvUtils.TsvFileWriter(FOLDER+"04-yago-ids.tsv") as idsFile:
             with TsvUtils.TsvFileWriter(FOLDER+"04-make-type-check.log") as logFile:
-                currentTopic=""
-                currentEnglishLabel=""
-                currentLabel=""
-                currentWikipediaPage=""
-                lastObject=""
-                wroteObject=False # True if the last object was written out
-                wroteFacts=False # True if the entity had any valid facts
-                isName = False # True for person names
+                entityGraph=Graph()                
+                dates={}
                 
                 for split in TsvUtils.tsvTuples(FOLDER+"03-yago-facts-to-type-check.tsv", "  Type-checking facts"):
                     if len(split)<3:
@@ -270,77 +316,27 @@ with TsvUtils.Timer("Step 04: Type-checking YAGO"):
                     subject = split[0]    
                     predicate = split[1]
                     obj = split[2]
-                    classes=split[4].split(", ") if len(split)>4 and len(split[4])>0 else None
-                    startDate=split[5] if len(split)>5 else ""
-                    endDate=split[6] if len(split)>6 else ""                    
-
-                    # Next entity
-                    if subject!=currentTopic:
-                        if wroteFacts:
-                            writeYagoId(idsFile, currentTopic, currentEnglishLabel, currentLabel, currentWikipediaPage, isName)
-                        currentTopic=subject
-                        currentEnglishLabel=""
-                        currentLabel=""
-                        currentWikipediaPage=""
-                        wroteFacts=False
-                        lastObject=""
-                        wroteLastObject=False
-                        isName=instanceOfAny(subject,[Prefixes.yagoPersonName])
+                    startDate=split[4] if len(split)>4 else ""
+                    endDate=split[5] if len(split)>5 else ""                    
+                    
+                    if len(entityGraph) and subject!=entityGraph.mainSubject():                          
+                        isName=isInstanceOfAny(entityGraph.mainSubject(),[Prefixes.yagoPersonName])
+                        writeId(entityGraph, idsFile, isName)
+                        # For names, we do not write out any facts, and we remove ourselves from the type hierarchy
+                        # so that the subclasses of PersonName become empty
                         if isName:
-                            # We remove ourselves from the type hierarchy, 
-                            # so that the class yago:PersonName will be empty and will be removed
-                            yagoInstances.pop(subject, None)
-                        
-                    # Gather information for the entity id
-                    if predicate==Prefixes.rdfsLabel:
-                        if obj.endswith('"@en'):
-                            currentEnglishLabel=obj[1:-4]
-                        elif obj.endswith('"@mul'):
-                            currentEnglishLabel=obj[1:-5]                            
-                        elif not currentLabel or not allLegal(currentLabel):
-                            currentLabel=TurtleUtils.splitLiteral(obj)[0]                            
-                    elif predicate==Prefixes.schemaUrl and obj.startswith('"https://en.wikipedia.org/wiki/'):
-                        currentWikipediaPage=obj[31:-13]
-                    
-                    # For names, we do not write out anything, just collect their label
-                    if isName:
-                        wroteFacts=True
-                        continue
-                    
-                    # If the object is a name, we have to discard the fact,
-                    # because names are removed from the set of entities
-                    if instanceOfAny(obj,[Prefixes.yagoPersonName]):
-                        continue
-                        
-                    # Write out the fact
-                    # If two successive facts have the same subject and object, this is because of overloading
-                    # In that case, the logs should be written only for one of the facts
-                    if classes is None or instanceOfAny(obj,classes):
-                        out.write(subject, predicate, obj, ". #", startDate, endDate)
-                        wroteFacts=True
-                        if obj==lastObject and not wroteLastObject:
-                            logFile.unWrite()
-                        lastObject=obj
-                        wroteLastObject=True
-                        count+=1
-                    elif isSubClassOfAny(obj,classes):
-                        newObject=createGenericInstance(obj, out)
-                        out.write(subject, predicate, newObject, ". #", startDate, endDate)
-                        if newObject==lastObject and not wroteLastObject:
-                            logFile.unWrite()
-                        lastObject=newObject
-                        wroteLastObject=True
-                        count+=1
-                        wroteFacts=True
-                    else:
-                        if obj!=lastObject or not wroteLastObject:
-                            logFile.writeMetaFact(subject, predicate, obj, Prefixes.ysReason, f'"object is not in {", ".join(str(s) for s in classes)}"')
-                        lastObject=obj
-                        wroteLastObject=False
+                            yagoInstances.pop(entityGraph.mainSubject(), None)
+                        else:    
+                            count+=writeFacts(entityGraph, dates, out, idsFile, logFile)
+                        entityGraph.clear()
+                        dates={}    
+                    entityGraph.add((subject, predicate, obj))
+                    if startDate or endDate:
+                        dates[(subject, predicate, obj)]=(startDate, endDate)
                         
                 # Also flush the ids of the last entity...
-                if wroteFacts:
-                    writeYagoId(idsFile, currentTopic, currentEnglishLabel, currentLabel, currentWikipediaPage, isName)
+                writeId(entityGraph, idsFile, isName)
+                count+=writeFacts(entityGraph, dates, out, idsFile, logFile)
 
     print("  Info: Number of facts:",count)    
     # Write out classes that did not get any instances    

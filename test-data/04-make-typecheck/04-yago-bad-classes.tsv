@@ -59,7 +59,6 @@ schema:ComputerLanguage
 yago:Sport
 schema:SportsEvent
 schema:Festival
-schema:Language
 schema:MedicalCondition
 schema:InfectiousDisease
 schema:Substance
