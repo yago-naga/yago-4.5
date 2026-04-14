@@ -285,7 +285,7 @@ yago:Award a sh:NodeShape ;
 # Religions etc. are intangibles
 yago:BeliefSystem a sh:NodeShape ;
 	rdfs:subClassOf schema:Intangible ;
-    ys:fromClass wd:Q5390013, wd:Q49447 .
+    ys:fromClass wd:Q5390013, wd:Q49447, wd:Q9174 .
 	#; They are classes and cannot have properties
 	#sh:property [
     #    sh:path yago:foundationalText ; 

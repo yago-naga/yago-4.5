@@ -441,7 +441,6 @@ def handleRange(entityFacts: Graph, yagoSchema: YagoSchema, writer) -> None:
         if not yagoProperty:
            continue 
         for obj in list(entityFacts.objectsOf(mainEntity, predicate)):
-            # cleanObject already returns normalized object, no need to normalize again
             cleanObj = cleanObject(mainEntity, obj, yagoProperty, writer)
             if cleanObj is None:
                 # Reason was already written to the writer
