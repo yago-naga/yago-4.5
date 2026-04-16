@@ -1305,10 +1305,17 @@ schema:Person a sh:NodeShape ;
         ys:fromProperty wdt:P1303 ;
         rdfs:comment "Musical instrument played by the Person"@en ;
     ] ;
-
+# Thomas 16/04/2026 add building (many schools are not instances of organization)
     sh:property [
         sh:path schema:alumniOf ;
-        sh:class schema:Organization ;
+        sh:or (
+          [
+		sh:class schema:Organization 
+	  ]
+	  [
+		sh:class yago:Building
+          ]
+	) ;
         ys:fromProperty wdt:P69 ;
         rdfs:comment "An Organization that a Person is an alumnus of (typically an educational institution)"
     ] ;
@@ -1391,9 +1398,17 @@ schema:Person a sh:NodeShape ;
         ys:fromProperty wdt:P20 ;
         rdfs:comment "The place where a Person died"@en ;
     ] ;
+ # Thomas 16/04/2026 add monument (e.g., Pantheon)
     sh:property [
         sh:path yago:burialPlace ;
-        sh:class schema:Place ;
+	sh:or (
+		[
+        	sh:class schema:Place 
+		]
+		[
+		sh:class yago:Monument
+		]
+		) 
         sh:maxCount 1 ;
         ys:fromProperty wdt:P119 ;
         rdfs:comment "The place where a Person is buried"@en ;
@@ -1475,7 +1490,15 @@ schema:Person a sh:NodeShape ;
 		sh:maxCount 1 ;
         ys:fromProperty wdt:P26 ;
         rdfs:comment "The spouse of a Person"@en ;
-    ] .
+    ] ;
+    # Thomas 16/04/2026 add property
+    sh:property [
+        sh:path yago:partner ;
+        sh:class schema:Person ;
+        ys:fromProperty wdt:P451 ;
+        rdfs:comment "The unmarried partner of a Person"@en ;
+    ] ;
+ .
 
 # --------- Professions ---------------
 
