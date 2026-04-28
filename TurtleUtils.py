@@ -281,7 +281,7 @@ def triplesFromTurtleFile(file, message=None, predicates=None):
 ##########################################################################
 
 class Graph(object):
-    """ A graph of triples """
+    """ A graph of triples, potentially with meta facts """
     def __init__(self, hasInverse=True):
         self.index={}
         # Wikidata graphs are often about a main entity
@@ -289,15 +289,16 @@ class Graph(object):
         return
     def clear(self):
         self.index.clear()
-        self.mainSubjectCache=None
+        self.mainSubjectCache=None    
     def add(self, triple):
         (subject, predicate, obj) = triple
         if subject not in self.index:
             self.index[subject]={}
         m=self.index[subject]
         if predicate not in m:
-            m[predicate]=set()
-        m[predicate].add(obj)
+            m[predicate]={}
+        if obj not in m[predicate]:
+            m[predicate][obj]={}
     def remove(self, triple):
         (subject, predicate, obj) = triple
         if subject not in self.index:
@@ -305,11 +306,37 @@ class Graph(object):
         m=self.index[subject]
         if predicate not in m:
             return
-        m[predicate].discard(obj)
+        m[predicate].pop(obj, None)
         if len(m[predicate])==0:
             self.index[subject].pop(predicate)
             if len(self.index[subject])==0:
                 self.index.pop(subject)
+    def getMetaFacts(self, triple):
+        (subject, predicate, obj) = triple
+        if subject not in self.index:
+            return None
+        if predicate not in self.index[subject]:
+            return None
+        if obj not in self.index[subject][predicate]:
+            return None
+        return self.index[subject][predicate][obj]
+    def addMetaFact(self, triple, key, value):
+        self.add(triple)
+        self.index[triple[0]][triple[1]][triple[2]][key]=value
+    def addMetaFacts(self, triple, keyValueMap):
+        self.add(triple)
+        self.index[triple[0]][triple[1]][triple[2]].update(keyValueMap)
+    def removeMetaFact(self, triple, key):
+        self.index[triple[0]][triple[1]][triple[2]].pop(key, None)
+    def replaceObject(self, triple, newObject):
+        (subject, predicate, oldObj) = triple
+        if subject not in self.index:
+            self.index[subject]={}
+        m=self.index[subject]
+        if predicate not in m:
+            m[predicate]={}
+        oldMap = m[predicate].pop(oldObj, {})        
+        m[predicate][newObject]=oldMap
     def __contains__(self, triple):
         (subject, predicate, obj) = triple
         if subject not in self.index:
@@ -413,7 +440,7 @@ class Graph(object):
         return None
     def __len__(self):
         return len(self.index)
-
+        
 # Regex for literals
 literalRegex=re.compile('"([^"]*)"(@([a-z-]+))?(\\^\\^(.*))?')
 

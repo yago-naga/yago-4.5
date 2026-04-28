@@ -95,7 +95,7 @@ def minValue(val, values):
 
 def isDataType(typ):
     """ TRUE for types that are datatypes (rdf:langstring etc.)"""
-    return typ.startswith("xsd:") or typ.startswith("rdf:") or typ.startswith(Prefixes.yagoUnitOfMeasurement)
+    return typ.startswith("xsd:") or typ.startswith("rdf:") or typ.startswith(Prefixes.yagoUnitOfMeasurement) or typ.startswith("geo:")
     
 class YagoProperty(YagoObject):
     """ Represents a YAGO property with its attributes"""
@@ -138,6 +138,10 @@ class YagoProperty(YagoObject):
     def schemaIdentifier(self):
         """ Returns a blank node name for this property """
         return "ys:"+stripPrefix(self.identifier)+"_property"
+    
+    def allObjectsAreLiterals(self):
+        """ TRUE if all object types are literal types"""
+        return all(isDataType(t) for t in self.objectTypes)
         
     def writeTo(self, out):
         """ Pretty prints property to output stream """
@@ -200,7 +204,7 @@ class YagoProperty(YagoObject):
         if len(patterns)>1:
             warning("Property", self,"has more than one pattern:",patterns)
         if len(patterns)>0:
-            compileMe=TurtleUtils.splitLiteral(patterns.pop())[0]
+            compileMe=TurtleUtils.splitLiteral(getFirst(patterns))[0]
             if self.pattern and self.pattern!=compileMe:
                warning("Property",self,"has different patterns:",self.pattern,"and",compileMe)
             self.pattern=compileMe.replace("\\\\","\\")
@@ -374,6 +378,6 @@ class YagoSchema(object):
                     print("    Warning: Undeclared superclass",c2,"of",c)
             for p in c.properties:
                 for o in p.objectTypes:
-                    if not o.startswith("xsd:") and o!=Prefixes.rdfLangString and o!=Prefixes.geoPoint and o not in self.classes:
+                    if not o.startswith("xsd:") and o!=Prefixes.rdfLangString and o!=Prefixes.rdfsClass and o!=Prefixes.geoPoint and o not in self.classes:
                         print("    Warning: Undeclared range",o,"of property",p,"in class",c)                
                 

@@ -82,6 +82,13 @@ schema:Intangible  owl:disjointWith
 schema:Thing a sh:NodeShape ;
     # ys:fromClass wd:Q35120 ; No mapping!
 	sh:property [
+        sh:path rdf:type ;
+		sh:minCount 1 ;
+        sh:class rdfs:Class ; 
+        ys:fromProperty wdt:P31, wdt:P106, wdt:P136, wdt:P39; # From type, occupation, genre, position
+        rdfs:comment "The class that a Thing belongs to"@en ;
+    ] ;		
+	sh:property [
         sh:path yago:siteLinks ;
 		sh:minInclusive 1 ;
 		sh:maxCount 1 ;
