@@ -333,7 +333,7 @@ def normalizeDate(literal) -> Optional[str]:
 
 DATE_REGEX=r'[+-]?[0-9]{1,4}-[0-9]{1,2}-[0-9]{1,2}(T[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}(\\.[0-9]+)?(Z|[+-][0-9]{2}:[0-9]{2})?)?'
 
-INT_REGEX=r"\+?(-?[0-9]+)(\.[0-9]+)?"
+NUMBER_REGEX=r"\+?(-?[0-9]+)(\.[0-9]+)?"
 
 def cleanLiteralObject(obj, datatype) -> Optional[str]:
     """ Returns a version of obj that corresponds to the datatype -- or None"""
@@ -361,10 +361,13 @@ def cleanLiteralObject(obj, datatype) -> Optional[str]:
         return '"' + literalValue.replace("’","'")+'"' # For entities like "Monty Python's Life of Brian"
     if datatype == Prefixes.rdfLangString:
         return obj.replace("’","'") if literalDataType is None and lang is not None else None
-    if datatype == Prefixes.xsdDecimal and literalDataType == Prefixes.xsdInteger:
-        return '"'+literalValue+'"^^'+Prefixes.xsdDecimal
+    if datatype == Prefixes.xsdDecimal:
+        match=re.fullmatch(NUMBER_REGEX,literalValue)
+        if match:
+            return f'"{literalValue}"^^{Prefixes.xsdDecimal}'
+        return None
     if datatype == Prefixes.xsdInteger:
-        match=re.fullmatch(INT_REGEX,literalValue)
+        match=re.fullmatch(NUMBER_REGEX,literalValue)
         if match:
             return f'"{match.group(1)}"^^{Prefixes.xsdInteger}'
         return None
@@ -408,8 +411,6 @@ def cleanObject(subject, obj, yagoProperty, writer, yagoTaxonomyUp) -> Optional[
         cleanedObj = cleanLiteralObject(obj, objectType)
         if cleanedObj:
             cleanedObj = normalizeDate(normalizeString(cleanedObj))
-            if cleanedObj!=obj:
-                writer.writeMetaFact(subject, yagoProperty.identifier, obj, Prefixes.ysReason, cleanedObj)
             return cleanedObj
 
     writer.writeMetaFact(subject, yagoProperty.identifier, obj, Prefixes.ysReason, '"uncastable literal"')
