@@ -314,11 +314,11 @@ class Graph(object):
     def getMetaFacts(self, triple):
         (subject, predicate, obj) = triple
         if subject not in self.index:
-            return None
+            return {}
         if predicate not in self.index[subject]:
-            return None
+            return {}
         if obj not in self.index[subject][predicate]:
-            return None
+            return {}
         return self.index[subject][predicate][obj]
     def addMetaFact(self, triple, key, value):
         self.add(triple)
