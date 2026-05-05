@@ -42,7 +42,13 @@ from collections import defaultdict
 
 TEST=len(sys.argv)>1 and sys.argv[1]=="--test"
 FOLDER="test-data/04-make-typecheck/" if TEST else "yago-data/"
-        
+     
+def getFirst(iterable: Iterator[Any], default=None) -> Optional[Any]:
+    """ Returns the first element of an iterable or None"""
+    if iterable is None:
+        return None
+    return next(iter(iterable), default)
+     
 ##########################################################################
 #             YAGO ids
 ##########################################################################
@@ -206,7 +212,7 @@ def isSubClassOfAny(c, superclasses):
     """ True if this class is a subclass of any of the given superclasses"""
     # Can't use default argument as this is instantiated only once
     return isSubClassOfAny_(c, superclasses, set()) 
-    
+
 def isInstanceOfAny(obj, classes):
     """ True if this instance is an instance of any of the given classes"""
     # URIs are instances of anyURI and Thing (for external entities)
@@ -225,6 +231,16 @@ def isInstanceOfAny(obj, classes):
         else:
             return False
     return any(isSubClassOfAny(c, classes) for c in yagoInstances[obj])
+
+def schemaClass(e):
+    """ Returns a schema class of which e is an instance """
+    if e.startswith('"'):
+        literalValue, _, _, datatype = TurtleUtils.splitLiteral(e)
+        e = datatype
+    c = getFirst(yagoInstances[e])
+    while c and not c.startswith("schema:") and not c.startswith("yago:"):
+        c = getFirst(yagoTaxonomyUp[c])
+    return c
     
 def removeClass(c):
     """ Removes this class and all superclasses from the YAGO taxonomy """    
@@ -243,7 +259,7 @@ yagoSchema = None
 #             Main
 ##########################################################################
 
-def writeFacts(entityGraph, dates, out, idsFile, logFile):
+def writeFacts(entityGraph, out, idsFile, logFile):
     """ Type checks the facts of the entity and writes them out """
     subject=entityGraph.mainSubject()
             
@@ -266,7 +282,8 @@ def writeFacts(entityGraph, dates, out, idsFile, logFile):
             # because names are removed from the set of entities
             if isInstanceOfAny(obj,[Prefixes.yagoPersonName]):
                 continue
-            startDate, endDate = dates.get((subject, predicate, obj),("", ""))
+            startDate = entityGraph.getMetaFacts((subject, predicate, obj)).get("startDate","")
+            endDate = entityGraph.getMetaFacts((subject, predicate, obj)).get("endDate","")
             if predicate==Prefixes.rdfType or not targetClasses or isInstanceOfAny(obj,targetClasses):
                 out.write(subject, predicate, obj, ". #", startDate, endDate)
                 count+=1
@@ -279,7 +296,7 @@ def writeFacts(entityGraph, dates, out, idsFile, logFile):
             if objects2freq[obj]==1:
                 for p in entityGraph.predicatesOf(subject):
                     if obj in entityGraph.objectsOf(subject, p):
-                        logFile.writeMetaFact(subject, p, obj, Prefixes.ysReason, f'"object is not in range"')
+                        logFile.writeMetaFact(subject, p, obj, Prefixes.ysReason, f'"object is {schemaClass(obj)} and not {' or '.join(str(s) for s in targetClasses)}"')
             objects2freq[obj]-=1
     return count
 
@@ -308,7 +325,6 @@ with TsvUtils.Timer("Step 04: Type-checking YAGO"):
         with TsvUtils.TsvFileWriter(FOLDER+"04-yago-ids.tsv") as idsFile:
             with TsvUtils.TsvFileWriter(FOLDER+"04-make-type-check.log") as logFile:
                 entityGraph=Graph()                
-                dates={}
                 
                 for split in TsvUtils.tsvTuples(FOLDER+"03-yago-facts-to-type-check.tsv", "  Type-checking facts"):
                     if len(split)<3:
@@ -327,16 +343,17 @@ with TsvUtils.Timer("Step 04: Type-checking YAGO"):
                         if isName:
                             yagoInstances.pop(entityGraph.mainSubject(), None)
                         else:    
-                            count+=writeFacts(entityGraph, dates, out, idsFile, logFile)
+                            count+=writeFacts(entityGraph, out, idsFile, logFile)
                         entityGraph.clear()
-                        dates={}    
                     entityGraph.add((subject, predicate, obj))
-                    if startDate or endDate:
-                        dates[(subject, predicate, obj)]=(startDate, endDate)
+                    if startDate:
+                       entityGraph.addMetaFact((subject, predicate, obj),"startDate",startDate)
+                    if endDate:
+                       entityGraph.addMetaFact((subject, predicate, obj),"endDate",endDate)
                         
                 # Also flush the ids of the last entity...
                 writeId(entityGraph, idsFile, isName)
-                count+=writeFacts(entityGraph, dates, out, idsFile, logFile)
+                count+=writeFacts(entityGraph, out, idsFile, logFile)
 
     print("  Info: Number of facts:",count)    
     # Write out classes that did not get any instances    
