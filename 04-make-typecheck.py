@@ -43,7 +43,7 @@ from collections import defaultdict
 TEST=len(sys.argv)>1 and sys.argv[1]=="--test"
 FOLDER="test-data/04-make-typecheck/" if TEST else "yago-data/"
      
-def getFirst(iterable: Iterator[Any], default=None) -> Optional[Any]:
+def getFirst(iterable, default=None):
     """ Returns the first element of an iterable or None"""
     if iterable is None:
         return None
