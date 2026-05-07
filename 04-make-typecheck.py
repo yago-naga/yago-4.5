@@ -237,9 +237,9 @@ def schemaClass(e):
     if e.startswith('"'):
         literalValue, _, _, datatype = TurtleUtils.splitLiteral(e)
         e = datatype
-    c = getFirst(yagoInstances[e])
-    while c and not c.startswith("schema:") and not c.startswith("yago:"):
-        c = getFirst(yagoTaxonomyUp[c])
+    c = getFirst(yagoInstances.get(e, [None]))
+    while c and not c.startswith("schema:") and not c.startswith("yago:") and not c.startswith("rdf:") and not c.startswith("rdfs:") and not c.startswith("xsd:"):
+        c = getFirst(yagoTaxonomyUp.get(c, [None]))
     return c
     
 def removeClass(c):
