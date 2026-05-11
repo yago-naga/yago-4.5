@@ -2272,34 +2272,34 @@ schema:Taxon a sh:NodeShape;
 
 
 # Thomas 27/03/26
-#schema:MedicalEntity a sh:NodeShape;
-#	rdfs:subClassOf schema:Intangible ;
-#	rdfs:label "Medical entity"@en ;
-#	rdfs:comment "Any entity related to health (disease, treatment, examinations, etc.)"@en .
+schema:MedicalEntity a sh:NodeShape;
+	rdfs:subClassOf schema:Intangible ;
+	rdfs:label "Medical entity"@en ;
+	rdfs:comment "Any entity related to health (disease, treatment, examinations, etc.)"@en .
 
 # Thomas 01/04/26
-#schema:MedicalSpecialty a sh:NodeShape;
-#	rdfs:subClassOf schema:MedicalEntity ;
-#	rdfs:label "Medical Speciality"@en ;
-#	rdfs:comment "Branch of medicine concerning a specific group of diseases or population"@en ;
-#	ys:fromClass wd:Q44597158 .
+schema:MedicalSpecialty a sh:NodeShape;
+	rdfs:subClassOf schema:MedicalEntity ;
+	rdfs:label "Medical Speciality"@en ;
+	rdfs:comment "Branch of medicine concerning a specific group of diseases or population"@en ;
+	ys:fromClass wd:Q44597158 .
 
 # Thomas 01/04/26
-#schema:MedicalProcedure a sh:NodeShape;
-#	rdfs:subClassOf schema:MedicalEntity ;
-#	rdfs:label "Medical Procedure"@en ;
-#	rdfs:comment "Medical procedure for diagnosis or treatment"@en ;
-#	sh:property [
-#       sh:path yago:medicalSpecialty ;
-#        sh:class schema:MedicalSpecialty ;
-#        ys:fromProperty wdt:P1995 ;
-#        rdfs:comment "Medical speciality of the entity"@en ;
-#    ] ;   
-#	ys:fromClass wd:Q179661, wd:Q5690807 .
+schema:MedicalProcedure a sh:NodeShape;
+	rdfs:subClassOf schema:MedicalEntity ;
+	rdfs:label "Medical Procedure"@en ;
+	rdfs:comment "Medical procedure for diagnosis or treatment"@en ;
+	sh:property [
+       sh:path yago:medicalSpecialty ;
+        sh:class schema:MedicalSpecialty ;
+        ys:fromProperty wdt:P1995 ;
+        rdfs:comment "Medical speciality of the entity"@en ;
+    ] ;   
+	ys:fromClass wd:Q179661, wd:Q5690807 .
 
 # Thomas 01/04/26 # Medical conditions are classes
-#schema:MedicalCondition a sh:NodeShape;
-#	rdfs:subClassOf schema:MedicalEntity ;
+schema:MedicalCondition a sh:NodeShape;
+	rdfs:subClassOf schema:MedicalEntity ;
 	# Too few facts
 	#sh:property [
     #    sh:path yago:treatment ;
@@ -2311,12 +2311,12 @@ schema:Taxon a sh:NodeShape;
     #    ys:fromProperty wdt:P2176, wdt:P924 ;
     #    rdfs:comment "Drug or therapy used for treatment"@en ;
     #] ;   
-#	sh:property [
-#        sh:path yago:medicalSpecialty ;
-#        sh:class schema:MedicalSpecialty ;
-#        ys:fromProperty wdt:P1995 ;
-#        rdfs:comment "Medical speciality of the entity"@en ;
-#    ] ;   
+	sh:property [
+        sh:path yago:medicalSpecialty ;
+        sh:class schema:MedicalSpecialty ;
+        ys:fromProperty wdt:P1995 ;
+        rdfs:comment "Medical speciality of the entity"@en ;
+    ] ;   
 	# Too few facts
 	#sh:property [
     #    sh:path yago:symptom ;
@@ -2324,16 +2324,16 @@ schema:Taxon a sh:NodeShape;
     #    ys:fromProperty wdt:P780 ;
     #    rdfs:comment "Symptoms or signs of a medical condition"@en ;
     #] ;  
-#	sh:property [
-#        sh:path yago:hasCause ;
-#        ys:fromProperty wdt:P828 ;
-#        sh:or (
-#            [ sh:class schema:MedicalCondition ]
-#            [ sh:class schema:BioChemEntity ]
-#            [ sh:class schema:Event ]
-#        ) ;
-#        rdfs:comment "Cause of the medical condition"@en ;
-#    ] ;
+	sh:property [
+        sh:path yago:hasCause ;
+        ys:fromProperty wdt:P828 ;
+        sh:or (
+            [ sh:class schema:MedicalCondition ]
+            [ sh:class schema:BioChemEntity ]
+            [ sh:class schema:Event ]
+        ) ;
+        rdfs:comment "Cause of the medical condition"@en ;
+    ] ;
 	# Too few facts
 	#sh:property [
     #    sh:path yago:examination ;
@@ -2341,12 +2341,12 @@ schema:Taxon a sh:NodeShape;
     #    sh:class schema:MedicalProcedure ; 
     #    rdfs:comment "Medical examination to diagnose the medical condition"@en ;
     #] ;
-#	sh:property [
-#        sh:path yago:afflicts ;
-#        ys:fromProperty wdt:P689 ;
-#        sh:class schema:Taxon ;
-#        rdfs:comment "Type of organism which a condition or disease afflicts"@en ;
-#    ] ;
+	sh:property [
+        sh:path yago:afflicts ;
+        ys:fromProperty wdt:P689 ;
+        sh:class schema:Taxon ;
+        rdfs:comment "Type of organism which a condition or disease afflicts"@en ;
+    ] ;
 	# Too few facts
 	#sh:property [
     #    sh:path yago:riskFactor ;
@@ -2354,9 +2354,9 @@ schema:Taxon a sh:NodeShape;
     #    sh:class schema:Thing ;
     #    rdfs:comment "Risk factor for this medical condition"@en ;
     #] ;
-#	rdfs:label "Medical Condition"@en ;
-#	rdfs:comment "Any condition that affects the normal functioning of a person or an animal"@en ;
-#	ys:fromClass wd:Q7189713.
+	rdfs:label "Medical Condition"@en ;
+	rdfs:comment "Any condition that affects the normal functioning of a person or an animal"@en ;
+	ys:fromClass wd:Q7189713.
 
 
 ################################################################
