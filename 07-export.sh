@@ -1,7 +1,10 @@
 # Exports YAGO into a ZIP file and to the Web server
-# CC-BY 2023-2025 Fabian M. Suchanek
+# CC-BY 2023-2026 Fabian M. Suchanek
+# run with nohup
 
 cd yago-data
+
+######################## Tiny YAGO #############################
 
 echo "Creating tiny YAGO..."
 date +"  Current time: %F %T"
@@ -11,6 +14,37 @@ grep -P 'yago:A[^\t]+\t(rdf:type\t|[^\t]+\t("|yago:A|schema:))' 05-yago-final-wi
 rm yago-tiny.zip
 zip yago-tiny.zip yago-tiny.ttl
 echo "done"
+
+######################## YAGO Entity List #############################
+
+# This entity list is used for the LELA disambiguation system
+
+echo "Generating YAGO entity list..."
+  sed -n 's/^yago:\([^\t]\+\)\trdfs:comment\t"\([^"]\+\)"@en.*/{"id": "yago:\1", "title": "\1", "description": "\2"}/p' 05-yago-final-wikipedia.tsv > yago-entities.jsonl
+  zip -m yago-entities.jsonl.zip yago-entities.jsonl
+echo "done"
+
+######################## Export to Qlever #############################
+
+# Data files (renamed from .tsv to .ttl for QLever indexing)
+scp 01-yago-final-schema.ttl yago@yago.r2.enst.fr:/data/qlever/yago-schema.ttl
+scp 05-yago-final-taxonomy.tsv yago@yago.r2.enst.fr:/data/qlever/yago-taxonomy.ttl
+scp 05-yago-final-wikipedia.tsv yago@yago.r2.enst.fr:/data/qlever/yago-wikipedia.ttl
+scp 05-yago-final-wikipedia-labels.tsv yago@yago.r2.enst.fr:/data/qlever/yago-wikipedia-labels.ttl
+scp 05-yago-final-beyond-wikipedia.tsv yago@yago.r2.enst.fr:/data/qlever/yago-beyond-wikipedia.ttl
+scp 05-yago-final-beyond-wikipedia-labels.tsv yago@yago.r2.enst.fr:/data/qlever/yago-beyond-wikipedia-labels.ttl
+
+# Meta file - NOT renamed to .ttl (uses RDF-star syntax that QLever cannot parse)
+scp 05-yago-final-meta.tsv yago@yago.r2.enst.fr:/data/qlever/yago-meta.tsv
+
+# Log and mapping files (for excluded facts database)
+scp 02-make-taxonomy.log yago@yago.r2.enst.fr:/data/qlever/
+scp 03-yago-facts-to-type-check.log yago@yago.r2.enst.fr:/data/qlever/
+scp 04-make-type-check.log yago@yago.r2.enst.fr:/data/qlever/
+scp 04-yago-ids.tsv yago@yago.r2.enst.fr:/data/qlever/
+
+
+######################## Export to Web server #############################
 
 declare -A yagoFiles=( 
     ["schema"]="01-yago-final-schema.ttl"
@@ -34,11 +68,6 @@ do
     mv yago-$file.ttl "${yagoFiles[$file]}"
     echo "  done"
 done
-echo "done"
-
-echo "Generating YAGO entity list..."
-  sed -n 's/^yago:\([^\t]\+\)\trdfs:comment\t"\([^"]\+\)"@en.*/{"id": "yago:\1", "title": "\1", "description": "\2"}/p' 05-yago-final-wikipedia.tsv > yago-entities.jsonl
-  zip -m yago-entities.jsonl.zip yago-entities.jsonl
 echo "done"
   
 echo "Copying individual YAGO files to Web server..."
