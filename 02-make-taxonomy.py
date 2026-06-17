@@ -91,7 +91,7 @@ class WikidataVisitor:
 #           Creating the YAGO taxonomy
 ###########################################################################
 
-# Classes that will not be added to YAGO, and whose children won't be added either
+# Bad Classes that will not be added to YAGO, and whose children won't be added either
 badClasses = {
     "wd:Q17379835",   # Wikimedia page outside the main knowledge tree
     "wd:Q4167836",    # Wikimedia category
@@ -102,6 +102,14 @@ badClasses = {
     "wd:Q15474042",   # same
     "wd:Q111279923",  # same 
     "wd:Q38926",      # news
+    "wd:Q3695082",    # sign
+    "wd:Q16889133",   # class
+    "wd:Q19478619",   # metaclass
+    "wd:Q11953984",   # linguistic unit
+    "wd:Q151885",     # concept
+    "wd:Q13196193",   # part
+    "wd:Q1310239",    # dito
+    "wd:Q216353",     # title
     "wd:Q4167410",    # disambiguation page
     "wd:Q13406463",   # list article
     "wd:Q188889",     # Code
@@ -135,7 +143,11 @@ badClasses = {
     "wd:Q4835091",    # territory
     "wd:Q4026292",    # Action
     "wd:Q67518978",   # Occurrent
+    "wd:Q1190554",    # Occurence
+    "wd:Q2897903",    # Goods and services (issues with 'service')
+    "wd:Q3695082",    # Sign
     "wd:Q2545446",    # Graphemes
+    "wd:Q937228",     # Property
     "wd:Q32483",      # Characters
     "wd:Q3241972",    # Characters
     "wd:Q29654788",   # Unicode characters
@@ -148,16 +160,30 @@ badClasses = {
     "wd:Q192581",     # Job -> causes problem because instances of "lawyer" become instances of "job" and thus of "economic activity"
     "wd:Q12737077",   # Occupation (dito)
     "wd:Q28640",      # Profession (dito)
-    "wd:Q4164871"    # Role (dito)
+    "wd:Q828803",     # Job title (dito)
+    "wd:Q4164871",    # Role (dito)
+    "wd:Q27318"       # Test
 }
 
+# These should come first, to make sure we remove crap
+CLASS_PRIORITIES=[Prefixes.schemaPerson, Prefixes.yagoAward, Prefixes.schemaBioChemEntity, Prefixes.schemaMedicalEntity, Prefixes.schemaOrganization, Prefixes.schemaCreativeWork, Prefixes.schemaEvent]
+
+def getYagoClasses(yagoSchema):
+    """ Returns the classes of YAGO in the right order"""
+    classes=list(yagoSchema.classes.values())
+    for c in reversed(CLASS_PRIORITIES):
+        if c in classes:
+            classes.remove(c)  
+        classes.append(yagoSchema.classes[c])
+    return reversed(classes)
+    
 def disjointClasses(class_, taxonomyUp, yagoSchema):
     """Yields the set of classes that are disjoint with class_"""
     if class_ in yagoSchema.classes:
         yield from yagoSchema.classes[class_].disjointWith
     for superClass in taxonomyUp.get(class_, []):
         yield from disjointClasses(superClass, taxonomyUp, yagoSchema)
-    
+        
 def ancestors(class_, taxonomyUp):
     """ Yields the ancestors of class_ (including class_ itself)"""
     yield class_
@@ -195,6 +221,7 @@ def addSubClass(superClass, subClass, yagoSchema, yagoTaxonomyUp, wikidataTaxono
         # The current path is shorter than the one that exists -> abandon this path
         if superClass in subAncestors:
             stats['shortcuts'] += 1
+            logWriter.writeMetaFact(subClass, Prefixes.rdfsSubclassOf, superClass, Prefixes.ysReason, f'"is shortcut"')            
             return
         
         # The current path is longer than the one that exists -> abandon the other one
@@ -202,17 +229,12 @@ def addSubClass(superClass, subClass, yagoSchema, yagoTaxonomyUp, wikidataTaxono
         for existingSuperClass in list(yagoTaxonomyUp[subClass]):
             if existingSuperClass in superAncestors:
                 stats['shortcuts'] += 1
+                logWriter.writeMetaFact(subClass, Prefixes.rdfsSubclassOf, existingSuperClass, Prefixes.ysReason, f'"is shortcut"')            
                 yagoTaxonomyUp[subClass].discard(existingSuperClass)
         
-        # Otherwise we have true multiple inheritance
-        
-        # If the superAncestors contain "Award",
-        # give preference to that superclass
-        if Prefixes.yagoAward in superAncestors:
-            logWriter.writeMetaFact(subClass, Prefixes.rdfsSubclassOf, getFirst(yagoTaxonomyUp[subClass]), Prefixes.ysReason, f'"Subclass is already a {superClass}, which is a subclass of award"')
-            yagoTaxonomyUp[subClass].clear()            
-        else:
-            # Make a set of all classes with which the current class is disjoint
+        # If you're still there, we have true multiple inheritance
+        if subClass in yagoTaxonomyUp:
+            # Make a set of all classes with which the current class is disjoint              
             subDisjointSet = set(a.identifier for a in disjointClasses(subClass, yagoTaxonomyUp, yagoSchema))
             # Check if the new superClass is disjoint with any in subDisjointSet
             for a in superAncestors:
@@ -220,7 +242,7 @@ def addSubClass(superClass, subClass, yagoSchema, yagoTaxonomyUp, wikidataTaxono
                     stats['disjoint'] += 1
                     logWriter.writeMetaFact(subClass, Prefixes.rdfsSubclassOf, superClass, Prefixes.ysReason, f'"Subclass ({", ".join(str(s) for s in ancestors(subClass, yagoTaxonomyUp) if not s.startswith("wd:"))}) is disjoint from ancestor {a} of superclass"')
                     return
-    
+       
     yagoTaxonomyUp[subClass].add(superClass)
     # Sort the classes to have a deterministic algorithm
     for subSubClass in sorted(wikidataTaxonomyDown.get(subClass, [])):    
@@ -261,7 +283,7 @@ def main():
             stats = {'loops': 0, 'shortcuts': 0, 'disjoint': 0}
             
             # Now we merge the Wikidata taxonomy into the YAGO taxonomy
-            for yagoClass in yagoSchema.classes.values():
+            for yagoClass in getYagoClasses(yagoSchema):
                 for wikidataClass in yagoClass.fromClasses:            
                     for wikidataSubclass in wikidataTaxonomyDown.get(wikidataClass, []):
                         addSubClass(yagoClass.identifier, wikidataSubclass, yagoSchema, yagoTaxonomyUp, wikidataTaxonomyDown, stats, logWriter)

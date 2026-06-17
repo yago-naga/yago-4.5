@@ -243,8 +243,6 @@ def cleanAndReturnTypes(entityFacts, yagoSchema, yagoTaxonomyUp, writer):
         directType=directTypes[i]
         # Remove type if I am a shortcut
         if directType in myTypesAndSuperTypes:
-            if entityFacts.getMetaFacts((mainEntity, Prefixes.rdfType, directType)).get("declaredType",False):
-                writer.writeMetaFact(mainEntity, Prefixes.rdfType, directType, Prefixes.ysReason, f'"is shortcut"')
             entityFacts.remove((mainEntity, Prefixes.rdfType, directType))
             continue
         # Remove disjoint types
@@ -412,8 +410,8 @@ def cleanObject(subject, obj, yagoProperty, writer, yagoTaxonomyUp) -> Optional[
         if cleanedObj:
             cleanedObj = normalizeDate(normalizeString(cleanedObj))
             return cleanedObj
-
-    writer.writeMetaFact(subject, yagoProperty.identifier, obj, Prefixes.ysReason, '"uncastable literal"')
+    if subject!=obj: # Avoid lots of messages of the form "Q42 schema:url Q42"
+        writer.writeMetaFact(subject, yagoProperty.identifier, obj, Prefixes.ysReason, '"uncastable literal"')
     return None
 
 def handleRange(entityFacts, yagoSchema, writer, yagoTaxonomyUp):
@@ -525,7 +523,7 @@ def guessLabelIfNecessary(entityFacts, writer):
     if labelName:
         labelName = parse.unquote(labelName)
         labelName = re.sub("[\"'\u0000-\u001f]", "", labelName)
-        if len(labelName) > 3:
+        if len(labelName) > 2: # Get the class "dog" in...
             debug("Found label for", mainEntity, ": ", labelName)
             entityFacts.add((mainEntity, Prefixes.rdfsLabel, '"' + labelName + '"@' + labelLanguage))
             return True

@@ -129,6 +129,8 @@ schemaStartDate = "schema:startDate"
 
 schemaAbout = "schema:about"
 
+schemaOrganization = "schema:Organization"
+
 schemaUrl = "schema:url"
 
 schemaThing = "schema:Thing"
@@ -174,6 +176,18 @@ yagoUnitOfMeasurement="yago:UnitOfMeasurement"
 yagoUnit="yago:UnitOf"
 
 yagoCurrency="yago:currency"
+
+schemaPerson = "schema:Person"
+
+yagoAward = "yago:Award"
+
+schemaEvent = "schema:Event"
+
+schemaCreativeWork="schema:CreativeWork"
+
+schemaBioChemEntity = "schema:BioChemEntity"
+
+schemaMedicalEntity= "schema:MedicalEntity"
 
 yagoPersonName="yago:PersonName"
 

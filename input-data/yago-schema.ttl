@@ -36,8 +36,8 @@ ys:
 
 # Disjointness constraints
 schema:CreativeWork a rdfs:Class .
-schema:Event owl:disjointWith 
-    schema:CreativeWork.
+schema:Event 
+	owl:disjointWith schema:CreativeWork.
 schema:Organization owl:disjointWith 
     schema:CreativeWork,
     schema:Event.
@@ -51,7 +51,7 @@ schema:Person owl:disjointWith
     schema:Taxon,
     schema:Organization.
 schema:Place owl:disjointWith 
-    schema:CreativeWork, 
+    # schema:CreativeWork, # Fabian: Many places have been created by humans, in particular monuments
     schema:Event,
     schema:Person,
     schema:Taxon. 
@@ -59,10 +59,10 @@ schema:Product owl:disjointWith
     schema:Event,
     schema:Organization,
     schema:Taxon,
-    schema:Person,
-    schema:Place.	
+    schema:Person.
+    # schema:Place.	# Fabian 2026-06-17: Greenhouses, rocket launchers, etc.
 schema:BioChemEntity owl:disjointWith
-    schema:CreativeWork,
+    # schema:CreativeWork, # Fabian: some medical entities are human-made. So is food.
     schema:Event,
     schema:Organization,
     schema:Taxon,
@@ -778,8 +778,8 @@ yago:FictionalEntity a sh:NodeShape ;
 ################################################################
 
 schema:Event a sh:NodeShape ;
-    # Merge "occurrence" and "event", also to avoid having "event" twice in YAGO
-    ys:fromClass wd:Q1190554, wd:Q1656682 ;
+    # Remove "occurrence", is a bad class
+    ys:fromClass wd:Q1656682 ;
 	rdfs:subClassOf schema:Thing ;
     sh:property [
         sh:path schema:about ;
@@ -1190,7 +1190,7 @@ schema:MusicGroup a sh:NodeShape ;
 
 schema:Person a sh:NodeShape ;
     rdfs:subClassOf schema:Thing ;
-    ys:fromClass wd:Q5, wd:Q215627 ;
+    ys:fromClass wd:Q5, wd:Q215627, wd:Q212238 ; # Fabian: adding "civil servant" here to fix a bug in Wikidata that makes civil servants organizations
 	sh:property [   # Fabian: Vivaldi was a student as well 2025-12-09 :-)
     	sh:path yago:studentOf ;
     	sh:class schema:Person ;
@@ -1480,8 +1480,7 @@ schema:Person a sh:NodeShape ;
     sh:property [
         sh:path schema:spouse ;
         sh:class schema:Person ;
-		sh:maxCount 1 ;
-        ys:fromProperty wdt:P26 ;
+		ys:fromProperty wdt:P26 ;
         rdfs:comment "The spouse of a Person"@en ;
     ] ;
     # Thomas 16/04/2026 add property
@@ -2152,6 +2151,14 @@ schema:Product a sh:NodeShape ;
     ] ;	
 	
     sh:property [
+        sh:path schema:logo ;
+        sh:datatype xsd:anyURI ;
+		sh:maxCount 1 ;
+        ys:fromProperty wdt:P154 ;
+        rdfs:comment "The logo of an Organization"@en ;
+    ] ;
+
+    sh:property [
         sh:path schema:award ;
         sh:class yago:Award ;
         ys:fromProperty wdt:P166 ;
@@ -2295,7 +2302,7 @@ schema:MedicalProcedure a sh:NodeShape;
         ys:fromProperty wdt:P1995 ;
         rdfs:comment "Medical speciality of the entity"@en ;
     ] ;   
-	ys:fromClass wd:Q179661, wd:Q5690807 .
+	ys:fromClass wd:Q179661, wd:Q5690807, wd:Q796194 .
 
 # Thomas 01/04/26 # Medical conditions are classes
 schema:MedicalCondition a sh:NodeShape;
@@ -2356,7 +2363,7 @@ schema:MedicalCondition a sh:NodeShape;
     #] ;
 	rdfs:label "Medical Condition"@en ;
 	rdfs:comment "Any condition that affects the normal functioning of a person or an animal"@en ;
-	ys:fromClass wd:Q7189713.
+	ys:fromClass wd:Q7189713, wd:Q1483951.
 
 
 ################################################################
