@@ -105,14 +105,17 @@ def translatePropertiesAndClasses(entityFacts, yagoSchema, yagoTaxonomyUp):
         # One Wikidata property can map to several YAGO properties
         predicateList=[p.identifier for p in yagoSchema.wikidataProperties[predicate]] if predicate in yagoSchema.wikidataProperties else [predicate]
         for p in predicateList:
+            if p==Prefixes.rdfType:
+                # Remove any types that do not appear in the taxonomy
+                if not obj in yagoTaxonomyUp:
+                    continue
+                # We need this for logging purposes
+                newGraph.addMetaFact((subject, p, obj), "declaredType", True)
             newGraph.add((subject, p, obj))
             if startDate:
                 newGraph.addMetaFact((subject, p, obj), "startDate", startDate)
             if endDate:
                 newGraph.addMetaFact((subject, p, obj), "endDate", endDate)
-            # We need this for logging purposes
-            if predicate==Prefixes.wikidataType:
-                newGraph.addMetaFact((subject, p, obj), "declaredType", True)
     mainEntity=newGraph.mainSubject()
 
     # If I am a class, say so
