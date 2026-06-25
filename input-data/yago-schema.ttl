@@ -271,6 +271,13 @@ rdf:Property a sh:NodeShape ;
 schema:Intangible a rdfs:Class, sh:NodeShape;
 	rdfs:subClassOf schema:Thing .
 
+#Margherita 25/06/2026 added clas
+yago:AcademicDiscipline a sh:NodeShape ;
+    rdfs:subClassOf schema:Thing ;
+    rdfs:label "Academic discipline"@en ;
+    rdfs:comment "A field of academic study (e.g., mathematics, philosophy, linguistics)"@en ;
+    ys:fromClass wd:Q11862829, wd:Q4671286 .
+
 # Awards are needed as domain of schema:award
 yago:Award a sh:NodeShape ;
     ys:fromClass wd:Q618779, wd:Q38033430 ;
@@ -505,6 +512,91 @@ schema:CreativeWork a sh:NodeShape ;
         rdfs:comment "The duration of a CreativeWork (movie, song, etc.)"@en ;
     ] ;
 
+    #Margherita 24/06/2026 added property
+    sh:property [ 
+        sh:path schema:width ;
+        sh:datatype yago:UnitOfLength ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P2049 ;
+        rdfs:comment "The width of a CreativeWork"@en ;
+    ] ;
+    
+    #Margherita 24/06/2026 added property
+    sh:property [
+        sh:path schema:height ;
+        sh:datatype yago:UnitOfLength ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P2048 ;
+        rdfs:comment "The height of a CreativeWork"@en ;
+    ] ;
+    
+    #Margherita 24/06/2026 added property
+    sh:property [
+        sh:path schema:manufacturer ;
+        sh:class schema:Organization ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P176 ;
+        rdfs:comment "The manufacturer of a CreativeWork or Product"@en ;
+    ] ;
+
+    #Margherita 24/06/2026 added property
+    sh:property [
+        sh:path schema:illustrator ;
+        sh:class schema:Person ;
+        ys:fromProperty wdt:P110 ;
+        rdfs:comment "The illustrator of a Book or CreativeWork"@en ;
+    ] ;
+
+    #Margherita 24/06/2026 added property
+    sh:property [
+        sh:path schema:material ;
+        sh:class schema:BioChemEntity ;
+        ys:fromProperty wdt:P186 ;
+        rdfs:comment "The material an object or a place is made of"@en ;
+    ] ;
+
+    #Margherita 24/06/2026 added property
+    sh:property [
+        sh:path schema:locationCreated ;
+        sh:class schema:Place ;
+        ys:fromProperty wdt:P495 ;
+        rdfs:comment "The location where a Movie, TV Series, Organization, HumanMadeGeographicalEntity or a CreativeWork was created"@en ;
+    ] ;
+
+    #Margherita 24/06/2026 added property 
+    sh:property [
+        sh:path yago:ownedBy ;
+        sh:or (
+            [ sh:class schema:Organization ]
+            [ sh:class schema:Person ]
+        ) ;
+        ys:fromProperty wdt:P127 ;
+        rdfs:comment "The Organization or Person that owns an Organization or HumanMadeGeographicalEntity or a CreativeWork"@en ;
+    ] ;
+
+    #Margherita 24/06/2026 added property 
+    sh:property [
+        sh:path yago:influencedBy ;
+        sh:class schema:Thing ;
+        ys:fromProperty wdt:P737, wdt:P941 ;
+        rdfs:comment "An entity that influenced the CreativeWork"@en ;
+    ] ;
+
+    #Margherita 24/06/2026 added property 
+    sh:property [
+        sh:path schema:sponsor ;
+        sh:or (
+            [
+                sh:class schema:Organization
+            ]
+            [
+                sh:class schema:Person
+            ]
+        ) ;
+        ys:fromProperty wdt:P859 ;
+        rdfs:comment "The sponsor of an Event or Newspaper or Person or CreativeWork"@en ;
+    ] ;
+
     #Margherita 20/02/26 added property 
     sh:property [
         sh:path schema:inLanguage ;
@@ -528,7 +620,7 @@ schema:Book a sh:NodeShape ;
         sh:path schema:illustrator ;
         sh:class schema:Person ;
         ys:fromProperty wdt:P110 ;
-        rdfs:comment "The illustrator of a Book"@en ;
+        rdfs:comment "The illustrator of a Book or CreativeWork"@en ;
     ] ;
     sh:property [
         sh:path schema:editor ;
@@ -586,7 +678,7 @@ schema:Newspaper a sh:NodeShape ;
             ]
         ) ;
         ys:fromProperty wdt:P859 ;
-        rdfs:comment "The sponsor of an Event or Newspaper or Person"@en ;
+        rdfs:comment "The sponsor of an Event or Newspaper or Person or CreativeWork"@en ;
     ] .
 
 schema:TVSeries a sh:NodeShape ;
@@ -615,7 +707,7 @@ schema:TVSeries a sh:NodeShape ;
         sh:path schema:locationCreated ;
         sh:class schema:Place ;
         ys:fromProperty wdt:P495 ;
-        rdfs:comment "The location where a Movie, TV Series, Organization, or HumanMadeGeographicalEntity was created"@en ;
+        rdfs:comment "The location where a Movie, TV Series, Organization, HumanMadeGeographicalEntity or a CreativeWork was created"@en ;
 
     ] ;
     sh:property [
@@ -704,7 +796,7 @@ schema:Movie a sh:NodeShape ;
         sh:path schema:locationCreated ;
         sh:class schema:Place ;
         ys:fromProperty wdt:P495 ;
-        rdfs:comment "The location where a Movie, TV Series, Organization, or HumanMadeGeographicalEntity was created"@en ;
+        rdfs:comment "The location where a Movie, TV Series, Organization, HumanMadeGeographicalEntity or a CreativeWork was created"@en ;
     ] ;
     sh:property [
         sh:path schema:musicBy ; 
@@ -770,6 +862,17 @@ yago:FictionalEntity a sh:NodeShape ;
         ) ;
         ys:fromProperty wdt:P170, wdt:P50 ;
         rdfs:comment "The author of a CreativeWork or FictionalEntity"@en ;
+    ] ;
+
+    #Margherita 23/06/2026
+    sh:property [
+        sh:path schema:spouse ;
+        sh:or (
+            [ sh:class schema:Person ]
+            [ sh:class yago:FictionalEntity ]
+        ) ;
+        ys:fromProperty wdt:P26 ;
+        rdfs:comment "The spouse of a FictionalEntity"@en ;
     ] ;
 	ys:fromClass wd:Q14897293, wd:Q115537581, wd:Q18706315, wd:Q21070598, wd:Q64728693 .
 
@@ -876,7 +979,7 @@ schema:Event a sh:NodeShape ;
             ]
         ) ;
         ys:fromProperty wdt:P859 ;
-        rdfs:comment "The sponsor of an Event or Newspaper or Person"@en ;
+        rdfs:comment "The sponsor of an Event or Newspaper or Person or CreativeWork"@en ;
     ] ;
 	
 	sh:property [
@@ -961,7 +1064,7 @@ schema:Organization a sh:NodeShape ;
         sh:path schema:locationCreated ;
         sh:class schema:Place ;
         ys:fromProperty wdt:P740, wdt:P495 ;
-        rdfs:comment "The location where a Movie, TV Series, Organization, or HumanMadeGeographicalEntity was created"@en ;
+        rdfs:comment "The location where a Movie, TV Series, Organization, HumanMadeGeographicalEntity or a CreativeWork was created"@en ;
     ] ;
     sh:property [
         sh:path schema:logo ;
@@ -1208,7 +1311,7 @@ schema:Person a sh:NodeShape ;
             ]
         ) ;
         ys:fromProperty wdt:P859 ;
-        rdfs:comment "The sponsor of an Event or Newspaper or Person"@en ;
+        rdfs:comment "The sponsor of an Event or Newspaper or Person or CreativeWork"@en ;
     ] ;	
     sh:property [
         sh:path yago:beliefSystem ;
@@ -1919,6 +2022,20 @@ schema:AdministrativeArea a sh:NodeShape ;
         rdfs:comment "Number of vehicles per 1000 people"@en ;
     ] ;
 
+    #Margherita 25/06/2026
+    sh:property [
+        sh:path schema:dissolutionDate ;
+        sh:or (
+            [ sh:datatype xsd:dateTime ]
+            [ sh:datatype xsd:date ]
+            [ sh:datatype xsd:gYearMonth ]
+            [ sh:datatype xsd:gYear ]
+        ) ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P576 ;
+        rdfs:comment "The date an AdministrativeArea was dissolved"@en ;
+    ] ;
+
     #Margherita 20/02/26 reintegrated property thanks to UnitOfMoney, moved to AdministrativeArea, maybe should be in Country?
     sh:property [
         sh:path schema:medianIncome ;
@@ -2171,14 +2288,14 @@ schema:Product a sh:NodeShape ;
             [ sh:class schema:BioChemEntity ]
             ) ;
         ys:fromProperty wdt:P186 ;
-        rdfs:comment "The material a Product is made of"@en ;
+        rdfs:comment "The material an object or a place is made of"@en ;
     ] ;
     sh:property [
         sh:path schema:manufacturer ;
         sh:class schema:Corporation ;
 		sh:maxCount 1 ;
         ys:fromProperty wdt:P176, wdt:P178 ;
-        rdfs:comment "The manufacturer of a Product"@en ;
+        rdfs:comment "The manufacturer of a CreativeWork or Product"@en ;
     ] ;
     sh:property [
         sh:path schema:dateCreated ;
@@ -2271,6 +2388,41 @@ schema:Taxon a sh:NodeShape;
         ys:fromProperty wdt:P1034 ;
         rdfs:comment "A Taxon that another Taxon consumes (predator-prey relationship)"@en ;
     ] ;
+
+    #Margherita 23/06/2026 added property 
+    sh:property [
+          sh:path yago:endemicTo ;
+          sh:class schema:Place ;
+          ys:fromProperty wdt:P183 ;
+          rdfs:comment "The place where a Taxon is endemic"@en ;
+      ] ;
+
+      #Margherita 23/06/2026 added property
+      sh:property [
+          sh:path yago:taxonRange ;
+          sh:class schema:Place ;
+          ys:fromProperty wdt:P9714 ;
+          rdfs:comment "The geographical range of a Taxon"@en ;
+      ] ;
+
+      #Margherita 23/06/2026 added property
+      sh:property [
+          sh:path yago:eggIncubationPeriod ;
+          sh:datatype yago:UnitOfTime ;
+          sh:maxCount 1 ;
+          ys:fromProperty wdt:P7770 ;
+          rdfs:comment "The egg incubation period of a Taxon"@en ;
+      ] ;
+
+      #Margherita 23/06/2026 added property
+      sh:property [
+          sh:path yago:dielCycle ;
+          sh:datatype rdf:langString ;
+          sh:maxCount 1 ;
+          ys:fromProperty wdt:P9566 ;
+          rdfs:comment "The diel cycle of a Taxon"@en ;
+      ] ;
+
 	ys:fromClass wd:Q16521 .
 	
 ################################################################
