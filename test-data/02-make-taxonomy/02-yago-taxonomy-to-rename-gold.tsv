@@ -97,3 +97,4 @@ wd:Q_English_book	rdfs:subClassOf	wd:Q_European_book	.
 wd:Q_European_book	rdfs:subClassOf	schema:Book	.
 wd:Q_French_book	rdfs:subClassOf	wd:Q_European_book	.
 wd:Q_loop_book	rdfs:subClassOf	wd:Q_French_book	.
+yago:AcademicDiscipline	rdfs:subClassOf	schema:Thing	.

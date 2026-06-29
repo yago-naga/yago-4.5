@@ -227,6 +227,9 @@ def addSubClass(superClass, subClass, yagoSchema, yagoTaxonomyUp, wikidataTaxono
         # The current path is longer than the one that exists -> abandon the other one
         # Make a list before iterating because we modify the taxonomy
         for existingSuperClass in list(yagoTaxonomyUp[subClass]):
+            if existingSuperClass==superClass:
+                # We have a duplicate, don't add
+                return
             if existingSuperClass in superAncestors:
                 stats['shortcuts'] += 1
                 logWriter.writeMetaFact(subClass, Prefixes.rdfsSubclassOf, existingSuperClass, Prefixes.ysReason, f'"is shortcut"')            
