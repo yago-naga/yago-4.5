@@ -33,11 +33,7 @@
 @prefix wdno: <http://www.wikidata.org/prop/novalue/> .
 @prefix ys: <http://yago-knowledge.org/schema#> .
 <<	wd:Q_award	rdfs:subClassOf	wd:Q_European_event	>>	ys:excludedFor	"Subclass (yago:Award, schema:Intangible, schema:Thing) is disjoint from ancestor schema:Event of superclass"	.
-<<	wd:Q4167410	rdfs:subClassOf	schema:Book	>>	ys:excludedFor	"Bad class"	.
-<<	wd:Q_book_and_event	rdfs:subClassOf	wd:Q_English_book	>>	ys:excludedFor	"Subclass (schema:Event, schema:Thing) is disjoint from ancestor schema:CreativeWork of superclass"	.
-<<	wd:Q_English_book	rdfs:subClassOf	schema:Book	>>	ys:excludedFor	"is shortcut"	.
 <<	wd:Q_book_and_event	rdfs:subClassOf	wd:Q_English_book	>>	ys:excludedFor	"Subclass (schema:Event, schema:Thing) is disjoint from ancestor schema:CreativeWork of superclass"	.
 <<	wd:Q_European_book	rdfs:subClassOf	wd:Q_loop_book	>>	ys:excludedFor	"is ancestor"	.
-<<	wd:Q_award	rdfs:subClassOf	yago:Award	>>	ys:excludedFor	"is shortcut"	.
-<<	wd:Q_character	rdfs:subClassOf	schema:Person	>>	ys:excludedFor	"is shortcut"	.
-<<	wd:Q_European_event	rdfs:subClassOf	schema:Event	>>	ys:excludedFor	"is shortcut"	.
+<<	wd:Q_English_book	rdfs:subClassOf	schema:Book	>>	ys:excludedFor	"is shortcut"	.
+<<	wd:Q4167410	rdfs:subClassOf	schema:Book	>>	ys:excludedFor	"Bad class"	.
