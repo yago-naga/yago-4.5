@@ -109,8 +109,9 @@ def translatePropertiesAndClasses(entityFacts, yagoSchema, yagoTaxonomyUp):
                 # Remove any types that do not appear in the taxonomy
                 if not obj in yagoTaxonomyUp:
                     continue
-                # We need this for logging purposes
-                newGraph.addMetaFact((subject, p, obj), "declaredType", True)
+                if predicate!=Prefixes.wikidataType:
+                    # We need this for logging purposes
+                    newGraph.add((subject, Prefixes.rdfType, HAS_UNDECLARED_TYPES))
             newGraph.add((subject, p, obj))
             if startDate:
                 newGraph.addMetaFact((subject, p, obj), "startDate", startDate)
@@ -236,6 +237,10 @@ def getUnitOfMeasurement(subject, predicate, obj, entityGraph):
 #             Taxonomy checks
 ##########################################################################
 
+# Pseudo-type for entities that have types that were not declared by wdt:P31
+# but come from the profession. We do not log shortcuts for these.
+HAS_UNDECLARED_TYPES="has undeclared types"
+
 def cleanAndReturnTypes(entityFacts, yagoSchema, yagoTaxonomyUp, writer):
     """Removes disjoint classes and shortcuts, returns types and super types"""
     mainEntity = entityFacts.mainSubject()
@@ -267,7 +272,8 @@ def cleanAndReturnTypes(entityFacts, yagoSchema, yagoTaxonomyUp, writer):
         # Remove other type if the other one is a shortcut
         for j in range(0,i):
             if directTypes[j] in superClasses:
-                if entityFacts.getMetaFacts((mainEntity, Prefixes.rdfType, directTypes[j])).get("declaredType",False):
+                debug("Shortcut:",mainEntity, Prefixes.rdfType, directTypes[j])
+                if (mainEntity, Prefixes.rdfType, HAS_UNDECLARED_TYPES) not in entityFacts:
                     writer.writeMetaFact(mainEntity, Prefixes.rdfType, directTypes[j], Prefixes.ysReason, f'"is shortcut"')
                 entityFacts.remove((mainEntity, Prefixes.rdfType, directTypes[j]))
         # The class is OK

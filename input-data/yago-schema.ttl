@@ -123,7 +123,12 @@ schema:Thing a sh:NodeShape ;
 		ys:fromProperty schema:name, wdt:P2561, wdt:P1476, wdt:P5061, wdt:P1705 ;
         rdfs:comment "Provides a human-readable label for an entity in a specific language"@en ;
     ] ;   
-
+	sh:property [
+        sh:path yago:appearsIn ;
+        sh:class schema:CreativeWork ;
+        ys:fromProperty wdt:P1080, wdt:P1441, wdt:P4584 ;
+        rdfs:comment "A CreativeWork in which a Thing appears"@en ;
+    ] ;
     sh:property [
         sh:path yago:namedAfter ;
         sh:class schema:Thing ;
@@ -823,12 +828,6 @@ schema:Movie a sh:NodeShape ;
 yago:FictionalEntity a sh:NodeShape ;
 	rdfs:subClassOf schema:Thing ;
 	rdfs:label "Fictional entity"@en ;
-	sh:property [
-        sh:path yago:appearsIn ;
-        sh:class schema:CreativeWork ;
-        ys:fromProperty wdt:P1080, wdt:P1441, wdt:P4584 ;
-        rdfs:comment "A CreativeWork in which a FictionalEntity appears"@en ;
-    ] ;
 	sh:property [
         sh:path schema:performer ;
         sh:class schema:Person ;

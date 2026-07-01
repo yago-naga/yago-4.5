@@ -39,9 +39,9 @@ data:Q_Elvis a schema:Dataset ;
 <https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%B5%D1%81%D0%BB%D0%B8,_%D0%AD%D0%BB%D0%B2%D0%B8%D1%81> schema:about wd:Q_Elvis .
 
 wd:Q_Elvis wdt:P31 wd:Q_rock_singer;
-    # These are shortcuts that should not appear
+    # These are shortcuts that should not appear, and that should not be logged
     wdt:P31 schema:Person ;
-    wdt:P31 wd:Q_singer ;
+	wdt:P106 wd:Q_singer ;
 	# Given name should be decoded
 	wdt:P735 wd:Q493293 ;
 	# Test cardinality constraint: Only one birth place should stay
@@ -106,6 +106,8 @@ wd:Q_Barack_Obama wdt:P31 wd:Q5 ;
 	
 # Disjoint ranges
 wd:Q_composition  wdt:P31 wd:Q207628;
+    # This is a shortcut that should be logged
+	wdt:P31 schema:CreativeWork ; 
 	wdt:P86 wd:Q_person_or_band ; 
 	schema:name "composition"@en .
 
