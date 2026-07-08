@@ -1306,7 +1306,7 @@ schema:Person a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path yago:deathCause ;
-        schema:Thing ;
+        sh:class schema:Thing ;
         ys:fromProperty wdt:P509, wdt:P1196, wdt:P157 ;
         rdfs:comment "Cause of death"@en ;
     ] ;
