@@ -65,7 +65,6 @@ wd:Q_org	rdfs:label	"organization"@en	.
 wd:Q31	rdf:type	wd:Q123456	.
 wd:Q31	rdfs:label	"Belgium"@en	.
 wd:Q31	schema:location	wd:Schengen	.
-wd:Q31	schema:memberOf	wd:Schengen	.
 wd:Q31	yago:currency	wd:Q4916	.
 wd:Q31	yago:marriageableAge	"20"^^xsd:integer	.
 wd:Q31	schema:geo	"Point(4.6680555555556 50.641111111111)"^^geo:wktLiteral	.
@@ -85,11 +84,11 @@ wd:Q_singer	rdfs:comment	"this is a singer"@en	.
 wd:Q_singer	schema:alternateName	"this is a human singer"@en	.
 wd:Q_singer	schema:url	"https://de.wikipedia.org/wiki/Mensch"^^xsd:anyURI	.
 wd:Q_singer	rdf:type	rdfs:Class	.
-yago:Worker	rdfs:label	"label that survives"@en	.
-yago:Worker	schema:sameAs	"https://freebase.com/first-id-that-survives"	.
-yago:Worker	rdf:type	rdfs:Class	.
-yago:Worker	schema:sameAs	"https://freebase.com/second-id-that-survives"	.
-yago:Worker	rdf:type	rdfs:Class	.
+schema:Product	rdfs:label	"label that survives"@en	.
+schema:Product	schema:sameAs	"https://freebase.com/first-id-that-survives"	.
+schema:Product	rdf:type	rdfs:Class	.
+schema:Product	schema:sameAs	"https://freebase.com/second-id-that-survives"	.
+schema:Product	rdf:type	rdfs:Class	.
 wd:Q493293	rdfs:label	"Andrea"@mul	.
 wd:Q493293	rdf:type	wd:Q3409032	.
 wd:Q100995	rdf:type	yago:UnitOfMass	.
