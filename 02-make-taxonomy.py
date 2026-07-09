@@ -166,7 +166,7 @@ badClasses = {
 }
 
 # These should come first, to make sure we remove crap
-CLASS_PRIORITIES=[Prefixes.schemaPerson, Prefixes.yagoAward, Prefixes.schemaBioChemEntity, Prefixes.schemaMedicalEntity, Prefixes.schemaOrganization, Prefixes.schemaCreativeWork, Prefixes.schemaEvent]
+CLASS_PRIORITIES=[Prefixes.schemaPerson, Prefixes.yagoAward, Prefixes.schemaBioChemEntity, Prefixes.schemaMedicalEntity, Prefixes.schemaEvent, Prefixes.schemaCreativeWork, Prefixes.schemaOrganization]
 
 def getYagoClasses(yagoSchema):
     """ Returns the classes of YAGO in the right order"""

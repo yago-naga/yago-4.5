@@ -1992,7 +1992,7 @@ schema:MedicalCondition a sh:NodeShape;
     #] ;
 	rdfs:label "Medical Condition"@en ;
 	rdfs:comment "Any condition that affects the normal functioning of a person or an animal"@en ;
-	ys:fromClass wd:Q7189713, wd:Q1483951.
+	ys:fromClass wd:Q7189713, wd:Q1483951, wd:Q12136.
 
 
 ################################################################
