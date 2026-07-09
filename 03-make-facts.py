@@ -509,15 +509,17 @@ def handleMaxCounts(entityFacts, yagoSchema, writer, isSecondaryClass = False) -
                         languages.add(lang)
 
 # Pattern for astronomical object names
-astro=r'"[-+A-Z0-9\[\] ]{3,} [JBF]?[-0-9.+]{6,}"@mul'
+astro=r'"[-+A-Z0-9\[\] ]{3,} [JBF]?[-0-9.+]{6,}"@[a-z]+'
 
 def guessLabelIfNecessary(entityFacts, writer):
     """ Tries to guess a label for an entity from a Wikipedia URL, returns TRUE upon success"""
     mainEntity = entityFacts.mainSubject()
-    for l in entityFacts.objectsOf(mainEntity, Prefixes.rdfsLabel):
-        if re.match(astro,l):
-            writer.writeMetaFact(mainEntity, Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, f'"has invalid name: {l[1:9]}..."')
-            return False
+    
+    # Exclude astronomical objects that have no valid name
+    if entityFacts.objectsOf(mainEntity, Prefixes.rdfsLabel) and all(re.match(astro,l) for l in entityFacts.objectsOf(mainEntity, Prefixes.rdfsLabel)):
+        writer.writeMetaFact(mainEntity, Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, f'"has only invalid names"')
+        return False
+            
     if entityFacts.objectsOf(mainEntity, Prefixes.rdfsLabel):
         debug(mainEntity, "already has a label", entityFacts.objectsOf(mainEntity, Prefixes.rdfsLabel))
         return True

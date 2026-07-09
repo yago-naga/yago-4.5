@@ -6,9 +6,9 @@
 <<	wd:Q_Elvis	schema:deathDate	"0000-02-22T00:00:00Z"^^xsd:dateTime	>>	ys:excludedFor	"uncastable literal"	.
 <<	wd:Q_Elvis	schema:birthPlace	wd:Q_birth_place_1	>>	ys:excludedFor	"maxcount overflow"	.
 <<	wd:Q_composition	rdf:type	schema:CreativeWork	>>	ys:excludedFor	"is shortcut"	.
-<<	wd:Q31	schema:memberOf	schema:Thing	>>	ys:excludedFor	"Domain check failed, subject is schema:Place, schema:Country, schema:AdministrativeArea and expected types are schema:Organization, schema:Person"	.
+<<	wd:Q31	schema:memberOf	schema:Thing	>>	ys:excludedFor	"Domain check failed, subject is schema:AdministrativeArea, schema:Country, schema:Place and expected types are schema:Person, schema:Organization"	.
 <<	wd:Q31	yago:literacyRate	"lkblblhbl"^^xsd:decimal	>>	ys:excludedFor	"uncastable literal"	.
 <<	wd:Q31	yago:literacyRate	"500"^^xsd:decimal	>>	ys:excludedFor	"not in min-max range"	.
 <<	wd:Q312	schema:dateCreated	"1976-01-02"^^xsd:date	>>	ys:excludedFor	"maxcount overflow"	.
 <<	wd:Q678	rdf:type	schema:Thing	>>	ys:excludedFor	"no label"	.
-<<	wd:Q23482	rdf:type	schema:Thing	>>	ys:excludedFor	"has invalid name: BAD-NAME..."	.
+<<	wd:Q23482	rdf:type	schema:Thing	>>	ys:excludedFor	"has only invalid names"	.
