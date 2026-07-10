@@ -479,7 +479,7 @@ def handleMaxCounts(entityFacts, yagoSchema, writer, isSecondaryClass = False) -
             continue
         # Check maxcount
         if yagoProperty.maxCount and len(entityFacts.objectsOf(mainEntity, predicate)) > yagoProperty.maxCount:
-            # Sort by startDate and the alphabetically
+            # Sort by startDate and then alphabetically
             objects = sorted(entityFacts.objectsOf(mainEntity, predicate), reverse=True, key = lambda x: (entityFacts.getMetaFacts((mainEntity, predicate, x)).get("startDate"," "), x))
             for i in range(yagoProperty.maxCount, len(objects)):
                 # We log a maxcount overflow only for facts that do not have an associated date

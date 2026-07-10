@@ -57,33 +57,36 @@ def getFirst(myList):
 #             Full Taxonomy as HTML
 ##########################################################################
 
-def getSuperClasses(cls, classes, yagoTaxonomyUp, pathsToRoot, counter=0):
+def getSuperClasses_(cls, classes, yagoTaxonomyUp, counter=0):
     """Adds all superclasses of a class <cls> (including <cls>) to the set <classes>"""
     classes.add(cls)
     if counter>200:
         print("  Warning: recursion overflow in taxonomy with",cls,"and",classes)
-        return False
-    # Make a check before because it's a defaultdict,
-    # which would create cls if it's not there
-    if cls==Prefixes.schemaThing:
-        pathsToRoot[0]+=1
-    if cls in yagoTaxonomyUp:
-        for sc in yagoTaxonomyUp[cls]:
-            if not getSuperClasses(sc, classes, yagoTaxonomyUp, pathsToRoot, counter+1):
-                return False
-    return True 
+        return
+    if cls not in yagoTaxonomyUp:
+        return
+    for sc in yagoTaxonomyUp[cls]:
+        getSuperClasses_(sc, classes, yagoTaxonomyUp, counter+1)        
+    return
+
+def getSuperClasses(entityFacts, yagoTaxonomyUp):
+    """ Returns the classes and all superclasses of the main entity"""
+    superClasses=set()    
+    for c in entityFacts.objectsOf(mainEntity, Prefixes.rdfType):
+        getSuperClasses_(c, superClasses, yagoTaxonomyUp) 
+    return superClasses
     
-def _printTaxonomy(writer, cls=Prefixes.schemaThing):
+def _printTaxonomy(writer, yagoTaxonomyDown, class2num, cls=Prefixes.schemaThing):
     """ Prints the taxonomy to the writer. <cls> is the class to start with, i.e., the top-level class. """
     if cls not in yagoTaxonomyDown:
-        writer.write(f"<li>{cls.replace('yago:','y:')}: {str(classStats.get(cls,0))}\n")
+        writer.write(f"<li>{cls.replace('yago:','y:')}: {str(class2num.get(cls,0))}\n")
         return
-    writer.write(f"<li><details style='margin-left: 2em'><summary style='margin-left: -2em'>{cls.replace('yago:','y:')}: {str(classStats.get(cls,0))}</summary><ul>\n")
+    writer.write(f"<li><details style='margin-left: 2em'><summary style='margin-left: -2em'>{cls.replace('yago:','y:')}: {str(class2num.get(cls,0))}</summary><ul>\n")
     for subclass in yagoTaxonomyDown.get(cls, []):
-        _printTaxonomy(writer, subclass)
+        _printTaxonomy(writer, yagoTaxonomyDown, class2num, subclass)
     writer.write("</ul></details>\n")
 
-def printTaxonomy(file):
+def printTaxonomy(file, yagoTaxonomyDown, class2num):
     """ Prints the full taxonomy to the file """
     with open(file, "wt", encoding="UTF-8") as writer:
         writer.write("""
@@ -102,14 +105,14 @@ def printTaxonomy(file):
  <body>
  <h1>YAGO Taxonomy</h1>
  <ul>\n""")
-        _printTaxonomy(writer)
+        _printTaxonomy(writer, yagoTaxonomyDown, class2num)
         writer.write("</ul></body>\n</html>")
 
 ##########################################################################
 #             Top-level taxonomy as HTML
 ##########################################################################
  
-def printUpperTaxonomy(file):
+def printUpperTaxonomy(file, yagoSchema):
     """ Visualizes the top-level taxonomy as an HTML document"""
     with open(file, "wt", encoding="UTF-8") as writer:
         writer.write("""
@@ -151,55 +154,49 @@ with TsvUtils.Timer("Step 06: Collecting YAGO statistics"):
     yagoSchema = YagoSchema(FOLDER+"01-yago-final-schema.ttl")
 
     # Load YAGO taxonomy
-    yagoTaxonomyDown=defaultdict(set)
-    yagoTaxonomyUp=defaultdict(set)
+    yagoTaxonomyDown={}
+    yagoTaxonomyUp={}
     for triple in TsvUtils.tsvTuples(FOLDER+"05-yago-final-taxonomy.tsv", "  Loading YAGO taxonomy"):
-        if len(triple)>3:
-            yagoTaxonomyUp[triple[0]].add(triple[2])
-            yagoTaxonomyDown[triple[2]].add(triple[0])
+        if len(triple)<3:
+            continue
+        if triple[0] not in yagoTaxonomyUp:
+            yagoTaxonomyUp[triple[0]]=set()            
+        yagoTaxonomyUp[triple[0]].add(triple[2])
+        if triple[2] not in yagoTaxonomyDown:
+            yagoTaxonomyDown[triple[2]]=set()
+        yagoTaxonomyDown[triple[2]].add(triple[0])
 
     # Initialize counters
-    predicateStats=defaultdict(int)
-    classStats=defaultdict(int)
+    predicate2num={}
+    class2num={}
     samples=[]
-    entities=0
-    totalPathsToRoot=0
-    totalClassesPerInstance=0
-    humanReadableNames=0
-
-    # Initialize predicateStats with predicates from schema, same for classes
-    for yagoProperty in yagoSchema.properties:
-        predicateStats[yagoProperty]=0
-    predicateStats[Prefixes.rdfType]=0    
-    for yagoClass in yagoSchema.classes:
-        classStats[yagoClass]=0
-     
-    genericInstancesCount=0
+    entities=set()
+    numGenericInstances=0
     
     # Run through the facts
     for fileName in ["05-yago-final-wikipedia.tsv", "05-yago-final-beyond-wikipedia.tsv"]:
+        print("  Counting generic instances in",fileName, "...", end='',flush=True)
+        with open(FOLDER+fileName, "rt", encoding="UTF-8") as factFile:
+            for line in factFile:
+                if "_generic_instance\trdf:type" in line:
+                   numGenericInstances+=1 
+        print("done")
         for entityFacts in TurtleUtils.tsvEntities(FOLDER+fileName, "  Parsing "+fileName):
             mainEntity=entityFacts.mainSubject()
+            # We do not care about classes here
             if (mainEntity, Prefixes.rdfType, Prefixes.rdfsClass) in entityFacts:
                 continue
+            entities.add(mainEntity)
+            # Count predicates
             for p in entityFacts.predicatesOf(mainEntity):
-                predicateStats[p]+=1
-            if mainEntity.endswith("_generic_instance"):
-                genericInstancesCount+=1 
-            if fileName=="05-yago-final-beyond-wikipedia.tsv" and re.match(r".*_(Q[0-9]+)?",mainEntity):
-                # Facts about a Wikipedia entity, with a Wikidata object
-                continue
-            entities+=1
-            if not re.match(r"yago:Q[0-9]+", mainEntity):
-                humanReadableNames+=1
-            superClasses=set()
-            pathsToRoot=[0]
-            for c in entityFacts.objectsOf(mainEntity, Prefixes.rdfType):
-                getSuperClasses(c, superClasses, yagoTaxonomyUp, pathsToRoot)
+                if p not in predicate2num:
+                    predicate2num[p]=0
+                predicate2num[p]+=len(entityFacts.objectsOf(mainEntity,p))
+            superClasses=getSuperClasses(entityFacts, yagoTaxonomyUp)
             for c in superClasses:
-                classStats[c]+=1 
-            totalClassesPerInstance+=len(superClasses)   
-            totalPathsToRoot+=pathsToRoot[0]      
+                if c not in class2num:
+                    class2num[c]=0
+                class2num[c]+=1 
             if len(samples)<NUM_SAMPLES:
                 for c in superClasses:
                     entityFacts.add((mainEntity, 'rdf:type', c))
@@ -217,9 +214,9 @@ with TsvUtils.Timer("Step 06: Collecting YAGO statistics"):
             sample.printToWriter(sampleFile)
     print("done")
 
-    metaFacts=0
+    numMetaFacts=0
     for triple in TsvUtils.tsvTuples(FOLDER+"05-yago-final-meta.tsv", "  Counting meta facts"):
-        metaFacts += 1
+        numMetaFacts += 1
     
     print("  Computing dump size... ",end="",flush=True)    
     dumpSize=0
@@ -229,27 +226,24 @@ with TsvUtils.Timer("Step 06: Collecting YAGO statistics"):
     
     print("  Writing out statistics... ",end="",flush=True)    
     with open(FOLDER+"06-statistics.txt", "wt", encoding="UTF-8") as writer:
-        writer.write("YAGO 4.5 statistics\n\n")
+        writer.write("YAGO 4.6 statistics\n\n")
         writer.write("Dump size: "+str(dumpSize/1024/1024/1024)+" GB\n\n")
-        writer.write("Total number of entities: "+str(entities)+"\n\n")
-        writer.write("  ... of which generic: "+str(genericInstancesCount)+"\n\n")
+        writer.write("Total number of entities (without generic): "+str(len(entities))+"\n\n")
+        writer.write("Generic entities: "+str(numGenericInstances)+"\n\n")
         writer.write("Total number of classes: "+str(len(yagoTaxonomyUp))+"\n\n")
         writer.write("Disjointness statements: "+str(sum(len(yagoClass.disjointWith) for yagoClass in yagoSchema.classes.values()))+"\n\n")
-        writer.write("Avg number of paths to root: "+str(totalPathsToRoot/entities)+"\n\n")        
-        writer.write("Avg number of classes per instance: "+str(totalClassesPerInstance/entities)+"\n\n")        
-        writer.write("Human-readable names: "+str(humanReadableNames*100.0/entities)+"%\n\n")
-        writer.write("Total number of facts (excluding labels etc.): "+str(sum([predicateStats[p] for p in predicateStats if p not in excludePredicates]))+"\n\n")
-        writer.write("Avg number of facts (excluding labels etc.) per entity: "+str(sum([predicateStats[p] for p in predicateStats if p not in excludePredicates])/entities)+"\n\n")
-        writer.write("Total number of meta facts: "+str(metaFacts)+"\n\n")
-        writer.write("Total number of predicates: "+str(len(predicateStats))+"\n\n")
+        writer.write("Total number of facts (excluding labels etc.): "+str(sum([predicate2num[p] for p in predicate2num if p not in excludePredicates]))+"\n\n")
+        writer.write("Avg number of facts (excluding labels etc.) per entity: "+str(sum([predicate2num[p] for p in predicate2num if p not in excludePredicates])/len(entities))+"\n\n")
+        writer.write("Total number of meta facts: "+str(numMetaFacts)+"\n\n")
+        writer.write("Total number of predicates: "+str(len(predicate2num))+"\n\n")
         writer.write("Predicates:\n")
-        for pred in sorted(predicateStats.items(), key=lambda x:-x[1]):
+        for pred in sorted(predicate2num.items(), key=lambda x:-x[1]):
             writer.write("  "+pred[0]+": "+str(pred[1])+"\n")        
     print("done")
      
     print("  Writing out taxonomy... ",end="",flush=True)    
-    printTaxonomy(FOLDER+"06-taxonomy.html")
-    printUpperTaxonomy(FOLDER+"06-upper-taxonomy.html")
+    printTaxonomy(FOLDER+"06-taxonomy.html", yagoTaxonomyDown, class2num)
+    printUpperTaxonomy(FOLDER+"06-upper-taxonomy.html", yagoSchema)
     print("done")
     
 if TEST:
