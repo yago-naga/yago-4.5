@@ -274,7 +274,7 @@ def cleanAndReturnTypes(entityFacts, yagoSchema, yagoTaxonomyUp, writer):
             if directTypes[j] in superClasses:
                 debug("Shortcut:",mainEntity, Prefixes.rdfType, directTypes[j])
                 if (mainEntity, Prefixes.rdfType, HAS_UNDECLARED_TYPES) not in entityFacts:
-                    writer.writeMetaFact(mainEntity, Prefixes.rdfType, directTypes[j], Prefixes.ysReason, f'"is shortcut"')
+                    writer.writeMetaFact(mainEntity, Prefixes.rdfType, directTypes[j], Prefixes.ysReason, f'"Shortcut"')
                 entityFacts.remove((mainEntity, Prefixes.rdfType, directTypes[j]))
         # The class is OK
         myTypesAndSuperTypes.update(superClasses)
@@ -307,7 +307,7 @@ def handleDomain(entityFacts, yagoSchema, fullTransitiveClasses: Set[str], write
            continue
         if fullTransitiveClasses.isdisjoint(yagoProperty.subjectTypes):
             # Remove all objects for this predicate if domain check fails
-            writer.writeMetaFact(mainEntity, yagoProperty.identifier, Prefixes.schemaThing, Prefixes.ysReason, f'"Domain check failed, subject is {", ".join(s for s in fullTransitiveClasses if not s.startswith("wd:") and s!=Prefixes.schemaThing)} and expected types are {", ".join(yagoProperty.subjectTypes)}"')
+            writer.writeMetaFact(mainEntity, yagoProperty.identifier, Prefixes.schemaThing, Prefixes.ysReason, f'"Domain check failed: Subject is {", ".join(s for s in fullTransitiveClasses if not s.startswith("wd:") and s!=Prefixes.schemaThing)} and expected types are {", ".join(yagoProperty.subjectTypes)}"')
             entityFacts.removeObjects(mainEntity, predicate)
 
 
@@ -411,7 +411,7 @@ def cleanObject(subject, obj, yagoProperty, writer, yagoTaxonomyUp) -> Optional[
     if yagoProperty.pattern:
        objectValue = TurtleUtils.splitLiteral(obj)[0]
        if not objectValue or not re.match(yagoProperty.pattern, objectValue):
-           writer.writeMetaFact(subject, yagoProperty.identifier, obj, Prefixes.ysReason, '"pattern check failed"')
+           writer.writeMetaFact(subject, yagoProperty.identifier, obj, Prefixes.ysReason, '"Pattern check failed"')
            return None
 
     for objectType in yagoProperty.objectTypes:
@@ -420,7 +420,7 @@ def cleanObject(subject, obj, yagoProperty, writer, yagoTaxonomyUp) -> Optional[
             cleanedObj = normalizeDate(normalizeString(cleanedObj))
             return cleanedObj
     if subject!=obj: # Avoid lots of messages of the form "Q42 schema:url Q42"
-        writer.writeMetaFact(subject, yagoProperty.identifier, obj, Prefixes.ysReason, '"uncastable literal"')
+        writer.writeMetaFact(subject, yagoProperty.identifier, obj, Prefixes.ysReason, '"Uncastable literal"')
     return None
 
 def handleRange(entityFacts, yagoSchema, writer, yagoTaxonomyUp):
@@ -439,12 +439,12 @@ def handleRange(entityFacts, yagoSchema, writer, yagoTaxonomyUp):
             if yagoProperty.minInclusive is not None or yagoProperty.maxInclusive is not None:
                 splitObj=TurtleUtils.splitLiteral(cleanObj)
                 if splitObj[0] is None or not re.match(r"[-+]?[0-9.]", splitObj[0]):
-                    writer.writeMetaFact(mainEntity, yagoProperty.identifier, cleanObj, Prefixes.ysReason, '"not a number"')
+                    writer.writeMetaFact(mainEntity, yagoProperty.identifier, cleanObj, Prefixes.ysReason, '"Not a number"')
                     entityFacts.remove((mainEntity, predicate, obj))
                     continue
                 objValue=float(splitObj[0])
                 if yagoProperty.minInclusive is not None and objValue<yagoProperty.minInclusive or yagoProperty.maxInclusive is not None and objValue>yagoProperty.maxInclusive:
-                    writer.writeMetaFact(mainEntity, yagoProperty.identifier, cleanObj, Prefixes.ysReason, '"not in min-max range"')
+                    writer.writeMetaFact(mainEntity, yagoProperty.identifier, cleanObj, Prefixes.ysReason, '"Not in min-max range"')
                     entityFacts.remove((mainEntity, predicate, obj))
                     continue
             if cleanObj != obj:
@@ -485,7 +485,7 @@ def handleMaxCounts(entityFacts, yagoSchema, writer, isSecondaryClass = False) -
                 # We log a maxcount overflow only for facts that do not have an associated date
                 # because maxcount overflows are intended for facts that have different objects per time period
                 if "startDate" not in entityFacts.getMetaFacts((mainEntity, predicate, objects[i])):
-                    writer.writeMetaFact(mainEntity, predicate, objects[i], Prefixes.ysReason, '"maxcount overflow"')
+                    writer.writeMetaFact(mainEntity, predicate, objects[i], Prefixes.ysReason, '"Maxcount overflow"')
                 entityFacts.remove((mainEntity, predicate, objects[i]))
         # Check unique languages
         if yagoProperty.uniqueLang:
@@ -517,7 +517,7 @@ def guessLabelIfNecessary(entityFacts, writer):
     
     # Exclude astronomical objects that have no valid name
     if entityFacts.objectsOf(mainEntity, Prefixes.rdfsLabel) and all(re.match(astro,l) for l in entityFacts.objectsOf(mainEntity, Prefixes.rdfsLabel)):
-        writer.writeMetaFact(mainEntity, Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, f'"has only invalid names"')
+        writer.writeMetaFact(mainEntity, Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, f'"Only invalid names"')
         return False
             
     if entityFacts.objectsOf(mainEntity, Prefixes.rdfsLabel):
@@ -538,7 +538,7 @@ def guessLabelIfNecessary(entityFacts, writer):
             debug("Found label for", mainEntity, ": ", labelName)
             entityFacts.add((mainEntity, Prefixes.rdfsLabel, '"' + labelName + '"@' + labelLanguage))
             return True
-    writer.writeMetaFact(mainEntity, Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, '"no label"')
+    writer.writeMetaFact(mainEntity, Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, '"No label"')
     return False
 
 ##########################################################################
@@ -578,7 +578,7 @@ class treatWikidataEntity():
         types = cleanAndReturnTypes(entityFacts, self.yagoSchema, self.yagoTaxonomyUp, self.writer)
 
         if not types:
-            self.writer.writeMetaFact(entityFacts.mainSubject(), Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, '"no valid type"')
+            self.writer.writeMetaFact(entityFacts.mainSubject(), Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, '"No valid type"')
             return True
 
         handleDomain(entityFacts, self.yagoSchema, types, self.writer)
@@ -625,7 +625,7 @@ if __name__ == '__main__':
         factCount=0
         tempFiles=list(glob.glob(FOLDER+"03-yago-facts-to-type-check-*.tmp"))
         tempFiles.sort()
-        with open(FOLDER+"03-yago-facts-to-type-check.log", "wb") as logWriter:
+        with open(FOLDER+"03-make-facts.log", "wb") as logWriter:
             with open(FOLDER+"03-yago-facts-to-type-check.tsv", "wb") as writer:
                 for file in tempFiles:
                     with open(file, "rb") as reader:

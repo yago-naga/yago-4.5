@@ -204,12 +204,12 @@ def addSubClass(superClass, subClass, yagoSchema, yagoTaxonomyUp, wikidataTaxono
     # Exclude loops
     if subClass in superAncestors:
         stats['loops'] += 1
-        logWriter.writeMetaFact(subClass, Prefixes.rdfsSubclassOf, superClass, Prefixes.ysReason, '"is ancestor"')
+        logWriter.writeMetaFact(subClass, Prefixes.rdfsSubclassOf, superClass, Prefixes.ysReason, '"Loop"')
         return
     
     # Exclude classes that are already mapped to YAGO
     if subClass in yagoSchema.wikidataClasses:
-        logWriter.writeMetaFact(subClass, Prefixes.rdfsSubclassOf, superClass, Prefixes.ysReason, '"is mapped to YAGO class"')
+        logWriter.writeMetaFact(subClass, Prefixes.rdfsSubclassOf, superClass, Prefixes.ysReason, '"Class mapped to YAGO class"')
         return
         
     # Treat classes that appear already in the taxonomy
@@ -224,7 +224,7 @@ def addSubClass(superClass, subClass, yagoSchema, yagoTaxonomyUp, wikidataTaxono
                # We have a duplicate, don't add
                 return 
             stats['shortcuts'] += 1
-            logWriter.writeMetaFact(subClass, Prefixes.rdfsSubclassOf, superClass, Prefixes.ysReason, f'"is shortcut"')            
+            logWriter.writeMetaFact(subClass, Prefixes.rdfsSubclassOf, superClass, Prefixes.ysReason, f'"Shortcut"')            
             return
         
         # The current path is longer than the one that exists -> abandon the other one
@@ -232,7 +232,7 @@ def addSubClass(superClass, subClass, yagoSchema, yagoTaxonomyUp, wikidataTaxono
         for existingSuperClass in list(yagoTaxonomyUp[subClass]):
             if existingSuperClass in superAncestors:
                 stats['shortcuts'] += 1
-                logWriter.writeMetaFact(subClass, Prefixes.rdfsSubclassOf, existingSuperClass, Prefixes.ysReason, f'"is shortcut"')            
+                logWriter.writeMetaFact(subClass, Prefixes.rdfsSubclassOf, existingSuperClass, Prefixes.ysReason, f'"Shortcut"')            
                 yagoTaxonomyUp[subClass].discard(existingSuperClass)
         
         # If you're still there, we have true multiple inheritance
@@ -243,7 +243,7 @@ def addSubClass(superClass, subClass, yagoSchema, yagoTaxonomyUp, wikidataTaxono
             for a in superAncestors:
                 if a in subDisjointSet:
                     stats['disjoint'] += 1
-                    logWriter.writeMetaFact(subClass, Prefixes.rdfsSubclassOf, superClass, Prefixes.ysReason, f'"Subclass ({", ".join(str(s) for s in ancestors(subClass, yagoTaxonomyUp) if not s.startswith("wd:"))}) is disjoint from ancestor {a} of superclass"')
+                    logWriter.writeMetaFact(subClass, Prefixes.rdfsSubclassOf, superClass, Prefixes.ysReason, f'"Disjoint constraint: Subclass ({", ".join(str(s) for s in ancestors(subClass, yagoTaxonomyUp) if not s.startswith("wd:"))}) is disjoint from ancestor {a} of superclass"')
                     return
        
     yagoTaxonomyUp[subClass].add(superClass)

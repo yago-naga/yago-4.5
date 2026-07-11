@@ -20,8 +20,26 @@ Total number of predicates: 6
 
 Predicates:
   owl:sameAs: 2
-  rdfs:label: 1
-  schema:deathDate: 1
-  rdf:type: 1
-  schema:mainEntityOfPage: 1
   schema:child: 2
+  rdf:type: 1
+  schema:deathDate: 1
+  schema:mainEntityOfPage: 1
+  rdfs:label: 1
+
+Exclusion reasons:
+  06-make-statistics\02-make-taxonomy.log:
+    Disjoint constraint: 2
+    Loop: 1
+    Bad class: 1
+    Shortcut: 1
+  06-make-statistics\03-make-facts.log:
+    No valid type: 3
+    Uncastable literal: 3
+    No label: 2
+    Maxcount overflow: 2
+    Shortcut: 1
+    Domain check failed: 1
+    Not in min-max range: 1
+    Only invalid names: 1
+  06-make-statistics\04-make-type-check.log:
+    Range check failed: 5

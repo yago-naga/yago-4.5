@@ -8,12 +8,14 @@ Input:
 - 05-yago-final-beyond-wikipedia.tsv
 - 05-yago-final-wikipedia.tsv
 - 05-yago-final-taxonomy.tsv
+- Log files
 
 Output:
 - 06-statistics.txt
 - 06-taxonomy.html
 - 06-upper-taxonomy.html
 - 06-sample-entities.ttl
+- 06-sample-logs.tsv
 
 Algorithm:
 - load taxonomy
@@ -202,7 +204,7 @@ with TsvUtils.Timer("Step 06: Collecting YAGO statistics"):
                     entityFacts.add((mainEntity, 'rdf:type', c))
                 samples.append(entityFacts)
             else:
-                randomNumber=int(random.random()*entities)
+                randomNumber=int(random.random()*len(entities))
                 if randomNumber<NUM_SAMPLES:    
                     for c in superClasses:
                         entityFacts.add((mainEntity, 'rdf:type', c))
@@ -224,6 +226,55 @@ with TsvUtils.Timer("Step 06: Collecting YAGO statistics"):
         dumpSize+=os.path.getsize(f)
     print("done")
     
+    print("  Sampling from the logs...")
+    wikidata2yago={}
+    for split in TsvUtils.tsvTuples(FOLDER+"04-yago-ids.tsv", "    Loading YAGO ids"):
+        if len(split)<4:
+            continue
+        wikidata2yago[split[0]]=split[2]
+    reasonsForExclusion={}
+    with open(FOLDER+"06-sample-logs.tsv", "wt", encoding="UTF=8") as sampleFile:
+        for logFile in glob.glob(FOLDER+"*.log"):
+            logFileName=logFile[logFile.rfind("/")+1:]
+            sampleFile.write("# ---- "+logFileName+" ----\n\n")
+            samples=[]
+            reasonsForExclusion[logFileName]={}
+            counter=0
+            for split in TsvUtils.tsvTuples(logFile, "    Sampling from "+logFileName):
+                if len(split)<7:
+                    continue
+                counter+=1                    
+                reason=split[6][1:-1]
+                if ": " in reason:
+                    reason=reason[0:reason.find(": ")]                
+                # Handle legacy cases
+                elif reason.startswith("Subclass ("):
+                    reason="Subclass is disjoint from ancestor of superclass"
+                elif reason.startswith("Domain check"):
+                    reason="Domain check failed"
+                elif reason.startswith("object is"):
+                    reason="Range check failed"    
+                if reason not in reasonsForExclusion[logFileName]:
+                    reasonsForExclusion[logFileName][reason]=0
+                reasonsForExclusion[logFileName][reason]+=1
+                # We sample reasons only from the detailed ones
+                if not ": " in split[6]:
+                    continue
+                if len(samples)<NUM_SAMPLES:
+                    samples.append(split)
+                else:
+                    randomNumber=int(random.random()*counter)
+                    if randomNumber<NUM_SAMPLES:    
+                        samples[randomNumber]=split
+            for sample in samples:
+                sampleFile.write("\t".join(sample)+"\n# ")
+                for i in [1,2,3]:
+                    sampleFile.write(wikidata2yago.get(sample[i],sample[i])+"\t")
+                sampleFile.write("\n\n")
+            if not samples:
+                sampleFile.write("  # no exclusion reasons with details\n\n")              
+    print("  done")
+
     print("  Writing out statistics... ",end="",flush=True)    
     with open(FOLDER+"06-statistics.txt", "wt", encoding="UTF-8") as writer:
         writer.write("YAGO 4.6 statistics\n\n")
@@ -238,14 +289,19 @@ with TsvUtils.Timer("Step 06: Collecting YAGO statistics"):
         writer.write("Total number of predicates: "+str(len(predicate2num))+"\n\n")
         writer.write("Predicates:\n")
         for pred in sorted(predicate2num.items(), key=lambda x:-x[1]):
-            writer.write("  "+pred[0]+": "+str(pred[1])+"\n")        
+            writer.write("  "+pred[0]+": "+str(pred[1])+"\n") 
+        writer.write("\nExclusion reasons:\n")
+        for file in reasonsForExclusion:
+            writer.write("  "+file+":\n")
+            for reason in sorted(reasonsForExclusion[file].items(), key=lambda x:-x[1]):
+                writer.write("    "+reason[0]+": "+str(reason[1])+"\n")
     print("done")
      
     print("  Writing out taxonomy... ",end="",flush=True)    
     printTaxonomy(FOLDER+"06-taxonomy.html", yagoTaxonomyDown, class2num)
     printUpperTaxonomy(FOLDER+"06-upper-taxonomy.html", yagoSchema)
     print("done")
-    
+        
 if TEST:
     Evaluator.compare(FOLDER+"06-statistics.txt", FOLDER+"06-statistics-gold.txt")
     Evaluator.compare(FOLDER+"06-taxonomy.html", FOLDER+"06-taxonomy-gold.html")

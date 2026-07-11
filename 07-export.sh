@@ -55,7 +55,7 @@ declare -A yagoFiles=(
 	["beyond-wikipedia-labels"]="05-yago-final-beyond-wikipedia-labels.tsv" 
     ["meta"]="05-yago-final-meta.tsv"
 )
-version="4.5.1.0"
+version="4.6"
 
 echo "Packing YAGO files..."
 rm yago.zip

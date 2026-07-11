@@ -296,7 +296,7 @@ def writeFacts(entityGraph, out, idsFile, logFile):
             if objects2freq[obj]==1:
                 for p in entityGraph.predicatesOf(subject):
                     if obj in entityGraph.objectsOf(subject, p):
-                        logFile.writeMetaFact(subject, p, obj, Prefixes.ysReason, f'"object is {schemaClass(obj)} and not {' or '.join(str(s) for s in targetClasses)}"')
+                        logFile.writeMetaFact(subject, p, obj, Prefixes.ysReason, f'"Range check failed: Object is {schemaClass(obj)} and not {' or '.join(str(s) for s in targetClasses)}"')
             objects2freq[obj]-=1
     return count
 
