@@ -51,7 +51,7 @@ class WikidataVisitor:
         myNumTypes=len(graph.objectsOf(mainEntity,Prefixes.wikidataType))
         self.resultMap["numTypes"]+=myNumTypes
         if Prefixes.wikidataSubClassOf  in graph.predicatesOf(mainEntity):
-            self.result["numClasses"]+=1
+            self.resultMap["numClasses"]+=1
         self.resultMap["numFacts"]+=sum(len(graph.objectsOf(mainEntity,p)) for p in graph.predicatesOf(mainEntity))-myNumLabels-myNumTypes
         return True
         
