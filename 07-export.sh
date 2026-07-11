@@ -39,7 +39,7 @@ scp 05-yago-final-meta.tsv yago@yago.r2.enst.fr:/data/qlever/yago-meta.tsv
 
 # Log and mapping files (for excluded facts database)
 scp 02-make-taxonomy.log yago@yago.r2.enst.fr:/data/qlever/
-scp 03-yago-facts-to-type-check.log yago@yago.r2.enst.fr:/data/qlever/
+scp 03-make-facts.log yago@yago.r2.enst.fr:/data/qlever/
 scp 04-make-type-check.log yago@yago.r2.enst.fr:/data/qlever/
 scp 04-yago-ids.tsv yago@yago.r2.enst.fr:/data/qlever/
 

@@ -1,0 +1,8 @@
+Wikidata statistics
+
+File size: 0.0007022134959697723 GB
+numEntities: 2
+numLabels: 333
+numClasses: 0
+numFacts: 2739
+numTypes: 6
