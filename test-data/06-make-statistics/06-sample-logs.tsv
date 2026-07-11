@@ -1,0 +1,30 @@
+# ---- 06-make-statistics\02-make-taxonomy.log ----
+
+<<	wd:Q_award	rdfs:subClassOf	wd:Q_European_event	>>	ys:excludedFor	"Disjoint constraint: Subclass (yago:Award, schema:Intangible, schema:Thing) is disjoint from ancestor schema:Event of superclass"	.
+# wd:Q_award	rdfs:subClassOf	wd:Q_European_event	
+
+<<	wd:Q_book_and_event	rdfs:subClassOf	wd:Q_English_book	>>	ys:excludedFor	"Disjoint constraint: Subclass (schema:Event, schema:Thing) is disjoint from ancestor schema:CreativeWork of superclass"	.
+# wd:Q_book_and_event	rdfs:subClassOf	wd:Q_English_book	
+
+# ---- 06-make-statistics\03-make-facts.log ----
+
+<<	wd:Q31	schema:memberOf	schema:Thing	>>	ys:excludedFor	"Domain check failed: Subject is schema:Country, schema:AdministrativeArea, schema:Place and expected types are schema:Person, schema:Organization"	.
+# yago:Belgium	schema:memberOf	schema:Thing	
+
+# ---- 06-make-statistics\04-make-type-check.log ----
+
+<<	wd:Q_Elvis	schema:height	"500"^^wd:Q_Elvis	>>	ys:excludedFor	"Range check failed: Object is schema:Person and not yago:UnitOfLength"	.
+# yago:Elvis	schema:height	"500"^^wd:Q_Elvis	
+
+<<	wd:Q_Elvis	yago:hasFather	wd:Q43	>>	ys:excludedFor	"Range check failed: Object is schema:Book and not schema:Person"	.
+# yago:Elvis	yago:hasFather	yago:Douglas_Adams_Q43	
+
+<<	wd:Q42	yago:namedAfter	wd:Q493293	>>	ys:excludedFor	"Range check failed: Object is None and not schema:Thing"	.
+# yago:Douglas_Adams	yago:namedAfter	yago:YAGO_NAME_Andr_U0020_ea	
+
+<<	wd:Q403	schema:location	wd:Q174789	>>	ys:excludedFor	"Range check failed: Object is yago:UnitOfLength and not schema:Organization"	.
+# wd:Q403	schema:location	yago:Meter	
+
+<<	wd:Q403	schema:memberOf	wd:Q174789	>>	ys:excludedFor	"Range check failed: Object is yago:UnitOfLength and not schema:Organization"	.
+# wd:Q403	schema:memberOf	yago:Meter	
+
