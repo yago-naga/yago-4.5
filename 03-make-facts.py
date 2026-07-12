@@ -261,7 +261,7 @@ def cleanAndReturnTypes(entityFacts, yagoSchema, yagoTaxonomyUp, writer):
                 for disjointClass in yagoSchema.classes[superClass].disjointWith:
                     if disjointClass.identifier in myTypesAndSuperTypes:
                         if entityFacts.getMetaFacts((mainEntity, Prefixes.rdfType, directType)).get("declaredType",False):
-                            writer.writeMetaFact(mainEntity, Prefixes.rdfType, directType, Prefixes.ysReason, f'"disjoint with {disjointClass}"')
+                            writer.writeMetaFact(mainEntity, Prefixes.rdfType, directType, Prefixes.ysReason, f'"Disjoint type: {disjointClass}"')
                         entityFacts.remove((mainEntity, Prefixes.rdfType, directType))
                         gotRemoved=True
                         break
@@ -444,7 +444,8 @@ def handleRange(entityFacts, yagoSchema, writer, yagoTaxonomyUp):
                     continue
                 objValue=float(splitObj[0])
                 if yagoProperty.minInclusive is not None and objValue<yagoProperty.minInclusive or yagoProperty.maxInclusive is not None and objValue>yagoProperty.maxInclusive:
-                    writer.writeMetaFact(mainEntity, yagoProperty.identifier, cleanObj, Prefixes.ysReason, '"Not in min-max range"')
+                    if yagoProperty.identifier!=Prefixes.yagoSiteLinks:
+                        writer.writeMetaFact(mainEntity, yagoProperty.identifier, cleanObj, Prefixes.ysReason, '"Not in min-max range"')
                     entityFacts.remove((mainEntity, predicate, obj))
                     continue
             if cleanObj != obj:

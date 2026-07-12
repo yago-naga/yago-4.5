@@ -75,7 +75,7 @@ def main():
             writer.write("Wikidata statistics\n\n")
             writer.write("File size: "+str(os.path.getsize(WIKIDATA_FILE)/1024/1024/1024)+" GB\n")
             for key in mergedResults:
-                writer.write(key+": "+str(result[key])+"\n")
+                writer.write(key+": "+str(mergedResults[key])+"\n")
         print("done")
 
 if __name__ == '__main__':

@@ -191,6 +191,8 @@ schemaMedicalEntity= "schema:MedicalEntity"
 
 yagoPersonName="yago:PersonName"
 
+yagoSiteLinks = "yago:siteLinks"
+
 wikibaseQuantityUnit="wikibase:quantityUnit"
 
 ##########################################################################
