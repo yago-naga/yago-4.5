@@ -245,7 +245,7 @@ with TsvUtils.Timer("Step 06: Collecting YAGO statistics"):
                     continue
                 counter+=1                    
                 reason=split[6][1:-1]
-                if "rdfs:Class" in reason:
+                if reason.startswith("Domain check failed") and "rdfs:Class" in reason:
                     reason="Can't attach property to class"
                 elif ": " in reason:
                     reason=reason[0:reason.find(": ")]                
