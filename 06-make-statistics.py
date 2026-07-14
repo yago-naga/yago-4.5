@@ -176,7 +176,7 @@ with TsvUtils.Timer("Step 06: Collecting YAGO statistics"):
     numGenericInstances=0
     
     # Run through the facts
-    for fileName in ["05-yago-final-wikipedia.tsv", "05-yago-final-beyond-wikipedia.tsv"]:
+    for fileName in ["05-yago-final-wikipedia.tsv", "05-yago-final-beyond-wikipedia.tsv", "05-yago-final-wikipedia-labels.tsv", "05-yago-final-beyond-wikipedia-labels.tsv"]:
         print("  Counting generic instances in",fileName, "...", end='',flush=True)
         with open(FOLDER+fileName, "rt", encoding="UTF-8") as factFile:
             for line in factFile:
@@ -243,7 +243,7 @@ with TsvUtils.Timer("Step 06: Collecting YAGO statistics"):
             sampleFile.write("# ---- "+logFileName+" ----\n\n")
             samples=[]
             reasonsForExclusion[logFileName]={}
-            counter=0
+            counter=1 # Start at 1 to avoid randomization artifact
             for split in TsvUtils.tsvTuples(logFile, "    Sampling from "+logFileName):
                 if len(split)<7:
                     continue

@@ -7,3 +7,6 @@ yago:Elvis rdf:type yago:Singer, schema:Person, schema:Thing ;
 
 yago:Q_123456 rdfs:label "unknown child" ;
 	owl:sameAs wd:Q_123456 .
+
+yago:Singer rdfs:label "chanteur"@fr ;
+	schema:mainEntityOfPage "https://fr.wikipedia.org/wiki/Chanteur"^^xsd:anyUri .

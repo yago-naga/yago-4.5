@@ -1,8 +1,8 @@
 YAGO 4.6 statistics
 
-Dump size: 1.0423362255096436e-05 GB
+Dump size: 1.4107674360275269e-05 GB
 
-Total number of entities (without generic): 2
+Total number of entities (without generic): 3
 
 Generic entities: 0
 
@@ -10,9 +10,9 @@ Total number of classes: 40
 
 Disjointness statements: 56
 
-Total number of facts (excluding labels etc.): 4
+Total number of facts (excluding labels etc.): 5
 
-Avg number of facts (excluding labels etc.) per entity: 2.0
+Avg number of facts (excluding labels etc.) per entity: 1.6666666666666667
 
 Total number of meta facts: 2
 
@@ -20,11 +20,11 @@ Total number of predicates: 6
 
 Predicates:
   owl:sameAs: 2
+  schema:mainEntityOfPage: 2
   schema:child: 2
+  rdfs:label: 2
   rdf:type: 1
   schema:deathDate: 1
-  schema:mainEntityOfPage: 1
-  rdfs:label: 1
 
 Exclusion reasons:
   06-make-statistics\02-make-taxonomy.log:
