@@ -194,6 +194,10 @@ with TsvUtils.Timer("Step 06: Collecting YAGO statistics"):
                 if p not in predicate2num:
                     predicate2num[p]=0
                 predicate2num[p]+=len(entityFacts.objectsOf(mainEntity,p))
+            # Weird bug
+            if Prefixes.rdfsLabel not in entityFacts.predicatesOf(mainEntity):
+                print("Entity without label:",mainEntity)
+                exit
             superClasses=getSuperClasses(entityFacts, yagoTaxonomyUp)
             for c in superClasses:
                 if c not in class2num:
