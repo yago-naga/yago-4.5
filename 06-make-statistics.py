@@ -249,13 +249,6 @@ with TsvUtils.Timer("Step 06: Collecting YAGO statistics"):
                     reason="Can't attach property to class"
                 elif ": " in reason:
                     reason=reason[0:reason.find(": ")]                
-                # Handle legacy cases
-                elif reason.startswith("Subclass ("):
-                    reason="Subclass is disjoint from ancestor of superclass"
-                elif reason.startswith("Domain check"):
-                    reason="Domain check failed"
-                elif reason.startswith("object is"):
-                    reason="Range check failed"    
                 if reason not in reasonsForExclusion[logFileName]:
                     reasonsForExclusion[logFileName][reason]=0
                 reasonsForExclusion[logFileName][reason]+=1
