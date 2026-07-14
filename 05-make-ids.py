@@ -96,7 +96,7 @@ wikipediaUrlPattern=re.compile("https://([a-z-]+)\\.wiki.*")
 
 def isNonEnglishLabel(literal):
     """ TRUE for non-English labels and Wiki-pages"""
-    if literal[2] and literal[2]!='en':
+    if literal[2] and literal[2]!='en' and literal[2]!='mul':
         return True
     if literal[0]:
         match=wikipediaUrlPattern.match(literal[0])
