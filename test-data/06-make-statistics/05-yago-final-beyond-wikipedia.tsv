@@ -34,5 +34,11 @@
 @prefix prn: <http://www.wikidata.org/prop/reference/value-normalized/> .
 @prefix wdno: <http://www.wikidata.org/prop/novalue/> .
 @prefix ys: <http://yago-knowledge.org/schema#> .
-yago:Q_123456	rdfs:label	"unknown child"	.
-yago:Q_123456	owl:sameAs	wd:Q_123456	.
+yago:The_Marmion	yago:siteLinks 	"1"^^xsd:integer	.
+yago:The_Marmion	owl:sameAs	wd:Q137205919	.
+yago:The_Marmion	rdf:type	yago:Pub	.
+yago:The_Marmion	schema:location	yago:United_Kingdom	.
+yago:The_Marmion	schema:location	yago:City_of_Portsmouth	.
+yago:The_Marmion	schema:geo	"Point(-1.0873738 50.7864125)"^^geo:wktLiteral	.
+yago:The_Marmion	rdfs:label	"The Marmion"@en	.
+yago:The_Marmion	rdfs:comment	"pub in Portsmouth, Hampshire, England, UK"@en	.

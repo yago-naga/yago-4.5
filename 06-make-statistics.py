@@ -184,7 +184,7 @@ with TsvUtils.Timer("Step 06: Collecting YAGO statistics"):
                    numGenericInstances+=1 
         print("done")
         for entityFacts in TurtleUtils.tsvEntities(FOLDER+fileName, "  Parsing "+fileName):
-            mainEntity=entityFacts.mainSubject()
+            mainEntity=entityFacts.mainSubject()          
             # We do not care about classes here
             if (mainEntity, Prefixes.rdfType, Prefixes.rdfsClass) in entityFacts:
                 continue
@@ -194,15 +194,14 @@ with TsvUtils.Timer("Step 06: Collecting YAGO statistics"):
                 if p not in predicate2num:
                     predicate2num[p]=0
                 predicate2num[p]+=len(entityFacts.objectsOf(mainEntity,p))
-            # Weird bug
-            if Prefixes.rdfsLabel not in entityFacts.predicatesOf(mainEntity):
-                print("Entity without label:",mainEntity)
-                exit
             superClasses=getSuperClasses(entityFacts, yagoTaxonomyUp)
             for c in superClasses:
                 if c not in class2num:
                     class2num[c]=0
                 class2num[c]+=1 
+            # Do not sample for labels
+            if "labels" in fileName:
+                continue
             if len(samples)<NUM_SAMPLES:
                 for c in superClasses:
                     entityFacts.add((mainEntity, 'rdf:type', c))
