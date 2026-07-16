@@ -122,7 +122,6 @@ schema:Thing a sh:NodeShape ;
         sh:path rdfs:label ;
         sh:datatype rdf:langString ;
         sh:uniqueLang true ;
-		sh:minCount 1;
 		ys:fromProperty schema:name, wdt:P2561, wdt:P1476, wdt:P5061, wdt:P1705 ;
         rdfs:comment "Provides a human-readable label for an entity in a specific language"@en ;
     ] ; 
