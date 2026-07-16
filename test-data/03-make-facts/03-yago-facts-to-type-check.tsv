@@ -71,7 +71,7 @@ wd:Q31	schema:geo	"Point(4.6680555555556 50.641111111111)"^^geo:wktLiteral	.
 wd:Q31	yago:populationNumber	"11825551"^^xsd:integer	. #	"2014-01-02"^^xsd:date	"2014-01-02"^^xsd:date
 wd:Q312	rdf:type	schema:Corporation	.
 wd:Q312	rdfs:label	"corporation"@en	.
-wd:Q312	schema:dateCreated	"1976-04-01"^^xsd:date	.
+wd:Q312	schema:startDate	"1976-04-01"^^xsd:date	.
 wd:Q_fictional	rdf:type	wd:Q2593744	.
 wd:Q_fictional	rdf:type	wd:Q_rock_singer	.
 wd:Q_fictional	rdfs:label	"fictional"@en	.

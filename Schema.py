@@ -60,9 +60,16 @@ class YagoObject:
         if not TurtleUtils.isEntityWithPrefix(self.identifier):
             warning("YAGO object",self,"has an invalid identifier")
         for s in itertools.chain(self.labels,self.comments):
-            if not TurtleUtils.isLiteral(s):
-                warning("YAGO object",self,"has an invalid label or comment",s)
-                
+            literal, _, lang, _ = TurtleUtils.splitLiteral(s)
+            if not literal:
+                warning("YAGO object",self,"has an invalid label or comment:",s)
+            if not lang:
+                warning("YAGO object",self,"has a label or comment without language tag:",s)
+        if len(self.comments)>1:
+           warning("YAGO object",self,"has more than one comment:", ", ".join(self.comments))
+        if len(self.labels)>1:
+           warning("YAGO object",self,"has more than one label:", ", ".join(self.labels))
+            
 def stripPrefix(identifier):
     """ Removes the xyz: prefix"""
     return identifier[identifier.find(':')+1:]
@@ -93,10 +100,6 @@ def minValue(val, values):
             warning("Invalid numerical value:",v)            
     return val
 
-def isDataType(typ):
-    """ TRUE for types that are datatypes (rdf:langstring etc.)"""
-    return typ.startswith("xsd:") or typ.startswith("rdf:") or typ.startswith(Prefixes.yagoUnitOfMeasurement) or typ.startswith("geo:")
-    
 class YagoProperty(YagoObject):
     """ Represents a YAGO property with its attributes"""
     def __init__(self, name):
@@ -109,7 +112,8 @@ class YagoProperty(YagoObject):
         self.minInclusive=None
         self.maxInclusive=None        
         self.uniqueLang=False
-        self.pattern=None   
+        self.pattern=None  
+        self.isDatatype=None
     
     def check(self):
         """ Performs simple checks """
@@ -138,10 +142,6 @@ class YagoProperty(YagoObject):
     def schemaIdentifier(self):
         """ Returns a blank node name for this property """
         return "ys:"+stripPrefix(self.identifier)+"_property"
-    
-    def allObjectsAreLiterals(self):
-        """ TRUE if all object types are literal types"""
-        return all(isDataType(t) for t in self.objectTypes)
         
     def writeTo(self, out):
         """ Pretty prints property to output stream """
@@ -166,24 +166,33 @@ class YagoProperty(YagoObject):
         out.write("\t\tys:fromProperty "+", ".join(c for c in self.wikidataProperties)+" ;\n")
         if len(self.objectTypes)>1:
             out.write("\t\tsh:or ([ ")            
-            out.write(" ][ ".join("sh:datatype "+p if isDataType(p) else "sh:class "+p for p in self.objectTypes))
+            out.write(" ][ ".join("sh:datatype "+p if self.isDatatype else "sh:class "+p for p in self.objectTypes))
             out.write("]).\n\n")
         else:
-            out.write("".join("\t\tsh:datatype "+p if isDataType(p) else "\t\tsh:class "+p for p in self.objectTypes)+" .\n\n")  
+            out.write("".join("\t\tsh:datatype "+p if self.isDatatype else "\t\tsh:class "+p for p in self.objectTypes)+" .\n\n")  
         if self.labels:
             out.write(self.identifier+"\trdfs:label "+", ".join(c for c in self.labels)+" .\n\n")        
         if self.comments:
             out.write(self.identifier+"\trdfs:comment "+", ".join(c for c in self.comments)+" .\n\n")
-            
+    
+    def addObjectTypes(self, types, isDatatype):
+        """ Adds all the object types"""
+        if not types:
+            return
+        if self.isDatatype is not None and self.isDatatype!=isDatatype:
+            warning("Property",self.identifier,"has both datatype and class objects:", self.isDatatype, isDatatype)
+        self.isDatatype=isDatatype
+        self.objectTypes.update(types)
+        
     def updateFromShacl(self, shaclProperty, entityGraph):
         """ Adds what the SHACL property says to this YAGO property """
         
         # Object types
-        self.objectTypes.update(entityGraph.objectsOf(shaclProperty,Prefixes.shaclDatatype))
-        self.objectTypes.update(entityGraph.objectsOf(shaclProperty,Prefixes.shaclClass))
+        self.addObjectTypes(entityGraph.objectsOf(shaclProperty,Prefixes.shaclClass), False)
+        self.addObjectTypes(entityGraph.objectsOf(shaclProperty,Prefixes.shaclDatatype), True)
         for disjunctionNode in entityGraph.objectsOf(shaclProperty,Prefixes.shaclOr):
-            self.objectTypes.update([typ for anon in entityGraph.getList(disjunctionNode) for typ in entityGraph.objectsOf(anon,Prefixes.shaclClass)])
-            self.objectTypes.update([typ for anon in entityGraph.getList(disjunctionNode) for typ in entityGraph.objectsOf(anon,Prefixes.shaclDatatype)])
+            self.addObjectTypes([typ for anon in entityGraph.getList(disjunctionNode) for typ in entityGraph.objectsOf(anon,Prefixes.shaclClass)], False)
+            self.addObjectTypes([typ for anon in entityGraph.getList(disjunctionNode) for typ in entityGraph.objectsOf(anon,Prefixes.shaclDatatype)], True)
         
         # Labels and comments
         self.labels.update(entityGraph.objectsOf(shaclProperty,Prefixes.rdfsLabel))
@@ -228,7 +237,13 @@ class YagoClass(YagoObject):
 
         if not self.superClasses and self.identifier!=Prefixes.schemaThing and not self.identifier.startswith("rdf:") and not self.identifier.startswith("rdfs:"):
             warning("Class",self,"does not have a super class")
-            
+        for p in self.properties:
+            queue=[s for s in self.superClasses]
+            for s in queue:
+                if p in s.properties:
+                    warning("Subclass",self.identifier,"redefines property",p,"of superclass",s)
+                    queue.extend(s.superClasses)
+                    
     def __str__(self):
         return self.identifier
         

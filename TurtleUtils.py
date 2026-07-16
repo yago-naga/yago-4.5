@@ -596,6 +596,10 @@ def tsvEntities(file, message=None):
             graph=Graph()
             previousEntity=split[0]
         graph.add((split[0], split[1], split[2]))
+        if len(split)>4:
+            graph.addMetaFact((split[0], split[1], split[2]), "schema:startDate",split[4])      
+        if len(split)>5:
+            graph.addMetaFact((split[0], split[1], split[2]), "schema:endDate",split[5])
     if graph:
         yield graph
         

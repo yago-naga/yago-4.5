@@ -400,7 +400,7 @@ def cleanObject(subject, obj, yagoProperty, writer, yagoTaxonomyUp) -> Optional[
         return obj if obj in yagoTaxonomyUp or obj==Prefixes.rdfsClass else None
         
     # We handle only literals here, and let Step 4 do the Things
-    if not yagoProperty.allObjectsAreLiterals():
+    if not yagoProperty.isDatatype:
         return obj
 
     # The currency of a country must be a currency, but not a literal
@@ -525,6 +525,7 @@ def guessLabelIfNecessary(entityFacts, writer):
     if entityFacts.objectsOf(mainEntity, Prefixes.rdfsLabel):
         debug(mainEntity, "already has a label", entityFacts.objectsOf(mainEntity, Prefixes.rdfsLabel))
         return True
+        
     wikipediaPages = entityFacts.objectsOf(mainEntity, Prefixes.schemaUrl)
     labelName = None
     labelLanguage = "en"
@@ -536,7 +537,7 @@ def guessLabelIfNecessary(entityFacts, writer):
     if labelName:
         labelName = parse.unquote(labelName)
         labelName = re.sub("[\"'\u0000-\u001f]", "", labelName)
-        if len(labelName) > 2: # Get the class "dog" in...
+        if len(labelName) > 2: # Get the class "dog"
             debug("Found label for", mainEntity, ": ", labelName)
             entityFacts.add((mainEntity, Prefixes.rdfsLabel, '"' + labelName + '"@' + labelLanguage))
             return True
@@ -591,6 +592,7 @@ class treatWikidataEntity():
 
         # Min counts are de facto verified only for labels
         if not isSecondaryClass and not guessLabelIfNecessary(entityFacts, self.writer):
+            # No label, we already wrote a warning, quit
             return True
 
         # Get the subject only here, because it might have changed by mapping to YAGO schema
