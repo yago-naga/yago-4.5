@@ -579,7 +579,7 @@ class treatWikidataEntity():
         entityFacts = translatePropertiesAndClasses(entityFacts, self.yagoSchema, self.yagoTaxonomyUp)
 
         types = cleanAndReturnTypes(entityFacts, self.yagoSchema, self.yagoTaxonomyUp, self.writer)
-
+        
         if not types:
             self.writer.writeMetaFact(entityFacts.mainSubject(), Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, '"No valid type"')
             return True

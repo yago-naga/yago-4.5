@@ -37,7 +37,8 @@ schema:Place	rdfs:subClassOf	schema:Thing	.
 schema:MusicComposition	rdfs:subClassOf	schema:CreativeWork	.
 schema:CreativeWork	rdfs:subClassOf	schema:Thing	.
 schema:Taxon	rdfs:subClassOf	schema:Thing	.
-schema:Organization	rdfs:subClassOf	schema:Thing	.
+schema:Organization	rdfs:subClassOf	yago:Agent	.
+yago:Agent	rdfs:subClassOf	schema:Thing	.
 schema:Event	rdfs:subClassOf	schema:Thing	.
 schema:Product	rdfs:subClassOf	schema:Thing	.
 schema:Intangible	rdfs:subClassOf	schema:Thing	.
