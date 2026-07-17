@@ -30,6 +30,9 @@ Predicates:
   schema:geo: 1
   rdfs:comment: 1
 
+Predicates excluded:
+  schema:memberOf: 1 (50.0%)
+
 Exclusion reasons:
   06-make-statistics\02-make-taxonomy.log:
     Disjoint constraint: 2

@@ -236,6 +236,7 @@ with TsvUtils.Timer("Step 06: Collecting YAGO statistics"):
             continue
         wikidata2yago[split[0]]=split[2]
     reasonsForExclusion={}
+    predicate2numExcluded={}
     with open(FOLDER+"06-sample-logs.tsv", "wt", encoding="UTF=8") as sampleFile:
         for logFile in glob.glob(FOLDER+"*.log"):
             logFileName=logFile[logFile.rfind("/")+1:]
@@ -256,6 +257,10 @@ with TsvUtils.Timer("Step 06: Collecting YAGO statistics"):
                 if reason not in reasonsForExclusion[logFileName]:
                     reasonsForExclusion[logFileName][reason]=0
                 reasonsForExclusion[logFileName][reason]+=1
+                if reason.startswith("Domain check failed"):
+                    if split[2] not in predicate2numExcluded:
+                        predicate2numExcluded[split[2]]=0
+                    predicate2numExcluded[split[2]]+=1    
                 # We sample reasons only from the detailed ones
                 if not ": " in split[6]:
                     continue
@@ -289,6 +294,9 @@ with TsvUtils.Timer("Step 06: Collecting YAGO statistics"):
         writer.write("Predicates:\n")
         for pred in sorted(predicate2num.items(), key=lambda x:-x[1]):
             writer.write("  "+pred[0]+": "+str(pred[1])+"\n") 
+        writer.write("\nPredicates excluded:\n")
+        for pred in sorted(predicate2numExcluded.items(), key=lambda x:-x[1]):
+            writer.write("  "+pred[0]+": "+str(pred[1])+" ("+str(100*pred[1]/(pred[1]+predicate2num.get(pred[0],1)))+"%)\n") 
         writer.write("\nExclusion reasons:\n")
         for file in reasonsForExclusion:
             writer.write("  "+file+":\n")
