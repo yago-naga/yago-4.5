@@ -165,36 +165,8 @@ schema:Thing a sh:NodeShape ;
         sh:class schema:Thing ;
         ys:fromProperty wdt:P155, wdt:P1365 ;
         rdfs:comment "A Thing that follows another Thing chronologically or conceptually"@en ;
-    ] ;
-	
-	# Properties that attach to so many classes that it is easier to attach them to Thing
-	
-	sh:property [
-        sh:path yago:ownedBy ;
-        sh:class yago:Agent ;
-        ys:fromProperty wdt:P127 ;
-        rdfs:comment "The Organization or Person that owns a Thing"@en ;
-    ] ;
-    sh:property [
-        sh:path yago:influencedBy ;
-        sh:class schema:Thing ;
-        ys:fromProperty wdt:P737, wdt:P941 ;
-        rdfs:comment "An entity that influenced the Thing"@en ;
-    ] ;
-	sh:property [
-        sh:path schema:award ;
-        sh:class yago:Award ;
-        ys:fromProperty wdt:P166 ;
-        rdfs:comment "An award won by a Thing"@en ;
-    ] ;	
-    sh:property [
-        sh:path schema:sponsor ;
-        sh:class yago:Agent ;
-        ys:fromProperty wdt:P859 ;
-        rdfs:comment "The sponsor of a Thing"@en ;
     ] .
 	
-
 
 # Class of all classes. Classes can have properties, too, but only annotation properties.
 rdfs:Class a sh:NodeShape ;  
@@ -453,6 +425,30 @@ schema:CreativeWork a sh:NodeShape ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P576, wdt:P582 ;
         rdfs:comment "The date when an entity stopped existing"@en ;
+    ] ;
+	sh:property [
+        sh:path yago:ownedBy ;
+        sh:class yago:Agent ;
+        ys:fromProperty wdt:P127 ;
+        rdfs:comment "The Organization or Person that owns an entity"@en ;
+    ] ;
+    sh:property [
+        sh:path yago:influencedBy ;
+        sh:class schema:Thing ;
+        ys:fromProperty wdt:P737, wdt:P941 ;
+        rdfs:comment "An entity that influenced the entity"@en ;
+    ] ;
+	sh:property [
+        sh:path schema:award ;
+        sh:class yago:Award ;
+        ys:fromProperty wdt:P166 ;
+        rdfs:comment "An award won by an entity"@en ;
+    ] ;	
+    sh:property [
+        sh:path schema:sponsor ;
+        sh:class yago:Agent ;
+        ys:fromProperty wdt:P859 ;
+        rdfs:comment "The sponsor of an entity"@en ;
     ] ;
 	sh:property [
         sh:path schema:color ;
@@ -878,6 +874,21 @@ schema:Event a sh:NodeShape ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P576, wdt:P582 ;
     ] ;
+	sh:property [
+        sh:path yago:ownedBy ;
+        sh:class yago:Agent ;
+        ys:fromProperty wdt:P127 ;
+    ] ;
+    sh:property [
+        sh:path yago:influencedBy ;
+        sh:class schema:Thing ;
+        ys:fromProperty wdt:P737, wdt:P941 ;
+    ] ;
+    sh:property [
+        sh:path schema:sponsor ;
+        sh:class yago:Agent ;
+        ys:fromProperty wdt:P859 ;
+    ] ;
     sh:property [
         sh:path schema:logo ;
         sh:datatype xsd:anyURI ;
@@ -1021,6 +1032,21 @@ sh:property [
         sh:maxCount 1 ;
         ys:fromProperty wdt:P576, wdt:P582 ;
     ] ;
+    sh:property [
+        sh:path yago:influencedBy ;
+        sh:class schema:Thing ;
+        ys:fromProperty wdt:P737, wdt:P941 ;
+    ] ;
+	sh:property [
+        sh:path schema:award ;
+        sh:class yago:Award ;
+        ys:fromProperty wdt:P166 ;
+    ] ;	
+    sh:property [
+        sh:path schema:sponsor ;
+        sh:class yago:Agent ;
+        ys:fromProperty wdt:P859 ;
+    ] ;
  sh:property [
         sh:path schema:memberOf ;
         sh:class schema:Organization ;
@@ -1098,6 +1124,11 @@ schema:Organization a sh:NodeShape ;
         sh:class schema:Person ;
         ys:fromProperty wdt:P35, wdt:P6, wdt:P168, wdt:P169, wdt:P1075 ;
         rdfs:comment "The leader of an Organization or AdministrativeArea"@en ;
+    ] ;
+	sh:property [
+        sh:path yago:ownedBy ;
+        sh:class yago:Agent ;
+        ys:fromProperty wdt:P127 ;
     ] ;
     sh:property [
         sh:path schema:leiCode ;
@@ -1993,6 +2024,26 @@ schema:Product a sh:NodeShape ;
         sh:path yago:creator ;
         sh:class yago:Agent ;
         ys:fromProperty wdt:P50, wdt:P170, wdt:P112 ; 
+    ] ;
+	sh:property [
+        sh:path yago:ownedBy ;
+        sh:class yago:Agent ;
+        ys:fromProperty wdt:P127 ;
+    ] ;
+    sh:property [
+        sh:path yago:influencedBy ;
+        sh:class schema:Thing ;
+        ys:fromProperty wdt:P737, wdt:P941 ;
+    ] ;
+	sh:property [
+        sh:path schema:award ;
+        sh:class yago:Award ;
+        ys:fromProperty wdt:P166 ;
+    ] ;	
+    sh:property [
+        sh:path schema:sponsor ;
+        sh:class yago:Agent ;
+        ys:fromProperty wdt:P859 ;
     ] ;
     sh:property [
         sh:path schema:price ;
