@@ -244,49 +244,8 @@ schema:Thing a sh:NodeShape ;
         sh:class yago:Agent ;
         ys:fromProperty wdt:P859 ;
         rdfs:comment "The sponsor of a Thing"@en ;
-    ] ;
-	
-	# Properties for physical entities
-	
-	sh:property [
-        sh:path schema:color ;
-        ys:fromProperty wdt:P462 ;  
-        sh:class yago:Color ;       
-    ] ;		
-	sh:property [
-        sh:path schema:width ;
-        sh:datatype yago:UnitOfLength ;
-        ys:fromProperty wdt:P2049 ;
-		sh:maxCount 1 ;
-        rdfs:comment "The width of an object"@en ;
-    ] ;
-    sh:property [
-        sh:path schema:height ;
-        sh:datatype yago:UnitOfLength ;
-        ys:fromProperty wdt:P2048 ;
-		sh:maxCount 1 ;
-        rdfs:comment "The height of an object"@en ;
-    ] ;
-    sh:property [
-        sh:path yago:length ;
-        sh:datatype yago:UnitOfLength ;
-        sh:maxCount 1 ;
-        ys:fromProperty wdt:P2043 ;
-        rdfs:comment "The length of an object"@en ;
-    ] ;
-	sh:property [
-        sh:path yago:mass ;
-		sh:maxCount 1 ;
-        sh:datatype yago:UnitOfMass ;
-        ys:fromProperty wdt:P2067 ;
-        rdfs:comment "The mass of a Thing"@en ;
-    ] ;	
-    sh:property [
-        sh:path schema:material ;
-        sh:class schema:BioChemEntity ;
-        ys:fromProperty wdt:P186 ;
-        rdfs:comment "The material ofa Thing"@en ;
     ] .
+	
 
 
 # Class of all classes. Classes can have properties, too, but only annotation properties.
@@ -502,6 +461,46 @@ schema:CreativeWork a sh:NodeShape ;
         ys:fromProperty wdt:P154 ;
         rdfs:comment "The logo of an entity"@en ;
     ] ;	
+	sh:property [
+        sh:path schema:color ;
+        ys:fromProperty wdt:P462 ;  
+        sh:class yago:Color ;       
+        rdfs:comment "The color of an entity"@en ;
+    ] ;	
+	sh:property [
+        sh:path schema:width ;
+        sh:datatype yago:UnitOfLength ;
+        ys:fromProperty wdt:P2049 ;
+		sh:maxCount 1 ;
+        rdfs:comment "The width of an object"@en ;
+    ] ;
+    sh:property [
+        sh:path schema:height ;
+        sh:datatype yago:UnitOfLength ;
+        ys:fromProperty wdt:P2048 ;
+		sh:maxCount 1 ;
+        rdfs:comment "The height of an object"@en ;
+    ] ;
+    sh:property [
+        sh:path yago:length ;
+        sh:datatype yago:UnitOfLength ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P2043 ;
+        rdfs:comment "The length of an object"@en ;
+    ] ;
+	sh:property [
+        sh:path yago:mass ;
+		sh:maxCount 1 ;
+        sh:datatype yago:UnitOfMass ;
+        ys:fromProperty wdt:P2067 ;
+        rdfs:comment "The mass of an entity"@en ;
+    ] ;	
+    sh:property [
+        sh:path schema:material ;
+        sh:class schema:BioChemEntity ;
+        ys:fromProperty wdt:P186 ;
+        rdfs:comment "The material of a Thing"@en ;
+    ] ;
     sh:property [
         sh:path schema:publisher ;
 		sh:maxCount 1 ;
@@ -761,6 +760,40 @@ yago:FictionalEntity a sh:NodeShape ;
         ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17, wdt:P30, wdt:P551, wdt:P361, wdt:P463, wdt:P183, wdt:P9714 ;
         rdfs:comment "The location of an entity"@en ;
     ]  ;   
+	sh:property [
+        sh:path schema:color ;
+        ys:fromProperty wdt:P462 ;  
+        sh:class yago:Color ;       
+    ] ;	
+	sh:property [
+        sh:path schema:width ;
+        sh:datatype yago:UnitOfLength ;
+        ys:fromProperty wdt:P2049 ;
+		sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path schema:height ;
+        sh:datatype yago:UnitOfLength ;
+        ys:fromProperty wdt:P2048 ;
+		sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path yago:length ;
+        sh:datatype yago:UnitOfLength ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P2043 ;
+    ] ;
+	sh:property [
+        sh:path yago:mass ;
+		sh:maxCount 1 ;
+        sh:datatype yago:UnitOfMass ;
+        ys:fromProperty wdt:P2067 ;
+    ] ;	
+    sh:property [
+        sh:path schema:material ;
+        sh:class schema:BioChemEntity ;
+        ys:fromProperty wdt:P186 ;
+    ] ;
 	ys:fromClass wd:Q14897293, wd:Q115537581, wd:Q18706315, wd:Q21070598, wd:Q64728693 .
 
 ################################################################
@@ -1071,8 +1104,19 @@ schema:Person a sh:NodeShape ;
 		sh:maxCount 1 ;
         sh:datatype yago:Color ;
         ys:fromProperty wdt:P1340 ;
-        rdfs:comment "The eye color of a a person"@en ;
     ] ;
+    sh:property [
+        sh:path schema:height ;
+        sh:datatype yago:UnitOfLength ;
+        ys:fromProperty wdt:P2048 ;
+		sh:maxCount 1 ;
+    ] ;
+	sh:property [
+        sh:path yago:mass ;
+		sh:maxCount 1 ;
+        sh:datatype yago:UnitOfMass ;
+        ys:fromProperty wdt:P2067 ;
+    ] ;	
     sh:property [
         sh:path schema:givenName ;
         sh:datatype xsd:string ;
@@ -1319,6 +1363,35 @@ schema:Place a sh:NodeShape ;
         ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17, wdt:P30, wdt:P551, wdt:P361, wdt:P463, wdt:P183, wdt:P9714 ;
         rdfs:comment "The location of an entity"@en ;
     ]  ;   
+	sh:property [
+        sh:path schema:width ;
+        sh:datatype yago:UnitOfLength ;
+        ys:fromProperty wdt:P2049 ;
+		sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path schema:height ;
+        sh:datatype yago:UnitOfLength ;
+        ys:fromProperty wdt:P2048 ;
+		sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path yago:length ;
+        sh:datatype yago:UnitOfLength ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P2043 ;
+    ] ;
+	sh:property [
+        sh:path yago:mass ;
+		sh:maxCount 1 ;
+        sh:datatype yago:UnitOfMass ;
+        ys:fromProperty wdt:P2067 ;
+    ] ;	
+    sh:property [
+        sh:path schema:material ;
+        sh:class schema:BioChemEntity ;
+        ys:fromProperty wdt:P186 ;
+    ] ;
     sh:property [
         sh:path yago:populationNumber ; # Fabian: changed from schema:... 2024-04-03
         sh:datatype xsd:integer ;
@@ -1389,6 +1462,11 @@ yago:AstronomicalObject a sh:NodeShape ;
         ys:fromProperty wdt:P397 ;
         rdfs:comment "The parent celestial body of an AstronomicalObject"@en ;
     ] ;    
+	sh:property [
+        sh:path schema:color ;
+        ys:fromProperty wdt:P462 ;  
+        sh:class yago:Color ;       
+    ] ;	
 	sh:property [
         sh:path yago:luminosity ;
         sh:datatype yago:UnitOfLuminosity ;
@@ -1732,6 +1810,40 @@ schema:Product a sh:NodeShape ;
         ys:fromProperty wdt:P176, wdt:P178 ;
         rdfs:comment "The manufacturer of a CreativeWork or Product"@en ;
     ] ;
+	sh:property [
+        sh:path schema:color ;
+        ys:fromProperty wdt:P462 ;  
+        sh:class yago:Color ;       
+    ] ;	
+	sh:property [
+        sh:path schema:width ;
+        sh:datatype yago:UnitOfLength ;
+        ys:fromProperty wdt:P2049 ;
+		sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path schema:height ;
+        sh:datatype yago:UnitOfLength ;
+        ys:fromProperty wdt:P2048 ;
+		sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path yago:length ;
+        sh:datatype yago:UnitOfLength ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P2043 ;
+    ] ;
+	sh:property [
+        sh:path yago:mass ;
+		sh:maxCount 1 ;
+        sh:datatype yago:UnitOfMass ;
+        ys:fromProperty wdt:P2067 ;
+    ] ;	
+    sh:property [
+        sh:path schema:material ;
+        sh:class schema:BioChemEntity ;
+        ys:fromProperty wdt:P186 ;
+    ] ;
     sh:property [
         sh:path schema:price ;
         sh:datatype yago:UnitOfMoney ;
@@ -1763,6 +1875,35 @@ schema:Taxon a sh:NodeShape;
 		sh:maxCount 1 ;
         rdfs:comment "The parent taxon of a Taxon in biological classification"@en ;
     ] ;
+	sh:property [
+        sh:path schema:color ;
+        ys:fromProperty wdt:P462 ;  
+        sh:class yago:Color ;       
+    ] ;	
+	sh:property [
+        sh:path schema:width ;
+        sh:datatype yago:UnitOfLength ;
+        ys:fromProperty wdt:P2049 ;
+		sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path schema:height ;
+        sh:datatype yago:UnitOfLength ;
+        ys:fromProperty wdt:P2048 ;
+		sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path yago:length ;
+        sh:datatype yago:UnitOfLength ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P2043 ;
+    ] ;
+	sh:property [
+        sh:path yago:mass ;
+		sh:maxCount 1 ;
+        sh:datatype yago:UnitOfMass ;
+        ys:fromProperty wdt:P2067 ;
+    ] ;	
 	sh:property [
         sh:path yago:consumes ;
         sh:class schema:Taxon ;
@@ -1912,6 +2053,11 @@ schema:BioChemEntity a sh:NodeShape;
         ys:fromProperty wdt:P274 ;
         rdfs:comment "The chemical structure of the entity"@en ;
     ] ;
+	sh:property [
+        sh:path schema:color ;
+        ys:fromProperty wdt:P462 ;  
+        sh:class yago:Color ;       
+    ] ;	
     # duplicate with partOf
 	#sh:property [
     #    sh:path yago:contains ;
