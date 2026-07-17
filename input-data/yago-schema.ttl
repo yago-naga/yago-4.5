@@ -742,7 +742,7 @@ schema:Movie a sh:NodeShape ;
 yago:FictionalEntity a sh:NodeShape ;
 	rdfs:subClassOf schema:Thing ;
 	rdfs:label "Fictional entity"@en ;
-	sh:property [
+sh:property [
         sh:path schema:performer ;
         sh:class yago:Agent ;
         ys:fromProperty wdt:P175  ;
@@ -753,6 +753,12 @@ yago:FictionalEntity a sh:NodeShape ;
         sh:class yago:Agent ;
         ys:fromProperty wdt:P50, wdt:P170, wdt:P112 ; 
     ] ;
+    sh:property [
+        sh:path schema:gender ;
+        sh:class yago:Gender ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P21 ;
+    ] ;
 	sh:property [
         sh:path schema:spouse ;
         sh:or (
@@ -762,6 +768,16 @@ yago:FictionalEntity a sh:NodeShape ;
         ys:fromProperty wdt:P26 ;
         rdfs:comment "The spouse of a Person"@en ;
     ] ;
+    sh:property [
+        sh:path schema:knowsLanguage ;
+        sh:class schema:Language ;
+        ys:fromProperty wdt:P1412 ;
+    ] ;
+ sh:property [
+        sh:path yago:beliefSystem ;
+        sh:class yago:BeliefSystem ; 
+        ys:fromProperty wdt:P140, wdt:P1142 ;
+    ] ; 
 	sh:property [
         sh:path schema:address ;
         sh:datatype xsd:string ;
@@ -1066,6 +1082,12 @@ sh:property [
         ys:fromProperty wdt:P921 ;
     ] ;
     sh:property [
+        sh:path yago:interestedIn ; 
+        sh:class schema:Thing ; 
+        ys:fromProperty wdt:P2650;
+        rdfs:comment "The field of interest of the Agent"@en ;
+    ] ;  
+    sh:property [
         sh:path yago:influencedBy ;
         sh:class schema:Thing ;
         ys:fromProperty wdt:P737, wdt:P941 ;
@@ -1323,12 +1345,6 @@ schema:Person a sh:NodeShape ;
         ys:fromProperty wdt:P108 ;
         rdfs:comment "An organization, person or place (e.g., theater) that a Person works for"@en ;
     ] ;
-    sh:property [
-        sh:path yago:interestedIn ; 
-        sh:class schema:Thing ; 
-        ys:fromProperty wdt:P2650;
-        rdfs:comment "The field of interest of the Person"@en ;
-    ] ;  
     sh:property [
         sh:path schema:instrument ;
         sh:class yago:MusicalInstrument ;
