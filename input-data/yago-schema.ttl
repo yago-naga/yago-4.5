@@ -286,37 +286,8 @@ schema:Thing a sh:NodeShape ;
         sh:class schema:BioChemEntity ;
         ys:fromProperty wdt:P186 ;
         rdfs:comment "The material ofa Thing"@en ;
-    ] ;
+    ] .
 
-    # Located entities
-	
-	sh:property [
-        sh:path schema:geo ;
-        sh:datatype geo:wktLiteral ;
-        sh:maxCount 1 ;
-        ys:fromProperty wdt:P625 ;
-        rdfs:comment "The geographic coordinates of a Place (in WKT literal format)"@en ;
-    ] ;
-	sh:property [
-        sh:path schema:postalCode ;
-        sh:datatype xsd:string ;
-        ys:fromProperty wdt:P281 ;
-        rdfs:comment "The postal code of an AdministrativeArea"@en ;
-    ] ;
-	sh:property [
-        sh:path schema:address ;
-        sh:datatype xsd:string ;
-        ys:fromProperty wdt:P6375 ;
-        rdfs:comment "The physical address of an Organization"@en ;
-    ] ;
-	sh:property [
-        sh:path schema:location ;
-        sh:class schema:Place ;
-		# Fabian: wdt:P361 is overloaded with partOf, to make countries part of continents etc.
-		# Fabian: wdt:P463 is overloaded with memberOf
-        ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17, wdt:P30, wdt:P551, wdt:P361, wdt:P463, wdt:P183, wdt:P9714 ;
-        rdfs:comment "The location of a Thing"@en ;
-    ]     .
 
 # Class of all classes. Classes can have properties, too, but only annotation properties.
 rdfs:Class a sh:NodeShape ;  
@@ -511,7 +482,7 @@ yago:UnitOfTemperature a sh:NodeShape ;
 	ys:fromClass wd:Q68723978 .
 	
 ################################################################
-#                Media
+#                Creative Work
 ################################################################
 
 schema:CreativeWork a sh:NodeShape ;
@@ -529,7 +500,7 @@ schema:CreativeWork a sh:NodeShape ;
         sh:datatype xsd:anyURI ;
 		sh:maxCount 1 ;
         ys:fromProperty wdt:P154 ;
-        rdfs:comment "The logo of an Organization"@en ;
+        rdfs:comment "The logo of an entity"@en ;
     ] ;	
     sh:property [
         sh:path schema:publisher ;
@@ -544,6 +515,20 @@ schema:CreativeWork a sh:NodeShape ;
         ys:fromProperty wdt:P921 ;
         rdfs:comment "Indicates what a CreativeWork or Event is about"@en ;
     ] ;
+    sh:property [
+        sh:path schema:address ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P6375 ;
+        rdfs:comment "The physical address of the entity"@en ;
+    ] ;
+	sh:property [
+        sh:path schema:location ;
+        sh:class schema:Place ;
+		# Fabian: wdt:P361 is overloaded with partOf, to make countries part of continents etc.
+		# Fabian: wdt:P463 is overloaded with memberOf
+        ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17, wdt:P30, wdt:P551, wdt:P361, wdt:P463, wdt:P183, wdt:P9714 ;
+        rdfs:comment "The location of an entity"@en ;
+    ]  ;   
     sh:property [
         sh:path schema:contentLocation ;
         sh:class schema:Place ;
@@ -614,7 +599,7 @@ schema:CreativeWork a sh:NodeShape ;
         sh:path schema:inLanguage ;
         sh:class schema:Language ;
         ys:fromProperty wdt:P364, wdt:P407 ;
-        rdfs:comment "The language of a CreativeWork"@en ;
+        rdfs:comment "The language of an entity (e.g., CreativeWork)"@en ;
     ] .
     
 schema:Book a sh:NodeShape ;
@@ -734,6 +719,13 @@ schema:Movie a sh:NodeShape ;
         rdfs:comment "The director of photography for a Movie or TV Series"@en ;
     ] .
 
+
+
+
+################################################################
+#                Fictional Entity
+################################################################
+
 # Fictional entities are Things,
 # from  fictional entity (Q14897293) ,  imaginary character (Q115537581) ,  hypothetical entity (Q18706315) ,
 #  character that may or may not be fictional (Q21070598),  fictional creature (Q2593744) ,
@@ -756,6 +748,19 @@ yago:FictionalEntity a sh:NodeShape ;
         ys:fromProperty wdt:P26 ;
         rdfs:comment "The spouse of a Person"@en ;
     ] ;
+	sh:property [
+        sh:path schema:address ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P6375 ;
+    ] ;
+	sh:property [
+        sh:path schema:location ;
+        sh:class schema:Place ;
+		# Fabian: wdt:P361 is overloaded with partOf, to make countries part of continents etc.
+		# Fabian: wdt:P463 is overloaded with memberOf
+        ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17, wdt:P30, wdt:P551, wdt:P361, wdt:P463, wdt:P183, wdt:P9714 ;
+        rdfs:comment "The location of an entity"@en ;
+    ]  ;   
 	ys:fromClass wd:Q14897293, wd:Q115537581, wd:Q18706315, wd:Q21070598, wd:Q64728693 .
 
 ################################################################
@@ -772,18 +777,29 @@ schema:Event a sh:NodeShape ;
         sh:datatype rdf:langString ;
         ys:fromProperty wdt:P1451 ;
     ] ;		
+	sh:property [
+        sh:path schema:address ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P6375 ;
+    ] ;
+	sh:property [
+        sh:path schema:location ;
+        sh:class schema:Place ;
+		# Fabian: wdt:P361 is overloaded with partOf, to make countries part of continents etc.
+		# Fabian: wdt:P463 is overloaded with memberOf
+        ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17, wdt:P30, wdt:P551, wdt:P361, wdt:P463, wdt:P183, wdt:P9714 ;
+        rdfs:comment "The location of an entity"@en ;
+    ]  ;   
     sh:property [
         sh:path schema:logo ;
         sh:datatype xsd:anyURI ;
 		sh:maxCount 1 ;
         ys:fromProperty wdt:P154 ;
-        rdfs:comment "The logo of an Organization"@en ;
     ] ;	
     sh:property [
         sh:path schema:inLanguage ;
         sh:class schema:Language ;
         ys:fromProperty wdt:P364, wdt:P407 ;
-        rdfs:comment "The language of a CreativeWork"@en ;
     ] ;	
     sh:property [
         sh:path schema:about ;
@@ -890,6 +906,19 @@ sh:property [
         sh:datatype rdf:langString ;
         ys:fromProperty wdt:P1451 ;
     ] ;	
+	sh:property [
+        sh:path schema:address ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P6375 ;
+    ] ;
+	sh:property [
+        sh:path schema:location ;
+        sh:class schema:Place ;
+		# Fabian: wdt:P361 is overloaded with partOf, to make countries part of continents etc.
+		# Fabian: wdt:P463 is overloaded with memberOf
+        ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17, wdt:P30, wdt:P551, wdt:P361, wdt:P463, wdt:P183, wdt:P9714 ;
+        rdfs:comment "The location of an entity"@en ;
+    ]  ;   
 	sh:property [ 
         sh:path yago:playsIn ;
         sh:or (
@@ -919,7 +948,6 @@ schema:Organization a sh:NodeShape ;
         sh:datatype xsd:anyURI ;
 		sh:maxCount 1 ;
         ys:fromProperty wdt:P154 ;
-        rdfs:comment "The logo of an Organization"@en ;
     ] ;
     sh:property [
         sh:path schema:duns ;
@@ -1265,6 +1293,32 @@ schema:Place a sh:NodeShape ;
 	ys:fromClass wd:Q82794 ;
 	rdfs:subClassOf schema:Thing ;
 	rdfs:label "Place"@en ;
+    sh:property [
+        sh:path schema:geo ;
+        sh:datatype geo:wktLiteral ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P625 ;
+        rdfs:comment "The geographic coordinates of a Place (in WKT literal format)"@en ;
+    ] ;
+    sh:property [
+        sh:path schema:postalCode ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P281 ;
+        rdfs:comment "The postal code of a Place"@en ;
+    ] ;
+	sh:property [
+        sh:path schema:address ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P6375 ;
+    ] ;
+	sh:property [
+        sh:path schema:location ;
+        sh:class schema:Place ;
+		# Fabian: wdt:P361 is overloaded with partOf, to make countries part of continents etc.
+		# Fabian: wdt:P463 is overloaded with memberOf
+        ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17, wdt:P30, wdt:P551, wdt:P361, wdt:P463, wdt:P183, wdt:P9714 ;
+        rdfs:comment "The location of an entity"@en ;
+    ]  ;   
     sh:property [
         sh:path yago:populationNumber ; # Fabian: changed from schema:... 2024-04-03
         sh:datatype xsd:integer ;
@@ -1670,7 +1724,6 @@ schema:Product a sh:NodeShape ;
         sh:datatype xsd:anyURI ;
 		sh:maxCount 1 ;
         ys:fromProperty wdt:P154 ;
-        rdfs:comment "The logo of an Organization"@en ;
     ] ;
     sh:property [
         sh:path schema:manufacturer ;
