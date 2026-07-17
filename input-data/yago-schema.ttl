@@ -1705,7 +1705,7 @@ schema:Taxon a sh:NodeShape;
 
 # Thomas 27/03/26
 schema:MedicalEntity a sh:NodeShape;
-	rdfs:subClassOf schema:Intangible ;
+	rdfs:subClassOf schema:Thing ;
 	rdfs:label "Medical entity"@en ;
 	rdfs:comment "Any entity related to health (disease, treatment, examinations, etc.)"@en .
 
