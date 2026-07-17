@@ -243,3 +243,6 @@ wds:Q1340-244BF02D-91AC-4783-BCB6-4247B0B0D80E a wikibase:Statement ;
 # Stars should be excluded
 wd:Q23482  wdt:P31 yago:AstronomicalObject ;
 schema:name "XYZ J107878.27+203031.3"@en, "ABC J100216.27+203031.3"@mul .
+
+# Predefined labels should take precedence
+wd:Q1656682 rdfs:label "Should go away"@en, "Ceci reste"@fr .

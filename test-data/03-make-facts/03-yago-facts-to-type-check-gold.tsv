@@ -79,6 +79,7 @@ wd:Q_fictional	schema:birthPlace	wd:Q_birth_place_1	.
 wd:Q_fictional	yago:appearsIn	wd:Q_book	.
 wd:Q_singer	rdfs:label	"singer"@en	.
 wd:Q_singer	rdfs:label	"chanteur plus en détail"@fr	.
+wd:Q_singer	rdfs:label	"Mensch"@de	.
 wd:Q_singer	schema:sameAs	"https://freebase.com/id"	.
 wd:Q_singer	rdfs:comment	"this is a singer"@en	.
 wd:Q_singer	schema:alternateName	"this is a human singer"@en	.
@@ -98,3 +99,5 @@ wd:Q100995	rdfs:label	"lb"@en	.
 wd:Q100995	rdfs:label	"رطل"@ar	.
 wd:Q1340	rdf:type	wd:Q1259917	.
 wd:Q1340	rdfs:label	"Vivaldi"@en	.
+schema:Event	rdfs:label	"Ceci reste"@fr	.
+schema:Event	rdf:type	rdfs:Class	.

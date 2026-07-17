@@ -262,7 +262,7 @@ def cleanAndReturnTypes(entityFacts, yagoSchema, yagoTaxonomyUp, writer):
                     if disjointClass.identifier in myTypesAndSuperTypes:
                         # Log this only for entities with only natively declared types
                         if (mainEntity, Prefixes.rdfType, HAS_UNDECLARED_TYPES) not in entityFacts:
-                            writer.writeMetaFact(mainEntity, Prefixes.rdfType, directType, Prefixes.ysReason, f'"Disjoint type: {superclass} with {disjointClass}"')
+                            writer.writeMetaFact(mainEntity, Prefixes.rdfType, directType, Prefixes.ysReason, f'"Disjoint type: {superClass} with {disjointClass}"')
                         entityFacts.remove((mainEntity, Prefixes.rdfType, directType))
                         gotRemoved=True
                         break
@@ -470,11 +470,19 @@ def isSecondaryWikidataClass(entityFacts, yagoSchema) -> bool:
 def handleMaxCounts(entityFacts, yagoSchema, writer, isSecondaryClass = False) -> None:
     """ Performs uniqueLang and maxCount checks, removes offending facts """
     mainEntity = entityFacts.mainSubject()
+    # For classes that have been mapped to YAGO and that have a manually defined label,
+    # that label takes precedence
+    if mainEntity in yagoSchema.classes:
+        for label in yagoSchema.classes[mainEntity].labels:
+            for badLabel in list(entityFacts.objectsOf(mainEntity, Prefixes.rdfsLabel)):
+                if label[-3:] == badLabel[-3:]:
+                    entityFacts.remove((mainEntity, Prefixes.rdfsLabel, badLabel))
+                    writer.writeMetaFact(mainEntity, Prefixes.rdfsLabel, badLabel, Prefixes.ysReason, f"Already has manually defined label: {label}")
     for predicate in list(entityFacts.predicatesOf(mainEntity)):
         yagoProperty = yagoSchema.properties.get(predicate, None)
         if not yagoProperty:
             continue
-        # For secondary classes, we remove all objects because we will get them from the primary class
+        # For secondary classes, we remove all label objects because we will get them from the primary class
         if isSecondaryClass and (yagoProperty.maxCount or yagoProperty.uniqueLang):
             debug("Secondary class", mainEntity, "loses", predicate)
             entityFacts.removeObjects(mainEntity, predicate)
@@ -521,11 +529,8 @@ def guessLabelIfNecessary(entityFacts, writer):
     if entityFacts.objectsOf(mainEntity, Prefixes.rdfsLabel) and all(re.match(astro,l) for l in entityFacts.objectsOf(mainEntity, Prefixes.rdfsLabel)):
         writer.writeMetaFact(mainEntity, Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, f'"Only invalid names"')
         return False
-            
-    if entityFacts.objectsOf(mainEntity, Prefixes.rdfsLabel):
-        debug(mainEntity, "already has a label", entityFacts.objectsOf(mainEntity, Prefixes.rdfsLabel))
-        return True
-        
+    
+    # Try to get some more labels from Wikipedia pages     
     wikipediaPages = entityFacts.objectsOf(mainEntity, Prefixes.schemaUrl)
     labelName = None
     labelLanguage = "en"
@@ -541,8 +546,13 @@ def guessLabelIfNecessary(entityFacts, writer):
             debug("Found label for", mainEntity, ": ", labelName)
             entityFacts.add((mainEntity, Prefixes.rdfsLabel, '"' + labelName + '"@' + labelLanguage))
             return True
-    writer.writeMetaFact(mainEntity, Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, '"No label"')
-    return False
+    
+    # Still no label? Give up
+    if not entityFacts.objectsOf(mainEntity, Prefixes.rdfsLabel):
+        writer.writeMetaFact(mainEntity, Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, '"No label"')
+        return False
+        
+    return True
 
 ##########################################################################
 #             Main method
