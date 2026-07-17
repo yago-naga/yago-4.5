@@ -517,6 +517,7 @@ yago:UnitOfTemperature a sh:NodeShape ;
 schema:CreativeWork a sh:NodeShape ;
     ys:fromClass wd:Q17537576, wd:Q386724 ;
 	rdfs:subClassOf schema:Thing ;
+	rdfs:label "Creative work"@en ;
     sh:property [
         sh:path schema:editor ;
         sh:class schema:Person ;
@@ -906,6 +907,7 @@ sh:property [
 schema:Organization a sh:NodeShape ;
     ys:fromClass wd:Q43229, wd:Q895526, wd:Q167037, wd:Q155076 ; # Fabian: we add corporations here (in the sense of legal entities), and juridical persons, and organs
 	rdfs:subClassOf yago:Agent ;
+	rdfs:label "Organization"@en ;
 	sh:property [
         sh:path yago:officialLanguage ; # Fabian: changed from schema:... 2024-04-03
         sh:class schema:Language ;
@@ -1021,6 +1023,7 @@ schema:MusicGroup a sh:NodeShape ;
 
 schema:Person a sh:NodeShape ;
     rdfs:subClassOf yago:Agent ;
+	rdfs:label "Person"@en ;
     ys:fromClass wd:Q5, wd:Q215627, wd:Q212238 ; # Fabian: adding "civil servant" here to fix a bug in Wikidata that makes civil servants organizations
     sh:property [   # Fabian: Vivaldi was a student as well 2025-12-09 :-)
     	sh:path yago:studentOf ;
@@ -1261,6 +1264,7 @@ schema:Place a sh:NodeShape ;
 	# Fabian 2026-02-21: Added from Wikidata class region
 	ys:fromClass wd:Q82794 ;
 	rdfs:subClassOf schema:Thing ;
+	rdfs:label "Place"@en ;
     sh:property [
         sh:path yago:populationNumber ; # Fabian: changed from schema:... 2024-04-03
         sh:datatype xsd:integer ;
@@ -1659,6 +1663,7 @@ schema:Airport a sh:NodeShape ;
 # Mapping also Collectables and Goods
 schema:Product a sh:NodeShape ;
 	rdfs:subClassOf schema:Thing ;
+	rdfs:label "Product"@en ;
     ys:fromClass wd:Q2424752, wd:Q2342494, wd:Q28877, wd:Q2184715 ;
     sh:property [
         sh:path schema:logo ;
@@ -1697,6 +1702,7 @@ schema:Product a sh:NodeShape ;
 # This is the only way in which we can make assertions about taxons
 schema:Taxon a sh:NodeShape;
 	rdfs:subClassOf schema:Thing ;
+	rdfs:label "Taxon"@en ;
 	sh:property [
         sh:path schema:parentTaxon ;
         sh:class schema:Taxon ;
