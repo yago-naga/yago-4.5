@@ -262,7 +262,7 @@ def cleanAndReturnTypes(entityFacts, yagoSchema, yagoTaxonomyUp, writer):
                     if disjointClass.identifier in myTypesAndSuperTypes:
                         # Log this only for entities with only natively declared types
                         if (mainEntity, Prefixes.rdfType, HAS_UNDECLARED_TYPES) not in entityFacts:
-                            writer.writeMetaFact(mainEntity, Prefixes.rdfType, directType, Prefixes.ysReason, f'"Disjoint type: {disjointClass}"')
+                            writer.writeMetaFact(mainEntity, Prefixes.rdfType, directType, Prefixes.ysReason, f'"Disjoint type: {superclass} with {disjointClass}"')
                         entityFacts.remove((mainEntity, Prefixes.rdfType, directType))
                         gotRemoved=True
                         break
