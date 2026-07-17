@@ -170,58 +170,6 @@ schema:Thing a sh:NodeShape ;
 	# Properties that attach to so many classes that it is easier to attach them to Thing
 	
 	sh:property [
-        sh:path yago:creator ;
-        sh:class yago:Agent ;
-        ys:fromProperty wdt:P50, wdt:P170, wdt:P112 ; 
-        rdfs:comment "The creator of a Thing"@en ;
-    ] ;
-    sh:property [
-        sh:path schema:locationCreated ;
-        sh:class schema:Place ;
-        ys:fromProperty wdt:P495 ;
-        rdfs:comment "The location where a Thing was created"@en ;
-    ] ;	
-	sh:property [
-        sh:path schema:startDate ;
-        sh:or (
-            [
-                sh:datatype xsd:dateTime
-            ]
-            [
-                sh:datatype xsd:date
-            ]
-            [
-                sh:datatype xsd:gYearMonth
-            ]
-            [
-                sh:datatype xsd:gYear
-            ]
-        ) ;
-        sh:maxCount 1 ;
-        ys:fromProperty wdt:P571, wdt:P580  ;
-        rdfs:comment "The date a Thing started existing"@en ;
-    ] ;
-	sh:property [
-        sh:path schema:endDate ;
-        sh:or (
-            [
-                sh:datatype xsd:dateTime
-            ]
-            [
-                sh:datatype xsd:date
-            ]
-            [
-                sh:datatype xsd:gYearMonth
-            ]
-            [
-                sh:datatype xsd:gYear
-            ]
-        ) ;
-        sh:maxCount 1 ;
-        ys:fromProperty wdt:P576, wdt:P582 ;
-        rdfs:comment "The date when a Thing stopped existing"@en ;
-    ] ;
-	sh:property [
         sh:path yago:ownedBy ;
         sh:class yago:Agent ;
         ys:fromProperty wdt:P127 ;
@@ -454,6 +402,11 @@ schema:CreativeWork a sh:NodeShape ;
         ys:fromProperty wdt:P98 ;
         rdfs:comment "An editor of a Book"@en ;
     ] ;		
+	sh:property [
+        sh:path yago:creator ;
+        sh:class yago:Agent ;
+        ys:fromProperty wdt:P50, wdt:P170, wdt:P112 ; 
+    ] ;
     sh:property [
         sh:path schema:logo ;
         sh:datatype xsd:anyURI ;
@@ -461,6 +414,46 @@ schema:CreativeWork a sh:NodeShape ;
         ys:fromProperty wdt:P154 ;
         rdfs:comment "The logo of an entity"@en ;
     ] ;	
+	sh:property [
+        sh:path schema:startDate ;
+        sh:or (
+            [
+                sh:datatype xsd:dateTime
+            ]
+            [
+                sh:datatype xsd:date
+            ]
+            [
+                sh:datatype xsd:gYearMonth
+            ]
+            [
+                sh:datatype xsd:gYear
+            ]
+        ) ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P571, wdt:P580  ;
+        rdfs:comment "The date an entity started existing"@en ;
+    ] ;
+	sh:property [
+        sh:path schema:endDate ;
+        sh:or (
+            [
+                sh:datatype xsd:dateTime
+            ]
+            [
+                sh:datatype xsd:date
+            ]
+            [
+                sh:datatype xsd:gYearMonth
+            ]
+            [
+                sh:datatype xsd:gYear
+            ]
+        ) ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P576, wdt:P582 ;
+        rdfs:comment "The date when an entity stopped existing"@en ;
+    ] ;
 	sh:property [
         sh:path schema:color ;
         ys:fromProperty wdt:P462 ;  
@@ -528,6 +521,12 @@ schema:CreativeWork a sh:NodeShape ;
         ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17, wdt:P30, wdt:P551, wdt:P361, wdt:P463, wdt:P183, wdt:P9714 ;
         rdfs:comment "The location of an entity"@en ;
     ]  ;   
+    sh:property [
+        sh:path schema:locationCreated ;
+        sh:class schema:Place ;
+        ys:fromProperty wdt:P495 ;
+        rdfs:comment "The location where an entity was created"@en ;
+    ] ;	
     sh:property [
         sh:path schema:contentLocation ;
         sh:class schema:Place ;
@@ -739,6 +738,11 @@ yago:FictionalEntity a sh:NodeShape ;
         rdfs:comment "An Agent who performs in this Creative Work"@en ;
     ] ;
 	sh:property [
+        sh:path yago:creator ;
+        sh:class yago:Agent ;
+        ys:fromProperty wdt:P50, wdt:P170, wdt:P112 ; 
+    ] ;
+	sh:property [
         sh:path schema:spouse ;
         sh:or (
             [ sh:class schema:Person ]
@@ -758,8 +762,12 @@ yago:FictionalEntity a sh:NodeShape ;
 		# Fabian: wdt:P361 is overloaded with partOf, to make countries part of continents etc.
 		# Fabian: wdt:P463 is overloaded with memberOf
         ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17, wdt:P30, wdt:P551, wdt:P361, wdt:P463, wdt:P183, wdt:P9714 ;
-        rdfs:comment "The location of an entity"@en ;
     ]  ;   
+    sh:property [
+        sh:path schema:locationCreated ;
+        sh:class schema:Place ;
+        ys:fromProperty wdt:P495 ;
+    ] ;	
 	sh:property [
         sh:path schema:color ;
         ys:fromProperty wdt:P462 ;  
@@ -806,6 +814,11 @@ schema:Event a sh:NodeShape ;
 	rdfs:label "Event"@en ;
     rdfs:subClassOf schema:Thing ;
 	sh:property [
+        sh:path yago:creator ;
+        sh:class yago:Agent ;
+        ys:fromProperty wdt:P50, wdt:P170, wdt:P112 ; 
+    ] ;
+	sh:property [
         sh:path schema:slogan ; # Fabian: changed from motto to slogan 2024-04-03
         sh:datatype rdf:langString ;
         ys:fromProperty wdt:P1451 ;
@@ -821,8 +834,50 @@ schema:Event a sh:NodeShape ;
 		# Fabian: wdt:P361 is overloaded with partOf, to make countries part of continents etc.
 		# Fabian: wdt:P463 is overloaded with memberOf
         ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17, wdt:P30, wdt:P551, wdt:P361, wdt:P463, wdt:P183, wdt:P9714 ;
-        rdfs:comment "The location of an entity"@en ;
-    ]  ;   
+    ]  ;  
+    sh:property [
+        sh:path schema:locationCreated ;
+        sh:class schema:Place ;
+        ys:fromProperty wdt:P495 ;
+    ] ;	 
+	sh:property [
+        sh:path schema:startDate ;
+        sh:or (
+            [
+                sh:datatype xsd:dateTime
+            ]
+            [
+                sh:datatype xsd:date
+            ]
+            [
+                sh:datatype xsd:gYearMonth
+            ]
+            [
+                sh:datatype xsd:gYear
+            ]
+        ) ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P571, wdt:P580  ;
+    ] ;
+	sh:property [
+        sh:path schema:endDate ;
+        sh:or (
+            [
+                sh:datatype xsd:dateTime
+            ]
+            [
+                sh:datatype xsd:date
+            ]
+            [
+                sh:datatype xsd:gYearMonth
+            ]
+            [
+                sh:datatype xsd:gYear
+            ]
+        ) ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P576, wdt:P582 ;
+    ] ;
     sh:property [
         sh:path schema:logo ;
         sh:datatype xsd:anyURI ;
@@ -922,7 +977,51 @@ sh:property [
         sh:class yago:BeliefSystem ; # Fabian: merge with belief system for people?
         ys:fromProperty wdt:P140, wdt:P1142 ;
         rdfs:comment "The belief system (e.g., religion) of an Agent"@en ;
-    ] ; sh:property [
+    ] ; 
+ sh:property [
+        sh:path yago:creator ;
+        sh:class yago:Agent ;
+        ys:fromProperty wdt:P50, wdt:P170, wdt:P112 ; 
+    ] ;
+	sh:property [
+        sh:path schema:startDate ;
+        sh:or (
+            [
+                sh:datatype xsd:dateTime
+            ]
+            [
+                sh:datatype xsd:date
+            ]
+            [
+                sh:datatype xsd:gYearMonth
+            ]
+            [
+                sh:datatype xsd:gYear
+            ]
+        ) ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P571, wdt:P580  ;
+    ] ;
+	sh:property [
+        sh:path schema:endDate ;
+        sh:or (
+            [
+                sh:datatype xsd:dateTime
+            ]
+            [
+                sh:datatype xsd:date
+            ]
+            [
+                sh:datatype xsd:gYearMonth
+            ]
+            [
+                sh:datatype xsd:gYear
+            ]
+        ) ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P576, wdt:P582 ;
+    ] ;
+ sh:property [
         sh:path schema:memberOf ;
         sh:class schema:Organization ;
         ys:fromProperty wdt:P463, wdt:P114 ;
@@ -950,8 +1049,12 @@ sh:property [
 		# Fabian: wdt:P361 is overloaded with partOf, to make countries part of continents etc.
 		# Fabian: wdt:P463 is overloaded with memberOf
         ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17, wdt:P30, wdt:P551, wdt:P361, wdt:P463, wdt:P183, wdt:P9714 ;
-        rdfs:comment "The location of an entity"@en ;
     ]  ;   
+    sh:property [
+        sh:path schema:locationCreated ;
+        sh:class schema:Place ;
+        ys:fromProperty wdt:P495 ;
+    ] ;	
 	sh:property [ 
         sh:path yago:playsIn ;
         sh:or (
@@ -1361,8 +1464,45 @@ schema:Place a sh:NodeShape ;
 		# Fabian: wdt:P361 is overloaded with partOf, to make countries part of continents etc.
 		# Fabian: wdt:P463 is overloaded with memberOf
         ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17, wdt:P30, wdt:P551, wdt:P361, wdt:P463, wdt:P183, wdt:P9714 ;
-        rdfs:comment "The location of an entity"@en ;
     ]  ;   
+	sh:property [
+        sh:path schema:startDate ;
+        sh:or (
+            [
+                sh:datatype xsd:dateTime
+            ]
+            [
+                sh:datatype xsd:date
+            ]
+            [
+                sh:datatype xsd:gYearMonth
+            ]
+            [
+                sh:datatype xsd:gYear
+            ]
+        ) ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P571, wdt:P580  ;
+    ] ;
+	sh:property [
+        sh:path schema:endDate ;
+        sh:or (
+            [
+                sh:datatype xsd:dateTime
+            ]
+            [
+                sh:datatype xsd:date
+            ]
+            [
+                sh:datatype xsd:gYearMonth
+            ]
+            [
+                sh:datatype xsd:gYear
+            ]
+        ) ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P576, wdt:P582 ;
+    ] ;
 	sh:property [
         sh:path schema:width ;
         sh:datatype yago:UnitOfLength ;
@@ -1391,6 +1531,11 @@ schema:Place a sh:NodeShape ;
         sh:path schema:material ;
         sh:class schema:BioChemEntity ;
         ys:fromProperty wdt:P186 ;
+    ] ;
+ sh:property [
+        sh:path yago:creator ;
+        sh:class yago:Agent ;
+        ys:fromProperty wdt:P50, wdt:P170, wdt:P112 ; 
     ] ;
     sh:property [
         sh:path yago:populationNumber ; # Fabian: changed from schema:... 2024-04-03
@@ -1843,6 +1988,11 @@ schema:Product a sh:NodeShape ;
         sh:path schema:material ;
         sh:class schema:BioChemEntity ;
         ys:fromProperty wdt:P186 ;
+    ] ;
+ sh:property [
+        sh:path yago:creator ;
+        sh:class yago:Agent ;
+        ys:fromProperty wdt:P50, wdt:P170, wdt:P112 ; 
     ] ;
     sh:property [
         sh:path schema:price ;
