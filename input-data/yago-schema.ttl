@@ -501,6 +501,11 @@ schema:CreativeWork a sh:NodeShape ;
         rdfs:comment "The material of a Thing"@en ;
     ] ;
     sh:property [
+        sh:path schema:price ;
+        sh:datatype yago:UnitOfMoney ;
+        ys:fromProperty wdt:P2284 ;
+    ] ;
+    sh:property [
         sh:path schema:publisher ;
 		sh:maxCount 1 ;
         sh:class yago:Agent ;
@@ -966,7 +971,6 @@ schema:Event a sh:NodeShape ;
         sh:minInclusive 0 ;
 		sh:maxCount 1 ;
         ys:fromProperty wdt:P2899 ;
-        rdfs:comment "Minimum required age in years"@en ;
     ] ;
     sh:property [
         sh:path schema:requiredMaxAge ;
@@ -1166,6 +1170,20 @@ schema:Organization a sh:NodeShape ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P1278 ;
         rdfs:comment "The Legal Entity Identifier (LEI) code for an Organization"@en ;
+    ] ;
+    sh:property [
+        sh:path schema:requiredMinAge ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 0 ;
+		sh:maxCount 1 ;
+        ys:fromProperty wdt:P2899 ;
+    ] ;
+    sh:property [
+        sh:path schema:requiredMaxAge ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 0 ;
+		sh:maxCount 1 ;
+        ys:fromProperty wdt:P4135 ;
     ] ;
     sh:property [
         sh:path schema:numberOfEmployees ;
@@ -2260,7 +2278,6 @@ schema:MedicalCondition a sh:NodeShape;
         sh:path yago:hasCause ;
         ys:fromProperty wdt:P828 ;
         sh:class schema:Thing ;
-        rdfs:comment "The cause of an Event"@en ;
     ] ;
 	# Too few facts
 	#sh:property [
