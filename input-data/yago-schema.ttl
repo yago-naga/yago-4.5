@@ -2064,6 +2064,11 @@ schema:Product a sh:NodeShape ;
         ys:fromProperty wdt:P176, wdt:P178 ;
         rdfs:comment "The manufacturer of a CreativeWork or Product"@en ;
     ] ;
+    sh:property [
+        sh:path schema:locationCreated ;
+        sh:class schema:Place ;
+        ys:fromProperty wdt:P495 ;
+    ] ;	
 	sh:property [
         sh:path schema:color ;
         ys:fromProperty wdt:P462 ;  
