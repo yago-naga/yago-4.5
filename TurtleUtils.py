@@ -217,7 +217,7 @@ def triplesFromTerms(generator, predicates=None, givenSubject=None):
             printError("File ended unexpectedly after", subject, predicate)
             return
         elif object in ['.',',',';']:
-            printError("Unexpected",object,"after",subject,predicate)
+            printError("Unexpected",object,"after",subject,predicate, "and before", " ".join(next(generator, None) for i in range(0,20)))
             return
         elif object=='(':
             listNode=blankNodeName("list")
