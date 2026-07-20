@@ -56,6 +56,21 @@ instanceIndicators = {
     "wdt:P171",  # parent taxon -> instance of taxon
     "wdt:P176",  # manufacturer -> instance of Product
     "wdt:P178",  # developer -> instance of Product
+    "wdt:P11143", # disease identifier
+    "wdt:P11430", # disease identifier
+    "wdt:P13987", # disease identifier
+    "wdt:P2892", # disease identifier
+    "wdt:P3201", # disease identifier
+    "wdt:P3720", # disease identifier
+    "wdt:P4229", # disease identifier
+    "wdt:P486", # disease identifier
+    "wdt:P494", # disease identifier
+    "wdt:P5082", # disease identifier
+    "wdt:P5270", # disease identifier
+    "wdt:P557", # disease identifier
+    "wdt:P686", # disease identifier
+    "wdt:P699", # disease identifier
+    "wdt:P7807", # disease identifier
     "wdt:P580"   # start time -> instance of Event
 }
 
