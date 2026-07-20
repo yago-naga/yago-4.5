@@ -148,7 +148,7 @@ This is the top-level taxonomy of classes of YAGO 4.5, together with their prope
 ##########################################################################
 
 # Number of example entities
-NUM_SAMPLES=200
+NUM_SAMPLES=2000
 
 with TsvUtils.Timer("Step 06: Collecting YAGO statistics"):
 
