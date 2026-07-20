@@ -1891,6 +1891,13 @@ schema:AdministrativeArea a sh:NodeShape ;
         ys:fromProperty wdt:P3529 ;
         rdfs:comment "Median household income in a place"@en ;
     ] ;
+    sh:property [
+        sh:path yago:humanDevelopmentIndex ; # Fabian: changed from schema:humanDevelopmentIndex 2024-04-03
+        sh:datatype xsd:decimal ;
+		sh:maxCount 1 ;
+        ys:fromProperty wdt:P1081 ;
+        rdfs:comment "The Human Development Index value for a Country"@en ;
+    ] ;
     ys:fromClass wd:Q56061, wd:Q486972 . # Fabian: also from human settlement, to avoid having it under land forms
 
 # Needed for capitals, mapped to "City or Town" in Wikidata, and to City.
@@ -1901,13 +1908,6 @@ schema:City a sh:NodeShape ;
 # Needed because of additional properties
 schema:Country a sh:NodeShape ;
 	rdfs:subClassOf schema:AdministrativeArea ;
-    sh:property [
-        sh:path yago:humanDevelopmentIndex ; # Fabian: changed from schema:humanDevelopmentIndex 2024-04-03
-        sh:datatype xsd:decimal ;
-		sh:maxCount 1 ;
-        ys:fromProperty wdt:P1081 ;
-        rdfs:comment "The Human Development Index value for a Country"@en ;
-    ] ;
     sh:property [
         sh:path yago:inequalityAdjustedHumanDevelopmentIndex ; 
         sh:datatype xsd:decimal ;
