@@ -189,6 +189,8 @@ schemaBioChemEntity = "schema:BioChemEntity"
 
 schemaMedicalEntity= "schema:MedicalEntity"
 
+schemaPlace = "schema:Place"
+
 yagoPersonName="yago:PersonName"
 
 yagoSiteLinks = "yago:siteLinks"
