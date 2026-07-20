@@ -1898,6 +1898,12 @@ schema:AdministrativeArea a sh:NodeShape ;
         ys:fromProperty wdt:P1081 ;
         rdfs:comment "The Human Development Index value for a Country"@en ;
     ] ;
+    sh:property [
+        sh:path yago:studentsCount ;
+        sh:datatype xsd:integer ;
+		sh:maxCount 1 ;
+        ys:fromProperty wdt:P2196 ;
+    ] ;
     ys:fromClass wd:Q56061, wd:Q486972 . # Fabian: also from human settlement, to avoid having it under land forms
 
 # Needed for capitals, mapped to "City or Town" in Wikidata, and to City.
