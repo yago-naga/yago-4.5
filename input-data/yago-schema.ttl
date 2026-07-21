@@ -1604,17 +1604,19 @@ schema:Person a sh:NodeShape ;
         sh:class yago:Election ;
         ys:fromProperty wdt:P3602 ;
         rdfs:comment "An Election that a Politician was a candidate in"@en ;
-	] .    
-
-yago:SportsPerson a sh:NodeShape ;
-    ys:fromClass wd:Q50995749 ;	
-	rdfs:subClassOf schema:Person ;
-	sh:property [
+	] ;
+    sh:property [
     	sh:path yago:sportNumber ;
     	sh:datatype xsd:string ;
     	ys:fromProperty wdt:P1618 ;
         rdfs:comment "The sport number (jersey number) of a SportsPerson"@en ;
-	] .
+	] .    
+
+# Thomas: Move property up
+# yago:SportsPerson a sh:NodeShape ;
+#    ys:fromClass wd:Q50995749 ;	
+#	rdfs:subClassOf schema:Person ;
+# .
 
 # Thomas: Move property up
 # yago:Politician a sh:NodeShape ;
