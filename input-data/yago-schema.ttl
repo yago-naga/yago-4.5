@@ -1085,6 +1085,12 @@ schema:Organization a sh:NodeShape ;
         sh:datatype xsd:string ;
         ys:fromProperty wdt:P281 ;
     ] ;
+    sh:property [
+        sh:path schema:geo ;
+        sh:datatype geo:wktLiteral ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P625 ;
+    ] ;
    sh:property [
         sh:path schema:location ;
         sh:class schema:Place ;
