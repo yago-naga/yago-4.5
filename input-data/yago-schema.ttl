@@ -1204,7 +1204,15 @@ schema:Organization a sh:NodeShape ;
         sh:class schema:Thing ;
         ys:fromProperty wdt:P921 ;
     ] ;
-	sh:property [
+    sh:property [
+        sh:path yago:medicalSpecialty ;
+        sh:or (
+            [ sh:class schema:MedicalSpecialty ]
+            [ sh:class yago:AcademicDiscipline ]
+	) ;
+        ys:fromProperty wdt:P1995 ;
+    ] ;
+    sh:property [
         sh:path schema:locationCreated ;
         sh:class schema:Place ;
         ys:fromProperty wdt:P495 ;
@@ -1527,6 +1535,14 @@ schema:Person a sh:NodeShape ;
         sh:class schema:Thing ; 
         ys:fromProperty wdt:P101 ;
         rdfs:comment "The field of work of the Agent"@en ;
+    ] ;
+    sh:property [
+        sh:path yago:medicalSpecialty ;
+        sh:or (
+            [ sh:class schema:MedicalSpecialty ]
+            [ sh:class yago:AcademicDiscipline ]
+	) ;
+        ys:fromProperty wdt:P1995 ;
     ] ;
     sh:property [ 
         sh:path yago:playsIn ;
@@ -2351,7 +2367,7 @@ schema:MedicalCondition a sh:NodeShape;
     ] ;
 	rdfs:label "Medical Condition"@en ;
 	rdfs:comment "Any condition that affects the normal functioning of a person or an animal"@en ;
-	ys:fromClass wd:Q7189713, wd:Q1483951, wd:Q12136.
+	ys:fromClass wd:Q7189713, wd:Q1483951, wd:Q12136, wd:Q130753312, wd:Q87075524, wd:Q112193867 .
 
 
 ################################################################
