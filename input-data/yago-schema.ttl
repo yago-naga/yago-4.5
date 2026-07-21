@@ -465,7 +465,12 @@ schema:CreativeWork a sh:NodeShape ;
         ys:fromProperty wdt:P737, wdt:P941 ;
         rdfs:comment "An entity that influenced the entity"@en ;
     ] ;
-	sh:property [
+    sh:property [
+        sh:path yago:hasCause ;
+        ys:fromProperty wdt:P828 ;
+        sh:class schema:Thing ;
+    ] ;
+    sh:property [
         sh:path schema:award ;
         sh:class yago:Award ;
         ys:fromProperty wdt:P166 ;
