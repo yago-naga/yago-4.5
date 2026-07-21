@@ -963,6 +963,11 @@ schema:Event a sh:NodeShape ;
         rdfs:comment "An Agent who performs in this Creative Work"@en ;
     ] ;
   sh:property [
+        sh:path schema:director ;
+        sh:class schema:Person ;
+        ys:fromProperty wdt:P1037, wdt:P1875;
+    ] ;	
+  sh:property [
         sh:path yago:officialLanguage ; 
         sh:class schema:Language ;
         ys:fromProperty wdt:P37 ;
@@ -1281,7 +1286,7 @@ schema:EducationalOrganization a sh:NodeShape ;
 # We need this as a superclass of MusicGroup
 schema:PerformingGroup rdf:type sh:NodeShape ;
     rdfs:subClassOf schema:Organization ; 
-	sh:property [
+    sh:property [
         sh:path schema:director ;
         sh:class schema:Person ;
         ys:fromProperty wdt:P1037, wdt:P1875;
