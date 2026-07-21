@@ -2366,6 +2366,13 @@ schema:Taxon a sh:NodeShape;
         ys:fromProperty wdt:P1034 ;
         rdfs:comment "A Taxon that another Taxon consumes (predator-prey relationship)"@en ;
     ] ;
+    sh:property [
+        sh:path yago:lifeExpectancy ;
+		sh:maxCount 1 ;
+        sh:datatype xsd:decimal ;    
+        sh:minInclusive 0 ;
+        ys:fromProperty wdt:P2250 ;
+    ] ;
     #Margherita 23/06/2026 added property
     sh:property [
           sh:path yago:eggIncubationPeriod ;
