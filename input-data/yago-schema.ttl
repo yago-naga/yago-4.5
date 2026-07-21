@@ -645,20 +645,6 @@ schema:CreativeWork a sh:NodeShape ;
         sh:class schema:Person ;
         ys:fromProperty wdt:P344 ;
         rdfs:comment "The director of photography for a Movie or TV Series"@en ;
-    ]  ; 
-    sh:property [
-        sh:path schema:numberOfEpisodes ;
-        sh:datatype xsd:integer ;
-        sh:maxCount 1 ;
-        ys:fromProperty wdt:P1113 ;
-        rdfs:comment "The number of episodes in a TV Series"@en ;
-    ] ;
-    sh:property [
-        sh:path schema:numberOfSeasons ;
-        sh:datatype xsd:integer ;
-        sh:maxCount 1 ;
-        ys:fromProperty wdt:P2437 ;
-        rdfs:comment "The number of seasons in a TV Series"@en ;
     ]  .
  
 schema:Book a sh:NodeShape ;
@@ -680,11 +666,23 @@ schema:Book a sh:NodeShape ;
         rdfs:comment "The ISBN (International Standard Book Number) of a Book"@en ;
     ]  .
 
-# Thomas: move properties up
-# schema:TVSeries a sh:NodeShape ; 
-#	rdfs:subClassOf schema:CreativeWork ; # instead of series
-#    ys:fromClass wd:Q5398426 .
-
+schema:TVSeries a sh:NodeShape ; 
+	rdfs:subClassOf schema:CreativeWork ; # instead of series
+	ys:fromClass wd:Q5398426, wd:Q15416 ;
+    sh:property [
+        sh:path schema:numberOfEpisodes ;
+        sh:datatype xsd:integer ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P1113 ;
+        rdfs:comment "The number of episodes in a TV Series"@en ;
+    ] ;
+    sh:property [
+        sh:path schema:numberOfSeasons ;
+        sh:datatype xsd:integer ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P2437 ;
+        rdfs:comment "The number of seasons in a TV Series"@en ;
+    ] .
 schema:MusicComposition a sh:NodeShape ;
 	rdfs:subClassOf schema:CreativeWork ;
     ys:fromClass wd:Q207628, wd:Q2188189 ;
