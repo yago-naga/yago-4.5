@@ -839,7 +839,7 @@ yago:FictionalEntity a sh:NodeShape ;
 
 schema:Event a sh:NodeShape ;
     # Remove "occurrence", is a bad class
-    ys:fromClass wd:Q1656682 ;
+    ys:fromClass wd:Q1656682, wd:Q132821, wd:Q11514315, wd:Q350604 ;
 	rdfs:label "Event"@en ;
     rdfs:subClassOf schema:Thing ;
 	sh:property [
