@@ -2286,6 +2286,11 @@ schema:Product a sh:NodeShape ;
         rdfs:comment "The Global Trade Item Number for a Product"@en ;
     ] .
 
+yago:coin a sh:NodeShape ;
+    rdfs:subClassOf schema:Product ;
+    ys:fromClass wd:Q113813711 .
+
+
 ################################################################
 #                Animals and other organisms
 ################################################################
