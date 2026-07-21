@@ -46,6 +46,16 @@ def getFirst(iterable):
     except StopIteration:
         return None
 
+def debug(*message: Any) -> None:
+    """ Prints a message if we're in TEST mode"""
+    if TEST:
+        sys.stdout.buffer.write(b"  DEBUG: ")
+        for m in message:
+            # Using this instead of print to allow printing unicode chars to pipes
+            sys.stdout.buffer.write(str(m).encode('utf8'))
+            sys.stdout.buffer.write(b" ")
+        print("")
+
 ###########################################################################
 #           Loading the Wikidata taxonomy
 ###########################################################################
@@ -60,7 +70,7 @@ instanceIndicators = {
     "wdt:P11143", # disease identifier
     "wdt:P11430", # disease identifier
     "wdt:P13987", # disease identifier
-    "wdt:P2892", # disease identifier
+    # "wdt:P2892", # disease identifier -> UMLS CUI does not identify just diseases
     "wdt:P3201", # disease identifier
     "wdt:P3720", # disease identifier
     "wdt:P4229", # disease identifier
@@ -86,12 +96,15 @@ class WikidataVisitor:
 
         # Ignore classes without labels
         if Prefixes.rdfsLabel not in predicates:
+            debug(graph.mainSubject(),"does not have a label")
             return True
         # Ignore non-classes
         if Prefixes.wikidataSubClassOf not in predicates and Prefixes.wikidataAnalogousClass not in predicates:
+            debug(graph.mainSubject(),"has no superclass")
             return True   
         # If we're handling an instance, quit
         if not predicates.isdisjoint(instanceIndicators):
+            debug(graph.mainSubject(),"has an instance indicator:", [s for s in instanceIndicators if s in predicates])
             return True
         for subject, predicate, obj in graph:            
             if predicate == Prefixes.wikidataSubClassOf or predicate == Prefixes.wikidataAnalogousClass:
@@ -226,7 +239,8 @@ def addSubClass(superClass, subClass, yagoSchema, yagoTaxonomyUp, wikidataTaxono
     
     # Exclude classes that are already mapped to YAGO
     if subClass in yagoSchema.wikidataClasses:
-        logWriter.writeMetaFact(subClass, Prefixes.rdfsSubclassOf, superClass, Prefixes.ysReason, '"Class mapped to YAGO class"')
+        logWriter.writeMetaFact(subClass, Prefixes.rdfsSubclassOf, superClass, Prefixes.ysReason, f'"Class mapped to YAGO class: {yagoSchema.wikidataClasses[subClass].identifier}"')
+        print(yagoSchema.wikidataClasses)
         return
         
     # Treat classes that appear already in the taxonomy
