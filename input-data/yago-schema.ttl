@@ -2096,6 +2096,12 @@ yago:HumanMadeGeographicalEntity a sh:NodeShape ;
         ys:fromProperty wdt:P2196 ;
     ] ;
     sh:property [
+        sh:path schema:logo ;
+        sh:datatype xsd:anyURI ;
+		sh:maxCount 1 ;
+        ys:fromProperty wdt:P154 ;
+    ] ;
+    sh:property [
         sh:path schema:maximumAttendeeCapacity ;
         sh:datatype xsd:integer ;
 		sh:maxCount 1 ;
