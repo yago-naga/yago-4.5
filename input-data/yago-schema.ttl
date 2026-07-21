@@ -666,7 +666,7 @@ schema:CreativeWork a sh:NodeShape ;
  
 schema:Book a sh:NodeShape ;
     rdfs:subClassOf schema:CreativeWork ;
-    ys:fromClass wd:Q571, wd:Q3331189, wd:Q7725634, wd:Q1004 ;
+    ys:fromClass wd:Q571, wd:Q7725634, wd:Q1004 ;
     sh:property [
         sh:path schema:numberOfPages ;
         sh:datatype xsd:integer ;
@@ -841,7 +841,7 @@ yago:FictionalEntity a sh:NodeShape ;
 
 schema:Event a sh:NodeShape ;
     # Remove "occurrence", is a bad class
-    ys:fromClass wd:Q1656682, wd:Q132821, wd:Q11514315, wd:Q350604 ;
+    ys:fromClass wd:Q1656682, wd:Q1689296, wd:Q11514315, wd:Q115431196 ;
 	rdfs:label "Event"@en ;
     rdfs:subClassOf schema:Thing ;
 	sh:property [
@@ -2055,7 +2055,7 @@ schema:Landform a sh:NodeShape ;
 # Linked to body of water and marine body of water and lake
 schema:BodyOfWater a sh:NodeShape ;
 	rdfs:subClassOf schema:Landform ;
-    ys:fromClass wd:Q15324, wd:Q116126039, wd:Q23397, wd:Q355304 ;
+    ys:fromClass wd:Q15324, wd:Q23397 ;
     sh:property [
         sh:path yago:flowsInto ;
         sh:class schema:BodyOfWater ;
