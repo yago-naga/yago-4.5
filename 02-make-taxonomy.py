@@ -56,6 +56,7 @@ instanceIndicators = {
     "wdt:P171",  # parent taxon -> instance of taxon
     "wdt:P176",  # manufacturer -> instance of Product
     "wdt:P178",  # developer -> instance of Product
+    "wdt:P10205", # coin identifier -> instance of Product
     "wdt:P11143", # disease identifier
     "wdt:P11430", # disease identifier
     "wdt:P13987", # disease identifier
