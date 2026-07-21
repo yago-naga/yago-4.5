@@ -2044,6 +2044,20 @@ yago:HumanMadeGeographicalEntity a sh:NodeShape ;
         ys:fromProperty wdt:P140, wdt:P1142 ;
     ] ; 
     sh:property [
+        sh:path yago:ownedBy ;
+        sh:or (
+	 [ sh:class schema:Person ]
+         [ sh:class schema:Organization ]
+        ) ;
+        ys:fromProperty wdt:P127 ;
+    ] ;
+    sh:property [
+        sh:path yago:studentsCount ;
+        sh:datatype xsd:integer ;
+		sh:maxCount 1 ;
+        ys:fromProperty wdt:P2196 ;
+    ] ;
+    sh:property [
         sh:path schema:maximumAttendeeCapacity ;
         sh:datatype xsd:integer ;
 		sh:maxCount 1 ;
@@ -2159,7 +2173,7 @@ schema:Product a sh:NodeShape ;
         ) ;
         ys:fromProperty wdt:P50, wdt:P170, wdt:P112 ; 
     ] ;
-	sh:property [
+   sh:property [
         sh:path yago:ownedBy ;
         sh:or (
 	 [ sh:class schema:Person ]
