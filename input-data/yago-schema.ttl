@@ -1259,6 +1259,11 @@ schema:Organization a sh:NodeShape ;
         ys:fromProperty wdt:P1317 ;
     ] ;
     sh:property [
+        sh:path yago:notableWork ;
+        sh:class schema:Thing ;
+        ys:fromProperty wdt:P800 ;
+    ] ;		
+    sh:property [
         sh:path schema:numberOfEmployees ;
         sh:datatype xsd:integer ;
 		sh:maxCount 1 ;
