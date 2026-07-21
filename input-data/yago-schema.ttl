@@ -1216,19 +1216,20 @@ schema:Organization a sh:NodeShape ;
         sh:path schema:locationCreated ;
         sh:class schema:Place ;
         ys:fromProperty wdt:P495 ;
-    ]  .
-
-schema:Corporation a sh:NodeShape ;
-	rdfs:subClassOf schema:Organization ;
-    ys:fromClass wd:Q783794 ; # Fabian 2023-05-04: we merge companies 
-	ys:fromClass wd:Q4830453 ; # Fabian 2023-03-29: we merge in businesses here
-	sh:property [
+    ] ;
+    sh:property [
         sh:path schema:numberOfEmployees ;
         sh:datatype xsd:integer ;
 		sh:maxCount 1 ;
         ys:fromProperty wdt:P1128 ;
         rdfs:comment "The number of employees in an Organization"@en ;
-    ] .
+    ]  .
+
+schema:Corporation a sh:NodeShape ;
+     rdfs:subClassOf schema:Organization ;
+     ys:fromClass wd:Q783794 ; # Fabian 2023-05-04: we merge companies 
+	ys:fromClass wd:Q4830453  # Fabian 2023-03-29: we merge in businesses here
+.
 
 schema:Airline a sh:NodeShape ;
     ys:fromClass wd:Q46970 ;
