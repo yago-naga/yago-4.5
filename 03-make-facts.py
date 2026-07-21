@@ -45,6 +45,7 @@ from typing import Optional, Dict, Set, Tuple, Any, Iterator, List
 TEST=len(sys.argv)>1 and sys.argv[1]=="--test"
 FOLDER="test-data/03-make-facts/" if TEST else "yago-data/"
 WIKIDATA_FILE= "test-data/03-make-facts/00-wikidata.ttl" if TEST else "input-data/wikidata.ttl"
+SCHEMA_FILE = "yago-data/01-yago-final-schema.ttl"
 
 ##########################################################################
 #             Debugging
@@ -298,6 +299,7 @@ def getSuperClasses(class_, yagoTaxonomyUp: Dict[str, Set[str]], classes: Set[st
 def handleDomain(entityFacts, yagoSchema, fullTransitiveClasses: Set[str], writer) -> None:
     """ Performs a domain check, removes offending facts"""
     mainEntity = entityFacts.mainSubject()
+    debug(mainEntity,"is", ", ".join(s for s in fullTransitiveClasses ))
     for predicate in list(entityFacts.predicatesOf(mainEntity)):
         if predicate == Prefixes.rdfType:
             continue
@@ -477,7 +479,7 @@ def handleMaxCounts(entityFacts, yagoSchema, writer, isSecondaryClass = False) -
             for badLabel in list(entityFacts.objectsOf(mainEntity, Prefixes.rdfsLabel)):
                 if label[-3:] == badLabel[-3:]:
                     entityFacts.remove((mainEntity, Prefixes.rdfsLabel, badLabel))
-                    writer.writeMetaFact(mainEntity, Prefixes.rdfsLabel, badLabel, Prefixes.ysReason, f"Already has manually defined label: {label}")
+                    writer.writeMetaFact(mainEntity, Prefixes.rdfsLabel, badLabel, Prefixes.ysReason, f'"Already has manually defined label: {label[1:-4]}"')
     for predicate in list(entityFacts.predicatesOf(mainEntity)):
         yagoProperty = yagoSchema.properties.get(predicate, None)
         if not yagoProperty:
@@ -563,13 +565,13 @@ class treatWikidataEntity():
     def __init__(self, workerId: int) -> None:
         """ We load everything once per process (!) in order to avoid problems with shared memory """
         self.number: int = workerId
-        self.yagoSchema = YagoSchema(FOLDER+"01-yago-final-schema.ttl", False)
+        self.yagoSchema = YagoSchema(SCHEMA_FILE, False)
         self.yagoTaxonomyUp: Dict[str, Set[str]] = defaultdict(set)
         for triple in TsvUtils.tsvTuples(FOLDER+"02-yago-taxonomy-to-rename.tsv"):
             if len(triple) > 3:
                 self.yagoTaxonomyUp[triple[0]].add(triple[2])
         self.writer: Optional[TsvUtils.TsvFileWriter] = None
-
+        
     def visit(self, entityFacts) -> None:
         """ Writes out the facts for a single Wikidata entity """
 

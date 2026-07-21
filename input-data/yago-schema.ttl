@@ -1787,6 +1787,13 @@ yago:AstronomicalObject a sh:NodeShape ;
 	rdfs:subClassOf schema:Place ;
 	ys:fromClass wd:Q6999 ;
 	sh:property [
+        sh:path schema:location ;
+        sh:class schema:Place ;
+		# Fabian: wdt:P361 is overloaded with partOf, to make countries part of continents etc.
+		# Fabian: wdt:P463 is overloaded with memberOf
+        ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17, wdt:P30, wdt:P551, wdt:P361, wdt:P463, wdt:P183, wdt:P9714 ;
+    ] ;
+	sh:property [
         sh:path yago:parentBody ;
         sh:class yago:AstronomicalObject ;
 		sh:maxCount 1 ;
@@ -2042,14 +2049,7 @@ schema:Country a sh:NodeShape ;
 # not from geographical region (Q82794) and geographic location  (Q2221906) because otherwise many administrative regions become Landforms
 schema:Landform a sh:NodeShape ;
     rdfs:subClassOf schema:Place ;
-	ys:fromClass wd:Q14524493, wd:Q205895, wd:Q271669, wd:Q3622002, wd:Q35145263 ;
-    sh:property [
-        sh:path schema:location ;
-        sh:class schema:Place ;
-		# Fabian: wdt:P361 is overloaded with partOf, to make countries part of continents etc.
-		# Fabian: wdt:P463 is overloaded with memberOf
-        ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17, wdt:P30, wdt:P551, wdt:P361, wdt:P463, wdt:P183, wdt:P9714 ;
-    ]  .
+	ys:fromClass wd:Q14524493, wd:Q205895, wd:Q271669, wd:Q3622002, wd:Q35145263  .
     
 # Bodies of water are Landforms.
 # Linked to body of water and marine body of water and lake
@@ -2287,7 +2287,7 @@ schema:Product a sh:NodeShape ;
         sh:datatype xsd:integer ;
 		sh:maxCount 1 ;
         ys:fromProperty wdt:P1083 ;
-    ]
+    ] ;
     sh:property [
         sh:path schema:requiredMinAge ;
         sh:datatype xsd:integer ;
@@ -2305,13 +2305,12 @@ schema:Product a sh:NodeShape ;
     sh:property [
         sh:path schema:gtin ;
         sh:datatype xsd:string ;
-        sh:pattern "^\\d{12,14}|\\d{8}$" ;
 		sh:maxCount 1 ;
         ys:fromProperty wdt:P3962 ;
         rdfs:comment "The Global Trade Item Number for a Product"@en ;
     ] .
 
-yago:coin a sh:NodeShape ;
+yago:Coin a sh:NodeShape ;
     rdfs:subClassOf schema:Product ;
     ys:fromClass wd:Q113813711 .
 

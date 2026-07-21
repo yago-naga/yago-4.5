@@ -61,7 +61,9 @@ schema:Movie	rdfs:subClassOf	schema:CreativeWork	.
 yago:SportsPerson	rdfs:subClassOf	yago:Worker	.
 schema:Newspaper	rdfs:subClassOf	schema:CreativeWork	.
 yago:Gender	rdfs:subClassOf	schema:Intangible	.
-schema:AdministrativeArea	rdfs:subClassOf	schema:Place	.
+schema:AdministrativeArea	rdfs:subClassOf	yago:LocalOrganization	.
+yago:LocalOrganization	rdfs:subClassOf	schema:Place	.
+yago:LocalOrganization	rdfs:subClassOf	schema:Organization	.
 schema:Country	rdfs:subClassOf	schema:AdministrativeArea	.
 yago:Academic	rdfs:subClassOf	yago:Worker	.
 schema:City	rdfs:subClassOf	schema:AdministrativeArea	.

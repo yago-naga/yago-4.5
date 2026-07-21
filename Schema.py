@@ -213,10 +213,10 @@ class YagoProperty(YagoObject):
         if len(patterns)>1:
             warning("Property", self,"has more than one pattern:",patterns)
         if len(patterns)>0:
-            compileMe=TurtleUtils.splitLiteral(getFirst(patterns))[0]
+            compileMe=TurtleUtils.splitLiteral(getFirst(patterns))[0].replace("\\\\","\\")
             if self.pattern and self.pattern!=compileMe:
                warning("Property",self,"has different patterns:",self.pattern,"and",compileMe)
-            self.pattern=compileMe.replace("\\\\","\\")
+            self.pattern=compileMe
                 
 class YagoClass(YagoObject):
     """ A class of YAGO """
@@ -285,7 +285,7 @@ class YagoClass(YagoObject):
         
         # Properties
         for shaclProperty in entityGraph.objectsOf(self.identifier, Prefixes.shaclProperty):
-            # Property name
+            # Property name            
             propertyNames=entityGraph.objectsOf(shaclProperty,Prefixes.shaclPath)
             if len(propertyNames)>1:
                 warning("Property",shaclProperty,"has non-unique path",propertyNames)

@@ -188,9 +188,9 @@ wd:Q_singer  schema:name "singer"@en ;
 	skos:altLabel "this is a human singer"@en .
 	
 # The labels of the second class should not survive, because both classes map to Product
-wd:Q2184715 schema:name "label that survives"@en ;
+wd:Q2184715 schema:name "label that survives"@fr ;
     wdt:P646	<https://freebase.com/first-id-that-survives> .
-wd:Q2342494 schema:name "label that does not survive"@en ;
+wd:Q2342494 schema:name "label that does not survive"@fr ;
 	wdt:P646	<https://freebase.com/second-id-that-survives> .
     
 # Properties survive
@@ -244,5 +244,5 @@ wds:Q1340-244BF02D-91AC-4783-BCB6-4247B0B0D80E a wikibase:Statement ;
 wd:Q23482  wdt:P31 yago:AstronomicalObject ;
 schema:name "XYZ J107878.27+203031.3"@en, "ABC J100216.27+203031.3"@mul .
 
-# Predefined labels should take precedence
-wd:Q1656682 rdfs:label "Should go away"@en, "Ceci reste"@fr .
+# Predefined labels should take precedence, and the primary class as well
+wd:Q1656682 rdfs:label "Should go away"@en, "Ceci ne reste pas"@fr .

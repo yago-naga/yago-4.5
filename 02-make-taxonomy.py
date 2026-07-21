@@ -46,7 +46,7 @@ def getFirst(iterable):
     except StopIteration:
         return None
 
-def debug(*message: Any) -> None:
+def debug(*message) -> None:
     """ Prints a message if we're in TEST mode"""
     if TEST:
         sys.stdout.buffer.write(b"  DEBUG: ")

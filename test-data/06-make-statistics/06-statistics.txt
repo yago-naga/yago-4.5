@@ -8,7 +8,7 @@ Generic entities: 0
 
 Total number of classes: 40
 
-Disjointness statements: 56
+Disjointness statements: 58
 
 Total number of facts (excluding labels etc.): 9
 

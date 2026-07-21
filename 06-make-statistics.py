@@ -45,6 +45,7 @@ from collections import defaultdict
 
 TEST=len(sys.argv)>1 and sys.argv[1]=="--test"
 FOLDER="test-data/06-make-statistics/" if TEST else "yago-data/"
+SCHEMA_FILE = "yago-data/01-yago-final-schema.ttl"
 
 # Predicates that are excluded for fact counting
 excludePredicates=["rdfs:label", "rdfs:comment", "rdf:type", "schema:url", "owl:sameAs", "schema:alternateName"]
@@ -153,7 +154,7 @@ NUM_SAMPLES=2000
 with TsvUtils.Timer("Step 06: Collecting YAGO statistics"):
 
     # Load YAGO schema
-    yagoSchema = YagoSchema(FOLDER+"01-yago-final-schema.ttl")
+    yagoSchema = YagoSchema(SCHEMA_FILE)
 
     # Load YAGO taxonomy
     yagoTaxonomyDown={}
