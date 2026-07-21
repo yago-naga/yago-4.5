@@ -2239,6 +2239,12 @@ schema:Product a sh:NodeShape ;
         rdfs:comment "The published price listed or paid for a product (with unit of currency)"@en ;
     ] ;
     sh:property [
+        sh:path schema:maximumAttendeeCapacity ;
+        sh:datatype xsd:integer ;
+		sh:maxCount 1 ;
+        ys:fromProperty wdt:P1083 ;
+    ]
+    sh:property [
         sh:path schema:gtin ;
         sh:datatype xsd:string ;
         sh:pattern "^\\d{12,14}|\\d{8}$" ;
