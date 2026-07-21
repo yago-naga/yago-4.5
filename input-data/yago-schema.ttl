@@ -1176,6 +1176,11 @@ schema:Organization a sh:NodeShape ;
         rdfs:comment "The leader of an Organization or AdministrativeArea"@en ;
     ] ;
     sh:property [
+        sh:path yago:artDirector ;
+        sh:class schema:Person ;
+        ys:fromProperty wdt:P3174 ;
+    ] ;
+    sh:property [
         sh:path yago:creator ;
         sh:or (
 	 [ sh:class schema:Person ]
