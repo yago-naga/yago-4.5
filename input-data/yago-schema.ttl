@@ -62,7 +62,7 @@ schema:Product owl:disjointWith
     schema:Person.
     # schema:Place.	# Fabian 2026-06-17: Greenhouses, rocket launchers, etc.
 schema:BioChemEntity owl:disjointWith
-    # schema:CreativeWork, # Fabian: some medical entities are human-made. So is food.
+    schema:CreativeWork, 
     schema:Event,
     schema:Organization,
     schema:Taxon,
@@ -72,7 +72,7 @@ schema:Intangible  owl:disjointWith
     schema:Event,
     schema:Organization,
     schema:Taxon,
-	schema:BioChemEntity,
+    schema:BioChemEntity,
     schema:Person,
     schema:Place.	
 
@@ -274,7 +274,10 @@ yago:Award a sh:NodeShape ;
     rdfs:subClassOf schema:Intangible ;
     sh:property [
         sh:path yago:conferredBy ; 
-        sh:class yago:Agent ;
+        sh:or (
+	 [ sh:class schema:Person ]
+         [ sh:class schema:Organization ]
+        ) ;
         ys:fromProperty wdt:P1027 ;
         rdfs:comment "The organization or person that conferred an award"@en ;
     ] .
@@ -381,7 +384,10 @@ schema:CreativeWork a sh:NodeShape ;
     ] ;		
 	sh:property [
         sh:path yago:creator ;
-        sh:class yago:Agent ;
+        sh:or (
+	 [ sh:class schema:Person ]
+         [ sh:class schema:Organization ]
+        ) ;
         ys:fromProperty wdt:P50, wdt:P170, wdt:P112 ; 
     ] ;
     sh:property [
@@ -436,9 +442,12 @@ schema:CreativeWork a sh:NodeShape ;
         ys:fromProperty wdt:P576, wdt:P582 ;
         rdfs:comment "The date when an entity stopped existing"@en ;
     ] ;
-	sh:property [
+    sh:property [
         sh:path yago:ownedBy ;
-        sh:class yago:Agent ;
+        sh:or (
+	 [ sh:class schema:Person ]
+         [ sh:class schema:Organization ]
+        ) ;
         ys:fromProperty wdt:P127 ;
         rdfs:comment "The Organization or Person that owns an entity"@en ;
     ] ;
@@ -456,8 +465,11 @@ schema:CreativeWork a sh:NodeShape ;
     ] ;	
     sh:property [
         sh:path schema:sponsor ;
-        sh:class yago:Agent ;
-        ys:fromProperty wdt:P859 ;
+        sh:or (
+	 [ sh:class schema:Person ]
+         [ sh:class schema:Organization ]
+        ) ;
+   	ys:fromProperty wdt:P859 ;
         rdfs:comment "The sponsor of an entity"@en ;
     ] ;
 	sh:property [
@@ -508,7 +520,10 @@ schema:CreativeWork a sh:NodeShape ;
     sh:property [
         sh:path schema:publisher ;
 		sh:maxCount 1 ;
-        sh:class yago:Agent ;
+        sh:or (
+	 [ sh:class schema:Person ]
+         [ sh:class schema:Organization ]
+        ) ;
         ys:fromProperty wdt:P123 ;
         rdfs:comment "The publisher of a Book or Newspaper"@en ;
     ] ;	
@@ -565,8 +580,11 @@ schema:CreativeWork a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path schema:performer ;
-        sh:class yago:Agent ;
-		ys:fromProperty wdt:P175, wdt:P161  ;
+        sh:or (
+	 [ sh:class schema:Person ]
+         [ sh:class schema:Organization ]
+        ) ;
+	ys:fromProperty wdt:P175, wdt:P161  ;
         rdfs:comment "An Agent who performs in this Creative Work"@en ;
     ] ;
     sh:property [
@@ -615,7 +633,10 @@ schema:CreativeWork a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path schema:musicBy ; 
-        sh:class yago:Agent ;
+        sh:or (
+	 [ sh:class schema:Person ]
+         [ sh:class schema:Organization ]
+        ) ;
         ys:fromProperty wdt:P86 ;
         rdfs:comment "The composer or musician for a Movie, TV Series, or MusicComposition"@en ;
     ] ;		
@@ -676,7 +697,10 @@ schema:MusicComposition a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path schema:lyricist ;
-        sh:class yago:Agent ;
+        sh:or (
+	 [ sh:class schema:Person ]
+         [ sh:class schema:Organization ]
+        ) ;
         ys:fromProperty wdt:P676 ;
         rdfs:comment "The lyricist of a MusicComposition"@en ;
     ] .
@@ -694,13 +718,19 @@ yago:FictionalEntity a sh:NodeShape ;
 	rdfs:label "Fictional entity"@en ;
     sh:property [
         sh:path schema:performer ;
-        sh:class yago:Agent ;
+        sh:or (
+	 [ sh:class schema:Person ]
+         [ sh:class schema:Organization ]
+        ) ;
         ys:fromProperty wdt:P175  ;
         rdfs:comment "An Agent who performs in this Creative Work"@en ;
     ] ;
 	sh:property [
         sh:path yago:creator ;
-        sh:class yago:Agent ;
+        sh:or (
+	 [ sh:class schema:Person ]
+         [ sh:class schema:Organization ]
+        ) ;
         ys:fromProperty wdt:P50, wdt:P170, wdt:P112 ; 
     ] ;
     sh:property [
@@ -792,7 +822,10 @@ schema:Event a sh:NodeShape ;
     rdfs:subClassOf schema:Thing ;
 	sh:property [
         sh:path yago:creator ;
-        sh:class yago:Agent ;
+        sh:or (
+	 [ sh:class schema:Person ]
+         [ sh:class schema:Organization ]
+        ) ;
         ys:fromProperty wdt:P50, wdt:P170, wdt:P112 ; 
     ] ;
 	sh:property [
@@ -867,7 +900,10 @@ schema:Event a sh:NodeShape ;
     ] ; 
 	sh:property [
         sh:path yago:ownedBy ;
-        sh:class yago:Agent ;
+        sh:or (
+	 [ sh:class schema:Person ]
+         [ sh:class schema:Organization ]
+        ) ;
         ys:fromProperty wdt:P127 ;
     ] ;
     sh:property [
@@ -877,7 +913,10 @@ schema:Event a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path schema:sponsor ;
-        sh:class yago:Agent ;
+        sh:or (
+	 [ sh:class schema:Person ]
+         [ sh:class schema:Organization ]
+        ) ;
         ys:fromProperty wdt:P859 ;
     ] ;
     sh:property [
@@ -893,7 +932,10 @@ schema:Event a sh:NodeShape ;
     ] ;	
     sh:property [
         sh:path schema:organizer ;
-        sh:class yago:Agent ;
+        sh:or (
+	 [ sh:class schema:Person ]
+         [ sh:class schema:Organization ]
+        ) ;
         ys:fromProperty wdt:P664 ;
         rdfs:comment "The organizer of an Event"@en ;
     ] ;
@@ -905,12 +947,18 @@ schema:Event a sh:NodeShape ;
     sh:property [
         sh:path yago:winner ;
         ys:fromProperty wdt:P1346 ;
-        sh:class yago:Agent ;
+        sh:or (
+	 [ sh:class schema:Person ]
+         [ sh:class schema:Organization ]
+        ) ;
         rdfs:comment "Winner of the event"@en ;
     ] ;
    sh:property [
         sh:path schema:performer ;
-        sh:class yago:Agent ;
+        sh:or (
+	 [ sh:class schema:Person ]
+         [ sh:class schema:Organization ]
+        ) ;
         ys:fromProperty wdt:P175  ;
         rdfs:comment "An Agent who performs in this Creative Work"@en ;
     ] ;
@@ -927,7 +975,10 @@ schema:Event a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path yago:participant ;
-        sh:class yago:Agent ;
+        sh:or (
+	 [ sh:class schema:Person ]
+         [ sh:class schema:Organization ]
+        ) ;
         ys:fromProperty wdt:P710, wdt:P1923 ;
         rdfs:comment "A Person or Organization that participated in an Event"@en ;
     ] ;
@@ -976,52 +1027,55 @@ yago:Election a sh:NodeShape ;
 #                Organizations
 ################################################################
 
-yago:Agent  a sh:NodeShape ; rdfs:subClassOf schema:Thing; rdfs:label "A Person or Organization"@en ;
-sh:property [
+schema:Organization a sh:NodeShape ; 
+    rdfs:subClassOf schema:Thing; 
+    rdfs:label "Organization"@en ;
+    ys:fromClass wd:Q43229, wd:Q895526, wd:Q167037, wd:Q155076 ; # Fabian: we add corporations here (in the sense of legal entities), and juridical persons, and organs
+    sh:property [
         sh:path yago:beliefSystem ;
-        sh:class yago:BeliefSystem ; # Fabian: merge with belief system for people?
+        sh:class yago:BeliefSystem ; 
         ys:fromProperty wdt:P140, wdt:P1142 ;
-        rdfs:comment "The belief system (e.g., religion) of an Agent"@en ;
+        rdfs:comment "The belief system (e.g., religion) of an entity"@en ;
     ] ; 
     sh:property [
         sh:path yago:interestedIn ; 
         sh:class schema:Thing ; 
         ys:fromProperty wdt:P2650;
-        rdfs:comment "The field of interest of the Agent"@en ;
+        rdfs:comment "The field of interest of the entity"@en ;
     ] ;  
     sh:property [
         sh:path yago:influencedBy ;
         sh:class schema:Thing ;
         ys:fromProperty wdt:P737, wdt:P941 ;
     ] ;
-	sh:property [
+    sh:property [
         sh:path schema:award ;
         sh:class yago:Award ;
         ys:fromProperty wdt:P166 ;
     ] ;	
     sh:property [
         sh:path schema:sponsor ;
-        sh:class yago:Agent ;
+        sh:class schema:Organization ;
         ys:fromProperty wdt:P859 ;
     ] ;
- sh:property [
+    sh:property [
         sh:path schema:memberOf ;
         sh:class schema:Organization ;
         ys:fromProperty wdt:P463, wdt:P114 ;
         rdfs:comment "An Organization that a Person or another Organization is a member of"@en ;
     ] ;
-	sh:property [
+    sh:property [
         sh:path yago:fieldOfWork ;
         sh:class schema:Thing ; 
         ys:fromProperty wdt:P101 ;
         rdfs:comment "The field of work of the Agent"@en ;
     ] ;
-	sh:property [
+    sh:property [
         sh:path schema:slogan ; 
         sh:datatype rdf:langString ;
         ys:fromProperty wdt:P1451 ;
     ] ;	
-	sh:property [
+    sh:property [
         sh:path schema:address ;
         sh:datatype xsd:string ;
         ys:fromProperty wdt:P6375 ;
@@ -1031,14 +1085,14 @@ sh:property [
         sh:datatype xsd:string ;
         ys:fromProperty wdt:P281 ;
     ] ;
-	sh:property [
+   sh:property [
         sh:path schema:location ;
         sh:class schema:Place ;
 		# Fabian: wdt:P361 is overloaded with partOf, to make countries part of continents etc.
 		# Fabian: wdt:P463 is overloaded with memberOf
         ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17, wdt:P30, wdt:P551, wdt:P361, wdt:P463, wdt:P183, wdt:P9714 ;
     ]  ;   
-     	sh:property [ 
+    sh:property [ 
         sh:path yago:playsIn ;
         sh:or (
             [
@@ -1050,13 +1104,8 @@ sh:property [
         ) ;
 		ys:fromProperty wdt:P118 ;
         rdfs:comment "An Event in which an Agent plays"@en ;
-    ] .
-
-schema:Organization a sh:NodeShape ;
-    ys:fromClass wd:Q43229, wd:Q895526, wd:Q167037, wd:Q155076 ; # Fabian: we add corporations here (in the sense of legal entities), and juridical persons, and organs
-	rdfs:subClassOf yago:Agent ;
-	rdfs:label "Organization"@en ;
-	sh:property [
+    ] ;
+    sh:property [
         sh:path yago:officialLanguage ; # Fabian: changed from schema:... 2024-04-03
         sh:class schema:Language ;
         ys:fromProperty wdt:P37 ;
@@ -1084,7 +1133,10 @@ schema:Organization a sh:NodeShape ;
     ] ;
 	sh:property [
         sh:path yago:ownedBy ;
-        sh:class yago:Agent ;
+        sh:or (
+	 [ sh:class schema:Person ]
+         [ sh:class schema:Organization ]
+        ) ;
         ys:fromProperty wdt:P127 ;
     ] ;
     sh:property [
@@ -1225,8 +1277,8 @@ schema:PerformingGroup rdf:type sh:NodeShape ;
 ################################################################
 
 schema:Person a sh:NodeShape ;
-    rdfs:subClassOf yago:Agent ;
-	rdfs:label "Person"@en ;
+    rdfs:subClassOf schema:Thing ;
+    rdfs:label "Person"@en ;
     ys:fromClass wd:Q5, wd:Q215627, wd:Q212238 ; # Fabian: adding "civil servant" here to fix a bug in Wikidata that makes civil servants organizations
     sh:property [   # Fabian: Vivaldi was a student as well 2025-12-09 :-)
     	sh:path yago:studentOf ;
@@ -1234,7 +1286,7 @@ schema:Person a sh:NodeShape ;
     	ys:fromProperty wdt:P1066 ;
         rdfs:comment "A Person who was a student of an Academic"@en ;
 	] ;		
-	sh:property [
+   sh:property [
         sh:path yago:hairColor ;
 		sh:maxCount 1 ;
         sh:datatype yago:HairColor ;
@@ -1280,7 +1332,10 @@ schema:Person a sh:NodeShape ;
     ] ;
     sh:property [ 
         sh:path schema:worksFor ;
-        sh:class yago:Agent ;
+        sh:or (
+	 [ sh:class schema:Person ]
+         [ sh:class schema:Organization ]
+        ) ;
         ys:fromProperty wdt:P108 ;
         rdfs:comment "An organization, person or place (e.g., theater) that a Person works for"@en ;
     ] ;
@@ -1425,7 +1480,7 @@ schema:Person a sh:NodeShape ;
 		ys:fromProperty wdt:P26 ;
         rdfs:comment "The spouse of a Person"@en ;
     ] ;
-	sh:property [
+    sh:property [
         sh:path yago:notableWork ;
         sh:class schema:Thing ;
         ys:fromProperty wdt:P800 ;
@@ -1436,6 +1491,55 @@ schema:Person a sh:NodeShape ;
         sh:class schema:Person ;
         ys:fromProperty wdt:P451 ;
         rdfs:comment "The unmarried partner of a Person"@en ;
+    ] ;   
+    sh:property [
+        sh:path yago:beliefSystem ;
+        sh:class yago:BeliefSystem ; 
+        ys:fromProperty wdt:P140, wdt:P1142 ;
+    ] ; 
+    sh:property [
+        sh:path yago:interestedIn ; 
+        sh:class schema:Thing ; 
+        ys:fromProperty wdt:P2650;
+    ] ;  
+    sh:property [
+        sh:path yago:influencedBy ;
+        sh:class schema:Thing ;
+        ys:fromProperty wdt:P737, wdt:P941 ;
+    ] ;
+    sh:property [
+        sh:path schema:award ;
+        sh:class yago:Award ;
+        ys:fromProperty wdt:P166 ;
+    ] ;	
+    sh:property [
+        sh:path schema:sponsor ;
+        sh:class schema:Organization ;
+        ys:fromProperty wdt:P859 ;
+    ] ;
+    sh:property [
+        sh:path schema:memberOf ;
+        sh:class schema:Organization ;
+        ys:fromProperty wdt:P463, wdt:P114 ;
+    ] ;
+    sh:property [
+        sh:path yago:fieldOfWork ;
+        sh:class schema:Thing ; 
+        ys:fromProperty wdt:P101 ;
+        rdfs:comment "The field of work of the Agent"@en ;
+    ] ;
+    sh:property [ 
+        sh:path yago:playsIn ;
+        sh:or (
+            [
+                sh:class schema:Organization
+            ]
+            [
+                sh:class schema:Event
+            ]
+        ) ;
+	ys:fromProperty wdt:P118 ;
+        rdfs:comment "An Event in which an Agent plays"@en ;
     ] .    
 
 yago:SportsPerson a sh:NodeShape ;
@@ -1549,7 +1653,10 @@ schema:Place a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path yago:creator ;
-        sh:class yago:Agent ;
+        sh:or (
+	 [ sh:class schema:Person ]
+         [ sh:class schema:Organization ]
+        ) ;
         ys:fromProperty wdt:P50, wdt:P170, wdt:P112 ; 
     ] ;
     sh:property [
@@ -1670,45 +1777,17 @@ schema:AdministrativeArea a sh:NodeShape ;
         rdfs:comment "Male population count"@en ;
     ] ;	
     sh:property [
-        sh:path yago:beliefSystem ;
-        sh:class yago:BeliefSystem ; 
-        ys:fromProperty wdt:P140, wdt:P1142 ;
-    ] ; 
-	sh:property [
         sh:path yago:twinnedWith ;
         sh:class schema:Place ;
         ys:fromProperty wdt:P190 ;
         rdfs:comment "Twin place relationship (twinned administrative body)"@en ;
     ]  ;
     sh:property [
-        sh:path schema:postalCode ;
-        sh:datatype xsd:string ;
-        ys:fromProperty wdt:P281 ;
-        rdfs:comment "The postal code of a Place"@en ;
-    ] ;
-	sh:property [
-        sh:path schema:address ;
-        sh:datatype xsd:string ;
-        ys:fromProperty wdt:P6375 ;
-    ] ;
-	sh:property [
-        sh:path schema:location ;
-        sh:class schema:Place ;
-		# Fabian: wdt:P361 is overloaded with partOf, to make countries part of continents etc.
-		# Fabian: wdt:P463 is overloaded with memberOf
-        ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17, wdt:P30, wdt:P551, wdt:P361, wdt:P463, wdt:P183, wdt:P9714 ;
-    ]  ;   
-    sh:property [
         sh:path yago:currency ;
         ys:fromProperty wdt:P38 ;
         sh:class yago:UnitOfMoney ;
         rdfs:comment "Official currency of the country"@en ;
-    ] ;
-	sh:property [
-        sh:path schema:slogan ; 
-        sh:datatype rdf:langString ;
-        ys:fromProperty wdt:P1451 ;
-    ] ;		
+    ] ;	
     sh:property [
         sh:path yago:demonym ; # Fabian: changed from schema:... 2024-04-03
         sh:datatype rdf:langString ;
@@ -2053,12 +2132,18 @@ schema:Product a sh:NodeShape ;
     ] ;		
    sh:property [
         sh:path yago:creator ;
-        sh:class yago:Agent ;
+        sh:or (
+	 [ sh:class schema:Person ]
+         [ sh:class schema:Organization ]
+        ) ;
         ys:fromProperty wdt:P50, wdt:P170, wdt:P112 ; 
     ] ;
 	sh:property [
         sh:path yago:ownedBy ;
-        sh:class yago:Agent ;
+        sh:or (
+	 [ sh:class schema:Person ]
+         [ sh:class schema:Organization ]
+        ) ;
         ys:fromProperty wdt:P127 ;
     ] ;
     sh:property [
@@ -2073,7 +2158,10 @@ schema:Product a sh:NodeShape ;
     ] ;	
     sh:property [
         sh:path schema:sponsor ;
-        sh:class yago:Agent ;
+        sh:or (
+	 [ sh:class schema:Person ]
+         [ sh:class schema:Organization ]
+        ) ;
         ys:fromProperty wdt:P859 ;
     ] ;
     sh:property [
