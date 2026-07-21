@@ -535,10 +535,7 @@ schema:CreativeWork a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path schema:location ;
-        sh:or (
-		   [ sh:class schema:Place ] 
-		   [ sh:class schema:Organization ]
-		) ;
+        sh:class schema:Place ;
 		# Fabian: wdt:P361 is overloaded with partOf, to make countries part of continents etc.
 		# Fabian: wdt:P463 is overloaded with memberOf
         ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17, wdt:P30, wdt:P551, wdt:P361, wdt:P463, wdt:P183, wdt:P9714 ;
@@ -552,7 +549,7 @@ schema:CreativeWork a sh:NodeShape ;
     ] ;	
     sh:property [
         sh:path schema:contentLocation ;
-        sh:or ([sh:class schema:Place] [sh:class schema:Organization ]) ;
+        sh:class schema:Place ;
         ys:fromProperty wdt:P840 ;
         rdfs:comment "The location depicted or described in the CreativeWork"@en ;
     ] ;
@@ -767,7 +764,7 @@ yago:FictionalEntity a sh:NodeShape ;
     ] ;
 	sh:property [
         sh:path schema:location ;
-        sh:or ([sh:class schema:Place] [sh:class schema:Organization ]) ;
+        sh:class schema:Place ;
 		# Fabian: wdt:P361 is overloaded with partOf, to make countries part of continents etc.
 		# Fabian: wdt:P463 is overloaded with memberOf
         ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17, wdt:P30, wdt:P551, wdt:P361, wdt:P463, wdt:P183, wdt:P9714 ;
@@ -842,7 +839,7 @@ schema:Event a sh:NodeShape ;
     ] ;
 	sh:property [
         sh:path schema:location ;
-        sh:or ([sh:class schema:Place] [sh:class schema:Organization ]) ;
+        sh:class schema:Place ;
 		# Fabian: wdt:P361 is overloaded with partOf, to make countries part of continents etc.
 		# Fabian: wdt:P463 is overloaded with memberOf
         ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17, wdt:P30, wdt:P551, wdt:P361, wdt:P463, wdt:P183, wdt:P9714 ;
@@ -1271,11 +1268,15 @@ schema:Organization a sh:NodeShape ;
         rdfs:comment "The number of employees in an Organization"@en ;
     ]  .
 
+yago:LocalOrganization a sh:NodeShape ; 
+    rdfs:subClassOf schema:Place, schema:Organization ; 
+	rdfs:label "An Organization that is also a Place"@en ; 
+	ys:fromClass wd:Q294163, wd:Q28737012, wd:Q166118.
+
 schema:Corporation a sh:NodeShape ;
      rdfs:subClassOf schema:Organization ;
      ys:fromClass wd:Q783794 ; # Fabian 2023-05-04: we merge companies 
-	ys:fromClass wd:Q4830453  # Fabian 2023-03-29: we merge in businesses here
-.
+	ys:fromClass wd:Q4830453 . # Fabian 2023-03-29: we merge in businesses here
 
 schema:Airline a sh:NodeShape ;
     ys:fromClass wd:Q46970 ;
@@ -1300,7 +1301,7 @@ schema:Airline a sh:NodeShape ;
 
 # We attach it under organization, to avoid CivicStructure
 schema:EducationalOrganization a sh:NodeShape ;
-	rdfs:subClassOf schema:Organization ;
+	rdfs:subClassOf yago:LocalOrganization ;
     ys:fromClass wd:Q5341295 ;
     sh:property [
         sh:path yago:studentsCount ;
@@ -1810,7 +1811,7 @@ yago:AstronomicalObject a sh:NodeShape ;
 # One permissible subclass of schema:Place is Administrative Area
 # We import all subclasses from Wikidata
 schema:AdministrativeArea a sh:NodeShape ;
-	rdfs:subClassOf schema:Organization, schema:Place ;
+	rdfs:subClassOf yago:LocalOrganization ;
 	    sh:property [
         sh:path yago:populationNumber ; # Fabian: changed from schema:... 2024-04-03
         sh:datatype xsd:integer ;
@@ -2022,7 +2023,7 @@ schema:Landform a sh:NodeShape ;
 	ys:fromClass wd:Q14524493, wd:Q205895, wd:Q271669, wd:Q3622002, wd:Q35145263 ;
     sh:property [
         sh:path schema:location ;
-        sh:or ([sh:class schema:Place] [sh:class schema:Organization ]) ;
+        sh:class schema:Place ;
 		# Fabian: wdt:P361 is overloaded with partOf, to make countries part of continents etc.
 		# Fabian: wdt:P463 is overloaded with memberOf
         ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17, wdt:P30, wdt:P551, wdt:P361, wdt:P463, wdt:P183, wdt:P9714 ;
@@ -2059,7 +2060,7 @@ yago:HumanMadeGeographicalEntity a sh:NodeShape ;
     ys:fromClass wd:Q811979, wd:Q811430, wd:Q811463, wd:Q35145743, wd:Q811430, wd:Q18247357, wd:Q699405, wd:Q684740, wd:Q699405, wd:Q12292478, wd:Q1497375, wd:Q845132, wd:Q1403389, wd:Q1403389, wd:Q975783, wd:Q15642541, wd:Q839954, wd:Q17350442 ;
    sh:property [
         sh:path schema:location ;
-        sh:or ([sh:class schema:Place] [sh:class schema:Organization ]) ;
+        sh:class schema:Place ;
 		# Fabian: wdt:P361 is overloaded with partOf, to make countries part of continents etc.
 		# Fabian: wdt:P463 is overloaded with memberOf
         ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17, wdt:P30, wdt:P551, wdt:P361, wdt:P463, wdt:P183, wdt:P9714 ;
