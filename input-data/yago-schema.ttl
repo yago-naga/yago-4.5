@@ -1264,7 +1264,7 @@ schema:Corporation a sh:NodeShape ;
 .
 
 schema:Airline a sh:NodeShape ;
-    ys:fromClass wd:Q46970 ;
+    ys:fromClass wd:Q46970, wd:Q62447 ;
 	rdfs:subClassOf schema:Corporation ;
     sh:property [
         sh:path schema:iataCode ;
