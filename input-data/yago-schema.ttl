@@ -2260,6 +2260,12 @@ schema:BioChemEntity a sh:NodeShape;
         ys:fromProperty wdt:P462 ;  
         sh:class yago:Color ;       
     ] ;	
+	sh:property [
+        sh:path yago:mass ;
+		sh:maxCount 1 ;
+        sh:datatype yago:UnitOfMass ;
+        ys:fromProperty wdt:P2067 ;
+    ] ;	
     rdfs:label "Biological or chemical entity"@en ;
 	rdfs:comment "Any biological, chemical, or biochemical entity. For example: a protein; a gene; a chemical; a synthetic chemical; a drug."@en ;
 	ys:fromClass wd:Q43460564, wd:Q55568967, wd:Q10683158 .
