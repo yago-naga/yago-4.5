@@ -332,7 +332,7 @@ schema:Language a sh:NodeShape ;
 # as names are replaced by strings. Is automatically removed from final taxonomy.
 yago:PersonName a sh:NodeShape ;
 	rdfs:subClassOf schema:Intangible ;
-    ys:fromClass wd:Q10856962 .
+    ys:fromClass wd:Q10856962, wd:Q101352 . # Fabian: adding familyName here directly
 	
 # For units of measurement for quantified properties such as "width"
 yago:UnitOfMeasurement a sh:NodeShape ;
