@@ -2031,7 +2031,7 @@ schema:Country a sh:NodeShape ;
         ys:fromProperty wdt:P2997 ;
         rdfs:comment "Age of majority in years"@en ;
     ] ;
-    ys:fromClass wd:Q6256, wd:Q3024240 . # Also: historical countries
+    ys:fromClass wd:Q6256, wd:Q3024240, wd:Q15042037 . # Also: historical countries
 
 
 # --------------------- Land Forms ------------------------
