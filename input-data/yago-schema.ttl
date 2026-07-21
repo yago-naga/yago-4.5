@@ -273,6 +273,14 @@ yago:Award a sh:NodeShape ;
     ys:fromClass wd:Q618779, wd:Q38033430 ;
     rdfs:subClassOf schema:Intangible ;
     sh:property [
+        sh:path schema:sponsor ;
+        sh:or (
+	 [ sh:class schema:Person ]
+         [ sh:class schema:Organization ]
+        ) ;
+        ys:fromProperty wdt:P859 ;
+    ] ;
+    sh:property [
         sh:path yago:conferredBy ; 
         sh:or (
 	 [ sh:class schema:Person ]
@@ -457,7 +465,12 @@ schema:CreativeWork a sh:NodeShape ;
         ys:fromProperty wdt:P737, wdt:P941 ;
         rdfs:comment "An entity that influenced the entity"@en ;
     ] ;
-	sh:property [
+    sh:property [
+        sh:path yago:hasCause ;
+        ys:fromProperty wdt:P828 ;
+        sh:class schema:Thing ;
+    ] ;
+    sh:property [
         sh:path schema:award ;
         sh:class yago:Award ;
         ys:fromProperty wdt:P166 ;
@@ -642,14 +655,37 @@ schema:CreativeWork a sh:NodeShape ;
         sh:class schema:Person ;
         ys:fromProperty wdt:P344 ;
         rdfs:comment "The director of photography for a Movie or TV Series"@en ;
-    ]  ;
+    ] ;
+    sh:property [
+        sh:path schema:gtin ;
+        sh:datatype xsd:string ;
+        sh:pattern "^\\d{12,14}|\\d{8}$" ;
+		sh:maxCount 1 ;
+        ys:fromProperty wdt:P3962 
+    ] .
+ 
+schema:Book a sh:NodeShape ;
+    rdfs:subClassOf schema:CreativeWork ;
+    ys:fromClass wd:Q571, wd:Q3331189, wd:Q7725634, wd:Q1004 ;
     sh:property [
         sh:path schema:numberOfPages ;
         sh:datatype xsd:integer ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P1104 ;
         rdfs:comment "The number of pages in a Book"@en ;
-    ]  ;   
+    ]  ;  
+    sh:property [
+        sh:path schema:isbn ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P212 , wdt:P957 ;
+        sh:pattern "^(97[89]-([0-57]-(\\d-\\d{7}|\\d\\d-\\d{6}|\\d\\d\\d-\\d{5}|\\d{4}-\\d{4}|\\d{5}-\\d\\d\\d|\\d{6}-\\d\\d|\\d{7}-\\d)|[89]\\d-(\\d-\\d{6}|\\d\\d-\\d{5}|\\d\\d\\d-\\d{4}|\\d{4}-\\d\\d\\d|\\d{5}-\\d\\d|\\d{6}-\\d)|[69]\\d\\d-(\\d-\\d{5}|\\d\\d-\\d{4}|\\d\\d\\d-\\d\\d\\d|\\d{4}-\\d\\d|\\d{5}-\\d)|99[0-8]\\d-\\d-\\d{4}|99[0-8]\\d-\\d\\d-\\d\\d\\d|99[0-8]\\d-\\d\\d\\d-\\d\\d|99[0-8]\\d-\\d{4}-\\d|999\\d\\d-\\d-\\d\\d\\d|999\\d\\d-\\d\\d-\\d\\d|999\\d\\d-\\d\\d\\d-\\d)-\\d|\\d{9}(\\d|X))|(\\d{1,5}-\\d{1,7}-\\d{1,6}-[0-9X])$" ;
+        rdfs:comment "The ISBN (International Standard Book Number) of a Book"@en ;
+    ]  .
+
+schema:TVSeries a sh:NodeShape ; 
+	rdfs:subClassOf schema:CreativeWork ; # instead of series
+	ys:fromClass wd:Q5398426, wd:Q15416 ;
     sh:property [
         sh:path schema:numberOfEpisodes ;
         sh:datatype xsd:integer ;
@@ -663,27 +699,7 @@ schema:CreativeWork a sh:NodeShape ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P2437 ;
         rdfs:comment "The number of seasons in a TV Series"@en ;
-    ] ;
-    sh:property [
-        sh:path schema:isbn ;
-        sh:datatype xsd:string ;
-        sh:maxCount 1 ;
-        ys:fromProperty wdt:P212 , wdt:P957 ;
-        sh:pattern "^(97[89]-([0-57]-(\\d-\\d{7}|\\d\\d-\\d{6}|\\d\\d\\d-\\d{5}|\\d{4}-\\d{4}|\\d{5}-\\d\\d\\d|\\d{6}-\\d\\d|\\d{7}-\\d)|[89]\\d-(\\d-\\d{6}|\\d\\d-\\d{5}|\\d\\d\\d-\\d{4}|\\d{4}-\\d\\d\\d|\\d{5}-\\d\\d|\\d{6}-\\d)|[69]\\d\\d-(\\d-\\d{5}|\\d\\d-\\d{4}|\\d\\d\\d-\\d\\d\\d|\\d{4}-\\d\\d|\\d{5}-\\d)|99[0-8]\\d-\\d-\\d{4}|99[0-8]\\d-\\d\\d-\\d\\d\\d|99[0-8]\\d-\\d\\d\\d-\\d\\d|99[0-8]\\d-\\d{4}-\\d|999\\d\\d-\\d-\\d\\d\\d|999\\d\\d-\\d\\d-\\d\\d|999\\d\\d-\\d\\d\\d-\\d)-\\d|\\d{9}(\\d|X))|(\\d{1,5}-\\d{1,7}-\\d{1,6}-[0-9X])$" ;
-        rdfs:comment "The ISBN (International Standard Book Number) of a Book"@en ;
-    ]  .
- 
-# Thomas: Move property ISBN up   
-# schema:Book a sh:NodeShape ;
-#	rdfs:subClassOf schema:CreativeWork ;
-#    ys:fromClass wd:Q571 ;
-# .
-
-# Thomas: move properties up
-# schema:TVSeries a sh:NodeShape ; 
-#	rdfs:subClassOf schema:CreativeWork ; # instead of series
-#    ys:fromClass wd:Q5398426 .
-
+    ] .
 schema:MusicComposition a sh:NodeShape ;
 	rdfs:subClassOf schema:CreativeWork ;
     ys:fromClass wd:Q207628, wd:Q2188189 ;
@@ -738,7 +754,7 @@ yago:FictionalEntity a sh:NodeShape ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P21 ;
     ] ;
-	sh:property [
+  sh:property [
         sh:path schema:spouse ;
         sh:or (
             [ sh:class schema:Person ]
@@ -747,6 +763,15 @@ yago:FictionalEntity a sh:NodeShape ;
         ys:fromProperty wdt:P26 ;
         rdfs:comment "The spouse of a Person"@en ;
     ] ;
+    sh:property [
+        sh:path yago:partner ;
+        sh:or (
+            [ sh:class schema:Person ]
+            [ sh:class yago:FictionalEntity ]
+        ) ;
+        ys:fromProperty wdt:P451 ;
+        rdfs:comment "The unmarried partner of a Person"@en ;
+    ] ;   
     sh:property [
         sh:path schema:knowsLanguage ;
         sh:class schema:Language ;
@@ -816,7 +841,7 @@ yago:FictionalEntity a sh:NodeShape ;
 
 schema:Event a sh:NodeShape ;
     # Remove "occurrence", is a bad class
-    ys:fromClass wd:Q1656682 ;
+    ys:fromClass wd:Q1656682, wd:Q132821, wd:Q11514315, wd:Q350604 ;
 	rdfs:label "Event"@en ;
     rdfs:subClassOf schema:Thing ;
 	sh:property [
@@ -941,7 +966,7 @@ schema:Event a sh:NodeShape ;
     sh:property [
         sh:path yago:leader ; 
         sh:class schema:Person ;
-        ys:fromProperty wdt:P35, wdt:P6, wdt:P168, wdt:P169, wdt:P1075 ;
+        ys:fromProperty wdt:P35, wdt:P6, wdt:P168, wdt:P169, wdt:P1075, wdt:P1037, wdt:P1875;
     ] ;
     sh:property [
         sh:path yago:winner ;
@@ -961,11 +986,6 @@ schema:Event a sh:NodeShape ;
         ys:fromProperty wdt:P175  ;
         rdfs:comment "An Agent who performs in this Creative Work"@en ;
     ] ;
-  sh:property [
-        sh:path schema:director ;
-        sh:class schema:Person ;
-        ys:fromProperty wdt:P1037, wdt:P1875;
-    ] ;	
   sh:property [
         sh:path yago:officialLanguage ; 
         sh:class schema:Language ;
@@ -1063,11 +1083,6 @@ schema:Organization a sh:NodeShape ;
         ys:fromProperty wdt:P166 ;
     ] ;	
     sh:property [
-        sh:path schema:director ;
-        sh:class schema:Person ;
-        ys:fromProperty wdt:P1037, wdt:P1875;
-    ] ;	
-    sh:property [
         sh:path schema:sponsor ;
         sh:class schema:Organization ;
         ys:fromProperty wdt:P859 ;
@@ -1138,6 +1153,12 @@ schema:Organization a sh:NodeShape ;
         ys:fromProperty wdt:P154 ;
     ] ;
     sh:property [
+        sh:path yago:currency ;
+        ys:fromProperty wdt:P38 ;
+        sh:class yago:UnitOfMoney ;
+        rdfs:comment "Official currency of the organization"@en ;
+    ] ;	
+    sh:property [
         sh:path schema:duns ;
         sh:datatype xsd:string ;
         sh:pattern "^\\d{9}$" ;
@@ -1148,8 +1169,13 @@ schema:Organization a sh:NodeShape ;
     sh:property [
         sh:path yago:leader ; # Fabian: changed from schema: to yago: 2024-04-03
         sh:class schema:Person ;
-        ys:fromProperty wdt:P35, wdt:P6, wdt:P168, wdt:P169, wdt:P1075 ;
+        ys:fromProperty wdt:P35, wdt:P6, wdt:P168, wdt:P169, wdt:P1075, wdt:P1037, wdt:P1875;
         rdfs:comment "The leader of an Organization or AdministrativeArea"@en ;
+    ] ;
+    sh:property [
+        sh:path yago:artDirector ;
+        sh:class schema:Person ;
+        ys:fromProperty wdt:P3174 ;
     ] ;
     sh:property [
         sh:path yago:creator ;
@@ -1279,7 +1305,7 @@ schema:Corporation a sh:NodeShape ;
 	ys:fromClass wd:Q4830453 . # Fabian 2023-03-29: we merge in businesses here
 
 schema:Airline a sh:NodeShape ;
-    ys:fromClass wd:Q46970 ;
+    ys:fromClass wd:Q46970, wd:Q62447 ;
 	rdfs:subClassOf schema:Corporation ;
     sh:property [
         sh:path schema:iataCode ;
@@ -1604,17 +1630,19 @@ schema:Person a sh:NodeShape ;
         sh:class yago:Election ;
         ys:fromProperty wdt:P3602 ;
         rdfs:comment "An Election that a Politician was a candidate in"@en ;
-	] .    
-
-yago:SportsPerson a sh:NodeShape ;
-    ys:fromClass wd:Q50995749 ;	
-	rdfs:subClassOf schema:Person ;
-	sh:property [
+	] ;
+    sh:property [
     	sh:path yago:sportNumber ;
     	sh:datatype xsd:string ;
     	ys:fromProperty wdt:P1618 ;
         rdfs:comment "The sport number (jersey number) of a SportsPerson"@en ;
-	] .
+	] .    
+
+# Thomas: Move property up
+# yago:SportsPerson a sh:NodeShape ;
+#    ys:fromClass wd:Q50995749 ;	
+#	rdfs:subClassOf schema:Person ;
+# .
 
 # Thomas: Move property up
 # yago:Politician a sh:NodeShape ;
@@ -1843,12 +1871,6 @@ schema:AdministrativeArea a sh:NodeShape ;
         rdfs:comment "Twin place relationship (twinned administrative body)"@en ;
     ]  ;
     sh:property [
-        sh:path yago:currency ;
-        ys:fromProperty wdt:P38 ;
-        sh:class yago:UnitOfMoney ;
-        rdfs:comment "Official currency of the country"@en ;
-    ] ;	
-    sh:property [
         sh:path yago:demonym ; # Fabian: changed from schema:... 2024-04-03
         sh:datatype rdf:langString ;
         ys:fromProperty wdt:P1549 ;
@@ -2010,7 +2032,7 @@ schema:Country a sh:NodeShape ;
         ys:fromProperty wdt:P2997 ;
         rdfs:comment "Age of majority in years"@en ;
     ] ;
-    ys:fromClass wd:Q6256, wd:Q3024240 . # Also: historical countries
+    ys:fromClass wd:Q6256, wd:Q3024240, wd:Q15042037 . # Also: historical countries
 
 
 # --------------------- Land Forms ------------------------
@@ -2027,20 +2049,20 @@ schema:Landform a sh:NodeShape ;
 		# Fabian: wdt:P361 is overloaded with partOf, to make countries part of continents etc.
 		# Fabian: wdt:P463 is overloaded with memberOf
         ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17, wdt:P30, wdt:P551, wdt:P361, wdt:P463, wdt:P183, wdt:P9714 ;
-    ] ;	
-    sh:property [
-        sh:path yago:flowsInto ;
-        sh:class schema:BodyOfWater ;
-		sh:maxCount 1 ;
-        ys:fromProperty wdt:P403, wdt:P201 ;
-        rdfs:comment "The BodyOfWater that another body of water flows into"@en ;
     ]  .
     
 # Bodies of water are Landforms.
 # Linked to body of water and marine body of water and lake
 schema:BodyOfWater a sh:NodeShape ;
 	rdfs:subClassOf schema:Landform ;
-    ys:fromClass wd:Q15324, wd:Q116126039, wd:Q23397 .
+    ys:fromClass wd:Q15324, wd:Q116126039, wd:Q23397, wd:Q355304 ;
+    sh:property [
+        sh:path yago:flowsInto ;
+        sh:class schema:BodyOfWater ;
+		sh:maxCount 1 ;
+        ys:fromProperty wdt:P403, wdt:P201 ;
+        rdfs:comment "The BodyOfWater that another body of water flows into"@en ;
+    ] .
 
 # Continents
 schema:Continent a sh:NodeShape ;
@@ -2267,6 +2289,20 @@ schema:Product a sh:NodeShape ;
         ys:fromProperty wdt:P1083 ;
     ]
     sh:property [
+        sh:path schema:requiredMinAge ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 0 ;
+		sh:maxCount 1 ;
+        ys:fromProperty wdt:P2899 ;
+    ] ;
+    sh:property [
+        sh:path schema:requiredMaxAge ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 0 ;
+		sh:maxCount 1 ;
+        ys:fromProperty wdt:P4135 ;
+    ] ;
+    sh:property [
         sh:path schema:gtin ;
         sh:datatype xsd:string ;
         sh:pattern "^\\d{12,14}|\\d{8}$" ;
@@ -2274,6 +2310,11 @@ schema:Product a sh:NodeShape ;
         ys:fromProperty wdt:P3962 ;
         rdfs:comment "The Global Trade Item Number for a Product"@en ;
     ] .
+
+yago:coin a sh:NodeShape ;
+    rdfs:subClassOf schema:Product ;
+    ys:fromClass wd:Q113813711 .
+
 
 ################################################################
 #                Animals and other organisms
@@ -2325,6 +2366,13 @@ schema:Taxon a sh:NodeShape;
         sh:class schema:Taxon ;
         ys:fromProperty wdt:P1034 ;
         rdfs:comment "A Taxon that another Taxon consumes (predator-prey relationship)"@en ;
+    ] ;
+    sh:property [
+        sh:path yago:lifeExpectancy ;
+		sh:maxCount 1 ;
+        sh:datatype xsd:decimal ;    
+        sh:minInclusive 0 ;
+        ys:fromProperty wdt:P2250 ;
     ] ;
     #Margherita 23/06/2026 added property
     sh:property [
