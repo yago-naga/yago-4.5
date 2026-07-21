@@ -645,14 +645,7 @@ schema:CreativeWork a sh:NodeShape ;
         sh:class schema:Person ;
         ys:fromProperty wdt:P344 ;
         rdfs:comment "The director of photography for a Movie or TV Series"@en ;
-    ]  ;
-    sh:property [
-        sh:path schema:numberOfPages ;
-        sh:datatype xsd:integer ;
-        sh:maxCount 1 ;
-        ys:fromProperty wdt:P1104 ;
-        rdfs:comment "The number of pages in a Book"@en ;
-    ]  ;   
+    ]  ; 
     sh:property [
         sh:path schema:numberOfEpisodes ;
         sh:datatype xsd:integer ;
@@ -666,7 +659,18 @@ schema:CreativeWork a sh:NodeShape ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P2437 ;
         rdfs:comment "The number of seasons in a TV Series"@en ;
-    ] ;
+    ]  .
+ 
+schema:Book a sh:NodeShape ;
+    rdfs:subClassOf schema:CreativeWork ;
+    ys:fromClass wd:Q571, wd:Q3331189, wd:Q7725634, wd:Q1004 ;
+    sh:property [
+        sh:path schema:numberOfPages ;
+        sh:datatype xsd:integer ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P1104 ;
+        rdfs:comment "The number of pages in a Book"@en ;
+    ]  ;  
     sh:property [
         sh:path schema:isbn ;
         sh:datatype xsd:string ;
@@ -675,12 +679,6 @@ schema:CreativeWork a sh:NodeShape ;
         sh:pattern "^(97[89]-([0-57]-(\\d-\\d{7}|\\d\\d-\\d{6}|\\d\\d\\d-\\d{5}|\\d{4}-\\d{4}|\\d{5}-\\d\\d\\d|\\d{6}-\\d\\d|\\d{7}-\\d)|[89]\\d-(\\d-\\d{6}|\\d\\d-\\d{5}|\\d\\d\\d-\\d{4}|\\d{4}-\\d\\d\\d|\\d{5}-\\d\\d|\\d{6}-\\d)|[69]\\d\\d-(\\d-\\d{5}|\\d\\d-\\d{4}|\\d\\d\\d-\\d\\d\\d|\\d{4}-\\d\\d|\\d{5}-\\d)|99[0-8]\\d-\\d-\\d{4}|99[0-8]\\d-\\d\\d-\\d\\d\\d|99[0-8]\\d-\\d\\d\\d-\\d\\d|99[0-8]\\d-\\d{4}-\\d|999\\d\\d-\\d-\\d\\d\\d|999\\d\\d-\\d\\d-\\d\\d|999\\d\\d-\\d\\d\\d-\\d)-\\d|\\d{9}(\\d|X))|(\\d{1,5}-\\d{1,7}-\\d{1,6}-[0-9X])$" ;
         rdfs:comment "The ISBN (International Standard Book Number) of a Book"@en ;
     ]  .
- 
-# Thomas: Move property ISBN up   
-# schema:Book a sh:NodeShape ;
-#	rdfs:subClassOf schema:CreativeWork ;
-#    ys:fromClass wd:Q571 ;
-# .
 
 # Thomas: move properties up
 # schema:TVSeries a sh:NodeShape ; 
