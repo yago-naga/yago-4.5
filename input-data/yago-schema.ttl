@@ -944,7 +944,7 @@ schema:Event a sh:NodeShape ;
     sh:property [
         sh:path yago:leader ; 
         sh:class schema:Person ;
-        ys:fromProperty wdt:P35, wdt:P6, wdt:P168, wdt:P169, wdt:P1075 ;
+        ys:fromProperty wdt:P35, wdt:P6, wdt:P168, wdt:P169, wdt:P1075, wdt:P1037, wdt:P1875;
     ] ;
     sh:property [
         sh:path yago:winner ;
@@ -964,11 +964,6 @@ schema:Event a sh:NodeShape ;
         ys:fromProperty wdt:P175  ;
         rdfs:comment "An Agent who performs in this Creative Work"@en ;
     ] ;
-  sh:property [
-        sh:path schema:director ;
-        sh:class schema:Person ;
-        ys:fromProperty wdt:P1037, wdt:P1875;
-    ] ;	
   sh:property [
         sh:path yago:officialLanguage ; 
         sh:class schema:Language ;
@@ -1066,11 +1061,6 @@ schema:Organization a sh:NodeShape ;
         ys:fromProperty wdt:P166 ;
     ] ;	
     sh:property [
-        sh:path schema:director ;
-        sh:class schema:Person ;
-        ys:fromProperty wdt:P1037, wdt:P1875;
-    ] ;	
-    sh:property [
         sh:path schema:sponsor ;
         sh:class schema:Organization ;
         ys:fromProperty wdt:P859 ;
@@ -1151,7 +1141,7 @@ schema:Organization a sh:NodeShape ;
     sh:property [
         sh:path yago:leader ; # Fabian: changed from schema: to yago: 2024-04-03
         sh:class schema:Person ;
-        ys:fromProperty wdt:P35, wdt:P6, wdt:P168, wdt:P169, wdt:P1075 ;
+        ys:fromProperty wdt:P35, wdt:P6, wdt:P168, wdt:P169, wdt:P1075, wdt:P1037, wdt:P1875;
         rdfs:comment "The leader of an Organization or AdministrativeArea"@en ;
     ] ;
     sh:property [
