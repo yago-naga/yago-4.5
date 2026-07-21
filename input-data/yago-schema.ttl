@@ -273,6 +273,14 @@ yago:Award a sh:NodeShape ;
     ys:fromClass wd:Q618779, wd:Q38033430 ;
     rdfs:subClassOf schema:Intangible ;
     sh:property [
+        sh:path schema:sponsor ;
+        sh:or (
+	 [ sh:class schema:Person ]
+         [ sh:class schema:Organization ]
+        ) ;
+        ys:fromProperty wdt:P859 ;
+    ] ;
+    sh:property [
         sh:path yago:conferredBy ; 
         sh:or (
 	 [ sh:class schema:Person ]
