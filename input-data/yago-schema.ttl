@@ -645,7 +645,14 @@ schema:CreativeWork a sh:NodeShape ;
         sh:class schema:Person ;
         ys:fromProperty wdt:P344 ;
         rdfs:comment "The director of photography for a Movie or TV Series"@en ;
-    ]  .
+    ] ;
+    sh:property [
+        sh:path schema:gtin ;
+        sh:datatype xsd:string ;
+        sh:pattern "^\\d{12,14}|\\d{8}$" ;
+		sh:maxCount 1 ;
+        ys:fromProperty wdt:P3962 
+    ] .
  
 schema:Book a sh:NodeShape ;
     rdfs:subClassOf schema:CreativeWork ;
