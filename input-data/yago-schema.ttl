@@ -1026,6 +1026,11 @@ sh:property [
         sh:datatype xsd:string ;
         ys:fromProperty wdt:P6375 ;
     ] ;
+    sh:property [
+        sh:path schema:postalCode ;
+        sh:datatype xsd:string ;
+        ys:fromProperty wdt:P281 ;
+    ] ;
 	sh:property [
         sh:path schema:location ;
         sh:class schema:Place ;
