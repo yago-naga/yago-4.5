@@ -2283,6 +2283,20 @@ schema:Product a sh:NodeShape ;
         ys:fromProperty wdt:P1083 ;
     ]
     sh:property [
+        sh:path schema:requiredMinAge ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 0 ;
+		sh:maxCount 1 ;
+        ys:fromProperty wdt:P2899 ;
+    ] ;
+    sh:property [
+        sh:path schema:requiredMaxAge ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 0 ;
+		sh:maxCount 1 ;
+        ys:fromProperty wdt:P4135 ;
+    ] ;
+    sh:property [
         sh:path schema:gtin ;
         sh:datatype xsd:string ;
         sh:pattern "^\\d{12,14}|\\d{8}$" ;
