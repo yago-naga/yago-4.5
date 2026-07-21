@@ -2198,9 +2198,12 @@ schema:MedicalProcedure a sh:NodeShape;
         ys:fromProperty wdt:P4135 ;
         rdfs:comment "Maximum required age in years"@en ;
     ] ;	
-	sh:property [
-       sh:path yago:medicalSpecialty ;
-        sh:class schema:MedicalSpecialty ;
+    sh:property [
+        sh:path yago:medicalSpecialty ;
+        sh:or (
+            [ sh:class schema:MedicalSpecialty ]
+            [ sh:class yago:AcademicDiscipline ]
+	) ;
         ys:fromProperty wdt:P1995 ;
         rdfs:comment "Medical speciality of the entity"@en ;
     ] ;   
