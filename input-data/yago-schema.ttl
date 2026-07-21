@@ -752,7 +752,7 @@ yago:FictionalEntity a sh:NodeShape ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P21 ;
     ] ;
-	sh:property [
+  sh:property [
         sh:path schema:spouse ;
         sh:or (
             [ sh:class schema:Person ]
@@ -761,6 +761,15 @@ yago:FictionalEntity a sh:NodeShape ;
         ys:fromProperty wdt:P26 ;
         rdfs:comment "The spouse of a Person"@en ;
     ] ;
+    sh:property [
+        sh:path yago:partner ;
+        sh:or (
+            [ sh:class schema:Person ]
+            [ sh:class yago:FictionalEntity ]
+        ) ;
+        ys:fromProperty wdt:P451 ;
+        rdfs:comment "The unmarried partner of a Person"@en ;
+    ] ;   
     sh:property [
         sh:path schema:knowsLanguage ;
         sh:class schema:Language ;
