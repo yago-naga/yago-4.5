@@ -898,7 +898,7 @@ schema:Event a sh:NodeShape ;
         sh:class yago:BeliefSystem ; 
         ys:fromProperty wdt:P140, wdt:P1142 ;
     ] ; 
-	sh:property [
+   sh:property [
         sh:path yago:ownedBy ;
         sh:or (
 	 [ sh:class schema:Person ]
@@ -2038,7 +2038,12 @@ yago:HumanMadeGeographicalEntity a sh:NodeShape ;
         ys:fromProperty wdt:P176 ;
         rdfs:comment "The manufacturer of a CreativeWork or Product"@en ;
     ] ;
-	sh:property [
+    sh:property [
+        sh:path yago:beliefSystem ;
+        sh:class yago:BeliefSystem ; 
+        ys:fromProperty wdt:P140, wdt:P1142 ;
+    ] ; 
+    sh:property [
         sh:path schema:maximumAttendeeCapacity ;
         sh:datatype xsd:integer ;
 		sh:maxCount 1 ;
