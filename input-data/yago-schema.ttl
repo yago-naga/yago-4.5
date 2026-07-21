@@ -974,6 +974,11 @@ schema:Event a sh:NodeShape ;
         sh:class schema:Language ;
         ys:fromProperty wdt:P37 ;
     ] ;	
+  sh:property [
+        sh:path yago:publishedOn ;
+        sh:class schema:Organization ;
+        ys:fromProperty wdt:P449 ;
+    ] ;
    sh:property [
         sh:path yago:deathNumber ;
         sh:datatype xsd:integer ;
