@@ -2012,20 +2012,20 @@ schema:Landform a sh:NodeShape ;
 		# Fabian: wdt:P361 is overloaded with partOf, to make countries part of continents etc.
 		# Fabian: wdt:P463 is overloaded with memberOf
         ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17, wdt:P30, wdt:P551, wdt:P361, wdt:P463, wdt:P183, wdt:P9714 ;
-    ] ;	
-    sh:property [
-        sh:path yago:flowsInto ;
-        sh:class schema:BodyOfWater ;
-		sh:maxCount 1 ;
-        ys:fromProperty wdt:P403, wdt:P201 ;
-        rdfs:comment "The BodyOfWater that another body of water flows into"@en ;
     ]  .
     
 # Bodies of water are Landforms.
 # Linked to body of water and marine body of water and lake
 schema:BodyOfWater a sh:NodeShape ;
 	rdfs:subClassOf schema:Landform ;
-    ys:fromClass wd:Q15324, wd:Q116126039, wd:Q23397 .
+    ys:fromClass wd:Q15324, wd:Q116126039, wd:Q23397, wd:Q355304 ;
+    sh:property [
+        sh:path yago:flowsInto ;
+        sh:class schema:BodyOfWater ;
+		sh:maxCount 1 ;
+        ys:fromProperty wdt:P403, wdt:P201 ;
+        rdfs:comment "The BodyOfWater that another body of water flows into"@en ;
+    ] .
 
 # Continents
 schema:Continent a sh:NodeShape ;
