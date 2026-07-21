@@ -1244,6 +1244,16 @@ schema:Organization a sh:NodeShape ;
         ys:fromProperty wdt:P495 ;
     ] ;
     sh:property [
+        sh:path yago:floruit ;
+        sh:or (
+            [ sh:datatype xsd:dateTime ]
+            [ sh:datatype xsd:date ]
+            [ sh:datatype xsd:gYearMonth ]
+            [ sh:datatype xsd:gYear ]
+        ) ;
+        ys:fromProperty wdt:P1317 ;
+    ] ;
+    sh:property [
         sh:path schema:numberOfEmployees ;
         sh:datatype xsd:integer ;
 		sh:maxCount 1 ;
