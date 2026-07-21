@@ -1571,7 +1571,13 @@ schema:Person a sh:NodeShape ;
         ) ;
 	ys:fromProperty wdt:P118 ;
         rdfs:comment "An Event in which an Agent plays"@en ;
-    ] .    
+    ] ;
+    sh:property [
+        sh:path yago:candidateIn ;
+        sh:class yago:Election ;
+        ys:fromProperty wdt:P3602 ;
+        rdfs:comment "An Election that a Politician was a candidate in"@en ;
+	] .    
 
 yago:SportsPerson a sh:NodeShape ;
     ys:fromClass wd:Q50995749 ;	
@@ -1583,15 +1589,11 @@ yago:SportsPerson a sh:NodeShape ;
         rdfs:comment "The sport number (jersey number) of a SportsPerson"@en ;
 	] .
 
-yago:Politician a sh:NodeShape ;
-    ys:fromClass wd:Q82955 ;	
-	rdfs:subClassOf schema:Person ;
-    sh:property [
-        sh:path yago:candidateIn ;
-        sh:class yago:Election ;
-        ys:fromProperty wdt:P3602 ;
-        rdfs:comment "An Election that a Politician was a candidate in"@en ;
-    ] .
+# Thomas: Move property up
+# yago:Politician a sh:NodeShape ;
+#    ys:fromClass wd:Q82955 ;	
+#	rdfs:subClassOf schema:Person ;
+#    ] .
 	
 ################################################################
 #                Places
