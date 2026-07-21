@@ -611,7 +611,7 @@ schema:CreativeWork a sh:NodeShape ;
         sh:path schema:director ;
         sh:class schema:Person ;
         ys:fromProperty wdt:P57 ;
-        rdfs:comment "The director of a PerformingGroup or CreativeWork"@en ;
+        rdfs:comment "The director of a CreativeWork"@en ;
     ] ;	
     sh:property [
         sh:path schema:illustrator ;
@@ -1059,6 +1059,11 @@ schema:Organization a sh:NodeShape ;
         ys:fromProperty wdt:P166 ;
     ] ;	
     sh:property [
+        sh:path schema:director ;
+        sh:class schema:Person ;
+        ys:fromProperty wdt:P1037, wdt:P1875;
+    ] ;	
+    sh:property [
         sh:path schema:sponsor ;
         sh:class schema:Organization ;
         ys:fromProperty wdt:P859 ;
@@ -1286,12 +1291,6 @@ schema:EducationalOrganization a sh:NodeShape ;
 # We need this as a superclass of MusicGroup
 schema:PerformingGroup rdf:type sh:NodeShape ;
     rdfs:subClassOf schema:Organization ; 
-    sh:property [
-        sh:path schema:director ;
-        sh:class schema:Person ;
-        ys:fromProperty wdt:P1037, wdt:P1875;
-        rdfs:comment "The director of a PerformingGroup or CreativeWork"@en ;
-    ] ;	
     sh:property [
         sh:path schema:knowsLanguage ;
         sh:class schema:Language ;
