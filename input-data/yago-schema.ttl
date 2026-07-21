@@ -1156,6 +1156,12 @@ schema:Organization a sh:NodeShape ;
         ys:fromProperty wdt:P154 ;
     ] ;
     sh:property [
+        sh:path yago:currency ;
+        ys:fromProperty wdt:P38 ;
+        sh:class yago:UnitOfMoney ;
+        rdfs:comment "Official currency of the organization"@en ;
+    ] ;	
+    sh:property [
         sh:path schema:duns ;
         sh:datatype xsd:string ;
         sh:pattern "^\\d{9}$" ;
@@ -1858,12 +1864,6 @@ schema:AdministrativeArea a sh:NodeShape ;
         ys:fromProperty wdt:P190 ;
         rdfs:comment "Twin place relationship (twinned administrative body)"@en ;
     ]  ;
-    sh:property [
-        sh:path yago:currency ;
-        ys:fromProperty wdt:P38 ;
-        sh:class yago:UnitOfMoney ;
-        rdfs:comment "Official currency of the country"@en ;
-    ] ;	
     sh:property [
         sh:path yago:demonym ; # Fabian: changed from schema:... 2024-04-03
         sh:datatype rdf:langString ;
