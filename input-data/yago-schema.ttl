@@ -382,7 +382,7 @@ yago:UnitOfTemperature a sh:NodeShape ;
 ################################################################
 
 schema:CreativeWork a sh:NodeShape ;
-    ys:fromClass wd:Q17537576, wd:Q386724 ;
+    ys:fromClass wd:Q17537576, wd:Q386724, wd:Q87167 ;
 	rdfs:subClassOf schema:Thing ;
 	rdfs:label "Creative work"@en ;
     sh:property [
