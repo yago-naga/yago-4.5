@@ -367,7 +367,12 @@ yago:UnitOfMass a sh:NodeShape ;
 	
 yago:UnitOfMoney a sh:NodeShape ;
 	rdfs:subClassOf yago:UnitOfMeasurement ;
-	ys:fromClass wd:Q8142 .
+	ys:fromClass wd:Q8142 ;
+    sh:property [
+        sh:path schema:price ;
+        sh:datatype yago:UnitOfMoney ;
+        ys:fromProperty wdt:P2284 ;
+    ] .
 
 yago:UnitOfSpeed a sh:NodeShape ;
 	rdfs:subClassOf yago:UnitOfMeasurement ;
