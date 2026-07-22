@@ -2174,6 +2174,11 @@ schema:Airport a sh:NodeShape ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P238 ;
         rdfs:comment "The IATA code for an Airport or Airline"@en 
+    ] ;
+    sh:property [
+        sh:path yago:elevation ; # Fabian: changed from schema: to yago: 2024-04-03
+        sh:datatype yago:UnitOfLength ;
+        ys:fromProperty wdt:P2044 
     ] .
 
 ################################################################
