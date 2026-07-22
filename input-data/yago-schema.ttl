@@ -332,6 +332,12 @@ schema:Language a sh:NodeShape ;
 # Needed for treatment of person names. Used only internally,
 # as names are replaced by strings. Is automatically removed from final taxonomy.
 yago:PersonName a sh:NodeShape ;
+    sh:property [
+        sh:path schema:inLanguage ;
+        sh:class schema:Language ;
+        ys:fromProperty wdt:P364, wdt:P407 ;
+        rdfs:comment "The language of an entity (e.g., CreativeWork)"@en 
+    ] ;
 	rdfs:subClassOf schema:Intangible ;
     ys:fromClass wd:Q10856962 .
 	
@@ -394,8 +400,16 @@ schema:CreativeWork a sh:NodeShape ;
         sh:path schema:editor ;
         sh:class schema:Person ;
         ys:fromProperty wdt:P98 ;
-        rdfs:comment "An editor of a Book"@en 
+        rdfs:comment "An editor of a Creative Work"@en 
     ] ;		
+    sh:property [
+        sh:path schema:isbn ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P212 , wdt:P957 ;
+        sh:pattern "^(97[89]-([0-57]-(\\d-\\d{7}|\\d\\d-\\d{6}|\\d\\d\\d-\\d{5}|\\d{4}-\\d{4}|\\d{5}-\\d\\d\\d|\\d{6}-\\d\\d|\\d{7}-\\d)|[89]\\d-(\\d-\\d{6}|\\d\\d-\\d{5}|\\d\\d\\d-\\d{4}|\\d{4}-\\d\\d\\d|\\d{5}-\\d\\d|\\d{6}-\\d)|[69]\\d\\d-(\\d-\\d{5}|\\d\\d-\\d{4}|\\d\\d\\d-\\d\\d\\d|\\d{4}-\\d\\d|\\d{5}-\\d)|99[0-8]\\d-\\d-\\d{4}|99[0-8]\\d-\\d\\d-\\d\\d\\d|99[0-8]\\d-\\d\\d\\d-\\d\\d|99[0-8]\\d-\\d{4}-\\d|999\\d\\d-\\d-\\d\\d\\d|999\\d\\d-\\d\\d-\\d\\d|999\\d\\d-\\d\\d\\d-\\d)-\\d|\\d{9}(\\d|X))|(\\d{1,5}-\\d{1,7}-\\d{1,6}-[0-9X])$" ;
+        rdfs:comment "The ISBN (International Standard Book Number) of a Creative Work"@en 
+    ] ;	
 	sh:property [
         sh:path yago:creator ;
         sh:or (
@@ -679,15 +693,7 @@ schema:Book a sh:NodeShape ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P1104 ;
         rdfs:comment "The number of pages in a Book"@en 
-    ]  ;  
-    sh:property [
-        sh:path schema:isbn ;
-        sh:datatype xsd:string ;
-        sh:maxCount 1 ;
-        ys:fromProperty wdt:P212 , wdt:P957 ;
-        sh:pattern "^(97[89]-([0-57]-(\\d-\\d{7}|\\d\\d-\\d{6}|\\d\\d\\d-\\d{5}|\\d{4}-\\d{4}|\\d{5}-\\d\\d\\d|\\d{6}-\\d\\d|\\d{7}-\\d)|[89]\\d-(\\d-\\d{6}|\\d\\d-\\d{5}|\\d\\d\\d-\\d{4}|\\d{4}-\\d\\d\\d|\\d{5}-\\d\\d|\\d{6}-\\d)|[69]\\d\\d-(\\d-\\d{5}|\\d\\d-\\d{4}|\\d\\d\\d-\\d\\d\\d|\\d{4}-\\d\\d|\\d{5}-\\d)|99[0-8]\\d-\\d-\\d{4}|99[0-8]\\d-\\d\\d-\\d\\d\\d|99[0-8]\\d-\\d\\d\\d-\\d\\d|99[0-8]\\d-\\d{4}-\\d|999\\d\\d-\\d-\\d\\d\\d|999\\d\\d-\\d\\d-\\d\\d|999\\d\\d-\\d\\d\\d-\\d)-\\d|\\d{9}(\\d|X))|(\\d{1,5}-\\d{1,7}-\\d{1,6}-[0-9X])$" ;
-        rdfs:comment "The ISBN (International Standard Book Number) of a Book"@en 
-    ]  .
+    ] .
 
 schema:TVSeries a sh:NodeShape ; 
 	rdfs:subClassOf schema:CreativeWork ; # instead of series
@@ -2079,7 +2085,7 @@ schema:Landform a sh:NodeShape ;
 # Linked to body of water and marine body of water and lake
 schema:BodyOfWater a sh:NodeShape ;
 	rdfs:subClassOf schema:Landform ;
-    ys:fromClass wd:Q15324, wd:Q23397 ;
+    ys:fromClass wd:Q15324, wd:Q23397, wd:Q55659167 ;
     sh:property [
         sh:path yago:flowsInto ;
         sh:class schema:BodyOfWater ;
