@@ -174,6 +174,13 @@ def termsAndSeparators(generator):
 # Counts blank nodes to give a unique name to each of them
 blankNodeCounter=0
 
+def isTerm(subject, generator):
+    """ Prints an error and returns FALSE if not a name """
+    if subject in ['.',',',';','[','(',')',']']:
+       printError("Expected a term, not",subject,"before '", " ".join(next(generator, "") for i in range(0,10)),"'")
+       return False
+    return True
+    
 def blankNodeName(subject, predicate=None):
     """ Generates a legible name for a blank node in the YS namespace """
     global blankNodeCounter
@@ -192,37 +199,31 @@ def blankNodeName(subject, predicate=None):
     
 def triplesFromTerms(generator, predicates=None, givenSubject=None):
     """ Iterator over the triples of a term generator """
-    while True:        
-        term=next(generator, None)
-        if not term or term==']':
+    predicate=None
+    while True:    
+        # Come here to read the subject
+        if not givenSubject:        
+           givenSubject=next(generator, None)
+           if givenSubject == ']' or givenSubject is None:
+               return
+           if not isTerm(givenSubject, generator):
+               return
+        # Read the predicate
+        if not predicate:
+           predicate = next(generator, None)
+           if not isTerm(predicate, generator):
+               return  
+           if predicate=='a':
+               predicate='rdf:type'
+        # Read object           
+        obj=next(generator, None)
+        if not obj:
+            printError("File ended unexpectedly after", givenSubject, predicate)
             return
-        if term=='.' or (term==';' and givenSubject):
-            continue
-        # If we're inside a [...]
-        if givenSubject:
-            subject=givenSubject
-            if term!=',':
-                predicate=term            
-        # If we're in a normal statement     
-        else:
-            if term!=';' and term!=',':
-                subject=term
-            if term!=',':
-                predicate=next(generator, None)
-        if predicate=='a':
-            predicate='rdf:type'
-        # read the object
-        object=next(generator, None)
-        if not object:
-            printError("File ended unexpectedly after", subject, predicate)
-            return
-        elif object in ['.',',',';']:
-            printError("Unexpected",object,"after",subject,predicate, "and before", " ".join(next(generator, None) for i in range(0,20)))
-            return
-        elif object=='(':
+        elif obj=='(':
             listNode=blankNodeName("list")
             previousListNode=None
-            yield (subject, predicate, listNode)
+            yield (givenSubject, predicate, listNode)
             while True:
                 term=next(generator, None)
                 if not term:
@@ -242,14 +243,31 @@ def triplesFromTerms(generator, predicates=None, givenSubject=None):
                     previousListNode=listNode
                     listNode=blankNodeName("list")
             yield (previousListNode, 'rdf:rest', 'rdf:nil')
-        elif object=='[':
-            object=blankNodeName(subject, predicate)
-            yield (subject, predicate, object)
-            yield from triplesFromTerms(generator, predicates, givenSubject=object)
+        elif obj=='[':
+            obj=blankNodeName(givenSubject, predicate)
+            yield (givenSubject, predicate, obj)
+            yield from triplesFromTerms(generator, predicates, givenSubject=obj)
+        elif not isTerm(obj, generator):
+            return
         else:
             if (not predicates) or (predicate in predicates):
-                yield (subject, predicate, object)
-
+                yield (givenSubject, predicate, obj)
+        # Read the final marker
+        marker = next(generator, None)
+        if marker=='.':
+            predicate = None
+            givenSubject = None
+        elif marker==';':
+            predicate = None
+        elif marker==',':
+            pass
+        elif marker==']':
+            return
+        elif marker is None: 
+            printError("Unexpected end of file after", givenSubject, predicate)
+            return
+        else:
+            printError("Unexpected item", marker, "before", " ".join(next(generator, "") for i in range(0,10)),"'")
 ##########################################################################
 #             Reading files
 ##########################################################################
