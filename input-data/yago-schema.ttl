@@ -1607,6 +1607,11 @@ schema:Person a sh:NodeShape ;
         sh:class schema:Organization ;
         ys:fromProperty wdt:P859 
     ] ;
+   sh:property [
+        sh:path schema:slogan ; 
+        sh:datatype rdf:langString ;
+        ys:fromProperty wdt:P1451 
+    ] ;		
     sh:property [
         sh:path schema:memberOf ;
         sh:class schema:Organization ;
@@ -2256,7 +2261,7 @@ schema:Product a sh:NodeShape ;
         sh:class schema:Thing ;
         ys:fromProperty wdt:P921 
     ] ;
-	sh:property [
+   sh:property [
         sh:path schema:slogan ; 
         sh:datatype rdf:langString ;
         ys:fromProperty wdt:P1451 
