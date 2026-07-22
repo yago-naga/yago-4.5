@@ -11,6 +11,7 @@ CC-BY 2022 Fabian M. Suchanek
 # We need these prefixes just to print them into each file. We don't actually use them...
 
 prefixes = {
+"wikibase": "http://wikiba.se/ontology#",
 "yago": "http://yago-knowledge.org/resource/",
 "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
 "xsd": "http://www.w3.org/2001/XMLSchema#",
