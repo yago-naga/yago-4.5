@@ -686,7 +686,7 @@ schema:Book a sh:NodeShape ;
 
 schema:TVSeries a sh:NodeShape ; 
 	rdfs:subClassOf schema:CreativeWork ; # instead of series
-	ys:fromClass wd:Q5398426, wd:Q15416 ;
+	ys:fromClass wd:Q5398426, wd:Q15416, wd:Q3464665 ;
     sh:property [
         sh:path schema:numberOfEpisodes ;
         sh:datatype xsd:integer ;
@@ -1420,6 +1420,14 @@ schema:Person a sh:NodeShape ;
         ) ;
         ys:fromProperty wdt:P108 ;
         rdfs:comment "An organization, person or place (e.g., theater) that a Person works for"@en 
+    ] ;
+    sh:property [
+        sh:path yago:representedBy ;
+        sh:or (
+	     [ sh:class schema:Person ]
+         [ sh:class schema:Organization ]
+        ) ;
+        ys:fromProperty wdt:P1875
     ] ;
     sh:property [
         sh:path schema:instrument ;
