@@ -981,7 +981,15 @@ schema:Event a sh:NodeShape ;
 	 [ sh:class schema:Person ]
          [ sh:class schema:Organization ]
         ) ;
-        ys:fromProperty wdt:P35, wdt:P6, wdt:P168, wdt:P169, wdt:P1075, wdt:P1037, wdt:P1875
+        ys:fromProperty wdt:P35, wdt:P6, wdt:P168, wdt:P169, wdt:P1075, wdt:P1037
+    ] ;
+    sh:property [
+        sh:path yago:representedBy ;
+        sh:or (
+	     [ sh:class schema:Person ]
+         [ sh:class schema:Organization ]
+        ) ;
+        ys:fromProperty wdt:P1875
     ] ;
     sh:property [
         sh:path yago:winner ;
@@ -1187,8 +1195,16 @@ schema:Organization a sh:NodeShape ;
 	 [ sh:class schema:Person ]
          [ sh:class schema:Organization ]
         ) ;
-        ys:fromProperty wdt:P35, wdt:P6, wdt:P168, wdt:P169, wdt:P1075, wdt:P1037, wdt:P1875;
+        ys:fromProperty wdt:P35, wdt:P6, wdt:P168, wdt:P169, wdt:P1075, wdt:P1037
         rdfs:comment "The leader of an Organization or AdministrativeArea"@en 
+    ] ;
+    sh:property [
+        sh:path yago:representedBy ;
+        sh:or (
+	     [ sh:class schema:Person ]
+         [ sh:class schema:Organization ]
+        ) ;
+        ys:fromProperty wdt:P1875
     ] ;
     sh:property [
         sh:path yago:artDirector ;
