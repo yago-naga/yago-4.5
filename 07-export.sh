@@ -15,6 +15,8 @@ rm yago-tiny.zip
 zip yago-tiny.zip yago-tiny.ttl
 echo "done"
 
+exit
+
 ######################## YAGO Entity List #############################
 
 # This entity list is used for the LELA disambiguation system
