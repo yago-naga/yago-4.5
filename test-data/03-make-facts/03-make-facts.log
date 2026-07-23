@@ -1,5 +1,5 @@
 <<	wd:Q_Inconsistent	rdf:type	wd:Q_rock_singer	>>	ys:excludedFor	"Disjoint type: schema:Person with schema:Organization"	.
-<<	wd:Q_Has_no_label	rdf:type	schema:Thing	>>	ys:excludedFor	"No label"	.
+<<	wd:Q_Has_no_label	rdf:type	schema:Thing	>>	ys:excludedFor	"No valid label"	.
 <<		rdf:type	schema:Thing	>>	ys:excludedFor	"No valid type"	.
 <<		rdf:type	schema:Thing	>>	ys:excludedFor	"No valid type"	.
 <<	wd:Q31	rdf:type	schema:Thing	>>	ys:excludedFor	"No valid type"	.
@@ -10,6 +10,10 @@
 <<	wd:Q31	yago:literacyRate	"lkblblhbl"^^xsd:decimal	>>	ys:excludedFor	"Uncastable literal"	.
 <<	wd:Q31	yago:literacyRate	"500"^^xsd:decimal	>>	ys:excludedFor	"Not in min-max range"	.
 <<	wd:Q312	schema:startDate	"1976-01-02"^^xsd:date	>>	ys:excludedFor	"Maxcount overflow"	.
-<<	wd:Q678	rdf:type	schema:Thing	>>	ys:excludedFor	"No label"	.
-<<	wd:Q23482	rdf:type	schema:Thing	>>	ys:excludedFor	"Only invalid names"	.
+<<	wd:Q678	rdf:type	schema:Thing	>>	ys:excludedFor	"No valid label"	.
+<<	wd:Q23482	rdfs:label	"XYZ J107878.27+203031.3"@en	>>	ys:excludedFor	"Is invalid label"	.
+<<	wd:Q23482	rdfs:label	"ABC J100216.27+203031.3"@mul	>>	ys:excludedFor	"Is invalid label"	.
+<<	wd:Q23482	rdf:type	schema:Thing	>>	ys:excludedFor	"No valid label"	.
 <<	schema:Event	rdfs:label	"Should go away"@en	>>	ys:excludedFor	"Already has manually defined label: Event"	.
+<<	wd:Q4736609	schema:locationCreated	schema:Thing	>>	ys:excludedFor	"Domain check failed: Subject is schema:Place, yago:AstronomicalObject and expected types are schema:CreativeWork, schema:Event, yago:FictionalEntity, schema:Product, schema:Organization"	.
+<<	wd:Q4736609	schema:inLanguage	schema:Thing	>>	ys:excludedFor	"Domain check failed: Subject is schema:Place, yago:AstronomicalObject and expected types are schema:CreativeWork, yago:PersonName, schema:Event"	.

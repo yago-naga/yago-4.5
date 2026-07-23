@@ -1,3 +1,4 @@
+@prefix wikibase: <http://wikiba.se/ontology#> .
 @prefix yago: <http://yago-knowledge.org/resource/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -5,7 +6,6 @@
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix wikibase: <http://wikiba.se/ontology#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix schema: <http://schema.org/> .
 @prefix cc: <http://creativecommons.org/ns#> .
@@ -46,7 +46,7 @@ wd:Q_Elvis	rdfs:comment	"Elvis Presley, the great singer"@en	.
 wd:Q_Elvis	schema:birthDate	"1935"^^xsd:gYear	.
 wd:Q_Elvis	schema:url	"https://elvis.com"^^xsd:anyURI	.
 wd:Q_Elvis	schema:url	"https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%B5%D1%81%D0%BB%D0%B8,_%D0%AD%D0%BB%D0%B2%D0%B8%D1%81"^^xsd:anyURI	.
-wd:Q_Elvis	rdfs:label	"Пресли,_Элвис"@ru	.
+wd:Q_Elvis	rdfs:label	"Пресли, Элвис"@ru	.
 wd:Q_tiger	schema:parentTaxon	wd:Q_cat	.
 wd:Q_tiger	yago:consumes	wd:Q_sheep	.
 wd:Q_tiger	rdfs:label	"tiger"@en	.
@@ -64,8 +64,8 @@ wd:Q_org	schema:slogan	"Blah blah"@en	.
 wd:Q_org	rdfs:label	"organization"@en	.
 wd:Q31	rdf:type	wd:Q123456	.
 wd:Q31	rdfs:label	"Belgium"@en	.
-wd:Q31	schema:location	wd:Schengen	.
 wd:Q31	schema:memberOf	wd:Schengen	.
+wd:Q31	schema:location	wd:Schengen	.
 wd:Q31	yago:currency	wd:Q4916	.
 wd:Q31	yago:marriageableAge	"20"^^xsd:integer	.
 wd:Q31	schema:geo	"Point(4.6680555555556 50.641111111111)"^^geo:wktLiteral	.
@@ -80,11 +80,11 @@ wd:Q_fictional	schema:birthPlace	wd:Q_birth_place_1	.
 wd:Q_fictional	yago:appearsIn	wd:Q_book	.
 wd:Q_singer	rdfs:label	"singer"@en	.
 wd:Q_singer	rdfs:label	"chanteur plus en détail"@fr	.
-wd:Q_singer	rdfs:label	"Mensch"@de	.
+wd:Q_singer	rdfs:label	"Saenger"@de	.
 wd:Q_singer	schema:sameAs	"https://freebase.com/id"	.
 wd:Q_singer	rdfs:comment	"this is a singer"@en	.
 wd:Q_singer	schema:alternateName	"this is a human singer"@en	.
-wd:Q_singer	schema:url	"https://de.wikipedia.org/wiki/Mensch"^^xsd:anyURI	.
+wd:Q_singer	schema:url	"https://de.wikipedia.org/wiki/Saenger"^^xsd:anyURI	.
 wd:Q_singer	rdf:type	rdfs:Class	.
 schema:Product	rdfs:label	"label that survives"@fr	.
 schema:Product	schema:sameAs	"https://freebase.com/first-id-that-survives"	.
@@ -101,3 +101,15 @@ wd:Q100995	rdfs:label	"رطل"@ar	.
 wd:Q1340	rdf:type	wd:Q1259917	.
 wd:Q1340	rdfs:label	"Vivaldi"@en	.
 schema:Event	rdf:type	rdfs:Class	.
+wd:Q4736609	rdf:type	yago:AstronomicalObject	.
+wd:Q4736609	schema:url	"http://alternativesjournal.ca/"^^xsd:anyURI	.
+wd:Q4736609	schema:url	"http://0-search.ebscohost.com.emu.londonmet.ac.uk/direct.asp?db=a9h&jid=3A0&scope=site"^^xsd:anyURI	.
+wd:Q4736609	schema:url	"http://0-search.ebscohost.com.emu.londonmet.ac.uk/direct.asp?db=ehh&jid=3A0&scope=site"^^xsd:anyURI	.
+wd:Q4736609	schema:url	"http://books.google.com/books?id=00STAAAAIAAJ"^^xsd:anyURI	.
+wd:Q4736609	schema:url	"http://books.google.com/books?id=37W3AAAAIAAJ"^^xsd:anyURI	.
+wd:Q4736609	schema:url	"https://en.wikipedia.org/wiki/A%5CJ:_Alternatives_Journal"^^xsd:anyURI	.
+wd:Q4736609	schema:location	wd:Q16	.
+wd:Q4736609	rdfs:label	"AJ: Alternatives Journal"@en	.
+wd:Q4736609	yago:creator	wd:Q30063582	.
+wd:Q4736609	schema:startDate	"1971"^^xsd:gYear	.
+wd:Q4736609	schema:sameAs	"/m/03m6d0b"	.

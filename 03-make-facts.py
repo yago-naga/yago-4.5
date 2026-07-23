@@ -72,11 +72,20 @@ def getFirst(iterable: Iterator[Any], default=None) -> Optional[Any]:
 ##########################################################################
 
 def handleWebPages(entityFacts) -> None:
-    """ Changes <page, schema:about, entity> to <entity, url, page> """
+    """ Changes <page, schema:about, entity> to <entity, url, page>; add labels """
     for page, predicate, entity in entityFacts.triplesWithPredicate(Prefixes.schemaAbout):
         entityFacts.remove((page, Prefixes.schemaAbout, entity))
         entityFacts.add((entity, Prefixes.schemaUrl, page))
         debug("Fixed", entity, Prefixes.schemaUrl, page)
+        # Move also all labels for wikipedia pages
+        match=re.match("<https://([a-z]+).wikipedia.org/wiki/([^>]*)>",page)
+        if match:
+            labelName = parse.unquote(match.group(2))
+            labelName = re.sub("[\"'\u0000-\u001f\\\\]", "", labelName)
+            labelName = re.sub("_", " ", labelName)
+            if len(labelName) > 2: # Get the class "dog"
+                debug("Found label for", entity, ": ", labelName)
+                entityFacts.add((entity, Prefixes.rdfsLabel, '"' + labelName + '"@' + match.group(1)))
 
 def translatePropertiesAndClasses(entityFacts, yagoSchema, yagoTaxonomyUp):
     """ Replaces properties by their YAGO properties, and classes by their YAGO equivalents, returns new graph with fact dates and fact units"""
@@ -121,6 +130,7 @@ def translatePropertiesAndClasses(entityFacts, yagoSchema, yagoTaxonomyUp):
     mainEntity=newGraph.mainSubject()
 
     # If I am a class, say so
+    debug("Is",mainEntity ,"a class?",yagoTaxonomyUp.get(mainEntity, None))
     if mainEntity in yagoTaxonomyUp:
         newGraph.removeObjects(mainEntity, Prefixes.rdfType)
         newGraph.add((mainEntity, Prefixes.rdfType, Prefixes.rdfsClass))
@@ -523,38 +533,13 @@ def handleMaxCounts(entityFacts, yagoSchema, writer, isSecondaryClass = False) -
 # Pattern for astronomical object names
 astro=r'"[-+A-Z0-9\[\] ]{3,} [JBF]?[-0-9.+]{6,}"@[a-z]+'
 
-def guessLabelIfNecessary(entityFacts, writer):
-    """ Tries to guess a label for an entity from a Wikipedia URL, returns TRUE upon success"""
-    mainEntity = entityFacts.mainSubject()
-    
-    # Exclude astronomical objects that have no valid name
-    if entityFacts.objectsOf(mainEntity, Prefixes.rdfsLabel) and all(re.match(astro,l) for l in entityFacts.objectsOf(mainEntity, Prefixes.rdfsLabel)):
-        writer.writeMetaFact(mainEntity, Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, f'"Only invalid names"')
-        return False
-    
-    # Try to get some more labels from Wikipedia pages     
-    wikipediaPages = entityFacts.objectsOf(mainEntity, Prefixes.schemaUrl)
-    labelName = None
-    labelLanguage = "en"
-    for wikipediaPage in wikipediaPages:
-        for (language, title) in re.findall("https://([a-z]+).wikipedia.org/wiki/([^^]*)", wikipediaPage):
-            if language == "en" or not labelName:
-                labelName = title
-                labelLanguage = language
-    if labelName:
-        labelName = parse.unquote(labelName)
-        labelName = re.sub("[\"'\u0000-\u001f]", "", labelName)
-        if len(labelName) > 2: # Get the class "dog"
-            debug("Found label for", mainEntity, ": ", labelName)
-            entityFacts.add((mainEntity, Prefixes.rdfsLabel, '"' + labelName + '"@' + labelLanguage))
-            return True
-    
-    # Still no label? Give up
-    if not entityFacts.objectsOf(mainEntity, Prefixes.rdfsLabel):
-        writer.writeMetaFact(mainEntity, Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, '"No label"')
-        return False
-        
-    return True
+def removeAstroLabels(entityFacts, writer):
+    """ Removes illegible labels that identify astronomical objects"""    
+    mainEntity = entityFacts.mainSubject()    
+    for label in list(entityFacts.objectsOf(mainEntity, Prefixes.rdfsLabel)):
+        if re.match(astro,label):
+            entityFacts.remove((mainEntity, Prefixes.rdfsLabel, label))
+            writer.writeMetaFact(mainEntity, Prefixes.rdfsLabel, label, Prefixes.ysReason, '"Is invalid label"')
 
 ##########################################################################
 #             Main method
@@ -600,11 +585,13 @@ class treatWikidataEntity():
 
         handleRange(entityFacts, self.yagoSchema, self.writer, self.yagoTaxonomyUp)
 
+        removeAstroLabels(entityFacts, self.writer)
+        
         handleMaxCounts(entityFacts, self.yagoSchema, self.writer, isSecondaryClass)
 
         # Min counts are de facto verified only for labels
-        if not isSecondaryClass and not guessLabelIfNecessary(entityFacts, self.writer):
-            # No label, we already wrote a warning, quit
+        if not isSecondaryClass and not entityFacts.objectsOf(entityFacts.mainSubject(), Prefixes.rdfsLabel):
+            self.writer.writeMetaFact(entityFacts.mainSubject(), Prefixes.rdfType, Prefixes.schemaThing, Prefixes.ysReason, '"No valid label"')
             return True
 
         # Get the subject only here, because it might have changed by mapping to YAGO schema

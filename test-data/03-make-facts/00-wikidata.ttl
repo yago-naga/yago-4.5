@@ -36,7 +36,7 @@ data:Q_Elvis a schema:Dataset ;
 <https://elvis.com> schema:about wd:Q_Elvis .
 
 # Wikipedia page should deliver the label
-<https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%B5%D1%81%D0%BB%D0%B8,_%D0%AD%D0%BB%D0%B2%D0%B8%D1%81> schema:about wd:Q_Elvis .
+<https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%B5%D1%81%D0%BB%D0%B8,_%D0%AD%D0%BB%D0%B2%D0%B8%D1%81> schema:about wd:Q_Elvis ; schema:name "Elviskaia"@ru .
 
 wd:Q_Elvis wdt:P31 wd:Q_rock_singer;
     # These are shortcuts that should not appear, and that should not be logged
@@ -170,12 +170,12 @@ wd:Q_fictional wdt:P31 wd:Q2593744, wd:Q_rock_singer ;
 	
 # Classes should survive
 
-<https://de.wikipedia.org/wiki/Mensch> a schema:Article ;
-	schema:about wd:Q_singer ;
-	schema:inLanguage "de" ;
-	schema:isPartOf <https://de.wikipedia.org/> ;
-	schema:name "Saenger"@de .
-	
+<https://de.wikipedia.org/wiki/Saenger> a schema:Article ;
+        schema:about wd:Q_singer ;
+        schema:inLanguage "de" ;
+        schema:isPartOf <https://de.wikipedia.org/> ;
+        schema:name "Saenger"@de .
+		
 wd:Q_singer  schema:name "singer"@en ;
 	skos:prefLabel "singer"@en ;
 	schema:name "singer"@en ;
@@ -246,3 +246,39 @@ schema:name "XYZ J107878.27+203031.3"@en, "ABC J100216.27+203031.3"@mul .
 
 # Predefined labels should take precedence, and the primary class as well
 wd:Q1656682 rdfs:label "Should go away"@en, "Ceci ne reste pas"@fr .
+
+
+<https://en.wikipedia.org/wiki/A%5CJ:_Alternatives_Journal> a schema:Article ;
+        schema:about wd:Q4736609 ;
+        schema:inLanguage "en" ;
+        schema:isPartOf <https://en.wikipedia.org/> ;
+        schema:name "A\\J: Alternatives Journal"@en .
+
+wd:Q4736609 wdt:P31 yago:AstronomicalObject ;
+        wdt:P236 "1205-7398" ;
+        wdtn:P236 <urn:ISSN:1205-7398> ;
+        wdt:P236 "2562-8453" ;
+        wdtn:P236 <urn:ISSN:2562-8453> ;
+        wdt:P1058 "40974" ;
+        wdt:P1156 "22699" ;
+        wdt:P856 <http://alternativesjournal.ca/>,
+                <http://0-search.ebscohost.com.emu.londonmet.ac.uk/direct.asp?db=a9h&jid=3A0&scope=site>,
+                <http://0-search.ebscohost.com.emu.londonmet.ac.uk/direct.asp?db=ehh&jid=3A0&scope=site>,
+                <http://books.google.com/books?id=00STAAAAIAAJ>,
+                <http://books.google.com/books?id=37W3AAAAIAAJ> ;
+        wdt:P1680 "Alternatives Journal"@en ;
+        wdt:P17 wd:Q16 ;
+        wdt:P1476 "A\\J"@en,
+                "Alternatives journal"@en ;
+        wdt:P495 wd:Q16 ;
+        wdt:P112 wd:Q30063582 ;
+        wdt:P571 "1971-01-01T00:00:00Z"^^xsd:dateTime ;
+        wdt:P8875 wd:Q371467 ;
+        wdt:P8903 "2762" ;
+        wdt:P407 wd:Q1860 ;
+        wdt:P7363 "1205-7398" ;
+        wdtn:P7363 <http://issn.org/resource/ISSN/1205-7398> ;
+        wdt:P646 "/m/03m6d0b" ;
+        wdt:P10283 "S62117714" ;
+        wdt:P6981 "3439748" ;
+        p:P31 wds:Q4736609-0DBECDA8-4714-4B36-9757-6E9F132477EF .
