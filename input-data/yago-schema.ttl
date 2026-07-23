@@ -858,7 +858,7 @@ yago:FictionalEntity a sh:NodeShape ;
 
 schema:Event a sh:NodeShape ;
     # Remove "occurrence", is a bad class
-    ys:fromClass wd:Q1656682, wd:Q1689296, wd:Q11514315, wd:Q115431196, wd:Q16738832 ;
+    ys:fromClass wd:Q1656682, wd:Q1689296, wd:Q11514315, wd:Q115431196, wd:Q2334719 ;
 	rdfs:label "Event"@en ;
     rdfs:subClassOf schema:Thing ;
 	sh:property [
@@ -2457,6 +2457,12 @@ schema:Taxon a sh:NodeShape;
         sh:class schema:Taxon ;
         ys:fromProperty wdt:P1034 ;
         rdfs:comment "A Taxon that another Taxon consumes (predator-prey relationship)"@en 
+    ] ;
+	sh:property [
+        sh:path yago:afflicts ;
+        ys:fromProperty wdt:P689 ;
+        sh:or ([sh:class schema:Taxon] [sh:class schema:Person]) ;
+        rdfs:comment "Type of organism which a condition or disease afflicts"@en 
     ] ;
     sh:property [
         sh:path yago:lifeExpectancy ;
