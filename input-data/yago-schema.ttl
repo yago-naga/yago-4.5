@@ -2233,7 +2233,7 @@ schema:Airport a sh:NodeShape ;
 schema:Product a sh:NodeShape ;
 	rdfs:subClassOf schema:Thing ;
 	rdfs:label "Product"@en ;
-    ys:fromClass wd:Q2424752, wd:Q2342494, wd:Q28877, wd:Q2184715 ;
+    ys:fromClass wd:Q2424752, wd:Q2342494, wd:Q28877, wd:Q2184715, wd:Q28885102 ;
     sh:property [
         sh:path schema:logo ;
         sh:datatype xsd:anyURI ;
