@@ -2458,6 +2458,12 @@ schema:Taxon a sh:NodeShape;
         ys:fromProperty wdt:P1034 ;
         rdfs:comment "A Taxon that another Taxon consumes (predator-prey relationship)"@en 
     ] ;
+	sh:property [
+        sh:path yago:afflicts ;
+        ys:fromProperty wdt:P689 ;
+        sh:or ([sh:class schema:Taxon] [sh:class schema:Person]) ;
+        rdfs:comment "Type of organism which a condition or disease afflicts"@en 
+    ] ;
     sh:property [
         sh:path yago:lifeExpectancy ;
 		sh:maxCount 1 ;
