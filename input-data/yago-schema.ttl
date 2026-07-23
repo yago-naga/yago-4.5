@@ -977,7 +977,10 @@ schema:Event a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path yago:leader ; 
-        sh:class schema:Person ;
+        sh:or (
+	 [ sh:class schema:Person ]
+         [ sh:class schema:Organization ]
+        ) ;
         ys:fromProperty wdt:P35, wdt:P6, wdt:P168, wdt:P169, wdt:P1075, wdt:P1037, wdt:P1875
     ] ;
     sh:property [
@@ -1180,7 +1183,10 @@ schema:Organization a sh:NodeShape ;
     ] ;
     sh:property [
         sh:path yago:leader ; # Fabian: changed from schema: to yago: 2024-04-03
-        sh:class schema:Person ;
+        sh:or (
+	 [ sh:class schema:Person ]
+         [ sh:class schema:Organization ]
+        ) ;
         ys:fromProperty wdt:P35, wdt:P6, wdt:P168, wdt:P169, wdt:P1075, wdt:P1037, wdt:P1875;
         rdfs:comment "The leader of an Organization or AdministrativeArea"@en 
     ] ;
@@ -1382,14 +1388,14 @@ schema:Person a sh:NodeShape ;
    sh:property [
         sh:path yago:hairColor ;
 		sh:maxCount 1 ;
-        sh:datatype yago:HairColor ;
+        sh:class yago:HairColor ;
         ys:fromProperty wdt:P1884 ;
         rdfs:comment "The hair color of a a person"@en 
     ] ;
     sh:property [
         sh:path yago:eyeColor ;
 		sh:maxCount 1 ;
-        sh:datatype yago:Color ;
+        sh:class yago:Color ;
         ys:fromProperty wdt:P1340 
     ] ;
     sh:property [
@@ -2085,7 +2091,7 @@ schema:Landform a sh:NodeShape ;
 # Linked to body of water and marine body of water and lake
 schema:BodyOfWater a sh:NodeShape ;
 	rdfs:subClassOf schema:Landform ;
-    ys:fromClass wd:Q15324, wd:Q23397, wd:Q55659167 ;
+    ys:fromClass wd:Q15324, wd:Q23397, wd:Q55659167, wd:Q355304, wd:Q4022 ; # Added river
     sh:property [
         sh:path yago:flowsInto ;
         sh:class schema:BodyOfWater ;
@@ -2555,7 +2561,7 @@ schema:MedicalCondition a sh:NodeShape;
 	sh:property [
         sh:path yago:afflicts ;
         ys:fromProperty wdt:P689 ;
-        sh:class schema:Taxon ;
+        sh:or ([sh:class schema:Taxon] [sh:class schema:Person]) ;
         rdfs:comment "Type of organism which a condition or disease afflicts"@en 
     ] ;
 	# Too few facts
