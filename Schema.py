@@ -297,7 +297,16 @@ class YagoClass(YagoObject):
             yagoProperty.subjectTypes.add(self.identifier)
             yagoProperty.updateFromShacl(shaclProperty, entityGraph)
             self.properties.add(yagoProperty)
-        
+
+PREDEFINED_LABELS={
+"owl:disjointWith": '"is disjoint with"@en',
+"rdf:Property": '"Class of properties"@en',
+"rdf:first": '"first element of a list"@en',
+"rdf:rest": '"next element of a list"@en',
+"rdfs:subClassOf": '"is subclass of"@en',
+"rdfs:subPropertyOf": '"is subproperty of"@en'
+}
+
 class YagoSchema(object):
     """ The YAGO schema """
     
@@ -367,6 +376,10 @@ class YagoSchema(object):
             clss.writeTo(out)
         for prop in self.properties.values():
             prop.writeTo(out)
+        # Make sure all properties have a label, even the RDF ones    
+        for prop in PREDEFINED_LABELS:
+            if prop not in self.properties:
+                out.write(prop+" rdfs:label "+PREDEFINED_LABELS[prop]+" .\n")
           
     def writeToFile(self,file):
         """ Writes the schema to a file"""
