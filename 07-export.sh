@@ -11,11 +11,12 @@ date +"  Current time: %F %T"
 cp 01-yago-final-schema.ttl yago-tiny.ttl
 grep -v -P '@prefix' 05-yago-final-taxonomy.tsv >> yago-tiny.ttl
 grep -P 'yago:A[^\t]+\t(rdf:type\t|[^\t]+\t("|yago:A|schema:))' 05-yago-final-wikipedia.tsv >> yago-tiny.ttl
+grep -P 'yago:[^\t]+\trdf:type\tyago:UnitOf' 05-yago-final-wikipedia.tsv >> yago-tiny.ttl
 rm yago-tiny.zip
 zip yago-tiny.zip yago-tiny.ttl
 echo "done"
 
-exit
+if false; then
 
 ######################## YAGO Entity List #############################
 
@@ -88,3 +89,5 @@ scp 06-upper-taxonomy.html yago@yago.r2.enst.fr:~/website/content/schema.php
 scp yago-entities.jsonl.zip yago@yago.r2.enst.fr:/data/public/yago4.5/yago-entities.jsonl.zip
 echo "done"
 date +"Current time: %F %T"
+
+fi

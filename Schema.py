@@ -59,6 +59,10 @@ class YagoObject:
         """ Performs simple checks """
         if not TurtleUtils.isEntityWithPrefix(self.identifier):
             warning("YAGO object",self,"has an invalid identifier")
+        # If we do not have a label, invent one by splitting the identifier by Camel Case.
+        # We also get labels from Wikidata, but YAGO-tiny will not have them. By putting them here, we make them part of the schema and YAGO-tiny gets them
+        if not self.labels:
+            self.labels.add('"'+re.sub("([a-z])([A-Z])","\\1 \\2",stripPrefix(self.identifier))+'"@en')        
         for s in itertools.chain(self.labels,self.comments):
             literal, _, lang, _ = TurtleUtils.splitLiteral(s)
             if not literal:
@@ -117,9 +121,6 @@ class YagoProperty(YagoObject):
     
     def check(self):
         """ Performs simple checks """
-        # If we do not have a label, invent one by splitting the identifier by Camel Case
-        if not self.labels:
-            self.labels.add('"'+re.sub("([a-z])([A-Z])","\\1 \\2",stripPrefix(self.identifier))+'"@en')        
         super().check()
         if not self.objectTypes:
             warning("Property",self,"has no object types")
@@ -300,7 +301,6 @@ class YagoClass(YagoObject):
 
 PREDEFINED_LABELS={
 "owl:disjointWith": '"is disjoint with"@en',
-"rdf:Property": '"Class of properties"@en',
 "rdf:first": '"first element of a list"@en',
 "rdf:rest": '"next element of a list"@en',
 "rdfs:subClassOf": '"is subclass of"@en',

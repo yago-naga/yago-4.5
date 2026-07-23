@@ -7,4 +7,5 @@ python3 03-make-facts.py
 python3 04-make-typecheck.py
 python3 05-make-ids.py
 python3 06-make-statistics.py
+bash 07-export.sh
 # python3 08-make-wikidata-statistics.py
