@@ -1724,8 +1724,15 @@ schema:Place a sh:NodeShape ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P625 ;
         rdfs:comment "The geographic coordinates of a Place (in WKT literal format)"@en 
+    ] ;	
+    sh:property [
+        sh:path schema:location ;
+        sh:class schema:Place ;
+		# Fabian: wdt:P361 is overloaded with partOf, to make countries part of continents etc.
+		# Fabian: wdt:P463 is overloaded with memberOf
+        ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17, wdt:P30, wdt:P551, wdt:P361, wdt:P463, wdt:P183, wdt:P9714 
     ] ;
-	sh:property [
+    sh:property [
         sh:path schema:startDate ;
         sh:or (
             [
@@ -1839,14 +1846,7 @@ schema:Place a sh:NodeShape ;
 yago:AstronomicalObject a sh:NodeShape ;
 	rdfs:subClassOf schema:Place ;
 	ys:fromClass wd:Q6999 ;
-	sh:property [
-        sh:path schema:location ;
-        sh:class schema:Place ;
-		# Fabian: wdt:P361 is overloaded with partOf, to make countries part of continents etc.
-		# Fabian: wdt:P463 is overloaded with memberOf
-        ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17, wdt:P30, wdt:P551, wdt:P361, wdt:P463, wdt:P183, wdt:P9714 
-    ] ;
-	sh:property [
+    sh:property [
         sh:path yago:parentBody ;
         sh:class yago:AstronomicalObject ;
 		sh:maxCount 1 ;
@@ -2102,7 +2102,7 @@ schema:Country a sh:NodeShape ;
 # not from geographical region (Q82794) and geographic location  (Q2221906) because otherwise many administrative regions become Landforms
 schema:Landform a sh:NodeShape ;
     rdfs:subClassOf schema:Place ;
-	ys:fromClass wd:Q14524493, wd:Q205895, wd:Q271669, wd:Q3622002, wd:Q35145263  .
+	ys:fromClass wd:Q14524493, wd:Q205895, wd:Q271669, wd:Q3622002, wd:Q35145263 .
     
 # Bodies of water are Landforms.
 # Linked to body of water and marine body of water and lake
@@ -2133,13 +2133,6 @@ yago:HumanMadeGeographicalEntity a sh:NodeShape ;
 	rdfs:subClassOf schema:Place ;
 	rdfs:label "Human-made geographical entity"@en ;
     ys:fromClass wd:Q811979, wd:Q811430, wd:Q811463, wd:Q35145743, wd:Q811430, wd:Q18247357, wd:Q699405, wd:Q684740, wd:Q699405, wd:Q12292478, wd:Q1497375, wd:Q845132, wd:Q1403389, wd:Q1403389, wd:Q975783, wd:Q15642541, wd:Q839954, wd:Q17350442 ;
-   sh:property [
-        sh:path schema:location ;
-        sh:class schema:Place ;
-		# Fabian: wdt:P361 is overloaded with partOf, to make countries part of continents etc.
-		# Fabian: wdt:P463 is overloaded with memberOf
-        ys:fromProperty wdt:P131 , wdt:P276 , wdt:P706 , wdt:P4552, wdt:P17, wdt:P30, wdt:P551, wdt:P361, wdt:P463, wdt:P183, wdt:P9714 
-    ] ;
    sh:property [
         sh:path schema:postalCode ;
         sh:datatype xsd:string ;
