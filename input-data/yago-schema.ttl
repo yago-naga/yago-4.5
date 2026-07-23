@@ -403,6 +403,11 @@ schema:CreativeWork a sh:NodeShape ;
         rdfs:comment "An editor of a Creative Work"@en 
     ] ;		
     sh:property [
+        sh:path yago:beliefSystem ;
+        sh:class yago:BeliefSystem ; 
+        ys:fromProperty wdt:P140, wdt:P1142 
+    ] ; 	
+    sh:property [
         sh:path schema:isbn ;
         sh:datatype xsd:string ;
         sh:maxCount 1 ;
@@ -558,7 +563,7 @@ schema:CreativeWork a sh:NodeShape ;
          [ sh:class schema:Organization ]
         ) ;
         ys:fromProperty wdt:P123 ;
-        rdfs:comment "The publisher of a Book or Newspaper"@en 
+        rdfs:comment "The publisher of a Creative Work"@en 
     ] ;	
 	sh:property [
         sh:path schema:about ;
@@ -659,14 +664,21 @@ schema:CreativeWork a sh:NodeShape ;
         sh:path schema:productionCompany ;
         sh:class schema:Organization ;
         ys:fromProperty wdt:P272 ;
-        rdfs:comment "The production company for a Movie or TV Series"@en 
+        rdfs:comment "The production company for a Creative Work"@en 
     ] ;
+    sh:property [
+        sh:path schema:numberOfEpisodes ;
+        sh:datatype xsd:integer ;
+        sh:maxCount 1 ;
+        ys:fromProperty wdt:P1113 ;
+        rdfs:comment "The number of episodes in a Creative Work"@en 
+    ] ;	
 	sh:property [
         sh:path schema:numberOfPages ;
         sh:datatype xsd:integer ;
         sh:maxCount 1 ;
         ys:fromProperty wdt:P1104 ;
-        rdfs:comment "The number of pages in a Book"@en 
+        rdfs:comment "The number of pages in a Creative Work"@en 
     ] ;
     sh:property [
         sh:path schema:musicBy ; 
@@ -675,13 +687,13 @@ schema:CreativeWork a sh:NodeShape ;
          [ sh:class schema:Organization ]
         ) ;
         ys:fromProperty wdt:P86 ;
-        rdfs:comment "The composer or musician for a Movie, TV Series, or MusicComposition"@en 
+        rdfs:comment "The composer or musician for a Creative Work"@en 
     ] ;		
     sh:property [
         sh:path yago:directorOfPhotography ;
         sh:class schema:Person ;
         ys:fromProperty wdt:P344 ;
-        rdfs:comment "The director of photography for a Movie or TV Series"@en 
+        rdfs:comment "The director of photography for a Creative Work"@en 
     ] ;
     sh:property [
         sh:path schema:gtin ;
@@ -698,13 +710,6 @@ schema:Book a sh:NodeShape ;
 schema:TVSeries a sh:NodeShape ; 
 	rdfs:subClassOf schema:CreativeWork ; # instead of series
 	ys:fromClass wd:Q5398426, wd:Q15416, wd:Q3464665 ;
-    sh:property [
-        sh:path schema:numberOfEpisodes ;
-        sh:datatype xsd:integer ;
-        sh:maxCount 1 ;
-        ys:fromProperty wdt:P1113 ;
-        rdfs:comment "The number of episodes in a TV Series"@en 
-    ] ;
     sh:property [
         sh:path schema:numberOfSeasons ;
         sh:datatype xsd:integer ;
@@ -1321,13 +1326,6 @@ schema:Organization a sh:NodeShape ;
         ys:fromProperty wdt:P800 
     ] ;		
     sh:property [
-        sh:path yago:studentsCount ;
-        sh:datatype xsd:integer ;
-		sh:maxCount 1 ;
-        ys:fromProperty wdt:P2196 ;
-        rdfs:comment "The number of students in an Organization"@en 
-    ] ;
-    sh:property [
         sh:path schema:numberOfEmployees ;
         sh:datatype xsd:integer ;
 		sh:maxCount 1 ;
@@ -1338,7 +1336,7 @@ schema:Organization a sh:NodeShape ;
 yago:LocalOrganization a sh:NodeShape ; 
     rdfs:subClassOf schema:Place, schema:Organization ; 
 	rdfs:label "An Organization that is also a Place"@en ; 
-	ys:fromClass wd:Q294163, wd:Q28737012, wd:Q166118.
+	ys:fromClass wd:Q294163, wd:Q33506, wd:Q166118.
 
 schema:Corporation a sh:NodeShape ;
      rdfs:subClassOf schema:Organization ;
@@ -1365,12 +1363,17 @@ schema:Airline a sh:NodeShape ;
         rdfs:comment "The ICAO code for an Airport or Airline"@en 
     ] .
 
-# Thomas: move studentCount up
 # We attach it under organization, to avoid CivicStructure
-#schema:EducationalOrganization a sh:NodeShape ;
-#	rdfs:subClassOf yago:LocalOrganization ;
-#    ys:fromClass wd:Q5341295 ;
-#.
+schema:EducationalOrganization a sh:NodeShape ;
+	rdfs:subClassOf yago:LocalOrganization ;
+	sh:property [
+        sh:path yago:studentsCount ;
+        sh:datatype xsd:integer ;
+		sh:maxCount 1 ;
+        ys:fromProperty wdt:P2196 ;
+        rdfs:comment "The number of students in an Organization"@en 
+    ] ;
+    ys:fromClass wd:Q5341295, wd:Q2385804 .
 
 # We need this as a superclass of MusicGroup
 schema:PerformingGroup rdf:type sh:NodeShape ;
