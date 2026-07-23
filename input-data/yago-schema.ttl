@@ -1195,7 +1195,7 @@ schema:Organization a sh:NodeShape ;
 	 [ sh:class schema:Person ]
          [ sh:class schema:Organization ]
         ) ;
-        ys:fromProperty wdt:P35, wdt:P6, wdt:P168, wdt:P169, wdt:P1075, wdt:P1037
+        ys:fromProperty wdt:P35, wdt:P6, wdt:P168, wdt:P169, wdt:P1075, wdt:P1037 ;
         rdfs:comment "The leader of an Organization or AdministrativeArea"@en 
     ] ;
     sh:property [
@@ -1326,7 +1326,7 @@ schema:Organization a sh:NodeShape ;
 		sh:maxCount 1 ;
         ys:fromProperty wdt:P2196 ;
         rdfs:comment "The number of students in an Organization"@en 
-    ] 
+    ] ;
     sh:property [
         sh:path schema:numberOfEmployees ;
         sh:datatype xsd:integer ;
