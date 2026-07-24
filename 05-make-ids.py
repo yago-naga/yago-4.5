@@ -168,13 +168,13 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
     
     yagoUnits={}
     
-    with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-meta-TEST.tsv") as metaFacts:
-        with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-beyond-wikipedia-TEST.tsv") as fullFacts:
-            with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-wikipedia-TEST.tsv") as wikipediaFacts:
-                with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-wikipedia-labels-TEST.tsv") as wikipediaLabelFacts:
-                    with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-beyond-wikipedia-labels-TEST.tsv") as fullLabelFacts:
+    with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-meta.tsv") as metaFacts:
+        with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-beyond-wikipedia.tsv") as fullFacts:
+            with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-wikipedia.tsv") as wikipediaFacts:
+                with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-wikipedia-labels.tsv") as wikipediaLabelFacts:
+                    with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-beyond-wikipedia-labels.tsv") as fullLabelFacts:
                         previousEntity="Elvis"
-                        for split in TsvUtils.tsvTuples(FOLDER+"04-yago-facts-to-rename-TEST.tsv", "  Renaming"):
+                        for split in TsvUtils.tsvTuples(FOLDER+"04-yago-facts-to-rename.tsv", "  Renaming"):
                             if len(split)<3:
                                 continue
                             subject=toYagoEntity(split[0])
@@ -221,7 +221,7 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
      
     # Write out taxonomy
     
-    with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-taxonomy-TEST.tsv") as taxFacts:
+    with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-taxonomy.tsv") as taxFacts:
         for split in TsvUtils.tsvTuples(FOLDER+"02-yago-taxonomy-to-rename.tsv", "  Renaming classes"):
             if len(split)<3:
                 continue
@@ -255,7 +255,7 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
             prop.objectTypes=newDataTypes
     print("done")            
     print("  Writing out schema...", flush=True, end='')
-    yagoSchema.writeToFile(FOLDER+"05-yago-final-schema-TEST.ttl")
+    yagoSchema.writeToFile(FOLDER+"05-yago-final-schema.ttl")
     print("done")
     
 if TEST:
