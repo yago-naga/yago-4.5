@@ -13,7 +13,7 @@ cp 01-yago-final-schema.ttl yago-tiny.ttl
 # Add taxonomy
 grep -v -P '@prefix' 05-yago-final-taxonomy.tsv >> yago-tiny.ttl
 # Add facts
-grep -P 'yago:A[^\t]+\t(rdf:type\t|[^\t]+\t("|yago:A))' 05-yago-final-wikipedia.tsv >> yago-tiny.ttl
+grep -P 'yago:A[^\t]+\t(rdf:type\t|[^\t]+\t("|yago:A))' |  grep -v -P "_Q[0-9]+" | 05-yago-final-wikipedia.tsv >> yago-tiny.ttl
 # Add units and their types and labels
 grep -oP '"\^\^\K[a-zA-Z0-9_:]+' yago-tiny.ttl | sort | uniq > yago-units.txt
 sed 's/^/^/; s/$/\t(rdf:type|rdfs:label)/' yago-units.txt > yago-units-patterns.txt

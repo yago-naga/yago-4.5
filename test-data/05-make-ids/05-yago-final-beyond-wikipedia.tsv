@@ -32,6 +32,7 @@
 @prefix prn: <http://www.wikidata.org/prop/reference/value-normalized/> .
 @prefix wdno: <http://www.wikidata.org/prop/novalue/> .
 @prefix ys: <http://yago-knowledge.org/schema#> .
+yago:Elvis	schema:height	"200"^^yago:Meter	.
 yago:Elvis	schema:child	yago:Q_123456	.
 yago:Q_123456	rdfs:label	"unknown child"	.
 yago:Q_123456	owl:sameAs	wd:Q_123456	.

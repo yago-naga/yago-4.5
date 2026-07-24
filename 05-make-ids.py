@@ -90,7 +90,10 @@ def toYagoEntity(entity):
     
 def goesToWikipediaVersion(entity):
     """ TRUE if the entity is a literal or has a Wikipedia page or is a generic instance"""
-    return isLiteral(entity) or entity in entitiesWithWikipediaPage or isGenericInstance(entity)
+    if isLiteral(entity):
+        string, _, _, unit = TurtleUtils.splitLiteral(entity)    
+        return unit is None or not unit.startswith("yago:") or goesToWikipediaVersion(unit)
+    return entity in entitiesWithWikipediaPage or isGenericInstance(entity)
 
 wikipediaUrlPattern=re.compile("https://([a-z-]+)\\.wiki.*")
 
