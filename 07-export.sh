@@ -27,8 +27,6 @@ rm yago-tiny.zip
 zip yago-tiny.zip yago-tiny.ttl
 echo "done"
 
-if false; then
-
 ######################## YAGO Entity List #############################
 
 # This entity list is used for the LELA disambiguation system
@@ -36,6 +34,7 @@ if false; then
 echo "Generating YAGO entity list..."
   sed -n 's/^yago:\([^\t]\+\)\trdfs:comment\t"\([^"]\+\)"@en.*/{"id": "yago:\1", "title": "\1", "description": "\2"}/p' 05-yago-final-wikipedia.tsv > yago-entities.jsonl
   zip -m yago-entities.jsonl.zip yago-entities.jsonl
+  rm yago-entities.jsonl
 echo "done"
 
 ######################## Export to Qlever #############################
@@ -60,15 +59,18 @@ scp 04-yago-ids.tsv yago@yago.r2.enst.fr:/data/qlever/
 
 ######################## Export to Web server #############################
 
-declare -A yagoFiles=( 
-    ["schema"]="01-yago-final-schema.ttl"
-	["taxonomy"]="05-yago-final-taxonomy.tsv"
-    ["facts"]="05-yago-final-wikipedia.tsv"
-	["labels"]="05-yago-final-wikipedia-labels.tsv" 
-    ["beyond-wikipedia"]="05-yago-final-beyond-wikipedia.tsv" 
-	["beyond-wikipedia-labels"]="05-yago-final-beyond-wikipedia-labels.tsv" 
-    ["meta"]="05-yago-final-meta.tsv"
-)
+declare -A yagoFiles
+    yagoFiles["schema"]="01-yago-final-schema.ttl"
+	yagoFiles["taxonomy"]="05-yago-final-taxonomy.tsv"
+    yagoFiles["facts"]="05-yago-final-wikipedia.tsv"
+	yagoFiles["labels"]="05-yago-final-wikipedia-labels.tsv" 
+    yagoFiles["beyond-wikipedia"]="05-yago-final-beyond-wikipedia.tsv" 
+	yagoFiles["beyond-wikipedia-labels"]="05-yago-final-beyond-wikipedia-labels.tsv" 
+    yagoFiles["meta"]="05-yago-final-meta.tsv"
+	yagoFiles["taxonomy-log"]="02-make-taxonomy.log"
+	yagoFiles["fact-log"]="03-make-facts.log"
+	yagoFiles["range-log"]="04-make-type-check.log"
+	
 version="4.6"
 
 echo "Packing YAGO files..."
@@ -76,9 +78,9 @@ rm yago.zip
 for file in "${!yagoFiles[@]}"
 do
     echo "  Packing $file..."
-    mv "${yagoFiles[$file]}" yago-$file.ttl
+	mv "${yagoFiles[$file]}" yago-$file.ttl
+    rm zip yago-$file.zip
     zip yago-$file.zip yago-$file.ttl
-    zip yago.zip yago-$file.ttl
     mv yago-$file.ttl "${yagoFiles[$file]}"
     echo "  done"
 done
@@ -94,11 +96,9 @@ done
 echo "done"
 
 echo "Copying collective YAGO files to Web server..."
-scp yago.zip yago@yago.r2.enst.fr:/data/public/yago4.5/yago-$version.zip
+scp 06-statistics.txt yago@yago.r2.enst.fr:/data/public/yago4.5/yago-$version-statistics.txt
 scp yago-tiny.zip yago@yago.r2.enst.fr:/data/public/yago4.5/yago-$version-tiny.zip
 scp 06-upper-taxonomy.html yago@yago.r2.enst.fr:~/website/content/schema.php
 scp yago-entities.jsonl.zip yago@yago.r2.enst.fr:/data/public/yago4.5/yago-entities.jsonl.zip
 echo "done"
 date +"Current time: %F %T"
-
-fi
