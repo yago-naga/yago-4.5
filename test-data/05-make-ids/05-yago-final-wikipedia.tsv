@@ -57,3 +57,9 @@ yago:Douglas_Adams	rdfs:label	"Douglas Adams"@en	.
 yago:Douglas_Adams	owl:sameAs	wd:Q42	.
 yago:Douglas_Adams	rdf:type	schema:Person	.
 yago:Douglas_Adams	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Douglas_Adams>	.
+yago:Aalborg	yago:siteLinks	"108"^^xsd:integer	.
+yago:Aalborg	owl:sameAs	wd:Q25410	.
+yago:Aalborg	schema:geo	"Point(9.9166666666667 57.05)"^^geo:wktLiteral	.
+yago:Aalborg	schema:image	"http://commons.wikimedia.org/wiki/Special:FilePath/Aalborg%20NyTorv%202004%20ubt.jpeg"^^xsd:anyURI	.
+yago:Aalborg	schema:sameAs	"/m/0dnntf"	.
+yago:Aalborg	schema:sameAs	"08780076-n"	.
