@@ -21,7 +21,7 @@ grep -E -f yago-units-patterns.txt 05-yago-final-wikipedia.tsv >> yago-tiny.ttl
 rm yago-units.txt
 rm yago-units-patterns.txt
 # Add labels of classes after the last schema-declared one
-grep -m 1 -A 1000000 'schema:MedicalCondition' 05-yago-final-taxonomy.tsv |sed '1d' | cut -f1 | grep -v -P "yago:A" | sort | uniq | sed 's/.*/&\trdfs:label\t"&"@en\t./' >> yago-tiny.ttl
+grep -m 1 -A 1000000 'schema:MedicalCondition' 05-yago-final-taxonomy.tsv |sed '1d' | cut -f1 | grep -v -P "yago:A" | sort | uniq | sed 's/.*/& rdfs:label "&"@en; rdf:type rdfs:Class ./' >> yago-tiny.ttl
 # Zip the file
 rm yago-tiny.zip
 zip yago-tiny.zip yago-tiny.ttl

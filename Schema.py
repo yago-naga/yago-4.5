@@ -304,6 +304,19 @@ PREDEFINED_LABELS={
 "rdf:first": '"first element of a list"@en',
 "rdf:rest": '"next element of a list"@en',
 "rdfs:subClassOf": '"is subclass of"@en',
+"sh:class": '"has range"@en',
+"sh:datatype": '"has datatype"@en',
+"sh:maxCount": '"has maxcount"@en',
+"sh:maxInclusive": '"is max inclusive of"@en',
+"sh:minCount": '"has min count"@en',
+"sh:minInclusive": '"is min inclusive of"@en',
+"sh:or": '"one of"@en',
+"sh:path": '"concerns"@en',
+"sh:pattern": '"has pattern"@en',
+"sh:property": '"has property"@en',
+"sh:uniqueLang": '"has unique language"@en',
+"ys:fromClass": '"derives from Wikidata class"@en',
+"ys:fromProperty": '"derives from Wikidata property"@en',
 "rdfs:subPropertyOf": '"is subproperty of"@en'
 }
 
