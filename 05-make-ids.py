@@ -231,8 +231,8 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
     
     # Write out schema
     
-    print("Adding datatypes to schema...")
     yagoSchema = Schema.YagoSchema(SCHEMA_FILE) 
+    print("  Adding datatypes to schema...", flush=True, end='')
     for prop in yagoSchema.properties.values():
         if prop.isDatatype:
             newDataTypes=set()
@@ -242,6 +242,7 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
                 else:
                     newDataTypes.add(datatype)
             prop.objectTypes=newDataTypes
+    print("done")            
     print("  Writing out schema...", flush=True, end='')
     yagoSchema.writeToFile(FOLDER+"05-yago-final-schema.ttl")
     print("done")
