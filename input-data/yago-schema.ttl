@@ -2424,6 +2424,11 @@ schema:Taxon a sh:NodeShape;
         rdfs:comment "The parent taxon of a Taxon in biological classification"@en 
     ] ;
 	sh:property [
+        sh:path schema:location ;
+        sh:class schema:Place ;
+        ys:fromProperty wdt:P183
+    ]  ;   
+	sh:property [
         sh:path schema:color ;
         ys:fromProperty wdt:P462 ;  
         sh:class yago:Color 
