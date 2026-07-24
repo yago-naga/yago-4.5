@@ -8,7 +8,7 @@ Call:
 
 Input:
 - the Wikidata file, in input-data/wikidata.ttl
-- 01-yago-final-schema.ttl, the YAGO schema
+- 01-yago-schema.ttl, the YAGO schema
 
 Output:
 - 02-yago-taxonomy-to-rename.tsv, the YAGO lower level taxonomy
@@ -37,7 +37,7 @@ TEST=len(sys.argv)>1 and sys.argv[1]=="--test"
 
 OUTPUT_FOLDER="test-data/02-make-taxonomy/" if TEST else "yago-data/"
 WIKIDATA_FILE= "test-data/02-make-taxonomy/00-wikidata.ttl" if TEST else "input-data/wikidata.ttl"
-SCHEMA_FILE = "yago-data/01-yago-final-schema.ttl"
+SCHEMA_FILE = "yago-data/01-yago-schema.ttl"
 
 def getFirst(iterable):
     """ Returns the first element of an iterable or None"""

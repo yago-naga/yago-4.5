@@ -9,7 +9,7 @@ cd yago-data
 echo "Creating tiny YAGO..."
 date +"  Current time: %F %T"
 # Add schema
-cp 01-yago-final-schema.ttl yago-tiny.ttl
+cp 05-yago-final-schema.ttl yago-tiny.ttl
 # Add taxonomy
 grep -v -P '@prefix' 05-yago-final-taxonomy.tsv >> yago-tiny.ttl
 # Add facts
@@ -42,7 +42,7 @@ echo "done"
 ######################## Export to Qlever #############################
 
 # Data files (renamed from .tsv to .ttl for QLever indexing)
-scp 01-yago-final-schema.ttl yago@yago.r2.enst.fr:/data/qlever/yago-schema.ttl
+scp 05-yago-final-schema.ttl yago@yago.r2.enst.fr:/data/qlever/yago-schema.ttl
 scp 05-yago-final-taxonomy.tsv yago@yago.r2.enst.fr:/data/qlever/yago-taxonomy.ttl
 scp 05-yago-final-wikipedia.tsv yago@yago.r2.enst.fr:/data/qlever/yago-wikipedia.ttl
 scp 05-yago-final-wikipedia-labels.tsv yago@yago.r2.enst.fr:/data/qlever/yago-wikipedia-labels.ttl
@@ -62,7 +62,7 @@ scp 04-yago-ids.tsv yago@yago.r2.enst.fr:/data/qlever/
 ######################## Export to Web server #############################
 
 declare -A yagoFiles
-    yagoFiles["schema"]="01-yago-final-schema.ttl"
+    yagoFiles["schema"]="05-yago-final-schema.ttl"
 	yagoFiles["taxonomy"]="05-yago-final-taxonomy.tsv"
     yagoFiles["facts"]="05-yago-final-wikipedia.tsv"
 	yagoFiles["labels"]="05-yago-final-wikipedia-labels.tsv" 

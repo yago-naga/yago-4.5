@@ -43,3 +43,5 @@ yago:Fabian	rdfs:label	"Fabian"@en	.
 yago:Fabian	owl:sameAs	wd:Q44	.
 yago:Fabian_Q45	rdfs:label	"Fabian"@en	.
 yago:Fabian_Q45	owl:sameAs	wd:Q45	.
+yago:Metre	rdf:type	yago:UnitOfLength	.
+yago:Kilometre	rdf:type	yago:UnitOfLength	.

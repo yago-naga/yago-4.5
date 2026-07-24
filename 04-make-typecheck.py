@@ -7,6 +7,7 @@ Call:
   python3 make-typecheck.py
 
 Input:
+- 01-yago-schema.ttl
 - 02-yago-taxonomy-to-rename.tsv
 - 03-yago-facts-to-type-check.tsv
 
@@ -42,7 +43,7 @@ from collections import defaultdict
 
 TEST=len(sys.argv)>1 and sys.argv[1]=="--test"
 FOLDER="test-data/04-make-typecheck/" if TEST else "yago-data/"
-SCHEMA_FILE = "yago-data/01-yago-final-schema.ttl"
+SCHEMA_FILE = "yago-data/01-yago-schema.ttl"
 
 def getFirst(iterable, default=None):
     """ Returns the first element of an iterable or None"""

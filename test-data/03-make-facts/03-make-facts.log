@@ -15,5 +15,5 @@
 <<	wd:Q23482	rdfs:label	"ABC J100216.27+203031.3"@mul	>>	ys:excludedFor	"Is invalid label"	.
 <<	wd:Q23482	rdf:type	schema:Thing	>>	ys:excludedFor	"No valid label"	.
 <<	schema:Event	rdfs:label	"Should go away"@en	>>	ys:excludedFor	"Already has manually defined label: Event"	.
-<<	wd:Q4736609	schema:locationCreated	schema:Thing	>>	ys:excludedFor	"Domain check failed: Subject is schema:Place, yago:AstronomicalObject and expected types are schema:Product, schema:Organization, schema:CreativeWork, yago:FictionalEntity, schema:Event"	.
-<<	wd:Q4736609	schema:inLanguage	schema:Thing	>>	ys:excludedFor	"Domain check failed: Subject is schema:Place, yago:AstronomicalObject and expected types are schema:CreativeWork, yago:PersonName, schema:Event"	.
+<<	wd:Q4736609	schema:locationCreated	schema:Thing	>>	ys:excludedFor	"Domain check failed: Subject is schema:Place, yago:AstronomicalObject and expected types are schema:Event, schema:Organization, yago:FictionalEntity, schema:Product, schema:CreativeWork"	.
+<<	wd:Q4736609	schema:inLanguage	schema:Thing	>>	ys:excludedFor	"Domain check failed: Subject is schema:Place, yago:AstronomicalObject and expected types are schema:Event, schema:CreativeWork, yago:PersonName"	.

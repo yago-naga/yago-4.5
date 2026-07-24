@@ -10,7 +10,7 @@ Input:
 - yago-schema.ttl, the hard-coded YAGO schema and shapes
 
 Output:
-- 01-yago-final-schema.ttl, the YAGO schema, checked for inconsistencies
+- 01-yago-schema.ttl, the YAGO schema, checked for inconsistencies
     
 Algorithm:
 1) Load the schema
@@ -43,7 +43,7 @@ yagoSchema=Schema.YagoSchema(INPUT_FOLDER+"/yago-schema.ttl")
 
 # Write out the schema
 print("  Writing schema to",OUTPUT_FOLDER,"...", end="", flush=True)
-yagoSchema.writeToFile(OUTPUT_FOLDER+"/01-yago-final-schema.ttl")
+yagoSchema.writeToFile(OUTPUT_FOLDER+"/01-yago-schema.ttl")
 print("done")
 
 print("done")
