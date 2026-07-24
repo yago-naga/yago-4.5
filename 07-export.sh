@@ -8,10 +8,21 @@ cd yago-data
 
 echo "Creating tiny YAGO..."
 date +"  Current time: %F %T"
+# Add schema
 cp 01-yago-final-schema.ttl yago-tiny.ttl
+# Add taxonomy
 grep -v -P '@prefix' 05-yago-final-taxonomy.tsv >> yago-tiny.ttl
-grep -P 'yago:A[^\t]+\t(rdf:type\t|[^\t]+\t("|yago:A|schema:))' 05-yago-final-wikipedia.tsv >> yago-tiny.ttl
-grep -P 'yago:[^\t]+\trdf:type\tyago:UnitOf' 05-yago-final-wikipedia.tsv >> yago-tiny.ttl
+# Add facts
+grep -P 'yago:A[^\t]+\t(rdf:type\t|[^\t]+\t("|yago:A))' 05-yago-final-wikipedia.tsv >> yago-tiny.ttl
+# Add units and their types and labels
+grep -oP '"\^\^\K[a-zA-Z_:]+' yago-tiny.ttl | sort | uniq > yago-units.txt
+sed 's/^/^/; s/$/\t(rdf:type|rdfs:label)/' yago-units.txt > yago-units-patterns.txt
+grep -E -f yago-units-patterns.txt 05-yago-final-wikipedia.tsv >> yago-tiny.ttl
+rm yago-units.txt
+rm yago-units-patterns.txt
+# Add labels of classes after the last schema-declared one
+grep -m 1 -A 1000000 'schema:MedicalCondition' 05-yago-final-taxonomy.tsv |sed '1d' | cut -f1 | sort | uniq | sed 's/.*/&\trdfs:label\t"&"@en\t./' >> yago-tiny.ttl
+# Zip the file
 rm yago-tiny.zip
 zip yago-tiny.zip yago-tiny.ttl
 echo "done"
