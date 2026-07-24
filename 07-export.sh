@@ -27,6 +27,8 @@ rm yago-tiny.zip
 zip yago-tiny.zip yago-tiny.ttl
 echo "done"
 
+if false; then
+
 ######################## YAGO Entity List #############################
 
 # This entity list is used for the LELA disambiguation system
@@ -102,3 +104,5 @@ scp 06-upper-taxonomy.html yago@yago.r2.enst.fr:~/website/content/schema.php
 scp yago-entities.jsonl.zip yago@yago.r2.enst.fr:/data/public/yago4.5/yago-entities.jsonl.zip
 echo "done"
 date +"Current time: %F %T"
+
+fi
