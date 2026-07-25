@@ -241,7 +241,10 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
     
     with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-taxonomy-TEST.tsv") as taxFacts:
         for split in TsvUtils.tsvTuples(FOLDER+"02-yago-taxonomy-to-rename.tsv", "  Renaming classes"):
+            if split[0]=="wd:Q83092855": # TEST
+                print("*** Found",split[0], split[1], split[2])
             if len(split)<3:
+                print("Not a good line",split) # TEST
                 continue
             subject=toYagoEntity(split[0])
             if not subject  or subject==Prefixes.yagoPersonName:
@@ -258,7 +261,10 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
             if subject==obj:
                 print("Identical mapping:",subject) # TEST
                 continue
-            # Write taxonomic fact            
+            # Write taxonomic fact  
+            if split[0]=="wd:Q83092855": # TEST
+                print("*** Writing",subject, relation, obj)
+            
             taxFacts.writeFact(subject, relation, obj)              
     
     # Write out schema
