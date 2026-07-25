@@ -141,6 +141,10 @@ def childrenOf(cls, taxonomyDown):
 
 with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
 
+    # Load schema
+    
+    yagoSchema = Schema.YagoSchema(SCHEMA_FILE) 
+
     # Load YAGO ids
     
     yagoIds={}
@@ -151,7 +155,7 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
         yagoIds[split[0]]=split[2]
         if split[3]==". #WIKI":
             entitiesWithWikipediaPage.add(split[2])
-        
+    # Remove ids for classes that have no instances    
     for split in TsvUtils.tsvTuples(FOLDER+"04-yago-bad-classes.tsv", "  Removing bad YAGO classes"):
         yagoIds.pop(split[0], None)
     
@@ -165,14 +169,10 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
             pos=entityId.rfind("_Q")
             if pos!=-1:
                 entityId=entityId[0:pos]
-                if entityId not in simplifiedIds and entityId not in entitiesWithWikipediaPage:
+                if entityId not in simplifiedIds and entityId not in entitiesWithWikipediaPage and entityId not in yagoSchema.classes and entityId not in yagoSchema.properties:
                     yagoIds[entity]=entityId
                     simplifiedIds.add(entityId)
     print("done")
-
-    # Load schema
-    
-    yagoSchema = Schema.YagoSchema(SCHEMA_FILE) 
     
     # Write out facts
     

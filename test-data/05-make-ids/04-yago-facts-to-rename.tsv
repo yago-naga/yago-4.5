@@ -86,6 +86,8 @@ wd:Q43	rdf:type	schema:Person	.
 wd:Q44	rdfs:label	"Fabian"@en	.
 wd:Q45	rdfs:label	"Fabian"@en	.
 
+wd:Q46	rdfs:label	"Gender"@en .
+
 yago:Metre	rdf:type	yago:UnitOfLength	.
 yago:Kilometre	rdf:type	yago:UnitOfLength	.
 
