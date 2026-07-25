@@ -53,6 +53,12 @@ def debug(*message) -> None:
             sys.stdout.buffer.write(b" ")
         print("")
 
+def getFirst(iterable, default=None):
+    """ Returns the first element of an iterable or None"""
+    if iterable is None:
+        return None
+    return next(iter(iterable), default)
+    
 ##########################################################################
 #             Helper methods
 ##########################################################################
@@ -164,6 +170,10 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
                     simplifiedIds.add(entityId)
     print("done")
 
+    # Load schema
+    
+    yagoSchema = Schema.YagoSchema(SCHEMA_FILE) 
+    
     # Write out facts
     
     yagoUnits={}
@@ -186,12 +196,18 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
                             if not obj:
                                 # Should not happen
                                 continue
-                            # Register units
-                            if relation==Prefixes.rdfType and obj.startswith(Prefixes.yagoUnit):
-                                if obj not in yagoUnits:
-                                    yagoUnits[obj]=set()
-                                yagoUnits[obj].add(subject)
                             literal=TurtleUtils.splitLiteral(obj)
+                            # Register units
+                            # This will break for disjunctions that contain YAGO units
+                            if literal[3]:
+                                datatype=literal[3]
+                                if relation in yagoSchema.properties:
+                                    yagoProperty=yagoSchema.properties[relation]
+                                    yagoUnitClass=getFirst(yagoProperty.objectTypes)
+                                    if yagoUnitClass.startswith(Prefixes.yagoUnit):
+                                        if yagoUnitClass not in yagoUnits:
+                                            yagoUnits[yagoUnitClass]=set()
+                                        yagoUnits[yagoUnitClass].add(datatype)                            
                             # Write facts to Wikipedia version of YAGO
                             if goesToWikipediaVersion(subject) and (relation==Prefixes.rdfType or goesToWikipediaVersion(obj)):
                                 if isNonEnglishLabel(literal):
@@ -242,8 +258,12 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
     
     # Write out schema
     
-    yagoSchema = Schema.YagoSchema(SCHEMA_FILE) 
     print("  Adding datatypes to schema...", flush=True, end='')
+    # Add all units to yago:UnitOfMeasurement
+    if Prefixes.yagoUnitOfMeasurement not in yagoUnits:
+        yagoUnits[Prefixes.yagoUnitOfMeasurement]=set()
+    yagoUnits[Prefixes.yagoUnitOfMeasurement].update(k for s in yagoUnits.values() for k in s)    
+
     for prop in yagoSchema.properties.values():
         if prop.isDatatype:
             newDataTypes=set()
