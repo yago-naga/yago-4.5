@@ -235,7 +235,8 @@ class YagoClass(YagoObject):
         # If we do not have a label, and won't get one from Wikidata, invent one by splitting the identifier by Camel Case
         if not self.labels and not self.fromClasses:
             self.labels.add('"'+re.sub("([a-z])([A-Z])","\\1 \\2",stripPrefix(self.identifier))+'"@en')        
-
+        if self.comments and self.fromClasses:
+            warning("Class",self,"has a comment although it will inherit one from Wikidata. Remove it.")
         if not self.superClasses and self.identifier!=Prefixes.schemaThing and not self.identifier.startswith("rdf:") and not self.identifier.startswith("rdfs:"):
             warning("Class",self,"does not have a super class")
         for p in self.properties:
@@ -314,6 +315,7 @@ PREDEFINED_LABELS={
 "sh:path": '"concerns"@en',
 "sh:pattern": '"has pattern"@en',
 "sh:property": '"has property"@en',
+"sh:NodeShape": '"SHACL node shape"@en',
 "sh:uniqueLang": '"has unique language"@en',
 "ys:fromClass": '"derives from Wikidata class"@en',
 "ys:fromProperty": '"derives from Wikidata property"@en',
@@ -389,6 +391,7 @@ class YagoSchema(object):
             clss.writeTo(out)
         for prop in self.properties.values():
             prop.writeTo(out)
+        out.write("sh:NodeShape rdf:type rdfs:Class .\n")    
         # Make sure all properties have a label, even the RDF ones    
         for prop in PREDEFINED_LABELS:
             if prop not in self.properties:

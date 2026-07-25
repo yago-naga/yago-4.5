@@ -265,7 +265,7 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
     yagoUnits[Prefixes.yagoUnitOfMeasurement].update(k for s in yagoUnits.values() for k in s)    
 
     for prop in yagoSchema.properties.values():
-        if prop.isDatatype:
+        if prop.isDatatype and prop.identifier!=Prefixes.yagoCurrency:
             newDataTypes=set()
             for datatype in prop.objectTypes:
                 if datatype in yagoUnits:

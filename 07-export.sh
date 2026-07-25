@@ -88,16 +88,16 @@ echo "Copying individual YAGO files to Web server..."
 for file in "${!yagoFiles[@]}"
 do
     echo "  Copying $file..."
-    scp yago-$file.zip yago@yago.r2.enst.fr:/data/public/yago4.5/yago-$version-$file.zip
+    scp yago-$file.zip yago@yago.r2.enst.fr:/data/public/yago$version/yago-$version-$file.zip
     echo "  done"
 done
 echo "done"
 
 echo "Copying collective YAGO files to Web server..."
-scp 06-statistics.txt yago@yago.r2.enst.fr:/data/public/yago4.5/yago-$version-statistics.txt
-scp yago-tiny.zip yago@yago.r2.enst.fr:/data/public/yago4.5/yago-$version-tiny.zip
+scp 06-statistics.txt yago@yago.r2.enst.fr:/data/public/yago$version/yago-$version-statistics.txt
+scp yago-tiny.zip yago@yago.r2.enst.fr:/data/public/yago$version/yago-$version-tiny.zip
 scp 06-upper-taxonomy.html yago@yago.r2.enst.fr:~/website/content/schema.php
-scp yago-entities.jsonl.zip yago@yago.r2.enst.fr:/data/public/yago4.5/yago-entities.jsonl.zip
+scp yago-entities.jsonl.zip yago@yago.r2.enst.fr:/data/public/yago$version/yago-entities.jsonl.zip
 echo "done"
 date +"Current time: %F %T"
 
