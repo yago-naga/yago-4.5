@@ -399,7 +399,6 @@ class YagoSchema(object):
           
     def writeToFile(self,file):
         """ Writes the schema to a file"""
-        print("Wruting to",file)
         with open(file, "wt", encoding="utf-8") as out:
             for p in Prefixes.prefixes:
                 out.write("@prefix "+p+": <"+Prefixes.prefixes[p]+"> .\n")
