@@ -536,6 +536,9 @@ astro=r'"[-+A-Z0-9\[\] ]{3,} [JBF]?[-0-9.+]{6,}"@[a-z]+'
 def removeAstroLabels(entityFacts, writer):
     """ Removes illegible labels that identify astronomical objects"""    
     mainEntity = entityFacts.mainSubject()    
+    # Do not remove classes, because this disrupts the taxonomy!
+    if (mainEntity, Prefixes.rdfType, Prefixes.rdfsClass) in entityFacts:
+        return
     for label in list(entityFacts.objectsOf(mainEntity, Prefixes.rdfsLabel)):
         if re.match(astro,label):
             entityFacts.remove((mainEntity, Prefixes.rdfsLabel, label))
