@@ -178,105 +178,112 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
     
     yagoUnits={}
     
-    with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-meta.tsv") as metaFacts:
-        with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-beyond-wikipedia.tsv") as fullFacts:
-            with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-wikipedia.tsv") as wikipediaFacts:
-                with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-wikipedia-labels.tsv") as wikipediaLabelFacts:
-                    with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-beyond-wikipedia-labels.tsv") as fullLabelFacts:
-                        previousEntity="Elvis"
-                        for split in TsvUtils.tsvTuples(FOLDER+"04-yago-facts-to-rename.tsv", "  Renaming"):
-                            if len(split)<3:
-                                continue
-                            subject=toYagoEntity(split[0])
-                            if not subject:
-                                # Happens for empty classes
-                                continue
-                            relation=split[1]
-                            obj=toYagoEntity(split[2])
-                            if not obj:
-                                # Should not happen
-                                continue
-                            literal=TurtleUtils.splitLiteral(obj)
-                            # Register units
-                            # This will break for disjunctions that contain YAGO units
-                            if literal[3]:
-                                datatype=literal[3]
-                                if relation in yagoSchema.properties:
-                                    yagoProperty=yagoSchema.properties[relation]
-                                    yagoUnitClass=getFirst(yagoProperty.objectTypes)
-                                    if yagoUnitClass.startswith(Prefixes.yagoUnit):
-                                        if yagoUnitClass not in yagoUnits:
-                                            yagoUnits[yagoUnitClass]=set()
-                                        yagoUnits[yagoUnitClass].add(datatype)                            
-                            # Write facts to Wikipedia version of YAGO
-                            if goesToWikipediaVersion(subject) and (relation==Prefixes.rdfType or goesToWikipediaVersion(obj)):
-                                if isNonEnglishLabel(literal):
-                                    wikipediaLabelFacts.writeFact(subject, relation, obj)
+    # TEST
+    if False:
+        with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-meta.tsv") as metaFacts:
+            with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-beyond-wikipedia.tsv") as fullFacts:
+                with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-wikipedia.tsv") as wikipediaFacts:
+                    with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-wikipedia-labels.tsv") as wikipediaLabelFacts:
+                        with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-beyond-wikipedia-labels.tsv") as fullLabelFacts:
+                            previousEntity="Elvis"
+                            for split in TsvUtils.tsvTuples(FOLDER+"04-yago-facts-to-rename.tsv", "  Renaming"):
+                                if len(split)<3:
+                                    continue
+                                subject=toYagoEntity(split[0])
+                                if not subject:
+                                    # Happens for empty classes
+                                    continue
+                                relation=split[1]
+                                obj=toYagoEntity(split[2])
+                                if not obj:
+                                    # Should not happen
+                                    continue
+                                literal=TurtleUtils.splitLiteral(obj)
+                                # Register units
+                                # This will break for disjunctions that contain YAGO units
+                                if literal[3]:
+                                    datatype=literal[3]
+                                    if relation in yagoSchema.properties:
+                                        yagoProperty=yagoSchema.properties[relation]
+                                        yagoUnitClass=getFirst(yagoProperty.objectTypes)
+                                        if yagoUnitClass.startswith(Prefixes.yagoUnit):
+                                            if yagoUnitClass not in yagoUnits:
+                                                yagoUnits[yagoUnitClass]=set()
+                                            yagoUnits[yagoUnitClass].add(datatype)                            
+                                # Write facts to Wikipedia version of YAGO
+                                if goesToWikipediaVersion(subject) and (relation==Prefixes.rdfType or goesToWikipediaVersion(obj)):
+                                    if isNonEnglishLabel(literal):
+                                        wikipediaLabelFacts.writeFact(subject, relation, obj)
+                                    else:
+                                        wikipediaFacts.writeFact(subject, relation, obj)
+                                    if isGenericInstance(subject):
+                                        wikipediaFacts.writeFact(subject, "rdfs:label", f'"{subject[5:-17].replace('_', ' ')}"@en')
+                                    if subject!=previousEntity and split[0] in yagoIds:
+                                       wikipediaFacts.writeFact(subject, "owl:sameAs", split[0])
                                 else:
-                                    wikipediaFacts.writeFact(subject, relation, obj)
-                                if isGenericInstance(subject):
-                                    wikipediaFacts.writeFact(subject, "rdfs:label", f'"{subject[5:-17].replace('_', ' ')}"@en')
-                                if subject!=previousEntity and split[0] in yagoIds:
-                                   wikipediaFacts.writeFact(subject, "owl:sameAs", split[0])
-                            else:
-                                if isNonEnglishLabel(literal):
-                                    fullLabelFacts.writeFact(subject, relation, obj)
-                                else:
-                                    fullFacts.writeFact(subject, relation, obj)
-                                if subject!=previousEntity and split[0] in yagoIds:
-                                   fullFacts.writeFact(subject, "owl:sameAs", split[0])                
-                            # If there is a meta-fact, write it out as well
-                            if len(split)>5:
-                                if split[4] and split[4]==split[5]:
-                                    metaFacts.writeMetaFact(subject, relation, obj, "yago:onDate", split[4])
-                                else:
-                                    if split[4]: metaFacts.writeMetaFact(subject, relation, obj, "schema:startDate", split[4])
-                                    if split[5]: metaFacts.writeMetaFact(subject, relation, obj, "schema:endDate", split[5])
-                            if not isGenericInstance(subject):
-                                previousEntity=subject
+                                    if isNonEnglishLabel(literal):
+                                        fullLabelFacts.writeFact(subject, relation, obj)
+                                    else:
+                                        fullFacts.writeFact(subject, relation, obj)
+                                    if subject!=previousEntity and split[0] in yagoIds:
+                                       fullFacts.writeFact(subject, "owl:sameAs", split[0])                
+                                # If there is a meta-fact, write it out as well
+                                if len(split)>5:
+                                    if split[4] and split[4]==split[5]:
+                                        metaFacts.writeMetaFact(subject, relation, obj, "yago:onDate", split[4])
+                                    else:
+                                        if split[4]: metaFacts.writeMetaFact(subject, relation, obj, "schema:startDate", split[4])
+                                        if split[5]: metaFacts.writeMetaFact(subject, relation, obj, "schema:endDate", split[5])
+                                if not isGenericInstance(subject):
+                                    previousEntity=subject
      
     # Write out taxonomy
     
-    with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-taxonomy.tsv") as taxFacts:
+    with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-taxonomy-TEST.tsv") as taxFacts:
         for split in TsvUtils.tsvTuples(FOLDER+"02-yago-taxonomy-to-rename.tsv", "  Renaming classes"):
             if len(split)<3:
                 continue
             subject=toYagoEntity(split[0])
             if not subject  or subject==Prefixes.yagoPersonName:
                 # Happens if a class has no label or no instances
+                print("No subject mapping:",split[0]) # TEST
                 continue
             relation=split[1]
             obj=split[2] if relation==Prefixes.rdfType else toYagoEntity(split[2])
             if not obj:
                 # Happens if a class has no label or no instances
+                print("No object mapping:",split[2]) # TEST
                 continue
             # Happened with yago:Award rdfs:subClassOf yago:Award...
             if subject==obj:
+                print("Identical mapping:",subject) # TEST
                 continue
             # Write taxonomic fact            
             taxFacts.writeFact(subject, relation, obj)              
     
     # Write out schema
     
-    print("  Adding datatypes to schema...", flush=True, end='')
-    # Add all units to yago:UnitOfMeasurement
-    if Prefixes.yagoUnitOfMeasurement not in yagoUnits:
-        yagoUnits[Prefixes.yagoUnitOfMeasurement]=set()
-    yagoUnits[Prefixes.yagoUnitOfMeasurement].update(k for s in yagoUnits.values() for k in s)    
+    # TEST
+    if False:
+        print("  Adding datatypes to schema...", flush=True, end='')
+        # Add all units to yago:UnitOfMeasurement
+        if Prefixes.yagoUnitOfMeasurement not in yagoUnits:
+            yagoUnits[Prefixes.yagoUnitOfMeasurement]=set()
+        yagoUnits[Prefixes.yagoUnitOfMeasurement].update(k for s in yagoUnits.values() for k in s)    
 
-    for prop in yagoSchema.properties.values():
-        if prop.isDatatype and prop.identifier!=Prefixes.yagoCurrency:
-            newDataTypes=set()
-            for datatype in prop.objectTypes:
-                if datatype in yagoUnits:
-                    newDataTypes.update(yagoUnits[datatype])
-                else:
-                    newDataTypes.add(datatype)
-            prop.objectTypes=newDataTypes
-    print("done")            
-    print("  Writing out schema...", flush=True, end='')
-    yagoSchema.writeToFile(FOLDER+"05-yago-final-schema.ttl")
-    print("done")
+        for prop in yagoSchema.properties.values():
+            if prop.isDatatype and prop.identifier!=Prefixes.yagoCurrency:
+                newDataTypes=set()
+                for datatype in prop.objectTypes:
+                    if datatype in yagoUnits:
+                        newDataTypes.update(yagoUnits[datatype])
+                    else:
+                        newDataTypes.add(datatype)
+                prop.objectTypes=newDataTypes
+        print("done")            
+        print("  Writing out schema...", flush=True, end='')
+        yagoSchema.writeToFile(FOLDER+"05-yago-final-schema.ttl")
+        print("done")
     
 if TEST:
     Evaluator.compare(FOLDER+"05-yago-final-wikipedia.tsv")
