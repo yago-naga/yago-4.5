@@ -18,7 +18,7 @@ grep -v -P '@prefix' 05-yago-final-taxonomy.tsv >> yago-tiny.ttl
 grep -P 'yago:A[^\t]+\trdf:type' 05-yago-final-wikipedia.tsv >> yago-tiny.ttl
 grep -P 'yago:A[^\t]+\t[^\t]+\t("|yago:A)' 05-yago-final-wikipedia.tsv >> yago-tiny.ttl
 # Add units and their types and labels (except those who start with A)
-grep -oP 'sh:datatype *\Kyago:[^A][^\t \].,]+' 05-yago-final-schema.ttl | sort | uniq |  sed 's/.*/& rdfs:label "&"@en; rdf:type yago:UnitOfMeasurement ./' >> yago-tiny.ttl
+grep -oP 'sh:datatype *\Kyago:[^A][^\t \].,]+' 05-yago-final-schema.ttl | sort | uniq | grep -v -P "yago:UnitOf" | sed 's/.*/& rdfs:label "&"@en; rdf:type yago:UnitOfMeasurement ./' >> yago-tiny.ttl
 # Zip the file
 rm yago-tiny.zip
 zip yago-tiny.zip yago-tiny.ttl
