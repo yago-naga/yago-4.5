@@ -69,8 +69,15 @@ schema:SportsOrganization	rdfs:subClassOf	schema:Organization	.
 schema:AdministrativeArea	rdfs:subClassOf	schema:Place	.
 schema:Landform	rdfs:subClassOf	schema:Place	.
 yago:Test_Class_1	rdfs:subClassOf	schema:CreativeWork	.
+yago:Singer	rdfs:subClassOf	schema:Person	.
 yago:Test_Class_2	rdfs:subClassOf	yago:Test_Class_4	.
 yago:Test_Class_2	rdfs:subClassOf	yago:Test_Class_1	.
 yago:Test_Class_3	rdfs:subClassOf	yago:Test_Class_2	.
 yago:Test_Class_5	rdfs:subClassOf	yago:Test_Class_2	.
 yago:Intangible	rdfs:subClassOf	schema:Thing	.
+yago:Singer	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Singer>	.
+yago:Singer	owl:sameAs	wd:Q_singer	.
+yago:Singer	schema:alternateName	"this is a human being"@en	.
+yago:Singer	rdfs:comment	"this is a singer"@en	.
+yago:Singer	rdf:type	rdfs:Class	.
+yago:Singer	rdfs:label	"singer"@en	.

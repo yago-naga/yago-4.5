@@ -42,12 +42,6 @@ yago:Elvis	yago:academicTitle	yago:DoctoralDegree_generic_instance	.
 yago:Elvis	schema:givenName	"Andr ea"	.
 yago:Elvis	schema:child	yago:Elvis	.
 yago:Elvis	schema:spouse	yago:Elvis	.
-yago:Singer	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Singer>	.
-yago:Singer	owl:sameAs	wd:Q_singer	.
-yago:Singer	schema:alternateName	"this is a human being"@en	.
-yago:Singer	rdfs:comment	"this is a singer"@en	.
-yago:Singer	rdf:type	rdfs:Class	.
-yago:Singer	rdfs:label	"singer"@en	.
 yago:Belgium	rdf:type	schema:Place	.
 yago:Belgium	owl:sameAs	wd:Q31	.
 yago:Belgium	schema:mainEntityOfPage	<https://en.wikipedia.org/wiki/Belgium>	.

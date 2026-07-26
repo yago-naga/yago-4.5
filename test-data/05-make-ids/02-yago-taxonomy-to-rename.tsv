@@ -71,6 +71,7 @@ schema:SportsOrganization	rdfs:subClassOf	schema:Organization	.
 schema:AdministrativeArea	rdfs:subClassOf	schema:Place	.
 schema:Landform	rdfs:subClassOf	schema:Place	.
 wd:Q207804	rdfs:subClassOf	schema:CreativeWork	.
+wd:Q_singer	rdfs:subClassOf	schema:Person	.
 wd:Q570948	rdfs:subClassOf	wd:Q5185279	.
 wd:Q570948	rdfs:subClassOf	wd:Q207804	.
 wd:Q6550961	rdfs:subClassOf	wd:Q570948	.

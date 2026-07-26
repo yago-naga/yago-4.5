@@ -145,7 +145,7 @@ def tryYagoId(out,currentTopic, title, isWikipedia=False):
     if not isGoodYagoTitle(title):
         return False
     if registerTitle(title):
-        out.write(currentTopic,"owl:sameAs","yago:"+title,". #WIKI" if isWikipedia else ". #OTHER")    
+        out.write(currentTopic,"owl:sameAs","yago:"+title, ". #WIKI" if isWikipedia else ". #OTHER")    
         return True
     return False
     
@@ -194,7 +194,7 @@ def createGenericInstance(targetClass, outFile):
 
 # We store the global taxonomy here
 yagoTaxonomyUp={}
-
+    
 def isSubClassOfAny_(c, superclasses, seenClasses):
     """ True if this class is a subclass of any of the given superclasses, avoiding loops"""
     if c in seenClasses:
