@@ -4,22 +4,24 @@
 
 cd yago-data
 
+echo "Exporting YAGO..."
+date +"  Current time: %F %T"
+
 ######################## Tiny YAGO #############################
 
-echo "Creating tiny YAGO..."
-date +"  Current time: %F %T"
+echo "  Creating tiny YAGO..."
 # Add schema
 cp 05-yago-final-schema.ttl yago-tiny.ttl
 # Add taxonomy
 grep -v -P '@prefix' 05-yago-final-taxonomy.tsv >> yago-tiny.ttl
 # Add facts
-grep -P 'yago:A[^\t]+\t(rdf:type\t|[^\t]+\t("|yago:A))' 05-yago-final-wikipedia.tsv | grep -v -P "_Q[0-9]+" >> yago-tiny.ttl
+grep -P 'yago:A[^\t]+\t((rdf:type\t)|([^\t]+\t("|yago:A)))' 05-yago-final-wikipedia.tsv | grep -v -P "_Q[0-9]+" >> yago-tiny.ttl
 # Add units and their types and labels (except those who start with A)
 grep -oP 'sh:datatype *\Kyago:[^A][^\t \].,]+' 05-yago-final-schema.ttl | sort | uniq |  sed 's/.*/& rdfs:label "&"@en; rdf:type yago:UnitOfMeasurement ./' >> yago-tiny.ttl
 # Zip the file
 rm yago-tiny.zip
 zip yago-tiny.zip yago-tiny.ttl
-echo "done"
+echo "  done"
 
 if false; then
 
@@ -27,11 +29,11 @@ if false; then
 
 # This entity list is used for the LELA disambiguation system
 
-echo "Generating YAGO entity list..."
+echo "  Generating YAGO entity list..."
   sed -n 's/^yago:\([^\t]\+\)\trdfs:comment\t"\([^"]\+\)"@en.*/{"id": "yago:\1", "title": "\1", "description": "\2"}/p' 05-yago-final-wikipedia.tsv > yago-entities.jsonl
   zip -m yago-entities.jsonl.zip yago-entities.jsonl
   rm yago-entities.jsonl
-echo "done"
+echo "  done"
 
 ######################## Export to Qlever #############################
 
@@ -69,34 +71,36 @@ declare -A yagoFiles
 	
 version="4.6"
 
-echo "Packing YAGO files..."
+echo "  Packing YAGO files..."
 rm yago.zip
 for file in "${!yagoFiles[@]}"
 do
-    echo "  Packing $file..."
+    echo "    Packing $file..."
 	mv "${yagoFiles[$file]}" yago-$file.ttl
     rm zip yago-$file.zip
     zip yago-$file.zip yago-$file.ttl
     mv yago-$file.ttl "${yagoFiles[$file]}"
-    echo "  done"
+    echo "    done"
 done
-echo "done"
+echo "  done"
   
-echo "Copying individual YAGO files to Web server..."
+echo "  Copying individual YAGO files to Web server..."
 for file in "${!yagoFiles[@]}"
 do
-    echo "  Copying $file..."
+    echo "    Copying $file..."
     scp yago-$file.zip yago@yago.r2.enst.fr:/data/public/yago$version/yago-$version-$file.zip
-    echo "  done"
+    echo "    done"
 done
-echo "done"
+echo "  done"
 
-echo "Copying collective YAGO files to Web server..."
+echo "  Copying collective YAGO files to Web server..."
 scp 06-statistics.txt yago@yago.r2.enst.fr:/data/public/yago$version/yago-$version-statistics.txt
 scp yago-tiny.zip yago@yago.r2.enst.fr:/data/public/yago$version/yago-$version-tiny.zip
 scp 06-upper-taxonomy.html yago@yago.r2.enst.fr:~/website/content/schema.php
 scp yago-entities.jsonl.zip yago@yago.r2.enst.fr:/data/public/yago$version/yago-entities.jsonl.zip
+echo "  done"
+
+fi
 echo "done"
 date +"Current time: %F %T"
 
-fi
