@@ -155,6 +155,7 @@ badClasses = {
     "wd:Q4119870",    # same
     "wd:Q7318358",    # same
     "wd:Q10383930",   # academic work
+    "wd:Q1907875",    # master's thesis
     "wd:Q2352616",    # catalogue
     "wd:Q591041",     # same
     "wd:Q13442814",   # same
