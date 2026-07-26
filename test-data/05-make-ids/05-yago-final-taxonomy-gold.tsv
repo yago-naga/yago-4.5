@@ -81,3 +81,4 @@ yago:Singer	schema:alternateName	"this is a human being"@en	.
 yago:Singer	rdfs:comment	"this is a singer"@en	.
 yago:Singer	rdf:type	rdfs:Class	.
 yago:Singer	rdfs:label	"singer"@en	.
+yago:Singer	rdfs:label	"chanteur"@fr	.

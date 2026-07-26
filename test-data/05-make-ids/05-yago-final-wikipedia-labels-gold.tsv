@@ -33,5 +33,4 @@
 @prefix wdno: <http://www.wikidata.org/prop/novalue/> .
 @prefix ys: <http://yago-knowledge.org/schema#> .
 yago:Singer	schema:alternateName	"c'est un chateur"@fr	.
-yago:Singer	rdfs:label	"chanteur"@fr	.
 yago:Singer	schema:mainEntityOfPage	"https://fr.wikipedia.org/wiki/Chanteur"^^xsd:anyUri	.

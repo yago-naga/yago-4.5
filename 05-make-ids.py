@@ -214,6 +214,7 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
                     with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-wikipedia-labels.tsv") as wikipediaLabelFacts:
                         with TsvUtils.TsvFileWriter(FOLDER+"05-yago-final-beyond-wikipedia-labels.tsv") as fullLabelFacts:
                             previousEntity="Elvis"
+                            foundLabel=False
                             for split in TsvUtils.tsvTuples(FOLDER+"04-yago-facts-to-rename.tsv", "  Renaming"):
                                 if len(split)<3:
                                     continue
@@ -240,7 +241,11 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
                                             yagoUnits[yagoUnitClass].add(datatype)                            
                                 # Write facts where they belong
                                 if goesToTaxonomy(subject, taxonomicEntities):
-                                    if isNonEnglishLabel(literal):
+                                    # We need at least one label for the class in the taxonomy
+                                    if relation==Prefixes.rdfsLabel and not foundLabel:
+                                        taxFacts.writeFact(subject, relation, obj)
+                                        foundLabel=True
+                                    elif isNonEnglishLabel(literal):
                                         wikipediaLabelFacts.writeFact(subject, relation, obj)
                                     else:
                                         taxFacts.writeFact(subject, relation, obj)
@@ -274,6 +279,7 @@ with TsvUtils.Timer("Step 05: Renaming YAGO entities"):
                                 
                                 if not isGenericInstance(subject):
                                     previousEntity=subject
+                                    foundLabel=False
          
     # Write out schema
     
