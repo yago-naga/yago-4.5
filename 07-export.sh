@@ -1,7 +1,7 @@
 # Exports YAGO into a ZIP file and to the Web server
 # CC-BY 2023-2026 Fabian M. Suchanek
 # run with nohup
-
+#!/bin/bash
 cd yago-data
 
 echo "Exporting YAGO..."
