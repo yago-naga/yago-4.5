@@ -6,7 +6,7 @@ cd yago-data
 
 echo "Exporting YAGO..."
 
-if false ;
+if false ; then
 
 date +"  Current time: %F %T"
 
