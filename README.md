@@ -1,6 +1,6 @@
-# Yago 4.6
+# YAGO
 
-<img src="https://yago-knowledge.org/assets/images/yago-logos/yago-logo.svg" align="right" height="100"> YAGO is a large knowledge base that can be considered a logically consistent subset of Wikidata. This GitHub repository contains the source code that generates YAGO from Wikidata. It is of use only for people who want to build YAGO themselves.
+<img src="https://yago-knowledge.org/assets/images/yago-logos/yago-logo.svg" align="right" height="100"> YAGO is a large knowledge base that can be considered a logically consistent subset of Wikidata. The current version is YAGO 4.6. This GitHub repository contains the source code that generates YAGO from Wikidata. It is of use only for people who want to build YAGO themselves.
 
 If you are mainly interested in using YAGO, please see the [Web page of YAGO](https://yago-knowledge.org).
 
