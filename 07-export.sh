@@ -1,7 +1,11 @@
 # Exports YAGO into a ZIP file and to the Web server
 # CC-BY 2023-2026 Fabian M. Suchanek
-# run with nohup
-#!/bin/bash
+
+
+# run with 
+#            nohup bash 07-export &
+
+
 cd yago-data
 
 echo "Exporting YAGO..."
@@ -84,7 +88,7 @@ for file in "${!yagoFiles[@]}"
 do
     echo "    Packing $file..."
 	mv "${yagoFiles[$file]}" yago-$file.ttl
-    rm zip yago-$file.zip
+    rm yago-$file.zip
     zip yago-$file.zip yago-$file.ttl
     mv yago-$file.ttl "${yagoFiles[$file]}"
     echo "    done"
