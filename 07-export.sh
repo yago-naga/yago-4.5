@@ -5,6 +5,9 @@
 cd yago-data
 
 echo "Exporting YAGO..."
+
+if false ;
+
 date +"  Current time: %F %T"
 
 ######################## Tiny YAGO #############################
@@ -24,8 +27,6 @@ rm yago-tiny.zip
 zip yago-tiny.zip yago-tiny.ttl
 echo "  done"
 
-if false; then
-
 ######################## YAGO Entity List #############################
 
 # This entity list is used for the LELA disambiguation system
@@ -38,6 +39,8 @@ echo "  done"
 
 ######################## Export to Qlever #############################
 
+echo "  Copying files for Qlever..."
+set -x
 # Data files (renamed from .tsv to .ttl for QLever indexing)
 scp 05-yago-final-schema.ttl yago@yago.r2.enst.fr:/data/qlever/yago-schema.ttl
 scp 05-yago-final-taxonomy.tsv yago@yago.r2.enst.fr:/data/qlever/yago-taxonomy.ttl
@@ -54,9 +57,12 @@ scp 02-make-taxonomy.log yago@yago.r2.enst.fr:/data/qlever/
 scp 03-make-facts.log yago@yago.r2.enst.fr:/data/qlever/
 scp 04-make-type-check.log yago@yago.r2.enst.fr:/data/qlever/
 scp 04-yago-ids.tsv yago@yago.r2.enst.fr:/data/qlever/
-
+set +x
+echo "  done"
 
 ######################## Export to Web server #############################
+
+fi
 
 declare -A yagoFiles
     yagoFiles["schema"]="05-yago-final-schema.ttl"
@@ -95,13 +101,14 @@ done
 echo "  done"
 
 echo "  Copying collective YAGO files to Web server..."
+set -x
 scp 06-statistics.txt yago@yago.r2.enst.fr:/data/public/yago$version/yago-$version-statistics.txt
 scp yago-tiny.zip yago@yago.r2.enst.fr:/data/public/yago$version/yago-$version-tiny.zip
 scp 06-upper-taxonomy.html yago@yago.r2.enst.fr:~/website/content/schema.php
 scp yago-entities.jsonl.zip yago@yago.r2.enst.fr:/data/public/yago$version/yago-entities.jsonl.zip
+set +x
 echo "  done"
 
-fi
 echo "done"
 date +"Current time: %F %T"
 
