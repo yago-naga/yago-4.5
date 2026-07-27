@@ -391,7 +391,11 @@ class YagoSchema(object):
             clss.writeTo(out)
         for prop in self.properties.values():
             prop.writeTo(out)
+        # Needed for SHACL validation    
         out.write("sh:NodeShape rdf:type rdfs:Class .\n")    
+        out.write("rdfs:Resource rdf:type rdfs:Class .\n")
+        out.write('rdfs:Resource rdfs:label "Resource"@en .\n')
+        out.write('owl:sameAs rdfs:label "is the same as"@en .\n')
         # Make sure all properties have a label, even the RDF ones    
         for prop in PREDEFINED_LABELS:
             if prop not in self.properties:
