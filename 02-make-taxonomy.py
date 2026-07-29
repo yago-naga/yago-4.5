@@ -129,6 +129,9 @@ badClasses = {
     "wd:Q17362920",   # Wikimedia duplicate page
     "wd:Q21286738",   # Wikimedia suplucate item
     "wd:Q17442446",   # Wikimedia internal stuff
+    "wd:Q163359",     # Unit that is (erroneously) also a country
+    "wd:Q7604380",    # Same
+    "wd:Q35798",      # Executive organization
     "wd:Q3331189",    # version and edition
     "wd:Q15474042",   # same
     "wd:Q111279923",  # same 

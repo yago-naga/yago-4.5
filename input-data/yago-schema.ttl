@@ -1372,7 +1372,7 @@ schema:EducationalOrganization a sh:NodeShape ;
         ys:fromProperty wdt:P2196 ;
         rdfs:comment "The number of students in an Organization"@en 
     ] ;
-    ys:fromClass wd:Q5341295, wd:Q2385804 .
+    ys:fromClass wd:Q5341295, wd:Q2385804, wd:Q38723, wd:Q1244442 .
 
 # We need this as a superclass of MusicGroup
 schema:PerformingGroup rdf:type sh:NodeShape ;
