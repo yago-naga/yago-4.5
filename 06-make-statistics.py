@@ -4,7 +4,7 @@ Produces statistics about YAGO entities and predicates, and extracts samples
 CC-BY 2022-2025 Fabian M. Suchanek
 
 Input:
-- 01-yago-final-schema.ttl
+- 05-yago-final-schema.ttl
 - 05-yago-final-beyond-wikipedia.tsv
 - 05-yago-final-wikipedia.tsv
 - 05-yago-final-taxonomy.tsv
@@ -45,7 +45,7 @@ from collections import defaultdict
 
 TEST=len(sys.argv)>1 and sys.argv[1]=="--test"
 FOLDER="test-data/06-make-statistics/" if TEST else "yago-data/"
-SCHEMA_FILE = "yago-data/01-yago-final-schema.ttl"
+SCHEMA_FILE = "yago-data/05-yago-final-schema.ttl"
 
 # Predicates that are excluded for fact counting
 excludePredicates=["rdfs:label", "rdfs:comment", "rdf:type", "schema:url", "owl:sameAs", "schema:alternateName"]
