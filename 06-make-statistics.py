@@ -129,7 +129,12 @@ This is the top-level taxonomy of classes of YAGO 4.5, together with their prope
             
             # Outgoing properties
             for yagoProperty in sorted(yagoClass.properties):
-                writer.write(f"<li>- {yagoProperty.identifier} &rarr;{'<sup>1</sup>' if yagoProperty.maxCount or yagoProperty.uniqueLang else ''} {', '.join(sorted(yagoProperty.objectTypes))}")
+                writer.write(f"<li>- {yagoProperty.identifier} &rarr;")
+                if yagoProperty.maxCount:
+                    writer.write(f"<sup>&le;{yagoProperty.maxCount}</sup>")
+                elif yagoProperty.uniqueLang:
+                    writer.write(f"<sup>&le;1</sup>")
+                writer.write(' '+', '.join(sorted(yagoProperty.objectTypes)))
             writer.write("</ul></details>\n<details style='margin-left: 2em'><summary style='margin-left: -2em'>Incoming properties</summary><ul style='list-style-type: none'>\n")
             
             # Incoming properties

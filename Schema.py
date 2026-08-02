@@ -425,6 +425,9 @@ class YagoSchema(object):
                 if c2.identifier not in self.classes:
                     print("    Warning: Undeclared superclass",c2,"of",c)
             for p in c.properties:
+                if len(p.objectTypes)>10:
+                    # These are the automatically generated disjunctions of YAGO units
+                    continue
                 for o in p.objectTypes:
                     if not o.startswith("xsd:") and o!=Prefixes.rdfLangString and o!=Prefixes.rdfsClass and o!=Prefixes.geoPoint and o not in self.classes:
                         print("    Warning: Undeclared range",o,"of property",p,"in class",c)                

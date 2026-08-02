@@ -1704,6 +1704,11 @@ schema:Person a sh:NodeShape ;
 #    ys:fromClass wd:Q82955 ;	
 #	rdfs:subClassOf schema:Person ;
 #    ] .
+
+# Fabian: avoid erroneous link from Musicians to Circus performer
+yago:Musician a sh:NodeShape ;
+    ys:fromClass wd:Q639669 ;	
+	rdfs:subClassOf schema:Person .
 	
 ################################################################
 #                Places
