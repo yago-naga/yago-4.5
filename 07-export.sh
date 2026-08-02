@@ -106,7 +106,6 @@ echo "  done"
 
 echo "  Copying collective YAGO files to Web server..."
 set -x
-scp 06-statistics.txt yago@yago.r2.enst.fr:/data/public/yago$version/yago-$version-statistics.txt
 scp yago-tiny.zip yago@yago.r2.enst.fr:/data/public/yago$version/yago-$version-tiny.zip
 scp 06-upper-taxonomy.html yago@yago.r2.enst.fr:~/website/content/schema.php
 scp yago-entities.jsonl.zip yago@yago.r2.enst.fr:/data/public/yago$version/yago-entities.jsonl.zip
