@@ -66,3 +66,17 @@ wd:Q_character a wd:item ;
 wd:Q_award a wd:item ;
   rdfs:label "My award" ;
   wdt:P279 wd:Q618779, wd:Q_European_event .
+  
+# Bad links should get corrected
+wd:Q639669 a wd:item ;
+  rdfs:label "singer" ;
+  wdt:P279 wd:Q17307272 .
+
+wd:Q17307272 a wd:item ;
+  rdfs:label "circus performer" ;
+  wdt:P279 wd:Q5 .
+
+wd:Q713200 a wd:item ;
+  rdfs:label "performing artist" ;
+  wdt:P279 wd:Q5 .
+    

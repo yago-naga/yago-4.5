@@ -267,7 +267,7 @@ def triplesFromTerms(generator, predicates=None, givenSubject=None):
             printError("Unexpected end of file after", givenSubject, predicate)
             return
         else:
-            printError("Unexpected item", marker, "before", " ".join(next(generator, "") for i in range(0,10)),"'")
+            printError("Unexpected item", marker, "before", " ".join(str(next(generator, "")) for i in range(0,10)),"'")
 ##########################################################################
 #             Reading files
 ##########################################################################

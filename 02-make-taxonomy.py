@@ -109,6 +109,9 @@ class WikidataVisitor:
             return True
         for subject, predicate, obj in graph:            
             if predicate == Prefixes.wikidataSubClassOf or predicate == Prefixes.wikidataAnalogousClass:
+                # Handle bad links
+                if subject in badLinks and obj==badLinks[subject][0]:
+                    obj=badLinks[subject][1]
                 if obj not in self.wikidataTaxonomyDown:
                     self.wikidataTaxonomyDown[obj] = set()
                 self.wikidataTaxonomyDown[obj].add(subject)
@@ -201,6 +204,11 @@ badClasses = {
     "wd:Q828803",     # Job title (dito)
     "wd:Q4164871",    # Role (dito)
     "wd:Q27318"       # Test
+}
+
+# Bad taxonomic links
+badLinks = {
+    "wd:Q639669": ("wd:Q17307272", "wd:Q713200")
 }
 
 # These should come first, to make sure we remove crap

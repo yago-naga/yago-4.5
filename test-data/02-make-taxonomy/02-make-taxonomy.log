@@ -33,8 +33,8 @@
 @prefix wdno: <http://www.wikidata.org/prop/novalue/> .
 @prefix ys: <http://yago-knowledge.org/schema#> .
 <<	wd:Q_award	rdfs:subClassOf	wd:Q_European_event	>>	ys:excludedFor	"Disjoint constraint: Subclass (yago:Award, schema:Intangible, schema:Thing) is disjoint from ancestor schema:Event of superclass"	.
-<<	wd:Q4167410	rdfs:subClassOf	schema:Book	>>	ys:excludedFor	"Bad class"	.
 <<	wd:Q_book_and_event	rdfs:subClassOf	wd:Q_English_book	>>	ys:excludedFor	"Disjoint constraint: Subclass (schema:Event, schema:Thing) is disjoint from ancestor schema:CreativeWork of superclass"	.
 <<	wd:Q_English_book	rdfs:subClassOf	schema:Book	>>	ys:excludedFor	"Shortcut"	.
 <<	wd:Q_book_and_event	rdfs:subClassOf	wd:Q_English_book	>>	ys:excludedFor	"Disjoint constraint: Subclass (schema:Event, schema:Thing) is disjoint from ancestor schema:CreativeWork of superclass"	.
 <<	wd:Q_European_book	rdfs:subClassOf	wd:Q_loop_book	>>	ys:excludedFor	"Loop"	.
+<<	wd:Q4167410	rdfs:subClassOf	schema:Book	>>	ys:excludedFor	"Bad class"	.

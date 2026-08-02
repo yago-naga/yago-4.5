@@ -425,7 +425,7 @@ class YagoSchema(object):
                 if c2.identifier not in self.classes:
                     print("    Warning: Undeclared superclass",c2,"of",c)
             for p in c.properties:
-                if len(p.objectTypes)>10:
+                if len(p.objectTypes)>5:
                     # These are the automatically generated disjunctions of YAGO units
                     continue
                 for o in p.objectTypes:
