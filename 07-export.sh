@@ -10,8 +10,6 @@ cd yago-data
 
 echo "Exporting YAGO..."
 
-if false ; then
-
 date +"  Current time: %F %T"
 
 ######################## Tiny YAGO #############################
@@ -41,6 +39,8 @@ echo "  Generating YAGO entity list..."
   rm yago-entities.jsonl
 echo "  done"
 
+if false; then
+
 ######################## Export to Qlever #############################
 
 echo "  Copying files for Qlever..."
@@ -65,8 +65,6 @@ set +x
 echo "  done"
 
 ######################## Export to Web server #############################
-
-fi
 
 declare -A yagoFiles
     yagoFiles["schema"]="05-yago-final-schema.ttl"
@@ -115,3 +113,4 @@ echo "  done"
 echo "done"
 date +"Current time: %F %T"
 
+fi
