@@ -39,8 +39,6 @@ echo "  Generating YAGO entity list..."
   rm yago-entities.jsonl
 echo "  done"
 
-if false; then
-
 ######################## Export to Qlever #############################
 
 echo "  Copying files for Qlever..."
@@ -112,5 +110,3 @@ echo "  done"
 
 echo "done"
 date +"Current time: %F %T"
-
-fi
