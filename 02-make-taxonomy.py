@@ -130,7 +130,7 @@ badClasses = {
     "wd:Q4167836",    # Wikimedia category
     "wd:Q15138389",   # Wikimedia article page
     "wd:Q17362920",   # Wikimedia duplicate page
-    "wd:Q21286738",   # Wikimedia suplucate item
+    "wd:Q21286738",   # Wikimedia duplicate item
     "wd:Q17442446",   # Wikimedia internal stuff
     "wd:Q163359",     # Unit that is (erroneously) also a country
     "wd:Q20719690",   # same
@@ -172,7 +172,6 @@ badClasses = {
     "wd:Q5707594",    # same
     "wd:Q309481",     # same
     "wd:Q191067",     # same
-    "wd:Q13442814",   # same
     "wd:Q43460564",   # Chemical entity
     "wd:Q43099500",   # Performing arts prod
     "wd:Q52721362",   # same
