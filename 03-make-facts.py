@@ -631,17 +631,20 @@ if __name__ == '__main__':
         factCount=0
         tempFiles=list(glob.glob(FOLDER+"03-yago-facts-to-type-check-*.tmp"))
         tempFiles.sort()
-        with open(FOLDER+"03-make-facts.log", "wb") as logWriter:
-            with open(FOLDER+"03-yago-facts-to-type-check.tsv", "wb") as writer:
+        with open(FOLDER+"03-make-facts.log", "wt",encoding="utf-8") as logWriter:
+            for p in Prefixes.prefixes:
+                logWriter.write("@prefix "+p+": <"+Prefixes.prefixes[p]+"> .\n")
+            with open(FOLDER+"03-yago-facts-to-type-check.tsv", "wt",encoding="utf-8") as writer:
+                for p in Prefixes.prefixes:
+                    writer.write("@prefix "+p+": <"+Prefixes.prefixes[p]+"> .\n")            
                 for file in tempFiles:
-                    with open(file, "rb") as reader:
+                    with open(file, "rt", encoding="utf-8") as reader:
                         for line in reader:
-                            if line.startswith(b"<<"):
+                            if line.startswith("<<"):
                                 logWriter.write(line)
-                            elif line.strip():
-                                writer.write(line)
-                                if not line.startswith(b"@"):
-                                    factCount+=1
+                            elif line.strip() and not line.startswith("@"):
+                                writer.write(line)                               
+                                factCount+=1
         print("  done")
         print("  Info: Number of facts:",factCount)
 

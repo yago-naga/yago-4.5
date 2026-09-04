@@ -1,3 +1,37 @@
+@prefix wikibase: <http://wikiba.se/ontology#> .
+@prefix yago: <http://yago-knowledge.org/resource/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix schema: <http://schema.org/> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix data: <https://www.wikidata.org/wiki/Special:EntityData/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix s: <http://www.wikidata.org/entity/statement/> .
+@prefix ref: <http://www.wikidata.org/reference/> .
+@prefix v: <http://www.wikidata.org/value/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix wpq: <http://www.wikidata.org/prop/quant/> .
+@prefix wdtn: <http://www.wikidata.org/prop/direct-normalized/> .
+@prefix p: <http://www.wikidata.org/prop/> .
+@prefix ps: <http://www.wikidata.org/prop/statement/> .
+@prefix psv: <http://www.wikidata.org/prop/statement/value/> .
+@prefix psn: <http://www.wikidata.org/prop/statement/value-normalized/> .
+@prefix pq: <http://www.wikidata.org/prop/qualifier/> .
+@prefix pqv: <http://www.wikidata.org/prop/qualifier/value/> .
+@prefix pqn: <http://www.wikidata.org/prop/qualifier/value-normalized/> .
+@prefix pr: <http://www.wikidata.org/prop/reference/> .
+@prefix prv: <http://www.wikidata.org/prop/reference/value/> .
+@prefix prn: <http://www.wikidata.org/prop/reference/value-normalized/> .
+@prefix wdno: <http://www.wikidata.org/prop/novalue/> .
+@prefix ys: <http://yago-knowledge.org/schema#> .
 <<	wd:Q_Inconsistent	rdf:type	wd:Q_rock_singer	>>	ys:excludedFor	"Disjoint type: schema:Person with schema:Organization"	.
 <<	wd:Q_Has_no_label	rdf:type	schema:Thing	>>	ys:excludedFor	"No valid label"	.
 <<		rdf:type	schema:Thing	>>	ys:excludedFor	"No valid type"	.
@@ -15,5 +49,5 @@
 <<	wd:Q23482	rdfs:label	"ABC J100216.27+203031.3"@mul	>>	ys:excludedFor	"Is invalid label"	.
 <<	wd:Q23482	rdf:type	schema:Thing	>>	ys:excludedFor	"No valid label"	.
 <<	schema:Event	rdfs:label	"Should go away"@en	>>	ys:excludedFor	"Already has manually defined label: Event"	.
-<<	wd:Q4736609	schema:locationCreated	schema:Thing	>>	ys:excludedFor	"Domain check failed: Subject is yago:AstronomicalObject, schema:Place and expected types are schema:Product, schema:Event, schema:CreativeWork, yago:FictionalEntity, schema:Organization"	.
-<<	wd:Q4736609	schema:inLanguage	schema:Thing	>>	ys:excludedFor	"Domain check failed: Subject is yago:AstronomicalObject, schema:Place and expected types are yago:PersonName, schema:Event, schema:CreativeWork"	.
+<<	wd:Q4736609	schema:locationCreated	schema:Thing	>>	ys:excludedFor	"Domain check failed: Subject is schema:Place, yago:AstronomicalObject and expected types are schema:Event, schema:Organization, schema:Product, schema:CreativeWork, yago:FictionalEntity"	.
+<<	wd:Q4736609	schema:inLanguage	schema:Thing	>>	ys:excludedFor	"Domain check failed: Subject is schema:Place, yago:AstronomicalObject and expected types are schema:CreativeWork, yago:PersonName, schema:Event"	.
